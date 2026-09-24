@@ -83,6 +83,10 @@
    {
     "source": "Mantan Web",
     "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPWkxReVE1ZmFfNF8wVC1HM1dSdDBqWFhscmpDTi0zRDZ4eTlMMWVvWjR5eTNCaUxFYzBveEcteWdCQXVXNTdMdUNMSUJoV2VLTnlGdnJOSUJ5TGFyZ3M2Rk1lRi1hVEs3QUxnYlE5QUNwbW1wOWpsMHlUS2hTQ3R3TEtIazIyaS0y?oc=5"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5rcGU2eFFibDdWTlpRRlVOcTVxM3g5MU5aUnJJZ3hnajA4aGdtU3BJeGFSRnluRk1CNFRETnExZHhYSUNsLXc0WEdMVjcwN3c1TDJETlNUMU1sZFh6SWlYMkxFS1REenBU?oc=5"
    }
   ],
   "dv": 3
@@ -423,7 +427,12 @@
   "title": "「ぴよりん」尽くしの新幹線ツアーが東京駅〜名古屋駅で、\" ぴよりん弁当＆車掌ぴよりん”付き",
   "source": "ファッションプレス",
   "url": "https://www.fashion-press.net/news/151051",
-  "related": [],
+  "related": [
+   {
+    "source": "fashion-press.net",
+    "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9jUUViMmtZT1FNa1lUc2dpZXVhdTg2RVg2MlpqZ2w5ZFkxN0VmRGdFYXEyVlBBX1ZXa1g4UVMtUzdkM215T05YNFRsckFxZlZRcTVR?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -921,6 +930,15 @@
   "related": []
  },
  {
+  "id": "n20260821-16ed5a01",
+  "date": "2026-08-21",
+  "cat": "media",
+  "title": "ぴよりん×バーミキュラ 初の「鍋ぴよりん」体験教室 名古屋市（2026年8月21日掲載）｜中京テレビNEWS NNN",
+  "source": "日テレNEWS NNN",
+  "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPbzlHTnFLNEw4ejc0R1FmTjFYOXdzUm9DNVFxXzEtTUN0TVlmeG5XTWZiczk2OE5xa0g5X18xQVdhVVpEWWx6X2NwMjdRNEhTdmN6X2czOG5UeXFpZVhQUnU3TTdTUWV2TWs5ZC0zSEdzMWxZUnBXTTVkVmtaQS1tWUVKYw?oc=5",
+  "related": []
+ },
+ {
   "id": "n20260818-406ed6b0",
   "date": "2026-08-18",
   "cat": "press",
@@ -973,6 +991,15 @@
   "title": "【シェ・シバタ×ぴよりん】ぴよりんクッキー缶第２弾が登場！",
   "source": "prtimes.jp",
   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBiOC11V0Jad0ljY1BneUNhNlFtUmhqSEVPYlU3Tk5xOHZiRnFBdnFVMU5rNHJPR2toQlJpRmhjTHhhWVM4V0cydi1UWDZzLUEzY0JmU2F4c3dJRHYzZFNZOEk1aS1CbTY4dVE?oc=5",
+  "related": []
+ },
+ {
+  "id": "n20260807-f9cd7027",
+  "date": "2026-08-07",
+  "cat": "media",
+  "title": "「ぴよりんコラボ弁当」がJR名古屋タカシマヤに8月8日から16日まで限定登場",
+  "source": "名古屋情報通",
+  "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE03a1dNWS14NjhhZVRJY3NzenVkamdyUkJtNnJScEJ2alZtX3JUb2tnVlpGd0diWTAwdThuYTZUU2FRbXRfdnpiZ085TmRGeXZpMHJF?oc=5",
   "related": []
  },
  {
