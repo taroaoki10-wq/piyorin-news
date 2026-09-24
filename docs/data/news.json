@@ -7,7 +7,7 @@
   "source": "中部経済新聞",
   "url": "https://www.chukei-news.co.jp/news/2026/09/23/OK0002609230401_02/",
   "related": [],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260923-afcc9479",
@@ -17,7 +17,7 @@
   "source": "ウォーカープラス",
   "url": "https://www.walkerplus.com/article/1003319/image10021341.html",
   "related": [],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260923-679479e2",
@@ -27,7 +27,7 @@
   "source": "ウォーカープラス",
   "url": "https://www.walkerplus.com/article/1405058/image17569555.html",
   "related": [],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260922-f159ab72",
@@ -37,7 +37,7 @@
   "source": "地域ニュースサイト号外NET",
   "url": "https://toyohashi-tahara.goguynet.jp/2026/09/22/piyorin-4/",
   "related": [],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260922-fa1cff31",
@@ -47,7 +47,7 @@
   "source": "ウォーカープラス",
   "url": "https://www.walkerplus.com/article/54134/image296296.html",
   "related": [],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260919-balloon",
@@ -70,7 +70,7 @@
     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5YNUlOQm9oX3ZwS1ZJMjU4N2JyazdSUDM5OWNraTkyOXNFY0swSE12WGlMRnFVenJCS0lYaW5MZUstd2diMWNwSHV3MGNfV1Vu?oc=5"
    }
   ],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260918-wolfy",
@@ -115,7 +115,7 @@
     "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPWkxReVE1ZmFfNF8wVC1HM1dSdDBqWFhscmpDTi0zRDZ4eTlMMWVvWjR5eTNCaUxFYzBveEcteWdCQXVXNTdMdUNMSUJoV2VLTnlGdnJOSUJ5TGFyZ3M2Rk1lRi1hVEs3QUxnYlE5QUNwbW1wOWpsMHlUS2hTQ3R3TEtIazIyaS0y?oc=5"
    }
   ],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260918-ikoyo",
@@ -130,7 +130,7 @@
     "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE90SnEyME5xNTdRb2hQMW9HSzIxcjlNYnNFRzVOQVNWT096b2ZEMW5zWFhPWGprb25lODlPMTExT3ZqLWhhQ0tSdmc4Q1cxemNTdXc?oc=5"
    }
   ],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260918-9bbac5b4",
@@ -140,7 +140,7 @@
   "source": "いこーよニュース",
   "url": "https://report.iko-yo.net/articles/33776/digest",
   "related": [],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260918-73e5e157",
@@ -150,7 +150,7 @@
   "source": "毎日キレイ",
   "url": "https://mainichikirei.jp/prtimes/article/20260917prt00m100000100a.html",
   "related": [],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260918-a5a5f5e1",
@@ -160,7 +160,7 @@
   "source": "ナゴヤトコトン",
   "url": "https://nagoyato.com/posts/19183",
   "related": [],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260918-9c25a86f",
@@ -170,7 +170,7 @@
   "source": "ORICON NEWS",
   "url": "https://www.oricon.co.jp/pressrelease/2996859/",
   "related": [],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260917-owabi",
@@ -198,7 +198,7 @@
     "url": "https://www.toyohashi-kalmia.jp/topics/piyorinstationfes2026/"
    }
   ],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260917-dd7a0ef6",
@@ -217,7 +217,7 @@
     "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE12VHFTYXRQeV9WRnRuLUFrSFBaQjhCdktZa0N4U2E2M3FNRVQ1Mm1UZ0tBNmlDYnlVVUUwWnFPQ2dUb3lTTm5KRWtkV1hRdGJxd3JFRFlUUU5TT3V0MUNoODRaN2k3cEs0QnVmSi14LUJqbTR6ZHFINWstX0VXeXM?oc=5"
    }
   ],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260917-2b6491b8",
@@ -227,7 +227,7 @@
   "source": "中日新聞Web",
   "url": "https://www.chunichi.co.jp/article/1312442",
   "related": [],
-  "checked": true
+  "dv": 2
  },
  {
   "id": "n20260917-bbe49b92",
@@ -856,16 +856,6 @@
   "related": []
  },
  {
-  "id": "n20260917-f987b157",
-  "date": "2026-08-21",
-  "cat": "media",
-  "title": "ぴよりん×バーミキュラ 初の「鍋ぴよりん」体験教室 名古屋市（中京テレビＮＥＷＳ）",
-  "source": "Yahoo!ニュース",
-  "url": "https://news.yahoo.co.jp/articles/c3d68b8092efd43d224fd1968097ceab11586e3d",
-  "related": [],
-  "checked": true
- },
- {
   "id": "n20260821-ec253c6b",
   "date": "2026-08-21",
   "cat": "press",
@@ -878,6 +868,16 @@
     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5xb21MelIyMDB4WEtraVhlT0VjMGE2ZzhaVWxudjZSX1dwYUZmM1Bha05naEFqTExBZjVTR2hXYXBaUURRaEkxS3NFUFFrVFdVYnFJV19SZzdwbEdTVW4tQWM5MlQ2dE1DZnc?oc=5"
    }
   ]
+ },
+ {
+  "id": "n20260917-f987b157",
+  "date": "2026-08-21",
+  "cat": "media",
+  "title": "ぴよりん×バーミキュラ 初の「鍋ぴよりん」体験教室 名古屋市（中京テレビＮＥＷＳ）",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/c3d68b8092efd43d224fd1968097ceab11586e3d",
+  "related": [],
+  "checked": true
  },
  {
   "id": "n20260821-8b94efa3",
