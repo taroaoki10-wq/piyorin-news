@@ -27,6 +27,9 @@ jobs:
       - name: ニュースを収集
         run: python scripts/fetch_news.py
 
+      - name: カレンダーの予定を抽出
+        run: python scripts/extract_events.py
+
       - name: 変更があればコミット
         run: |
           git config user.name  "github-actions[bot]"
@@ -35,6 +38,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "変更なし"
           else
-            git commit -m "ニュース更新 $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
+            git commit -m "ニュース・予定更新 $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
             git push
           fi
