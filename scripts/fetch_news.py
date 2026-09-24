@@ -265,14 +265,21 @@ JP_DATE_RE = [
     # 時刻つきの日付（記事の公開日時の書き方として多い）
     r"(20\d{2})\s*[年/.]\s*(\d{1,2})\s*[月/.]\s*(\d{1,2})\s*日?\s*(?:\([^)]{1,3}\)\s*)?\d{1,2}:\d{2}",
 ]
-DATE_CHECK_VERSION = 2  # 確認方法を改善したら上げる（確認済みの記事をもう一度確認する）
+DATE_CHECK_VERSION = 3  # 確認方法を改善したら上げる（確認済みの記事をもう一度確認する）
 
 
 def published_date(page: str) -> str | None:
+    # 公開日の書き方ごとに最初の1つを取り、その中でいちばん古いものを使う
+    # （再掲載の日付に引っ張られないように。関連記事の日付を拾わないよう各書き方の最初だけ見る）
+    found = []
     for pat in PUBLISHED_RE:
+        if found and pat.startswith("<time"):
+            break  # <time> は他に手がかりがないときだけ使う
         m = re.search(pat, page, re.I)
-        if m:
-            return m.group(1).replace("/", "-")
+        if m and m.group(1) >= "2005-01-01":
+            found.append(m.group(1).replace("/", "-"))
+    if found:
+        return min(found)
     body = page[page.lower().find("<body"):] if "<body" in page.lower() else page
     for pat in JP_DATE_RE:
         m = re.search(pat, body)
@@ -324,10 +331,16 @@ def direct_url(item: dict) -> str | None:
         return None
 
 
+def article_url(url: str) -> str:
+    """写真ギャラリーのページ（…/image123.html など）は記事本体のURLにする。"""
+    return re.sub(r"/(?:image|photo|img)\d+\.html?$", "/", url)
+
+
 def verify(item: dict) -> tuple[dict, str | None, str | None]:
     url = direct_url(item)
     if not url:
         return item, None, None
+    url = article_url(url)
     try:
         return item, url, published_date(fetch(url))
     except Exception:
