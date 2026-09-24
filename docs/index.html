@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#FFC928">
+<meta name="theme-color" content="#FBDB16">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>ぴよりんニュース</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,8 +13,8 @@
 <style>
 :root{
   --bg:#F3F2EE; --surface:#FFFFFF; --ink:#1E1B16; --muted:#6D675C; --line:#E3DFD5; --hover:#FFF6D6;
-  --yolk:#FFC928; --yolk-ink:#2A2000; --caramel:#98581B;
-  --c-official:#FFC928; --c-official-ink:#2A2000;
+  --yolk:#FBDB16; --yolk-ink:#2A2000; --caramel:#98581B;
+  --c-official:#FBDB16; --c-official-ink:#2A2000;
   --c-press:#DCE5FB; --c-press-ink:#23459E;
   --c-media:#DAF0E6; --c-media-ink:#1F6B4F;
   --shadow:0 1px 2px rgba(40,30,10,.05),0 8px 24px -12px rgba(40,30,10,.12);
@@ -46,7 +48,7 @@ aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:s
 .brand{display:flex;flex-direction:column;gap:6px}
 .eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .brand h1{margin:0;font-family:var(--f-display);font-weight:900;font-size:30px;line-height:1.15;letter-spacing:.01em;white-space:nowrap;display:flex;align-items:center;gap:10px}
-.yolk{width:18px;height:18px;border-radius:50%;background:var(--yolk);box-shadow:inset -3px -3px 0 rgba(0,0,0,.08);flex:none}
+.yolk{width:36px;height:36px;border-radius:50%;flex:none;display:block}
 .brand p{margin:0;color:var(--muted);font-size:13px}
 .sec-label{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
 .links{display:flex;flex-direction:column;gap:8px}
@@ -132,7 +134,7 @@ details.rel li a:hover{color:var(--caramel)}
 .toolbar{top:env(safe-area-inset-top,0px)}
 
 /* ---------- calendar ---------- */
-:root{--k-sale:#FFC928;--k-sale-ink:#2A2000;--k-event:#3D63D6;--k-event-ink:#FFFFFF;--k-campaign:#2E8B6A;--k-campaign-ink:#FFFFFF;--k-release:#FFFFFF;--k-release-ink:#98581B;--k-release-line:#E6B98A}
+:root{--k-sale:#FBDB16;--k-sale-ink:#2A2000;--k-event:#3D63D6;--k-event-ink:#FFFFFF;--k-campaign:#2E8B6A;--k-campaign-ink:#FFFFFF;--k-release:#FFFFFF;--k-release-ink:#98581B;--k-release-line:#E6B98A}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--k-event:#5C7FE8;--k-campaign:#3A9E7A;--k-release:#1C1A15;--k-release-ink:#E6A860;--k-release-line:#6B4A26}}
 :root[data-theme="dark"]{--k-event:#5C7FE8;--k-campaign:#3A9E7A;--k-release:#1C1A15;--k-release-ink:#E6A860;--k-release-line:#6B4A26}
 .cal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -204,7 +206,30 @@ details.rel li a:hover{color:var(--caramel)}
   .search{max-width:none}
   .brand h1{font-size:28px}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- home link ---------- */
+.home{display:block;border-radius:12px}
+.home:hover h1{color:var(--caramel)}
+
+/* ---------- reader ---------- */
+.reader{position:fixed;top:0;right:0;bottom:0;z-index:30;width:min(600px,100%);background:var(--surface);border-left:1px solid var(--line);box-shadow:-24px 0 48px -24px rgba(0,0,0,.25);display:flex;flex-direction:column;animation:slidein .22s ease-out}
+@keyframes slidein{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+.reader-bar{display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 12px) 20px 12px;border-bottom:1px solid var(--line)}
+.reader-bar .eyebrow{margin-right:auto}
+.reader-bar a{font-size:13px;font-weight:700;color:var(--caramel)}
+.reader-bar button{font:inherit;font-size:20px;line-height:1;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.reader-bar button:hover{border-color:var(--yolk)}
+.reader-body{overflow-y:auto;padding:24px 28px calc(env(safe-area-inset-bottom,0px) + 48px);display:flex;flex-direction:column;gap:14px}
+.reader-body h2{margin:0;font-family:var(--f-display);font-size:24px;line-height:1.45;text-wrap:balance}
+.reader-body h3{margin:10px 0 0;font-size:16px;padding-left:10px;border-left:3px solid var(--yolk)}
+.reader-body p{margin:0;line-height:1.85}
+.reader-body ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.reader-body img{width:100%;height:auto;border-radius:12px;background:var(--bg)}
+.reader-ev{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:12px 14px;border-radius:12px;background:var(--hover);font-size:13px}
+.reader-ev b{font-family:var(--f-mono);font-weight:500}
+.reader-note{color:var(--muted);font-size:13px}
+@media (max-width:620px){.reader-body{padding:20px 18px 48px}.reader-body h2{font-size:20px}}
 </style>
 
 </head>
@@ -213,7 +238,7 @@ details.rel li a:hover{color:var(--caramel)}
   <aside>
     <div class="brand">
       <span class="eyebrow">Piyorin News Watch</span>
-      <h1><span class="yolk" aria-hidden="true"></span>ぴよりんニュース</h1>
+      <a href="./" class="home" id="home" aria-label="ぴよりんニュース トップへ"><h1><img class="yolk" src="icon.png" alt="" width="36" height="36">ぴよりんニュース</h1></a>
       <p>名古屋のひよこプリン「ぴよりん」の公式発表・プレスリリース・メディア記事をまとめて追いかけます。</p>
     </div>
 
@@ -278,11 +303,19 @@ details.rel li a:hover{color:var(--caramel)}
     </div>
   </main>
 </div>
+<div class="reader" id="reader" hidden role="dialog" aria-labelledby="reader-title">
+  <div class="reader-bar">
+    <span class="eyebrow">Reader</span>
+    <a id="reader-orig" href="#" target="_blank" rel="noopener">元の記事を開く ↗</a>
+    <button type="button" id="reader-close" aria-label="閉じる">×</button>
+  </div>
+  <article class="reader-body" id="reader-body"></article>
+</div>
 <script>
 (function(){
   const CATS={official:'公式',press:'プレスリリース',media:'Webメディア'};
   const WD=['日','月','火','水','木','金','土'];
-  let state={news:[],events:[],updatedAt:null,filter:'all',q:''};
+  let state={news:[],events:[],articles:{},updatedAt:null,filter:'all',q:''};
   try{const f=localStorage.getItem('piyo-filter');if(f&&(f==='all'||CATS[f]))state.filter=f;}catch(e){}
 
   const $=id=>document.getElementById(id);
@@ -340,7 +373,7 @@ details.rel li a:hover{color:var(--caramel)}
       const live=e.start<=t, n=days(t,e.start);
       const range=e.end&&e.end!==e.start?`${md(e.start)}–${md(e.end)}`:md(e.start);
       return `<div class="ev"><div class="d"><strong>${md(e.start)}</strong><span>${wd(e.start)}</span></div>
-        <div><a class="t" href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener">${esc(e.title)}</a>
+        <div><a class="t" href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener" data-read="${esc(e.id)}">${esc(e.title)}</a>
         <div class="p"><span>${esc(range)} · ${esc(e.place)}</span><span class="cd${live?' now':''}">${live?'開催中':n===1?'あした':'あと'+n+'日'}</span></div></div></div>`}).join('')
       :'<p class="meta" style="padding:8px 0">予定されているイベントはありません</p>';
   }
@@ -400,7 +433,7 @@ details.rel li a:hover{color:var(--caramel)}
       const end=e.end||e.start;const [st,sc]=statusOf(e,t);
       return `<div class="ag${sc==='done'?' done':''}" id="ag-${esc(e.id)}">
         <div class="when">${md(e.start)}${end!==e.start?' – '+md(end):''}<span>${wd(e.start)}${end!==e.start?' – '+wd(end):''}</span></div>
-        <div><h4><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener">${esc(e.title)}</a></h4>
+        <div><h4><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener" data-read="${esc(e.id)}">${esc(e.title)}</a></h4>
         <div class="pl"><span class="ktag k-${KINDS[e.kind]?e.kind:'event'}">${KINDS[e.kind]||'イベント'}</span><span>${esc(e.place||'')}</span></div></div>
         <span class="cd${sc==='now'?' now':''}">${st}</span></div>`}).join('')
       :'<p class="empty">この月の予定はまだありません。</p>';
@@ -411,7 +444,6 @@ details.rel li a:hover{color:var(--caramel)}
     $('view-cal').style.display=v==='calendar'?'flex':'';
     $('tab-news').setAttribute('aria-selected',v==='news');$('tab-cal').setAttribute('aria-selected',v==='calendar');
     if(v==='calendar')renderCal();
-    try{localStorage.setItem('piyo-view',v)}catch(_){}
   }
   document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setView(b.dataset.view)});
   $('to-cal').addEventListener('click',e=>{e.preventDefault();setView('calendar');window.scrollTo({top:0,behavior:'smooth'})});
@@ -425,13 +457,61 @@ details.rel li a:hover{color:var(--caramel)}
   $('seg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;state.filter=b.dataset.k;try{localStorage.setItem('piyo-filter',state.filter)}catch(_){}renderSeg();renderFeed()});
   let tmr;$('q').addEventListener('input',e=>{clearTimeout(tmr);tmr=setTimeout(()=>{state.q=e.target.value;renderFeed()},120)});
   renderAll();
-  {let v=location.hash==='#calendar'?'calendar':null;if(!v){try{v=localStorage.getItem('piyo-view')}catch(_){}}if(v==='calendar')setView('calendar')}
+  if(location.hash==='#calendar')setView('calendar');
+
+  // ---------- reader ----------
+  function openReader(ev){
+    const art=state.articles[ev.url];
+    const end=ev.end||ev.start;
+    const when=`${md(ev.start)}（${wd(ev.start)}）${end!==ev.start?` – ${md(end)}（${wd(end)}）`:''}`;
+    const [st]=statusOf(ev,todayStr());
+    let h=`<h2 id="reader-title">${esc(art&&art.title||ev.title)}</h2>`;
+    h+=`<div class="reader-ev"><span class="ktag k-${KINDS[ev.kind]?ev.kind:'event'}">${KINDS[ev.kind]||'イベント'}</span><b>${esc(when)}</b>${ev.place?`<span>${esc(ev.place)}</span>`:''}<span class="cd">${esc(st)}</span></div>`;
+    if(art&&art.blocks&&art.blocks.length){
+      let ul=null;
+      for(const b of art.blocks){
+        if(b.t==='li'){if(!ul){h+='<ul>';ul=1}h+=`<li>${esc(b.x)}</li>`;continue}
+        if(ul){h+='</ul>';ul=null}
+        if(b.t==='h')h+=`<h3>${esc(b.x)}</h3>`;
+        else if(b.t==='img'&&/^https:\/\//.test(b.x))h+=`<img src="${esc(b.x)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`;
+        else if(b.t==='p')h+=`<p>${esc(b.x)}</p>`;
+      }
+      if(ul)h+='</ul>';
+    }else{
+      h+='<p class="reader-note">この記事の本文はまだ取り込まれていません。次の自動更新で読み込まれます。上の「元の記事を開く」から直接ご覧いただけます。</p>';
+    }
+    $('reader-body').innerHTML=h;
+    $('reader-orig').href=safeUrl(ev.url);
+    $('reader').hidden=false;
+    $('reader-body').scrollTop=0;
+    $('reader-close').focus({preventScroll:true});
+  }
+  function closeReader(){$('reader').hidden=true}
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[data-read]');
+    if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0)return;
+    const ev=state.events.find(x=>x.id===a.dataset.read);
+    if(!ev)return;
+    e.preventDefault();openReader(ev);
+  });
+  $('reader-close').addEventListener('click',closeReader);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('reader').hidden)closeReader()});
+  $('home').addEventListener('click',e=>{
+    if(e.metaKey||e.ctrlKey)return;
+    e.preventDefault();closeReader();
+    state.filter='all';state.q='';$('q').value='';
+    try{localStorage.setItem('piyo-filter','all')}catch(_){}
+    history.replaceState(null,'',location.pathname);
+    setView('news');renderSeg();renderFeed();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
 
   // GitHub Actions が更新する JSON を読み込む
   async function load(){
     const bust='?t='+Date.now();
     try{
-      const [n,e,m]=await Promise.all(['news','events','meta'].map(f=>fetch('data/'+f+'.json'+bust).then(r=>r.ok?r.json():null).catch(()=>null)));
+      const [n,e,m,a]=await Promise.all(['news','events','meta','articles'].map(f=>fetch('data/'+f+'.json'+bust).then(r=>r.ok?r.json():null).catch(()=>null)));
+      if(a&&typeof a==='object')state.articles=a;
       if(Array.isArray(n))state.news=n;
       if(Array.isArray(e))state.events=e;
       if(m&&m.updatedAt)state.updatedAt=m.updatedAt;

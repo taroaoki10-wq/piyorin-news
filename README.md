@@ -35,6 +35,8 @@ GitHub Pages（docs/index.html、5分ごとに読み直し）→ Safari で表�
 | `docs/data/state.json` | 予定の読み取りが済んだ記事の記録 |
 | `scripts/extract_events.py` | 予定の抽出プログラム |
 | `scripts/claude_events.py` | Claude API で記事から予定を読み取る部分 |
+| `docs/data/articles.json` | ページ内リーダー用の記事本文（予定の元記事） |
+| `scripts/build_reader.py` | リーダー用に元記事を保存するプログラム |
 | `docs/data/meta.json` | 最終更新日時 |
 | `scripts/fetch_news.py` | 収集プログラム |
 | `.github/workflows/update.yml` | 定期実行の設定 |

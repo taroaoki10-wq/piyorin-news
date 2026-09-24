@@ -30,6 +30,9 @@ jobs:
           # Settings → Secrets and variables → Actions に登録したClaudeのAPIキー
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
+      - name: リーダー用に予定の元記事を保存
+        run: python3 scripts/build_reader.py
+
       - name: 変更があればコミット
         run: |
           git config user.name  "github-actions[bot]"
