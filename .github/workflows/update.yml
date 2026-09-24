@@ -29,6 +29,9 @@ jobs:
 
       - name: カレンダーの予定を抽出
         run: python scripts/extract_events.py
+        env:
+          # Settings → Secrets and variables → Actions に登録したClaudeのAPIキー
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: 変更があればコミット
         run: |
