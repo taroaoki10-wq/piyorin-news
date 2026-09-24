@@ -1,0 +1,28 @@
+name: claude-test
+on: workflow_dispatch
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          cd scripts && python - <<'PY'
+          import json, os, extract_events as x, claude_events as c
+          news=json.load(open('../docs/data/news.json'))
+          want=['p5558','p5546','p5358','p5520']
+          tin=tout=0
+          for n in [n for n in news if n['cat']=='official' and any(w in n['url'] for w in want)]:
+              try:
+                  evs,u=c.claude_events(n,'\n'.join(x.html_to_lines(x.fetch(n['url']))),os.environ['ANTHROPIC_API_KEY'])
+                  tin+=u.get('input_tokens',0); tout+=u.get('output_tokens',0)
+                  for e in evs: print('RESULT', n['url'][-6:], e['start'], e['end'], e['kind'], e['title'], '@', e['place'])
+                  if not evs: print('RESULT', n['url'][-6:], 'NONE')
+              except Exception as e:
+                  print('RESULT ERR', n['url'], getattr(e,'code',''), getattr(e,'read',lambda:b'')()[:300], e)
+          print('RESULT USAGE', tin, tout)
+          PY
