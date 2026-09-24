@@ -315,7 +315,7 @@ details.rel li a:hover{color:var(--caramel)}
 (function(){
   const CATS={official:'公式',press:'プレスリリース',media:'Webメディア'};
   const WD=['日','月','火','水','木','金','土'];
-  let state={news:[],events:[],articles:{},updatedAt:null,filter:'all',q:''};
+  let state={news:[],events:[],updatedAt:null,filter:'all',q:''};
   try{const f=localStorage.getItem('piyo-filter');if(f&&(f==='all'||CATS[f]))state.filter=f;}catch(e){}
 
   const $=id=>document.getElementById(id);
@@ -329,7 +329,7 @@ details.rel li a:hover{color:var(--caramel)}
   function relLinks(it){
     const r=(it.related||[]).filter(x=>x&&x.url);
     if(!r.length)return '';
-    return `<details class="rel"><summary>ほか${r.length}件</summary><ul>${r.map(x=>`<li><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(x.source)} ↗</a></li>`).join('')}</ul></details>`;
+    return `<details class="rel"><summary>ほか${r.length}件</summary><ul>${r.map(x=>`<li><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener" data-news="${esc(it.id)}" data-url="${esc(safeUrl(x.url))}" data-src="${esc(x.source)}">${esc(x.source)}</a></li>`).join('')}</ul></details>`;
   }
   function isNew(it){return days(it.date,todayStr())<=3}
 
@@ -347,7 +347,7 @@ details.rel li a:hover{color:var(--caramel)}
     const list=filtered();
     const hero=list.slice(0,2), rest=list.slice(2);
     $('hero').innerHTML=hero.map((it,i)=>`
-      <a class="feat${i===0?' lead':''}" href="${esc(safeUrl(it.url))}" target="_blank" rel="noopener">
+      <a class="feat${i===0?' lead':''}" href="${esc(safeUrl(it.url))}" target="_blank" rel="noopener" data-news="${esc(it.id)}">
         <div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><span class="dt" style="font-family:var(--f-mono)">${esc(it.date.replaceAll('-','.'))} ${wd(it.date)}</span>${isNew(it)?'<span class="new">NEW</span>':''}</div>
         <h2>${esc(it.title)}</h2>
         <div class="foot"><span class="src">${esc(it.source)}${(it.related||[]).length?` ほか${it.related.length}件`:''}</span><span aria-hidden="true">↗</span></div>
@@ -361,7 +361,7 @@ details.rel li a:hover{color:var(--caramel)}
         <div class="items">${g.items.map(it=>`
           <article class="item">
             <div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span>${isNew(it)?'<span class="new">NEW</span>':''}</div>
-            <h3><a href="${esc(safeUrl(it.url))}" target="_blank" rel="noopener">${esc(it.title)}</a></h3>
+            <h3><a href="${esc(safeUrl(it.url))}" target="_blank" rel="noopener" data-news="${esc(it.id)}">${esc(it.title)}</a></h3>
             <div class="row"><span class="src">${esc(it.source)}</span>${relLinks(it)}</div>
           </article>`).join('')}</div>
       </section>`).join(''):`<p class="empty">条件に合うニュースはありません。</p>`;
@@ -460,40 +460,70 @@ details.rel li a:hover{color:var(--caramel)}
   if(location.hash==='#calendar')setView('calendar');
 
   // ---------- reader ----------
-  function openReader(ev){
-    const art=state.articles[ev.url];
+  // 記事ごとの本文ファイル（data/reader/<URLのSHA-1先頭12桁>.json）を開いたときに読み込む
+  const readerCache={};
+  async function readerId(url){
+    const d=await crypto.subtle.digest('SHA-1',new TextEncoder().encode(url));
+    return [...new Uint8Array(d)].map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,12);
+  }
+  async function loadArticle(url){
+    if(url in readerCache)return readerCache[url];
+    let art=null;
+    try{const r=await fetch('data/reader/'+(await readerId(url))+'.json');if(r.ok)art=await r.json()}catch(_){}
+    return readerCache[url]=art;
+  }
+  function cleanTitle(t){return String(t||'').replace(/\s*[|｜]\s*[^|｜]*$/,'')}
+  function renderBlocks(art,tt){
+    let h='',ul=null;
+    for(const b of art.blocks||[]){
+      if(b.t==='li'){if(!ul){h+='<ul>';ul=1}h+=`<li>${esc(b.x)}</li>`;continue}
+      if(ul){h+='</ul>';ul=null}
+      if(b.t==='h'&&b.x.replace(/\s/g,'')!==tt.replace(/\s/g,''))h+=`<h3>${esc(b.x)}</h3>`;
+      else if(b.t==='img'&&/^https:\/\//.test(b.x))h+=`<img src="${esc(b.x)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`;
+      else if(b.t==='p')h+=`<p>${esc(b.x)}</p>`;
+    }
+    if(ul)h+='</ul>';
+    return h;
+  }
+  let readerToken=0;
+  // src: {url, title, chip(HTML)}
+  async function openReader(src){
+    const token=++readerToken;
+    const paint=(art,loading)=>{
+      const tt=cleanTitle(art&&art.title||src.title);
+      let h=`<h2 id="reader-title">${esc(tt)}</h2><div class="reader-ev">${src.chip}</div>`;
+      if(loading)h+='<p class="reader-note">読み込み中…</p>';
+      else if(art&&art.blocks&&art.blocks.length){
+        h+=renderBlocks(art,tt);
+        if(art.mode==='summary')h+='<p class="reader-note">この記事は掲載元の要約のみを表示しています。続きは上の「元の記事を開く」からご覧ください。</p>';
+      }else h+='<p class="reader-note">この記事の本文はまだ取り込まれていません（取り込みは1時間ごとの自動更新で行います）。上の「元の記事を開く」から直接ご覧いただけます。</p>';
+      $('reader-body').innerHTML=h;
+    };
+    $('reader-orig').href=safeUrl(src.url);
+    $('reader').hidden=false;
+    paint(null,true);$('reader-body').scrollTop=0;
+    $('reader-close').focus({preventScroll:true});
+    const art=await loadArticle(src.url);
+    if(token===readerToken)paint(art,false);
+  }
+  function eventSource(ev){
     const end=ev.end||ev.start;
     const when=`${md(ev.start)}（${wd(ev.start)}）${end!==ev.start?` – ${md(end)}（${wd(end)}）`:''}`;
     const [st]=statusOf(ev,todayStr());
-    const tt=(art&&art.title||ev.title).replace(/\s*[|｜]\s*[^|｜]*$/,'');
-    let h=`<h2 id="reader-title">${esc(tt)}</h2>`;
-    h+=`<div class="reader-ev"><span class="ktag k-${KINDS[ev.kind]?ev.kind:'event'}">${KINDS[ev.kind]||'イベント'}</span><b>${esc(when)}</b>${ev.place?`<span>${esc(ev.place)}</span>`:''}<span class="cd">${esc(st)}</span></div>`;
-    if(art&&art.blocks&&art.blocks.length){
-      let ul=null;
-      for(const b of art.blocks){
-        if(b.t==='li'){if(!ul){h+='<ul>';ul=1}h+=`<li>${esc(b.x)}</li>`;continue}
-        if(ul){h+='</ul>';ul=null}
-        if(b.t==='h'&&b.x.replace(/\s/g,'')!==tt.replace(/\s/g,''))h+=`<h3>${esc(b.x)}</h3>`;
-        else if(b.t==='img'&&/^https:\/\//.test(b.x))h+=`<img src="${esc(b.x)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`;
-        else if(b.t==='p')h+=`<p>${esc(b.x)}</p>`;
-      }
-      if(ul)h+='</ul>';
-    }else{
-      h+='<p class="reader-note">この記事の本文はまだ取り込まれていません。次の自動更新で読み込まれます。上の「元の記事を開く」から直接ご覧いただけます。</p>';
-    }
-    $('reader-body').innerHTML=h;
-    $('reader-orig').href=safeUrl(ev.url);
-    $('reader').hidden=false;
-    $('reader-body').scrollTop=0;
-    $('reader-close').focus({preventScroll:true});
+    return {url:ev.url,title:ev.title,chip:`<span class="ktag k-${KINDS[ev.kind]?ev.kind:'event'}">${KINDS[ev.kind]||'イベント'}</span><b>${esc(when)}</b>${ev.place?`<span>${esc(ev.place)}</span>`:''}<span class="cd">${esc(st)}</span>`};
   }
-  function closeReader(){$('reader').hidden=true}
+  function newsSource(it,url,source){
+    return {url:url||it.url,title:it.title,chip:`<span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><b>${esc(it.date.replaceAll('-','.'))}（${wd(it.date)}）</b><span>${esc(source||it.source)}</span>`};
+  }
+  function closeReader(){$('reader').hidden=true;readerToken++}
   document.addEventListener('click',e=>{
-    const a=e.target.closest('a[data-read]');
+    const a=e.target.closest('a[data-read],a[data-news]');
     if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0)return;
-    const ev=state.events.find(x=>x.id===a.dataset.read);
-    if(!ev)return;
-    e.preventDefault();openReader(ev);
+    let src=null;
+    if(a.dataset.read){const ev=state.events.find(x=>x.id===a.dataset.read);if(ev)src=eventSource(ev)}
+    else{const it=state.news.find(x=>x.id===a.dataset.news);if(it)src=newsSource(it,a.dataset.url,a.dataset.src)}
+    if(!src)return;
+    e.preventDefault();openReader(src);
   });
   $('reader-close').addEventListener('click',closeReader);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('reader').hidden)closeReader()});
@@ -511,8 +541,7 @@ details.rel li a:hover{color:var(--caramel)}
   async function load(){
     const bust='?t='+Date.now();
     try{
-      const [n,e,m,a]=await Promise.all(['news','events','meta','articles'].map(f=>fetch('data/'+f+'.json'+bust).then(r=>r.ok?r.json():null).catch(()=>null)));
-      if(a&&typeof a==='object')state.articles=a;
+      const [n,e,m]=await Promise.all(['news','events','meta'].map(f=>fetch('data/'+f+'.json'+bust).then(r=>r.ok?r.json():null).catch(()=>null)));
       if(Array.isArray(n))state.news=n;
       if(Array.isArray(e))state.events=e;
       if(m&&m.updatedAt)state.updatedAt=m.updatedAt;
