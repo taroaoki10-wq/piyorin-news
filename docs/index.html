@@ -213,6 +213,8 @@ details.rel li a:hover{color:var(--caramel)}
 .home:hover h1{color:var(--caramel)}
 
 /* ---------- reader ---------- */
+.reader-scrim{position:fixed;inset:0;z-index:29;background:rgba(20,16,0,.22);cursor:pointer;animation:fadein .2s ease-out}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
 .reader{position:fixed;top:0;right:0;bottom:0;z-index:30;width:min(600px,100%);background:var(--surface);border-left:1px solid var(--line);box-shadow:-24px 0 48px -24px rgba(0,0,0,.25);display:flex;flex-direction:column;animation:slidein .22s ease-out}
 @keyframes slidein{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
 .reader-bar{display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 12px) 20px 12px;border-bottom:1px solid var(--line)}
@@ -303,6 +305,7 @@ details.rel li a:hover{color:var(--caramel)}
     </div>
   </main>
 </div>
+<div class="reader-scrim" id="reader-scrim" hidden aria-hidden="true"></div>
 <div class="reader" id="reader" hidden role="dialog" aria-labelledby="reader-title">
   <div class="reader-bar">
     <span class="eyebrow">Reader</span>
@@ -500,7 +503,7 @@ details.rel li a:hover{color:var(--caramel)}
       $('reader-body').innerHTML=h;
     };
     $('reader-orig').href=safeUrl(src.url);
-    $('reader').hidden=false;
+    $('reader').hidden=false;$('reader-scrim').hidden=false;
     paint(null,true);$('reader-body').scrollTop=0;
     $('reader-close').focus({preventScroll:true});
     const art=await loadArticle(src.url);
@@ -515,7 +518,9 @@ details.rel li a:hover{color:var(--caramel)}
   function newsSource(it,url,source){
     return {url:url||it.url,title:it.title,chip:`<span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><b>${esc(it.date.replaceAll('-','.'))}（${wd(it.date)}）</b><span>${esc(source||it.source)}</span>`};
   }
-  function closeReader(){$('reader').hidden=true;readerToken++}
+  function closeReader(){$('reader').hidden=true;$('reader-scrim').hidden=true;readerToken++}
+  // リーダーの外側（暗くなった部分）を押したら、下にあるリンクより優先して閉じる
+  $('reader-scrim').addEventListener('click',e=>{e.preventDefault();e.stopPropagation();closeReader()});
   document.addEventListener('click',e=>{
     const a=e.target.closest('a[data-read],a[data-news]');
     if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0)return;
