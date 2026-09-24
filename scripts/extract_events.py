@@ -34,7 +34,7 @@ SKIP_TITLE = re.compile(r"お詫び|訂正|休業|営業時間|価格改定|終�
 DATE_LABELS = [
     "販売日時", "販売期間", "販売日程", "販売日", "発売日", "販売開始日",
     "実施期間", "開催期間", "開催日時", "開催日程", "開催日", "会期",
-    "出店期間", "受付期間", "予約受付期間", "期間", "日程", "日時",
+    "出店期間", "受付期間", "予約受付期間", "ツアー実施日", "実施日", "運行日", "期間", "日程", "日時",
 ]
 PLACE_LABELS = ["販売場所", "開催場所", "出店場所", "会場", "販売店舗", "場所", "引換場所"]
 
@@ -110,8 +110,8 @@ def parse_range(text: str, base: date) -> tuple[date, date] | None:
     return None
 
 
-def find_labeled(lines: list[str], labels: list[str]) -> list[tuple[str, str]]:
-    """見出し行を探し、(見出し, 値テキスト) を優先順に返す。"""
+def find_labeled(lines: list[str], labels: list[str], extra: int = 2) -> list[tuple[str, str]]:
+    """見出し行を探し、(見出し, 値テキスト) を優先順に返す。extra は続けて読む行数。"""
     hits = []
     for pri, label in enumerate(labels):
         pat = re.compile(r"^[【\[■●◆◇▼▶☆★・\s]*" + re.escape(label) + r"(?:[】\]:：\s]+|$|(?=\d))(.*)$")
@@ -120,15 +120,22 @@ def find_labeled(lines: list[str], labels: list[str]) -> list[tuple[str, str]]:
             if not m:
                 continue
             value = m.group(1).strip()
-            following = " ".join(lines[i + 1: i + 3])
-            hits.append((pri, i, label, (value + " " + following).strip() if len(value) < 6 else value + " " + following))
+            following = " ".join(lines[i + 1: i + 1 + extra])
+            if extra == 1 and len(value) >= 2:
+                text = value  # 場所は見出しと同じ行の値だけを使う
+            elif extra == 1:
+                text = lines[i + 1] if i + 1 < len(lines) else ""
+            else:
+                text = (value + " " + following).strip()
+            hits.append((pri, i, label, text))
     hits.sort(key=lambda h: (h[0], h[1]))
     return [(h[2], h[3]) for h in hits]
 
 
 def short_title(title: str) -> str:
     quotes = re.findall(r"[「『]([^」』]{2,40})[」』]", title)
-    good = [q for q in quotes if "ぴよりん" in q and len(q) >= 6]
+    good = [q for q in quotes if "ぴよりん" in q and len(q) >= 6
+            and not re.fullmatch(r"ぴよりん\s*(village|アトリエ|shop|ショップ|カフェ|MARKET).*", q, re.I)]
     if good:
         return max(good, key=len)
     return re.sub(r"^【[^】]*】", "", title).strip()
@@ -138,7 +145,7 @@ def guess_kind(title: str, label: str, single_day: bool) -> str:
     hay = title + " " + label
     if re.search(r"キャンペーン|実施期間|コラボ企画|推し旅|スタンプラリー", hay):
         return "campaign"
-    if re.search(r"開催|フェス|イベント|ツアー|祭|展|会期|教室|体験", hay) and "販売" not in label:
+    if re.search(r"開催|フェス|イベント|ツアー|祭|展|会期|教室|体験|実施日|運行|乗車", hay) and "販売" not in label:
         return "event"
     if single_day and re.search(r"発売|予約|受付|販売開始|より販売|登場", hay):
         return "release"
@@ -164,7 +171,7 @@ def extract(article: dict, page: str) -> dict | None:
         return None
     label, (start, end) = found
     place = ""
-    for _, value in find_labeled(lines, PLACE_LABELS):
+    for _, value in find_labeled(lines, PLACE_LABELS, extra=1):
         place = re.split(r"\s*[※(]|\s{2,}|URL|TEL", value)[0].strip(" :：")
         if place:
             break
