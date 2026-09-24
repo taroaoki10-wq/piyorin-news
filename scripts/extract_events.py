@@ -11,12 +11,15 @@ from __future__ import annotations
 
 import html
 import json
+import os
 import re
 import sys
 import unicodedata
 import urllib.request
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+
+from claude_events import MODEL, claude_events
 
 JST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent.parent
@@ -203,20 +206,34 @@ def main() -> int:
             and n["url"] not in covered and n.get("date", "") >= cutoff
             and not SKIP_TITLE.search(n.get("title", ""))]
     todo = todo[:MAX_ARTICLES_PER_RUN]
-    added = 0
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+    print(f"読み取り方法: {'Claude API（' + MODEL + '）' if api_key else '見出しのパターン（APIキー未設定）'}")
+    added, tokens_in, tokens_out = 0, 0, 0
     for art in todo:
         try:
-            ev = extract(art, fetch(art["url"]))
-        except Exception as e:  # 1記事の失敗で止めない
+            page = fetch(art["url"])
+            if api_key:
+                found, usage = claude_events(art, "\n".join(html_to_lines(page)), api_key)
+                tokens_in += usage.get("input_tokens", 0)
+                tokens_out += usage.get("output_tokens", 0)
+            else:
+                one = extract(art, page)
+                found = [one] if one else []
+        except Exception as e:  # 1記事の失敗で止めない（次回もう一度読む）
             print(f"読み取り失敗 {art['url']}: {e}", file=sys.stderr)
             continue
         checked.add(art["url"])
-        if ev:
+        if not found:
+            print(f"予定なし: {art['title'][:40]}")
+        base_id = "auto-" + re.sub(r"\W", "", art["id"])[-24:]
+        for n, ev in enumerate(found):
+            ev = {"id": base_id if n == 0 else f"{base_id}-{n + 1}", **{k: v for k, v in ev.items() if k != "id"},
+                  "url": art["url"], "auto": True}
             events.append(ev)
             added += 1
             print(f"予定を追加: {ev['start']}〜{ev['end']} {ev['title']}（{ev['kind']}）")
-        else:
-            print(f"日付なし: {art['title'][:40]}")
+    if tokens_in or tokens_out:
+        print(f"Claude API 使用量: 入力 {tokens_in} / 出力 {tokens_out} トークン")
 
     events.sort(key=lambda e: (e.get("start", ""), e.get("end", "")))
     print(f"確認 {len(todo)}記事 / 予定追加 {added}件 / 予定合計 {len(events)}件")
