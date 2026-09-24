@@ -2,8 +2,8 @@ name: ぴよりんニュースを更新
 
 on:
   schedule:
-    # 3時間ごと（UTC表記。日本時間では 0,3,6,9,12,15,18,21 時の少し後）
-    - cron: "17 */3 * * *"
+    # 1時間ごと（毎時23分。混み合う0分台を避けて遅れを減らす）
+    - cron: "23 * * * *"
   workflow_dispatch: {}   # Actions画面の「Run workflow」で手動実行もできる
 
 permissions:
@@ -16,19 +16,16 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
+      # ubuntu-latest に入っている Python をそのまま使う（準備の時間を省く）
       - name: ニュースを収集
-        run: python scripts/fetch_news.py
+        run: python3 scripts/fetch_news.py
 
       - name: カレンダーの予定を抽出
-        run: python scripts/extract_events.py
+        run: python3 scripts/extract_events.py
         env:
           # Settings → Secrets and variables → Actions に登録したClaudeのAPIキー
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -42,5 +39,6 @@ jobs:
             echo "変更なし"
           else
             git commit -m "ニュース・予定更新 $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
+            git pull --rebase --autostash -q || true
             git push
           fi

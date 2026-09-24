@@ -14,12 +14,14 @@ import json
 import os
 import re
 import sys
+import time
 import unicodedata
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-from claude_events import MODEL, claude_events
+from claude_events import claude_events_batch, snippet
 
 JST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent.parent
@@ -194,7 +196,18 @@ def extract(article: dict, page: str) -> dict | None:
     }
 
 
+def count_ranges(text: str, base: date) -> int:
+    """抜粋に出てくる、記事の時期に合う日付（範囲）の数。"""
+    found = set()
+    for m in RANGE_RE.finditer(text):
+        r = parse_range(m.group(0), base)
+        if r:
+            found.add(r)
+    return len(found)
+
+
 def main() -> int:
+    t0 = time.time()
     news = json.loads(NEWS_FILE.read_text(encoding="utf-8"))
     events = json.loads(EVENTS_FILE.read_text(encoding="utf-8")) if EVENTS_FILE.exists() else []
     state = json.loads(STATE_FILE.read_text(encoding="utf-8")) if STATE_FILE.exists() else {}
@@ -204,25 +217,63 @@ def main() -> int:
 
     todo = [n for n in news if n.get("cat") == "official" and n["url"] not in checked
             and n["url"] not in covered and n.get("date", "") >= cutoff
-            and not SKIP_TITLE.search(n.get("title", ""))]
-    todo = todo[:MAX_ARTICLES_PER_RUN]
+            and not SKIP_TITLE.search(n.get("title", ""))][:MAX_ARTICLES_PER_RUN]
+    if not todo:
+        print(f"新しい公式記事なし（{time.time() - t0:.1f}秒）")
+        return 0
+
     api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
-    print(f"読み取り方法: {'Claude API（' + MODEL + '）' if api_key else '見出しのパターン（APIキー未設定）'}")
-    added, tokens_in, tokens_out = 0, 0, 0
-    for art in todo:
+
+    def load(art):
         try:
-            page = fetch(art["url"])
-            if api_key:
-                found, usage = claude_events(art, "\n".join(html_to_lines(page)), api_key)
-                tokens_in += usage.get("input_tokens", 0)
-                tokens_out += usage.get("output_tokens", 0)
-            else:
-                one = extract(art, page)
-                found = [one] if one else []
-        except Exception as e:  # 1記事の失敗で止めない（次回もう一度読む）
-            print(f"読み取り失敗 {art['url']}: {e}", file=sys.stderr)
+            return art, fetch(art["url"]), None
+        except Exception as e:
+            return art, None, e
+
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        pages = list(ex.map(load, todo))
+
+    results: dict[str, list[dict]] = {}
+    ask: list[tuple[dict, str]] = []
+    for art, page, err in pages:
+        if err:  # 読めなかった記事は次回もう一度読む
+            print(f"読み取り失敗 {art['url']}: {err}", file=sys.stderr)
+            continue
+        lines = html_to_lines(page)
+        text = snippet(lines)
+        base = date.fromisoformat(art["date"])
+        n = count_ranges(text, base)
+        if n == 0:
+            results[art["url"]] = []  # 日付がない記事はAPIに送らない
+            continue
+        one = extract(art, page)
+        if n == 1 and one:
+            results[art["url"]] = [one]  # 日付が1つだけの単純な記事はパターンで十分
+            continue
+        if api_key:
+            ask.append((art, text))
+        else:
+            results[art["url"]] = [one] if one else []
+
+    tokens = {"input_tokens": 0, "output_tokens": 0}
+    for i in range(0, len(ask), 8):  # 8記事ずつまとめて1回で読ませる
+        chunk = ask[i:i + 8]
+        try:
+            found, usage = claude_events_batch(chunk, api_key)
+        except Exception as e:  # APIが失敗した記事は次回もう一度読む
+            print(f"Claude API 失敗: {e}", file=sys.stderr)
+            continue
+        for k in tokens:
+            tokens[k] += usage.get(k, 0)
+        for j, (art, _) in enumerate(chunk):
+            results[art["url"]] = found.get(j, [])
+
+    added = 0
+    for art in todo:
+        if art["url"] not in results:
             continue
         checked.add(art["url"])
+        found = results[art["url"]]
         if not found:
             print(f"予定なし: {art['title'][:40]}")
         base_id = "auto-" + re.sub(r"\W", "", art["id"])[-24:]
@@ -232,11 +283,11 @@ def main() -> int:
             events.append(ev)
             added += 1
             print(f"予定を追加: {ev['start']}〜{ev['end']} {ev['title']}（{ev['kind']}）")
-    if tokens_in or tokens_out:
-        print(f"Claude API 使用量: 入力 {tokens_in} / 出力 {tokens_out} トークン")
 
     events.sort(key=lambda e: (e.get("start", ""), e.get("end", "")))
-    print(f"確認 {len(todo)}記事 / 予定追加 {added}件 / 予定合計 {len(events)}件")
+    print(f"確認 {len(results)}記事（うちAPI {len(ask)}記事）/ 予定追加 {added}件 / 予定合計 {len(events)}件（{time.time() - t0:.1f}秒）")
+    if tokens["input_tokens"]:
+        print(f"Claude API 使用量: 入力 {tokens['input_tokens']} / 出力 {tokens['output_tokens']} トークン")
     before = EVENTS_FILE.read_text(encoding="utf-8") if EVENTS_FILE.exists() else ""
     after = json.dumps(events, ensure_ascii=False, indent=1) + "\n"
     if after != before:

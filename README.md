@@ -6,19 +6,23 @@ GitHub Actions が3時間ごとに情報を集め、GitHub Pages で公開しま
 ## しくみ
 
 ```
-GitHub Actions（3時間ごと）
-  └ scripts/fetch_news.py
+GitHub Actions（1時間ごと・毎時23分）
+  └ scripts/fetch_news.py（7つの情報源を同時に取得）
       ├ ぴよりん公式サイト「お知らせ」
       ├ PR TIMES（ジェイアール東海フードサービス）
-      └ Googleニュース「ぴよりん」
-          ↓ 新しい記事だけ追記
+      ├ Googleニュース「ぴよりん」（関連度順・直近7日・直近1日）
+      └ Bingニュース「ぴよりん」（関連度順・新着順）
+          ↓ 新しい記事だけ追記（同じ話題は「ほか◯件」にまとめる）
       docs/data/news.json
   └ scripts/extract_events.py
-      公式記事を Claude API に渡して販売期間・開催日を読み取り
+      新しい公式記事から販売期間・開催日を読み取り
+        ・日付のない記事 → 何もしない
+        ・日付が1つだけの記事 → パターンで読み取り（APIを使わない）
+        ・日程が複数ある記事 → 日付まわりの抜粋だけをまとめて Claude API へ
           ↓
       docs/data/events.json
           ↓
-GitHub Pages（docs/index.html）→ Safari で表示
+GitHub Pages（docs/index.html、5分ごとに読み直し）→ Safari で表示
 ```
 
 ## ファイル構成
