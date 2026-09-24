@@ -25,7 +25,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
-from urllib.parse import parse_qs, quote, urljoin, urlparse
+from urllib.parse import parse_qs, quote, urlencode, urljoin, urlparse
 
 JST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent.parent
@@ -267,17 +267,45 @@ def published_date(page: str) -> str | None:
     return None
 
 
+def decode_google(url: str) -> str | None:
+    """Googleニュースの中継URLから元記事のURLを取り出す。"""
+    aid = urlparse(url).path.rstrip("/").split("/")[-1]
+    sg = ts = None
+    for base in ("https://news.google.com/articles/", "https://news.google.com/rss/articles/"):
+        try:
+            page = fetch(base + aid)
+        except Exception:
+            continue
+        sg = re.search(r'data-n-a-sg="([^"]+)"', page)
+        ts = re.search(r'data-n-a-ts="([^"]+)"', page)
+        if sg and ts:
+            break
+    if not (sg and ts):
+        return None
+    inner = json.dumps(["garturlreq", [["X", "X", ["X", "X"], None, None, 1, 1, "US:en", None, 1, None, None, None,
+                                        None, None, 0, 1], "X", "X", 1, [1, 1, 1], 1, 1, None, 0, 0, None, 0],
+                        aid, int(ts.group(1)), sg.group(1)])
+    data = urlencode({"f.req": json.dumps([[["Fbv4je", inner, None, "generic"]]])}).encode()
+    req = urllib.request.Request("https://news.google.com/_/DotsSplashUi/data/batchexecute", data=data,
+                                 headers={"User-Agent": UA, "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        body = r.read().decode("utf-8", errors="replace")
+    for row in json.loads(body.split("\n\n", 1)[1]):
+        if isinstance(row, list) and len(row) > 2 and row[0] == "wrb.fr" and row[2]:
+            got = json.loads(row[2])
+            if isinstance(got, list) and len(got) > 1 and str(got[1]).startswith("http"):
+                return got[1]
+    return None
+
+
 def direct_url(item: dict) -> str | None:
-    """Googleニュースの中継URLしかない記事は、Bingで同じタイトルを探して元のURLを得る。"""
+    """中継URL（Googleニュース）なら元記事のURLにする。"""
     if "news.google.com" not in item["url"]:
         return item["url"]
     try:
-        for f in parse_rss(fetch(bing(item["title"][:60])), "bing"):
-            if norm(f["title"]) == norm(item["title"]) and "news.google.com" not in f["url"]:
-                return f["url"]
+        return decode_google(item["url"])
     except Exception:
-        pass
-    return None
+        return None
 
 
 def verify(item: dict) -> tuple[dict, str | None, str | None]:
@@ -292,17 +320,23 @@ def verify(item: dict) -> tuple[dict, str | None, str | None]:
 
 def verify_dates(items: list[dict]) -> int:
     limit = (datetime.now(JST).date() - timedelta(days=VERIFY_DAYS)).isoformat()
-    todo = [n for n in items if n.get("cat") != "official" and not n.get("checked") and n.get("date", "") >= limit][:VERIFY_MAX]
+    todo = [n for n in items if n.get("cat") != "official" and n.get("date", "") >= limit
+            and not (n.get("checked") and "news.google.com" not in n["url"])
+            and n.get("tries", 0) < 3][:VERIFY_MAX]
     fixed = 0
-    with ThreadPoolExecutor(max_workers=8) as ex:
+    with ThreadPoolExecutor(max_workers=6) as ex:
         for item, url, real in ex.map(verify, todo):
+            if not url:  # 元記事が分からなかったものは次回もう一度（3回まで）
+                item["tries"] = item.get("tries", 0) + 1
+                continue
             item["checked"] = True
-            if url and "news.google.com" in item["url"]:
-                item["url"] = url  # 元記事のURLに置き換える
+            item.pop("tries", None)
+            item["url"] = url  # 元記事のURLに置き換える
             if real and abs((datetime.fromisoformat(real) - datetime.fromisoformat(item["date"])).days) > 3:
                 print(f"日付を修正: {item['date']} → {real} {item['title'][:40]}")
                 item["date"] = real
                 fixed += 1
+    print(f"掲載日の確認 {len(todo)}件（修正 {fixed}件）")
     return fixed
 
 
