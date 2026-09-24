@@ -259,11 +259,27 @@ VERIFY_DAYS = 14   # 直近この日数の記事だけ確認する
 VERIFY_MAX = 15    # 1回で確認する最大件数
 
 
+JP_DATE_RE = [
+    # 「公開日」「配信」などの近くに書かれた日付
+    r"(?:公開|配信|掲載|投稿|更新)(?:日|日時)?[^0-9<]{0,12}(20\d{2})\s*[年/.-]\s*(\d{1,2})\s*[月/.-]\s*(\d{1,2})",
+    # 時刻つきの日付（記事の公開日時の書き方として多い）
+    r"(20\d{2})\s*[年/.]\s*(\d{1,2})\s*[月/.]\s*(\d{1,2})\s*日?\s*(?:\([^)]{1,3}\)\s*)?\d{1,2}:\d{2}",
+]
+DATE_CHECK_VERSION = 2  # 確認方法を改善したら上げる（確認済みの記事をもう一度確認する）
+
+
 def published_date(page: str) -> str | None:
     for pat in PUBLISHED_RE:
         m = re.search(pat, page, re.I)
         if m:
-            return m.group(1)
+            return m.group(1).replace("/", "-")
+    body = page[page.lower().find("<body"):] if "<body" in page.lower() else page
+    for pat in JP_DATE_RE:
+        m = re.search(pat, body)
+        if m:
+            y, mo, d = (int(x) for x in m.groups())
+            if 1 <= mo <= 12 and 1 <= d <= 31:
+                return f"{y}-{mo:02d}-{d:02d}"
     return None
 
 
@@ -321,16 +337,16 @@ def verify(item: dict) -> tuple[dict, str | None, str | None]:
 def verify_dates(items: list[dict]) -> int:
     limit = (datetime.now(JST).date() - timedelta(days=VERIFY_DAYS)).isoformat()
     todo = [n for n in items if n.get("cat") != "official" and n.get("date", "") >= limit
-            and not (n.get("checked") and "news.google.com" not in n["url"])
-            and n.get("tries", 0) < 3][:VERIFY_MAX]
+            and n.get("dv", 0) < DATE_CHECK_VERSION and n.get("tries", 0) < 3][:VERIFY_MAX]
     fixed = 0
     with ThreadPoolExecutor(max_workers=6) as ex:
         for item, url, real in ex.map(verify, todo):
             if not url:  # 元記事が分からなかったものは次回もう一度（3回まで）
                 item["tries"] = item.get("tries", 0) + 1
                 continue
-            item["checked"] = True
+            item["dv"] = DATE_CHECK_VERSION
             item.pop("tries", None)
+            item.pop("checked", None)
             item["url"] = url  # 元記事のURLに置き換える
             if real and abs((datetime.fromisoformat(real) - datetime.fromisoformat(item["date"])).days) > 3:
                 print(f"日付を修正: {item['date']} → {real} {item['title'][:40]}")
