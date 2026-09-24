@@ -109,7 +109,12 @@
   "title": "シルバーウィーク期間だけ！現地激ウマ名物が都内近郊に集結♪ぴよりん・北海道海鮮も",
   "source": "いこーよニュース",
   "url": "https://report.iko-yo.net/articles/33776/digest",
-  "related": [],
+  "related": [
+   {
+    "source": "report.iko-yo.net",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9YeTdUYXo5TlRnOWcyTGxKQWpWQWNCbGtoX1JaeGFqWW1HbXJmMU5yQVdVNUxJOW5UNllTVThWSzNhQWRjUjZseXh5djl3dHFDa21FZWNOMWJFZ2M?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -139,6 +144,16 @@
   "title": "ぴよりん15周年をウルフィがお祝い♪「ウルフィ×ぴよりん オメ ...",
   "source": "ORICON NEWS",
   "url": "https://www.oricon.co.jp/pressrelease/2996859/",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20260918-6dcad376",
+  "date": "2026-09-18",
+  "cat": "media",
+  "title": "ぴよりんフェス、豊橋駅ビル「カルミア」で開催 10月1～4日：ニュース",
+  "source": "中日BIZナビ",
+  "url": "https://biz.chunichi.co.jp/news/article/10/130649/25/",
   "related": [],
   "dv": 3
  },
@@ -196,7 +211,12 @@
   "title": "豊橋市の魅力ぎゅっ ぴよりんフェスに来てね 10月1～4日、駅ビルで開催",
   "source": "中日新聞Web",
   "url": "https://www.chunichi.co.jp/article/1312442",
-  "related": [],
+  "related": [
+   {
+    "source": "chunichi.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFAteXdWT3kwM3ptUDlRSTlJajUxRk5FNWltT0F0cGhNSTJiSF9jS0ZCWFFBaUx3TEpGZVduMXNTbnNSQzdrdV9HUlFsZVBMSWIzMVZmZg?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -483,8 +503,9 @@
   "cat": "media",
   "title": "第20回アジア競技大会（2026/愛知・名古屋）を記念した特別デザインのぴよりん",
   "source": "フーズチャネル",
-  "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA4bWFiU3prWm5jNkxkOFlfYS1EVG5KRlB3Qk1xb3NOZ3FCazBab0ExSUJkRWZpM0pYX3FVeTNsWTdoSjlmYkpnWktCYUFNdGx4eGRCMDZ3?oc=5",
-  "related": []
+  "url": "https://foods-ch.infomart.co.jp/news/329977",
+  "related": [],
+  "dv": 3
  },
  {
   "id": "n20260911-ff273e6f",
@@ -493,7 +514,8 @@
   "title": "「ぴよりん」が埼玉県・川越におでかけ！まるひろ川越店「秋の ...",
   "source": "AERA dot. (アエラドット)",
   "url": "https://dot.asahi.com/articles/-/292522?page=1",
-  "related": []
+  "related": [],
+  "dv": 3
  },
  {
   "id": "n20260910-asian",
