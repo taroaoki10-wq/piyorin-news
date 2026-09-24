@@ -1,0 +1,26 @@
+name: batch-test
+on: workflow_dispatch
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          cd scripts && python3 - <<'PY'
+          import json, os, datetime, extract_events as x, claude_events as c
+          news=json.load(open('../docs/data/news.json'))
+          want=['p5558','p5546','p5358','p5520']
+          arts=[n for n in news if n['cat']=='official' and any(w in n['url'] for w in want)]
+          ask=[]
+          for n in arts:
+              page=x.fetch(n['url']); text=c.snippet(x.html_to_lines(page)); k=x.count_ranges(text, datetime.date.fromisoformat(n['date']))
+              print('RESULT', n['url'][-6:], 'ranges', k, 'snippet_chars', len(text))
+              if k==1: print('RESULT', n['url'][-6:], 'PATTERN', x.extract(n,page))
+              else: ask.append((n,text))
+          res,u=c.claude_events_batch(ask, os.environ['ANTHROPIC_API_KEY'])
+          for i,(n,_) in enumerate(ask):
+              for e in res.get(i,[]): print('RESULT', n['url'][-6:], e['start'], e['end'], e['kind'], e['title'])
+          print('RESULT USAGE', u.get('input_tokens'), u.get('output_tokens'))
+          PY
