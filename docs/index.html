@@ -125,6 +125,10 @@ details.rel li a:hover{color:var(--caramel)}
 .tabs button[aria-selected="true"]{color:var(--ink)}
 .tabs button[aria-selected="true"]::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;border-radius:3px;background:var(--yolk)}
 .tabs .n{font-family:var(--f-mono);font-size:11px;font-weight:400;color:var(--muted)}
+.stamp{margin-left:auto;align-self:center;margin-bottom:8px;display:flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:11px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.stamp i{width:6px;height:6px;border-radius:50%;background:var(--line)}
+.stamp.fresh i{background:var(--yolk)}
+@media (max-width:620px){.stamp .lbl{display:none}}
 .toolbar{top:env(safe-area-inset-top,0px)}
 
 /* ---------- calendar ---------- */
@@ -243,6 +247,7 @@ details.rel li a:hover{color:var(--caramel)}
     <div class="tabs" role="tablist" aria-label="表示切り替え">
       <button type="button" role="tab" id="tab-news" aria-controls="view-news" data-view="news" aria-selected="true">ニュース<span class="n" id="n-news"></span></button>
       <button type="button" role="tab" id="tab-cal" aria-controls="view-cal" data-view="calendar" aria-selected="false">カレンダー<span class="n" id="n-cal"></span></button>
+      <span class="stamp" id="stamp" aria-live="polite"><i aria-hidden="true"></i><span class="lbl">最終更新</span><span id="stamp-t">—</span></span>
     </div>
     <div id="view-news" role="tabpanel" aria-labelledby="tab-news" style="display:flex;flex-direction:column;gap:28px">
     <div class="toolbar">
@@ -343,7 +348,12 @@ details.rel li a:hover{color:var(--caramel)}
     const u=state.updatedAt?new Date(state.updatedAt):null;
     const s=u&&!isNaN(u)?`${u.getMonth()+1}/${u.getDate()} ${String(u.getHours()).padStart(2,'0')}:${String(u.getMinutes()).padStart(2,'0')}`:'—';
     const srcs=new Set();state.news.forEach(n=>{srcs.add(n.source);(n.related||[]).forEach(r=>srcs.add(r.source))});
-    $('meta').innerHTML=`<span>最終更新 ${esc(s)}</span><span>${state.news.length}件 · ${srcs.size}ソース</span>`;
+    $('meta').innerHTML=`<span>${state.news.length}件 · ${srcs.size}ソース</span>`;
+    $('stamp-t').textContent=s;
+    const fresh=u&&!isNaN(u)&&(Date.now()-u.getTime())<4*3600e3;
+    $('stamp').classList.toggle('fresh',!!fresh);
+    const c=new Date();
+    $('stamp').title=(u&&!isNaN(u)?`ニュースの最終収集: ${u.getFullYear()}/${u.getMonth()+1}/${u.getDate()} ${s.split(' ')[1]}`:'最終収集: 不明')+`\nページの確認: ${String(c.getHours()).padStart(2,'0')}:${String(c.getMinutes()).padStart(2,'0')}`;
   }
 
   // ---------- calendar ----------
