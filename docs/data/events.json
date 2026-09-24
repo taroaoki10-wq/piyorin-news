@@ -1,14 +1,5 @@
 [
  {
-  "id": "e-keikyu",
-  "title": "ぴよりん出張販売（京急百貨店）",
-  "start": "2026-09-10",
-  "end": "2026-09-11",
-  "place": "京急百貨店 7階催事場（横浜）",
-  "kind": "sale",
-  "url": "https://prtimes.jp/main/html/rd/p/000000223.000124425.html"
- },
- {
   "id": "e-halloween",
   "title": "ハロウィン限定グッズ発売",
   "start": "2026-09-01",
@@ -16,6 +7,15 @@
   "place": "ぴよりんvillage",
   "kind": "release",
   "url": "https://piyorin.com/news/p5363/"
+ },
+ {
+  "id": "e-keikyu",
+  "title": "ぴよりん出張販売（京急百貨店）",
+  "start": "2026-09-10",
+  "end": "2026-09-11",
+  "place": "京急百貨店 7階催事場（横浜）",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000223.000124425.html"
  },
  {
   "id": "e-tour-entry",
@@ -99,15 +99,6 @@
   "url": "https://piyorin.com/news/p5358/"
  },
  {
-  "id": "e-dode",
-  "title": "ドデ祭2026",
-  "start": "2026-10-17",
-  "end": "2026-10-18",
-  "place": "メ～テレ本社屋前",
-  "kind": "event",
-  "url": "https://www.nagoyatv.com/dodematsuri/"
- },
- {
   "id": "e-wolfy-online",
   "title": "ウルフィ×ぴよりん ぬいぐるみ オンライン発売",
   "start": "2026-10-17",
@@ -115,6 +106,15 @@
   "place": "BLUE LINES EX",
   "kind": "release",
   "url": "https://piyorin.com/news/p5558/"
+ },
+ {
+  "id": "e-dode",
+  "title": "ドデ祭2026",
+  "start": "2026-10-17",
+  "end": "2026-10-18",
+  "place": "メ～テレ本社屋前",
+  "kind": "event",
+  "url": "https://www.nagoyatv.com/dodematsuri/"
  },
  {
   "id": "e-wolfy-village",
