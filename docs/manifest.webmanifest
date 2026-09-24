@@ -1,0 +1,22 @@
+{
+ "name": "ぴよりんニュース",
+ "short_name": "ぴよりん",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#F3F2EE",
+ "theme_color": "#FBDB16",
+ "lang": "ja",
+ "icons": [
+  {
+   "src": "apple-touch-icon.png",
+   "sizes": "180x180",
+   "type": "image/png"
+  },
+  {
+   "src": "icon.png",
+   "sizes": "128x128",
+   "type": "image/png"
+  }
+ ]
+}

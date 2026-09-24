@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FBDB16">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ぴよりん">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>ぴよりんニュース</title>
@@ -232,6 +237,50 @@ details.rel li a:hover{color:var(--caramel)}
 .reader-ev b{font-family:var(--f-mono);font-weight:500}
 .reader-note{color:var(--muted);font-size:13px}
 @media (max-width:620px){.reader-body{padding:20px 18px 48px}.reader-body h2{font-size:20px}}
+
+/* ---------- iPhone / touch ---------- */
+html{-webkit-text-size-adjust:100%}
+a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media (hover:none){.feat:hover,.link:hover{transform:none}}
+@media (hover:none),(max-width:620px){html.reader-open,html.reader-open body{overflow:hidden}}
+.reader-body{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+@media (max-width:620px){
+  body{padding-inline:0}
+  .shell{grid-template-columns:minmax(0,1fr);padding-inline:16px;gap:18px;padding-block:calc(env(safe-area-inset-top,0px) + 12px) calc(env(safe-area-inset-bottom,0px) + 40px)}
+  aside{display:contents}
+  aside>.brand{order:1}
+  aside>.brand .eyebrow,aside>.brand p{display:none}
+  .brand h1{font-size:24px}
+  .yolk{width:30px;height:30px}
+  aside>nav{order:2}
+  aside>nav .sec-label{display:none}
+  aside>*,main{min-width:0}
+  .links{display:flex;flex-direction:row;gap:8px;overflow-x:auto;margin-inline:-16px;padding:2px 16px;scrollbar-width:none}
+  .links::-webkit-scrollbar,.events::-webkit-scrollbar{display:none}
+  .link{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border-radius:99px}
+  .link .ico{width:32px;height:32px;border-radius:50%}
+  .link .ico svg{width:17px;height:17px}
+  .link b{font-size:13.5px;white-space:nowrap}
+  .link small,.link .arr{display:none}
+  aside>section{order:3}
+  aside>section .sec-label{margin-bottom:8px}
+  .events{flex-direction:row;overflow-x:auto;gap:10px;margin-inline:-16px;padding:0 16px 4px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .ev,.ev:last-child{flex:0 0 76%;border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--surface);scroll-snap-align:start}
+  main{order:4}
+  aside>.meta{order:5;flex-direction:row;gap:10px;justify-content:center}
+  .tabs{position:sticky;top:0;z-index:6;background:var(--bg);margin-inline:-16px;padding:calc(env(safe-area-inset-top,0px) + 8px) 16px 0}
+  .tabs button{padding-bottom:10px}
+  .toolbar{position:static}
+  .seg{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .seg button{white-space:nowrap}
+  .search input{font-size:16px;padding-block:9px}
+  .feat{padding:18px 18px 14px}
+  .feat h2{font-size:18px}
+  .item h3{font-size:15.5px}
+  .reader{width:100%;border-left:0}
+  .reader-bar{padding-top:calc(env(safe-area-inset-top,0px) + 10px)}
+  .reader-bar button{width:40px;height:40px}
+}
 </style>
 
 </head>
@@ -503,7 +552,7 @@ details.rel li a:hover{color:var(--caramel)}
       $('reader-body').innerHTML=h;
     };
     $('reader-orig').href=safeUrl(src.url);
-    $('reader').hidden=false;$('reader-scrim').hidden=false;
+    $('reader').hidden=false;$('reader-scrim').hidden=false;document.documentElement.classList.add('reader-open');
     paint(null,true);$('reader-body').scrollTop=0;
     $('reader-close').focus({preventScroll:true});
     const art=await loadArticle(src.url);
@@ -518,7 +567,11 @@ details.rel li a:hover{color:var(--caramel)}
   function newsSource(it,url,source){
     return {url:url||it.url,title:it.title,chip:`<span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><b>${esc(it.date.replaceAll('-','.'))}（${wd(it.date)}）</b><span>${esc(source||it.source)}</span>`};
   }
-  function closeReader(){$('reader').hidden=true;$('reader-scrim').hidden=true;readerToken++}
+  function closeReader(){$('reader').hidden=true;$('reader-scrim').hidden=true;document.documentElement.classList.remove('reader-open');readerToken++}
+  // iPhone：リーダーを右へスワイプすると閉じる
+  {let sx=0,sy=0;const r=$('reader');
+   r.addEventListener('touchstart',e=>{const t=e.touches[0];sx=t.clientX;sy=t.clientY},{passive:true});
+   r.addEventListener('touchend',e=>{const t=e.changedTouches[0];const dx=t.clientX-sx,dy=t.clientY-sy;if(dx>80&&Math.abs(dy)<60)closeReader()},{passive:true});}
   // リーダーの外側（暗くなった部分）を押したら、下にあるリンクより優先して閉じる
   $('reader-scrim').addEventListener('click',e=>{e.preventDefault();e.stopPropagation();closeReader()});
   document.addEventListener('click',e=>{
