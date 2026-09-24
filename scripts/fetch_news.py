@@ -245,6 +245,67 @@ def merge(existing: list[dict], incoming: list[dict]) -> tuple[list[dict], int]:
     return existing[:MAX_ITEMS], added
 
 
+# ---------- 掲載日の確認 ----------
+# ニュース検索は、古い記事を「今日の記事」として返すことがある（画像ページの再掲載など）。
+# 新しく入った記事は元のページを開き、ページに書かれた公開日で日付を直す。
+PUBLISHED_RE = [
+    r'<meta[^>]+property="article:published_time"[^>]+content="(\d{4}-\d{2}-\d{2})',
+    r'<meta[^>]+content="(\d{4}-\d{2}-\d{2})[^"]*"[^>]+property="article:published_time"',
+    r'"datePublished"\s*:\s*"(\d{4}-\d{2}-\d{2})',
+    r'<meta[^>]+(?:name|itemprop)="(?:pubdate|publishdate|date|datePublished)"[^>]+content="(\d{4}-\d{2}-\d{2})',
+    r'<time[^>]+datetime="(\d{4}-\d{2}-\d{2})',
+]
+VERIFY_DAYS = 14   # 直近この日数の記事だけ確認する
+VERIFY_MAX = 15    # 1回で確認する最大件数
+
+
+def published_date(page: str) -> str | None:
+    for pat in PUBLISHED_RE:
+        m = re.search(pat, page, re.I)
+        if m:
+            return m.group(1)
+    return None
+
+
+def direct_url(item: dict) -> str | None:
+    """Googleニュースの中継URLしかない記事は、Bingで同じタイトルを探して元のURLを得る。"""
+    if "news.google.com" not in item["url"]:
+        return item["url"]
+    try:
+        for f in parse_rss(fetch(bing(item["title"][:60])), "bing"):
+            if norm(f["title"]) == norm(item["title"]) and "news.google.com" not in f["url"]:
+                return f["url"]
+    except Exception:
+        pass
+    return None
+
+
+def verify(item: dict) -> tuple[dict, str | None, str | None]:
+    url = direct_url(item)
+    if not url:
+        return item, None, None
+    try:
+        return item, url, published_date(fetch(url))
+    except Exception:
+        return item, url, None
+
+
+def verify_dates(items: list[dict]) -> int:
+    limit = (datetime.now(JST).date() - timedelta(days=VERIFY_DAYS)).isoformat()
+    todo = [n for n in items if n.get("cat") != "official" and not n.get("checked") and n.get("date", "") >= limit][:VERIFY_MAX]
+    fixed = 0
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        for item, url, real in ex.map(verify, todo):
+            item["checked"] = True
+            if url and "news.google.com" in item["url"]:
+                item["url"] = url  # 元記事のURLに置き換える
+            if real and abs((datetime.fromisoformat(real) - datetime.fromisoformat(item["date"])).days) > 3:
+                print(f"日付を修正: {item['date']} → {real} {item['title'][:40]}")
+                item["date"] = real
+                fixed += 1
+    return fixed
+
+
 def main() -> int:
     t0 = time.time()
     before = NEWS_FILE.read_text(encoding="utf-8") if NEWS_FILE.exists() else "[]"
@@ -261,6 +322,9 @@ def main() -> int:
             incoming += items
 
     merged, added = merge(existing, incoming)
+    fixed = verify_dates(merged)
+    if fixed:
+        merged.sort(key=lambda n: (n["date"], n["cat"] == "official"), reverse=True)
     print(f"新規 {added}件 / 合計 {len(merged)}件（{time.time() - t0:.1f}秒）")
     after = json.dumps(merged, ensure_ascii=False, indent=1) + "\n"
     if after != before:
