@@ -84,6 +84,11 @@ def norm(title: str) -> str:
     return re.sub(r"[\s\W_]+", "", t)
 
 
+def clean_title(title: str) -> str:
+    """「＜画像3 / 8＞」など、同じ記事の別ページを示す前置きを外す。"""
+    return re.sub(r"^\s*[＜<]?\s*画像\s*\d+\s*/\s*\d+\s*[＞>]\s*", "", title).strip()
+
+
 def has_keyword(text: str) -> bool:
     low = (text or "").lower()
     return any(k.lower() in low for k in KEYWORDS)
@@ -148,7 +153,7 @@ def parse_rss(xml_text: str, kind: str) -> list[dict]:
             source = "PR TIMES"
         if source and title.endswith(" - " + source):
             title = title[: -len(" - " + source)].strip()
-        title = html.unescape(title)
+        title = clean_title(html.unescape(title))
         hay = title + (" " + desc if kind in ("bing", "prtimes") else "")
         if not has_keyword(hay):
             continue
@@ -189,7 +194,27 @@ def make_id(item: dict) -> str:
     return "n" + item["date"].replace("-", "") + "-" + hashlib.sha1(item["url"].encode()).hexdigest()[:8]
 
 
+def dedupe(existing: list[dict]) -> list[dict]:
+    """保存済みの記事のうち、同じ記事（タイトルが同じ）を1件にまとめる。"""
+    order = {"official": 0, "press": 1, "media": 2}
+    kept: dict[str, dict] = {}
+    for n in sorted(existing, key=lambda x: (order.get(x.get("cat"), 9), x.get("date", ""))):
+        n["title"] = clean_title(n["title"])
+        key = norm(n["title"])
+        first = kept.get(key)
+        if not first:
+            kept[key] = n
+            continue
+        seen = {first["source"]} | {r["source"] for r in first.get("related", [])}
+        for r in [{"source": n["source"], "url": n["url"]}] + n.get("related", []):
+            if r["source"] not in seen:
+                first.setdefault("related", []).append(r)
+                seen.add(r["source"])
+    return list(kept.values())
+
+
 def merge(existing: list[dict], incoming: list[dict]) -> tuple[list[dict], int]:
+    existing = dedupe(existing)
     by_url = {n["url"]: n for n in existing}
     for n in existing:
         for r in n.get("related", []):
@@ -201,6 +226,7 @@ def merge(existing: list[dict], incoming: list[dict]) -> tuple[list[dict], int]:
     for it in sorted(incoming, key=lambda x: order.get(x["cat"], 9)):
         if it["url"] in by_url:
             continue
+        it["title"] = clean_title(it["title"])
         key = norm(it["title"])
         twin = by_title.get(key)
         if twin:
