@@ -1,0 +1,137 @@
+[
+ {
+  "id": "e-keikyu",
+  "title": "ぴよりん出張販売（京急百貨店）",
+  "start": "2026-09-10",
+  "end": "2026-09-11",
+  "place": "京急百貨店 7階催事場（横浜）",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000223.000124425.html"
+ },
+ {
+  "id": "e-halloween",
+  "title": "ハロウィン限定グッズ発売",
+  "start": "2026-09-01",
+  "end": "2026-09-01",
+  "place": "ぴよりんvillage",
+  "kind": "release",
+  "url": "https://piyorin.com/news/p5363/"
+ },
+ {
+  "id": "e-tour-entry",
+  "title": "新幹線ツアー募集開始（完売）",
+  "start": "2026-09-17",
+  "end": "2026-09-17",
+  "place": "EX旅",
+  "kind": "release",
+  "url": "https://piyorin.com/news/p5529/"
+ },
+ {
+  "id": "e-cookie",
+  "title": "秋限定クッキー缶 発売",
+  "start": "2026-09-18",
+  "end": "2026-09-18",
+  "place": "ぴよりんshopアトリエ店（勝川）",
+  "kind": "release",
+  "url": "https://piyorin.com/news/p5538/"
+ },
+ {
+  "id": "e-kuri",
+  "title": "栗きんとんぴよりん",
+  "start": "2026-09-18",
+  "end": "2026-09-19",
+  "place": "PLUSTA中津川",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5507/"
+ },
+ {
+  "id": "e-kawagoe",
+  "title": "ぴよりん出張販売（まるひろ川越）",
+  "start": "2026-09-18",
+  "end": "2026-09-20",
+  "place": "まるひろ川越店 5階催場",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5520/"
+ },
+ {
+  "id": "e-honohon",
+  "title": "ホノホンぴよりん",
+  "start": "2026-09-18",
+  "end": "2026-09-23",
+  "place": "ぴよりんshop・アトリエ店・village",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5512/"
+ },
+ {
+  "id": "e-bento",
+  "title": "ぴよりんコラボ弁当 第3弾",
+  "start": "2026-09-19",
+  "end": "2026-09-27",
+  "place": "ジェイアール名古屋タカシマヤ B1",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5491/"
+ },
+ {
+  "id": "e-fes",
+  "title": "ぴよりんステーションフェス",
+  "start": "2026-10-01",
+  "end": "2026-10-04",
+  "place": "豊橋駅ビル カルミア 4F",
+  "kind": "event",
+  "url": "https://www.toyohashi-kalmia.jp/topics/piyorinstationfes2026/"
+ },
+ {
+  "id": "e-thunder",
+  "title": "ブラックサンダーぴよりん",
+  "start": "2026-10-02",
+  "end": "2026-10-03",
+  "place": "豊橋駅ビル カルミア 4F",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5546/"
+ },
+ {
+  "id": "e-oshitabi",
+  "title": "推し旅×ぴよりん",
+  "start": "2026-10-02",
+  "end": "2026-11-30",
+  "place": "東海道新幹線・ぴよりんvillage",
+  "kind": "campaign",
+  "url": "https://piyorin.com/news/p5358/"
+ },
+ {
+  "id": "e-dode",
+  "title": "ドデ祭2026",
+  "start": "2026-10-17",
+  "end": "2026-10-18",
+  "place": "メ～テレ本社屋前",
+  "kind": "event",
+  "url": "https://www.nagoyatv.com/dodematsuri/"
+ },
+ {
+  "id": "e-wolfy-online",
+  "title": "ウルフィ×ぴよりん ぬいぐるみ オンライン発売",
+  "start": "2026-10-17",
+  "end": "2026-10-17",
+  "place": "BLUE LINES EX",
+  "kind": "release",
+  "url": "https://piyorin.com/news/p5558/"
+ },
+ {
+  "id": "e-wolfy-village",
+  "title": "ウルフィ×ぴよりん ぬいぐるみ 店頭販売",
+  "start": "2026-10-19",
+  "end": "2026-12-31",
+  "place": "ぴよりんvillage",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5558/"
+ },
+ {
+  "id": "e-tour",
+  "title": "ぴよりん新幹線ツアー（いいぴよの日）",
+  "start": "2026-11-14",
+  "end": "2026-11-14",
+  "place": "のぞみ399号 東京12:51→名古屋14:31",
+  "kind": "event",
+  "url": "https://piyorin.com/news/p5529/"
+ }
+]
