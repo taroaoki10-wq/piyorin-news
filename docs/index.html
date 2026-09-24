@@ -465,14 +465,15 @@ details.rel li a:hover{color:var(--caramel)}
     const end=ev.end||ev.start;
     const when=`${md(ev.start)}（${wd(ev.start)}）${end!==ev.start?` – ${md(end)}（${wd(end)}）`:''}`;
     const [st]=statusOf(ev,todayStr());
-    let h=`<h2 id="reader-title">${esc(art&&art.title||ev.title)}</h2>`;
+    const tt=(art&&art.title||ev.title).replace(/\s*[|｜]\s*[^|｜]*$/,'');
+    let h=`<h2 id="reader-title">${esc(tt)}</h2>`;
     h+=`<div class="reader-ev"><span class="ktag k-${KINDS[ev.kind]?ev.kind:'event'}">${KINDS[ev.kind]||'イベント'}</span><b>${esc(when)}</b>${ev.place?`<span>${esc(ev.place)}</span>`:''}<span class="cd">${esc(st)}</span></div>`;
     if(art&&art.blocks&&art.blocks.length){
       let ul=null;
       for(const b of art.blocks){
         if(b.t==='li'){if(!ul){h+='<ul>';ul=1}h+=`<li>${esc(b.x)}</li>`;continue}
         if(ul){h+='</ul>';ul=null}
-        if(b.t==='h')h+=`<h3>${esc(b.x)}</h3>`;
+        if(b.t==='h'&&b.x.replace(/\s/g,'')!==tt.replace(/\s/g,''))h+=`<h3>${esc(b.x)}</h3>`;
         else if(b.t==='img'&&/^https:\/\//.test(b.x))h+=`<img src="${esc(b.x)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`;
         else if(b.t==='p')h+=`<p>${esc(b.x)}</p>`;
       }
