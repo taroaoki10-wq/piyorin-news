@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFC928">
+<title>ぴよりんニュース</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F3F2EE; --surface:#FFFFFF; --ink:#1E1B16; --muted:#6D675C; --line:#E3DFD5; --hover:#FFF6D6;
+  --yolk:#FFC928; --yolk-ink:#2A2000; --caramel:#98581B;
+  --c-official:#FFC928; --c-official-ink:#2A2000;
+  --c-press:#DCE5FB; --c-press-ink:#23459E;
+  --c-media:#DAF0E6; --c-media-ink:#1F6B4F;
+  --shadow:0 1px 2px rgba(40,30,10,.05),0 8px 24px -12px rgba(40,30,10,.12);
+  --f-display:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  --f-mono:"DM Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#13120E; --surface:#1C1A15; --ink:#F2EEE3; --muted:#A09887; --line:#2D2A22; --hover:#2A2413;
+  --caramel:#E6A860;
+  --c-press:#1F2A45; --c-press-ink:#A9BFF5; --c-media:#16302A; --c-media-ink:#8FD6B6;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#13120E; --surface:#1C1A15; --ink:#F2EEE3; --muted:#A09887; --line:#2D2A22; --hover:#2A2413;
+  --caramel:#E6A860;
+  --c-press:#1F2A45; --c-press-ink:#A9BFF5; --c-media:#16302A; --c-media-ink:#8FD6B6;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7;padding-inline:16px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--caramel);outline-offset:2px;border-radius:6px}
+.shell{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:292px minmax(0,1fr);gap:40px;padding-block:40px 64px}
+
+/* ---------- sidebar ---------- */
+aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;display:flex;flex-direction:column;gap:28px}
+.brand{display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.brand h1{margin:0;font-family:var(--f-display);font-weight:900;font-size:30px;line-height:1.15;letter-spacing:.01em;white-space:nowrap;display:flex;align-items:center;gap:10px}
+.yolk{width:18px;height:18px;border-radius:50%;background:var(--yolk);box-shadow:inset -3px -3px 0 rgba(0,0,0,.08);flex:none}
+.brand p{margin:0;color:var(--muted);font-size:13px}
+.sec-label{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.links{display:flex;flex-direction:column;gap:8px}
+.link{display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;transition:transform .15s ease,border-color .15s ease,background .15s ease}
+.link:hover{border-color:var(--yolk);background:var(--hover);transform:translateX(2px)}
+.link .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--yolk);color:var(--yolk-ink)}
+.link .ico svg{width:20px;height:20px}
+.link b{display:block;font-weight:700;font-size:14.5px;line-height:1.35}
+.link small{display:block;color:var(--muted);font-size:11.5px;line-height:1.4}
+.link .arr{color:var(--muted);font-family:var(--f-mono);font-size:14px}
+.events{display:flex;flex-direction:column}
+.ev{display:grid;grid-template-columns:54px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.ev:last-child{border-bottom:1px solid var(--line)}
+.ev .d{font-family:var(--f-mono);font-variant-numeric:tabular-nums;line-height:1.2}
+.ev .d strong{display:block;font-size:18px;font-weight:500}
+.ev .d span{font-size:10.5px;color:var(--muted)}
+.ev .t{font-size:13.5px;font-weight:700;line-height:1.45}
+.ev .t:hover{color:var(--caramel)}
+.ev .p{font-size:11.5px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cd{font-family:var(--f-mono);font-size:10.5px;padding:1px 7px;border-radius:99px;background:var(--hover);color:var(--caramel);border:1px solid var(--line)}
+.cd.now{background:var(--yolk);color:var(--yolk-ink);border-color:transparent}
+.meta{font-family:var(--f-mono);font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+
+/* ---------- main ---------- */
+main{min-width:0;display:flex;flex-direction:column;gap:28px}
+.toolbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.seg{display:flex;gap:4px;flex-wrap:wrap}
+.seg button{font:inherit;font-size:13px;font-weight:700;border:1px solid transparent;background:none;color:var(--muted);padding:6px 12px;border-radius:99px;cursor:pointer;display:flex;gap:6px;align-items:center}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.seg .n{font-family:var(--f-mono);font-size:11px;font-weight:400;opacity:.7}
+.search{position:relative;flex:1 1 200px;max-width:280px}
+.search input{width:100%;font:inherit;font-size:13.5px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:7px 14px 7px 34px}
+.search svg{position:absolute;left:12px;top:50%;translate:0 -50%;width:15px;height:15px;color:var(--muted)}
+
+.hero{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.feat{position:relative;display:flex;flex-direction:column;gap:14px;padding:22px 22px 18px;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);transition:transform .2s ease}
+.feat:hover{transform:translateY(-2px)}
+.feat.lead{background:var(--yolk);color:var(--yolk-ink);border-color:transparent}
+.feat.lead .src,.feat.lead .dt{color:rgba(42,32,0,.7)}
+.feat h2{margin:0;font-family:var(--f-display);font-weight:700;font-size:21px;line-height:1.45;text-wrap:balance}
+.feat .foot{margin-top:auto;display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px}
+
+.day{display:grid;grid-template-columns:88px minmax(0,1fr);gap:20px}
+.day-h{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px);align-self:start;font-family:var(--f-mono);line-height:1.1;padding-top:14px}
+.day-h strong{display:block;font-size:26px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.day-h span{font-size:11px;color:var(--muted);letter-spacing:.08em}
+.items{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.item{border-bottom:1px solid var(--line);padding:14px 12px;border-radius:12px;display:flex;flex-direction:column;gap:6px;transition:background .15s ease}
+.item:hover{background:var(--hover)}
+.item h3{margin:0;font-size:16px;font-weight:700;line-height:1.55;text-wrap:pretty}
+.item h3 a:hover{text-decoration:underline;text-decoration-color:var(--yolk);text-decoration-thickness:3px;text-underline-offset:3px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.tag{font-size:11px;font-weight:700;padding:2px 9px;border-radius:99px;letter-spacing:.02em;white-space:nowrap}
+.tag.official{background:var(--c-official);color:var(--c-official-ink)}
+.tag.press{background:var(--c-press);color:var(--c-press-ink)}
+.tag.media{background:var(--c-media);color:var(--c-media-ink)}
+.feat.lead .tag{background:var(--yolk-ink);color:var(--yolk)}
+.new{font-family:var(--f-mono);font-size:10px;font-weight:500;letter-spacing:.1em;color:var(--caramel)}
+.feat.lead .new{color:var(--yolk-ink)}
+.src{font-weight:500}
+details.rel summary{cursor:pointer;list-style:none;color:var(--caramel);font-weight:700}
+details.rel summary::-webkit-details-marker{display:none}
+details.rel summary::after{content:" ＋"}
+details.rel[open] summary::after{content:" −"}
+details.rel ul{margin:6px 0 0;padding:0 0 0 12px;border-left:2px solid var(--yolk);list-style:none;display:flex;flex-direction:column;gap:2px}
+details.rel li a{font-size:12.5px;color:var(--ink)}
+details.rel li a:hover{color:var(--caramel)}
+.empty{padding:48px 0;text-align:center;color:var(--muted)}
+
+
+/* ---------- tabs ---------- */
+.tabs{display:flex;gap:28px;border-bottom:1px solid var(--line)}
+.tabs button{font:inherit;font-family:var(--f-display);font-weight:700;font-size:18px;background:none;border:0;color:var(--muted);padding:4px 0 12px;cursor:pointer;position:relative;display:flex;align-items:center;gap:8px}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{color:var(--ink)}
+.tabs button[aria-selected="true"]::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;border-radius:3px;background:var(--yolk)}
+.tabs .n{font-family:var(--f-mono);font-size:11px;font-weight:400;color:var(--muted)}
+.toolbar{top:env(safe-area-inset-top,0px)}
+
+/* ---------- calendar ---------- */
+:root{--k-sale:#FFC928;--k-sale-ink:#2A2000;--k-event:#3D63D6;--k-event-ink:#FFFFFF;--k-campaign:#2E8B6A;--k-campaign-ink:#FFFFFF;--k-release:#FFFFFF;--k-release-ink:#98581B;--k-release-line:#E6B98A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--k-event:#5C7FE8;--k-campaign:#3A9E7A;--k-release:#1C1A15;--k-release-ink:#E6A860;--k-release-line:#6B4A26}}
+:root[data-theme="dark"]{--k-event:#5C7FE8;--k-campaign:#3A9E7A;--k-release:#1C1A15;--k-release-ink:#E6A860;--k-release-line:#6B4A26}
+.cal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cal-title{font-family:var(--f-mono);font-size:30px;font-weight:500;letter-spacing:-.02em;margin:0;font-variant-numeric:tabular-nums}
+.cal-title small{font-family:var(--f-body);font-size:14px;color:var(--muted);margin-left:8px;letter-spacing:0}
+.cal-nav{display:flex;gap:6px}
+.cal-nav button{font:inherit;font-size:13px;font-weight:700;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 14px;cursor:pointer}
+.cal-nav button:hover{border-color:var(--yolk);background:var(--hover)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.cal{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.dow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.08em}
+.dow span{padding:8px 10px}
+.dow span:first-child,.cell.sun .num{color:#C4463A}
+.dow span:last-child,.cell.sat .num{color:#3D63D6}
+.week{--bar-h:22px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));row-gap:3px;position:relative;border-bottom:1px solid var(--line)}
+.week:last-child{border-bottom:0}
+.cell{grid-row:1 / -1;border-right:1px solid var(--line);padding:6px 8px}
+.cell:nth-child(7){border-right:0}
+.cell.out{background:repeating-linear-gradient(-45deg,transparent 0 6px,var(--bg) 6px 7px)}
+.cell.out .num{opacity:.4}
+.num{font-family:var(--f-mono);font-size:12.5px;font-variant-numeric:tabular-nums;display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:99px}
+.cell.today .num{background:var(--ink);color:var(--bg)!important}
+.bar{position:relative;z-index:1;margin:0 3px;border-radius:6px;font-size:11.5px;font-weight:700;line-height:22px;padding:0 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;border:0;font-family:inherit;text-align:left}
+.bar.cont-l{border-top-left-radius:0;border-bottom-left-radius:0;margin-left:0}
+.bar.cont-r{border-top-right-radius:0;border-bottom-right-radius:0;margin-right:0}
+.bar.past{opacity:.45}
+.k-sale{background:var(--k-sale);color:var(--k-sale-ink)}
+.k-event{background:var(--k-event);color:var(--k-event-ink)}
+.k-campaign{background:var(--k-campaign);color:var(--k-campaign-ink)}
+.k-release{background:var(--k-release);color:var(--k-release-ink);box-shadow:inset 0 0 0 1.5px var(--k-release-line)}
+.more{grid-row:auto;font-size:11px;color:var(--muted);padding-left:10px;font-family:var(--f-mono)}
+.agenda{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.ag{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px 12px;border-bottom:1px solid var(--line);border-radius:12px;transition:background .3s ease}
+.ag:hover{background:var(--hover)}
+.ag.flash{background:var(--hover);box-shadow:inset 3px 0 0 var(--yolk)}
+.ag .when{font-family:var(--f-mono);font-size:13px;font-variant-numeric:tabular-nums;line-height:1.3}
+.ag .when span{display:block;font-size:10.5px;color:var(--muted)}
+.ag h4{margin:0;font-size:15px;line-height:1.5}
+.ag h4 a:hover{text-decoration:underline;text-decoration-color:var(--yolk);text-decoration-thickness:3px;text-underline-offset:3px}
+.ag .pl{font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ktag{font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:99px}
+.ag.done{opacity:.55}
+@media (max-width:620px){
+  .week{--bar-h:6px;row-gap:4px}
+  .cell{padding:4px}
+  .num{font-size:11px;min-width:20px;height:20px}
+  .bar{font-size:0;line-height:6px;padding:0;margin:0 2px}
+  .more{font-size:9px;padding-left:4px;line-height:1}
+  .ag{grid-template-columns:1fr;gap:6px}
+  .cal-title{font-size:24px}
+}
+
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr;gap:28px;padding-block:24px 48px}
+  aside{position:static}
+  .links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .link{grid-template-columns:1fr;justify-items:start;gap:8px}
+  .link .arr{display:none}
+}
+@media (max-width:620px){
+  .links{grid-template-columns:1fr}
+  .link{grid-template-columns:40px 1fr auto}
+  .link .arr{display:block}
+  .hero{grid-template-columns:1fr}
+  .day{grid-template-columns:1fr;gap:6px}
+  .day-h{position:static;padding-top:0;display:flex;gap:8px;align-items:baseline}
+  .day-h strong{font-size:20px}
+  .search{max-width:none}
+  .brand h1{font-size:28px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="shell">
+  <aside>
+    <div class="brand">
+      <span class="eyebrow">Piyorin News Watch</span>
+      <h1><span class="yolk" aria-hidden="true"></span>ぴよりんニュース</h1>
+      <p>名古屋のひよこプリン「ぴよりん」の公式発表・プレスリリース・メディア記事をまとめて追いかけます。</p>
+    </div>
+
+    <nav aria-label="公式リンク">
+      <p class="sec-label">Links</p>
+      <div class="links">
+        <a class="link" href="https://piyorin.com/" target="_blank" rel="noopener">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></span>
+          <span><b>公式サイト</b><small>お知らせ・店舗情報</small></span><span class="arr">↗</span>
+        </a>
+        <a class="link" href="https://piyorin.com/detail/" target="_blank" rel="noopener">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2z"/><path d="M4 21V5"/><path d="M9 8h6"/></svg></span>
+          <span><b>ぴよりん図鑑</b><small>歴代のぴよりんが大集合</small></span><span class="arr">↗</span>
+        </a>
+        <a class="link" href="https://market.jr-central.co.jp/shop/c/cpiyorin/" target="_blank" rel="noopener">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg></span>
+          <span><b>ぴよりんMARKET</b><small>JR東海MARKETの通販</small></span><span class="arr">↗</span>
+        </a>
+      </div>
+    </nav>
+
+    <section aria-labelledby="ev-h">
+      <p class="sec-label" id="ev-h">Upcoming <a href="#calendar" id="to-cal" style="float:right;color:var(--caramel);letter-spacing:.04em">カレンダー →</a></p>
+      <div class="events" id="events"></div>
+    </section>
+
+    <div class="meta" id="meta"></div>
+  </aside>
+
+  <main>
+    <div class="tabs" role="tablist" aria-label="表示切り替え">
+      <button type="button" role="tab" id="tab-news" aria-controls="view-news" data-view="news" aria-selected="true">ニュース<span class="n" id="n-news"></span></button>
+      <button type="button" role="tab" id="tab-cal" aria-controls="view-cal" data-view="calendar" aria-selected="false">カレンダー<span class="n" id="n-cal"></span></button>
+    </div>
+    <div id="view-news" role="tabpanel" aria-labelledby="tab-news" style="display:flex;flex-direction:column;gap:28px">
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="種類で絞り込み" id="seg"></div>
+      <label class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+        <input id="q" type="search" placeholder="キーワードで探す（例：新幹線）" aria-label="キーワード検索">
+      </label>
+    </div>
+    <div class="hero" id="hero"></div>
+    <div id="feed" style="display:flex;flex-direction:column;gap:28px"></div>
+    </div>
+    <div id="view-cal" role="tabpanel" aria-labelledby="tab-cal" hidden style="flex-direction:column;gap:20px">
+      <div class="cal-head">
+        <h2 class="cal-title" id="cal-title"></h2>
+        <div class="cal-nav">
+          <button type="button" id="cal-prev" aria-label="前の月">←</button>
+          <button type="button" id="cal-today">今月</button>
+          <button type="button" id="cal-next" aria-label="次の月">→</button>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i class="k-sale"></i>限定販売</span><span><i class="k-event"></i>イベント</span><span><i class="k-campaign"></i>キャンペーン</span><span><i class="k-release"></i>発売・受付開始</span>
+      </div>
+      <div class="cal" id="cal"></div>
+      <p class="sec-label" style="margin:12px 0 0" id="ag-label">この月の予定</p>
+      <div class="agenda" id="agenda"></div>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+  const CATS={official:'公式',press:'プレスリリース',media:'Webメディア'};
+  const WD=['日','月','火','水','木','金','土'];
+  let state={news:[],events:[],updatedAt:null,filter:'all',q:''};
+  try{const f=localStorage.getItem('piyo-filter');if(f&&(f==='all'||CATS[f]))state.filter=f;}catch(e){}
+
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const safeUrl=u=>/^https?:\/\//.test(u||'')?u:'#';
+  const todayStr=()=>{const d=new Date(Date.now()+9*3600e3);return d.toISOString().slice(0,10)}; // JST
+  const days=(a,b)=>Math.round((Date.parse(b)-Date.parse(a))/864e5);
+  const md=s=>{const [,m,d]=s.split('-').map(Number);return m+'.'+String(d).padStart(2,'0')};
+  const wd=s=>WD[new Date(s+'T12:00:00+09:00').getUTCDay()];
+
+  function relLinks(it){
+    const r=(it.related||[]).filter(x=>x&&x.url);
+    if(!r.length)return '';
+    return `<details class="rel"><summary>ほか${r.length}件</summary><ul>${r.map(x=>`<li><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(x.source)} ↗</a></li>`).join('')}</ul></details>`;
+  }
+  function isNew(it){return days(it.date,todayStr())<=3}
+
+  function renderSeg(){
+    const c={all:state.news.length,official:0,press:0,media:0};
+    state.news.forEach(n=>{if(c[n.cat]!=null)c[n.cat]++});
+    $('seg').innerHTML=['all','official','press','media'].map(k=>`<button type="button" data-k="${k}" aria-pressed="${state.filter===k}">${k==='all'?'すべて':CATS[k]}<span class="n">${c[k]}</span></button>`).join('');
+  }
+  function filtered(){
+    const q=state.q.trim().toLowerCase();
+    return state.news.filter(n=>(state.filter==='all'||n.cat===state.filter)&&(!q||(n.title+' '+n.source+' '+(n.related||[]).map(r=>r.source).join(' ')).toLowerCase().includes(q)))
+      .sort((a,b)=>a.date<b.date?1:a.date>b.date?-1:(a.cat==='official'?-1:1));
+  }
+  function renderFeed(){
+    const list=filtered();
+    const hero=list.slice(0,2), rest=list.slice(2);
+    $('hero').innerHTML=hero.map((it,i)=>`
+      <a class="feat${i===0?' lead':''}" href="${esc(safeUrl(it.url))}" target="_blank" rel="noopener">
+        <div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><span class="dt" style="font-family:var(--f-mono)">${esc(it.date.replaceAll('-','.'))} ${wd(it.date)}</span>${isNew(it)?'<span class="new">NEW</span>':''}</div>
+        <h2>${esc(it.title)}</h2>
+        <div class="foot"><span class="src">${esc(it.source)}${(it.related||[]).length?` ほか${it.related.length}件`:''}</span><span aria-hidden="true">↗</span></div>
+      </a>`).join('');
+    $('hero').hidden=!hero.length;
+    const groups=[];
+    rest.forEach(it=>{const g=groups[groups.length-1];if(g&&g.date===it.date)g.items.push(it);else groups.push({date:it.date,items:[it]})});
+    $('feed').innerHTML=list.length?groups.map(g=>`
+      <section class="day">
+        <div class="day-h"><strong>${md(g.date)}</strong><span>${g.date.slice(0,4)} · ${wd(g.date)}</span></div>
+        <div class="items">${g.items.map(it=>`
+          <article class="item">
+            <div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span>${isNew(it)?'<span class="new">NEW</span>':''}</div>
+            <h3><a href="${esc(safeUrl(it.url))}" target="_blank" rel="noopener">${esc(it.title)}</a></h3>
+            <div class="row"><span class="src">${esc(it.source)}</span>${relLinks(it)}</div>
+          </article>`).join('')}</div>
+      </section>`).join(''):`<p class="empty">条件に合うニュースはありません。</p>`;
+  }
+  function renderEvents(){
+    const t=todayStr();
+    const up=state.events.filter(e=>(e.end||e.start)>=t).sort((a,b)=>a.start<b.start?-1:1).slice(0,5);
+    $('events').innerHTML=up.length?up.map(e=>{
+      const live=e.start<=t, n=days(t,e.start);
+      const range=e.end&&e.end!==e.start?`${md(e.start)}–${md(e.end)}`:md(e.start);
+      return `<div class="ev"><div class="d"><strong>${md(e.start)}</strong><span>${wd(e.start)}</span></div>
+        <div><a class="t" href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener">${esc(e.title)}</a>
+        <div class="p"><span>${esc(range)} · ${esc(e.place)}</span><span class="cd${live?' now':''}">${live?'開催中':n===1?'あした':'あと'+n+'日'}</span></div></div></div>`}).join('')
+      :'<p class="meta" style="padding:8px 0">予定されているイベントはありません</p>';
+  }
+  function renderMeta(){
+    const u=state.updatedAt?new Date(state.updatedAt):null;
+    const s=u&&!isNaN(u)?`${u.getMonth()+1}/${u.getDate()} ${String(u.getHours()).padStart(2,'0')}:${String(u.getMinutes()).padStart(2,'0')}`:'—';
+    const srcs=new Set();state.news.forEach(n=>{srcs.add(n.source);(n.related||[]).forEach(r=>srcs.add(r.source))});
+    $('meta').innerHTML=`<span>最終更新 ${esc(s)}</span><span>${state.news.length}件 · ${srcs.size}ソース</span>`;
+  }
+
+  // ---------- calendar ----------
+  const KINDS={sale:'限定販売',event:'イベント',campaign:'キャンペーン',release:'発売・受付開始'};
+  const pad=n=>String(n).padStart(2,'0');
+  const ymd=(y,m,d)=>{const x=new Date(Date.UTC(y,m,d));return x.getUTCFullYear()+'-'+pad(x.getUTCMonth()+1)+'-'+pad(x.getUTCDate())};
+  const addDays=(s,n)=>{const [y,m,d]=s.split('-').map(Number);return ymd(y,m-1,d+n)};
+  const t0=todayStr();
+  state.view='news';state.ym=[+t0.slice(0,4),+t0.slice(5,7)-1];
+  function statusOf(e,t){const end=e.end||e.start;if(end<t)return['終了','done'];if(e.start<=t)return['開催中','now'];const n=days(t,e.start);return[n===1?'あした':'あと'+n+'日',''];}
+  function renderCal(){
+    const [y,m]=state.ym, t=todayStr();
+    $('cal-title').innerHTML=`${y}.${pad(m+1)}<small>${m+1}月</small>`;
+    const first=ymd(y,m,1), firstDow=new Date(Date.UTC(y,m,1)).getUTCDay();
+    const gridStart=addDays(first,-firstDow);
+    const lastDay=ymd(y,m+1,0);
+    const weeks=Math.ceil((firstDow+ +lastDay.slice(8))/7);
+    const evs=state.events.slice().sort((a,b)=>a.start<b.start?-1:a.start>b.start?1:((b.end||b.start)>(a.end||a.start)?1:-1));
+    let html='<div class="dow">'+WD.map(w=>`<span>${w}</span>`).join('')+'</div>';
+    const MAXL=window.matchMedia('(max-width:620px)').matches?4:3;
+    for(let w=0;w<weeks;w++){
+      const ws=addDays(gridStart,w*7), we=addDays(ws,6);
+      let cells='';
+      for(let i=0;i<7;i++){const d=addDays(ws,i);const cls=['cell',d.slice(0,7)!==first.slice(0,7)?'out':'',d===t?'today':'',i===0?'sun':'',i===6?'sat':''].join(' ');cells+=`<div class="${cls}" style="grid-column:${i+1}"><span class="num">${+d.slice(8)}</span></div>`;}
+      const lanes=[];let bars='';const hidden={};
+      evs.forEach(e=>{
+        const end=e.end||e.start; if(end<ws||e.start>we)return;
+        const a=e.start<ws?ws:e.start, b=end>we?we:end;
+        const ci=days(ws,a), ce=days(ws,b);
+        let lane=lanes.findIndex(l=>l.every(([x,y])=>ce<x||ci>y));
+        if(lane<0){lane=lanes.length;lanes.push([])}
+        lanes[lane].push([ci,ce]);
+        if(lane>=MAXL){for(let k=ci;k<=ce;k++)hidden[k]=(hidden[k]||0)+1;return}
+        const cl=['bar','k-'+(KINDS[e.kind]?e.kind:'event'),e.start<ws?'cont-l':'',end>we?'cont-r':'',end<t?'past':''].join(' ');
+        bars+=`<button type="button" class="${cl}" style="grid-column:${ci+1} / span ${ce-ci+1};grid-row:${lane+2}" data-ev="${esc(e.id)}" title="${esc(e.title)}（${esc(md(e.start))}${end!==e.start?'–'+esc(md(end)):''}）">${esc(e.title)}</button>`;
+      });
+      Object.entries(hidden).forEach(([k,n])=>{bars+=`<span class="more" style="grid-column:${+k+1};grid-row:${MAXL+2}">+${n}</span>`});
+      html+=`<div class="week" style="grid-template-rows:30px repeat(${MAXL+1},var(--bar-h)) 4px">${cells}${bars}</div>`;
+    }
+    $('cal').innerHTML=html;
+    const inMonth=evs.filter(e=>e.start<=lastDay&&(e.end||e.start)>=first);
+    $('ag-label').textContent=`${m+1}月の予定 · ${inMonth.length}件`;
+    $('agenda').innerHTML=inMonth.length?inMonth.map(e=>{
+      const end=e.end||e.start;const [st,sc]=statusOf(e,t);
+      return `<div class="ag${sc==='done'?' done':''}" id="ag-${esc(e.id)}">
+        <div class="when">${md(e.start)}${end!==e.start?' – '+md(end):''}<span>${wd(e.start)}${end!==e.start?' – '+wd(end):''}</span></div>
+        <div><h4><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener">${esc(e.title)}</a></h4>
+        <div class="pl"><span class="ktag k-${KINDS[e.kind]?e.kind:'event'}">${KINDS[e.kind]||'イベント'}</span><span>${esc(e.place||'')}</span></div></div>
+        <span class="cd${sc==='now'?' now':''}">${st}</span></div>`}).join('')
+      :'<p class="empty">この月の予定はまだありません。</p>';
+  }
+  function setView(v){
+    state.view=v;
+    $('view-news').hidden=v!=='news';$('view-cal').hidden=v!=='calendar';
+    $('view-cal').style.display=v==='calendar'?'flex':'';
+    $('tab-news').setAttribute('aria-selected',v==='news');$('tab-cal').setAttribute('aria-selected',v==='calendar');
+    if(v==='calendar')renderCal();
+    try{localStorage.setItem('piyo-view',v)}catch(_){}
+  }
+  document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setView(b.dataset.view)});
+  $('to-cal').addEventListener('click',e=>{e.preventDefault();setView('calendar');window.scrollTo({top:0,behavior:'smooth'})});
+  const shift=n=>{let [y,m]=state.ym;m+=n;y+=Math.floor(m/12);m=((m%12)+12)%12;state.ym=[y,m];renderCal()};
+  $('cal-prev').addEventListener('click',()=>shift(-1));$('cal-next').addEventListener('click',()=>shift(1));
+  $('cal-today').addEventListener('click',()=>{const t=todayStr();state.ym=[+t.slice(0,4),+t.slice(5,7)-1];renderCal()});
+  $('cal').addEventListener('click',e=>{const b=e.target.closest('.bar');if(!b)return;const el=document.getElementById('ag-'+b.dataset.ev);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800)});
+  function renderCounts(){$('n-news').textContent=state.news.length;$('n-cal').textContent=state.events.filter(e=>(e.end||e.start)>=todayStr()).length}
+  function renderAll(){renderSeg();renderFeed();renderEvents();renderMeta();renderCounts();if(state.view==='calendar')renderCal()}
+
+  $('seg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;state.filter=b.dataset.k;try{localStorage.setItem('piyo-filter',state.filter)}catch(_){}renderSeg();renderFeed()});
+  let tmr;$('q').addEventListener('input',e=>{clearTimeout(tmr);tmr=setTimeout(()=>{state.q=e.target.value;renderFeed()},120)});
+  renderAll();
+  {let v=location.hash==='#calendar'?'calendar':null;if(!v){try{v=localStorage.getItem('piyo-view')}catch(_){}}if(v==='calendar')setView('calendar')}
+
+  // GitHub Actions が更新する JSON を読み込む
+  async function load(){
+    const bust='?t='+Date.now();
+    try{
+      const [n,e,m]=await Promise.all(['news','events','meta'].map(f=>fetch('data/'+f+'.json'+bust).then(r=>r.ok?r.json():null).catch(()=>null)));
+      if(Array.isArray(n))state.news=n;
+      if(Array.isArray(e))state.events=e;
+      if(m&&m.updatedAt)state.updatedAt=m.updatedAt;
+      renderAll();
+    }catch(err){}
+  }
+  load();
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')load()});
+  setInterval(load,15*60*1000);
+})();
+</script>
+</body>
+</html>
