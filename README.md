@@ -13,6 +13,10 @@ GitHub Actions（3時間ごと）
       └ Googleニュース「ぴよりん」
           ↓ 新しい記事だけ追記
       docs/data/news.json
+  └ scripts/extract_events.py
+      公式記事から販売期間・開催日を読み取り
+          ↓
+      docs/data/events.json
           ↓
 GitHub Pages（docs/index.html）→ Safari で表示
 ```
@@ -23,14 +27,18 @@ GitHub Pages（docs/index.html）→ Safari で表示
 |---|---|
 | `docs/index.html` | 表示ページ（ニュース／カレンダー） |
 | `docs/data/news.json` | ニュース（自動で追記） |
-| `docs/data/events.json` | カレンダーの予定（手で編集） |
+| `docs/data/events.json` | カレンダーの予定（自動追加＋手で編集） |
+| `docs/data/state.json` | 予定の読み取りが済んだ記事の記録 |
+| `scripts/extract_events.py` | 予定の抽出プログラム |
 | `docs/data/meta.json` | 最終更新日時 |
 | `scripts/fetch_news.py` | 収集プログラム |
 | `.github/workflows/update.yml` | 定期実行の設定 |
 
-## 予定（カレンダー）の追加
+## 予定（カレンダー）の自動追加
 
-予定はニュースから自動で正しく読み取るのが難しいため、`docs/data/events.json` を GitHub の画面で直接編集します（ファイルを開いて鉛筆アイコン → 編集 → Commit changes）。
+`scripts/extract_events.py` が、公式サイトの新しいお知らせ記事を読み、「販売期間」「開催日」「実施期間」などの見出しや本文冒頭から日付を読み取って `docs/data/events.json` に追加します（`"auto": true` が付きます）。確認済みの記事は `docs/data/state.json` に記録され、読み直しません。
+
+読み取りを間違えた予定は、`events.json` で直接直してください。直した予定から `"auto": true` を消すと、手で登録した予定として扱われます。予定を手で追加することもできます（ファイルを開いて鉛筆アイコン → 編集 → Commit changes）。
 
 ```json
 {
