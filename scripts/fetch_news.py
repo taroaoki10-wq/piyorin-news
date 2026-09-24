@@ -5,7 +5,7 @@
   - ぴよりん公式サイト「お知らせ」（HTMLから記事リンクを読み取り）
   - PR TIMES（ジェイアール東海フードサービスの会社別RSS）
   - Googleニュース（関連度順・直近7日・直近1日の3種類の検索RSS）
-  - Bingニュース（関連度順・新着順の2種類の検索RSS）
+  - Bingニュース（関連度順・直近7日の2種類の検索RSS）
 
 検索の種類を増やしているのは、1つの検索では新しい記事が上位100件から漏れることがあるため。
 標準ライブラリだけで動くので、pip install は不要です。
@@ -46,7 +46,7 @@ def gnews(q: str) -> str:
 
 def bing(q: str, newest: bool = False) -> str:
     url = "https://www.bing.com/news/search?q=" + quote(q) + "&format=rss&setlang=ja&cc=JP"
-    return url + ("&qft=" + quote('sortbydate="1"') if newest else "")
+    return url + ("&qft=" + quote('interval="7"') if newest else "")  # 直近7日に絞る
 
 
 def fetch(url: str) -> str:
@@ -166,7 +166,7 @@ SOURCES = [
     ("Googleニュース（7日）", gnews("ぴよりん when:7d"), "google"),
     ("Googleニュース（1日）", gnews("ぴよりん when:1d"), "google"),
     ("Bingニュース", bing("ぴよりん"), "bing"),
-    ("Bingニュース（新着）", bing("ぴよりん", newest=True), "bing"),
+    ("Bingニュース（7日）", bing("ぴよりん", newest=True), "bing"),
 ]
 
 
