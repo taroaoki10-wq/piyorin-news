@@ -437,6 +437,10 @@
    {
     "source": "Yahoo!ニュース",
     "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNckVLckVjQ3V6QUU3ckxEeXFUZlk4YngwU050WEZtYktXT2toUnUtdXFVR3FmbE82SWNKNHBqZ3h1SVhCbF9ERFVqTXlNOXBOUFhtYk9XR24xOElFOEVacWt2YjBuVE1UdUNWTktZaUNIY1g0NmVXa243Z1dTOHpZb0NFc29WZlU5YmZ2dkR3?oc=5"
+   },
+   {
+    "source": "news.ntv.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNcUVsYldQV2ZxMlBfYU9kT29xMmJNbzAzOXZESGl5QndiN3h6LU4xZzV5MFhDSngwNmE3cllvdFhtbzQ2ZWdNS0Z5aXpWQ3hralNwT0pvUnpOREhUa1RkVFM4TmtycGJTNmdoWnJfY1BxX3pKcERndlRnS1p4azdYWWZSZw?oc=5"
    }
   ],
   "dv": 3
@@ -504,7 +508,12 @@
   "title": "第20回アジア競技大会（2026/愛知・名古屋）を記念した特別デザインのぴよりん",
   "source": "フーズチャネル",
   "url": "https://foods-ch.infomart.co.jp/news/329977",
-  "related": [],
+  "related": [
+   {
+    "source": "foods-ch.infomart.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA4bWFiU3prWm5jNkxkOFlfYS1EVG5KRlB3Qk1xb3NOZ3FCazBab0ExSUJkRWZpM0pYX3FVeTNsWTdoSjlmYkpnWktCYUFNdGx4eGRCMDZ3?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -958,6 +967,15 @@
   "related": []
  },
  {
+  "id": "n20260817-d84f8d9e",
+  "date": "2026-08-17",
+  "cat": "media",
+  "title": "【シェ・シバタ×ぴよりん】ぴよりんクッキー缶第２弾が登場！",
+  "source": "prtimes.jp",
+  "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBiOC11V0Jad0ljY1BneUNhNlFtUmhqSEVPYlU3Tk5xOHZiRnFBdnFVMU5rNHJPR2toQlJpRmhjTHhhWVM4V0cydi1UWDZzLUEzY0JmU2F4c3dJRHYzZFNZOEk1aS1CbTY4dVE?oc=5",
+  "related": []
+ },
+ {
   "id": "n20260805-4f1762b9",
   "date": "2026-08-05",
   "cat": "press",
@@ -1056,6 +1074,15 @@
   "title": "【新商品】名古屋の人気スイーツ「ぴよりん」デザインの折り畳み傘が新登場！",
   "source": "PR TIMES",
   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5IYXdiVThNV3MwbXZYQ3RvZG1jbDlRYWxXeFE2REpXQzNzRHVOZ3hUWTBxcUU5UVhnRGtDNVdPWFROS2xjME4yQTZlSjBOVTFOTmg4b2FCWW9kbmM2RTcyLTVydVBYUlROd3c?oc=5",
+  "related": []
+ },
+ {
+  "id": "n20260730-d7434cc4",
+  "date": "2026-07-30",
+  "cat": "media",
+  "title": "ひよこ型スイーツ「ぴよりん」が“夏祭り”姿に、南国フルーツ風味のババロア＆濃厚プリン",
+  "source": "ファッションプレス",
+  "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9zUnBfUjdWQUFxc0J2Yzl6QXRVeWNBNDlCa0VReFF5dDY1ZmhDNzVld1FBRXJSM3k1THlRb1dDY2JfbTJqYlFDd3FIbVB3cEhFaEZv?oc=5",
   "related": []
  },
  {
