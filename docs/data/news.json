@@ -6,7 +6,8 @@
   "title": "豊橋駅の「カルミア」 ホテルアソシア豊橋 来月「ぴよりん」フェア ブラックサンダーとコラボ",
   "source": "中部経済新聞",
   "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9HX042NmpURldISTRwVTZuWVdveXVPM0w5YXNmMHphdVJJQ1JPQm9UQUFNVzFxVVNGYlBwanZLMXVGeENZbG11cVNmSjFiNHZLYThzdzBRNnBPTExKSExrV2dvb1dqVmlya3M3cDhUZ0xTcHc?oc=5",
-  "related": []
+  "related": [],
+  "checked": true
  },
  {
   "id": "n20260923-afcc9479",
@@ -15,7 +16,8 @@
   "title": "名古屋名物のスイーツ「ぴよりん」に新作が続々！神出鬼没な“○よりん”など限定商品も",
   "source": "ウォーカープラス",
   "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE56TE4tSTQzZG9oQVA2VDFucGZ2NG54cW5WNjZ4QWRESmdrdExJdTdvZlQ4dm1mTnREal9UbVF2RW9qX0w4MG1pTnZMOHprOXhweV9wZk1fM0tkcXB2d2l1MDEzNndQM1EzM1ptaWFR?oc=5",
-  "related": []
+  "related": [],
+  "checked": true
  },
  {
   "id": "n20260923-679479e2",
@@ -24,25 +26,8 @@
   "title": "名古屋駅にオープンした話題の新施設「ぴよりんvillage」をSKE48センター大村杏がレポート！",
   "source": "ウォーカープラス",
   "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5YaDF0OG1tcjFZcWtTaFpjWkZTLVRnUlNvTVV2d3BKOHV4aWNPQUI4UDRuam00MGJlZElybGFlSUlfY0VSRTZMYWw2Y3JWeHZ1OFdnR1ZfbnQtU2NONV96MDdVZmZJczRsRC01SS1R?oc=5",
-  "related": []
- },
- {
-  "id": "n20260922-fes",
-  "date": "2026-09-22",
-  "cat": "media",
-  "title": "ぴよりんフェス、豊橋駅ビル「カルミア」で開催 10月1～4日",
-  "source": "中日BIZナビ",
-  "url": "https://biz.chunichi.co.jp/news/article/10/130649",
-  "related": [
-   {
-    "source": "中日新聞Web",
-    "url": "https://www.chunichi.co.jp/article/1312442"
-   },
-   {
-    "source": "豊橋駅ビル カルミア",
-    "url": "https://www.toyohashi-kalmia.jp/topics/piyorinstationfes2026/"
-   }
-  ]
+  "related": [],
+  "checked": true
  },
  {
   "id": "n20260922-f159ab72",
@@ -51,7 +36,8 @@
   "title": "【豊橋市】ぴよりんが豊橋にやってくる！カルミアで限定コラボ＆限定スイーツづくしの4日間！",
   "source": "地域ニュースサイト号外NET",
   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE55SjV3c0l3dzlzNDJ6VmplelVDYWN3M2c1bjdUVm5oRzd5eGpuZU9hbUJtTDdMYWRNS3l3bDU2Q1hPSzV4ajVpWnNUb3JzVVdYSEdBT1gtTmhDZmxKVFdaMU5rMUotbVJxNXc?oc=5",
-  "related": []
+  "related": [],
+  "checked": true
  },
  {
   "id": "n20260922-fa1cff31",
@@ -60,7 +46,8 @@
   "title": "新・名古屋土産「ぴよりん」にあまおう味が登場",
   "source": "ウォーカープラス",
   "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE13RVZ0SGJFZEJVal9xYTZ5VUMwNkxxcGMxeXNLZ0hoQ19wendIbDBOVGhJVHdfZFdzdnI4OEM1ekJ5ZllLcTRaUXEwdUxsSE9DSHdpNkVvZ0hNQzJVV1AyM21WRkZsWmd2?oc=5",
-  "related": []
+  "related": [],
+  "checked": true
  },
  {
   "id": "n20260919-balloon",
@@ -82,7 +69,8 @@
     "source": "名古屋情報通",
     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5YNUlOQm9oX3ZwS1ZJMjU4N2JyazdSUDM5OWNraTkyOXNFY0swSE12WGlMRnFVenJCS0lYaW5MZUstd2diMWNwSHV3MGNfV1Vu?oc=5"
    }
-  ]
+  ],
+  "checked": true
  },
  {
   "id": "n20260919-1f266706",
@@ -91,7 +79,8 @@
   "title": "名古屋スイーツ・ぴよりん、オウムに変身 映画「総理の夫」とコラボ [愛知県]",
   "source": "朝日新聞",
   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOZlZ5WlVBOHplTDR0WFhWcnVyQldWOXIyWnZxWkNZbEQxQzZtQ3EzUWJFcFR1dUNkeXRRRF85YzNSUmRnMlZfNFFuZ3VPM3QzY1BlTUpvRVJCSHFvNjgtT3VHNHQ4aHpMOUN2OTVFMUlLOWxkRzJybWFibnREOFZRMWRqOFpoQVlYdzBaUDBR?oc=5",
-  "related": []
+  "related": [],
+  "checked": true
  },
  {
   "id": "n20260918-wolfy",
@@ -135,7 +124,8 @@
     "source": "Mantan Web",
     "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPWkxReVE1ZmFfNF8wVC1HM1dSdDBqWFhscmpDTi0zRDZ4eTlMMWVvWjR5eTNCaUxFYzBveEcteWdCQXVXNTdMdUNMSUJoV2VLTnlGdnJOSUJ5TGFyZ3M2Rk1lRi1hVEs3QUxnYlE5QUNwbW1wOWpsMHlUS2hTQ3R3TEtIazIyaS0y?oc=5"
    }
-  ]
+  ],
+  "checked": true
  },
  {
   "id": "n20260918-ikoyo",
@@ -149,7 +139,8 @@
     "source": "report.iko-yo.net",
     "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE90SnEyME5xNTdRb2hQMW9HSzIxcjlNYnNFRzVOQVNWT096b2ZEMW5zWFhPWGprb25lODlPMTExT3ZqLWhhQ0tSdmc4Q1cxemNTdXc?oc=5"
    }
-  ]
+  ],
+  "checked": true
  },
  {
   "id": "n20260918-9bbac5b4",
@@ -158,7 +149,8 @@
   "title": "シルバーウィーク期間だけ！現地激ウマ名物が都内近郊に集結♪ぴよりん・北海道海鮮も",
   "source": "いこーよニュース",
   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9YeTdUYXo5TlRnOWcyTGxKQWpWQWNCbGtoX1JaeGFqWW1HbXJmMU5yQVdVNUxJOW5UNllTVThWSzNhQWRjUjZseXh5djl3dHFDa21FZWNOMWJFZ2M?oc=5",
-  "related": []
+  "related": [],
+  "checked": true
  },
  {
   "id": "n20260918-73e5e157",
@@ -167,7 +159,8 @@
   "title": "豊橋産うずら卵、累計30万個使用。「ぴよりんあん巻き」がリニューアル、「カスタード餡」から濃厚カスタードクリームへ",
   "source": "毎日キレイ",
   "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBRMmdRd25UdEttYjhvQXlnNHRKSTVGVmxkdDZXNEw4RkRpQnk1X3F0cmUwbWlFQ3R2T3hVTHpxbEpESjdib0lGUFNXY1V6Uk5KaHI4UGpSWmN6TnkyTC1Mc01NQ0NpTUp4dndhSDZPTWVWOUd5dHhmRTJR?oc=5",
-  "related": []
+  "related": [],
+  "checked": true
  },
  {
   "id": "n20260918-a5a5f5e1",
@@ -176,7 +169,8 @@
   "title": "秋の味覚と”カワイイ”がてんこ盛り！ ジェイアール名古屋タカシマヤ「 ぴよりんコラボ弁当」第３弾 総まとめ",
   "source": "ナゴヤトコトン",
   "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE0xNlBVTU5oSzcxZEtvbElTQVRhdzd4bVh1OXNfZkZ0bDhtWHd1YW9qbGdmT19JOU1ldm4tYU1HVk16M2VpSHZv?oc=5",
-  "related": []
+  "related": [],
+  "checked": true
  },
  {
   "id": "n20260918-9c25a86f",
@@ -185,7 +179,8 @@
   "title": "ぴよりん15周年をウルフィがお祝い♪「ウルフィ×ぴよりん オメ ...",
   "source": "ORICON NEWS",
   "url": "https://www.oricon.co.jp/pressrelease/2996859/",
-  "related": []
+  "related": [],
+  "checked": true
  },
  {
   "id": "n20260917-owabi",
@@ -197,13 +192,33 @@
   "related": []
  },
  {
+  "id": "n20260922-fes",
+  "date": "2026-09-17",
+  "cat": "media",
+  "title": "ぴよりんフェス、豊橋駅ビル「カルミア」で開催 10月1～4日",
+  "source": "中日BIZナビ",
+  "url": "https://biz.chunichi.co.jp/news/article/10/130649",
+  "related": [
+   {
+    "source": "中日新聞Web",
+    "url": "https://www.chunichi.co.jp/article/1312442"
+   },
+   {
+    "source": "豊橋駅ビル カルミア",
+    "url": "https://www.toyohashi-kalmia.jp/topics/piyorinstationfes2026/"
+   }
+  ],
+  "checked": true
+ },
+ {
   "id": "n20260917-f987b157",
   "date": "2026-09-17",
   "cat": "media",
   "title": "ぴよりん×バーミキュラ 初の「鍋ぴよりん」体験教室 名古屋市（中京テレビＮＥＷＳ）",
   "source": "Yahoo!ニュース",
   "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE44YnFrSm5hODRzMzI5UEt1QlA5WmhhSzhEVWVacm40anMyVml6cEVZZy1DREVGRGR5Z3NsNU5yM0toaEFTVlE2ZGJlbVFERWM2RHdGRzcyajl6X3VWRWs5cmsyNDl6eUVJRHM5NmhrUmV2SFQ3MUlWWkpOSHpyRjA?oc=5",
-  "related": []
+  "related": [],
+  "checked": true
  },
  {
   "id": "n20260917-dd7a0ef6",
