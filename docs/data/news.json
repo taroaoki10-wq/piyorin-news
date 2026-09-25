@@ -10,6 +10,16 @@
   "dv": 3
  },
  {
+  "id": "n20260925-3665712b",
+  "date": "2026-09-25",
+  "cat": "media",
+  "title": "たくさん歩いた誕生日",
+  "source": "note",
+  "url": "https://note.com/sakurabbit_0704/n/nfd2dc0b67345",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "n20260923-3e62efcd",
   "date": "2026-09-23",
   "cat": "media",
@@ -304,7 +314,12 @@
   "title": "夜の中川運河で「巨大ぴよりん」が光る！ 「アジア・アジアパラ競技大会」を盛り上げる“スポーツ＆グルメ”イベント開催 万博を彩ったドローンショーも（中京テレビＮＥＷＳ）",
   "source": "Yahoo!ニュース",
   "url": "https://news.yahoo.co.jp/articles/f2e5ebb1e4bc33d056934b5a79aac33acca33ff9",
-  "related": [],
+  "related": [
+   {
+    "source": "news.yahoo.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1ZcEM1bGtwYk82VXowcXZOSVhDRFZrMk02X016R0Y0cWh0OVNULTlOcTRHMXpsOE85RXM2QW5NZWlERFRvWlFnT2xSZUZLZ1RsZll1dzNNeXVZY2pHWXdmZzJRQk40WFdYci1lMjhudVBwWlpWSjNqbTFraU5iajQ?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -407,6 +422,10 @@
    {
     "source": "朝日新聞",
     "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9Ec0JMM0FhUUZCblByRkt5OHZDYWt0cjA5eUhkV0lvTi05T1BfMVZWUjV6dFVYVGdOZzBKa2x6YzFtQ3picGF6ZmYzUlVTNEFRMy03VGVsem90cW8?oc=5"
+   },
+   {
+    "source": "mainichikirei.jp",
+    "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9vWmVpQVhuR1A2T1ZvQkpuZndNRThPQzBPNXlMZWtGa0hNZ1piN0I5UGU4ZDZ5LUNfS19nZHM4YUIxRXNVekxNZDNLX244Q2J3d3BqcjlKRzRITTAwVHh6bGZhQVhtWmF0bjVjd3k5NDVKMm9nT2NnMGRn?oc=5"
    }
   ],
   "dv": 3
