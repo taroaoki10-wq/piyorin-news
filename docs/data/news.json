@@ -336,6 +336,16 @@
   "dv": 3
  },
  {
+  "id": "n20260916-3f8daa61",
+  "date": "2026-09-16",
+  "cat": "media",
+  "title": "夜の中川運河で「巨大ぴよりん」が光る！ 「アジア・アジアパラ競技大会」を盛り上げる“スポーツ＆グルメ”イベント開催 万博を彩ったドローンショーも（2026年9月16日掲載）｜中京テレビNEWS NNN",
+  "source": "日テレNEWS NNN",
+  "url": "https://news.ntv.co.jp/n/ctv/category/sports/ctaf4d28a00553479583b6f64ddb9c31c6",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "n20260915-thunder",
   "date": "2026-09-15",
   "cat": "official",
@@ -877,6 +887,15 @@
   "related": []
  },
  {
+  "id": "n20260823-ee80b6d8",
+  "date": "2026-08-23",
+  "cat": "media",
+  "title": "ぴよりん×SKE48が夢のコラボ！アイドル衣装をイメージした限定ぴよ ...",
+  "source": "ORICON NEWS",
+  "url": "https://www.oricon.co.jp/pressrelease/2953494/",
+  "related": []
+ },
+ {
   "id": "n20260822-501de54a",
   "date": "2026-08-22",
   "cat": "press",
@@ -999,7 +1018,12 @@
   "title": "【シェ・シバタ×ぴよりん】ぴよりんクッキー缶第２弾が登場！",
   "source": "prtimes.jp",
   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBiOC11V0Jad0ljY1BneUNhNlFtUmhqSEVPYlU3Tk5xOHZiRnFBdnFVMU5rNHJPR2toQlJpRmhjTHhhWVM4V0cydi1UWDZzLUEzY0JmU2F4c3dJRHYzZFNZOEk1aS1CbTY4dVE?oc=5",
-  "related": []
+  "related": [
+   {
+    "source": "MANTANWEB（まんたんウェブ）",
+    "url": "https://mantan-web.jp/prtimes/article/20260817prt00m200000627a.html"
+   }
+  ]
  },
  {
   "id": "n20260808-0e2a9948",
@@ -1172,7 +1196,12 @@
   "title": "名古屋駅にオープンした話題の新施設「ぴよりんvillage」をSKE48センター大村杏がレポート！",
   "source": "ウォーカープラス",
   "url": "https://www.walkerplus.com/article/1405058/",
-  "related": [],
+  "related": [
+   {
+    "source": "walkerplus.com",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5YaDF0OG1tcjFZcWtTaFpjWkZTLVRnUlNvTVV2d3BKOHV4aWNPQUI4UDRuam00MGJlZElybGFlSUlfY0VSRTZMYWw2Y3JWeHZ1OFdnR1ZfbnQtU2NONV96MDdVZmZJczRsRC01SS1R?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -2634,7 +2663,12 @@
   "title": "名古屋名物のスイーツ「ぴよりん」に新作が続々！神出鬼没な“○よりん”など限定商品も",
   "source": "ウォーカープラス",
   "url": "https://www.walkerplus.com/article/1003319/",
-  "related": [],
+  "related": [
+   {
+    "source": "walkerplus.com",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE56TE4tSTQzZG9oQVA2VDFucGZ2NG54cW5WNjZ4QWRESmdrdExJdTdvZlQ4dm1mTnREal9UbVF2RW9qX0w4MG1pTnZMOHprOXhweV9wZk1fM0tkcXB2d2l1MDEzNndQM1EzM1ptaWFR?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -2644,7 +2678,12 @@
   "title": "新・名古屋土産「ぴよりん」にあまおう味が登場",
   "source": "ウォーカープラス",
   "url": "https://www.walkerplus.com/article/54134/",
-  "related": [],
+  "related": [
+   {
+    "source": "walkerplus.com",
+    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE13RVZ0SGJFZEJVal9xYTZ5VUMwNkxxcGMxeXNLZ0hoQ19wendIbDBOVGhJVHdfZFdzdnI4OEM1ekJ5ZllLcTRaUXEwdUxsSE9DSHdpNkVvZ0hNQzJVV1AyM21WRkZsWmd2?oc=5"
+   }
+  ],
   "dv": 3
  }
 ]
