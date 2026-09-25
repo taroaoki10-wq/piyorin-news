@@ -204,6 +204,10 @@
    {
     "source": "Yahoo!ニュース",
     "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE12VHFTYXRQeV9WRnRuLUFrSFBaQjhCdktZa0N4U2E2M3FNRVQ1Mm1UZ0tBNmlDYnlVVUUwWnFPQ2dUb3lTTm5KRWtkV1hRdGJxd3JFRFlUUU5TT3V0MUNoODRaN2k3cEs0QnVmSi14LUJqbTR6ZHFINWstX0VXeXM?oc=5"
+   },
+   {
+    "source": "asahi.com",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBfYlpEZGNteTc1QWpDdWx1X1d1dnJ5NVdfTFVCaEx5RlBZVFNlOGdTcm5fTEdFdktTNzNGWXAwMi1tMWVZUFRkWXFrVVhsWXVjSTNqZWJyaw?oc=5"
    }
   ],
   "dv": 3
@@ -303,6 +307,10 @@
    {
     "source": "おとなの週末Web",
     "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE0tWVkwcXV0VlYxTnRHNDY5bXQyZHBlMjNyR19oUVhENkxzUVVmaHRxeUNDRjVMQWZUcjBZRGhFNHNtNjE1YThjcFdsNjl5MFZDQ1lBMjR3bw?oc=5"
+   },
+   {
+    "source": "otonano-shumatsu.com",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBITFE2T3FIZHppX1FEdk1kRUxiTGdHZTR0OWN0WTR1a0VaWjVRTW5lNjVMMXkyeWJVY2JoX2pYa3JvUnNqOEVZQzYzdFpEbnltUWJrN1gxWEJ3UQ?oc=5"
    }
   ],
   "dv": 3
@@ -994,6 +1002,15 @@
   "related": []
  },
  {
+  "id": "n20260808-0e2a9948",
+  "date": "2026-08-08",
+  "cat": "press",
+  "title": "ぴよりん史上初！『ブルーベリーぴよりん』が8月8日「ブルーベリーの日」より期間限定で登場！",
+  "source": "PR TIMES",
+  "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5uTnVyU2V5LVNUU3ZLaE04N0luS1BDVzl2TklCM2hYbkpSNkY4Q2dLWjF5dXhmZnJIUk1vdmc5RFJHU2dqeUM0Q0JCdzhPN3NpVHZVYV9zclN0UkNsREFSRWkyY3JfcTc2a1E?oc=5",
+  "related": []
+ },
+ {
   "id": "n20260807-f9cd7027",
   "date": "2026-08-07",
   "cat": "media",
@@ -1013,6 +1030,10 @@
    {
     "source": "PR TIMES",
     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE15NlBBT0tKQTdkcm5tcjRQVDhZOTZXWFFaWHl3X2ZXS0h0Sl9qVjA3Z3c2b0E5bFJlVzFQNkw4WGJwR3UzQVpVVFVtVGFCTFF2ejBYV0JVQlJKbGM2Ui1JNWdOZ2VKb1pPMUE?oc=5"
+   },
+   {
+    "source": "CLASSY.[クラッシィ]",
+    "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5ZOHByRzkxUnpaUC1ab21DNU9WM2FjZ0szMEZub0ZrZDlsQ1pWVW9nbENkZWNhNTVBV2JrOXZ2MnNEaE1LdEExRTNTMnllQnhrVDlOWlpRM0I?oc=5"
    }
   ]
  },
@@ -2598,7 +2619,12 @@
   "title": "名古屋スイーツ・ぴよりん、オウムに変身 映画「総理の夫」とコラボ [愛知県]",
   "source": "朝日新聞",
   "url": "https://www.asahi.com/sp/articles/photo/AS20210915002190.html?iref=sp_photo_gallery_3",
-  "related": [],
+  "related": [
+   {
+    "source": "asahi.com",
+    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOZlZ5WlVBOHplTDR0WFhWcnVyQldWOXIyWnZxWkNZbEQxQzZtQ3EzUWJFcFR1dUNkeXRRRF85YzNSUmRnMlZfNFFuZ3VPM3QzY1BlTUpvRVJCSHFvNjgtT3VHNHQ4aHpMOUN2OTVFMUlLOWxkRzJybWFibnREOFZRMWRqOFpoQVlYdzBaUDBR?oc=5"
+   }
+  ],
   "checked": true
  },
  {
