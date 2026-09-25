@@ -238,6 +238,29 @@ details.rel li a:hover{color:var(--caramel)}
 .reader-note{color:var(--muted);font-size:13px}
 @media (max-width:620px){.reader-body{padding:20px 18px 48px}.reader-body h2{font-size:20px}}
 
+/* ---------- bookmarks ---------- */
+:root{--star:#FBDB16;--star-edge:#E0A200}
+.bm-mark{display:inline-flex;width:16px;height:16px;flex:none}
+.row>.bm-mark{margin-left:auto}
+.bm-mark svg,.bm-del svg,.star-btn svg{width:100%;height:100%;fill:var(--star);stroke:var(--star-edge);stroke-width:1.6;stroke-linejoin:round}
+.feat.lead .bm-mark svg{fill:#FFFFFF;stroke:var(--yolk-ink)}
+details.rel li .bm-mark,.ev .bm-mark,.ag h4 .bm-mark{display:inline-block;width:13px;height:13px;margin-left:6px;vertical-align:-1px}
+.reader-bar .star-btn{display:grid;place-items:center;padding:0}
+.star-btn svg{width:19px;height:19px;fill:none;stroke:var(--muted);transition:fill .15s ease,stroke .15s ease}
+.star-btn[aria-pressed="true"]{background:var(--hover);border-color:var(--star-edge)}
+.star-btn[aria-pressed="true"] svg{fill:var(--star);stroke:var(--star-edge)}
+.star-btn.pop svg{animation:starpop .35s ease-out}
+@keyframes starpop{0%{transform:scale(.6)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+.bm-item{position:relative;padding-right:56px}
+.bm-item .dt{font-family:var(--f-mono)}
+.bm-del{position:absolute;right:8px;top:50%;translate:0 -50%;width:40px;height:40px;border-radius:50%;border:0;background:none;cursor:pointer;display:grid;place-items:center;padding:0}
+.bm-del svg{width:21px;height:21px}
+.bm-del:hover{background:var(--hover)}
+.bm-empty svg{width:14px;height:14px;vertical-align:-2px;fill:none;stroke:var(--muted);stroke-width:1.8;stroke-linejoin:round}
+.stamp-m{display:none}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);translate:-50% 0;z-index:40;display:flex;gap:14px;align-items:center;padding:10px 12px 10px 18px;border-radius:99px;background:var(--ink);color:var(--bg);font-size:13px;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);animation:fadein .2s ease-out;white-space:nowrap}
+.toast button{font:inherit;font-weight:700;border:0;border-radius:99px;padding:4px 12px;background:var(--yolk);color:var(--yolk-ink);cursor:pointer}
+
 /* ---------- iPhone / touch ---------- */
 html{-webkit-text-size-adjust:100%}
 a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
@@ -268,8 +291,13 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   .ev,.ev:last-child{flex:0 0 76%;border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--surface);scroll-snap-align:start}
   main{order:4}
   aside>.meta{order:5;flex-direction:row;gap:10px;justify-content:center}
-  .tabs{position:sticky;top:0;z-index:6;background:var(--bg);margin-inline:-16px;padding:calc(env(safe-area-inset-top,0px) + 8px) 16px 0;gap:20px}
-  .tabs button{padding-bottom:10px;white-space:nowrap;font-size:17px;gap:6px}
+  .tabs{position:sticky;top:0;z-index:6;background:var(--bg);margin-inline:-16px;padding:calc(env(safe-area-inset-top,0px) + 8px) 16px 0;gap:18px;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{padding-bottom:10px;white-space:nowrap;font-size:16px;gap:5px;flex:none}
+  .tabs button[aria-selected="true"]::after{bottom:0}
+  .tabs .stamp{display:none}
+  aside>.brand{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .stamp-m{display:flex;margin:0}
   .toolbar{position:static}
   .seg{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
   .seg button{white-space:nowrap}
@@ -290,6 +318,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     <div class="brand">
       <span class="eyebrow">Piyorin News Watch</span>
       <a href="./" class="home" id="home" aria-label="ぴよりんニュース トップへ"><h1><img class="yolk" src="icon.png?v=2" alt="" width="36" height="36">ぴよりんニュース</h1></a>
+      <span class="stamp stamp-m" id="stamp-m" aria-hidden="true"><i></i><span id="stamp-t2">—</span></span>
       <p>名古屋のひよこプリン「ぴよりん」の公式発表・プレスリリース・メディア記事をまとめて追いかけます。</p>
     </div>
 
@@ -323,6 +352,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     <div class="tabs" role="tablist" aria-label="表示切り替え">
       <button type="button" role="tab" id="tab-news" aria-controls="view-news" data-view="news" aria-selected="true">ニュース<span class="n" id="n-news"></span></button>
       <button type="button" role="tab" id="tab-cal" aria-controls="view-cal" data-view="calendar" aria-selected="false">カレンダー<span class="n" id="n-cal"></span></button>
+      <button type="button" role="tab" id="tab-bm" aria-controls="view-bm" data-view="bookmarks" aria-selected="false">ブックマーク<span class="n" id="n-bm"></span></button>
       <span class="stamp" id="stamp" aria-live="polite"><i aria-hidden="true"></i><span class="lbl">最終更新</span><span id="stamp-t">—</span></span>
     </div>
     <div id="view-news" role="tabpanel" aria-labelledby="tab-news" style="display:flex;flex-direction:column;gap:28px">
@@ -352,12 +382,17 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       <p class="sec-label" style="margin:12px 0 0" id="ag-label">この月の予定</p>
       <div class="agenda" id="agenda"></div>
     </div>
+    <div id="view-bm" role="tabpanel" aria-labelledby="tab-bm" hidden>
+      <p class="sec-label" id="bm-label" style="margin:0 0 10px">ブックマーク</p>
+      <div class="items" id="bm-list"></div>
+    </div>
   </main>
 </div>
 <div class="reader-scrim" id="reader-scrim" hidden aria-hidden="true"></div>
 <div class="reader" id="reader" hidden role="dialog" aria-labelledby="reader-title">
   <div class="reader-bar">
     <span class="eyebrow">Reader</span>
+    <button type="button" id="reader-star" class="star-btn" aria-pressed="false" aria-label="ブックマークに追加" title="ブックマークに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/></svg></button>
     <a id="reader-orig" href="#" target="_blank" rel="noopener">元の記事を開く ↗</a>
     <button type="button" id="reader-close" aria-label="閉じる">×</button>
   </div>
@@ -378,10 +413,20 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   const md=s=>{const [,m,d]=s.split('-').map(Number);return m+'.'+String(d).padStart(2,'0')};
   const wd=s=>WD[new Date(s+'T12:00:00+09:00').getUTCDay()];
 
+  // ---------- bookmarks（この端末のブラウザに保存） ----------
+  const BM_KEY='piyo-bookmarks';
+  const STAR='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/></svg>';
+  const isDate=d=>/^\d{4}-\d{2}-\d{2}$/.test(d||'');
+  function readBm(){try{const r=JSON.parse(localStorage.getItem(BM_KEY)||'[]');return Array.isArray(r)?r.filter(b=>b&&typeof b.url==='string'&&/^https?:\/\//.test(b.url)):[]}catch(_){return[]}}
+  let bms=readBm();
+  const isBm=u=>!!u&&bms.some(b=>b.url===u);
+  const mark=u=>isBm(u)?`<span class="bm-mark" role="img" aria-label="ブックマーク済み" title="ブックマーク済み">${STAR}</span>`:'';
+  function saveBm(){try{localStorage.setItem(BM_KEY,JSON.stringify(bms))}catch(_){}}
+
   function relLinks(it){
     const r=(it.related||[]).filter(x=>x&&x.url);
     if(!r.length)return '';
-    return `<details class="rel"><summary>ほか${r.length}件</summary><ul>${r.map(x=>`<li><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener" data-news="${esc(it.id)}" data-url="${esc(safeUrl(x.url))}" data-src="${esc(x.source)}">${esc(x.source)}</a></li>`).join('')}</ul></details>`;
+    return `<details class="rel" data-id="${esc(it.id)}"><summary>ほか${r.length}件</summary><ul>${r.map(x=>`<li><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener" data-news="${esc(it.id)}" data-url="${esc(safeUrl(x.url))}" data-src="${esc(x.source)}">${esc(x.source)}</a>${mark(x.url)}</li>`).join('')}</ul></details>`;
   }
   function isNew(it){return days(it.date,todayStr())<=3}
 
@@ -396,11 +441,12 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       .sort((a,b)=>a.date<b.date?1:a.date>b.date?-1:(a.cat==='official'?-1:1));
   }
   function renderFeed(){
+    const openRel=new Set([...document.querySelectorAll('#feed details.rel[open]')].map(d=>d.dataset.id));
     const list=filtered();
     const hero=list.slice(0,2), rest=list.slice(2);
     $('hero').innerHTML=hero.map((it,i)=>`
       <a class="feat${i===0?' lead':''}" href="${esc(safeUrl(it.url))}" target="_blank" rel="noopener" data-news="${esc(it.id)}">
-        <div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><span class="dt" style="font-family:var(--f-mono)">${esc(it.date.replaceAll('-','.'))} ${wd(it.date)}</span>${isNew(it)?'<span class="new">NEW</span>':''}</div>
+        <div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><span class="dt" style="font-family:var(--f-mono)">${esc(it.date.replaceAll('-','.'))} ${wd(it.date)}</span>${isNew(it)?'<span class="new">NEW</span>':''}${mark(it.url)}</div>
         <h2>${esc(it.title)}</h2>
         <div class="foot"><span class="src">${esc(it.source)}${(it.related||[]).length?` ほか${it.related.length}件`:''}</span><span aria-hidden="true">↗</span></div>
       </a>`).join('');
@@ -412,11 +458,12 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
         <div class="day-h"><strong>${md(g.date)}</strong><span>${g.date.slice(0,4)} · ${wd(g.date)}</span></div>
         <div class="items">${g.items.map(it=>`
           <article class="item">
-            <div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span>${isNew(it)?'<span class="new">NEW</span>':''}</div>
+            <div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span>${isNew(it)?'<span class="new">NEW</span>':''}${mark(it.url)}</div>
             <h3><a href="${esc(safeUrl(it.url))}" target="_blank" rel="noopener" data-news="${esc(it.id)}">${esc(it.title)}</a></h3>
             <div class="row"><span class="src">${esc(it.source)}</span>${relLinks(it)}</div>
           </article>`).join('')}</div>
       </section>`).join(''):`<p class="empty">条件に合うニュースはありません。</p>`;
+    if(openRel.size)document.querySelectorAll('#feed details.rel').forEach(d=>{if(openRel.has(d.dataset.id))d.open=true});
   }
   function renderEvents(){
     const t=todayStr();
@@ -425,7 +472,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       const live=e.start<=t, n=days(t,e.start);
       const range=e.end&&e.end!==e.start?`${md(e.start)}–${md(e.end)}`:md(e.start);
       return `<div class="ev"><div class="d"><strong>${md(e.start)}</strong><span>${wd(e.start)}</span></div>
-        <div><a class="t" href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener" data-read="${esc(e.id)}">${esc(e.title)}</a>
+        <div><a class="t" href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener" data-read="${esc(e.id)}">${esc(e.title)}</a>${mark(e.url)}
         <div class="p"><span>${esc(range)} · ${esc(e.place)}</span><span class="cd${live?' now':''}">${live?'開催中':n===1?'あした':'あと'+n+'日'}</span></div></div></div>`}).join('')
       :'<p class="meta" style="padding:8px 0">予定されているイベントはありません</p>';
   }
@@ -434,9 +481,9 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     const s=u&&!isNaN(u)?`${u.getMonth()+1}/${u.getDate()} ${String(u.getHours()).padStart(2,'0')}:${String(u.getMinutes()).padStart(2,'0')}`:'—';
     const srcs=new Set();state.news.forEach(n=>{srcs.add(n.source);(n.related||[]).forEach(r=>srcs.add(r.source))});
     $('meta').innerHTML=`<span>${state.news.length}件 · ${srcs.size}ソース</span>`;
-    $('stamp-t').textContent=s;
+    $('stamp-t').textContent=s;$('stamp-t2').textContent=s;
     const fresh=u&&!isNaN(u)&&(Date.now()-u.getTime())<4*3600e3;
-    $('stamp').classList.toggle('fresh',!!fresh);
+    $('stamp').classList.toggle('fresh',!!fresh);$('stamp-m').classList.toggle('fresh',!!fresh);
     const c=new Date();
     $('stamp').title=(u&&!isNaN(u)?`ニュースの最終収集: ${u.getFullYear()}/${u.getMonth()+1}/${u.getDate()} ${s.split(' ')[1]}`:'最終収集: 不明')+`\nページの確認: ${String(c.getHours()).padStart(2,'0')}:${String(c.getMinutes()).padStart(2,'0')}`;
   }
@@ -485,17 +532,18 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       const end=e.end||e.start;const [st,sc]=statusOf(e,t);
       return `<div class="ag${sc==='done'?' done':''}" id="ag-${esc(e.id)}">
         <div class="when">${md(e.start)}${end!==e.start?' – '+md(end):''}<span>${wd(e.start)}${end!==e.start?' – '+wd(end):''}</span></div>
-        <div><h4><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener" data-read="${esc(e.id)}">${esc(e.title)}</a></h4>
+        <div><h4><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener" data-read="${esc(e.id)}">${esc(e.title)}</a>${mark(e.url)}</h4>
         <div class="pl"><span class="ktag k-${KINDS[e.kind]?e.kind:'event'}">${KINDS[e.kind]||'イベント'}</span><span>${esc(e.place||'')}</span></div></div>
         <span class="cd${sc==='now'?' now':''}">${st}</span></div>`}).join('')
       :'<p class="empty">この月の予定はまだありません。</p>';
   }
   function setView(v){
     state.view=v;
-    $('view-news').hidden=v!=='news';$('view-cal').hidden=v!=='calendar';
+    $('view-news').hidden=v!=='news';$('view-cal').hidden=v!=='calendar';$('view-bm').hidden=v!=='bookmarks';
     $('view-cal').style.display=v==='calendar'?'flex':'';
-    $('tab-news').setAttribute('aria-selected',v==='news');$('tab-cal').setAttribute('aria-selected',v==='calendar');
+    $('tab-news').setAttribute('aria-selected',v==='news');$('tab-cal').setAttribute('aria-selected',v==='calendar');$('tab-bm').setAttribute('aria-selected',v==='bookmarks');
     if(v==='calendar')renderCal();
+    if(v==='bookmarks')renderBm();
   }
   document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setView(b.dataset.view)});
   $('to-cal').addEventListener('click',e=>{e.preventDefault();setView('calendar');window.scrollTo({top:0,behavior:'smooth'})});
@@ -503,13 +551,31 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   $('cal-prev').addEventListener('click',()=>shift(-1));$('cal-next').addEventListener('click',()=>shift(1));
   $('cal-today').addEventListener('click',()=>{const t=todayStr();state.ym=[+t.slice(0,4),+t.slice(5,7)-1];renderCal()});
   $('cal').addEventListener('click',e=>{const b=e.target.closest('.bar');if(!b)return;const el=document.getElementById('ag-'+b.dataset.ev);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800)});
-  function renderCounts(){$('n-news').textContent=state.news.length;$('n-cal').textContent=state.events.filter(e=>(e.end||e.start)>=todayStr()).length}
-  function renderAll(){renderSeg();renderFeed();renderEvents();renderMeta();renderCounts();if(state.view==='calendar')renderCal()}
+  function renderCounts(){$('n-news').textContent=state.news.length;$('n-cal').textContent=state.events.filter(e=>(e.end||e.start)>=todayStr()).length;$('n-bm').textContent=bms.length}
+  function bmTag(b){
+    if(b.cat==='event'){const k=KINDS[b.kind]?b.kind:'event';return `<span class="ktag k-${k}">${KINDS[k]}</span>`}
+    return CATS[b.cat]?`<span class="tag ${b.cat}">${CATS[b.cat]}</span>`:'';
+  }
+  function renderBm(){
+    const list=bms.slice().sort((a,b)=>(b.savedAt||0)-(a.savedAt||0));
+    $('bm-label').textContent=`ブックマーク · ${list.length}件`;
+    $('bm-list').innerHTML=list.length?list.map(b=>`
+      <article class="item bm-item">
+        <div class="row">${bmTag(b)}${isDate(b.date)?`<span class="dt">${b.date.replaceAll('-','.')} ${wd(b.date)}</span>`:''}</div>
+        <h3><a href="${esc(safeUrl(b.url))}" target="_blank" rel="noopener" data-bm="${esc(b.url)}">${esc(b.title)}</a></h3>
+        <div class="row"><span class="src">${esc(b.source||'')}</span></div>
+        <button type="button" class="bm-del" data-unbm="${esc(b.url)}" aria-label="ブックマークを外す" title="ブックマークを外す">${STAR}</button>
+      </article>`).join('')
+      :`<p class="empty bm-empty">まだブックマークはありません。<br>記事をリーダーで開いて、上の ${STAR.replace('<svg ','<svg ')} を押すとここに保存されます。</p>`;
+    $('bm-list').classList.toggle('items',!!list.length);
+  }
+  function renderAll(){renderSeg();renderFeed();renderEvents();renderMeta();renderCounts();if(state.view==='calendar')renderCal();if(state.view==='bookmarks')renderBm()}
 
   $('seg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;state.filter=b.dataset.k;try{localStorage.setItem('piyo-filter',state.filter)}catch(_){}renderSeg();renderFeed()});
   let tmr;$('q').addEventListener('input',e=>{clearTimeout(tmr);tmr=setTimeout(()=>{state.q=e.target.value;renderFeed()},120)});
   renderAll();
   if(location.hash==='#calendar')setView('calendar');
+  if(location.hash==='#bookmarks')setView('bookmarks');
 
   // ---------- reader ----------
   // 記事ごとの本文ファイル（data/reader/<URLのSHA-1先頭12桁>.json）を開いたときに読み込む
@@ -539,8 +605,11 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   }
   let readerToken=0;
   // src: {url, title, chip(HTML)}
+  let curSrc=null;
+  function paintStar(pop){const on=!!curSrc&&isBm(curSrc.url);const b=$('reader-star');b.setAttribute('aria-pressed',on);const l=on?'ブックマークを外す':'ブックマークに追加';b.setAttribute('aria-label',l);b.title=l;b.classList.remove('pop');if(pop&&on){void b.offsetWidth;b.classList.add('pop')}}
   async function openReader(src){
     const token=++readerToken;
+    curSrc=src;paintStar(false);
     const paint=(art,loading)=>{
       const tt=cleanTitle(art&&art.title||src.title);
       let h=`<h2 id="reader-title">${esc(tt)}</h2><div class="reader-ev">${src.chip}</div>`;
@@ -562,11 +631,38 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     const end=ev.end||ev.start;
     const when=`${md(ev.start)}（${wd(ev.start)}）${end!==ev.start?` – ${md(end)}（${wd(end)}）`:''}`;
     const [st]=statusOf(ev,todayStr());
-    return {url:ev.url,title:ev.title,chip:`<span class="ktag k-${KINDS[ev.kind]?ev.kind:'event'}">${KINDS[ev.kind]||'イベント'}</span><b>${esc(when)}</b>${ev.place?`<span>${esc(ev.place)}</span>`:''}<span class="cd">${esc(st)}</span>`};
+    return {url:ev.url,title:ev.title,bm:{title:ev.title,date:ev.start,cat:'event',kind:ev.kind,source:ev.place||''},chip:`<span class="ktag k-${KINDS[ev.kind]?ev.kind:'event'}">${KINDS[ev.kind]||'イベント'}</span><b>${esc(when)}</b>${ev.place?`<span>${esc(ev.place)}</span>`:''}<span class="cd">${esc(st)}</span>`};
   }
   function newsSource(it,url,source){
-    return {url:url||it.url,title:it.title,chip:`<span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><b>${esc(it.date.replaceAll('-','.'))}（${wd(it.date)}）</b><span>${esc(source||it.source)}</span>`};
+    return {url:url||it.url,title:it.title,bm:{title:it.title,date:it.date,cat:it.cat,source:source||it.source},chip:`<span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><b>${esc(it.date.replaceAll('-','.'))}（${wd(it.date)}）</b><span>${esc(source||it.source)}</span>`};
   }
+  function bmSource(b){
+    const d=isDate(b.date)?`<b>${b.date.replaceAll('-','.')}（${wd(b.date)}）</b>`:'';
+    return {url:b.url,title:b.title,bm:{title:b.title,date:b.date,cat:b.cat,kind:b.kind,source:b.source},chip:`${bmTag(b)}${d}${b.source?`<span>${esc(b.source)}</span>`:''}`};
+  }
+  function refreshBm(){renderFeed();renderEvents();renderCounts();if(state.view==='calendar')renderCal();if(state.view==='bookmarks')renderBm();paintStar(false)}
+  function setBm(src,on){
+    bms=bms.filter(b=>b.url!==src.url);
+    if(on)bms.push({url:src.url,...src.bm,savedAt:Date.now()});
+    saveBm();refreshBm();
+  }
+  $('reader-star').addEventListener('click',()=>{if(!curSrc)return;const on=!isBm(curSrc.url);setBm(curSrc,on);paintStar(true)});
+  let toastTmr;
+  function toast(msg,undo){
+    document.querySelectorAll('.toast').forEach(t=>t.remove());clearTimeout(toastTmr);
+    const t=document.createElement('div');t.className='toast';t.setAttribute('role','status');
+    t.innerHTML=`<span>${esc(msg)}</span>`+(undo?'<button type="button">元に戻す</button>':'');
+    if(undo)t.querySelector('button').addEventListener('click',()=>{undo();t.remove()});
+    document.body.appendChild(t);toastTmr=setTimeout(()=>t.remove(),5000);
+  }
+  $('bm-list').addEventListener('click',e=>{
+    const d=e.target.closest('[data-unbm]');if(!d)return;
+    const b=bms.find(x=>x.url===d.dataset.unbm);if(!b)return;
+    bms=bms.filter(x=>x!==b);saveBm();refreshBm();
+    toast('ブックマークを外しました',()=>{if(!isBm(b.url)){bms.push(b);saveBm();refreshBm()}});
+  });
+  // 別のタブで変更したときも反映
+  window.addEventListener('storage',e=>{if(e.key===BM_KEY){bms=readBm();refreshBm()}});
   function closeReader(){$('reader').hidden=true;$('reader-scrim').hidden=true;document.documentElement.classList.remove('reader-open');readerToken++}
   // iPhone：リーダーを右へスワイプすると閉じる
   {let sx=0,sy=0;const r=$('reader');
@@ -575,10 +671,11 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   // リーダーの外側（暗くなった部分）を押したら、下にあるリンクより優先して閉じる
   $('reader-scrim').addEventListener('click',e=>{e.preventDefault();e.stopPropagation();closeReader()});
   document.addEventListener('click',e=>{
-    const a=e.target.closest('a[data-read],a[data-news]');
+    const a=e.target.closest('a[data-read],a[data-news],a[data-bm]');
     if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0)return;
     let src=null;
-    if(a.dataset.read){const ev=state.events.find(x=>x.id===a.dataset.read);if(ev)src=eventSource(ev)}
+    if(a.dataset.bm){const b=bms.find(x=>x.url===a.dataset.bm);if(b)src=bmSource(b)}
+    else if(a.dataset.read){const ev=state.events.find(x=>x.id===a.dataset.read);if(ev)src=eventSource(ev)}
     else{const it=state.news.find(x=>x.id===a.dataset.news);if(it)src=newsSource(it,a.dataset.url,a.dataset.src)}
     if(!src)return;
     e.preventDefault();openReader(src);
