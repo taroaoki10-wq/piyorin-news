@@ -9,12 +9,12 @@
  "lang": "ja",
  "icons": [
   {
-   "src": "apple-touch-icon.png",
+   "src": "apple-touch-icon.png?v=2",
    "sizes": "180x180",
    "type": "image/png"
   },
   {
-   "src": "icon.png",
+   "src": "icon.png?v=2",
    "sizes": "128x128",
    "type": "image/png"
   }
