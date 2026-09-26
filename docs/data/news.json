@@ -1,11 +1,31 @@
 [
  {
+  "id": "n20260927-fb5824c4",
+  "date": "2026-09-27",
+  "cat": "media",
+  "title": "形を崩さず持ち帰る流行の「ぴよりんチャレンジ」、本家はどうしてる？ 春日井→名古屋までを追った",
+  "source": "中日新聞Web",
+  "url": "https://www.chunichi.co.jp/article/1316928",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "n20260926-43aaee18",
   "date": "2026-09-26",
   "cat": "media",
   "title": "「ぴよりんステーションフェス」開催",
   "source": "tonichi.net",
   "url": "https://www.tonichi.net/news/index.php?id=125352",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20260926-429ac842",
+  "date": "2026-09-26",
+  "cat": "media",
+  "title": "形を崩さず持ち帰る流行の「ぴよりんチャレンジ」、本家はどうし ...",
+  "source": "中日新聞Web",
+  "url": "https://www.chunichi.co.jp/article/1316928",
   "related": [],
   "dv": 3
  },
@@ -346,6 +366,10 @@
    {
     "source": "otonano-shumatsu.com",
     "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBITFE2T3FIZHppX1FEdk1kRUxiTGdHZTR0OWN0WTR1a0VaWjVRTW5lNjVMMXkyeWJVY2JoX2pYa3JvUnNqOEVZQzYzdFpEbnltUWJrN1gxWEJ3UQ?oc=5"
+   },
+   {
+    "source": "news.yahoo.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNbnFtVGNId2lVQm1NSUJSRHVvTUEtRllDZWZQTWlJSkx4dXozLUdna3NZOWFHX2Z0VkxwS3ZXZDQ1WnFCbE1QUHF2NzlQa1cxODdQV1lJLVdPcC1UbDVQZHhXSnhheTdXYUg2Y0c0d0Z1dm1RbmUyZ0JsejQ3S1VmcDJZNFp2MmlN?oc=5"
    }
   ],
   "dv": 3
