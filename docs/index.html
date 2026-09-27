@@ -258,6 +258,26 @@ details.rel li .bm-mark,.ev .bm-mark,.ag h4 .bm-mark{display:inline-block;width:
 .bm-del:hover{background:var(--hover)}
 .bm-empty svg{width:14px;height:14px;vertical-align:-2px;fill:none;stroke:var(--muted);stroke-width:1.8;stroke-linejoin:round}
 .stamp-m{display:none}
+.sync{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:0 0 18px;display:flex;flex-direction:column;gap:12px}
+.sync-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.sync-row>div:not(.sync-btns){flex:1;min-width:180px;display:flex;flex-direction:column;line-height:1.5}
+.sync-row b{font-size:14px}
+.sync small{font-size:12px;color:var(--muted)}
+.sync small.err{color:#C2412D}
+.sync-dot{width:10px;height:10px;border-radius:50%;background:var(--line);flex:none}
+.sync-dot.on{background:var(--yolk);box-shadow:0 0 0 3px var(--hover)}
+.sync-dot.busy{animation:syncblink 1s ease-in-out infinite}
+@keyframes syncblink{50%{opacity:.35}}
+.sync-btns{display:flex;gap:6px;flex-wrap:wrap}
+.sync button{font:inherit;font-size:12.5px;font-weight:700;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 14px;cursor:pointer;white-space:nowrap}
+.sync button:hover{border-color:var(--yolk);background:var(--hover)}
+.sync button.primary{background:var(--yolk);border-color:transparent;color:var(--yolk-ink)}
+.sync button:disabled{opacity:.5;cursor:default}
+.sync ol{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:8px;font-size:13.5px}
+.sync ol small{display:block}
+.sync ol a{color:var(--caramel);font-weight:700}
+.sync-in{display:flex;gap:8px}
+.sync-in input{flex:1;min-width:0;font:inherit;font-size:16px;font-family:var(--f-mono);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:7px 12px}
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);translate:-50% 0;z-index:40;display:flex;gap:14px;align-items:center;padding:10px 12px 10px 18px;border-radius:99px;background:var(--ink);color:var(--bg);font-size:13px;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);animation:fadein .2s ease-out;white-space:nowrap}
 .toast button{font:inherit;font-weight:700;border:0;border-radius:99px;padding:4px 12px;background:var(--yolk);color:var(--yolk-ink);cursor:pointer}
 
@@ -383,6 +403,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       <div class="agenda" id="agenda"></div>
     </div>
     <div id="view-bm" role="tabpanel" aria-labelledby="tab-bm" hidden>
+      <div class="sync" id="sync"></div>
       <p class="sec-label" id="bm-label" style="margin:0 0 10px">ブックマーク</p>
       <div class="items" id="bm-list"></div>
     </div>
@@ -417,11 +438,14 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   const BM_KEY='piyo-bookmarks';
   const STAR='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/></svg>';
   const isDate=d=>/^\d{4}-\d{2}-\d{2}$/.test(d||'');
-  function readBm(){try{const r=JSON.parse(localStorage.getItem(BM_KEY)||'[]');return Array.isArray(r)?r.filter(b=>b&&typeof b.url==='string'&&/^https?:\/\//.test(b.url)):[]}catch(_){return[]}}
-  let bms=readBm();
+  const RM_KEY='piyo-bm-removed'; // 外した記事の記録（同期で「外した」ことを他の端末に伝える）
+  const okBm=b=>b&&typeof b.url==='string'&&/^https?:\/\//.test(b.url);
+  function readBm(){try{const r=JSON.parse(localStorage.getItem(BM_KEY)||'[]');return Array.isArray(r)?r.filter(okBm):[]}catch(_){return[]}}
+  function readRm(){try{const r=JSON.parse(localStorage.getItem(RM_KEY)||'{}');return r&&typeof r==='object'&&!Array.isArray(r)?r:{}}catch(_){return{}}}
+  let bms=readBm(), bmRemoved=readRm();
   const isBm=u=>!!u&&bms.some(b=>b.url===u);
   const mark=u=>isBm(u)?`<span class="bm-mark" role="img" aria-label="ブックマーク済み" title="ブックマーク済み">${STAR}</span>`:'';
-  function saveBm(){try{localStorage.setItem(BM_KEY,JSON.stringify(bms))}catch(_){}}
+  function saveBm(push=true){try{localStorage.setItem(BM_KEY,JSON.stringify(bms));localStorage.setItem(RM_KEY,JSON.stringify(bmRemoved))}catch(_){}if(push&&typeof queueSync==='function')queueSync()}
 
   function relLinks(it){
     const r=(it.related||[]).filter(x=>x&&x.url);
@@ -642,8 +666,10 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   }
   function refreshBm(){renderFeed();renderEvents();renderCounts();if(state.view==='calendar')renderCal();if(state.view==='bookmarks')renderBm();paintStar(false)}
   function setBm(src,on){
+    const now=Date.now();
     bms=bms.filter(b=>b.url!==src.url);
-    if(on)bms.push({url:src.url,...src.bm,savedAt:Date.now()});
+    if(on){bms.push({url:src.url,...src.bm,savedAt:now,ts:now});delete bmRemoved[src.url]}
+    else bmRemoved[src.url]=now;
     saveBm();refreshBm();
   }
   $('reader-star').addEventListener('click',()=>{if(!curSrc)return;const on=!isBm(curSrc.url);setBm(curSrc,on);paintStar(true)});
@@ -658,11 +684,108 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   $('bm-list').addEventListener('click',e=>{
     const d=e.target.closest('[data-unbm]');if(!d)return;
     const b=bms.find(x=>x.url===d.dataset.unbm);if(!b)return;
-    bms=bms.filter(x=>x!==b);saveBm();refreshBm();
-    toast('ブックマークを外しました',()=>{if(!isBm(b.url)){bms.push(b);saveBm();refreshBm()}});
+    bms=bms.filter(x=>x!==b);bmRemoved[b.url]=Date.now();saveBm();refreshBm();
+    toast('ブックマークを外しました',()=>{if(!isBm(b.url)){b.ts=Date.now();bms.push(b);delete bmRemoved[b.url];saveBm();refreshBm()}});
   });
   // 別のタブで変更したときも反映
-  window.addEventListener('storage',e=>{if(e.key===BM_KEY){bms=readBm();refreshBm()}});
+  window.addEventListener('storage',e=>{if(e.key===BM_KEY||e.key===RM_KEY){bms=readBm();bmRemoved=readRm();refreshBm()}if(e.key===SYNC_KEY){sync=readSync();paintSync()}});
+
+  // ---------- ブックマークの同期（GitHubの非公開メモ＝secret gist に保存） ----------
+  const SYNC_KEY='piyo-sync', GH='https://api.github.com', FILE='piyorin-bookmarks.json';
+  function readSync(){try{const v=JSON.parse(localStorage.getItem(SYNC_KEY)||'null');return v&&typeof v.token==='string'&&v.token?v:null}catch(_){return null}}
+  let sync=readSync(), syncBusy=false, syncAgain=false, syncLast=null, syncErr='', syncOpen=false, syncTmr;
+  function saveSync(){try{sync?localStorage.setItem(SYNC_KEY,JSON.stringify(sync)):localStorage.removeItem(SYNC_KEY)}catch(_){}}
+  async function gh(path,opt={}){
+    const r=await fetch(GH+path,{...opt,cache:'no-store',headers:{Authorization:'Bearer '+sync.token,Accept:'application/vnd.github+json',...(opt.body?{'Content-Type':'application/json'}:{})}});
+    if(r.status===401)throw new Error('auth');
+    if(!r.ok)throw new Error('http'+r.status);
+    return r.json();
+  }
+  const bmTime=b=>b.ts||b.savedAt||0;
+  function mergeBm(a,b){
+    const rm={...a.removed};
+    for(const [u,t] of Object.entries(b.removed||{}))if(typeof t==='number'&&!(rm[u]>=t))rm[u]=t;
+    const m=new Map();
+    for(const it of [...(a.items||[]),...(b.items||[])]){if(!okBm(it))continue;const c=m.get(it.url);if(!c||bmTime(c)<bmTime(it))m.set(it.url,it)}
+    const items=[];
+    for(const it of m.values()){if(rm[it.url]>=bmTime(it))continue;delete rm[it.url];items.push(it)}
+    const cut=Date.now()-180*864e5;for(const u in rm)if(!(rm[u]>=cut))delete rm[u];
+    return {items,removed:rm};
+  }
+  const canon=d=>JSON.stringify([d.items.map(i=>i.url+'@'+bmTime(i)).sort(),Object.keys(d.removed).sort().map(k=>k+'@'+d.removed[k])]);
+  async function findGist(){
+    for(let pg=1;pg<=10;pg++){const l=await gh('/gists?per_page=100&page='+pg);const g=l.find(x=>x.files&&x.files[FILE]);if(g)return g.id;if(l.length<100)break}
+    const g=await gh('/gists',{method:'POST',body:JSON.stringify({description:'ぴよりんニュースのブックマーク（自動同期）',public:false,files:{[FILE]:{content:JSON.stringify({v:1,items:[],removed:{}})}}})});
+    return g.id;
+  }
+  async function doSync(){
+    if(!sync)return;
+    if(syncBusy){syncAgain=true;return}
+    syncBusy=true;paintSync();
+    try{
+      if(!sync.gist){sync.gist=await findGist();saveSync()}
+      let g;
+      try{g=await gh('/gists/'+sync.gist)}catch(e){if(e.message!=='http404')throw e;sync.gist=await findGist();saveSync();g=await gh('/gists/'+sync.gist)}
+      const f=g.files&&g.files[FILE];
+      let remote={items:[],removed:{}};
+      if(f){
+        let txt=f.content;
+        if(f.truncated&&f.raw_url)txt=await fetch(f.raw_url,{cache:'no-store'}).then(r=>r.text());
+        try{const j=JSON.parse(txt||'{}');remote={items:Array.isArray(j.items)?j.items:[],removed:j.removed&&typeof j.removed==='object'&&!Array.isArray(j.removed)?j.removed:{}}}catch(_){}
+      }
+      const m=mergeBm({items:bms,removed:bmRemoved},remote);
+      if(canon(m)!==canon({items:bms,removed:bmRemoved})){bms=m.items;bmRemoved=m.removed;saveBm(false);refreshBm()}
+      if(!f||canon(m)!==canon(remote))
+        await gh('/gists/'+sync.gist,{method:'PATCH',body:JSON.stringify({files:{[FILE]:{content:JSON.stringify({v:1,updated:new Date().toISOString(),items:m.items,removed:m.removed})}}})});
+      syncLast=new Date();syncErr='';
+    }catch(e){
+      syncErr=e.message==='auth'?'合言葉が使えません（期限切れか削除された可能性があります）。「解除」してから設定し直してください。':e.message==='http403'||e.message==='http404'?'合言葉に「gist」の権限がありません。「gist」にチェックを入れて作り直してください。':'同期できませんでした。通信状態を確かめて「今すぐ同期」を押してください。';
+    }finally{
+      syncBusy=false;paintSync();
+      if(syncAgain){syncAgain=false;doSync()}
+    }
+  }
+  function queueSync(){if(!sync)return;clearTimeout(syncTmr);syncTmr=setTimeout(doSync,800)}
+  const hm=d=>`${d.getMonth()+1}/${d.getDate()} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+  const pad2=n=>String(n).padStart(2,'0');
+  const TOKEN_URL='https://github.com/settings/tokens/new?scopes=gist&description='+encodeURIComponent('ぴよりんニュース ブックマーク同期');
+  function paintSync(){
+    const el=$('sync');if(!el)return;
+    if(sync){
+      const st=syncBusy?'同期しています…':syncErr?`<small class="err">${esc(syncErr)}</small>`:syncLast?`最終同期 ${hm(syncLast)}・ほかの端末と共有中`:'ほかの端末と共有中';
+      el.innerHTML=`<div class="sync-row"><span class="sync-dot on${syncBusy?' busy':''}"></span><div><b>同期オン</b>${st.startsWith('<small')?st:`<small>${st}</small>`}</div>
+        <div class="sync-btns"><button type="button" data-sync="now" ${syncBusy?'disabled':''}>今すぐ同期</button><button type="button" data-sync="copy">合言葉をコピー</button><button type="button" data-sync="off">解除</button></div></div>`;
+    }else{
+      el.innerHTML=`<div class="sync-row"><span class="sync-dot"></span><div><b>この端末だけに保存中</b><small>${syncErr?`<span style="color:#C2412D">${esc(syncErr)}</span>`:'同期を設定すると、ほかのブラウザ・端末とブックマークを共有できます'}</small></div>
+        <div class="sync-btns"><button type="button" class="${syncOpen?'':'primary'}" data-sync="open">${syncOpen?'閉じる':'同期を設定'}</button></div></div>
+        ${syncOpen?`<form id="sync-form" autocomplete="off"><ol>
+          <li><b>はじめての端末</b>：<a href="${TOKEN_URL}" target="_blank" rel="noopener">GitHubで合言葉を作る ↗</a><small>「gist」だけにチェックが入った画面が開きます。Expiration（有効期限）を選んで一番下の「Generate token」を押し、表示された ghp_ で始まる文字をコピーします。この合言葉はブックマークの保存にしか使えません。</small></li>
+          <li><b>2台目以降</b>：同期オンの端末で「合言葉をコピー」を押し、その文字をこの端末に送ります（AirDrop・メモなど）。</li>
+          <li>合言葉を貼り付けて「同期を開始」を押します。
+            <div class="sync-in" style="margin-top:6px"><input type="password" id="sync-token" placeholder="ghp_…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="合言葉"><button type="submit" class="primary">同期を開始</button></div></li>
+        </ol></form>`:''}`;
+      const f=$('sync-form');
+      if(f)f.addEventListener('submit',async ev=>{
+        ev.preventDefault();
+        const t=$('sync-token').value.trim();
+        if(!/^(ghp_|github_pat_)[A-Za-z0-9_]{20,}$/.test(t)){syncErr='合言葉の形が違うようです。ghp_ で始まる文字をそのまま貼り付けてください。';paintSync();return}
+        sync={token:t};syncErr='';syncOpen=false;
+        try{await gh('/gists?per_page=1')}catch(e){sync=null;syncErr=e.message==='auth'?'この合言葉は使えませんでした。コピーし直してもう一度お試しください。':'合言葉に「gist」の権限がないか、通信できませんでした。';paintSync();return}
+        saveSync();await doSync();
+        if(!syncErr)toast('同期を開始しました');
+      });
+    }
+  }
+  $('sync').addEventListener('click',async e=>{
+    const b=e.target.closest('[data-sync]');if(!b)return;
+    const k=b.dataset.sync;
+    if(k==='open'){syncOpen=!syncOpen;syncErr='';paintSync();if(syncOpen)setTimeout(()=>{const i=$('sync-token');if(i)i.focus()},0)}
+    else if(k==='now')doSync();
+    else if(k==='copy'){try{await navigator.clipboard.writeText(sync.token);toast('合言葉をコピーしました。ほかの端末の「同期を設定」に貼り付けてください')}catch(_){prompt('この合言葉をコピーしてください',sync.token)}}
+    else if(k==='off'){sync=null;syncErr='';syncLast=null;saveSync();paintSync();toast('この端末の同期を解除しました（ブックマークはこの端末に残ります）')}
+  });
+  paintSync();
+  doSync();
   function closeReader(){$('reader').hidden=true;$('reader-scrim').hidden=true;document.documentElement.classList.remove('reader-open');readerToken++}
   // iPhone：リーダーを右へスワイプすると閉じる
   {let sx=0,sy=0;const r=$('reader');
@@ -704,8 +827,8 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     }catch(err){}
   }
   load();
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')load()});
-  setInterval(load,5*60*1000);
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){load();doSync()}});
+  setInterval(()=>{load();doSync()},5*60*1000);
 })();
 </script>
 </body>
