@@ -1,5 +1,15 @@
 [
  {
+  "id": "n20260928-5fa28bb4",
+  "date": "2026-09-28",
+  "cat": "media",
+  "title": "ぴよりん なぜ崩れない 春日井・勝川の工房→名古屋12キロ 優しく輸送：ニュース",
+  "source": "中日BIZナビ",
+  "url": "https://biz.chunichi.co.jp/news/article/10/130971/",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "n20260927-fb5824c4",
   "date": "2026-09-27",
   "cat": "media",
@@ -381,7 +391,12 @@
   "title": "11月14日催行 ジェイアール東海フードサービス，「ぴよりん15周年特別企画！初のぴよりん貸切新幹線ツアー」を発売",
   "source": "鉄道ファン・railf.jp",
   "url": "https://railf.jp/event/2026/09/16/120000.html",
-  "related": [],
+  "related": [
+   {
+    "source": "railf.jp",
+    "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9vWlBQbnA4RDA0V0wwbEpiNWtaMThqTlZVZzUwckY5UG5SMXJ2QVRReExQN2RiQUIzM0RXUEcxNktZY0lWeXBEckw0VGxmeFcycTdoNW5VOGI?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -693,6 +708,10 @@
    {
     "source": "PR TIMES",
     "url": "https://prtimes.jp/main/html/rd/p/000000239.000124425.html"
+   },
+   {
+    "source": "フーズチャネル",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5KY2FuYlpIWnJjaWwyTkZicDAzWDBaV1RRVzBCbVlNczhFMmVCS2c0Rm1HR1BHS1Q3bW9vTnpzVkxKWElQbTE4c1BxeVNlU3RlWmRxc1JB?oc=5"
    }
   ]
  },
