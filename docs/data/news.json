@@ -676,6 +676,10 @@
    {
     "source": "PR TIMES",
     "url": "https://prtimes.jp/main/html/rd/p/000000224.000124425.html"
+   },
+   {
+    "source": "tv-tokyo.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE4zXzNRRTJYXzlIamhhek4xQUVsNDROWlM0TWxKYnItT0pTV1U1dHJTcEJSVDRnVVpadlFvQUhuQ0laMVNIS2ZJOHBRUEdtOElvWFEzLTAtMTFQNjhBSlFsMm9pQ0txTzZTQXBlWHd3?oc=5"
    }
   ]
  },
@@ -2877,6 +2881,16 @@
     "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE13RVZ0SGJFZEJVal9xYTZ5VUMwNkxxcGMxeXNLZ0hoQ19wendIbDBOVGhJVHdfZFdzdnI4OEM1ekJ5ZllLcTRaUXEwdUxsSE9DSHdpNkVvZ0hNQzJVV1AyM21WRkZsWmd2?oc=5"
    }
   ],
+  "dv": 3
+ },
+ {
+  "id": "n20260929-5118dfb6",
+  "date": "2014-11-09",
+  "cat": "media",
+  "title": "新・名古屋土産「ぴよりん」のクリスマスバージョンがかわいすぎる！",
+  "source": "ウォーカープラス",
+  "url": "https://www.walkerplus.com/article/52200/",
+  "related": [],
   "dv": 3
  }
 ]
