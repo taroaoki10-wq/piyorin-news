@@ -618,6 +618,10 @@
    {
     "source": "毎日キレイ",
     "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE81bTNRVDd0aTI3eGZjRzZ6ZXJ2QlFSZjJXbWRsU3RyamlhUkpCc0dGRHp1SFo1M1ViVjYtVE92SWQ2MDQ2bTMtY3YxcWkwN2FnRnF3d1RmRjJ5Zy15Y0pFcjJRZ1FBcFR5d2xnX3FJaXhZZWZmMUlJSFV3?oc=5"
+   },
+   {
+    "source": "フーズチャネル",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1aTFpPUzZFbUc5VV9UQXJpR1Y4VEZQS245RzdnajUxN2IwUkRaSlMzQWlDbGtIOEw0dWN0aklxdklQN0JUeERlNXRDTlBfV0J5YzZkNzhR?oc=5"
    }
   ]
  },
@@ -1754,6 +1758,15 @@
   "related": []
  },
  {
+  "id": "n20260323-e3048c69",
+  "date": "2026-03-23",
+  "cat": "press",
+  "title": "名古屋の新たな名所を目指せ！中川運河に７mの【巨大ぴよりんバルーン】出現！",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000171.000124425.html",
+  "related": []
+ },
+ {
   "id": "n20260926-3e9268bd",
   "date": "2026-03-23",
   "cat": "media",
@@ -1762,15 +1775,6 @@
   "url": "https://www.sanyonews.jp/article/1893232",
   "related": [],
   "dv": 3
- },
- {
-  "id": "n20260323-e3048c69",
-  "date": "2026-03-23",
-  "cat": "press",
-  "title": "名古屋の新たな名所を目指せ！中川運河に７mの【巨大ぴよりんバルーン】出現！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000171.000124425.html",
-  "related": []
  },
  {
   "id": "n20260319-4d68d3aa",
