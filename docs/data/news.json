@@ -1,11 +1,67 @@
 [
  {
+  "id": "official-p5585",
+  "date": "2026-09-30",
+  "cat": "official",
+  "title": "おでかけ情報 お知らせ 「ぴよりん」が岡山におでかけ！桃太郎に登場する“オニ”をモチーフにした「オニぴよりん」を限定販売！ 記事を見る",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5585/",
+  "related": []
+ },
+ {
+  "id": "n20260930-2936c470",
+  "date": "2026-09-30",
+  "cat": "press",
+  "title": "「ぴよりん」が岡山におでかけ！桃太郎に登場する“オニ”をモチーフにした「オニぴよりん」を限定販売！",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000246.000124425.html",
+  "related": [
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBEQWtUcmRFSzlLRGtRdnZaQXRlb0Y1Y2VBaWprd1ZvT2ZhNmYyRTNqTFhlZWhGTE1TUDNEVWVNS2NmdHlERzR4VnNkd3Y0aHlodEYyQ2V3MWE4U0U3dlNRYTF1M1YyUTA0ck5EbWM2SWlnZmg0TWNxSjU2Yw?oc=5"
+   },
+   {
+    "source": "Mantan Web",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNUEVFNWwwYTdjbVRLVGpDRmJld1UxbFprTVpocUxwaEtJZnBfeWd5VTBoSjJ6Sl9oN0NWWEVnVjBFd2FtQ2JmSHIzNU45dUVycURxVmdsdWlDOVF4WkZ0eFpBUjJ6STdIY2F0c09LalctZEZCQ2hxTzl3YjhWOTByU0JKTm5HU05J?oc=5"
+   },
+   {
+    "source": "インサイド",
+    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBPN3MyVk5yQ2RhdkFibzN1OXByNGRGbDNNazhuZWduSGJiWTdFRmZlenQ0a1lWSGFDVnB1dU1iUmIydnBMNEFQbHNsWUFiTjdHZ3J2V2M0U3lNMDRRRTJSNnNkV0lydDdBX3RlVzNreko0QQ?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1STEJHejB4d0d1bE85UV82NTF4X19Eb2E0TElLc1FjQmpENXNJU1U5RjVhREFTM2loNkw5QWlYbFlCbzNrZExoa2FOMFh0dTRQQmdjZWZsYjhIVU15anAtQWRB?oc=5"
+   }
+  ],
+  "dv": 3
+ },
+ {
+  "id": "n20260929-6fb78d24",
+  "date": "2026-09-29",
+  "cat": "media",
+  "title": "「ぴよりん」が岡山におでかけ！桃太郎に登場する“オニ”を ...",
+  "source": "MANTANWEB（まんたんウェブ）",
+  "url": "https://mantan-web.jp/prtimes/article/20260930prt00m200000306a.html",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "n20260928-5fa28bb4",
   "date": "2026-09-28",
   "cat": "media",
   "title": "ぴよりん なぜ崩れない 春日井・勝川の工房→名古屋12キロ 優しく輸送：ニュース",
   "source": "中日BIZナビ",
   "url": "https://biz.chunichi.co.jp/news/article/10/130971/",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20260928-d550d91d",
+  "date": "2026-09-28",
+  "cat": "media",
+  "title": "ぴよりんvillage 予約大作戦",
+  "source": "note",
+  "url": "https://note.com/sora_cheering/n/n5c2efc060248",
   "related": [],
   "dv": 3
  },
@@ -923,7 +979,12 @@
   "title": "ぴよりんが生まれるまち・愛知県春日井市の特別住民に認定！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000225.000124425.html",
-  "related": []
+  "related": [
+   {
+    "source": "朝日新聞",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBpZHp1SmhHWF9SOW56M1lhaFFNbmFCeXE3QmF4eE9CdXd1TlFSS2huRW5tQmF2NGN5cGFMVEtSd05XX2lfYzk5Q0ZRSlB4YmRkWVFTV0ZNZGp2U1U?oc=5"
+   }
+  ]
  },
  {
   "id": "n20260826-4b1d64fa",
@@ -1441,6 +1502,15 @@
   "title": "市バス・地下鉄が1日乗り放題の乗車券と市内周遊企画で名古屋を巡る「ぴよりんと市バスでぷち旅」を開催",
   "source": "KADOKAWAグループ ポータルサイト",
   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOeVFvbm11ekk0VV96QndzRFYxRjFmNUYzVzRjLVZfNnc5dWZnUUxjVk9KZUhoYWxtbFNISEhJbUxhSURZX2tJVkhybXc1SDZycmpSZlhNREJfMWtoTVdoTUJDaUZ2V1hpcndUUjVqQXRFS0toX1Rwa2RIaHlvSVF1dVE5dmE?oc=5",
+  "related": []
+ },
+ {
+  "id": "n20260707-ef89a8f4",
+  "date": "2026-07-07",
+  "cat": "media",
+  "title": "お土産でもらった「ぴよりん焼き」にまさかの異変 袋に浮かぶ亡霊に「生き霊」「軽くホラー」と反響（LIMO）",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPTTI5WUEyZzlUZzR0TXNELXpMQW5CQ1ExOXp4TWJiTjlDbkw5cWJoQmVNTEJDUVBkSWZ0WjVyQ3Bma0VNV0l6VHBPYmZ0RTJfR3R2T3hKY2xjbUE4QmJ3QkxuUWd6bDZjMzM3c0NWUzZDREY5Q2dkVDZaUk52T2JiUkhILTdwb0xl?oc=5",
   "related": []
  },
  {

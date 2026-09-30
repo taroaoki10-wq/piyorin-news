@@ -99,6 +99,16 @@
   "url": "https://piyorin.com/news/p5358/"
  },
  {
+  "id": "auto-officialp5585",
+  "title": "オニぴよりん限定販売",
+  "start": "2026-10-10",
+  "end": "2026-10-12",
+  "place": "岡山髙島屋",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5585/",
+  "auto": true
+ },
+ {
   "id": "e-wolfy-online",
   "title": "ウルフィ×ぴよりん ぬいぐるみ オンライン発売",
   "start": "2026-10-17",
