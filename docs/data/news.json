@@ -31,8 +31,32 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1STEJHejB4d0d1bE85UV82NTF4X19Eb2E0TElLc1FjQmpENXNJU1U5RjVhREFTM2loNkw5QWlYbFlCbzNrZExoa2FOMFh0dTRQQmdjZWZsYjhIVU15anAtQWRB?oc=5"
+   },
+   {
+    "source": "毎日キレイ",
+    "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFA3VmdJUEJsQ2todm1DUmFmWTFjN3B3LWxZc3dZWWczZ3c2R29MRnkwNUJ4S29yUU9EVkcxdzYzSDBKWTZPYzJ1SGkzV1NCbGxVZXpZa3dDMmhMZ0V2RUlPa2JLc3QzRHVRSjg0VkdlNXhoV2N4MTB6QkFn?oc=5"
    }
   ],
+  "dv": 3
+ },
+ {
+  "id": "n20260930-28c24f57",
+  "date": "2026-09-30",
+  "cat": "media",
+  "title": "【岡山市北区】名古屋名物「ぴよりん」が岡山に登場 「オニぴよりん」も10月10日から3日間限定販売",
+  "source": "号外NET 岡山市",
+  "url": "https://okayamanakaku-minamiku-higashiku.goguynet.jp/2026/09/30/piyorin-2/",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20260930-faedfeb8",
+  "date": "2026-09-30",
+  "cat": "media",
+  "title": "【岡山市北区】名古屋名物「ぴよりん」が岡山に登場 「オニぴよ ...",
+  "source": "号外NET 岡山市",
+  "url": "https://okayamanakaku-minamiku-higashiku.goguynet.jp/2026/09/30/piyorin-2/",
+  "related": [],
   "dv": 3
  },
  {
