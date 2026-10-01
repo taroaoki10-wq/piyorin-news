@@ -18,6 +18,10 @@
    {
     "source": "TRAICY（トライシー）",
     "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBYS29tZmlMbUtsaEJvMXVZbTRkUmRQR0hoTTNyYmZpb194N0NEM2JMb0M2R2gzVDcweGNxeTBicFZsOVJ4RERJS3M3S1hiWThWb3B1dDNtbw?oc=5"
+   },
+   {
+    "source": "アメーバニュース",
+    "url": "https://news.ameba.jp/entry/20261001-23442032/"
    }
   ],
   "dv": 3
@@ -29,7 +33,12 @@
   "title": "ぴよりんが桃太郎の鬼に変身！角と羽の「オニぴよりん」が岡山高島屋で3日間限定販売",
   "source": "いこーよニュース",
   "url": "https://report.iko-yo.net/articles/34134",
-  "related": [],
+  "related": [
+   {
+    "source": "report.iko-yo.net",
+    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE93OHFHdXh3T20yLU9lTkJhZmhSOTlqU0tMaTZ5WkUxRG1uaXlsZ2Y5VnBKT21DcHgyZ0NfVHh1UlNRUy13UW0zaUh6SzZZRzhMTFE?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -39,6 +48,16 @@
   "title": "ぴよりんが桃太郎の鬼に変身！角と羽の「オニぴよりん」が岡山 ...",
   "source": "いこーよニュース",
   "url": "https://report.iko-yo.net/articles/34134",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261001-6f6ca3e4",
+  "date": "2026-10-01",
+  "cat": "media",
+  "title": "【画像】JR東海、「推し旅」でぴよりんとコラボ 新幹線で限定特典やクイズ",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32459647/?img_id=56709898",
   "related": [],
   "dv": 3
  },
@@ -86,6 +105,10 @@
    {
     "source": "MANTANWEB",
     "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1jUXNkUWphcUdRNnc3V0I1c0RYTUdyZldtYklldTVFa2w3MENLbG5sTDdRbWZzYnV6Ny1udnl3S1I0aVNlaEpQUk4wMVc1enpBYzI1UnNwSmxVd1kyNU1HY3VaU25lQThScXJYd3NfZGtMdG5SbUE?oc=5"
+   },
+   {
+    "source": "prtimes.jp",
+    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1vckh6SGRmZ2pQRk5FZXFMdUgxS3ZqU2xQb3F3cDdrdXdBX2JXN2VKT3BMSi1rSzVsSGR2RkhEbFdZbXVvOGktd2RPT09GVTVVN1NsVFZYUDNyeGtaNXpCUFBuc2JqdzlYV3c?oc=5"
    }
   ],
   "dv": 3
@@ -97,7 +120,12 @@
   "title": "【岡山市北区】名古屋名物「ぴよりん」が岡山に登場 「オニぴよりん」も10月10日から3日間限定販売",
   "source": "号外NET 岡山市",
   "url": "https://okayamanakaku-minamiku-higashiku.goguynet.jp/2026/09/30/piyorin-2/",
-  "related": [],
+  "related": [
+   {
+    "source": "okayamanakaku-minamiku-higashiku.goguynet.jp",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1TNHlEbVBxUHVJTTVFTFpqUkg5WHU0eUc0dk9sWERYUXhVR1FXcUNjU2hUalM4RTRMZmJka3hYUkd2N1JyRjJfNlhsM0J5c0g4QzlLXzk1MkI1ZW1CLTkxS2EwX2RqSl9YVEdBNldTX1Y0eVc2SWJ1VVlxaUg4U3M?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -821,6 +849,10 @@
    {
     "source": "tv-tokyo.co.jp",
     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE4zXzNRRTJYXzlIamhhek4xQUVsNDROWlM0TWxKYnItT0pTV1U1dHJTcEJSVDRnVVpadlFvQUhuQ0laMVNIS2ZJOHBRUEdtOElvWFEzLTAtMTFQNjhBSlFsMm9pQ0txTzZTQXBlWHd3?oc=5"
+   },
+   {
+    "source": "prtimes.jp",
+    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBpaXVPZzlTVmdRS2p6MXpGRFdVeHppT1hyc0hzOFEtMEY4Y1lMSm5SRjQ5LU14Rm9TNXMzQ1d4dklNREdTbDVQLTFFaTBwYU5vWUpXbjNURGZMZ1hWU2VuUmlMQ1VDblM5ZUE?oc=5"
    }
   ]
  },
@@ -1774,6 +1806,10 @@
    {
     "source": "PR TIMES",
     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5Tbkg4TVlkSlBVM3hpMTQ1cVkxbzRyTHQwMXM5SllRWWszSmZ5c3h6N0I0My0tOXJwYTBRWXROcXQtQUNnZDdsVXJwSF9pUU9EZmwxSHdvSVVMaWFIVkpPczlsbXB4WlQtQVE?oc=5"
+   },
+   {
+    "source": "CLASSY.[クラッシィ]",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5IcUpIWlQyejY5emxhLUJGaGV2OFBhTGFFT3FMSkpnaTdDMkRJakVQQXhkZGFPTm81azNiM1pQaERPanhxSmEwRXJsdG10MUxmVkZtOHg2Zw?oc=5"
    }
   ]
  },
