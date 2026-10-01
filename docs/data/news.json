@@ -1,5 +1,44 @@
 [
  {
+  "id": "n20261001-4c048dd2",
+  "date": "2026-10-01",
+  "cat": "media",
+  "title": "JR東海、「推し旅」でぴよりんとコラボ 新幹線で限定特典やクイズ",
+  "source": "千葉テレビ放送株式会社",
+  "url": "https://www.chiba-tv.com/plus/detail/2026102062704",
+  "related": [
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE01bC1GOFZGVG9UTUo1dTRGVktYZ1g2SDA5c3lXTzUwTVhaT05acW9zRjBMY0htN1B3UGstY3V4OFl2bnZ3T3hEeU51eTdfT2RGT1FodENwV29TdDFGNnc?oc=5"
+   },
+   {
+    "source": "TRAICY（トライシー） on MSN",
+    "url": "https://www.msn.com/ja-jp/news/other/jr%E6%9D%B1%E6%B5%B7-%E6%8E%A8%E3%81%97%E6%97%85-%E3%81%A7%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%81%A8%E3%82%B3%E3%83%A9%E3%83%9C-%E6%96%B0%E5%B9%B9%E7%B7%9A%E3%81%A7%E9%99%90%E5%AE%9A%E7%89%B9%E5%85%B8%E3%82%84%E3%82%AF%E3%82%A4%E3%82%BA/ar-AA2djuY5"
+   }
+  ],
+  "dv": 3
+ },
+ {
+  "id": "n20261001-e8e26e48",
+  "date": "2026-10-01",
+  "cat": "media",
+  "title": "ぴよりんが桃太郎の鬼に変身！角と羽の「オニぴよりん」が岡山高島屋で3日間限定販売",
+  "source": "いこーよニュース",
+  "url": "https://report.iko-yo.net/articles/34134",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261001-14a16abc",
+  "date": "2026-10-01",
+  "cat": "media",
+  "title": "ぴよりんが桃太郎の鬼に変身！角と羽の「オニぴよりん」が岡山 ...",
+  "source": "いこーよニュース",
+  "url": "https://report.iko-yo.net/articles/34134",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "official-p5585",
   "date": "2026-09-30",
   "cat": "official",
@@ -39,6 +78,10 @@
    {
     "source": "フーズチャネル",
     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFAxNWFJX2FHYXRkRGVBbWRfU0QxeExCNXM2OUgweVF2b0V1bDd2OEpCMHkxRjBVd2Rra1RmbmNMRFVMNzlMaExmcU1IdGRBOFBONmk1cmpR?oc=5"
+   },
+   {
+    "source": "MANTANWEB",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1jUXNkUWphcUdRNnc3V0I1c0RYTUdyZldtYklldTVFa2w3MENLbG5sTDdRbWZzYnV6Ny1udnl3S1I0aVNlaEpQUk4wMVc1enpBYzI1UnNwSmxVd1kyNU1HY3VaU25lQThScXJYd3NfZGtMdG5SbUE?oc=5"
    }
   ],
   "dv": 3
@@ -100,7 +143,12 @@
   "title": "形を崩さず持ち帰る流行の「ぴよりんチャレンジ」、本家はどうしてる？ 春日井→名古屋までを追った",
   "source": "中日新聞Web",
   "url": "https://www.chunichi.co.jp/article/1316928",
-  "related": [],
+  "related": [
+   {
+    "source": "chunichi.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1DNnN1bi1za1ZUMlV4cVR6YWxmXzJOclFkY2FPSVdaZHNGQlI2SjZ5cVpJcTNidlRMSkFxampWY1FlMjU2U0pEY3pocDdwOVA4bEZGZg?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
