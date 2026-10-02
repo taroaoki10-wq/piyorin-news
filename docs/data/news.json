@@ -1,5 +1,15 @@
 [
  {
+  "id": "n20261003-005cf3be",
+  "date": "2026-10-03",
+  "cat": "media",
+  "title": "ぴよりんが生まれる町春日井〜ぴよりんに特別住民票交付^_^",
+  "source": "公明党",
+  "url": "https://www.komei.or.jp/km/kobayashi-nobuko-kasugai/2026/10/03/012051/",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "n20261002-07538369",
   "date": "2026-10-02",
   "cat": "media",
@@ -189,6 +199,22 @@
    {
     "source": "札幌経済新聞",
     "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFA4am4wcHBneDZqSlhtcHBLb29qd1YzcmtyOVptNlk3SkN5SUxObEJjeWc5aUVZb0JXMGdPX2JwYy1HTy1GVG9FcmI5SjRkYXo3aXI2Uw?oc=5"
+   },
+   {
+    "source": "相模原町田経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE94N2dXcGRqdHd4SVItVGE1X0JNMXNKWndFQlJtWlhJb0k4VTllY1ZPNW1ScWZjcXl1MVdVS2kyUnY5bmFjVU9XSklpeml1QjlVVEVDNQ?oc=5"
+   },
+   {
+    "source": "TOKAIネットワーククラブ（TNC）",
+    "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE0zeF9DaVdrbmNTRlZCVVBvSmVmZUpyeDhYYk4xRy1wMC1kRUkyTXk1cmlmU0hOQVl5NzJqN2pqNzM4YzRIUGZvVnFoaEptcm1YZ19VSG03dFU?oc=5"
+   },
+   {
+    "source": "文京経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5NaGVGUXp2cnR0RDRIbGpVT25MR3ZFQ3E4TXpnT3hEWkRDSTJFUmFMVmlKRFdvbmd0S0owVFhYUk1pcWVHUVhKYmJ1UnBGTk02dUNN?oc=5"
+   },
+   {
+    "source": "浦和経済新聞",
+    "url": "https://urawa.keizai.biz/gpnews/1769327/"
    }
   ],
   "dv": 3
@@ -268,6 +294,10 @@
    {
     "source": "Yahoo!ニュース",
     "url": "https://news.yahoo.co.jp/articles/c79a2440e40a385019623604541960b16c7c3754"
+   },
+   {
+    "source": "dメニューニュース",
+    "url": "https://topics.smt.docomo.ne.jp/article/tvaichi/region/tvaichi-20261002-1857-10321"
    }
   ],
   "dv": 3
@@ -355,7 +385,12 @@
   "title": "【画像】JR東海、「推し旅」でぴよりんとコラボ 新幹線で限定特典やクイズ",
   "source": "ライブドアニュース",
   "url": "https://news.livedoor.com/article/image_detail/32459647/?img_id=56709898",
-  "related": [],
+  "related": [
+   {
+    "source": "news.livedoor.com",
+    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5aWjlvei1jN3l2bXJvQXRFVU56SVRWYTRERFJ4dm91UUtQWlpTajFkT0NhUmp5THd2dm1IMTBTUDFQUERwelp3a2JTNG02ajVWQXBQNHpJM3JNTjV1dzJRc2FPQUV2N1kxeXh4X091UzdPX0FkMUQ1aG1sSTc?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
