@@ -37,6 +37,10 @@
    {
     "source": "AGARA 紀伊民報",
     "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5TeV9halJDcUxJYk1uY3kzT0tza3JpcmVXS3g5bW9YVTR6cEVNbUdhcHZLTk5oTklUM2JhdkFVVFNROG1UcXpfcVpKNmdXWnIwSFZGQV9ZUC1QdF9aRHFmQ0lSUWk5UVl4MTVQaWtVM1hfcHRWVUs3U0Y1LTJyaDg?oc=5"
+   },
+   {
+    "source": "北海道新聞デジタル",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQLTNiWENMekdHSTJCTU1ERFlYZGtiUkp0VUFNNjl4aUNqbVJVOWRiNl9WbzJTWnpyeHJBalRYblN6ajcyU1N6dGdSbUs5aDhfaUY1SUxDQXJWRnNCdHg4ZWlxd1V5YkE0TXhuUXBrcDE5bU5rLUNlckR4dTR5UnJuYndRRFJiNnNI?oc=5"
    }
   ],
   "dv": 3
@@ -173,6 +177,18 @@
    {
     "source": "岡山経済新聞",
     "url": "https://okayama.keizai.biz/gpnews/1769327/"
+   },
+   {
+    "source": "富士山経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5GWGprVk1nQUVEYWxhaFdDc3dTa1RLMGIyVFN0ZXNZZ0hKblVMSHNCXzFEXzFzOVdWdDAtckJrQ3pHd0hITjFQcEkydzlBcWFlUnBj?oc=5"
+   },
+   {
+    "source": "函館経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBUZFMyVl9EQktYSXZabm0ybWVmWlVHTldhbVl2TUszS2ZDelE4Qmszdng0WjhCUnlTSFBrTk9RbXI4THVnUEJmMWE3MGpfYXVYczdsckZ3?oc=5"
+   },
+   {
+    "source": "札幌経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFA4am4wcHBneDZqSlhtcHBLb29qd1YzcmtyOVptNlk3SkN5SUxObEJjeWc5aUVZb0JXMGdPX2JwYy1HTy1GVG9FcmI5SjRkYXo3aXI2Uw?oc=5"
    }
   ],
   "dv": 3
@@ -204,6 +220,10 @@
    {
     "source": "Infoseekニュース",
     "url": "https://news.infoseek.co.jp/article/jiji_2026100200872/"
+   },
+   {
+    "source": "iJAMPポータル",
+    "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE13SkVFMG1XZDZKTnhSWXN6bmdSMVlyeWxKRTRHRjhsU19URzZfODFhNG1LUWZ1QTBIVXVQd0VpZS1ZcGFrSGtsb291cVhoZDlqUUtldEFGbDFhaExiY1FrTkxMTEN2MnJmU1BORURtZw?oc=5"
    }
   ],
   "dv": 3
@@ -250,6 +270,26 @@
     "url": "https://news.yahoo.co.jp/articles/c79a2440e40a385019623604541960b16c7c3754"
    }
   ],
+  "dv": 3
+ },
+ {
+  "id": "n20261002-3e23f50c",
+  "date": "2026-10-02",
+  "cat": "media",
+  "title": "写真：祝・TOICA導入20周年＆ぴよりん誕生15周年！「ぴよりんTOICA」デザインのグッズを新発売",
+  "source": "沖縄タイムス社",
+  "url": "https://www.okinawatimes.co.jp/articles/gallery/1936559",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261002-ac8aa747",
+  "date": "2026-10-02",
+  "cat": "media",
+  "title": "名古屋駅のおすすめモーニング30選♡おしゃれカフェ・小倉トースト・ぴよりん人気店まで",
+  "source": "dressy.pla-cole.wedding",
+  "url": "https://dressy.pla-cole.wedding/nagoya-morning-cafe/",
+  "related": [],
   "dv": 3
  },
  {
@@ -366,6 +406,10 @@
    {
     "source": "prtimes.jp",
     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1vckh6SGRmZ2pQRk5FZXFMdUgxS3ZqU2xQb3F3cDdrdXdBX2JXN2VKT3BMSi1rSzVsSGR2RkhEbFdZbXVvOGktd2RPT09GVTVVN1NsVFZYUDNyeGtaNXpCUFBuc2JqdzlYV3c?oc=5"
+   },
+   {
+    "source": "Infoseek",
+    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9hb0gyRkRXM3ZZbGRPM3NJNVZaT0xxVzVaS2lzcUlOSTFZYW5mWS1YLUpJZGFrOE92NGl1SV9HUWZ4QlZyZ3lVU2RQdC1DWUFqVzlUbThRZk0zT0ZsbjdPbzlXQUlYa3NUUkJxOHpoUm5OUQ?oc=5"
    }
   ],
   "dv": 3
