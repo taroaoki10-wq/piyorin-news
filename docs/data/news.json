@@ -10,6 +10,49 @@
   "dv": 3
  },
  {
+  "id": "n20261003-3824fdf1",
+  "date": "2026-10-03",
+  "cat": "media",
+  "title": "「ぴよりんは春日井市民」 春日井市、特別住民票第一号を交付",
+  "source": "中日新聞Web",
+  "url": "https://www.chunichi.co.jp/article/1320051?rct=aichi",
+  "related": [
+   {
+    "source": "47NEWS",
+    "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE90bzlYdzh6MzlCa0g3LWRXNjV3bVJpWGVpaXZEaDBtcFBnaUo4ZWlJVTR6ZzlPOEEzSmlNOEtTNzRmMkNnSV9fenpHdw?oc=5"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPOUpVY0wtOGFqN2ZET2o3Zktpdnk1UkZXSmhIMVRCcjRTVlRaZVBFQWhoT0Q0d0loYmxhSkZ6S3EtSkdIbUYtUTdMQU9KZzByS1UyVW55SEJOZTBZeS1nRFZiN2JPUElIZkdJRkVnSWY4SGdxalpaMGY2aEV1T012ZG1laUZYbm1mMUcwZdIBf0FVX3lxTFBKbXdnWmFHUV8yQWx2b2JpRHZvN2YwQ2pnOG1vUDFJanV4QzFRQ0JGMnoybjNHTDc5enB0cDV1YjNWa1FKNjlNem05TEN6YUFQb1VMLUpoZndRdmdPRm1pMkZ5RU1yWjZ6TFNZR1IwdkdQeFpOWlpaZkxXcVJhMFk?oc=5"
+   },
+   {
+    "source": "dメニューニュース",
+    "url": "https://topics.smt.docomo.ne.jp/article/chuplus/region/chuplus-1320051"
+   }
+  ],
+  "dv": 3
+ },
+ {
+  "id": "n20261003-86fbc6d3",
+  "date": "2026-10-03",
+  "cat": "media",
+  "title": "【岡山市北区】ぴよりん再び来岡！「オニぴよりん」を限定販売されるみたい。岡山タカシマヤに10月10日（土）～12日（月・祝）",
+  "source": "岡山おにさんぽ",
+  "url": "https://onisanpo.com/event/108978/",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261003-0c46408e",
+  "date": "2026-10-03",
+  "cat": "media",
+  "title": "【岡山市北区】ぴよりん再び来岡！「オニぴよりん」を限定販売さ ...",
+  "source": "onisanpo",
+  "url": "https://onisanpo.com/event/108978/",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "n20261002-07538369",
   "date": "2026-10-02",
   "cat": "media",
@@ -227,6 +270,18 @@
    {
     "source": "Infoseekニュース",
     "url": "https://news.infoseek.co.jp/article/jiji_202610020093416800/"
+   },
+   {
+    "source": "abeno.keizai.biz",
+    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5YaG5CaV9PWVlIaVQzbC1pcU41ZXRsM2s1dWdUUXh3U0hoZUw4eG1nUUlvMGhORi03b1NyM0tjaktCQ0t0MDhMbHJfSUM4dS1YZGc?oc=5"
+   },
+   {
+    "source": "川越経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5Ua0FYbklwemI3Slo0R1FDeklhY243UXQzbGtXcnM1N2ZWV09rWWV6RzlLSTQ3WHZ5b2hueUlkN3RNUVd6S3R5X0x0UW85b1pJUFJiYQ?oc=5"
+   },
+   {
+    "source": "梅田経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE8wQzhCU1RKdmtuamJNbjVvanZTVEF4NV9hdHVOY1A0bWplcVRNaWZkZnJmbnhoSkgzNjlFaE5HUS14MUVTY2lnTzRuZkVfN2NGZ1E?oc=5"
    }
   ],
   "dv": 3
@@ -281,6 +336,10 @@
    {
     "source": "朝日新聞デジタル",
     "url": "https://www.asahi.com/and/pressrelease/16935740"
+   },
+   {
+    "source": "新潟日報デジタルプラス",
+    "url": "https://www.niigata-nippo.co.jp/articles/-/917414"
    }
   ],
   "dv": 3
