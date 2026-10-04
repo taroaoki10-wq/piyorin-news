@@ -1,5 +1,15 @@
 [
  {
+  "id": "n20261005-4d59dd4e",
+  "date": "2026-10-05",
+  "cat": "media",
+  "title": "春日井市が特別住民票 「ぴよりん」製造をアピール",
+  "source": "中部経済新聞",
+  "url": "https://www.chukei-news.co.jp/news/2026/10/05/OK0002610050401_03/",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "n20261004-d2727fdf",
   "date": "2026-10-04",
   "cat": "media",
@@ -2190,7 +2200,12 @@
   "title": "「ぴよりん」純金の置物が販売へ 約70センチの特大金箔Verなども…価格発表",
   "source": "sanyonews.jp",
   "url": "https://www.sanyonews.jp/article/1941865",
-  "related": [],
+  "related": [
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5ucHBSc0g2STF4dk5KOHZ1RU9VZ2hGcE94bXlIY0t1NDVHZEN6bW1zSEQtMDdMdm05OVVPUWNqV2RPdU90cENBOEE4TUphdDdUNVE?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
