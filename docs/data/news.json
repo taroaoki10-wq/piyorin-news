@@ -1,5 +1,15 @@
 [
  {
+  "id": "n20261004-d2727fdf",
+  "date": "2026-10-04",
+  "cat": "media",
+  "title": "TOICA導入20周年とぴよりん誕生15周年を記念し「ぴよりんTOICAデザイン」をモチーフにしたグッズが10月5日から新発売",
+  "source": "千葉テレビ放送株式会社",
+  "url": "https://www.chiba-tv.com/plus/detail/2026102073174",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "n20261003-005cf3be",
   "date": "2026-10-03",
   "cat": "media",
@@ -108,6 +118,10 @@
    {
     "source": "北海道新聞デジタル",
     "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQLTNiWENMekdHSTJCTU1ERFlYZGtiUkp0VUFNNjl4aUNqbVJVOWRiNl9WbzJTWnpyeHJBalRYblN6ajcyU1N6dGdSbUs5aDhfaUY1SUxDQXJWRnNCdHg4ZWlxd1V5YkE0TXhuUXBrcDE5bU5rLUNlckR4dTR5UnJuYndRRFJiNnNI?oc=5"
+   },
+   {
+    "source": "Infoseek",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9pMkk3WHY1WF9FU0c4QmlRbE5yMGxOb2VqblhvWGJGZUU0VEVTb0prWkZMZ1RjZnJKSS0yV19tTjdoZC1JbmppMFVfUXZPR2dFR2lhd0NIUmlYVkswVFlLUmY3SXFTR2N0TXZxMldB?oc=5"
    }
   ],
   "dv": 3
@@ -958,7 +972,12 @@
   "title": "豊橋産うずら卵、累計30万個使用。「ぴよりんあん巻き」が ...",
   "source": "産経ニュース",
   "url": "https://www.sankei.com/pressrelease/prtimes/GJHAXWCIBJNDJOWE7UHHHZJXGA/",
-  "related": [],
+  "related": [
+   {
+    "source": "ORICON NEWS",
+    "url": "https://www.oricon.co.jp/pressrelease/2994357/"
+   }
+  ],
   "dv": 3
  },
  {
