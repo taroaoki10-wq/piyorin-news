@@ -320,6 +320,10 @@
    {
     "source": "西多摩経済新聞",
     "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9wTTNScFJycDZJTWhkYkVlZy1BZ01YWGlYdVF1QjB5dy1HMC1yUG9uLTkwbGdFcF9SVFdFcWRvcjJmSVpDVFRoeHdVWG5qNkVOOGNvR2tSdw?oc=5"
+   },
+   {
+    "source": "shinagawa.keizai.biz",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE4wTXQ0NWlQWGdtV0hvT0hsMjhnd0hYaTVMRV8yWUR6V2h5STdpMzZTSXBZWVo2UlE5bXlYYVRoamtUNzQtNUlFRkVVa1Ftbm9teFdDQ0g2QQ?oc=5"
    }
   ],
   "dv": 3
@@ -359,6 +363,10 @@
    {
     "source": "時事通信ニュース",
     "url": "https://sp.m.jiji.com/article/show/3881018"
+   },
+   {
+    "source": "jiji.com",
+    "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNVXE5SVVNZ08tb1dYVkRSVDBEZkxyTU5QYXNJWkFKNjUzajRISXFKX1BiWmFfNGlCeHVFZ0FhQUdVQXhaR3ZGU0pGTEx1WE03SkVpQVRsODhoY1lrYjRNQ2ltSExNc0NPdXJKc0stQ1F3ZFdXUGxZQXlBVW1vazhsYg?oc=5"
    }
   ],
   "dv": 3
@@ -1811,7 +1819,12 @@
   "title": "ぴよりん史上初！『ブルーベリーぴよりん』が8月8日「ブルーベリーの日」より期間限定で登場！",
   "source": "PR TIMES",
   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5uTnVyU2V5LVNUU3ZLaE04N0luS1BDVzl2TklCM2hYbkpSNkY4Q2dLWjF5dXhmZnJIUk1vdmc5RFJHU2dqeUM0Q0JCdzhPN3NpVHZVYV9zclN0UkNsREFSRWkyY3JfcTc2a1E?oc=5",
-  "related": []
+  "related": [
+   {
+    "source": "朝日新聞",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5CMHJKZEV2SmpWY1didlMtdVIxT1Z0LUp6bDhfRnBsOXpMVnNaejRhdFdlb0x2WUN1by1xbkx6SmpScE51N093bE9JMWQ0QjJlNUVCR2M5ZnRhSmM?oc=5"
+   }
+  ]
  },
  {
   "id": "n20260807-f9cd7027",
