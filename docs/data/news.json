@@ -356,6 +356,14 @@
    {
     "source": "新橋経済新聞",
     "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1pUExISEk5VDhGcUx0Wlc4VjVPaWdBQXA0RzNHUF9PRDljd3c0QWZWNGpHV3hhNU9HNlZ6Q205eFVmdl9NRm1QdTFpTDZSVUdxZ3MtM2NMMA?oc=5"
+   },
+   {
+    "source": "習志野経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9MZTBlRzlCenQyYUgteWZibGhRNFk2cHdCdzBkVmZfX0hoQUFYOGFpUS1sVE5wdGstcGJaNDJvU2R3ek5zSmR1WVBwbGRZQVhVaXhRcy02aw?oc=5"
+   },
+   {
+    "source": "沼津経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE81RXRDMWhwQ0RiOE1LM1JZZnhrX0EtR1NZS0p2aUlPQTlUNTFycnktN0lRY2hVTDAtYXExbW5zY2ltdnZmRVRkdGdkU1JYVE0?oc=5"
    }
   ],
   "dv": 3
@@ -399,6 +407,10 @@
    {
     "source": "jiji.com",
     "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNVXE5SVVNZ08tb1dYVkRSVDBEZkxyTU5QYXNJWkFKNjUzajRISXFKX1BiWmFfNGlCeHVFZ0FhQUdVQXhaR3ZGU0pGTEx1WE03SkVpQVRsODhoY1lrYjRNQ2ltSExNc0NPdXJKc0stQ1F3ZFdXUGxZQXlBVW1vazhsYg?oc=5"
+   },
+   {
+    "source": "時事ドットコム on MSN",
+    "url": "https://www.msn.com/ja-jp/food-and-drink/recipes/%E4%BA%BA%E6%B0%97%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%AB%E7%89%B9%E5%88%A5%E4%BD%8F%E6%B0%91%E7%A5%A8-%E6%84%9B%E7%9F%A5%E7%9C%8C%E6%98%A5%E6%97%A5%E4%BA%95%E5%B8%82-%E5%9C%B0%E5%9F%9F/ar-AA2doDcA"
    }
   ],
   "dv": 3
@@ -462,7 +474,12 @@
   "title": "写真：祝・TOICA導入20周年＆ぴよりん誕生15周年！「ぴよりんTOICA」デザインのグッズを新発売",
   "source": "沖縄タイムス社",
   "url": "https://www.okinawatimes.co.jp/articles/gallery/1936559",
-  "related": [],
+  "related": [
+   {
+    "source": "okinawatimes.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9kYWlncTZodUNKV05CdmtiWHFTRklzUEFHSGlqQVlqVjJ0WjJJdEMwMHgzekdxQ3U5XzZuRDFhOExxRlZESVdMcWtxNkUtZnlTcl9sclc2RngyN3BZdUwzSU5CYTEwdw?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
