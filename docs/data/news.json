@@ -16,7 +16,12 @@
   "title": "TOICA導入20周年とぴよりん誕生15周年を記念し「ぴよりんTOICAデザイン」をモチーフにしたグッズが10月5日から新発売",
   "source": "千葉テレビ放送株式会社",
   "url": "https://www.chiba-tv.com/plus/detail/2026102073174",
-  "related": [],
+  "related": [
+   {
+    "source": "chiba-tv.com",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5YSklSR0F6N2d1eGJyYy1tcmg3R253dE5LUC1yeVg1dVJlWjMwZmphQV9TZzZzT2lnTUlhQ1pZejBBa0cxR3JfNV9jQlZxb0tseFRfcXFyb3U3Q0dLTS1J?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -890,7 +895,12 @@
   "title": "ぴよりん15周年をウルフィがお祝い♪「ウルフィ×ぴよりん オメ ...",
   "source": "ORICON NEWS",
   "url": "https://www.oricon.co.jp/pressrelease/2996859/",
-  "related": [],
+  "related": [
+   {
+    "source": "MANTANWEB（まんたんウェブ）",
+    "url": "https://mantan-web.jp/prtimes/article/20260918prt00m200000093a.html"
+   }
+  ],
   "dv": 3
  },
  {
@@ -1700,6 +1710,10 @@
    {
     "source": "キャラクター情報サイト",
     "url": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE84N2lTZ0staXB3TFM0LWIyaHhmZFBRMEhYUExDZUE3RkRxWUJucjUyNlZXS1BEZjAyaHNyc2FmTTQ4Zw?oc=5"
+   },
+   {
+    "source": "朝日新聞",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBlcnJyOUNlTjdhNmo5NlRmVDg0bmRYaE1kT0NVSVNpalVBcFZZc2pTTFNueHJMQ3NFdks2MzRGckhwdmZsRV9GTkRTNzd0UEVQOEJiS2RGbDdzSUE?oc=5"
    }
   ]
  },
@@ -3096,6 +3110,15 @@
   "title": "【ぴよりん】生誕の地・JR名古屋駅構内「ぴよりんSTAION カフェジャンシアーヌ 」が8月31日（日）閉店、15年の歴史に幕",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000096.000124425.html",
+  "related": []
+ },
+ {
+  "id": "n20250703-95791af6",
+  "date": "2025-07-03",
+  "cat": "media",
+  "title": "JR名古屋駅「ぴよりん」イートイン店舗が8月末閉店。今後は“お ...",
+  "source": "トラベル Watch",
+  "url": "https://travel.watch.impress.co.jp/docs/news/2028047.html",
   "related": []
  },
  {
