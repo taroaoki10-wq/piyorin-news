@@ -132,6 +132,10 @@
    {
     "source": "Infoseek",
     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9pMkk3WHY1WF9FU0c4QmlRbE5yMGxOb2VqblhvWGJGZUU0VEVTb0prWkZMZ1RjZnJKSS0yV19tTjdoZC1JbmppMFVfUXZPR2dFR2lhd0NIUmlYVkswVFlLUmY3SXFTR2N0TXZxMldB?oc=5"
+   },
+   {
+    "source": "毎日新聞",
+    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9PeC0zR2IzTk5hQ3Q4SmkzNlI0X2NfS3dzU3lfQ0tvTlpGeE5rTXNlZDMwdVBtX3lvY1lJM21QWDhFRDBrUnVLS2Y2clF6RnVJZ0VFS0w3YzdkeHRtNzRJNlJPRnhYQWF3?oc=5"
    }
   ],
   "dv": 3
@@ -162,7 +166,12 @@
   "title": "画像・写真：人気スイーツ「ぴよりん」に特別住民票：時事ドットコム",
   "source": "時事ドットコム",
   "url": "https://www.jiji.com/jc/p?id=20261002174051-0093416800",
-  "related": [],
+  "related": [
+   {
+    "source": "jiji.com",
+    "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1ySmdPQ0tObm12d2pzMDJiNm10NUlVMlcxUHBpRmRQb3pmbXdTNm9QUzU4Z1luc29mc0h2bU9CX3dwUkZ3RmlpcEFHX3BLU3duTERzY1h6WVktY0ZfeW8tQS13dUY?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -364,6 +373,10 @@
    {
     "source": "沼津経済新聞",
     "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE81RXRDMWhwQ0RiOE1LM1JZZnhrX0EtR1NZS0p2aUlPQTlUNTFycnktN0lRY2hVTDAtYXExbW5zY2ltdnZmRVRkdGdkU1JYVE0?oc=5"
+   },
+   {
+    "source": "港北経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE91ZnR1aklFX3lLUjdUQ2pQLXFKWnJRdGNMdHZNNUxETlRsTjZYYUU0U05Kbk9MMm9yanczQnpHUzNkeXFxTFlfQXYxNkppQnV6eHVJ?oc=5"
    }
   ],
   "dv": 3
