@@ -131,6 +131,10 @@
    {
     "source": "news.yahoo.co.jp",
     "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFB1WjVOQ194MzVnWXJuc1BNVVk3YWFYVk9aanFoc1RWS0hEQWtITXp2V3ZKeEg2UkRzZjVsNTNJTmhzYkJndnNxRVhuTVpyNXdmOTJsTFZLOXd3b1Z6SUdPdVFxcndaNlZ1aUJQMldPLXVZd1loTmhESEdmWlBiTTQ?oc=5"
+   },
+   {
+    "source": "愛知のニュース",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBoLXhtdU90WXlmVmdHcUlkQ1drSl95LUNFMGlFeG5QNWxxc1JYdkZlcUJCRDA4TjdYaS00TlNyd0hvdmdXNjhURGppd05Qc3NMdWRMejBfdW9NdDA?oc=5"
    }
   ],
   "dv": 3
@@ -568,7 +572,12 @@
   "title": "名古屋駅のおすすめモーニング30選♡おしゃれカフェ・小倉トースト・ぴよりん人気店まで",
   "source": "dressy.pla-cole.wedding",
   "url": "https://dressy.pla-cole.wedding/nagoya-morning-cafe/",
-  "related": [],
+  "related": [
+   {
+    "source": "Dressy(ドレシー)",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1BbVdZU1A3ZmtrdEI2aXpMZTVfSXBnOXNuYkN3QUtfdms0QXBQN2t6a3FIdzJFYWoxZjljVS1vMnI4TlcxbEpTOE1IcHNUTks2dWhDaEFDYnBpSklsdkNCX1VB?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -779,7 +788,12 @@
   "title": "「ぴよりんステーションフェス」開催",
   "source": "tonichi.net",
   "url": "https://www.tonichi.net/news/index.php?id=125352",
-  "related": [],
+  "related": [
+   {
+    "source": "東日新聞",
+    "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9TR192cTFzTk5RVmp0cjZJMHZrcjV0SGpwSkRjeE1tU1k2bE1DQ2NhU2szX0tZdVRZOFR3ckdPNWd0M2FReG4xeHZoZ3dyRGVkaXRIR3B1NENfd1hl?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -809,7 +823,12 @@
   "title": "豊橋駅の「カルミア」 ホテルアソシア豊橋 来月「ぴよりん」フェア ブラックサンダーとコラボ",
   "source": "中部経済新聞",
   "url": "https://www.chukei-news.co.jp/news/2026/09/23/OK0002609230401_02/",
-  "related": [],
+  "related": [
+   {
+    "source": "chukei-news.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9HX042NmpURldISTRwVTZuWVdveXVPM0w5YXNmMHphdVJJQ1JPQm9UQUFNVzFxVVNGYlBwanZLMXVGeENZbG11cVNmSjFiNHZLYThzdzBRNnBPTExKSExrV2dvb1dqVmlya3M3cDhUZ0xTcHc?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
