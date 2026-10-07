@@ -23,6 +23,10 @@
    {
     "source": "Excite エキサイト",
     "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBaeDlBbjNuYjdUUkJmdTVGdWNaN25ta1BISjV2UWJmWVdpTFEzTnJlUi05Yy1LQ3lVc21abXVfRTl2anYwYTF3LVZkMzdKN1BQMEZGRmdjQW9xbGt2cHk2ckgxWmxsNUFpcDlVbVhHelEtaDV1R0E?oc=5"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1SeTA5U2F6TU5RQzhoRkUtaVptR1JzUi1wY0JYZG1MUV9KOUF0blZwVVpMczlfSmFUd3A0SlNZcGROekpWZnVTaUFXTUxMUVRxVmQ5T3J5ZnZWeHlHY09wY2hROVFBcUtRYVVYMzhrTG5SWnpyX0dadDItVQ?oc=5"
    }
   ],
   "dv": 3
@@ -73,7 +77,12 @@
   "title": "名古屋の人気スイーツ・ぴよりんに衝撃の異変⇨カラメルをかけ ...",
   "source": "ハフポスト on MSN",
   "url": "https://www.msn.com/ja-jp/entertainment/%E5%85%A8%E8%88%AC/%E5%90%8D%E5%8F%A4%E5%B1%8B%E3%81%AE%E4%BA%BA%E6%B0%97%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%81%AB%E8%A1%9D%E6%92%83%E3%81%AE%E7%95%B0%E5%A4%89-%E3%82%AB%E3%83%A9%E3%83%A1%E3%83%AB%E3%82%92%E3%81%8B%E3%81%91%E3%81%9F%E3%82%89-%E3%82%BF%E3%82%B9-%E3%82%B1%E3%83%86-%E3%83%9B%E3%83%A9%E3%83%BC%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%A6%E3%82%8B-%E3%81%A8%E5%8F%8D%E9%9F%BF/ar-AA2dIIek",
-  "related": [],
+  "related": [
+   {
+    "source": "ハフポスト",
+    "url": "https://www.huffingtonpost.jp/entry/story_jp_6ac5aec7e4b028b057cbc60a"
+   }
+  ],
   "dv": 3
  },
  {
@@ -83,6 +92,26 @@
   "title": "【画像】名古屋の人気スイーツ・ぴよりんに衝撃の異変⇨カラメル ...",
   "source": "ハフポスト",
   "url": "https://www.huffingtonpost.jp/entry/story_jp_6ac5b29ce4b028b057cbc78b",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261007-f4c3f5c7",
+  "date": "2026-10-07",
+  "cat": "media",
+  "title": "【画像】名古屋の人気スイーツ・ぴよりんに衝撃の異変⇨カラメルをかけたら…「タス…ケテ…」「ホラーになってる」と反響",
+  "source": "ハフポスト",
+  "url": "https://www.huffingtonpost.jp/entry/story_jp_6ac5b29ce4b028b057cbc78b?utm_hp_ref=yahoo",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261007-6df98a5e",
+  "date": "2026-10-07",
+  "cat": "media",
+  "title": "「ドクターイエロー」×「ぴよりん」がコラボ♪コラボグッズがぴよりんMARKETに登場♪",
+  "source": "千葉テレビ放送株式会社",
+  "url": "https://www.chiba-tv.com/plus/detail/2026102085859",
   "related": [],
   "dv": 3
  },
@@ -534,6 +563,10 @@
    {
     "source": "調布経済新聞",
     "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBrQ1UxbWhjcmpkSFFqeVJPbmhCOHh1OUNCakt2Ymw0amlkODd3bDVkaFliaUlrT3djTWZXeHlvM3hHajFLTEQ3TkNLZUZIdmxXNVE?oc=5"
+   },
+   {
+    "source": "すみだ経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5XdXQ3SDVCeGNDZ2lVOS1iRXkxSU1kcXA0UmNZcHVuMnJqVGpkdUQxUDJzS2ZneUp1ZW5QOUcyTl9YanVRVHg4b3FIaE45YWk1dlAw?oc=5"
    }
   ],
   "dv": 3
