@@ -1,1 +1,1 @@
-{"updatedAt": "2026-10-07T06:43+09:00", "added": 0, "sources": {"公式サイト": 12, "PR TIMES": 167, "Googleニュース": 100, "Googleニュース（7日）": 51, "Googleニュース（1日）": 3, "Bingニュース": 12, "Bingニュース（7日）": 2}, "errors": []}
+{"updatedAt": "2026-10-07T10:39+09:00", "added": 0, "sources": {"公式サイト": 12, "PR TIMES": 167, "Googleニュース": 100, "Googleニュース（7日）": 51, "Googleニュース（1日）": 3, "Bingニュース（7日）": 2}, "errors": ["Bingニュース: not well-formed (invalid token): line 1, column 41"]}
