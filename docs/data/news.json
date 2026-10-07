@@ -46,6 +46,10 @@
    {
     "source": "Excite エキサイト",
     "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1TYnN3TTRNVkxRRG9TakpRLVN5RjdyNDRFTzJnYnhOekx5VDdjOVJfMTNuMWFtU3UxRFc2cjY4RWxRekNwVVdVTzRhRWtSbWd2Y1dkMHF4R2hKOHNqaS1QWFNNS0tscGo0eGhnemVsYjA2N1pB?oc=5"
+   },
+   {
+    "source": "au Webポータル",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9OWXlsRE1LSGZqZWxGN0lGYzVfTTRDUUdrY3BGZi1POVZUQ3JzOWotWDIzTjAxOFJPSjdqSmFKdng1SVVpMEdEWDRmRmtYQzczVEVBaFAxMmVTVlJhR3RzeEN2SlZJSDhTdFZ3SE93?oc=5"
    }
   ],
   "dv": 3
@@ -3900,6 +3904,16 @@
   "title": "期間限定の「ぴよりん」登場！かわいい”2羽”の新味が仲間入り!!",
   "source": "ウォーカープラス",
   "url": "https://www.walkerplus.com/article/151510/",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261004-d399d142",
+  "date": "2017-08-24",
+  "cat": "media",
+  "title": "いったいどんな味!?名古屋みやげの定番“ぴよりん”に期間限定で仲間が登場！",
+  "source": "ウォーカープラス",
+  "url": "https://www.walkerplus.com/article/119095/",
   "related": [],
   "dv": 3
  },
