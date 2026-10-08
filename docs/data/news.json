@@ -1,5 +1,59 @@
 [
  {
+  "id": "official-p5609",
+  "date": "2026-10-08",
+  "cat": "official",
+  "title": "店舗 限定商品 お知らせ 第5回アジアパラ競技大会（愛知・名古屋）ライセンスグッズ「ウズミンぴよりん」販売 記事を見る",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5609/",
+  "related": []
+ },
+ {
+  "id": "n20261008-fd659421",
+  "date": "2026-10-08",
+  "cat": "press",
+  "title": "第5回アジアパラ競技大会（愛知・名古屋）ライセンスグッズ「ウズミンぴよりん」販売",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000242.000124425.html",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261008-ea14419b",
+  "date": "2026-10-08",
+  "cat": "press",
+  "title": "第5回アジアパラ競技大会（2026/愛知・名古屋）を記念した特別デザインのぴよりん",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000068.000174790.html",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261008-51653388",
+  "date": "2026-10-08",
+  "cat": "press",
+  "title": "第5回アジアパラ競技大会（2026/愛知・名古屋）を記念した特別 ...",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000068.000174790.html",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261008-febf34a0",
+  "date": "2026-10-08",
+  "cat": "media",
+  "title": "人気スイーツ「ぴよりん」に特別住民票　愛知県春日井市",
+  "source": "ｄメニューニュース",
+  "url": "https://topics.smt.docomo.ne.jp/article/jiji_region/region/jiji_region-2026100700532?fm=latestnews",
+  "related": [
+   {
+    "source": "時事ドットコム",
+    "url": "https://www.jiji.com/jc/article?k=2026100700532&g=jfn"
+   }
+  ],
+  "dv": 3
+ },
+ {
   "id": "official-p5593",
   "date": "2026-10-07",
   "cat": "official",
@@ -126,6 +180,16 @@
   "title": "ぴよりん 愛知・春日井市の顔に…特別住民票交付 「生まれるまち」ＰＲへ ：地域ニュース",
   "source": "読売新聞",
   "url": "https://www.bosai-nippon.com/local/chubu/news/20261006-GYTNT00065/",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261006-0d2fc7c1",
+  "date": "2026-10-06",
+  "cat": "media",
+  "title": "ぴよりん 愛知・春日井市の顔に…特別住民票交付 「生まれるまち」PRへ（読売新聞オンライン）",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/f5dde3b4e7341623d63b53b47aaf3b7959f04213",
   "related": [],
   "dv": 3
  },

@@ -137,6 +137,16 @@
   "url": "https://www.nagoyatv.com/dodematsuri/"
  },
  {
+  "id": "auto-officialp5609",
+  "title": "ウズミンぴよりん販売",
+  "start": "2026-10-17",
+  "end": "2026-10-19",
+  "place": "",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5609/",
+  "auto": true
+ },
+ {
   "id": "e-wolfy-village",
   "title": "ウルフィ×ぴよりん ぬいぐるみ 店頭販売",
   "start": "2026-10-19",
