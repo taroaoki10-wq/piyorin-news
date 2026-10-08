@@ -1,5 +1,15 @@
 [
  {
+  "id": "n20261009-b6aa78c1",
+  "date": "2026-10-09",
+  "cat": "media",
+  "title": "TOICA導入20周年とぴよりん誕生15周年を記念し、JR東海リテイリング・プラスが「ぴよりんTOICA」デザインのグッズを発売",
+  "source": "@DIME アットダイム",
+  "url": "https://dime.jp/genre/2160888/",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "official-p5609",
   "date": "2026-10-08",
   "cat": "official",
@@ -35,6 +45,10 @@
    {
     "source": "毎日キレイ",
     "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE83N1ZJTDMyRGN4LVpUUWd2UThNTWoyODBZWWg1SVBRNmxNOEJ4c0M3aHBDNENkVXloZnA1YUxDRFRURWt2YzNHRU1qVFJTX1ZDNjViamFkTGM2bFRDUlVwWWhMNXlnTVBicjJqS2s3R2JXaHZtR3RzR09R?oc=5"
+   },
+   {
+    "source": "Infoseek",
+    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5GSDJycHFqY2l4cW1DQ0d3cFdoeTBUNTFCRUNvNk5pSWUwLVhPUFdtRFF0TTcyUUIxdHpNM0JuOTA0ajVnampadVlnRjdsbFlTV2dRQk5ITjltbVhQTlozQkRQeTlmeXRxVzdTcnZsa3BlQQ?oc=5"
    }
   ],
   "dv": 3
@@ -84,6 +98,10 @@
    {
     "source": "時事ドットコム",
     "url": "https://www.jiji.com/jc/article?k=2026100700532&g=jfn"
+   },
+   {
+    "source": "時事通信ニュース",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE84LXBVUVJ1RHoza1VQckNyeFhkc0VoNTVXT2FSdFBHcmF4VXlaZnlBU19leExha0xHSnpLOGthZk5CbmE3M2pRX05wZXdLYlF5ZTJ0UUhZSXBxNU42RGc?oc=5"
    }
   ],
   "dv": 3
@@ -153,6 +171,16 @@
   "title": "愛知名物「ぴよりん」新幹線でお取り寄せ 10～12日、岡山高島屋",
   "source": "山陽新聞デジタル",
   "url": "https://www.sanyonews.jp/article/2001257",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261008-6572160c",
+  "date": "2026-10-08",
+  "cat": "media",
+  "title": "TOICA導入20周年とぴよりん誕生15周年を記念し、JR東海リテイリング ...",
+  "source": "@DIME アットダイム",
+  "url": "https://dime.jp/genre/2160888/",
   "related": [],
   "dv": 3
  },
