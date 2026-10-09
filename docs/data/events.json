@@ -137,6 +137,16 @@
   "url": "https://www.nagoyatv.com/dodematsuri/"
  },
  {
+  "id": "auto-officialp5612",
+  "title": "ドデ祭2026 ぴよりん出店（ウルフィコラボ）",
+  "start": "2026-10-17",
+  "end": "2026-10-18",
+  "place": "ドデ祭2026会場",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5612/",
+  "auto": true
+ },
+ {
   "id": "auto-officialp5609",
   "title": "ウズミンぴよりん販売",
   "start": "2026-10-17",

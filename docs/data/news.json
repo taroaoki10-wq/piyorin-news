@@ -1,11 +1,65 @@
 [
  {
+  "id": "official-p5612",
+  "date": "2026-10-09",
+  "cat": "official",
+  "title": "店舗 限定商品 お知らせ メ～テレ「ドデ祭2026」に今年もぴよりんが出店！限定『ウルフィ×ぴよりん』の新作コラボ商品を販売 記事を見る",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5612/",
+  "related": []
+ },
+ {
   "id": "n20261009-b6aa78c1",
   "date": "2026-10-09",
   "cat": "media",
   "title": "TOICA導入20周年とぴよりん誕生15周年を記念し、JR東海リテイリング・プラスが「ぴよりんTOICA」デザインのグッズを発売",
   "source": "@DIME アットダイム",
   "url": "https://dime.jp/genre/2160888/",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261009-e4389bf6",
+  "date": "2026-10-09",
+  "cat": "press",
+  "title": "メ～テレ「ドデ祭2026」に今年もぴよりんが出店！限定『ウルフィ×ぴよりん』の新作コラボ商品を販売",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000243.000124425.html",
+  "related": [
+   {
+    "source": "CREA WEB",
+    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1ZZ216MVA3Z2M4VWRheERXYXJRYzJmS2kyOF9PeFhoUE9uSTZadXlMaXBFMWpZNm9zSllJN19zLUdsRjFHQndZUmxsdWN3N0JxR285NXhiZ29XdHM0bXVFUmRoM3FZUzQ4LUg1a0lzcUpGZw?oc=5"
+   }
+  ],
+  "dv": 3
+ },
+ {
+  "id": "n20261009-d5c10422",
+  "date": "2026-10-09",
+  "cat": "press",
+  "title": "ドデ祭公式グッズショップ今年も開店！「ドデ商店」ぴよりん15 ...",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000001595.000014977.html",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261009-bdd3f897",
+  "date": "2026-10-09",
+  "cat": "media",
+  "title": "ドデ祭公式グッズショップ今年も開店！「ドデ商店」ぴよりん15周年コラボ＆ナナちゃんとの限定グッズも登場！名古屋らしさ満載のグッズが勢ぞろい",
+  "source": "CREA WEB",
+  "url": "https://crea.bunshun.jp/ud/pressrelease/6ac840437079c8c462000008",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261009-9c34432c",
+  "date": "2026-10-09",
+  "cat": "media",
+  "title": "HOME PR TIMES メ～テレ「ドデ祭2026」に今年もぴよりんが出店！限定 ...",
+  "source": "MANTANWEB（まんたんウェブ）",
+  "url": "https://mantan-web.jp/prtimes/article/20261009prt00m200000080a/photopage/001.html",
   "related": [],
   "dv": 3
  },
@@ -181,6 +235,26 @@
   "title": "TOICA導入20周年とぴよりん誕生15周年を記念し、JR東海リテイリング ...",
   "source": "@DIME アットダイム",
   "url": "https://dime.jp/genre/2160888/",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261008-425d74ac",
+  "date": "2026-10-08",
+  "cat": "media",
+  "title": "【画像】ぴよりん限定コラボが実現♪青いトサカがかわいい「ウズミンぴよりん」発売 2/4",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32522697/?img_id=56863985",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261008-e00f2f11",
+  "date": "2026-10-08",
+  "cat": "media",
+  "title": "メ～テレ「ドデ祭2026」に今年もぴよりんが出店！限定『ウルフィ× ...",
+  "source": "MANTANWEB（まんたんウェブ）",
+  "url": "https://mantan-web.jp/prtimes/article/20261009prt00m200000080a.html",
   "related": [],
   "dv": 3
  },
@@ -785,6 +859,10 @@
    {
     "source": "すみだ経済新聞",
     "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5XdXQ3SDVCeGNDZ2lVOS1iRXkxSU1kcXA0UmNZcHVuMnJqVGpkdUQxUDJzS2ZneUp1ZW5QOUcyTl9YanVRVHg4b3FIaE45YWk1dlAw?oc=5"
+   },
+   {
+    "source": "宗像経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBQZnp1NzFTU2VIaXF5cnZBbDUtUlpIVm9rUmJVZ1hCYjFuMzluRENqYTlyc1ZTZU0xaWdUZ2lIdk1YMXhGdU9uSEJyOEVoVXBjZnMwdjRR?oc=5"
    }
   ],
   "dv": 3
