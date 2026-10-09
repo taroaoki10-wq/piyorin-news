@@ -9,16 +9,6 @@
   "related": []
  },
  {
-  "id": "n20261009-b6aa78c1",
-  "date": "2026-10-09",
-  "cat": "media",
-  "title": "TOICA導入20周年とぴよりん誕生15周年を記念し、JR東海リテイリング・プラスが「ぴよりんTOICA」デザインのグッズを発売",
-  "source": "@DIME アットダイム",
-  "url": "https://dime.jp/genre/2160888/",
-  "related": [],
-  "dv": 3
- },
- {
   "id": "n20261009-e4389bf6",
   "date": "2026-10-09",
   "cat": "press",
@@ -29,6 +19,10 @@
    {
     "source": "CREA WEB",
     "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1ZZ216MVA3Z2M4VWRheERXYXJRYzJmS2kyOF9PeFhoUE9uSTZadXlMaXBFMWpZNm9zSllJN19zLUdsRjFHQndZUmxsdWN3N0JxR285NXhiZ29XdHM0bXVFUmRoM3FZUzQ4LUg1a0lzcUpGZw?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFAzcGtNVno4emZHSUhPRkVscDRqaXdIcl9vSGpjYVpFOFZiUDVVSWFYQ1hiQURXajlWV0QtbzVGcERwZWEzU0VkWDJwSnhWTTFZNlNWWERqcmN0Mko4RTBqQzhn?oc=5"
    }
   ],
   "dv": 3
@@ -40,6 +34,21 @@
   "title": "ドデ祭公式グッズショップ今年も開店！「ドデ商店」ぴよりん15 ...",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000001595.000014977.html",
+  "related": [
+   {
+    "source": "産経ニュース",
+    "url": "https://www.sankei.com/pressrelease/prtimes/3LTA5XN72FOFHJZCBGYPV2HQ5M/"
+   }
+  ],
+  "dv": 3
+ },
+ {
+  "id": "n20261009-b6aa78c1",
+  "date": "2026-10-09",
+  "cat": "media",
+  "title": "TOICA導入20周年とぴよりん誕生15周年を記念し、JR東海リテイリング・プラスが「ぴよりんTOICA」デザインのグッズを発売",
+  "source": "@DIME アットダイム",
+  "url": "https://dime.jp/genre/2160888/",
   "related": [],
   "dv": 3
  },
@@ -50,7 +59,16 @@
   "title": "ドデ祭公式グッズショップ今年も開店！「ドデ商店」ぴよりん15周年コラボ＆ナナちゃんとの限定グッズも登場！名古屋らしさ満載のグッズが勢ぞろい",
   "source": "CREA WEB",
   "url": "https://crea.bunshun.jp/ud/pressrelease/6ac840437079c8c462000008",
-  "related": [],
+  "related": [
+   {
+    "source": "PR TIMES",
+    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE04cFhzQzMzc09lRHNTalduUHVCSEh4UHRzUnJKM0hyYUpEb0I0TE14VlBnLUsxcXVhZUhOdDFMdEFwSlNDX3pyeTRUUXZGS2dnNG1ZU045R1NTaW1QWjVxS2Zqc29abGFTOHc?oc=5"
+   },
+   {
+    "source": "Excite エキサイト",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBqM1k1eWFoZWgwc1l3eTdEZjVjRzk3YXlvczFGTGpwc0YxbWN3QTdFSEcwSmVZWlpuaTY1ZGRua2tlSHQyN2xLR2JoaThUbGZvc0VacnJ0eGJaOGpUSzRDQlVqb0YteUFjMkZJdVhaMk5fWjZNUlE?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -60,6 +78,35 @@
   "title": "HOME PR TIMES メ～テレ「ドデ祭2026」に今年もぴよりんが出店！限定 ...",
   "source": "MANTANWEB（まんたんウェブ）",
   "url": "https://mantan-web.jp/prtimes/article/20261009prt00m200000080a/photopage/001.html",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261009-1a804aa4",
+  "date": "2026-10-09",
+  "cat": "media",
+  "title": "有名スイーツ「ぴよりん」が鬼になって岡山に“おでかけ”！岡山駅前のデパートで期間限定販売【岡山】（OHK岡山放送）",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/63f4f2be57fe83b1136e0f47bbbf3c35d2cadefa",
+  "related": [
+   {
+    "source": "OHK 岡山放送",
+    "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBVWnU0UGRSTGJIa2xFcWlKTEtJVVhvZzJHUnMwSThSM0loaFFYZFNIWjBGOGRpOXhuSXkzdUZWb1BSZE45UUhrN0pGaDR2NFNE?oc=5"
+   },
+   {
+    "source": "Excite エキサイト",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9DWGNnVFRuSUYxdU5BNC1odldueDZyaEVwNnJwNWNUMXR5QVJrRTRzQXZBMDVtWXlJS3FLMUowbkgtZTRWTHBYNWJvZTJma1BBQnBUNzc0SkZSN2NVeDdmUGJadUtaSXhZZmxHSjVR?oc=5"
+   }
+  ],
+  "dv": 3
+ },
+ {
+  "id": "n20261009-0d3382c4",
+  "date": "2026-10-09",
+  "cat": "media",
+  "title": "有名スイーツ「ぴよりん」が鬼になって岡山に“おでかけ”！岡山 ...",
+  "source": "FNNプライムオンライン",
+  "url": "https://www.fnn.jp/articles/-/1129715",
   "related": [],
   "dv": 3
  },
@@ -259,6 +306,16 @@
   "dv": 3
  },
  {
+  "id": "n20261008-74c40d40",
+  "date": "2026-10-08",
+  "cat": "media",
+  "title": "【画像】ぴよりん限定コラボが実現♪青いトサカがかわいい「ウズミンぴよりん」発売 1/4",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32522697/?img_id=56863983",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "official-p5593",
   "date": "2026-10-07",
   "cat": "official",
@@ -286,6 +343,10 @@
    {
     "source": "ニコニコニュース",
     "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1SeTA5U2F6TU5RQzhoRkUtaVptR1JzUi1wY0JYZG1MUV9KOUF0blZwVVpMczlfSmFUd3A0SlNZcGROekpWZnVTaUFXTUxMUVRxVmQ5T3J5ZnZWeHlHY09wY2hROVFBcUtRYVVYMzhrTG5SWnpyX0dadDItVQ?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBTS1lKNk9EY2VmYmlGbS1UYnRlQW1aUU9HMTQ3LTBZTl9ZSk5iY3FuOC1BeUpsXzJlaUF2VzdkbmV6SHFvc2Z1b2FtcWpib3RuS0NOVW45VjRTUUM2ZXZMWkhn?oc=5"
    }
   ],
   "dv": 3
@@ -863,6 +924,42 @@
    {
     "source": "宗像経済新聞",
     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBQZnp1NzFTU2VIaXF5cnZBbDUtUlpIVm9rUmJVZ1hCYjFuMzluRENqYTlyc1ZTZU0xaWdUZ2lIdk1YMXhGdU9uSEJyOEVoVXBjZnMwdjRR?oc=5"
+   },
+   {
+    "source": "近江八幡経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5lbl9wbUgzWExuTkdpTzdORVBQc0RnblY0TWVpTDEtRy1URW54ZENBMkR2Y3RBRlRQN1J3VFhSNlF4eG13Q25JRUZsMVRiLUg2YzdLbGhuLU0tdw?oc=5"
+   },
+   {
+    "source": "彦根経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE53TjFVSVprdVRqbWd3aVNQT2ZhUk00TXpMeU1xZ0NSN1BLWGs2R0E2SFQ3SzhFUVlMc1I0SGFhSEhOcHFhT3Q4VzJ2WWdYUThWQXd3?oc=5"
+   },
+   {
+    "source": "水戸経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBydWFJZ3h5eW9rQXZmUVdSOXNqLXMyOGhNT2Z0N1U5NFFJX0dQU0xSakFYa0txLXdsNFNGQ0tzbkFER3duT0R1OWJKNFNCMGVf?oc=5"
+   },
+   {
+    "source": "福島経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9CSWtNOTRqM3h4MzYwY251bUlINkdmOURUM2tFZmtKNkp6VjczUVlWaEh5Q1VTUjh1S1pmSXBDeUZnYlRRX0lqS3FNMzN6X0k1N21lTlRROA?oc=5"
+   },
+   {
+    "source": "江戸川経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9PQnpYU1dLNV80Qi0tTklrLU1adEprblBqdUpOQlNCWXFYeXBjMmFEVlM3MFBwOHU3Zmh3MmxWYTVJbEVlTlRKbFdfTHhOczlXYy0tMA?oc=5"
+   },
+   {
+    "source": "足利経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBOVm4yWXk1ZHdlaFkyWFpxM1EySzF0V1lEQi1qejFvOUZ2cmhuOVVYMnU2VERSNWl5X2RlT1F2dTJWVjltaUNYRUZHYklPMXZ4ZDRyVlF3?oc=5"
+   },
+   {
+    "source": "弘前経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFB2Y2N0eVFTRVotTS1BUUgzRnYyV19yUmNhUzJUNE9QVTJMSFcySEtWNU9wajdndDIxQ0lMbXNfTTBYTkRHaUVkVWNlT3RYc2lwb3I3UVBn?oc=5"
+   },
+   {
+    "source": "豊田経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBTXzl6c3hMVTRkSVJwWjBUaUgzUG1VZ0ZhMVFjWmRON00tWDN2ekxGemdPV1ZBMVZ6T29wejU0NzZEUVBvc05mbFVhMkdTWmdGcmxj?oc=5"
+   },
+   {
+    "source": "川口経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1mQVRLOHU0dTluMFIxZS1MREdTNVUxakRDbEVvNS1VMU10M2NVZ1V6RUhMZ0tqc3pRWm9sU2Vsa2NpRmJFVDR6VzUybkEyNy1Ca0xFaXdSNA?oc=5"
    }
   ],
   "dv": 3
