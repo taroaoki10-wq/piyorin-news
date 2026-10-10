@@ -259,6 +259,10 @@
    {
     "source": "Yahoo!ニュース",
     "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1fOV9ranVJQUhobWFtWUwxelV5Sk01Wlpjclc5bGNMLXhyWHhQTGdjQkJySE9tcVc1a0JQWlN2YkU3aUtCNkU3UEhMRFNjS3RFQWlMd3hWZDlnQkVrbGlGZ1BySU5ka2NhdnNSbHFMU1pyR3R2R0paSkxfVzk0Z1E?oc=5"
+   },
+   {
+    "source": "日テレNEWS NNN",
+    "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPWjk0cEZHYkJQNVNsQ3BpRnpPVWR3YVEtQy1zTGZZRnYwdU9xdTNCNkJBRlRSWUUyZnN0dHhicGdsTTIxYkY1UTNtZE5fRlctdkMzeUhFZ1JUQV9wZE4yaVM0RWlRRVR5VlExLWthMHlmOFdqZy1sX0FzUjdVa2dvTjU0aVpMMEE?oc=5"
    }
   ],
   "dv": 3
@@ -364,6 +368,16 @@
   "title": "【画像】ぴよりん限定コラボが実現♪青いトサカがかわいい「ウズミンぴよりん」発売 3/4",
   "source": "ライブドアニュース",
   "url": "https://news.livedoor.com/article/image_detail/32522697/?img_id=56863986",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261008-b13c9335",
+  "date": "2026-10-08",
+  "cat": "media",
+  "title": "【画像】ぴよりん限定コラボが実現♪青いトサカがかわいい「ウズミンぴよりん」発売 4/4",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32522697/?img_id=56863987",
   "related": [],
   "dv": 3
  },
