@@ -35,6 +35,10 @@
    {
     "source": "ニコニコニュース",
     "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE02ZHV6YTFudHJhcVl1YTVtdVI3bGd4OU5FdUJKd2VQblVlYjVnRmU5UDhFeWVnSVpfSnNpRXRXMmZnbWdVNmpVUENfWTlXSXNiTU5PSQ?oc=5"
+   },
+   {
+    "source": "産経ニュース",
+    "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1PTHJiLWo1a00wcUNyQ28tLWxRQjUzVGZBdzdJUW9pQjJBVlFpdmNEWmJOZzFRQzEtbjNTaGxRLU5YWnhUSDFtM2dpRVNVYU5lck1WLVdIcFk4SDEtZnZsY3lDSlREa0p2NzU3TTRqTUJ1blZZOEtfMTRDdw?oc=5"
    }
   ],
   "dv": 3
@@ -198,6 +202,10 @@
    {
     "source": "Infoseek",
     "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBtVUkxTy02SDRHVVdyU2xoVXRDTGJuTnJTVXBDeFV1UldHU0s1RTRWUFc0ME1mOXE0TUc0TnA2YzhleHBiZ3paWnoycU1HY1JrY1JHSDQwVDZjNTQteENzWm5NYzRaN2ZUekwya1NraDd0UQ?oc=5"
+   },
+   {
+    "source": "MANTANWEB",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBUdVhCLVlrMHpicDF0emJXalBuTlNDYzRCZTVkTEx0UzNvLUI1OFZxTWNBc05IOFhabHhQRHpNVDNlY21xb1lHU0FPQWpFWEZGbFpmZFZrS0ZpYlZfOUJEcHVfc2FYLTJaWmpCOXZyaFFiWTAtMkE?oc=5"
    }
   ],
   "dv": 3
@@ -1008,6 +1016,10 @@
    {
     "source": "川口経済新聞",
     "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1mQVRLOHU0dTluMFIxZS1MREdTNVUxakRDbEVvNS1VMU10M2NVZ1V6RUhMZ0tqc3pRWm9sU2Vsa2NpRmJFVDR6VzUybkEyNy1Ca0xFaXdSNA?oc=5"
+   },
+   {
+    "source": "浜松経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9NZmx2RWtrb1hSaGFFVFhFVF9SMzZMNGRXSGhtUzlCRFR5c2VTakJ1eFhJdGMwUnFWYzg4RG1sTFJQU2g2ZThvT3ljczVMRkJyTllHSkdzYw?oc=5"
    }
   ],
   "dv": 3
