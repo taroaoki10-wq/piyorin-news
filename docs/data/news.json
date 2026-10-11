@@ -54,6 +54,10 @@
    {
     "source": "産経ニュース",
     "url": "https://www.sankei.com/pressrelease/prtimes/3LTA5XN72FOFHJZCBGYPV2HQ5M/"
+   },
+   {
+    "source": "時事ドットコム",
+    "url": "https://www.jiji.com/jc/article?k=000001595.000014977&g=prt"
    }
   ],
   "dv": 3
@@ -555,7 +559,12 @@
   "title": "春日井市が特別住民票 「ぴよりん」製造をアピール",
   "source": "中部経済新聞",
   "url": "https://www.chukei-news.co.jp/news/2026/10/05/OK0002610050401_03/",
-  "related": [],
+  "related": [
+   {
+    "source": "chukei-news.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1qSUtlMU9BRktCU2tfVERUMjAxX0pybWpTX3J2OHp3YjJzWUJGWHJLb1NKUVlRN1Nkb2NjRzJsamYtSTRydVNDOUp5TTNLQkZMSFR1ZG9pYnFLRHVNZ3dLUjZFUVgxTW5FVUEwUVZKNlY4OWc?oc=5"
+   }
+  ],
   "dv": 3
  },
  {
@@ -1034,6 +1043,10 @@
    {
     "source": "浜松経済新聞",
     "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9NZmx2RWtrb1hSaGFFVFhFVF9SMzZMNGRXSGhtUzlCRFR5c2VTakJ1eFhJdGMwUnFWYzg4RG1sTFJQU2g2ZThvT3ljczVMRkJyTllHSkdzYw?oc=5"
+   },
+   {
+    "source": "外房経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9vSlBERW95NGRDS2ZuQ1l6MWdLV251SThKOFp6eGsxdTZXb3R2Y3VubExXeTVlQlI3MXF2NmowUE1WUjNSNTd3czZ3LW5BZmhTMUh3?oc=5"
    }
   ],
   "dv": 3
