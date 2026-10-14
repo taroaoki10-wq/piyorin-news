@@ -347,6 +347,39 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   .reader-bar{padding-top:calc(env(safe-area-inset-top,0px) + 10px)}
   .reader-bar button{width:40px;height:40px}
 }
+
+/* ---------- いますぐ更新 ---------- */
+.run-btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:12px;font-weight:700;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:4px 12px 4px 10px;cursor:pointer;white-space:nowrap}
+.tabs .run-btn{align-self:center;margin:0 0 8px 12px;font-family:var(--f-body);font-size:12px;padding:4px 12px 4px 10px;color:var(--ink);background:var(--surface);border:1px solid var(--line)}
+.run-btn:hover,.tabs .run-btn:hover{border-color:var(--yolk);background:var(--hover);color:var(--ink)}
+.run-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.run-btn.busy svg{animation:runspin 1s linear infinite}
+.run-btn:disabled{opacity:.75;cursor:default}
+@keyframes runspin{to{transform:rotate(360deg)}}
+.run-btn.mob{display:none}
+.run-meta{margin:-6px 0 18px;font-size:12.5px;color:var(--muted)}
+.run-meta button{font:inherit;font-size:12.5px;font-weight:700;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:4px 14px;margin-left:8px;cursor:pointer}
+.run-meta button:hover{border-color:var(--yolk);background:var(--hover)}
+.run-scrim{position:fixed;inset:0;z-index:49;background:rgba(20,16,0,.35)}
+.run-modal{position:fixed;z-index:50;left:50%;top:50%;translate:-50% -50%;width:min(460px,calc(100% - 32px));max-height:calc(100% - 32px);overflow-y:auto;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:22px 22px 18px;display:flex;flex-direction:column;gap:12px}
+.run-modal h2{margin:0;font-family:var(--f-display);font-size:19px;line-height:1.4}
+.run-modal p{margin:0;font-size:13.5px}
+.run-modal ol{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:10px;font-size:13.5px}
+.run-modal small{display:block;color:var(--muted);font-size:12px;line-height:1.55}
+.run-modal ol a{color:var(--caramel);font-weight:700}
+.run-modal input{width:100%;margin-top:6px;font:inherit;font-size:16px;font-family:var(--f-mono);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.run-err{color:#C2412D}
+.run-btns{display:flex;gap:8px;justify-content:flex-end}
+.run-btns button{font:inherit;font-size:13px;font-weight:700;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:8px 18px;cursor:pointer}
+.run-btns button:hover{border-color:var(--yolk);background:var(--hover)}
+.run-btns button.primary{background:var(--yolk);border-color:transparent;color:var(--yolk-ink)}
+@media (max-width:620px){
+.tabs .run-btn{display:none}
+.brand h1{font-size:22px}
+.stamp-m{margin-left:auto;font-size:10px;gap:4px}
+.run-btn.mob{display:inline-flex;flex:none;justify-content:center;width:34px;height:34px;padding:0}
+.run-btn.mob .run-t{display:none}
+}
 </style>
 
 </head>
@@ -357,6 +390,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       <span class="eyebrow">Piyorin News Watch</span>
       <a href="./" class="home" id="home" aria-label="ぴよりんニュース トップへ"><h1><img class="yolk" src="icon.png?v=2" alt="" width="36" height="36">ぴよりんニュース</h1></a>
       <span class="stamp stamp-m" id="stamp-m" aria-hidden="true"><i></i><span id="stamp-t2">—</span></span>
+      <button type="button" class="run-btn mob" id="run-btn-m" title="いますぐ更新" aria-label="いますぐ更新"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 11-2.6-5.9"/><path d="M20 4v5h-5"/></svg><span class="run-t">更新</span></button>
       <p>名古屋のひよこプリン「ぴよりん」の公式発表・プレスリリース・メディア記事をまとめて追いかけます。</p>
     </div>
 
@@ -392,6 +426,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       <button type="button" role="tab" id="tab-cal" aria-controls="view-cal" data-view="calendar" aria-selected="false">カレンダー<span class="n" id="n-cal"></span></button>
       <button type="button" role="tab" id="tab-bm" aria-controls="view-bm" data-view="bookmarks" aria-selected="false">ブックマーク<span class="n" id="n-bm"></span></button>
       <span class="stamp" id="stamp" aria-live="polite"><i aria-hidden="true"></i><span class="lbl">最終更新</span><span id="stamp-t">—</span></span>
+      <button type="button" class="run-btn" id="run-btn" title="いますぐ更新"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 11-2.6-5.9"/><path d="M20 4v5h-5"/></svg><span class="run-t">更新</span></button>
     </div>
     <div id="view-news" role="tabpanel" aria-labelledby="tab-news" style="display:flex;flex-direction:column;gap:28px">
     <div class="toolbar">
@@ -422,12 +457,27 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     </div>
     <div id="view-bm" role="tabpanel" aria-labelledby="tab-bm" hidden>
       <div class="sync" id="sync"></div>
+      <p class="run-meta" id="run-meta" hidden></p>
       <p class="sec-label" id="bm-label" style="margin:0 0 10px">ブックマーク</p>
       <div class="items" id="bm-list"></div>
     </div>
   </main>
 </div>
-<div class="reader-scrim" id="reader-scrim" hidden aria-hidden="true"></div>
+<div class="run-scrim" id="run-scrim" hidden></div>
+  <form class="run-modal" id="run-modal" hidden autocomplete="off" role="dialog" aria-labelledby="run-h">
+    <h2 id="run-h">いますぐ更新の準備</h2>
+    <p>このボタンは、GitHub Actions の「ぴよりんニュースを更新」を今すぐ実行します（1分ほどかかります）。実行にはあなた専用の合言葉が必要です。</p>
+    <ol>
+      <li><a id="run-token-link" href="#" target="_blank" rel="noopener">GitHubで合言葉を作る ↗</a>
+        <small>開いた画面で「Repository access」を「Only select repositories」にして piyorin-news だけを選び、「Permissions」の Actions を「Read and write」にします。一番下の「Generate token」を押して、表示された github_pat_ で始まる文字をコピーします。</small></li>
+      <li>貼り付けて「保存して更新」を押します。
+        <input type="password" id="run-token" placeholder="github_pat_…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="合言葉"></li>
+    </ol>
+    <p class="run-err" id="run-err" hidden></p>
+    <div class="run-btns"><button type="button" id="run-cancel">キャンセル</button><button type="submit" class="primary">保存して更新</button></div>
+    <small>合言葉はこの端末のブラウザにだけ保存されます。更新のたびに Claude API が少し使われます。</small>
+  </form>
+  <div class="reader-scrim" id="reader-scrim" hidden aria-hidden="true"></div>
 <div class="reader" id="reader" hidden role="dialog" aria-labelledby="reader-title">
   <div class="reader-bar">
     <span class="eyebrow">Reader</span>
@@ -923,7 +973,79 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     window.scrollTo({top:0,behavior:'smooth'});
   });
 
-  // GitHub Actions が更新する JSON を読み込む
+  // ---------- いますぐ更新（GitHub Actions を手動で起動して、終わるまで待つ） ----------
+    // 合言葉は「このリポジトリの Actions だけ」に絞ったGitHubのトークン。この端末のブラウザにだけ保存する
+    const RUN_KEY='piyo-run', REPO='taroaoki10-wq/piyorin-news', WF='update.yml';
+    const RUN_TOKEN_URL='https://github.com/settings/personal-access-tokens/new?name='+encodeURIComponent('ぴよりんニュース 更新ボタン')+'&description='+encodeURIComponent('ぴよりんニュースの「いますぐ更新」ボタン用')+'&target_name=taroaoki10-wq&expires_in=90&actions=write';
+    let runTok=(()=>{try{const v=JSON.parse(localStorage.getItem(RUN_KEY)||'null');return v&&typeof v.token==='string'&&v.token?v.token:''}catch(_){return''}})();
+    let runBusy=false;
+    const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+    function saveRunTok(t){runTok=t||'';try{t?localStorage.setItem(RUN_KEY,JSON.stringify({token:t})):localStorage.removeItem(RUN_KEY)}catch(_){}paintRun()}
+    function paintRun(){
+      document.querySelectorAll('.run-btn').forEach(b=>{b.disabled=runBusy;b.classList.toggle('busy',runBusy);const t=b.querySelector('.run-t');if(t)t.textContent=runBusy?'更新中…':'更新';b.title=runBusy?'更新しています':'いますぐ更新'});
+      const m=$('run-meta');if(m){m.hidden=!runTok;m.innerHTML=runTok?'「いますぐ更新」ボタンの合言葉をこの端末に保存中です。<button type="button" data-run="off">解除</button>':''}
+    }
+    async function ghRun(path,opt={}){
+      const r=await fetch(GH+path,{...opt,cache:'no-store',headers:{Authorization:'Bearer '+runTok,Accept:'application/vnd.github+json',...(opt.body?{'Content-Type':'application/json'}:{})}});
+      if(r.status===401)throw new Error('auth');
+      if(r.status===403||r.status===404)throw new Error('perm');
+      if(!r.ok)throw new Error('http'+r.status);
+      return r.status===204?null:r.json();
+    }
+    const dataSnap=async()=>{try{return (await Promise.all(['news','events','meta'].map(f=>fetch('data/'+f+'.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():'')))).join('\u0001')}catch(_){return''}};
+    function openRun(msg){
+      $('run-err').hidden=!msg;$('run-err').textContent=msg||'';
+      $('run-token').value='';
+      $('run-scrim').hidden=false;$('run-modal').hidden=false;
+      setTimeout(()=>$('run-token').focus(),0);
+    }
+    function closeRun(){$('run-scrim').hidden=true;$('run-modal').hidden=true}
+    async function runUpdate(){
+      if(runBusy)return;
+      if(!runTok){openRun();return}
+      runBusy=true;paintRun();
+      try{
+        const runsPath='/repos/'+REPO+'/actions/workflows/'+WF+'/runs?event=workflow_dispatch&per_page=10';
+        const prev=new Set(((await ghRun(runsPath)).workflow_runs||[]).map(x=>x.id));
+        const before=await dataSnap();
+        await ghRun('/repos/'+REPO+'/actions/workflows/'+WF+'/dispatches',{method:'POST',body:JSON.stringify({ref:'main'})});
+        toast('更新を始めました。1分ほどかかります');
+        // 実行の終わりを待つ（最大5分）
+        let run=null;
+        for(let i=0;i<60;i++){
+          await sleep(5000);
+          run=((await ghRun(runsPath)).workflow_runs||[]).find(x=>!prev.has(x.id))||null;
+          if(run&&run.status==='completed')break;
+        }
+        if(!run||run.status!=='completed'){toast('更新に時間がかかっています。しばらくしてから開き直してください');return}
+        if(run.conclusion!=='success'){toast('更新に失敗しました。GitHub の Actions のログを確認してください');return}
+        // GitHub Pages に反映されるのを待つ（最大90秒）
+        for(let i=0;i<18;i++){
+          if((await dataSnap())!==before){await load();toast('更新しました');return}
+          await sleep(5000);
+        }
+        await load();toast('更新が完了しました（新しい記事はありませんでした）');
+      }catch(e){
+        if(e.message==='auth'){saveRunTok('');openRun('合言葉が使えません（期限切れか削除された可能性があります）。作り直してください。')}
+        else if(e.message==='perm'){saveRunTok('');openRun('この合言葉では更新を起動できません。リポジトリは piyorin-news だけを選び、Actions を「Read and write」にして作り直してください。')}
+        else toast('更新できませんでした。通信状態を確かめて、もう一度お試しください');
+      }finally{runBusy=false;paintRun()}
+    }
+    $('run-token-link').href=RUN_TOKEN_URL;
+    $('run-cancel').addEventListener('click',closeRun);
+    $('run-scrim').addEventListener('click',closeRun);
+    $('run-modal').addEventListener('submit',e=>{
+      e.preventDefault();
+      const t=$('run-token').value.trim();
+      if(!/^(github_pat_|ghp_)[A-Za-z0-9_]{20,}$/.test(t)){$('run-err').hidden=false;$('run-err').textContent='合言葉の形が違うようです。github_pat_ で始まる文字をそのまま貼り付けてください。';return}
+      saveRunTok(t);closeRun();runUpdate();
+    });
+    document.querySelectorAll('.run-btn').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();runUpdate()})); // タブの切り替えに伝えない
+    $('run-meta').addEventListener('click',e=>{if(e.target.closest('[data-run="off"]')){saveRunTok('');toast('更新ボタンの合言葉を解除しました')}});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('run-modal').hidden)closeRun()});
+    paintRun();
+
+    // GitHub Actions が更新する JSON を読み込む
   async function load(){
     const bust='?t='+Date.now();
     try{
