@@ -281,6 +281,24 @@ details.rel li .bm-mark,.ev .bm-mark,.ag h4 .bm-mark{display:inline-block;width:
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);translate:-50% 0;z-index:40;display:flex;gap:14px;align-items:center;padding:10px 12px 10px 18px;border-radius:99px;background:var(--ink);color:var(--bg);font-size:13px;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);animation:fadein .2s ease-out;white-space:nowrap}
 .toast button{font:inherit;font-weight:700;border:0;border-radius:99px;padding:4px 12px;background:var(--yolk);color:var(--yolk-ink);cursor:pointer}
 
+/* ---------- 削除・関連判定 ---------- */
+.del-btn{flex:none;display:inline-grid;place-items:center;width:26px;height:26px;margin-left:auto;padding:0;border:0;border-radius:50%;background:none;color:var(--muted);cursor:pointer;opacity:0;transition:opacity .15s ease,background .15s ease}
+.row>.bm-mark+.del-btn{margin-left:6px}
+.del-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.item:hover .del-btn,.feat:hover .del-btn,.del-btn:focus-visible{opacity:1}
+.del-btn:hover{background:var(--line);color:var(--ink)}
+.feat.lead .del-btn{color:rgba(42,32,0,.7)}
+.feat.lead .del-btn:hover{background:rgba(42,32,0,.14);color:var(--yolk-ink)}
+.seg button.seg-trash{margin-left:6px;font-weight:500}
+.trash-note{margin:0;color:var(--muted);font-size:13px}
+.trash-item .why{font-size:11px;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--line);color:var(--muted);white-space:nowrap}
+.trash-item .why.ai{background:var(--hover);color:var(--caramel)}
+.trash-item h3 a{color:var(--muted)}
+.restore-btn{margin-left:auto;font:inherit;font-size:12.5px;font-weight:700;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:5px 14px;cursor:pointer;white-space:nowrap}
+.restore-btn:hover{border-color:var(--yolk);background:var(--hover)}
+.reader-hid{margin:0;padding:10px 14px;border-radius:12px;background:var(--hover);color:var(--caramel);font-size:13px;font-weight:700;line-height:1.6}
+@media (hover:none),(max-width:620px){.del-btn{opacity:.65;width:34px;height:34px}.restore-btn{padding:8px 16px}}
+
 /* ---------- iPhone / touch ---------- */
 html{-webkit-text-size-adjust:100%}
 a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
@@ -414,7 +432,8 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   <div class="reader-bar">
     <span class="eyebrow">Reader</span>
     <button type="button" id="reader-star" class="star-btn" aria-pressed="false" aria-label="ブックマークに追加" title="ブックマークに追加"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/></svg></button>
-    <a id="reader-orig" href="#" target="_blank" rel="noopener">元の記事を開く ↗</a>
+    <button type="button" id="reader-del" class="star-btn" hidden aria-label="ぴよりんと関係ない記事として削除" title="ぴよりんと関係ない記事として削除"></button>
+      <a id="reader-orig" href="#" target="_blank" rel="noopener">元の記事を開く ↗</a>
     <button type="button" id="reader-close" aria-label="閉じる">×</button>
   </div>
   <article class="reader-body" id="reader-body"></article>
@@ -443,6 +462,79 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   function readBm(){try{const r=JSON.parse(localStorage.getItem(BM_KEY)||'[]');return Array.isArray(r)?r.filter(okBm):[]}catch(_){return[]}}
   function readRm(){try{const r=JSON.parse(localStorage.getItem(RM_KEY)||'{}');return r&&typeof r==='object'&&!Array.isArray(r)?r:{}}catch(_){return{}}}
   let bms=readBm(), bmRemoved=readRm();
+    // ---------- 関係ない記事の削除（手動）と、AIの関連判定 ----------
+    // 削除の記録: {記事ID:{t:時刻, on:true=削除 / false=元に戻した}}。on:false は、AIが関係なしと判定した記事を表示に戻す印にもなる
+    const DEL_KEY='piyo-del', DEL_FILE='piyorin-hidden.json';
+    const TRASH='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4.5h6V7"/><path d="M6.5 7l1 12.5h9L17.5 7"/><path d="M10 11v5M14 11v5"/></svg>';
+    const UNDO='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 010 11H11"/></svg>';
+    const okDel=v=>!!v&&typeof v.t==='number'&&typeof v.on==='boolean';
+    function readDel(){try{const r=JSON.parse(localStorage.getItem(DEL_KEY)||'{}');if(!r||typeof r!=='object'||Array.isArray(r))return{};const o={};for(const k in r)if(okDel(r[k]))o[k]={t:r[k].t,on:r[k].on};return o}catch(_){return{}}}
+    let dels=readDel();
+    function saveDel(push=true){try{localStorage.setItem(DEL_KEY,JSON.stringify(dels))}catch(_){}if(push&&typeof queueSync==='function')queueSync()}
+    // 表示しない記事なら {by:'user'|'ai', why} を返す。表示する記事は null
+    function hideInfo(n){
+      const d=dels[n.id];
+      if(d)return d.on?{by:'user'}:null;
+      const j=n.jg;
+      if(j&&j.ok===false)return {by:'ai',why:String(j.why||'')};
+      return null;
+    }
+    const isShown=n=>!hideInfo(n);
+    const delBtn=it=>it.cat==='official'||!it.id?'':`<button type="button" class="del-btn" data-del="${esc(it.id)}" aria-label="ぴよりんと関係ない記事として削除" title="関係ない記事として削除">${TRASH}</button>`;
+    function setDel(id,on){dels[id]={t:Date.now(),on};saveDel();refreshDel()}
+    function delNews(id){if(!state.news.some(x=>x.id===id))return;setDel(id,true);toast('関係ない記事として削除しました',()=>setDel(id,false))}
+    function restoreNews(id){setDel(id,false);toast('元に戻しました')}
+    function refreshDel(){renderSeg();renderFeed();renderMeta();renderCounts();paintDel()}
+    function hiddenNote(src){
+      const n=src&&src.id&&state.news.find(x=>x.id===src.id), h=n&&hideInfo(n);
+      if(!h)return '<p class="reader-hid" id="reader-hid" hidden></p>';
+      return `<p class="reader-hid" id="reader-hid">${h.by==='ai'?'AIが「ぴよりんと関係なさそう」と判定した記事です'+(h.why?'（'+esc(h.why)+'）':''):'削除済みの記事です'}。右上のボタンで元に戻せます。</p>`;
+    }
+    function paintDel(){
+      const b=$('reader-del');if(!b)return;
+      const n=curSrc&&curSrc.id&&curSrc.cat!=='official'?state.news.find(x=>x.id===curSrc.id):null;
+      b.hidden=!n;
+      if(n){const hid=!!hideInfo(n);b.innerHTML=hid?UNDO:TRASH;const l=hid?'この記事を元に戻す':'ぴよりんと関係ない記事として削除';b.setAttribute('aria-label',l);b.title=l}
+      const el=$('reader-hid');if(el){const t=document.createElement('div');t.innerHTML=hiddenNote(curSrc);el.replaceWith(t.firstChild)}
+    }
+    function renderTrash(list){
+      $('hero').hidden=true;$('hero').innerHTML='';
+      const note='<p class="trash-note">「ぴよりんと関係なさそう」とAIが判定した記事と、手動で削除した記事です。タイトルを押すと読めます。</p>';
+      $('feed').innerHTML=note+(list.length?`<div class="items">${list.map(it=>{
+        const h=hideInfo(it)||{};
+        return `<article class="item trash-item">
+<div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><span class="dt" style="font-family:var(--f-mono)">${esc(it.date.replaceAll('-','.'))} ${wd(it.date)}</span><span class="why ${h.by==='ai'?'ai':''}">${h.by==='ai'?'AIが関係なしと判定':'手動で削除'}</span></div>
+<h3><a href="${esc(safeUrl(it.url))}" target="_blank" rel="noopener" data-news="${esc(it.id)}">${esc(it.title)}</a></h3>
+<div class="row"><span class="src">${esc(it.source)}</span>${h.by==='ai'&&h.why?`<span>${esc(h.why)}</span>`:''}<button type="button" class="restore-btn" data-restore="${esc(it.id)}">元に戻す</button></div>
+</article>`}).join('')}</div>`:'<p class="empty">削除した記事はありません。</p>');
+    }
+    // 端末間の同期（ブックマークと同じ secret gist の別ファイルに保存。同じ合言葉で動く）
+    function mergeDel(a,b){
+      const out={};
+      for(const s of [a,b])for(const [id,v] of Object.entries(s||{})){if(!okDel(v))continue;const c=out[id];if(!c||c.t<v.t)out[id]={t:v.t,on:v.on}}
+      return out;
+    }
+    const canonDel=d=>JSON.stringify(Object.keys(d).sort().map(k=>k+'@'+d[k].t+(d[k].on?'1':'0')));
+    function pruneDel(d){ // 記事が一覧からなくなって90日たった記録だけ消す
+      const ids=new Set(state.news.map(n=>n.id)), cut=Date.now()-90*864e5;
+      for(const k of Object.keys(d))if(!ids.has(k)&&!(d[k].t>=cut))delete d[k];
+      return d;
+    }
+    async function syncDel(g){
+      const f=g&&g.files&&g.files[DEL_FILE];
+      let remote={};
+      if(f){
+        let txt=f.content;
+        if(f.truncated&&f.raw_url)txt=await fetch(f.raw_url,{cache:'no-store'}).then(r=>r.text());
+        try{const j=JSON.parse(txt||'{}');remote=j&&j.items&&typeof j.items==='object'&&!Array.isArray(j.items)?j.items:{}}catch(_){}
+      }
+      let m=mergeDel(dels,remote);
+      if(state.news.length)m=pruneDel(m);
+      if(canonDel(m)!==canonDel(dels)){dels=m;saveDel(false);refreshDel()}
+      if(!f||canonDel(m)!==canonDel(remote))
+        await gh('/gists/'+sync.gist,{method:'PATCH',body:JSON.stringify({files:{[DEL_FILE]:{content:JSON.stringify({v:1,updated:new Date().toISOString(),items:m})}}})});
+    }
+
   const isBm=u=>!!u&&bms.some(b=>b.url===u);
   const mark=u=>isBm(u)?`<span class="bm-mark" role="img" aria-label="ブックマーク済み" title="ブックマーク済み">${STAR}</span>`:'';
   function saveBm(push=true){try{localStorage.setItem(BM_KEY,JSON.stringify(bms));localStorage.setItem(RM_KEY,JSON.stringify(bmRemoved))}catch(_){}if(push&&typeof queueSync==='function')queueSync()}
@@ -455,22 +547,24 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   function isNew(it){return days(it.date,todayStr())<=3}
 
   function renderSeg(){
-    const c={all:state.news.length,official:0,press:0,media:0};
-    state.news.forEach(n=>{if(c[n.cat]!=null)c[n.cat]++});
-    $('seg').innerHTML=['all','official','press','media'].map(k=>`<button type="button" data-k="${k}" aria-pressed="${state.filter===k}">${k==='all'?'すべて':CATS[k]}<span class="n">${c[k]}</span></button>`).join('');
+    const vis=state.news.filter(isShown);
+    const c={all:vis.length,official:0,press:0,media:0,trash:state.news.length-vis.length};
+    vis.forEach(n=>{if(c[n.cat]!=null)c[n.cat]++});
+    $('seg').innerHTML=['all','official','press','media','trash'].map(k=>`<button type="button" data-k="${k}"${k==='trash'?' class="seg-trash"':''} aria-pressed="${state.filter===k}">${k==='all'?'すべて':k==='trash'?'削除済み':CATS[k]}<span class="n">${c[k]}</span></button>`).join('');
   }
   function filtered(){
     const q=state.q.trim().toLowerCase();
-    return state.news.filter(n=>(state.filter==='all'||n.cat===state.filter)&&(!q||(n.title+' '+n.source+' '+(n.related||[]).map(r=>r.source).join(' ')).toLowerCase().includes(q)))
+    return state.news.filter(n=>(state.filter==='trash'?!isShown(n):isShown(n)&&(state.filter==='all'||n.cat===state.filter))&&(!q||(n.title+' '+n.source+' '+(n.related||[]).map(r=>r.source).join(' ')).toLowerCase().includes(q)))
       .sort((a,b)=>a.date<b.date?1:a.date>b.date?-1:(a.cat==='official'?-1:1));
   }
   function renderFeed(){
     const openRel=new Set([...document.querySelectorAll('#feed details.rel[open]')].map(d=>d.dataset.id));
     const list=filtered();
+    if(state.filter==='trash'){renderTrash(list);return}
     const hero=list.slice(0,2), rest=list.slice(2);
     $('hero').innerHTML=hero.map((it,i)=>`
       <a class="feat${i===0?' lead':''}" href="${esc(safeUrl(it.url))}" target="_blank" rel="noopener" data-news="${esc(it.id)}">
-        <div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><span class="dt" style="font-family:var(--f-mono)">${esc(it.date.replaceAll('-','.'))} ${wd(it.date)}</span>${isNew(it)?'<span class="new">NEW</span>':''}${mark(it.url)}</div>
+        <div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><span class="dt" style="font-family:var(--f-mono)">${esc(it.date.replaceAll('-','.'))} ${wd(it.date)}</span>${isNew(it)?'<span class="new">NEW</span>':''}${mark(it.url)}${delBtn(it)}</div>
         <h2>${esc(it.title)}</h2>
         <div class="foot"><span class="src">${esc(it.source)}${(it.related||[]).length?` ほか${it.related.length}件`:''}</span><span aria-hidden="true">↗</span></div>
       </a>`).join('');
@@ -482,7 +576,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
         <div class="day-h"><strong>${md(g.date)}</strong><span>${g.date.slice(0,4)} · ${wd(g.date)}</span></div>
         <div class="items">${g.items.map(it=>`
           <article class="item">
-            <div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span>${isNew(it)?'<span class="new">NEW</span>':''}${mark(it.url)}</div>
+            <div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span>${isNew(it)?'<span class="new">NEW</span>':''}${mark(it.url)}${delBtn(it)}</div>
             <h3><a href="${esc(safeUrl(it.url))}" target="_blank" rel="noopener" data-news="${esc(it.id)}">${esc(it.title)}</a></h3>
             <div class="row"><span class="src">${esc(it.source)}</span>${relLinks(it)}</div>
           </article>`).join('')}</div>
@@ -503,8 +597,8 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   function renderMeta(){
     const u=state.updatedAt?new Date(state.updatedAt):null;
     const s=u&&!isNaN(u)?`${u.getMonth()+1}/${u.getDate()} ${String(u.getHours()).padStart(2,'0')}:${String(u.getMinutes()).padStart(2,'0')}`:'—';
-    const srcs=new Set();state.news.forEach(n=>{srcs.add(n.source);(n.related||[]).forEach(r=>srcs.add(r.source))});
-    $('meta').innerHTML=`<span>${state.news.length}件 · ${srcs.size}ソース</span>`;
+    const srcs=new Set();state.news.filter(isShown).forEach(n=>{srcs.add(n.source);(n.related||[]).forEach(r=>srcs.add(r.source))});
+    $('meta').innerHTML=`<span>${state.news.filter(isShown).length}件 · ${srcs.size}ソース</span>`;
     $('stamp-t').textContent=s;$('stamp-t2').textContent=s;
     const fresh=u&&!isNaN(u)&&(Date.now()-u.getTime())<4*3600e3;
     $('stamp').classList.toggle('fresh',!!fresh);$('stamp-m').classList.toggle('fresh',!!fresh);
@@ -575,7 +669,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   $('cal-prev').addEventListener('click',()=>shift(-1));$('cal-next').addEventListener('click',()=>shift(1));
   $('cal-today').addEventListener('click',()=>{const t=todayStr();state.ym=[+t.slice(0,4),+t.slice(5,7)-1];renderCal()});
   $('cal').addEventListener('click',e=>{const b=e.target.closest('.bar');if(!b)return;const el=document.getElementById('ag-'+b.dataset.ev);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800)});
-  function renderCounts(){$('n-news').textContent=state.news.length;$('n-cal').textContent=state.events.filter(e=>(e.end||e.start)>=todayStr()).length;$('n-bm').textContent=bms.length}
+  function renderCounts(){$('n-news').textContent=state.news.filter(isShown).length;$('n-cal').textContent=state.events.filter(e=>(e.end||e.start)>=todayStr()).length;$('n-bm').textContent=bms.length}
   function bmTag(b){
     if(b.cat==='event'){const k=KINDS[b.kind]?b.kind:'event';return `<span class="ktag k-${k}">${KINDS[k]}</span>`}
     return CATS[b.cat]?`<span class="tag ${b.cat}">${CATS[b.cat]}</span>`:'';
@@ -633,10 +727,10 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   function paintStar(pop){const on=!!curSrc&&isBm(curSrc.url);const b=$('reader-star');b.setAttribute('aria-pressed',on);const l=on?'ブックマークを外す':'ブックマークに追加';b.setAttribute('aria-label',l);b.title=l;b.classList.remove('pop');if(pop&&on){void b.offsetWidth;b.classList.add('pop')}}
   async function openReader(src){
     const token=++readerToken;
-    curSrc=src;paintStar(false);
+    curSrc=src;paintStar(false);paintDel();
     const paint=(art,loading)=>{
       const tt=cleanTitle(art&&art.title||src.title);
-      let h=`<h2 id="reader-title">${esc(tt)}</h2><div class="reader-ev">${src.chip}</div>`;
+      let h=`<h2 id="reader-title">${esc(tt)}</h2><div class="reader-ev">${src.chip}</div>${hiddenNote(src)}`;
       if(loading)h+='<p class="reader-note">読み込み中…</p>';
       else if(art&&art.blocks&&art.blocks.length){
         h+=renderBlocks(art,tt);
@@ -658,13 +752,13 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     return {url:ev.url,title:ev.title,bm:{title:ev.title,date:ev.start,cat:'event',kind:ev.kind,source:ev.place||''},chip:`<span class="ktag k-${KINDS[ev.kind]?ev.kind:'event'}">${KINDS[ev.kind]||'イベント'}</span><b>${esc(when)}</b>${ev.place?`<span>${esc(ev.place)}</span>`:''}<span class="cd">${esc(st)}</span>`};
   }
   function newsSource(it,url,source){
-    return {url:url||it.url,title:it.title,bm:{title:it.title,date:it.date,cat:it.cat,source:source||it.source},chip:`<span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><b>${esc(it.date.replaceAll('-','.'))}（${wd(it.date)}）</b><span>${esc(source||it.source)}</span>`};
+    return {url:url||it.url,id:it.id,cat:it.cat,title:it.title,bm:{title:it.title,date:it.date,cat:it.cat,source:source||it.source},chip:`<span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><b>${esc(it.date.replaceAll('-','.'))}（${wd(it.date)}）</b><span>${esc(source||it.source)}</span>`};
   }
   function bmSource(b){
     const d=isDate(b.date)?`<b>${b.date.replaceAll('-','.')}（${wd(b.date)}）</b>`:'';
     return {url:b.url,title:b.title,bm:{title:b.title,date:b.date,cat:b.cat,kind:b.kind,source:b.source},chip:`${bmTag(b)}${d}${b.source?`<span>${esc(b.source)}</span>`:''}`};
   }
-  function refreshBm(){renderFeed();renderEvents();renderCounts();if(state.view==='calendar')renderCal();if(state.view==='bookmarks')renderBm();paintStar(false)}
+  function refreshBm(){renderFeed();renderEvents();renderCounts();if(state.view==='calendar')renderCal();if(state.view==='bookmarks')renderBm();paintStar(false);paintDel()}
   function setBm(src,on){
     const now=Date.now();
     bms=bms.filter(b=>b.url!==src.url);
@@ -690,7 +784,20 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   // 別のタブで変更したときも反映
   window.addEventListener('storage',e=>{if(e.key===BM_KEY||e.key===RM_KEY){bms=readBm();bmRemoved=readRm();refreshBm()}if(e.key===SYNC_KEY){sync=readSync();paintSync()}});
 
-  // ---------- ブックマークの同期（GitHubの非公開メモ＝secret gist に保存） ----------
+  // ---------- 削除・元に戻す・同期の接続 ----------
+    // 一覧の削除ボタン／削除済みの「元に戻す」（リンクより先に処理する）
+    document.addEventListener('click',e=>{
+      const b=e.target.closest('[data-del],[data-restore]');if(!b)return;
+      e.preventDefault();e.stopPropagation();
+      if(b.dataset.del)delNews(b.dataset.del);else restoreNews(b.dataset.restore);
+    },true);
+    $('reader-del').addEventListener('click',()=>{
+      const n=curSrc&&curSrc.id&&state.news.find(x=>x.id===curSrc.id);if(!n)return;
+      if(hideInfo(n))restoreNews(n.id);else{delNews(n.id);closeReader()}
+    });
+    window.addEventListener('storage',e=>{if(e.key===DEL_KEY){dels=readDel();refreshDel()}});
+
+    // ---------- ブックマークの同期（GitHubの非公開メモ＝secret gist に保存） ----------
   const SYNC_KEY='piyo-sync', GH='https://api.github.com', FILE='piyorin-bookmarks.json';
   function readSync(){try{const v=JSON.parse(localStorage.getItem(SYNC_KEY)||'null');return v&&typeof v.token==='string'&&v.token?v:null}catch(_){return null}}
   let sync=readSync(), syncBusy=false, syncAgain=false, syncLast=null, syncErr='', syncOpen=false, syncTmr;
@@ -737,6 +844,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       if(canon(m)!==canon({items:bms,removed:bmRemoved})){bms=m.items;bmRemoved=m.removed;saveBm(false);refreshBm()}
       if(!f||canon(m)!==canon(remote))
         await gh('/gists/'+sync.gist,{method:'PATCH',body:JSON.stringify({files:{[FILE]:{content:JSON.stringify({v:1,updated:new Date().toISOString(),items:m.items,removed:m.removed})}}})});
+      await syncDel(g);
       syncLast=new Date();syncErr='';
     }catch(e){
       syncErr=e.message==='auth'?'合言葉が使えません（期限切れか削除された可能性があります）。「解除」してから設定し直してください。':e.message==='http403'||e.message==='http404'?'合言葉に「gist」の権限がありません。「gist」にチェックを入れて作り直してください。':'同期できませんでした。通信状態を確かめて「今すぐ同期」を押してください。';
@@ -756,10 +864,10 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       el.innerHTML=`<div class="sync-row"><span class="sync-dot on${syncBusy?' busy':''}"></span><div><b>同期オン</b>${st.startsWith('<small')?st:`<small>${st}</small>`}</div>
         <div class="sync-btns"><button type="button" data-sync="now" ${syncBusy?'disabled':''}>今すぐ同期</button><button type="button" data-sync="copy">合言葉をコピー</button><button type="button" data-sync="off">解除</button></div></div>`;
     }else{
-      el.innerHTML=`<div class="sync-row"><span class="sync-dot"></span><div><b>この端末だけに保存中</b><small>${syncErr?`<span style="color:#C2412D">${esc(syncErr)}</span>`:'同期を設定すると、ほかのブラウザ・端末とブックマークを共有できます'}</small></div>
+      el.innerHTML=`<div class="sync-row"><span class="sync-dot"></span><div><b>この端末だけに保存中</b><small>${syncErr?`<span style="color:#C2412D">${esc(syncErr)}</span>`:'同期を設定すると、ほかのブラウザ・端末とブックマークや削除した記事を共有できます'}</small></div>
         <div class="sync-btns"><button type="button" class="${syncOpen?'':'primary'}" data-sync="open">${syncOpen?'閉じる':'同期を設定'}</button></div></div>
         ${syncOpen?`<form id="sync-form" autocomplete="off"><ol>
-          <li><b>はじめての端末</b>：<a href="${TOKEN_URL}" target="_blank" rel="noopener">GitHubで合言葉を作る ↗</a><small>「gist」だけにチェックが入った画面が開きます。Expiration（有効期限）を選んで一番下の「Generate token」を押し、表示された ghp_ で始まる文字をコピーします。この合言葉はブックマークの保存にしか使えません。</small></li>
+          <li><b>はじめての端末</b>：<a href="${TOKEN_URL}" target="_blank" rel="noopener">GitHubで合言葉を作る ↗</a><small>「gist」だけにチェックが入った画面が開きます。Expiration（有効期限）を選んで一番下の「Generate token」を押し、表示された ghp_ で始まる文字をコピーします。この合言葉はブックマークと削除した記事の記録の保存にしか使えません。</small></li>
           <li><b>2台目以降</b>：同期オンの端末で「合言葉をコピー」を押し、その文字をこの端末に送ります（AirDrop・メモなど）。</li>
           <li>合言葉を貼り付けて「同期を開始」を押します。
             <div class="sync-in" style="margin-top:6px"><input type="password" id="sync-token" placeholder="ghp_…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="合言葉"><button type="submit" class="primary">同期を開始</button></div></li>
