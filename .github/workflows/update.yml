@@ -4,7 +4,12 @@ on:
   schedule:
     # 1時間ごと（毎時23分。混み合う0分台を避けて遅れを減らす）
     - cron: "23 * * * *"
-  workflow_dispatch: {}   # Actions画面の「Run workflow」で手動実行もできる
+  workflow_dispatch:   # Actionsの「Run workflow」で手動実行もできる
+    inputs:
+      rejudge:
+        description: 判定済みの記事も、ぴよりんとの関連をもう一度判定する
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -32,6 +37,12 @@ jobs:
 
       - name: リーダー用に予定の元記事を保存
         run: python3 scripts/build_reader.py
+
+      - name: ぴよりんと関係がある記事か判定
+        run: python3 scripts/judge_relevance.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          REJUDGE: ${{ inputs.rejudge && '1' || '' }}
 
       - name: 変更があればコミット
         run: |
