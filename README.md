@@ -81,6 +81,15 @@ GitHub Pages（docs/index.html、5分ごとに読み直し）→ Safari で表�
 - 判定の基準を変えたときは `JUDGE_VERSION` を上げます。すべての記事をもう一度判定したいときは、Actions の「Run workflow」で `rejudge` にチェックを入れます。
 - APIキー（`ANTHROPIC_API_KEY`）が無いときは判定せず、記事はそのまま表示されます。
 
+## 「更新」ボタン（いますぐ更新）
+
+ページ右上の「最終更新」の隣にある「更新」ボタン（スマホはタイトルの右の丸いボタン）で、GitHub Actions の「ぴよりんニュースを更新」を今すぐ実行できます。押すと実行の終わりまで待ち（1分ほど）、終わったら画面を読み直します。
+
+- はじめて押すと、合言葉（GitHubの細かい権限を指定できるトークン）の設定画面が出ます。リポジトリは `piyorin-news` だけ、Permissions の Actions を「Read and write」にして作り、貼り付けます。
+- 合言葉はその端末のブラウザ（localStorage `piyo-run`）にだけ保存されます。ブックマーク同期の合言葉（gist用）とは別です。解除は「ブックマーク」タブの下にあるボタンから行います。
+- 押すたびに予定の抽出と関連判定で Claude API が少し使われます。更新が同時に2つ走ることはありません（workflow の `concurrency`）。
+- 合言葉が期限切れ・権限不足のときは、設定画面が理由つきでもう一度出ます。
+
 ## 更新の間隔を変える
 
 `.github/workflows/update.yml` の `cron` を書き換えます（時刻は UTC）。
