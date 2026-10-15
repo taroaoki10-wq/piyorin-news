@@ -9,22 +9,6 @@
   "related": []
  },
  {
-  "id": "n20261015-15eafb4b",
-  "date": "2026-10-15",
-  "cat": "media",
-  "title": "名古屋名物「ぴよりん」にカラメルソースをかけた結果 かわいい姿が「ホラーに一変した」1枚に反響",
-  "source": "LIMO | くらしとお金の経済メディア",
-  "url": "https://limo.media/articles/-/141945",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの食べ方とその見た目が話題。名古屋の人気スイーツとして紹介",
-   "t": "2026-10-15"
-  }
- },
- {
   "id": "n20261015-64b53a28",
   "date": "2026-10-15",
   "cat": "press",
@@ -46,13 +30,34 @@
   }
  },
  {
+  "id": "n20261015-15eafb4b",
+  "date": "2026-10-15",
+  "cat": "media",
+  "title": "名古屋名物「ぴよりん」にカラメルソースをかけた結果 かわいい姿が「ホラーに一変した」1枚に反響",
+  "source": "LIMO | くらしとお金の経済メディア",
+  "url": "https://limo.media/articles/-/141945",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの食べ方とその見た目が話題。名古屋の人気スイーツとして紹介",
+   "t": "2026-10-15"
+  }
+ },
+ {
   "id": "n20261015-a62ed81e",
   "date": "2026-10-15",
   "cat": "media",
   "title": "ひよこ型スイーツ「ぴよりん」ハロウィン限定で“魔女”姿に！星きらめく帽子＆ブルーベリー風味のババロア",
   "source": "ファッションプレス",
   "url": "https://www.fashion-press.net/news/152063",
-  "related": [],
+  "related": [
+   {
+    "source": "千葉テレビ放送株式会社",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9qR19WRjNTQnVvS1c0b3ZHZTVveUV5VUg0YzhHb2FzN284eThCTUZCY2U2TThLQTNnS3hvLVVzRTVCUGZpazZ4YkRCTmRmSzhfVjBDQ3dnRnlTTktzQmx3?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -74,6 +79,38 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんのハロウィン限定商品の紹介",
+   "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20261015-aca61305",
+  "date": "2026-10-15",
+  "cat": "media",
+  "title": "人気スイーツ「ぴよりん」が紫色の魔女に変身！今年もハロウィン限定で名古屋駅に登場",
+  "source": "いこーよニュース",
+  "url": "https://report.iko-yo.net/articles/34718",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのハロウィン限定商品の販売告知。ぴよりん自体の話題に該当。",
+   "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20261015-c910e13c",
+  "date": "2026-10-15",
+  "cat": "media",
+  "title": "人気スイーツ「ぴよりん」が紫色の魔女に変身！今年もハロウィン ...",
+  "source": "いこーよニュース",
+  "url": "https://report.iko-yo.net/articles/34718",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのハロウィン限定商品の販売告知。ぴよりん自体の話題に該当。",
    "t": "2026-10-15"
   }
  },
@@ -284,6 +321,10 @@
    {
     "source": "Excite エキサイト",
     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9DWGNnVFRuSUYxdU5BNC1odldueDZyaEVwNnJwNWNUMXR5QVJrRTRzQXZBMDVtWXlJS3FLMUowbkgtZTRWTHBYNWJvZTJma1BBQnBUNzc0SkZSN2NVeDdmUGJadUtaSXhZZmxHSjVR?oc=5"
+   },
+   {
+    "source": "au Webポータル",
+    "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5qZXl0ck1QWlNSSUdoQ0ZPQWY5aTVNZm9yME92R2M4YkxWWjRKQmJ4WXNIY1RhTl93TTBzQ2tfRkh4dVl4VVpxTWJOUl9lSlJITlkzVWhqLVBRbDR6c3RZNlFmNVVHY05rQ0NVWmNTVjBST25pbUN5Qw?oc=5"
    }
   ],
   "dv": 3,
