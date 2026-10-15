@@ -1,5 +1,14 @@
 [
  {
+  "id": "official-p5620",
+  "date": "2026-10-15",
+  "cat": "official",
+  "title": "店舗 限定商品 お知らせ 今年のハロウィンを彩る紫色のぴよりん！「ハロウィンぴよりん」を10月23日より販売 記事を見る",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5620/",
+  "related": []
+ },
+ {
   "id": "n20261015-15eafb4b",
   "date": "2026-10-15",
   "cat": "media",
@@ -12,6 +21,75 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんの食べ方とその見た目が話題。名古屋の人気スイーツとして紹介",
+   "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20261015-64b53a28",
+  "date": "2026-10-15",
+  "cat": "press",
+  "title": "今年のハロウィンを彩る紫色のぴよりん！「ハロウィンぴよりん」を10月23日より販売",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000257.000124425.html",
+  "related": [
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE0wbnBXb21oLW9qc0JZLUd1U1Z3U2hrcURiSW5ucnBJTzZzTmRkSE1ZbkUzSFBycFJvbUg1a2pEVTNISXZxUzVHZXQxVk15TUZUNU1IeTQwR3RMUHVyb3FiOTNydmZPZFRy?oc=5"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ハロウィンぴよりんの新商品販売情報",
+   "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20261015-a62ed81e",
+  "date": "2026-10-15",
+  "cat": "media",
+  "title": "ひよこ型スイーツ「ぴよりん」ハロウィン限定で“魔女”姿に！星きらめく帽子＆ブルーベリー風味のババロア",
+  "source": "ファッションプレス",
+  "url": "https://www.fashion-press.net/news/152063",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのハロウィン限定商品の紹介",
+   "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20261015-e6894c3a",
+  "date": "2026-10-15",
+  "cat": "media",
+  "title": "ひよこ型スイーツ「ぴよりん」ハロウィン限定で“魔女”姿に！星 ...",
+  "source": "ファッションプレス",
+  "url": "https://www.fashion-press.net/news/152063",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのハロウィン限定商品の紹介",
+   "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20261014-8c5cde0b",
+  "date": "2026-10-14",
+  "cat": "media",
+  "title": "今年のハロウィンを彩る紫色のぴよりん！「ハロウィンぴよりん ...",
+  "source": "産経ニュース",
+  "url": "https://www.sankei.com/pressrelease/prtimes/BO23NFTFDJPPLB3TUUQFEWQ6RE/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ハロウィンぴよりんの販売告知",
    "t": "2026-10-15"
   }
  },
@@ -5560,7 +5638,13 @@
   "title": "【ぴよりん】で贅沢に抹茶を堪能！「抹茶ぴよりん」「抹茶ぴよりんパフェ」を期間限定販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000090.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "抹茶ぴよりんの期間限定販売情報",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250522-991f5e43",
@@ -5569,7 +5653,13 @@
   "title": "【いいもの探訪×ぴよりん】ジェイアール名古屋タカシマヤ「開店25周年記念 JR東海 いいもの探訪フェア」にて開店25周年を祝う「ローズぴよりん」を限定販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000087.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのコラボ限定販売企画",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250507-d842254d",
@@ -5578,7 +5668,13 @@
   "title": "ありがとうを届けよう♪感謝の気持ちを「ぴよりん」に込めて。母の日限定の「母の日ぴよりん」が登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000085.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "母の日ぴよりんの限定販売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250501-fd30e6cd",
@@ -5587,7 +5683,13 @@
   "title": "【島田市×ぴよりん】静岡県島田市の緑茶をふんだんに使った「緑茶ぴよりん」を限定販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000084.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "島田市とのコラボぴよりん限定販売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250423-3535c214",
@@ -5596,7 +5698,13 @@
   "title": "【ぴよりん】が、SWEETS SHOP 【エスカ × plea×plea】で特別販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000082.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの特別販売イベント",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250422-36106f85",
@@ -5605,7 +5713,13 @@
   "title": "毎年人気の「こどもの日ぴよりん」が、今年も登場します！ちょっぴり勇ましい期間限定ぴよりんを、ぜひお楽しみください。",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000081.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "こどもの日ぴよりんの期間限定販売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250415-69334bcb",
@@ -5614,7 +5728,13 @@
   "title": "【ぴよりん】が、おでかけ！イオンモール土岐リニューアル記念の特別販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000080.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "イオンモール土岐でのぴよりん特別販売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250410-525ecfe1",
@@ -5623,7 +5743,13 @@
   "title": "【DENSO×ぴよりん】人協働ロボット「COBOTTA」がぴよりんを運ぶ！？日本最大級のイノベーション拠点「STATION Ai」にてコラボ展示実施中",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000079.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "DENSOとのコラボ展示企画",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250314-7a34519a",
@@ -5632,7 +5758,13 @@
   "title": "【徳川美術館×ぴよりん】徳川美術館 開館90周年記念コラボ！特別展「国宝 初音の調度」にちなんだ「姫君ぴよりん」を限定販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000077.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "徳川美術館との90周年記念コラボ",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250313-14c90618",
@@ -5641,7 +5773,13 @@
   "title": "春爛漫！待望の「さくらぴよりん」が二年ぶりに登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000076.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "さくらぴよりんの新商品販売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250225-eec7658e",
@@ -5650,7 +5788,13 @@
   "title": "北海道と愛知 人気者の共演ふたたび!!【onちゃん×ぴよりん】ジェイアール名古屋タカシマヤ「開店25周年記念 春の大北海道展」にてコラボぴよりんとコラボグッズ限定販売！！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000075.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "onちゃんとのコラボぴよりん販売企画",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250201-61c66c9b",
@@ -5659,7 +5803,13 @@
   "title": "「ぴよりん」の新キャラクター「ひより」デビュー!!",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000073.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの新キャラクター登場の話題",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250130-3ccdce72",
@@ -5668,7 +5818,13 @@
   "title": "【Hisaya-odori Park×ぴよりん】SPECIAL COLLABORATION！ぴよりんの巨大インスタレーションが登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000074.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんとパークのコラボイベント",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250129-8c77399b",
@@ -5677,7 +5833,13 @@
   "title": "初登場から13年！バレンタイン限定の特別な「バレンタインぴよりん」が今年も登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000067.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "バレンタイン限定ぴよりん商品",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250121-d7bfc9bd",
@@ -5686,7 +5848,13 @@
   "title": "【Zepp Nagoya×ぴよりん】異色のコラボレーションでZepp Nagoya開業20周年をお祝い！オリジナルグッズ限定販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000070.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "Zepp名古屋とのコラボ企画・グッズ販売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20250107-79df5404",
@@ -5695,7 +5863,13 @@
   "title": "日本最大級のショコラの祭典・ジェイアール名古屋タカシマヤ「2025 アムール・デュ・ショコラ」に【ぴよりん】登場！史上最高級の「Premiumぴよりん」を限定販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000066.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "チョコレート祭でぴよりん限定販売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241226-a8480370",
@@ -5704,7 +5878,13 @@
   "title": "新年は華やかな特別仕様の【ぴよりん】とともに。三が日限定「賀正ぴよりん」販売！！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000065.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "正月限定ぴよりん商品販売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241203-3600ef93",
@@ -5713,7 +5893,13 @@
   "title": "クリスマス限定「クリスマスぴよりんパフェ」で幸せ気分",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000063.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "クリスマス限定ぴよりんパフェ",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241128-e3f4ef7c",
@@ -5722,7 +5908,13 @@
   "title": "累計販売数400万ぴよ達成！『もっと！ぴよりん計画』始動！！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000062.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん販売数達成とキャンペーン",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241118-22c2305a",
@@ -5731,7 +5923,13 @@
   "title": "出版業界からエコ活動を発信する「ONE ECO PROJECT」が提案するエコバッグ「本袋（大）」に「ぴよりん柄」が登場！！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000060.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん柄エコバッグコラボ商品",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241112-4eadf729",
@@ -5740,7 +5938,13 @@
   "title": "【名古屋・驛麺通り】辛い!!が旨い!!「2024冬の限定麺」販売！「ぴよりん」コラボグッズが当たるキャンペーンも開催！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000057.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんコラボグッズキャンペーン",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241106-a6e61fd9",
@@ -5749,7 +5953,13 @@
   "title": "2025年版「ぴよりん」卓上カレンダーが登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000059.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの卓上カレンダー商品",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241101-3bc687ae",
@@ -5758,7 +5968,13 @@
   "title": "ぴよりんとチーズの出会い！レアチーズぴよりん登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000058.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "レアチーズぴよりん新商品",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241031-9196b434",
@@ -5767,7 +5983,13 @@
   "title": "今年のクリスマスは、「ぴよりん」と過ごす素敵なひとときを。",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000056.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "クリスマスぴよりんの企画記事",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241011-c63070eb",
@@ -5776,7 +5998,13 @@
   "title": "岐阜県とのコラボぴよりん第7弾「栗ぴよりん」が「清流の国ぎふ」文化祭2024 海外・国内大交流プログラムで特別販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000055.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "岐阜県とのコラボぴよりん商品",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241011-3c355d3b",
@@ -5785,7 +6013,13 @@
   "title": "メ～テレ主催「ドデ祭2024」に「ぴよりん」が登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000054.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "イベント出店のぴよりン話題",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241011-5623652d",
@@ -5794,7 +6028,13 @@
   "title": "かわいさ満載！【イコちゃん×ぴよりん】コラボ第2弾「カモノハシのイコちゃん×ぴよりん だっこポーチ」発売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000050.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん×イコちゃんのコラボ商品。公式コラボ企画",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241008-4742a573",
@@ -5803,7 +6043,13 @@
   "title": "「ぴよりん」鉄道の日オリジナルグッズ販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000051.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん鉄道の日オリジナルグッズ販売。ぴよりん企画",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20261010-3c571a08",
@@ -5813,7 +6059,13 @@
   "source": "ウォーカープラス",
   "url": "https://www.walkerplus.com/article/1219952/",
   "related": [],
-  "dv": 3
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりンチャレンジ企画で日立製作所とのコラボ検証",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241004-27fbaa0f",
@@ -5822,7 +6074,13 @@
   "title": "【イッチー×ぴよりん】東海テレビ公式キャラクター「イッチー」と初コラボ！「東海テレビ　ふるさとイッチー祭2024」にてコラボぴよりん＆オリジナルグッズを限定販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000052.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん×イッチー東海テレビコラボ商品の販売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20241003-52c396f5",
@@ -5831,7 +6089,13 @@
   "title": "【お亀堂×ぴよりん】三河豊橋と尾張名古屋・愛知県の企業がコラボして「うずら卵」を応援！「ぴよりんあん巻き」発売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000053.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん×お亀堂コラボ商品「ぴよりんあん巻き」発売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240925-592f227c",
@@ -5840,7 +6104,13 @@
   "title": "第70回名古屋まつりに「ぴよりん」登場！名古屋の老舗御菓子処「亀屋芳広」とのコラボ商品も販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000048.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "名古屋まつりにぴよりん登場、コラボ商品販売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20260925-27f5bf85",
@@ -5855,7 +6125,13 @@
     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5tUDBzcWlsREpuOXQxaTcxR2lyZmhZcmVWOGZPLXk4Wng2STFLVGJtSEIxM2dobzdXV3BUT3FTV3dFNHRVTXZrSHlKOWtOZ2hLQjF5amZRMXFZZVNWWFMyQWFZRUpkbHM0dU1MOFdR?oc=5"
    }
   ],
-  "dv": 3
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんが生しるこサンドとのコラボ商品に登場",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240913-64c5f1cd",
@@ -5864,7 +6140,13 @@
   "title": "【ブラックサンダー×ぴよりん】話題のコラボ商品が1年半ぶりに満を持して再雷⚡豊橋限定「ブラックサンダーぴよりん」販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000046.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん×ブラックサンダー再コラボ商品販売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240903-3f6f886f",
@@ -5873,7 +6155,13 @@
   "title": "ぴよりん×有田焼のコラボ「有田焼ぴよりん」が今年も登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000045.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん×有田焼のコラボ商品が登場",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240903-d122abb0",
@@ -5882,7 +6170,13 @@
   "title": "「ぴよりん」を科学的に検証！？日立製作所研究チーム協力による振動実験動画を公開！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000039.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの振動実験動画公開、企画内容",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240828-60a7aad0",
@@ -5891,7 +6185,13 @@
   "title": "【生しるこサンド×ぴよりん】愛知県の人気商品が夢のコラボ！和洋折衷の新感覚スイーツ「ぴよりん生しるこサンド」発売！！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000041.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん×生しるこサンドコラボ商品の発売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240827-794efa33",
@@ -5900,7 +6200,13 @@
   "title": "「ぴよりん」とレトロな世界を楽しもう！『ぴよりんと旅する レトロな世界フェア』開催！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000044.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんとレトロ世界フェア開催",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240827-5f4e8981",
@@ -5909,7 +6215,13 @@
   "title": "【イコちゃん×ぴよりん】関西と東海の人気キャラが初のコラボ！「カモノハシのイコちゃん×ぴよりん だっこぬいぐるみ」発売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000043.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん×イコちゃん初コラボぬいぐるみ発売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240822-9297c463",
@@ -5918,7 +6230,13 @@
   "title": "秋の訪れを彩る、「紅茶と洋ナシぴよりん」が登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000042.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "紅茶と洋ナシぴよりん新商品登場",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240809-80755dc5",
@@ -5927,7 +6245,13 @@
   "title": "さらなる進化を遂げた「ぴよりんルーム 第2弾」発売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000038.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんルーム第2弾商品発売",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240730-87ff711c",
@@ -5936,7 +6260,13 @@
   "title": "今度の付録は「ビッグサイズのふわふわぬいぐるみ」！！『ぴよりんブランドムック』第2弾発売！！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000037.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのムック本付録について。グッズ関連",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240726-0bbc12b5",
@@ -5945,7 +6275,13 @@
   "title": "パイナップルに変身!?美味しくかわいくリニューアル！味も見た目も新しくなった「なつやすみぴよりん」が登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000035.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの新商品「なつやすみぴよりん」の紹介",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240712-9a439016",
@@ -5954,7 +6290,13 @@
   "title": "【堂島ロール×ぴよりん】手土産にピッタリ！ぴよりんのプリン味をイメージした、名古屋限定のひんやりチーズスイーツ発売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000034.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "堂島ロールとのコラボ商品。公式コラボ",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240710-f700cabc",
@@ -5963,7 +6305,13 @@
   "title": "【ぴよりん】「第７回JR東海いいもの探訪フェア」に東海道新幹線60周年記念限定パッケージで登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000033.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "JR東海フェアへのぴよりん出展。イベント出店",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240628-7c4ca4fe",
@@ -5972,7 +6320,13 @@
   "title": "乗車特典あり！「名古屋観光特使ぴよりん」ラッピングバスが期間限定運行！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000031.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんラッピングバス運行。ぴよりん企画",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240626-3d2d0b30",
@@ -5981,7 +6335,13 @@
   "title": "「ぴよりん」誕生から１３年！感謝の気持ちを込めたアニバーサリー限定商品が続々登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000030.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん13周年（15周年企画）記念商品",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240625-ca9b06b3",
@@ -5990,7 +6350,13 @@
   "title": "ぴよりんファン必見！【ハタヤ×ぴよりん】可愛らしさと機能性を兼ね備えた屋内用コードリール「ぴよりんオートマッキー」発売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000028.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ハタヤとのコラボグッズ。公式ライセンスグッズ",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240605-1266424c",
@@ -5999,7 +6365,13 @@
   "title": "本物そっくり！？【キボリノコンノ展】木彫りの「ぴよりん」登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000026.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの木彫り作品展示。ぴよりん関連イベント",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240603-6ba0c145",
@@ -6008,7 +6380,13 @@
   "title": "【スガキヤ×ぴよりん】名古屋名物初コラボ！ぴよりんをイメージした「プリンパフェ」を期間限定販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000024.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "スガキヤとのコラボ商品。公式コラボ",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240522-1690ceb2",
@@ -6017,7 +6395,13 @@
   "title": "リニアをモチーフにしたコラボぴよりん「リニアぴよりん」が登場！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000017.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "リニアをモチーフとしたコラボぴよりん",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20240508-7e91c789",
@@ -6026,7 +6410,13 @@
   "title": "「ぴよりん」がご飯のお供に！【浜乙女×ぴよりん】「ぴよりんふりかけ～ぴよりんのかまぼこ入り～」 発売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000015.000124425.html",
-  "related": []
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "浜乙女とのコラボ商品ふりかけ。公式コラボ",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20260919-1f266706",
@@ -6041,7 +6431,13 @@
     "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOZlZ5WlVBOHplTDR0WFhWcnVyQldWOXIyWnZxWkNZbEQxQzZtQ3EzUWJFcFR1dUNkeXRRRF85YzNSUmRnMlZfNFFuZ3VPM3QzY1BlTUpvRVJCSHFvNjgtT3VHNHQ4aHpMOUN2OTVFMUlLOWxkRzJybWFibnREOFZRMWRqOFpoQVlYdzBaUDBR?oc=5"
    }
   ],
-  "checked": true
+  "checked": true,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "映画とのコラボぴよりん。公式コラボ企画",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20260925-2e204d29",
@@ -6056,7 +6452,13 @@
     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1tWmlZSnNwcGtBeUNseEVnN3NOV3V3TGxSN2FyMzZEdnZRRDNtTHUyZmhMaC1fdUZLVkNWUm1kYjd2Wl9PakV0NFFtb21DbFRvLTktb0xvS0FVMkRIMGNLRzc2TXdmQXBrLWhUdTZ3?oc=5"
    }
   ],
-  "dv": 3
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん福袋販売。ぴよりん商品企画",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20260923-afcc9479",
@@ -6071,7 +6473,13 @@
     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE56TE4tSTQzZG9oQVA2VDFucGZ2NG54cW5WNjZ4QWRESmdrdExJdTdvZlQ4dm1mTnREal9UbVF2RW9qX0w4MG1pTnZMOHprOXhweV9wZk1fM0tkcXB2d2l1MDEzNndQM1EzM1ptaWFR?oc=5"
    }
   ],
-  "dv": 3
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの新作商品紹介。ぴよりん本体の話題",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20260925-1d7ab54a",
@@ -6081,7 +6489,13 @@
   "source": "ウォーカープラス",
   "url": "https://www.walkerplus.com/article/151510/",
   "related": [],
-  "dv": 3
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "期間限定ぴよりん新味の紹介。新商品情報",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20261014-0bdc9ca9",
@@ -6091,7 +6505,13 @@
   "source": "ウォーカープラス",
   "url": "https://www.walkerplus.com/article/140731/",
   "related": [],
-  "dv": 3
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの専門店オープンについての直接的な記事",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20261004-d399d142",
@@ -6101,7 +6521,13 @@
   "source": "ウォーカープラス",
   "url": "https://www.walkerplus.com/article/119095/",
   "related": [],
-  "dv": 3
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの新商品（期間限定）に関する記事",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20260922-fa1cff31",
@@ -6116,7 +6542,13 @@
     "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE13RVZ0SGJFZEJVal9xYTZ5VUMwNkxxcGMxeXNLZ0hoQ19wendIbDBOVGhJVHdfZFdzdnI4OEM1ekJ5ZllLcTRaUXEwdUxsSE9DSHdpNkVvZ0hNQzJVV1AyM21WRkZsWmd2?oc=5"
    }
   ],
-  "dv": 3
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの新フレーバー商品（あまおう味）の紹介",
+   "t": "2026-10-15"
+  }
  },
  {
   "id": "n20260929-5118dfb6",
@@ -6131,6 +6563,12 @@
     "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9CYWVkZnB3NF90NlVnbl9OUktLbUdfcVN1S3puZjlmOTNhRHUtOU42aWJJOF9Xc3p3ZFFFVWxTY1Rrc2d1UUM5eEhpeUJ5b1l5bHV2NmJVa2laNEtIV3pqWFN0a1ZXWjhN?oc=5"
    }
   ],
-  "dv": 3
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのクリスマスバージョン商品に関する記事",
+   "t": "2026-10-15"
+  }
  }
 ]
