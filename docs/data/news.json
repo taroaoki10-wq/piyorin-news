@@ -48,6 +48,54 @@
   }
  },
  {
+  "id": "n20261016-2068f496",
+  "date": "2026-10-16",
+  "cat": "media",
+  "title": "東海地方の人気者がコラボ！ 【メ～テレ】「ドデ祭2026」が10/17、18開催。限定ウルフィぴよりんや新作グッズを販売",
+  "source": "朝日新聞",
+  "url": "https://www.asahi.com/and/w/article/16962315",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのイベント出店・コラボグッズ・限定商品販売の記事。ドデ祭2026への出店",
+   "t": "2026-10-16"
+  }
+ },
+ {
+  "id": "n20261016-bd2e3a1c",
+  "date": "2026-10-16",
+  "cat": "media",
+  "title": "おっさん、朝から悶絶する。",
+  "source": "note",
+  "url": "https://note.com/hei_project/n/n61181084fcbb",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんVillageへの訪問体験とぴよりん商品購入に関する記事。ぴよりん本体の",
+   "t": "2026-10-16"
+  }
+ },
+ {
+  "id": "n20261016-dfdba90d",
+  "date": "2026-10-16",
+  "cat": "media",
+  "title": "A middle-aged man, agonizing from the morning.",
+  "source": "note",
+  "url": "https://note.com/hei_project/n/n61181084fcbb?hl=en",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "記事n=1の英語版。ぴよりんVillageとぴよりん商品に関する内容。",
+   "t": "2026-10-16"
+  }
+ },
+ {
   "id": "official-p5620",
   "date": "2026-10-15",
   "cat": "official",
@@ -67,6 +115,10 @@
    {
     "source": "ニコニコニュース",
     "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE0wbnBXb21oLW9qc0JZLUd1U1Z3U2hrcURiSW5ucnBJTzZzTmRkSE1ZbkUzSFBycFJvbUg1a2pEVTNISXZxUzVHZXQxVk15TUZUNU1IeTQwR3RMUHVyb3FiOTNydmZPZFRy?oc=5"
+   },
+   {
+    "source": "MANTANWEB",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5DVzl6dGhNRXZOd3owUXJtRmYwT3RRWU90MjRNQTJ0SGoyNkVtSTJtM0w0aXd1OVJPVXZtMUJPLS0xdVNCMjdIeWtEZ2tSLVBQUnlSRV9uWUpRYjJrMkRBTDNtR0hvWXJzOVpzRjZvZXFPbnQ4MEE?oc=5"
    }
   ],
   "dv": 3,
