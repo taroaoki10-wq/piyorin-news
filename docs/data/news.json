@@ -27,6 +27,10 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBteThkT2NmaUllMXQ5ZmdhejJXTTF0d1h2UjYwaWlHOW1OU0R1anB1cWhhS3M0MFdJZldlZEtQdVFFZURMRmJmSHFTUXhxQ3hQeWY0WlJQR2FZeTAzQlp6UjhR?oc=5"
+   },
+   {
+    "source": "MANTANWEB",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQcVdxck05WVVJNGlwWUM4S0xCdE55dDZxTTY1WklTVVZreG4xS1BGUmduWkNPdHJTRUROdmw5LUhuaUpNTUJ5LW4xc09MVjcwN05TY1RlOFBzYTcwblVPM01GeEZrVkI5bTc4S3NTUElCZ1pPZ183UnV3aEVWT3VWNllPYlNlenFK?oc=5"
    }
   ],
   "dv": 3,
@@ -66,6 +70,43 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんの限定販売に関するJR東海フードサービスの記事",
+   "t": "2026-10-17"
+  }
+ },
+ {
+  "id": "n20261017-9fbb6f6e",
+  "date": "2026-10-17",
+  "cat": "media",
+  "title": "プレスリリース：ぴよりんが山口県へ初めてのおでかけ！「おのだサンパーク」で期間限定販売（PR TIMES）",
+  "source": "毎日新聞",
+  "url": "https://mainichi.jp/articles/20261017/pr2/00m/020/108000c",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの期間限定販売イベント出店に関する記事",
+   "t": "2026-10-17"
+  }
+ },
+ {
+  "id": "n20261017-6edec73a",
+  "date": "2026-10-17",
+  "cat": "media",
+  "title": "ぴよりんが山口県へ初めてのおでかけ！「おのだサンパーク」で ...",
+  "source": "毎日新聞デジタル",
+  "url": "https://mainichi.jp/articles/20261017/pr2/00m/020/108000c",
+  "related": [
+   {
+    "source": "朝日新聞デジタル",
+    "url": "https://www.asahi.com/and/pressrelease/16973301"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの期間限定販売イベント出店に関する記事",
    "t": "2026-10-17"
   }
  },
