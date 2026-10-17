@@ -1,5 +1,30 @@
 [
  {
+  "id": "official-p5628",
+  "date": "2026-10-17",
+  "cat": "official",
+  "title": "おでかけ情報 ぴよりんが山口県へ初めてのおでかけ！「おのだサンパーク」で期間限定販売 記事を見る",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5628/",
+  "related": []
+ },
+ {
+  "id": "n20261017-b732de0f",
+  "date": "2026-10-17",
+  "cat": "press",
+  "title": "ぴよりんが山口県へ初めてのおでかけ！「おのだサンパーク」で期間限定販売",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000253.000124425.html",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの期間限定販売イベント出店に関する記事",
+   "t": "2026-10-17"
+  }
+ },
+ {
   "id": "n20261016-c60a9d88",
   "date": "2026-10-16",
   "cat": "media",
@@ -119,6 +144,10 @@
    {
     "source": "MANTANWEB",
     "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5DVzl6dGhNRXZOd3owUXJtRmYwT3RRWU90MjRNQTJ0SGoyNkVtSTJtM0w0aXd1OVJPVXZtMUJPLS0xdVNCMjdIeWtEZ2tSLVBQUnlSRV9uWUpRYjJrMkRBTDNtR0hvWXJzOVpzRjZvZXFPbnQ4MEE?oc=5"
+   },
+   {
+    "source": "時事ドットコム",
+    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9GN25WY19hLXVsUlBCbFNaTTd6dThrOWtpa2JoTER5cVlTa3h0RWVpVkQtVUdycTdCWk5uV0NBaUM3Q0VUcmVQcFJkeDRmbFBmRXNBVnVlN0U1RWFQSHJFZ3EyQ19ZOGVfOWhZ?oc=5"
    }
   ],
   "dv": 3,

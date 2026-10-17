@@ -176,6 +176,16 @@
   "auto": true
  },
  {
+  "id": "auto-officialp5628",
+  "title": "おでかけ情報 ぴよりんが山口県へ初めてのおでかけ！「おのだサンパーク」で期間限定販売 記事を見る",
+  "start": "2026-11-01",
+  "end": "2026-11-03",
+  "place": "おのだサンパーク",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5628/",
+  "auto": true
+ },
+ {
   "id": "e-tour",
   "title": "ぴよりん新幹線ツアー（いいぴよの日）",
   "start": "2026-11-14",
