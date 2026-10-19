@@ -1,5 +1,37 @@
 [
  {
+  "id": "n20261019-f6657b54",
+  "date": "2026-10-19",
+  "cat": "media",
+  "title": "「ぴよりん」も初出店！全66店舗集結のグルメフェスタが山口で開催 VIVANTグッズも",
+  "source": "いこーよニュース",
+  "url": "https://report.iko-yo.net/articles/34870",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんがイベント出店することが記事の主要な内容",
+   "t": "2026-10-19"
+  }
+ },
+ {
+  "id": "n20261019-66f7b0ac",
+  "date": "2026-10-19",
+  "cat": "media",
+  "title": "「ぴよりん」も初出店！全66店舗集結のグルメフェスタが山口で ...",
+  "source": "いこーよニュース",
+  "url": "https://report.iko-yo.net/articles/34870",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんがイベント出店することが記事の主要な内容",
+   "t": "2026-10-19"
+  }
+ },
+ {
   "id": "n20261018-53ebc08b",
   "date": "2026-10-18",
   "cat": "media",
@@ -3367,6 +3399,21 @@
   ]
  },
  {
+  "id": "n20260902-46b9e9d1",
+  "date": "2026-09-02",
+  "cat": "press",
+  "title": "『エヴァンゲリオン』30周年記念展「ALL OF EVANGELION」「ぴよりん」とのコラボグッズ第2弾や、名古屋会場限定グッズが追加決定！",
+  "source": "PR TIMES",
+  "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBya3g1cS02VGNHZzI4dEdPNzVIaGRqcHNuM3Zud2VhTWNzMlRETmd2VU1QMUJBbzZpMmlNcEp1ZzJZMVhYVmVyYmlfTXR3akhfMXlYX2g4cHl0VGo4LTR3MGhWZk1COTZJZXc?oc=5",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "エヴァンゲリオンとぴよりんのコラボグッズ記事",
+   "t": "2026-10-15"
+  }
+ },
+ {
   "id": "n20261019-5d19bd3d",
   "date": "2026-09-02",
   "cat": "media",
@@ -3380,21 +3427,6 @@
    "ok": true,
    "why": "ぴよりんのコラボ商品が販売されるイベント",
    "t": "2026-10-19"
-  }
- },
- {
-  "id": "n20260902-46b9e9d1",
-  "date": "2026-09-02",
-  "cat": "press",
-  "title": "『エヴァンゲリオン』30周年記念展「ALL OF EVANGELION」「ぴよりん」とのコラボグッズ第2弾や、名古屋会場限定グッズが追加決定！",
-  "source": "PR TIMES",
-  "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBya3g1cS02VGNHZzI4dEdPNzVIaGRqcHNuM3Zud2VhTWNzMlRETmd2VU1QMUJBbzZpMmlNcEp1ZzJZMVhYVmVyYmlfTXR3akhfMXlYX2g4cHl0VGo4LTR3MGhWZk1COTZJZXc?oc=5",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "エヴァンゲリオンとぴよりんのコラボグッズ記事",
-   "t": "2026-10-15"
   }
  },
  {
@@ -4621,7 +4653,12 @@
   "title": "JR勝川駅が「ぴよりん」一色に！ 誕生15周年記念で初の駅装飾が7月スタート 「ぴよりんが生まれるまち」を広く発信",
   "source": "日テレNEWS NNN",
   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOM3FVZ3lNalJKYjFrSHZNc2M3RDNzVTdvM1hCQ0dZXzFPckN6VkdNMnM3OEhQSFRKWGJXVUxORElaSGtRYUhlWHVlY3BGbHNDN09vQ1lXRDloSmhjWXZDWV9Sa0oyWERJSDhmNS0tcWxoZmJBZF9XS0FZbmx5UFFRc1MzQQ?oc=5",
-  "related": [],
+  "related": [
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5sQmtrb1JfMVlXanpxVUVlUWtkaTdjTlRFdzdZSDBXSUFiVFlwWjc2Y0lxOVduV2tfZDFZeFRnMXh3SHN2eElEX1hXMlZVRks1QXdHS1ozUmczMnhLYWpQeHU1bm1BV2RCdmFkUFFSME94YTZQSllEQ0dmOUZ4eE0?oc=5"
+   }
+  ],
   "jg": {
    "v": 1,
    "ok": true,
