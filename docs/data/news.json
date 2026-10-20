@@ -15,7 +15,12 @@
   "title": "ぴよりんをモチーフにした人気の「ひよりの手作りクッキー缶」にハロウィンver.が登場！名古屋駅でも販売",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000241.000124425.html",
-  "related": [],
+  "related": [
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9hTDFaR1M4UFQtZDJlYVcxc3E0VHlNS2p5SXNCLUIyX2VJdGsySjBlOF9oY1BhTkx3b3RxTTdvNUR1c1ZLb2lkOE93OXFYYVdNWlhoWFlGOU96cDN4allnbnV3?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -54,6 +59,22 @@
    "ok": true,
    "why": "ぴよりんがイベント出店することが記事の主要な内容",
    "t": "2026-10-19"
+  }
+ },
+ {
+  "id": "n20261019-67c6ace3",
+  "date": "2026-10-19",
+  "cat": "media",
+  "title": "ぴよりんをモチーフにした人気の「ひよりの手作りクッキー缶」に ...",
+  "source": "MANTANWEB（まんたんウェブ）",
+  "url": "https://mantan-web.jp/prtimes/article/20261020prt00m200000141a.html",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんをモチーフにした商品の販売に関する記事",
+   "t": "2026-10-20"
   }
  },
  {
@@ -303,6 +324,22 @@
   "source": "ぴよりん公式サイト",
   "url": "https://piyorin.com/news/p5620/",
   "related": []
+ },
+ {
+  "id": "n20261020-31d74e47",
+  "date": "2026-10-15",
+  "cat": "media",
+  "title": "魔女姿のハロウィンぴよりんが登場へ 10月23日から期間限定で販売",
+  "source": "Dellows News",
+  "url": "https://news.dellows.jp/738113/?from=recommend_list",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの季節限定商品の販売について",
+   "t": "2026-10-20"
+  }
  },
  {
   "id": "n20261015-64b53a28",
@@ -2169,6 +2206,22 @@
   "source": "ぴよりん公式サイト",
   "url": "https://piyorin.com/news/p5585/",
   "related": []
+ },
+ {
+  "id": "n20261020-1ae90d5e",
+  "date": "2026-09-30",
+  "cat": "media",
+  "title": "岡山髙島屋でオニぴよりんなど限定販売へ 2026鉄道の日フェアに合わせ登場",
+  "source": "Dellows News",
+  "url": "https://news.dellows.jp/512480/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの限定販売イベント出店に関する記事",
+   "t": "2026-10-20"
+  }
  },
  {
   "id": "n20260930-2936c470",
