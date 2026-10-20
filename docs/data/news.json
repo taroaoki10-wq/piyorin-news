@@ -19,6 +19,10 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9hTDFaR1M4UFQtZDJlYVcxc3E0VHlNS2p5SXNCLUIyX2VJdGsySjBlOF9oY1BhTkx3b3RxTTdvNUR1c1ZLb2lkOE93OXFYYVdNWlhoWFlGOU96cDN4allnbnV3?oc=5"
+   },
+   {
+    "source": "MANTANWEB",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFByX2VLOGdiRU5LcVJxSk1vWENPR1YzdkVscnV5cV8ySFVUbmlCUnJBbS1OVnQxeEgwWW5BM1h4M1I5bU9tRG1ETDA3UFd4Y21zZExZWFhzeFBwV05TcERPQ2RPbUJ2bEo0RzZFdUNhVDd4eWRQNHc?oc=5"
    }
   ],
   "dv": 3,
@@ -326,22 +330,6 @@
   "related": []
  },
  {
-  "id": "n20261020-31d74e47",
-  "date": "2026-10-15",
-  "cat": "media",
-  "title": "魔女姿のハロウィンぴよりんが登場へ 10月23日から期間限定で販売",
-  "source": "Dellows News",
-  "url": "https://news.dellows.jp/738113/?from=recommend_list",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの季節限定商品の販売について",
-   "t": "2026-10-20"
-  }
- },
- {
   "id": "n20261015-64b53a28",
   "date": "2026-10-15",
   "cat": "press",
@@ -368,6 +356,22 @@
    "ok": true,
    "why": "ハロウィンぴよりんの新商品販売情報",
    "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20261020-31d74e47",
+  "date": "2026-10-15",
+  "cat": "media",
+  "title": "魔女姿のハロウィンぴよりんが登場へ 10月23日から期間限定で販売",
+  "source": "Dellows News",
+  "url": "https://news.dellows.jp/738113/?from=recommend_list",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの季節限定商品の販売について",
+   "t": "2026-10-20"
   }
  },
  {
@@ -694,6 +698,10 @@
    {
     "source": "クレアウェブ",
     "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFAyWVhrRUVrMlBCbzgteDFCaXZhV281VFpDbU50cmpVLVhEQ2JtUWxXQmZvcG9Pbm5UMjRGNE1pLUtoRHU2SUJVeHB4M3JobWFYODBXWDRySkVVdDNhUVhfVmZTWUE4QUwxbzN1bEt4SDFUZw?oc=5"
+   },
+   {
+    "source": "朝日新聞",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE81M3BlMWlkUDVuUVlyT0VyZFhrQmJwVkJ6aXVjSmJBT192eXphV21pQ29CdF9Ca081NU1va0JfMzZuNmQ5ZEs3dXliZ1JaR0cwdU9Jb3AyTE56Tkk?oc=5"
    }
   ],
   "dv": 3,
@@ -2208,22 +2216,6 @@
   "related": []
  },
  {
-  "id": "n20261020-1ae90d5e",
-  "date": "2026-09-30",
-  "cat": "media",
-  "title": "岡山髙島屋でオニぴよりんなど限定販売へ 2026鉄道の日フェアに合わせ登場",
-  "source": "Dellows News",
-  "url": "https://news.dellows.jp/512480/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの限定販売イベント出店に関する記事",
-   "t": "2026-10-20"
-  }
- },
- {
   "id": "n20260930-2936c470",
   "date": "2026-09-30",
   "cat": "press",
@@ -2278,6 +2270,22 @@
    "ok": true,
    "why": "オニぴよりン限定販売に関する記事",
    "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20261020-1ae90d5e",
+  "date": "2026-09-30",
+  "cat": "media",
+  "title": "岡山髙島屋でオニぴよりんなど限定販売へ 2026鉄道の日フェアに合わせ登場",
+  "source": "Dellows News",
+  "url": "https://news.dellows.jp/512480/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの限定販売イベント出店に関する記事",
+   "t": "2026-10-20"
   }
  },
  {
