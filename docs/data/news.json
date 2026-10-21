@@ -10,6 +10,10 @@
    {
     "source": "AERA DIGITAL",
     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFA4dGR1ZlhRdHFiYnE2WE5QTE0yRjZRaUQ1cEg4MXJfNHFaU1RqOUZvRll2cFpKcmlocUNFOU81MHJQdVg3ejhGUFNvRDJzLVpf?oc=5"
+   },
+   {
+    "source": "まんたんウェブ",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNNnlSYkp0Z3hieVM4VVZwT2JUM3BrZXgxeE94Zmw1VlFFcXRnU3NVWkFheU9tNmxjcVdDTkU4VlVyRFB2V2Rob3VpTUpzMEVkUHM5TURUeEpyUEZ4WnQ3ekQ4RXh6aWdpN3Q4SW53anhoR0wxM3BGdmE5b25UN0dNbVE1VTBkdWRO?oc=5"
    }
   ],
   "dv": 3,
@@ -136,7 +140,12 @@
   "title": "サンタやトナカイ姿の「ぴよりん」がずらり クリスマス限定ケーキ ...",
   "source": "ORICON NEWS on MSN",
   "url": "https://www.msn.com/ja-jp/entertainment/celebrity/%E3%82%B5%E3%83%B3%E3%82%BF%E3%82%84%E3%83%88%E3%83%8A%E3%82%AB%E3%82%A4%E5%A7%BF%E3%81%AE-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%8C%E3%81%9A%E3%82%89%E3%82%8A-%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%E9%99%90%E5%AE%9A%E3%82%B1%E3%83%BC%E3%82%AD2%E7%A8%AE%E9%A1%9E-30%E6%97%A5%E3%81%8B%E3%82%89%E5%85%88%E7%9D%80%E9%A0%86%E3%81%A7%E4%BA%88%E7%B4%84%E5%8F%97%E4%BB%98/ar-AA2fH9Q8",
-  "related": [],
+  "related": [
+   {
+    "source": "毎日新聞デジタル",
+    "url": "https://mainichi.jp/articles/20261021/orc/00m/200/110000c"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -340,6 +349,22 @@
    "ok": true,
    "why": "ぴよりんクリスマスケーキの予約に関する記事",
    "t": "2026-10-21"
+  }
+ },
+ {
+  "id": "n20261021-a9b3b541",
+  "date": "2026-10-21",
+  "cat": "media",
+  "title": "【画像】サンタやトナカイに扮したぴよりんがクリスマスケーキに、30日から予約開始",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32619044/?img_id=57108214",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのクリスマスケーキ商品紹介",
+   "t": "2026-10-22"
   }
  },
  {
@@ -6086,6 +6111,22 @@
    "ok": true,
    "why": "ぴよりんのイベント出店・実演販売",
    "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20261021-333f000f",
+  "date": "2025-10-21",
+  "cat": "media",
+  "title": "今年の「ぴよりん」クリスマスケーキは5種 『ブッシュドノエル』が6年ぶり登場",
+  "source": "オリコンニュース",
+  "url": "https://www.oricon.co.jp/news/2413661/?anc=044&utm_source=headlines.yahoo.co.jp&utm_content=%2Fhl%3Fa%3D20261021-00000439-oric-life&utm_medium=referral",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのクリスマスケーキ商品情報",
+   "t": "2026-10-22"
   }
  },
  {
