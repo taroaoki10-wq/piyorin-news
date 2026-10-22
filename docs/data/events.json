@@ -166,6 +166,16 @@
   "url": "https://piyorin.com/news/p5558/"
  },
  {
+  "id": "auto-officialp5633",
+  "title": "ぴよりんゴジラ販売",
+  "start": "2026-10-22",
+  "end": "2026-10-22",
+  "place": "ぴよりんvillage",
+  "kind": "release",
+  "url": "https://piyorin.com/news/p5633/",
+  "auto": true
+ },
+ {
   "id": "auto-officialp5599",
   "title": "ひよりの手作りクッキー缶 ハロウィンver. 販売",
   "start": "2026-10-23",

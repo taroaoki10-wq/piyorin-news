@@ -1,5 +1,14 @@
 [
  {
+  "id": "official-p5633",
+  "date": "2026-10-22",
+  "cat": "official",
+  "title": "店舗 限定商品 お知らせ 映画『ゴジラ-0.0』公開記念 「ぴよりんゴジラ」販売＆「ぴよりんvillage」をゴジラ仕様に！ 記事を見る",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5633/",
+  "related": []
+ },
+ {
   "id": "n20261022-a7672beb",
   "date": "2026-10-22",
   "cat": "media",
@@ -17,6 +26,116 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんのクリスマスケーキ新商品の予約開始に関する記事",
+   "t": "2026-10-22"
+  }
+ },
+ {
+  "id": "n20261022-ded7ef30",
+  "date": "2026-10-22",
+  "cat": "press",
+  "title": "映画『ゴジラ-0.0』公開記念　「ぴよりんゴジラ」販売＆「ぴよりんvillage」をゴジラ仕様に！",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000250.000124425.html",
+  "related": [
+   {
+    "source": "毎日キレイ",
+    "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5pWklqTHRjSFN3ekViZGFXZ3FKb2ZjamVKQ3UtSURsY08zVmUyN2J3ZkU5Q19RQnhvOTIyckpJMG1DNUg4SWpHQmZyUjdIWWNSZFlWSTlKa05HbFJsdy1teUFzNC01VEpmT2tkQURzM0VpZW1zaktNbXVB?oc=5"
+   },
+   {
+    "source": "まんたんウェブ",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE83aTdSLWRuQ1V2R3kwY0RuZzM5bGpid0c0R0lPblJ4SHA3ZzdNckJlU1pTc25IWEFodWY4QlpKNXlMT0c3dDVwbEU0bWFkZVZHYVJTaDhNaEVQdU43R09ueFQ5RXhWTExDczRHZVRyeVJXdnl1YkE?oc=5"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラコラボ商品と特別企画の公式販売情報",
+   "t": "2026-10-22"
+  }
+ },
+ {
+  "id": "n20261022-90c13031",
+  "date": "2026-10-22",
+  "cat": "press",
+  "title": "【JR東海】「ぴよりんvillage」にゴジラ襲来！ “絶望の到達点”から、前代未聞の“ゆるふわの到達点”へ！？",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000101.000160429.html",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんvillageでのゴジラコラボイベント企画",
+   "t": "2026-10-22"
+  }
+ },
+ {
+  "id": "n20261022-696e268c",
+  "date": "2026-10-22",
+  "cat": "media",
+  "title": "山口に出張？ 【ぴよりん】11/1より「ぴよりんおでかけセット」やグッズ全20種をおのだサンパークにて3日間限定販売",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/d1ecf92db9c7992608e46cfe454ca52cd35fef4f",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの山口県出張販売イベント情報",
+   "t": "2026-10-22"
+  }
+ },
+ {
+  "id": "n20261022-3fce1123",
+  "date": "2026-10-22",
+  "cat": "media",
+  "title": "ウミネコもキーウィも鳥です。12/12,4/4 on X: \"ぴよりん！！！！！\"",
+  "source": "Howl.link",
+  "url": "https://t.co/2hWB41jEyi",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": false,
+   "why": "個人の感想ツイート、ぴよりん商品情報なし",
+   "t": "2026-10-22"
+  }
+ },
+ {
+  "id": "n20261022-cc2285c7",
+  "date": "2026-10-22",
+  "cat": "media",
+  "title": "映画『ゴジラ-0.0』公開記念 「ぴよりんゴジラ」販売＆「ぴよりん ...",
+  "source": "アニメ！アニメ！",
+  "url": "https://animeanime.jp/release/prtimes/20261022/321596.html",
+  "related": [
+   {
+    "source": "MANTANWEB（まんたんウェブ）",
+    "url": "https://mantan-web.jp/prtimes/article/20261022prt00m200000904a.html"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラコラボの販売・グッズ・企画情報",
+   "t": "2026-10-22"
+  }
+ },
+ {
+  "id": "n20261022-e218b374",
+  "date": "2026-10-22",
+  "cat": "media",
+  "title": "山口に出張？ 【ぴよりん】11/1より「ぴよりんおでかけセット」や ...",
+  "source": "朝日新聞デジタル",
+  "url": "https://www.asahi.com/and/w/article/16979835",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの山口イベント出店・販売情報",
    "t": "2026-10-22"
   }
  },
@@ -169,6 +288,10 @@
    {
     "source": "毎日新聞デジタル",
     "url": "https://mainichi.jp/articles/20261021/orc/00m/200/110000c"
+   },
+   {
+    "source": "ORICON NEWS",
+    "url": "https://www.oricon.co.jp/news/2487819/full/"
    }
   ],
   "dv": 3,
@@ -186,7 +309,12 @@
   "title": "“魔女帽子ぴよりん”のハロウィン限定クッキー缶、紫芋 ...",
   "source": "ファッションプレス",
   "url": "https://www.fashion-press.net/news/152280",
-  "related": [],
+  "related": [
+   {
+    "source": "ファッションプレス on MSN",
+    "url": "https://www.msn.com/ja-jp/news/other/%E9%AD%94%E5%A5%B3%E5%B8%BD%E5%AD%90%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%AE%E3%83%8F%E3%83%AD%E3%82%A6%E3%82%A3%E3%83%B3%E9%99%90%E5%AE%9A%E3%82%AF%E3%83%83%E3%82%AD%E3%83%BC%E7%BC%B6-%E7%B4%AB%E8%8A%8B-%E3%81%8B%E3%81%BC%E3%81%A1%E3%82%83%E3%82%AF%E3%83%83%E3%82%AD%E3%83%BC%E3%82%84%E3%81%8A%E3%81%B0%E3%81%91%E5%9E%8B%E3%81%AA%E3%81%A98%E7%A8%AE/ar-AA2fJ6Xc"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -202,7 +330,12 @@
   "title": "ぴよりん26年クリスマスケーキ「サンタぴよりん」の苺ショート ...",
   "source": "ファッションプレス",
   "url": "https://www.fashion-press.net/news/152264",
-  "related": [],
+  "related": [
+   {
+    "source": "チバテレ｜千葉テレビ放送株式会社",
+    "url": "https://www.chiba-tv.com/plus/detail/2026102140439"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
