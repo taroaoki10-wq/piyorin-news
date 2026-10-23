@@ -1,1 +1,1 @@
-{"updatedAt": "2026-10-24T03:29+09:00", "added": 1, "sources": {"公式サイト": 12, "PR TIMES": 173, "Googleニュース": 103, "Googleニュース（7日）": 82, "Googleニュース（1日）": 18, "Bingニュース": 12, "Bingニュース（7日）": 7}, "errors": []}
+{"updatedAt": "2026-10-24T07:21+09:00", "added": 0, "sources": {"公式サイト": 12, "PR TIMES": 173, "Bingニュース": 12, "Bingニュース（7日）": 5}, "errors": ["Googleニュース: HTTP Error 503: Service Unavailable", "Googleニュース（7日）: HTTP Error 503: Service Unavailable", "Googleニュース（1日）: HTTP Error 503: Service Unavailable"]}
