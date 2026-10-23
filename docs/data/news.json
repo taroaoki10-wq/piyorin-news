@@ -1,5 +1,14 @@
 [
  {
+  "id": "official-p5642",
+  "date": "2026-10-23",
+  "cat": "official",
+  "title": "限定商品 おでかけ情報 お知らせ 「ぴよりん」が兵庫におでかけ！山陽百貨店「日本列島絶品うまいもの大会」にて『紅茶ぴよりんおでかけセット』を２日間限定で販売！ 記事を見る",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5642/",
+  "related": []
+ },
+ {
   "id": "n20261023-c7925588",
   "date": "2026-10-23",
   "cat": "media",
@@ -64,6 +73,54 @@
   }
  },
  {
+  "id": "n20261023-0599aec3",
+  "date": "2026-10-23",
+  "cat": "press",
+  "title": "「ぴよりん」が兵庫におでかけ！山陽百貨店「日本列島絶品うまいもの大会」にて『紅茶ぴよりんおでかけセット』を２日間限定で販売！",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000256.000124425.html",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの限定販売イベント出店の記事。公式商品紹介。",
+   "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261023-38662fa5",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "名古屋名物「ぴよりん」が大胆イメチェン!? まさかの“ゴジラ化”姿に「怖さゼロ」「誘惑すんごい」",
+  "source": "au Webポータル",
+  "url": "https://article.auone.jp/eccbcda5-cafc-4b6f-b539-017cb9fffc60",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのゴジラコラボ企画に関する記事。15周年企画も含む。",
+   "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261023-629582e9",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "名古屋名物「ぴよりん」が大胆イメチェン!? まさかの“ゴジラ化 ...",
+  "source": "マグミクス on MSN",
+  "url": "https://www.msn.com/ja-jp/news/other/%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%90%8D%E7%89%A9-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%8C%E5%A4%A7%E8%83%86%E3%82%A4%E3%83%A1%E3%83%81%E3%82%A7%E3%83%B3-%E3%81%BE%E3%81%95%E3%81%8B%E3%81%AE-%E3%82%B4%E3%82%B8%E3%83%A9%E5%8C%96-%E5%A7%BF%E3%81%AB-%E6%80%96%E3%81%95%E3%82%BC%E3%83%AD-%E8%AA%98%E6%83%91%E3%81%99%E3%82%93%E3%81%94%E3%81%84/ar-AA2fQOJe",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "記事n=1と同じゴジラコラボについての記事。ぴよりん関連企画。",
+   "t": "2026-10-23"
+  }
+ },
+ {
   "id": "official-p5633",
   "date": "2026-10-22",
   "cat": "official",
@@ -99,6 +156,10 @@
    {
     "source": "ニコニコニュース",
     "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5FcnB6WUpGOGNQWElQSnFIR0NIc2o2N01KU3c5SFJVLW1mSTg3TEY4S085LW5vOXhXM1VxSDJXU0FLNU5HbV9DUGRqNnkyNzFNWlBOX2NmZGJreXBxYWFIaW10M1ViUVNIdl9FaGF1RnZzNC1BSFNuLTNYdw?oc=5"
+   },
+   {
+    "source": "フーズチャネル",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFB4THp3dkhIZ3liVlZGSVZNNm1ZR1BNQzNnLXJXZEdoMjVMaE1JLTRtcllBT2VwQlQwTXhPdmpVNTBQNE1OUWNDaTBQMUtBUG1WY1F3RjZB?oc=5"
    }
   ],
   "dv": 3,
@@ -260,6 +321,10 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE10YlJGejlMZ0ZTY3pMOHBZVGZhcDd4RGxfRTA5Q3JtRkZCdDEwZzBQYUw2ZlByYWhhV2k3VzFWS0dWTXV5ckR3QnpmV0JmckMyN3h6bjdmVVJVRTdldmt3?oc=5"
+   },
+   {
+    "source": "産経ニュース",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE42TDVYUUpVQkdELUREdGVsN2hvVkx0QW5SVkwtTXNKZk5fX291MUVtM0hDR0lUb0Jyc2lsVjA4N2JfQ1doZjA0VXZUWThDeXk2Wnc1NzduZ2NjV1ZUMEJfQkV5Z1MwR0dha3laVW85VEJSaVJ2Z1E?oc=5"
    }
   ],
   "dv": 3,

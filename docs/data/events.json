@@ -206,6 +206,16 @@
   "auto": true
  },
  {
+  "id": "auto-officialp5642",
+  "title": "山陽百貨店 紅茶ぴよりんおでかけセット販売",
+  "start": "2026-11-07",
+  "end": "2026-11-08",
+  "place": "山陽百貨店",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5642/",
+  "auto": true
+ },
+ {
   "id": "e-tour",
   "title": "ぴよりん新幹線ツアー（いいぴよの日）",
   "start": "2026-11-14",
