@@ -223,5 +223,15 @@
   "place": "のぞみ399号 東京12:51→名古屋14:31",
   "kind": "event",
   "url": "https://piyorin.com/news/p5529/"
+ },
+ {
+  "id": "auto-officialp5638",
+  "title": "三島甘藷ぴよりん期間限定販売",
+  "start": "2026-11-15",
+  "end": "2026-11-23",
+  "place": "",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5638/",
+  "auto": true
  }
 ]

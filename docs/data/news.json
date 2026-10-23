@@ -9,6 +9,40 @@
   "related": []
  },
  {
+  "id": "official-p5638",
+  "date": "2026-10-23",
+  "cat": "official",
+  "title": "店舗 限定商品 お知らせ 静岡県三島市の特産「三島甘藷」を使用した 「三島甘藷ぴよりん」が期間限定で販売！ 記事を見る",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5638/",
+  "related": []
+ },
+ {
+  "id": "n20261023-0599aec3",
+  "date": "2026-10-23",
+  "cat": "press",
+  "title": "「ぴよりん」が兵庫におでかけ！山陽百貨店「日本列島絶品うまいもの大会」にて『紅茶ぴよりんおでかけセット』を２日間限定で販売！",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000256.000124425.html",
+  "related": [
+   {
+    "source": "www.nnn.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBoZkJwS0o2ekNOWFk2SnhfZENydDNnVk4zcGtzSkh6OFVSdHhCRTQ5Y04ya3pBVGdHLTYtVHBkNUx6VEp0RVZINnJudnFmVVZW?oc=5"
+   },
+   {
+    "source": "時事ドットコム",
+    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBORVNNamUtNk1odHp0Ty1HblMtSWJXcEhLSFF3eV9ubEp5aXVzaktGWW1xTWdGekg5Q3dGZjRaNkltbWpZTWw1TzVNVmoxUzl3d1lFc2FDazhGcmw0bHBfNlRybjM2azY4YUN3?oc=5"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの限定販売イベント出店の記事。公式商品紹介。",
+   "t": "2026-10-23"
+  }
+ },
+ {
   "id": "n20261023-c7925588",
   "date": "2026-10-23",
   "cat": "media",
@@ -31,7 +65,12 @@
   "title": "カラビナ付きぬいぐるみから限定スイーツまで！JR東海 映画『ゴジラ-0.0』公開記念「ぴよりんゴジラ」コラボ企画",
   "source": "Dtimes",
   "url": "https://dtimes.jp/post-1425913/",
-  "related": [],
+  "related": [
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1aRlVxX3NZNnJaT3pyOXBPZERsc29WWW5TZ1pLZ3hqcGsycl9RODhzNlV4djF6a0RBRkQ4SlpGRm02T2dTRUlCLVZsbTV5UC14NWJFU2czaGpOX3pDYzhydUJEdEJZdjBGUHp6TkFBTVhwT3d1ZS10MQ?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -73,22 +112,6 @@
   }
  },
  {
-  "id": "n20261023-0599aec3",
-  "date": "2026-10-23",
-  "cat": "press",
-  "title": "「ぴよりん」が兵庫におでかけ！山陽百貨店「日本列島絶品うまいもの大会」にて『紅茶ぴよりんおでかけセット』を２日間限定で販売！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000256.000124425.html",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの限定販売イベント出店の記事。公式商品紹介。",
-   "t": "2026-10-23"
-  }
- },
- {
   "id": "n20261023-38662fa5",
   "date": "2026-10-23",
   "cat": "media",
@@ -111,12 +134,145 @@
   "title": "名古屋名物「ぴよりん」が大胆イメチェン!? まさかの“ゴジラ化 ...",
   "source": "マグミクス on MSN",
   "url": "https://www.msn.com/ja-jp/news/other/%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%90%8D%E7%89%A9-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%8C%E5%A4%A7%E8%83%86%E3%82%A4%E3%83%A1%E3%83%81%E3%82%A7%E3%83%B3-%E3%81%BE%E3%81%95%E3%81%8B%E3%81%AE-%E3%82%B4%E3%82%B8%E3%83%A9%E5%8C%96-%E5%A7%BF%E3%81%AB-%E6%80%96%E3%81%95%E3%82%BC%E3%83%AD-%E8%AA%98%E6%83%91%E3%81%99%E3%82%93%E3%81%94%E3%81%84/ar-AA2fQOJe",
-  "related": [],
+  "related": [
+   {
+    "source": "Infoseekニュース",
+    "url": "https://news.infoseek.co.jp/article/magmix_382032/"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
    "ok": true,
    "why": "記事n=1と同じゴジラコラボについての記事。ぴよりん関連企画。",
+   "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261023-a1f6b18e",
+  "date": "2026-10-23",
+  "cat": "press",
+  "title": "静岡県三島市の特産「三島甘藷」を使用した 「三島甘藷ぴよりん」が期間限定で販売！",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000252.000124425.html",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "三島甘藷を使用した限定ぴよりん商品の販売に関する記事",
+   "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261023-6d385156",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "「ぴよりん」が山陽百貨店「日本列島絶品うまいもの大会」に登場！11月7日・8日限定で紅茶ぴよりんおでかけセットを販売、ぴよりんグッズも",
+  "source": "にじめん",
+  "url": "https://nijimen.kusuguru.co.jp/topics/642276",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "山陽百貨店のイベント出店とグッズ販売に関する記事",
+   "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261023-226fc32c",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "画像・写真 | サンタやトナカイ姿の「ぴよりん」がずらり クリスマス限定ケーキ2種類、30日から先着順で予約受付 1枚目",
+  "source": "オリコンニュース",
+  "url": "https://www.oricon.co.jp/news/2487819/photo/1/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "クリスマス限定ぴよりんケーキの販売に関する記事",
+   "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261023-ca06f856",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "『ゴジラ-0.0』と名古屋名物「ぴよりん」がまさかのコラボ ゴジラ化した”真っ黒”ビジュアルがインパクト大！",
+  "source": "マグミクス",
+  "url": "https://magmix.jp/post/382032",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "映画『ゴジラ-0.0』とのコラボ商品に関する記事",
+   "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261023-a4594ff3",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "「ぴよりん」が兵庫におでかけ！山陽百貨店「日本列島絶品うまいもの大会」にて『紅茶ぴよりんおでかけセット』を２日間限定で販売！｜Infoseekニュース",
+  "source": "Infoseek",
+  "url": "https://news.infoseek.co.jp/article/prtimes_000000256_000124425/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "山陽百貨店での限定販売イベント出店に関する記事",
+   "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261023-18e7fbff",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "「ぴよりん」が山陽百貨店「日本列島絶品うまいもの大会」に登場！11月7日・8日限定で紅茶ぴよりんおでかけセットを販売",
+  "source": "ニコニコニュース",
+  "url": "https://news.nicovideo.jp/watch/nw19909638?news_ref=search_search",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "山陽百貨店のイベント出店と限定セット販売に関する記事",
+   "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261023-851484f2",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "ゴジラ-0.0 × ぴよりん ぴよりんゴジラ 11月3日より登場!",
+  "source": "コラボカフェ",
+  "url": "https://collabo-cafe.com/events/collabo/godzilla-minus-zero-piyorin-2026/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ゴジラコラボ商品とぴよりんvillageのコラボ企画",
+   "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261023-eadd5c2c",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "「ぴよりん」が山陽百貨店「日本列島絶品うまいもの大会」に登場 ...",
+  "source": "にじめん",
+  "url": "https://nijimen.kusuguru.co.jp/topics/642276",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "山陽百貨店のイベント出店と限定販売に関する記事",
    "t": "2026-10-23"
   }
  },
@@ -635,6 +791,38 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんゴジラコラボ商品に関する記事",
+   "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261022-8dca955d",
+  "date": "2026-10-22",
+  "cat": "media",
+  "title": "映画ゴジラ-0.0公開記念でぴよりんゴジラ販売へ ぴよりんvillageも仕様変更",
+  "source": "Dellows News",
+  "url": "https://news.dellows.jp/850221/?from=top_category_area",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ゴジラコラボ商品販売とぴよりんvillage仕様変更",
+   "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261022-65d96dc5",
+  "date": "2026-10-22",
+  "cat": "media",
+  "title": "「ぴよりん」が兵庫におでかけ！山陽百貨店「日本列島絶品うまい ...",
+  "source": "神戸新聞",
+  "url": "https://www.kobe-np.co.jp/info/prtimes/202610/c124425_r256.shtml",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "山陽百貨店のイベント出店に関する記事",
    "t": "2026-10-23"
   }
  },
