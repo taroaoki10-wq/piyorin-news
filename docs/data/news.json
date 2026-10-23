@@ -61,6 +61,10 @@
    {
     "source": "オリコンニュース",
     "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9XU3YyNG1Jd1ZDMWpncVkycVdmSmZMYU9XVFJJMXVYY0hOQzFKLUhmdkJKZk5YT0h4cUZaOFU0VG1PekljVnFrZjRET0tPWmhHX1hISmZvaXM?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5zOFcxQ2FpTzN4Mm92WTlqTjdPcjI1aHJjM2NBWlhyUVJhZTRJY01WWFVTeHRZS09RQmdpWGNlY251T3ZxRVFSamp6Zmtmb2VHdmZvemxOdWh1Um1QRXJfbDZ3?oc=5"
    }
   ],
   "dv": 3,
@@ -317,7 +321,12 @@
   "title": "ぴよりんがゴジラになった!? 映画公開記念の限定スイーツが名古屋に登場",
   "source": "ASCII.jp",
   "url": "https://ascii.jp/elem/000/004/445/4445401/",
-  "related": [],
+  "related": [
+   {
+    "source": "週刊アスキー on MSN",
+    "url": "https://www.msn.com/ja-jp/news/other/ぴよりんがゴジラになった-映画公開記念の限定スイーツが名古屋に登場/ar-AA2fUzzG"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -377,6 +386,22 @@
    "ok": true,
    "why": "三島甘藷ぴよりんの期間限定販売に関する記事",
    "t": "2026-10-23"
+  }
+ },
+ {
+  "id": "n20261023-6871c1aa",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "名古屋名物「ぴよりん」が大胆イメチェン!? まさかの“ゴジラ化”姿に「怖さゼロ」「誘惑すんごい」｜Infoseekニュース",
+  "source": "Infoseek",
+  "url": "https://news.infoseek.co.jp/article/magmix_382032/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのゴジラコラボ企画が記事の主題",
+   "t": "2026-10-24"
   }
  },
  {
