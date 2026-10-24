@@ -383,6 +383,8 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 /* ---------- ぴよ（呼ぶとページの手前に出てきてチャットできる。スマホの幅だけ） ---------- */
 .piyo-call{display:none;position:fixed;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:44;width:60px;height:60px;border-radius:50%;border:0;padding:0;background:var(--yolk);box-shadow:0 8px 22px -8px rgba(60,40,0,.55),0 0 0 3px var(--surface);cursor:pointer;place-items:center;transition:transform .15s ease-out;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent}
 .piyo-call:active{transform:scale(.92)}
+.piyo-call.slide-in{animation:piyo-call-in .38s cubic-bezier(.2,.8,.2,1)} /* しまったあと、右の端から滑って戻る */
+@keyframes piyo-call-in{from{transform:translateX(calc(100% + 24px));opacity:0}to{transform:none;opacity:1}}
 .piyo-call img{width:40px;height:40px;pointer-events:none}
 .piyo-guard{position:fixed;inset:0;z-index:45;background:transparent;touch-action:none} /* ぴよを出している間、裏のページを押せなくする */
 .piyo-layer{position:fixed;left:0;right:0;bottom:0;z-index:45;pointer-events:none;padding:0 12px calc(env(safe-area-inset-bottom,0px) + 12px);display:flex;flex-direction:column;align-items:stretch;gap:6px;max-width:560px;margin-left:auto;transition:bottom .12s ease-out}
@@ -1248,7 +1250,8 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 
   // ---- 開いている間は裏のページを動かさない ----
   let lockY=0;
-  function lockPage(){lockY=window.scrollY;Object.assign(document.body.style,{position:'fixed',top:-lockY+'px',left:'0',right:'0',width:'100%'})}
+  // 固定する前と同じ幅にする（body の余白があるので width:100% だと右へ広がり、文字の折り返しも変わってずれる）
+  function lockPage(){lockY=window.scrollY;const w=document.body.getBoundingClientRect().width;Object.assign(document.body.style,{position:'fixed',top:-lockY+'px',left:'0',right:'',width:w+'px'})}
   function unlockPage(){Object.assign(document.body.style,{position:'',top:'',left:'',right:'',width:''});window.scrollTo(0,lockY)}
   $('piyo-guard').addEventListener('touchmove',e=>e.preventDefault(),{passive:false});
   let touchY=0,canPull=false,pull=0;
@@ -1296,7 +1299,9 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       setTimeout(()=>play('wave',()=>{idle();piyoMsg().say(lines.map(fmt).join('\n'))}),300);
     }else setTimeout(()=>play('wave'),300);
   }
-  function close(){stop();input.blur();layer.hidden=true;$('piyo-guard').hidden=true;$('piyo-call').hidden=false;unlockPage()}
+  function close(){stop();input.blur();layer.hidden=true;$('piyo-guard').hidden=true;unlockPage();
+    const c=$('piyo-call');c.classList.remove('slide-in');c.hidden=false;void c.offsetWidth;c.classList.add('slide-in');
+    clearTimeout(close.t);close.t=setTimeout(()=>c.classList.remove('slide-in'),600)} // 動きが止まっても画面の外に残さない
   $('piyo-call').addEventListener('click',open);
   $('piyo-close').addEventListener('click',close);
   pet.addEventListener('click',()=>{if(anim==='idle')play('wave')});
