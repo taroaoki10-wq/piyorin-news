@@ -1,7 +1,7 @@
 # ぴよりんニュース
 
 ぴよりんの公式発表・プレスリリース・メディア記事を自動で集めて表示するページです。
-GitHub Actions が3時間ごとに情報を集め、GitHub Pages で公開します。Claude のトークンは使いません。
+GitHub Actions が1時間ごとに情報を集め、GitHub Pages で公開します。予定の読み取り・関連判定・ぴよのメモ作りに Claude API（Haiku）を少し使います。スマホでは、右下のボタンでマスコットの「ぴよ」を呼んでチャットできます。
 
 ## しくみ
 
@@ -21,6 +21,11 @@ GitHub Actions（1時間ごと・毎時23分）
         ・日程が複数ある記事 → 日付まわりの抜粋だけをまとめて Claude API へ
           ↓
       docs/data/events.json
+  └ scripts/build_reader.py（リーダー用に元記事を保存）
+  └ scripts/judge_relevance.py（ぴよりんと関係ある記事か判定）
+  └ scripts/build_piyo.py（ぴよのメモとまとめを作り置き）
+          ↓
+      docs/data/piyo-memo.json・piyo-greeting.json
           ↓
 GitHub Pages（docs/index.html、5分ごとに読み直し）→ Safari で表示
 ```
@@ -37,6 +42,11 @@ GitHub Pages（docs/index.html、5分ごとに読み直し）→ Safari で表�
 | `scripts/claude_events.py` | Claude API で記事から予定を読み取る部分 |
 | `docs/data/reader/` | ページ内リーダー用の記事（1記事1ファイル。メディア記事は掲載元の要約のみ） |
 | `scripts/build_reader.py` | リーダー用に元記事を保存するプログラム |
+| `scripts/judge_relevance.py` | ぴよりんと関係ある記事かを判定するプログラム |
+| `scripts/build_piyo.py` | ぴよのメモとまとめを作るプログラム |
+| `docs/data/piyo-memo.json` | ぴよメモ（記事ごとの要点。自動で作成） |
+| `docs/data/piyo-greeting.json` | ぴよが最初につぶやくまとめと質問の候補（自動で作成） |
+| `docs/piyo-sprite.png` | ぴよの絵（通常・手を振る・考え中の3行） |
 | `docs/data/meta.json` | 最終更新日時 |
 | `scripts/fetch_news.py` | 収集プログラム |
 | `.github/workflows/update.yml` | 定期実行の設定 |
@@ -80,6 +90,20 @@ GitHub Pages（docs/index.html、5分ごとに読み直し）→ Safari で表�
 - 削除と元に戻した記録はブラウザ（localStorage `piyo-del`）に保存され、ブックマークの同期を設定していれば、同じ非公開 gist の `piyorin-hidden.json` に保存されて端末間で共有されます。
 - 判定の基準を変えたときは `JUDGE_VERSION` を上げます。すべての記事をもう一度判定したいときは、Actions の「Run workflow」で `rejudge` にチェックを入れます。
 - APIキー（`ANTHROPIC_API_KEY`）が無いときは判定せず、記事はそのまま表示されます。
+
+## ぴよ（スマホでチャット）
+
+スマホの幅（620px 以下）で見ると、右下にぴよのボタンが出ます。PC の画面は変わりません。
+
+- 押すとぴよが出てきて、最初に「最近のぴよりんニュース」のまとめをつぶやきます。入力欄の上には質問の候補が並び、押すとその質問を送ります。
+- 入力欄を押すとキーボードが出て、自由に質問できます。会話は吹き出しで残り、上へスクロールして遡れます。ぴよを出している間、裏のページは動きません。
+- 待っている間はまばたきし、タップすると手を振ります。入力欄の右の × でしまいます。
+- まとめと質問の候補は `scripts/build_piyo.py` が自動更新のときに作り置きします（メモか予定が変わったとき・日付が変わったときだけ作り直すので、呼ぶたびの料金はかかりません）。
+- 質問の答えは、ページが Claude API（Haiku 4.5）を直接呼んで作ります。ぴよメモ（`piyo-memo.json`）と予定（`events.json`）を渡すので、たいていは Web 検索なしで答えます。1回の質問で 1〜3 円ほど、「調べる」を押すと 5 円ほどです。
+- メモと予定だけで答えられないときは、ぴよが「記事をくわしく読まないと分からないぴよ。調べる？」「Web で調べる？」と聞きます。「調べる」を押したときだけ、記事の本文（最大3件）を足して聞き直すか、Web 検索（最大3回）を使います。
+- はじめて質問すると、Claude の API キーを入れる画面が出ます（[コンソール](https://platform.claude.com/settings/keys)で作ります）。キーはその端末のブラウザ（localStorage `piyo-key`）にだけ保存されます。解除は「ブックマーク」タブの下から。使いすぎが心配なら、コンソールで月の使用額の上限を決めておきます。
+- Web 検索は、コンソールの設定で Web 検索が許可されていないと使えません。
+- メモの基準を変えたら `build_piyo.py` の `MEMO_VERSION`、まとめの基準を変えたら `GREETING_VERSION` を上げます。
 
 ## 「更新」ボタン（いますぐ更新）
 
