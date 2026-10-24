@@ -1,5 +1,15 @@
 [
  {
+  "id": "n20261024-499b8037",
+  "date": "2026-10-24",
+  "cat": "media",
+  "title": "写真・図版（1枚目）| 静岡県三島市の特産「三島甘藷」を使用した 「三島甘藷ぴよりん」が期間限定で販売！",
+  "source": "AERA DIGITAL",
+  "url": "https://dot.asahi.com/articles/photo/295976",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "official-p5642",
   "date": "2026-10-23",
   "cat": "official",
@@ -69,6 +79,14 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5zOFcxQ2FpTzN4Mm92WTlqTjdPcjI1aHJjM2NBWlhyUVJhZTRJY01WWFVTeHRZS09RQmdpWGNlY251T3ZxRVFSamp6Zmtmb2VHdmZvemxOdWh1Um1QRXJfbDZ3?oc=5"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE4yYk1uejZxMzc4MDlVbjlXcEljbDBtSE1CYXBQVEtKaHQzT2tMeVFCRXd4ZXViakttWDM1bGdXS2xZSVR6NzVpaVFZN2E5eGVaZ3Jreg?oc=5"
+   },
+   {
+    "source": "AERA DIGITAL",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5qNmVtN0pDNUxuakZ4RHcwOGF0X2JTMUwyUGdLT3lvOTBWLXFlSGFVLVJib0FCam12Y3M4cVNYbUE4S2ZQMXRvbkk2eVN0akNvM1ZMYUx4WFZNdw?oc=5"
    }
   ],
   "dv": 3,
@@ -386,6 +404,10 @@
    {
     "source": "産経ニュース",
     "url": "https://www.sankei.com/pressrelease/prtimes/QPWMB67EWJMMXJRDO22GHZQDPM/"
+   },
+   {
+    "source": "ORICON NEWS",
+    "url": "https://www.oricon.co.jp/pressrelease/3052304/"
    }
   ],
   "dv": 3,
@@ -443,6 +465,66 @@
    "why": "ぴよりんゴジラのコラボ商品（スマホステッカー）の紹介記事。",
    "t": "2026-10-24"
   }
+ },
+ {
+  "id": "n20261023-fb831a44",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "【画像】カラビナ付きぬいぐるみから限定スイーツまで！JR東海 映画『ゴジラ-0.0』公開記念「ぴよりんゴジラ」コラボ企画 13/24",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32635167/?img_id=57151065",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261023-d91c5813",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "【画像】カラビナ付きぬいぐるみから限定スイーツまで！JR東海 映画『ゴジラ-0.0』公開記念「ぴよりんゴジラ」コラボ企画 9/24",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32635167/?img_id=57151061",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261023-43a3852f",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "【画像】カラビナ付きぬいぐるみから限定スイーツまで！JR東海 映画『ゴジラ-0.0』公開記念「ぴよりんゴジラ」コラボ企画 11/24",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32635167/?img_id=57151063",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261023-44b465a3",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "【画像】カラビナ付きぬいぐるみから限定スイーツまで！JR東海 映画『ゴジラ-0.0』公開記念「ぴよりんゴジラ」コラボ企画 8/24",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32635167/?img_id=57151060",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261023-e6c82c43",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "【画像】カラビナ付きぬいぐるみから限定スイーツまで！JR東海 映画『ゴジラ-0.0』公開記念「ぴよりんゴジラ」コラボ企画 7/24",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32635167/?img_id=57151059",
+  "related": [],
+  "dv": 3
+ },
+ {
+  "id": "n20261023-8975d17d",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "【画像】カラビナ付きぬいぐるみから限定スイーツまで！JR東海 映画『ゴジラ-0.0』公開記念「ぴよりんゴジラ」コラボ企画 6/24",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32635167/?img_id=57151058",
+  "related": [],
+  "dv": 3
  },
  {
   "id": "official-p5633",
@@ -521,6 +603,10 @@
    {
     "source": "ニコニコニュース",
     "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5SN19CRk53QWlsVC1GSkJuNEJVZURxUWd5TFhyd3FSa19YZGVjZWFpbklBN0hGeWVDRTlONDdKSmlQOVRNV3BRTXNTOG1Sdm9vM3V0blJ3amdKRmtrRDF1ODY5MmRXUWVRZ2lUeUFYWS1NdDUtZ1E?oc=5"
+   },
+   {
+    "source": "シブヤ経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9PTjRFWmFaRzMtclBTaUNienktT29HdWVaNFZUMDg4cEs2bmM4Vm5YeWhFMzYyUFBrSVZBcmJ4bU01b25vR2wwckF4dFJmdzRfNTJGQWVWNnFDeEVoeVFv?oc=5"
    }
   ],
   "dv": 3,
@@ -1450,6 +1536,16 @@
   }
  },
  {
+  "id": "n20261021-bfee00bf",
+  "date": "2026-10-21",
+  "cat": "media",
+  "title": "コメント | サンタやトナカイ姿の「ぴよりん」がずらり クリスマス限定ケーキ2種類、30日から先着順で予約受付",
+  "source": "オリコンニュース",
+  "url": "https://www.oricon.co.jp/news/2487819/comment/",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "official-p5599",
   "date": "2026-10-20",
   "cat": "official",
@@ -2065,22 +2161,6 @@
   "related": []
  },
  {
-  "id": "n20261017-2b7f38d5",
-  "date": "2026-10-09",
-  "cat": "media",
-  "title": "ドデ祭2026でドデ商店が開店へ ぴよりんやナナちゃんとのコラボグッズを販売",
-  "source": "Dellows News",
-  "url": "https://news.dellows.jp/667798/?from=related-reading-list",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ドデ祭2026でぴよりんとのコラボグッズ販売の記事。",
-   "t": "2026-10-24"
-  }
- },
- {
   "id": "n20261009-e4389bf6",
   "date": "2026-10-09",
   "cat": "press",
@@ -2148,6 +2228,22 @@
    "ok": true,
    "why": "ぴよりん15周年記念グッズの販売についての記事",
    "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20261017-2b7f38d5",
+  "date": "2026-10-09",
+  "cat": "media",
+  "title": "ドデ祭2026でドデ商店が開店へ ぴよりんやナナちゃんとのコラボグッズを販売",
+  "source": "Dellows News",
+  "url": "https://news.dellows.jp/667798/?from=related-reading-list",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ドデ祭2026でぴよりんとのコラボグッズ販売の記事。",
+   "t": "2026-10-24"
   }
  },
  {
