@@ -366,6 +366,10 @@
    {
     "source": "週刊アスキー",
     "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9sYmF5OXY4R3BRdElBNjcwZVJXQk41Tkp1bEN2MzhDdlRqTzZLV2FXSFpiQ2tWLVBCOS1JQ3FFMTVvQWRJSU1aTF9hVzJjc2JNaWNsc1VvZmQ1QktVd3c?oc=5"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE14aWlDMFJiZFlHcENFR1Z6S1VnbUhWcmNZMzNxaXBYSWg2aTBfSGxEMC1sQ2Y2YlV0dUwxeWx6X24zMlplSFBkdUhVNXFHSE9ETnMybA?oc=5"
    }
   ],
   "dv": 3,
@@ -606,6 +610,38 @@
    "v": 1,
    "ok": true,
    "why": "期間限定スイーツぴよりんゴジラの販売情報",
+   "t": "2026-10-25"
+  }
+ },
+ {
+  "id": "n20261023-e43305cf",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "「ぴよりん」が「生まれる場所」の最寄り駅が「ぴよりん」一色に！ 勝川駅改札口付近を7月1日から装飾 画像（3/3ページ）",
+  "source": "Tetsudo.com（鉄道コム）",
+  "url": "https://www.tetsudo.com/news/4100/figure/image/site-1307044-3-a-004.jpg.html",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん販売店舗とアトリエの駅装飾イベントについて",
+   "t": "2026-10-25"
+  }
+ },
+ {
+  "id": "n20261023-5e41829a",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "【画像】カラビナ付きぬいぐるみから限定スイーツまで！JR東海 映画『ゴジラ-0.0』公開記念「ぴよりんゴジラ」コラボ企画 12/24",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32635167/?img_id=57151064",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのゴジラコラボ企画とグッズについて",
    "t": "2026-10-25"
   }
  },
@@ -9190,27 +9226,6 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんの新フレーバー商品（あまおう味）の紹介",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20260929-5118dfb6",
-  "date": "2014-11-09",
-  "cat": "media",
-  "title": "新・名古屋土産「ぴよりん」のクリスマスバージョンがかわいすぎる！",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/52200/",
-  "related": [
-   {
-    "source": "walkerplus.com",
-    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9CYWVkZnB3NF90NlVnbl9OUktLbUdfcVN1S3puZjlmOTNhRHUtOU42aWJJOF9Xc3p3ZFFFVWxTY1Rrc2d1UUM5eEhpeUJ5b1l5bHV2NmJVa2laNEtIV3pqWFN0a1ZXWjhN?oc=5"
-   }
-  ],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんのクリスマスバージョン商品に関する記事",
    "t": "2026-10-15"
   }
  }
