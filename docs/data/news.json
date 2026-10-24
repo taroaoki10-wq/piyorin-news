@@ -546,6 +546,16 @@
   "dv": 3
  },
  {
+  "id": "n20261023-b0ae3349",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "【画像】カラビナ付きぬいぐるみから限定スイーツまで！JR東海 映画『ゴジラ-0.0』公開記念「ぴよりんゴジラ」コラボ企画 15/24",
+  "source": "ライブドアニュース",
+  "url": "https://news.livedoor.com/article/image_detail/32635167/?img_id=57151067",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "official-p5633",
   "date": "2026-10-22",
   "cat": "official",
@@ -766,6 +776,10 @@
    {
     "source": "産経ニュース",
     "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE42TDVYUUpVQkdELUREdGVsN2hvVkx0QW5SVkwtTXNKZk5fX291MUVtM0hDR0lUb0Jyc2lsVjA4N2JfQ1doZjA0VXZUWThDeXk2Wnc1NzduZ2NjV1ZUMEJfQkV5Z1MwR0dha3laVW85VEJSaVJ2Z1E?oc=5"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5OTHZhY1BHekpuMG52azFzNFhnam9LdHdob2pHZWhlX2dRa0NzMXkxZU4tX21fMjRmQzc3YXpQdkNKYjhMbGc3bl9HcEEwOUVaRTE3MlVxWTE?oc=5"
    }
   ],
   "dv": 3,
