@@ -382,16 +382,15 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 }
 /* ---------- ぴよ（呼ぶとページの手前に出てきてチャットできる。スマホの幅だけ） ---------- */
 :root{--piyo-dim:rgba(0,0,0,.22)} /* ぴよを出している間、画面全体にかける暗さ */
-.piyo-call{display:none;position:fixed;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:44;width:60px;height:60px;border-radius:50%;border:0;padding:0;background:var(--yolk);box-shadow:0 8px 22px -8px rgba(60,40,0,.55),0 0 0 3px var(--surface);cursor:pointer;place-items:center;transition:transform .15s ease-out;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent}
-.piyo-call:active{transform:scale(.92)}
-.piyo-call.slide-in{animation:piyo-call-in .38s cubic-bezier(.2,.8,.2,1)} /* しまったあと、右の端から滑って戻る */
-@keyframes piyo-call-in{from{transform:translateX(calc(100% + 24px));opacity:0}to{transform:none;opacity:1}}
-.piyo-call img{width:40px;height:40px;pointer-events:none}
+.piyo-idle{display:none;position:fixed;right:26px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:44;width:96px;height:104px;border:0;padding:0;background:url(piyo-sprite.png?v=1) 0 0/768px 312px no-repeat;filter:drop-shadow(0 6px 8px rgba(60,40,0,.28));cursor:pointer;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent} /* 待機しているぴよ。右の位置はチャットのぴよ（層の余白 12px＋右の余白 14px）とそろえる */
+.piyo-idle[hidden]{display:none!important}
+.piyo-idle:focus-visible{outline:2px solid var(--caramel);outline-offset:2px;border-radius:12px}
+.piyo-idle-space{display:none;height:124px} /* 記事の一番下が待機のぴよに隠れないための余白 */
 .piyo-guard{position:fixed;inset:0;z-index:45;background:var(--piyo-dim);-webkit-backdrop-filter:saturate(.45);backdrop-filter:saturate(.45);opacity:0;transition:opacity .28s ease-out;touch-action:none;pointer-events:none} /* ぴよを出している間、裏のページを少し暗く・黄色などの色を薄くして、押せなくする */
 .piyo-guard.on{opacity:1;pointer-events:auto}
 .piyo-layer{position:fixed;left:0;right:0;bottom:0;z-index:45;pointer-events:none;padding:0 12px calc(env(safe-area-inset-bottom,0px) + 12px);display:flex;flex-direction:column;align-items:stretch;gap:6px;max-width:560px;margin-left:auto;transition:bottom .12s ease-out}
-.piyo-layer::before{content:"";position:absolute;inset:-150px 0 0;z-index:-1;background:linear-gradient(to bottom,transparent,var(--bg) 170px);pointer-events:none}
-.piyo-layer::after{content:"";position:absolute;inset:-150px 0 0;z-index:-1;background:linear-gradient(to bottom,transparent,var(--piyo-dim) 170px);pointer-events:none;animation:piyo-dim-in .28s ease-out} /* ぴよの後ろの地の色も、裏のページと同じだけ暗くする */
+.piyo-layer::before{content:"";position:absolute;inset:-150px 0 0;z-index:-1;opacity:var(--pull-op,1);transition:opacity .2s ease-out;background:linear-gradient(to bottom,transparent,var(--bg) 170px);pointer-events:none}
+.piyo-layer::after{content:"";position:absolute;inset:-150px 0 0;z-index:-1;opacity:var(--pull-op,1);transition:opacity .2s ease-out;background:linear-gradient(to bottom,transparent,var(--piyo-dim) 170px);pointer-events:none;animation:piyo-dim-in .28s ease-out} /* ぴよの後ろの地の色も、裏のページと同じだけ暗くする */
 @keyframes piyo-dim-in{from{opacity:0}}
 .piyo-layer>*{pointer-events:auto}
 .piyo-log{display:flex;flex-direction:column;gap:10px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:16px 2px 12px;scrollbar-width:thin;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 18px);mask-image:linear-gradient(to bottom,transparent,#000 18px)}
@@ -408,7 +407,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .piyo-choices button.primary{background:var(--yolk);color:var(--yolk-ink);border-color:var(--yolk)}
 .piyo-choices button:disabled{cursor:default}
 .piyo-choices button.chosen{background:var(--bg);color:var(--muted);border-color:var(--line)}
-.piyo-pet{align-self:flex-end;margin-right:14px;width:96px;height:104px;flex:none;border:0;padding:0;background:url(piyo-sprite.png?v=1) 0 0/768px 312px no-repeat;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:piyo-in .35s cubic-bezier(.3,1.5,.6,1)}
+.piyo-pet{align-self:flex-end;margin-right:14px;width:96px;height:104px;flex:none;border:0;padding:0;background:url(piyo-sprite.png?v=1) 0 0/768px 312px no-repeat;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .piyo-pet:focus-visible{outline:2px solid var(--caramel);outline-offset:2px;border-radius:12px}
 .piyo-suggest{display:flex;gap:8px;overflow-x:auto;overscroll-behavior:contain;scrollbar-width:none;margin:0 -12px;padding:2px 12px 4px}
 .piyo-suggest::-webkit-scrollbar{display:none}
@@ -424,10 +423,9 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .piyo-close{border:1px solid var(--line);background:var(--bg);color:var(--muted);font-size:20px;line-height:1}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .piyo-send:disabled{background:#4A4214;color:#A8994A}}
 :root[data-theme="dark"] .piyo-send:disabled{background:#4A4214;color:#A8994A}
-@keyframes piyo-in{from{opacity:0;transform:translateY(40px) scale(.6)}to{opacity:1;transform:none}}
 @keyframes piyo-pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.piyo-pet,.piyo-msg{animation:none}}
-@media (max-width:620px){.piyo-call{display:grid}html.reader-open .piyo-call{display:none}}
+@media (prefers-reduced-motion:reduce){.piyo-msg{animation:none}}
+@media (max-width:620px){.piyo-idle,.piyo-idle-space{display:block}html.reader-open .piyo-idle{display:none}}
 </style>
 
 </head>
@@ -1158,7 +1156,8 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   const DEFAULT_SUGGEST=['いま買える限定ぴよりんは？','これからのイベントは？','ぴよりんってどこで買える？'];
 
   document.body.insertAdjacentHTML('beforeend',`
-<button type="button" class="piyo-call" id="piyo-call" aria-label="ぴよを呼ぶ" title="ぴよを呼ぶ"><img src="icon.png?v=2" alt=""></button>
+<button type="button" class="piyo-idle" id="piyo-idle" aria-label="ぴよと話す" title="ぴよと話す"></button>
+<div class="piyo-idle-space" aria-hidden="true"></div>
 <div class="piyo-guard" id="piyo-guard" hidden></div>
 <div class="piyo-layer" id="piyo-layer" hidden>
   <div class="piyo-log" id="piyo-log" role="log" aria-live="polite" aria-label="ぴよとの会話"></div>
@@ -1170,7 +1169,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     <button type="button" class="piyo-close" id="piyo-close" aria-label="ぴよをしまう" title="ぴよをしまう">×</button>
   </form>
 </div>`);
-  const pet=$('piyo-pet'),layer=$('piyo-layer'),log=$('piyo-log'),input=$('piyo-input'),suggest=$('piyo-suggest');
+  const pet=$('piyo-pet'),idleEl=$('piyo-idle'),layer=$('piyo-layer'),log=$('piyo-log'),input=$('piyo-input'),suggest=$('piyo-suggest');
 
   // ---- コマ送り（待っている間はまばたき、タップや返事で手を振る、考え中は首をかしげる） ----
   let anim=null,timer=0;
@@ -1298,7 +1297,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   }
   let touchY=0,canPull=false,pull=0;
   const PULL_CLOSE=90; // 会話の欄がいちばん上のとき、これより下に引いて離すとしまう
-  layer.addEventListener('touchstart',e=>{touchY=e.touches[0].clientY;canPull=log.contains(e.target)&&log.scrollTop<=0;pull=0},{passive:true});
+  layer.addEventListener('touchstart',e=>{touchY=e.touches[0].clientY;canPull=log.contains(e.target)&&log.scrollTop<=0;pull=0;petTop0=pet.getBoundingClientRect().top},{passive:true});
   layer.addEventListener('touchmove',e=>{
     if(suggest.contains(e.target))return; // 候補は横にずらして見られるように
     if(!log.contains(e.target)){e.preventDefault();return}
@@ -1306,7 +1305,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     if(canPull&&dy>0&&log.scrollTop<=0){ // いちばん上から下へ引く → 指についてぴよごと下がる
       e.preventDefault();pull=dy;
       layer.style.transition='bottom .12s ease-out';
-      layer.style.transform=`translateY(${dy*.6}px)`;layer.style.opacity=String(Math.max(.4,1-dy/400));
+      layer.style.transform=`translateY(${dy*.6}px)`;fadeRest(Math.max(.4,1-dy/400));holdPet(dy*.6);
       return;
     }
     if(dy<0)canPull=false;
@@ -1315,9 +1314,11 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   function endPull(){
     if(!pull)return;
     const done=pull>=PULL_CLOSE;pull=0;canPull=false;
-    layer.style.transition='bottom .12s ease-out,transform .2s ease-out,opacity .2s ease-out';
-    layer.style.transform=done?'translateY(100%)':'';layer.style.opacity=done?'0':'';
-    setTimeout(()=>{if(done)close();layer.style.transition=layer.style.transform=layer.style.opacity=''},200);
+    layer.style.transition='bottom .12s ease-out,transform .2s ease-out';
+    if(done){flyIdleFrom(pet.getBoundingClientRect());pet.style.visibility='hidden';guardOn(false)} // ぴよは半透明にせず、その場所から待機の位置へ滑って戻る
+    else{pet.style.transition='transform .2s ease-out';pet.style.transform=''}
+    layer.style.transform=done?'translateY(100%)':'';fadeRest(done?0:1,true);
+    setTimeout(()=>{if(done)close({flown:true});layer.style.transition=layer.style.transform='';fadeRest(1);pet.style.visibility=pet.style.transition=pet.style.transform=''},200);
   }
   layer.addEventListener('touchend',endPull,{passive:true});
   layer.addEventListener('touchcancel',()=>{pull=Math.min(pull,PULL_CLOSE-1);endPull()},{passive:true});
@@ -1331,7 +1332,9 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   }
   async function open(){
     const id=++openId;
-    $('piyo-call').hidden=true;guardOn(true);layer.hidden=false;lockPage();fit();frame(0,0);toBottom(true);
+    if(!suggest.children.length)fillSuggest(DEFAULT_SUGGEST); // 候補があとから出てぴよが跳ねないよう、先に場所を取る
+    const from=idleEl.hidden?null:idleEl.getBoundingClientRect();if(from)idleRect=from;
+    idleHide();guardOn(true);layer.hidden=false;lockPage();fit();frame(0,0);toBottom(true);if(from)slideFrom(pet,from);
     const refreshed=await loadData().catch(()=>false);
     if(id!==openId)return;
     if(refreshed)greeted=false;
@@ -1345,10 +1348,39 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       setTimeout(()=>play('wave',()=>{idle();piyoMsg().say(lines.map(fmt).join('\n'))}),300);
     }else setTimeout(()=>play('wave'),300);
   }
-  function close(){stop();input.blur();layer.hidden=true;guardOn(false);unlockPage();
-    const c=$('piyo-call');c.classList.remove('slide-in');c.hidden=false;void c.offsetWidth;c.classList.add('slide-in');
-    clearTimeout(close.t);close.t=setTimeout(()=>c.classList.remove('slide-in'),600)} // 動きが止まっても画面の外に残さない
-  $('piyo-call').addEventListener('click',open);
+  function close(o){const from=o&&o.flown?null:pet.getBoundingClientRect();stop();input.blur();layer.hidden=true;guardOn(false);unlockPage();
+    if(from)flyIdleFrom(from)}
+  idleEl.addEventListener('click',open);
+
+  // ---- 待機しているぴよ（スマホの幅だけ。押すとチャット、しまうと待機の位置へ戻る） ----
+  let iAnim=null,iTimer=0,idleRect=null,petTop0=0;
+  const iFrame=(row,col)=>{idleEl.style.backgroundPosition=`${-col*W}px ${-row*H}px`};
+  const iStop=()=>{clearTimeout(iTimer);iAnim=null};
+  function iIdle(){ // まばたきはチャットのぴよと同じく、動きを減らす設定でも続ける（裏にいる間だけ止める）
+    iStop();iAnim='idle';iFrame(0,0);if(document.hidden)return;
+    const hold=()=>{iTimer=setTimeout(blink,3000+Math.random()*3000)};
+    const blink=()=>{let i=0;const step=()=>{if(iAnim!=='idle')return;if(i<BLINK.length){iFrame(0,BLINK[i++]);iTimer=setTimeout(step,BLINK_MS)}else{iFrame(0,0);hold()}};step()};
+    hold();
+  }
+  document.addEventListener('visibilitychange',()=>{if(idleEl.hidden)return;document.hidden?iStop():iIdle()});
+  function idleHide(){iStop();idleEl.hidden=true}
+  function slideFrom(el,rect){ // el を、画面上の rect の位置から今の位置へ滑らせる
+    const r=el.getBoundingClientRect(),dx=rect.left-r.left,dy=rect.top-r.top;
+    if(el._fly)el._fly.cancel();
+    if((!dx&&!dy)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    el._fly=el.animate([{transform:`translate(${dx}px,${dy}px)`},{transform:'none'}],{duration:400,easing:'cubic-bezier(.2,.8,.2,1)'});
+  }
+  function flyIdleFrom(rect){idleEl.hidden=false;iFrame(0,0);slideFrom(idleEl,rect);iIdle()}
+  function holdPet(t){ // 引いている間、ぴよは待機の位置まで下がったらそこで止まる
+    const top=idleRect?idleRect.top:innerHeight-10-H;
+    const over=Math.max(0,petTop0+t-top);
+    pet.style.transition='';pet.style.transform=over?`translateY(${-over}px)`:'';
+  }
+  function fadeRest(v,anim){ // 引いている間、ぴよ以外（会話・候補・入力欄・後ろの幕）だけ薄くする
+    [log,suggest,$('piyo-form')].forEach(el=>{el.style.transition=anim?'opacity .2s ease-out':'';el.style.opacity=v===1?'':String(v)});
+    layer.style.setProperty('--pull-op',String(v));
+  }
+  iIdle();
   $('piyo-close').addEventListener('click',close);
   pet.addEventListener('click',()=>{if(anim==='idle')play('wave')});
 

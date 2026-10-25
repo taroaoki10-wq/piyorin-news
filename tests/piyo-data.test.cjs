@@ -49,9 +49,23 @@ test('同時呼び出しの通信を共有し時計が戻った場合も再取�
 });
 test('再オープン時に更新したまとめと候補を表示、会話を消さない',async()=>{
   const h=setup(),messages=[],chips=[];const nodes={};
-  Object.assign(h.ctx,{$:id=>nodes[id]||(nodes[id]={}),guardOn(){},layer:{hidden:true},lockPage(){},fit(){},frame(){},toBottom(){},play:(name,fn)=>fn?.(),idle(){},piyoMsg:()=>({say:s=>messages.push(s)}),fmt:s=>s,DEFAULT_SUGGEST:[],setTimeout:fn=>{fn();return 0},clearTimeout(){},fillSuggest:list=>chips.push(list)});
-  const open=html.slice(html.indexOf('  async function open(){',html.indexOf('  const DATA_TTL=')),html.indexOf('  function close(){stop();'));
+  Object.assign(h.ctx,{$:id=>nodes[id]||(nodes[id]={}),guardOn(){},layer:{hidden:true},lockPage(){},fit(){},frame(){},toBottom(){},play:(name,fn)=>fn?.(),idle(){},piyoMsg:()=>({say:s=>messages.push(s)}),fmt:s=>s,DEFAULT_SUGGEST:[],setTimeout:fn=>{fn();return 0},clearTimeout(){},fillSuggest:list=>chips.push(list),suggest:{children:[1]},idleEl:{hidden:true},idleHide(){},slideFrom(){}});
+  const open=html.slice(html.indexOf('  async function open(){',html.indexOf('  const DATA_TTL=')),html.indexOf('  function close('));
   vm.runInContext('let greeted=false,openId=0;'+open+';this.open=open;',h.ctx);
   await Promise.all([h.ctx.open(),h.ctx.open()]);await h.ctx.open();assert.equal(messages.length,1);
   h.advance(1800000);h.version(2);await h.ctx.open();assert.equal(messages.length,2);assert.match(messages[1],/summary2/);assert.equal(chips[1][0],'question2');
+});
+test('待機のぴよ：下へ引いても待機の位置で止まり、それより下へ行かない',()=>{
+  const fn=html.slice(html.indexOf('  function holdPet('),html.indexOf('  function fadeRest('));
+  const pet={style:{}},ctx={pet,innerHeight:812,H:104,idleRect:{top:698},petTop0:584};
+  vm.createContext(ctx);vm.runInContext(fn+';this.holdPet=holdPet;',ctx);
+  ctx.holdPet(60);assert.equal(pet.style.transform,'');      // まだ待機の位置より上
+  ctx.holdPet(114);assert.equal(pet.style.transform,'');     // ちょうど待機の位置
+  ctx.holdPet(240);assert.equal(pet.style.transform,'translateY(-126px)'); // 引いた分を打ち消して待機の位置に止める
+});
+test('待機のぴよ：呼ぶボタンは無く、待機のぴよと右の位置がチャットのぴよとそろう',()=>{
+  assert.ok(!html.includes('id="piyo-call"'));
+  assert.match(html,/id="piyo-idle"[^>]*aria-label="ぴよと話す"/);
+  assert.match(html,/\.piyo-idle\{[^}]*right:26px/);
+  assert.match(html,/\.piyo-layer\{[^}]*padding:0 12px/);assert.match(html,/\.piyo-pet\{[^}]*margin-right:14px/);
 });
