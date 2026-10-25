@@ -209,6 +209,18 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFB3OWxGYmF4ZTlkcF9jclVLVlN1Mk9qcExneWtjREliWWZ4MkxubUJvMzRUdjFtYmVFaGhfTmM0NjFDLWhCWlRhT3pFd1p2bGJtcld2NnNNbUl4OU0xLW1qM1psR2c5cmlBX0FUdVBxc1Rld1doRnhrRHJzS3o?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5xalZYMzBnWXRRbUJLUVE1Q25HY2RITWkwTVBOd0tqRmtiWHJ5ZFRmdlRJOGVIMFN1UmxENDQ1anpRajhxbDd6QVhFVWtuTjVQdzZLbTBobk1hN25qaGNXYUhjUFVmU0U1andZSzdLUnl2NFRza2NTSkhELUc?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE85UDFoVDJFSzVsa1ZIRlpONklVaGNJWUpFcG1ITEZ2djNBVUxvXzdKVWd5S0xYZHhpTzluSVRYZi1URWJrS2JJLU5KWF9LcUY1V0ptRERZalNnN0pUQThiMks5Z3Z0Si1PeXZpUVp6YUlFM1JVWng2a2NHMlM?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBNVmJaVno0TVJrUmprQk8tQ1JaZXowN194UmNiSGV1RHRMb3ZULVdrdkR2Z2lqTmNNSmRuUGQwbHIzY2FnNjhKd3cxTUI0Y0x5UFE4NVJWemxXRUpyTEJ5RmlGZzJrRndOZkFoWnBzdlc0UmNBdzZ4NjNSbnc?oc=5"
    }
   ],
   "dv": 3,
@@ -492,7 +504,12 @@
   "title": "「ぴよりん」が「生まれる場所」の最寄り駅が「ぴよりん」一色に！ 勝川駅改札口付近を7月1日から装飾 画像（3/3ページ）",
   "source": "Tetsudo.com（鉄道コム）",
   "url": "https://www.tetsudo.com/news/4100/figure/image/site-1307044-3-a-004.jpg.html",
-  "related": [],
+  "related": [
+   {
+    "source": "Tetsudo.com（鉄道コム）",
+    "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNdlVKUUZyNzF2d0ZpLXRzendwSkZObmtpd1J3eUxadHM0dk5sblRVV2VyOEctcTZvODVSY21vUlo5TDIyUGkwdVcxTUV2T0R6YUJGa2c5RERGNVRnR3NrR3pydVdJMDlaSkJraXVMVm1paXZHMXhkYkNLR01FRlRkOVNR?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -1100,7 +1117,12 @@
   "title": "名古屋名物「ぴよりん」×『ゴジラ』コラボスイーツ登場！『ゴジラ-0.0』公開記念で期間限定販売",
   "source": "玩具人 TOY PEOPLE",
   "url": "https://www.toy-people.com/jp/?p=115698",
-  "related": [],
+  "related": [
+   {
+    "source": "玩具人 TOY PEOPLE",
+    "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE15d3phZWoxQ2xrNnBKdGE1OEhoUE5sSl9qeDBxWVBWVmlOVENlVG9MSEkxZEVZUGc5WnNmeF9DZ1dSM1d3RWtSRXZXVFFVTHJH?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -1248,6 +1270,10 @@
    {
     "source": "AERA DIGITAL",
     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBRZC1aSFVTWlVWdDgxbkJtTUxMSjM5QlFOUmF3bzJTU0duTUxmN2t4ZEI0bW9BS2FUWUZlUFI5aDBlaG5VMTQ4QkxmY1BFeWNjZ3BmVUd3?oc=5"
+   },
+   {
+    "source": "storyweb.jp",
+    "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE8yaUNBSjFNSlZxU0VwbE14ZnhRTHd6T2liQWg4eGljV2NKTERFT0RORWtOMVJ6RDBXQWhfNW9MSHpxN3lIdW5LMl8zRQ?oc=5"
    }
   ],
   "dv": 3,
@@ -1496,7 +1522,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんのクリスマス限定商品・ケーキ販売の記事",
+   "why": "ぴよりんのクリスマス限定ケーキの新商品・予約についての記事",
    "t": "2026-10-25"
   }
  },
@@ -5795,22 +5821,6 @@
   "title": "画像4 / 9＞名古屋駅にオープンした話題の新施設「ぴよりんvillage」をSKE48センター大村杏がレポート！",
   "source": "ウォーカープラス",
   "url": "https://www.walkerplus.com/article/1405058/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりん公式施設「ぴよりんvillage」に関する記事",
-   "t": "2026-10-25"
-  }
- },
- {
-  "id": "n20260923-679479e2",
-  "date": "2026-07-17",
-  "cat": "media",
-  "title": "名古屋駅にオープンした話題の新施設「ぴよりんvillage」をSKE48センター大村杏がレポート！",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/1405058/",
   "related": [
    {
     "source": "walkerplus.com",
@@ -5819,15 +5829,22 @@
    {
     "source": "ウォーカープラス",
     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9SdnFGc3FISjh1ZXdGaU5ocGVUYzFDb0hFNWtvTVFseUhGUFkyNjNJYndQNlRnMmJ2QldQUjVncEJ2eXlUZnNwT3VBNGRyUlFRdml0UEZn0gFbQVVfeXFMTllzVkdFMWNPbUQ5YlhBRF9rcnpVT2dlWkdidkhzb0Y1Y0NxZWRzUHZZN3YxUkFOb0RRYkpMWHBOYk1Tc3dVTVFXLVAzb3VjczZjNDcxRWx6ZGNvVQ?oc=5"
+   },
+   {
+    "source": "ウォーカープラス",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1PS0hBWUZ2QmRUM181MXpLYWVDZTlscy04X3d5UnZ4Y0xPV0JTWWQ5RHktNFNNNGFUWGJFZXlwRjRyZFZUcmJRSHRnMTJkTEY3UElkQjJTdzFubEJzNGcxbmUwUUZseWNnR3hoZ0xB?oc=5"
    }
   ],
   "dv": 3,
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんvillageの新施設についての記事",
-   "t": "2026-10-15"
-  }
+   "why": "ぴよりん公式施設「ぴよりんvillage」に関する記事",
+   "t": "2026-10-25"
+  },
+  "merged_ids": [
+   "n20260923-679479e2"
+  ]
  },
  {
   "id": "n20260717-0f26087a",
