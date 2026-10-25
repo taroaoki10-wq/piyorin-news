@@ -646,6 +646,22 @@
   }
  },
  {
+  "id": "n20261023-cc077f0d",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "「ぴよりん」が兵庫におでかけ！山陽百貨店「日本列島絶品うまいもの大会」にて『紅茶ぴよりんおでかけセット』を２日間限定で",
+  "source": "ニコニコニュース",
+  "url": "https://news.nicovideo.jp/watch/nw19909589",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのイベント出店・限定商品に関する記事",
+   "t": "2026-10-25"
+  }
+ },
+ {
   "id": "official-p5633",
   "date": "2026-10-22",
   "cat": "official",
@@ -1698,6 +1714,22 @@
   "source": "ぴよりん公式サイト",
   "url": "https://piyorin.com/news/p5599/",
   "related": []
+ },
+ {
+  "id": "n20261025-4c87a955",
+  "date": "2026-10-20",
+  "cat": "media",
+  "title": "魔女帽子のぴよりん缶に8種類の手作りクッキー！ジェイアール東海 ...",
+  "source": "dtimes",
+  "url": "https://dtimes.jp/post-1422211/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの新商品・ハロウィンコラボ企画に関する記事",
+   "t": "2026-10-25"
+  }
  },
  {
   "id": "n20261020-0fc5898d",
@@ -9190,43 +9222,6 @@
    "ok": true,
    "why": "ぴよりんのハロウィンバージョン企画に関する記事",
    "t": "2026-10-19"
-  }
- },
- {
-  "id": "n20261004-d399d142",
-  "date": "2017-08-24",
-  "cat": "media",
-  "title": "いったいどんな味!?名古屋みやげの定番“ぴよりん”に期間限定で仲間が登場！",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/119095/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの新商品（期間限定）に関する記事",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20260922-fa1cff31",
-  "date": "2015-01-08",
-  "cat": "media",
-  "title": "新・名古屋土産「ぴよりん」にあまおう味が登場",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/54134/",
-  "related": [
-   {
-    "source": "walkerplus.com",
-    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE13RVZ0SGJFZEJVal9xYTZ5VUMwNkxxcGMxeXNLZ0hoQ19wendIbDBOVGhJVHdfZFdzdnI4OEM1ekJ5ZllLcTRaUXEwdUxsSE9DSHdpNkVvZ0hNQzJVV1AyM21WRkZsWmd2?oc=5"
-   }
-  ],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの新フレーバー商品（あまおう味）の紹介",
-   "t": "2026-10-15"
   }
  }
 ]
