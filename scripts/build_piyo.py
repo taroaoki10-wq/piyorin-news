@@ -74,6 +74,7 @@ MEMO_PROMPT = """名古屋のひよこ型スイーツ「ぴよりん」のニュ
 - 値段（税込で書いてあれば税込）
 - 販売・開催の期間や日付（年月日で。曜日は不要）
 - 場所・店舗、予約や整理券の方法、数量限定・なくなり次第終了などの条件
+「ぴよりんshop」に言及するときは、この表記を使い、「ぴよりnshop」と書かないでください。
 必ず save_memos ツールで、すべての記事の番号について答えてください。"""
 
 GREETING_TOOL = {
@@ -167,6 +168,11 @@ def call_tool(system: str, tool: dict, content: str, max_tokens: int, api_key: s
     return {}, res.get("usage", {})
 
 
+def correct_memo_shop_name(text: str) -> str:
+    """確認済みの店名の誤字だけを補正する（一般的な表記変換はしない）。"""
+    return text.replace("ぴよりnshop", "ぴよりんshop")
+
+
 def memo_batch(items: list[dict], api_key: str) -> tuple[dict[int, str], dict]:
     parts = []
     for i, it in enumerate(items):
@@ -179,12 +185,16 @@ def memo_batch(items: list[dict], api_key: str) -> tuple[dict[int, str], dict]:
     out: dict[int, str] = {}
     for m in got.get("memos") or []:
         if isinstance(m, dict) and isinstance(m.get("n"), int) and 0 <= m["n"] < len(items) and m.get("memo"):
-            out[m["n"]] = re.sub(r"\s+", " ", str(m["memo"])).strip()[:200]
+            out[m["n"]] = correct_memo_shop_name(re.sub(r"\s+", " ", str(m["memo"])).strip())[:200]
     return out, usage
 
 
 def build_memos(news: list[dict], memos: dict, api_key: str, t0: float) -> tuple[int, int, int]:
     """新しい公式・プレスリリースの記事をメモする。(メモした数, 入力トークン, 出力トークン) を返す。"""
+    # 作り済みのメモはAPIで再生成せず補正し、ID・出典・作成日・版を保つ。
+    for memo in memos.values():
+        if isinstance(memo, dict) and isinstance(memo.get("memo"), str):
+            memo["memo"] = correct_memo_shop_name(memo["memo"])
     since = (today_jst() - timedelta(days=KEEP_DAYS)).isoformat()
     todo = [
         n for n in news
