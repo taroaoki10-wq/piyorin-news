@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ぴよりん関連ニュースを集めて docs/data/news.json に追記する。
+"""ぴよりん関連ニュースを集め、最新500件と年別保管庫に保存する。
 
 情報源（すべて同時に取得）
   - ぴよりん公式サイト「お知らせ」（HTMLから記事リンクを読み取り）
@@ -26,11 +26,11 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import parse_qs, quote, urlencode, urljoin, urlparse
+from news_store import read_news, write_news
 
 JST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "docs" / "data"
-NEWS_FILE = DATA / "news.json"
 META_FILE = DATA / "meta.json"
 MAX_ITEMS = 500
 KEYWORDS = ("ぴよりん", "ピヨリン", "piyorin")
@@ -242,7 +242,7 @@ def merge(existing: list[dict], incoming: list[dict]) -> tuple[list[dict], int]:
         by_title[key] = it
         added += 1
     existing.sort(key=lambda n: (n["date"], n["cat"] == "official"), reverse=True)
-    return existing[:MAX_ITEMS], added
+    return existing, added
 
 
 # ---------- 掲載日の確認 ----------
@@ -371,8 +371,7 @@ def verify_dates(items: list[dict]) -> int:
 
 def main() -> int:
     t0 = time.time()
-    before = NEWS_FILE.read_text(encoding="utf-8") if NEWS_FILE.exists() else "[]"
-    existing = json.loads(before)
+    existing = read_news(DATA)
     incoming, errors, counts = [], [], {}
     with ThreadPoolExecutor(max_workers=len(SOURCES)) as ex:
         for name, items, err in ex.map(collect, SOURCES):
@@ -389,9 +388,7 @@ def main() -> int:
     if fixed:
         merged.sort(key=lambda n: (n["date"], n["cat"] == "official"), reverse=True)
     print(f"新規 {added}件 / 合計 {len(merged)}件（{time.time() - t0:.1f}秒）")
-    after = json.dumps(merged, ensure_ascii=False, indent=1) + "\n"
-    if after != before:
-        NEWS_FILE.write_text(after, encoding="utf-8")
+    write_news(DATA, merged, MAX_ITEMS)
     META_FILE.write_text(json.dumps({
         "updatedAt": datetime.now(JST).isoformat(timespec="minutes"),
         "added": added,

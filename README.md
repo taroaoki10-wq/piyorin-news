@@ -36,6 +36,9 @@ GitHub Pages（docs/index.html、5分ごとに読み直し）→ Safari で表�
 |---|---|
 | `docs/index.html` | 表示ページ（ニュース／カレンダー） |
 | `docs/data/news.json` | ニュース（自動で追記） |
+| `docs/data/archive/index.json`・`YYYY.json` | 最新500件より古い記事を年別に保管（一覧・検索にも表示） |
+| `scripts/news_store.py` | 最新記事と保管記事の読み書き。既存の記事ID・関連判定を維持 |
+| `docs/news-archive.js` | 年別記事を読み込み、最新記事と合わせて表示 |
 | `docs/data/events.json` | カレンダーの予定（自動追加＋手で編集） |
 | `docs/data/state.json` | 予定の読み取りが済んだ記事の記録 |
 | `scripts/extract_events.py` | 予定の抽出プログラム |
@@ -51,6 +54,16 @@ GitHub Pages（docs/index.html、5分ごとに読み直し）→ Safari で表�
 | `docs/data/meta.json` | 最終更新日時 |
 | `scripts/fetch_news.py` | 収集プログラム |
 | `.github/workflows/update.yml` | 定期実行の設定 |
+
+## 古い記事の保管
+
+収集時は `news.json` と年別保管庫の両方を読み、重複を確認します。掲載日を確認したあとで新しい順に分け、最新500件を `news.json`、残りを `archive/YYYY.json` に保存します。500件を超えても記事を捨てません。保管庫を読めない場合は更新を止め、空の保管庫で上書きしません。
+
+画面では最新記事を先に表示し、保管記事を取得できたら同じ一覧・検索に加えます。記事ID・URL・関連リンク・AI判定を保つため、ブックマークと非表示設定も引き継がれます。取得失敗時は表示中の保管記事を維持し、次の更新で再試行します。年別保管は記事情報が対象で、古い記事の本文キャッシュを永久保存する機能ではありません。本文がない場合は従来どおり元の記事へのリンクで読めます。
+
+自動の予定抽出・AI判定・ぴよメモ作りは従来どおり最新500件を対象とします。
+
+検証: `python3 -m unittest discover -s tests`、`node --test tests/news-archive.test.cjs`。
 
 ## 予定（カレンダー）の自動追加
 

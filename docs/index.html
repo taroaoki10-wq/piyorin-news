@@ -551,11 +551,13 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   </div>
   <article class="reader-body" id="reader-body"></article>
 </div>
+<script src="news-archive.js"></script>
 <script>
 (function(){
   const CATS={official:'公式',press:'プレスリリース',media:'Webメディア'};
   const WD=['日','月','火','水','木','金','土'];
   let state={news:[],events:[],updatedAt:null,filter:'all',q:''};
+  let currentNews=[], archivedNews=[], newsLoadSerial=0, archiveFailed=false;
   try{const f=localStorage.getItem('piyo-filter');if(f&&(f==='all'||CATS[f]))state.filter=f;}catch(e){}
 
   const $=id=>document.getElementById(id);
@@ -1110,13 +1112,27 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 
     // GitHub Actions が更新する JSON を読み込む
   async function load(){
+    const serial=++newsLoadSerial;
     const bust='?t='+Date.now();
     try{
       const [n,e,m]=await Promise.all(['news','events','meta'].map(f=>fetch('data/'+f+'.json'+bust).then(r=>r.ok?r.json():null).catch(()=>null)));
-      if(Array.isArray(n))state.news=n;
+      if(serial!==newsLoadSerial)return;
+      if(Array.isArray(n))currentNews=n;
+      state.news=PiyoNewsArchive.combine(currentNews,archivedNews);
       if(Array.isArray(e))state.events=e;
       if(m&&m.updatedAt)state.updatedAt=m.updatedAt;
       renderAll();
+      try{
+        const archived=await PiyoNewsArchive.load(bust);
+        if(serial!==newsLoadSerial)return;
+        archivedNews=archived;archiveFailed=false;
+        state.news=PiyoNewsArchive.combine(currentNews,archivedNews);
+        renderAll();
+      }catch(err){
+        if(serial!==newsLoadSerial)return;
+        if(!archiveFailed)toast('過去の記事を読み込めませんでした。次の更新で再試行します。');
+        archiveFailed=true;
+      }
     }catch(err){}
   }
   load();
