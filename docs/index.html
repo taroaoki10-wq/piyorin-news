@@ -1232,14 +1232,29 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   }
 
   // ---- データ（呼んだときに読み込む） ----
-  let data=null;
-  async function loadData(){
-    const t='?t='+Date.now();
-    const weatherP=loadWeather();
-    const get=f=>fetch('data/'+f+'.json'+t,{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null);
-    const [greeting,memo,events,news,basics]=await Promise.all(['piyo-greeting','piyo-memo','events','news','piyo-basics'].map(get));
-    data={greeting:greeting&&Array.isArray(greeting.lines)?greeting:null,memo:memo&&typeof memo==='object'?memo:{},events:Array.isArray(events)?events:[],news:Array.isArray(news)?news:[],
-      basics:basics&&Array.isArray(basics.lines)?basics:null,weather:await weatherP};
+  const DATA_TTL=30*60*1000;
+  let data=null,dataLoadedAt=null,dataLoadedDay='',dataLoading=null;
+  function loadData(){
+    if(dataLoading)return dataLoading; // 読み込み途中の再オープンでも通信を重ねない
+    const now=Date.now();
+    if(dataLoadedAt!==null&&now>=dataLoadedAt&&now-dataLoadedAt<DATA_TTL&&dataLoadedDay===todayStr())return Promise.resolve(false);
+    dataLoading=(async()=>{
+      const t='?t='+now;
+      const weatherP=loadWeather();
+      const get=f=>fetch('data/'+f+'.json'+t,{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null);
+      const [greeting,memo,events,news,basics]=await Promise.all(['piyo-greeting','piyo-memo','events','news','piyo-basics'].map(get));
+      const weather=await weatherP,old=data||{};
+      const valid={greeting:!!greeting&&Array.isArray(greeting.lines),memo:!!memo&&typeof memo==='object'&&!Array.isArray(memo),
+        events:Array.isArray(events),news:Array.isArray(news),basics:!!basics&&Array.isArray(basics.lines),weather:Array.isArray(weather)&&weather.length>0};
+      data={greeting:valid.greeting?greeting:old.greeting||null,memo:valid.memo?memo:old.memo||{},
+        events:valid.events?events:old.events||[],news:valid.news?news:old.news||[],basics:valid.basics?basics:old.basics||null,
+        weather:valid.weather?weather:null}; // 古い予報は更新失敗時に使わない
+      // 一部でも失敗したら次に呼んだとき再試行する
+      if(Object.values(valid).every(Boolean)){dataLoadedAt=now;dataLoadedDay=new Date(now+9*3600e3).toISOString().slice(0,10)}
+      else{dataLoadedAt=null;dataLoadedDay=''}
+      return valid.greeting||valid.weather;
+    })().finally(()=>{dataLoading=null});
+    return dataLoading;
   }
   // 天気の番号（WMO）を言葉に
   function weatherWord(c){
@@ -1308,15 +1323,19 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   layer.addEventListener('touchcancel',()=>{pull=Math.min(pull,PULL_CLOSE-1);endPull()},{passive:true});
 
   // ---- 呼ぶ・しまう ----
-  let greeted=false;
+  let greeted=false,openId=0;
   function fillSuggest(list){
     suggest.innerHTML='';
     list.forEach(q=>{const b=document.createElement('button');b.type='button';b.textContent=q;b.addEventListener('click',()=>{if(busy)return;pendingChip=b;ask(q)});suggest.appendChild(b)});
     suggest.hidden=!list.length;
   }
   async function open(){
+    const id=++openId;
     $('piyo-call').hidden=true;guardOn(true);layer.hidden=false;lockPage();fit();frame(0,0);toBottom(true);
-    if(!data)await loadData().catch(()=>{});
+    const refreshed=await loadData().catch(()=>false);
+    if(id!==openId)return;
+    if(refreshed)greeted=false;
+    if(layer.hidden)return; // 取得中にしまった場合は、次の呼び出しで表示する
     if(!greeted){
       greeted=true;
       const g=data&&data.greeting;
