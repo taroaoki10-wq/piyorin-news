@@ -552,6 +552,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   <article class="reader-body" id="reader-body"></article>
 </div>
 <script src="news-archive.js"></script>
+<script src="news-identity.js"></script>
 <script>
 (function(){
   const CATS={official:'公式',press:'プレスリリース',media:'Webメディア'};
@@ -588,7 +589,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     function saveDel(push=true){try{localStorage.setItem(DEL_KEY,JSON.stringify(dels))}catch(_){}if(push&&typeof queueSync==='function')queueSync()}
     // 表示しない記事なら {by:'user'|'ai', why} を返す。表示する記事は null
     function hideInfo(n){
-      const d=dels[n.id];
+      const d=PiyoNewsIdentity.deletion(n,dels);
       if(d)return d.on?{by:'user'}:null;
       const j=n.jg;
       if(j&&j.ok===false)return {by:'ai',why:String(j.why||'')};
@@ -631,7 +632,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     }
     const canonDel=d=>JSON.stringify(Object.keys(d).sort().map(k=>k+'@'+d[k].t+(d[k].on?'1':'0')));
     function pruneDel(d){ // 記事が一覧からなくなって90日たった記録だけ消す
-      const ids=new Set(state.news.map(n=>n.id)), cut=Date.now()-90*864e5;
+      const ids=new Set(state.news.flatMap(n=>PiyoNewsIdentity.ids(n))), cut=Date.now()-90*864e5;
       for(const k of Object.keys(d))if(!ids.has(k)&&!(d[k].t>=cut))delete d[k];
       return d;
     }

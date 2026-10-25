@@ -13,6 +13,7 @@
 from __future__ import annotations
 
 import hashlib
+import copy
 import html
 import json
 import re
@@ -85,8 +86,51 @@ def norm(title: str) -> str:
 
 
 def clean_title(title: str) -> str:
-    """「＜画像3 / 8＞」など、同じ記事の別ページを示す前置きを外す。"""
-    return re.sub(r"^\s*[＜<]?\s*画像\s*\d+\s*/\s*\d+\s*[＞>]\s*", "", title).strip()
+    """写真ページの飾りだけを外す。普通の見出し末尾の日付は残す。"""
+    t = title.strip()
+    prefix = r"^(?:[＜<]\s*画像\s*\d+\s*/\s*\d+\s*[＞>]|【画像】|画像・写真\s*[|｜]|写真・図版[（(]\d+枚目[）)]\s*[|｜])\s*"
+    cleaned = re.sub(prefix, "", t)
+    if cleaned != t:
+        cleaned = re.sub(r"\s+(?:\d+\s*/\s*\d+|\d+枚目)$", "", cleaned)
+    return cleaned.strip()
+
+
+def article_key(url: str) -> str:
+    """媒体ごとの記事IDで識別。未知のphoto URLは推測しない。"""
+    p = urlparse(url)
+    host = (p.hostname or "").lower()
+    patterns = {
+        "news.livedoor.com": r"/article/(?:detail|image_detail)/(\d+)/?",
+        "www.oricon.co.jp": r"/news/(\d+)/(?:full/|photo/\d+/|comment/)?",
+        "www.sankei.com": r"/article/([^/]+)/(?:photo/[^/]+/)?",
+        "dot.asahi.com": r"/articles/(?:photo|-)/(\d+)/?",
+    }
+    m = re.fullmatch(patterns.get(host, r"(?!)"), p.path)
+    return host + ":" + m.group(1) if m else url
+
+
+def article_keys(item: dict) -> set[str]:
+    return {"title:" + norm(item["title"])} | {
+        "url:" + article_key(r["url"])
+        for r in [item] + item.get("related", [])
+    }
+
+
+def absorb(first: dict, other: dict) -> None:
+    """代表記事のID・判定を維持し、まとめた記事のIDと元リンクを残す。"""
+    aliases = set(first.get("merged_ids", [])) | set(other.get("merged_ids", []))
+    if other.get("id"):
+        aliases.add(other["id"])
+    aliases.discard(first["id"])
+    if aliases:
+        first["merged_ids"] = sorted(aliases)
+    seen = {first["url"]} | {r["url"] for r in first.get("related", [])}
+    for r in [other] + other.get("related", []):
+        if r["url"] not in seen:
+            first.setdefault("related", []).append({"source": r["source"], "url": r["url"]})
+            seen.add(r["url"])
+    if "jg" not in first and "jg" in other:
+        first["jg"] = copy.deepcopy(other["jg"])
 
 
 def has_keyword(text: str) -> bool:
@@ -195,52 +239,73 @@ def make_id(item: dict) -> str:
 
 
 def dedupe(existing: list[dict]) -> list[dict]:
-    """保存済みの記事のうち、同じ記事（タイトルが同じ）を1件にまとめる。"""
+    """見出し・記事URLのどちらでつながる場合も、同じグループにまとめる。"""
+    items = copy.deepcopy(existing)
+    parents = list(range(len(items)))
+
+    def root(i):
+        while parents[i] != i:
+            parents[i] = parents[parents[i]]
+            i = parents[i]
+        return i
+
+    seen = {}
+    for i, item in enumerate(items):
+        item["title"] = clean_title(item["title"])
+        for key in article_keys(item):
+            if key in seen:
+                parents[root(i)] = root(seen[key])
+            seen[key] = i
+    groups = {}
+    for i, item in enumerate(items):
+        groups.setdefault(root(i), []).append(item)
     order = {"official": 0, "press": 1, "media": 2}
-    kept: dict[str, dict] = {}
-    for n in sorted(existing, key=lambda x: (order.get(x.get("cat"), 9), x.get("date", ""))):
-        n["title"] = clean_title(n["title"])
-        key = norm(n["title"])
-        first = kept.get(key)
-        if not first:
-            kept[key] = n
-            continue
-        seen = {first["source"]} | {r["source"] for r in first.get("related", [])}
-        for r in [{"source": n["source"], "url": n["url"]}] + n.get("related", []):
-            if r["source"] not in seen:
-                first.setdefault("related", []).append(r)
-                seen.add(r["source"])
-    return list(kept.values())
+    result = []
+    for group in groups.values():
+        # 元からある通常記事を優先。同一URLの見出し違いは長い見出しを残す。
+        group.sort(key=lambda n: (order.get(n["cat"], 9),
+                   bool(re.search(r"/(?:image_detail|photo|comment)/", n["url"])),
+                   n["date"], -len(n["title"])))
+        first = group[0]
+        if first["title"].endswith(("...", "…")):
+            complete = [n["title"] for n in group if n["url"] == first["url"]
+                        and not n["title"].endswith(("...", "…"))]
+            if complete:
+                first["title"] = max(complete, key=len)
+        for other in group[1:]:
+            absorb(first, other)
+        result.append(first)
+    return result
 
 
 def merge(existing: list[dict], incoming: list[dict]) -> tuple[list[dict], int]:
     existing = dedupe(existing)
-    by_url = {n["url"]: n for n in existing}
-    for n in existing:
-        for r in n.get("related", []):
-            by_url.setdefault(r["url"], n)
-    by_title = {norm(n["title"]): n for n in existing}
+    by_key = {key: n for n in existing for key in article_keys(n)}
     added = 0
-    # 公式 → プレス → メディアの順に処理して、同じ話題は公式側にまとめる
     order = {"official": 0, "press": 1, "media": 2}
-    for it in sorted(incoming, key=lambda x: order.get(x["cat"], 9)):
-        if it["url"] in by_url:
-            continue
+    for it in sorted(copy.deepcopy(incoming), key=lambda x: order.get(x["cat"], 9)):
         it["title"] = clean_title(it["title"])
-        key = norm(it["title"])
-        twin = by_title.get(key)
-        if twin:
-            if twin["url"] != it["url"] and all(r["url"] != it["url"] for r in twin.get("related", [])):
-                # 同じ媒体の別URL（Google経由とBing経由など）は重ねない
-                if it["source"] != twin["source"] and all(r["source"] != it["source"] for r in twin.get("related", [])):
-                    twin.setdefault("related", []).append({"source": it["source"], "url": it["url"]})
-            by_url[it["url"]] = twin
+        keys = article_keys(it)
+        # URLを先に照合し、同じ写真が違う見出しで配信されても再追加しない。
+        twin = next((by_key[k] for k in sorted(keys, reverse=True) if k in by_key), None)
+        if twin is not None:
+            # 新着のURLと見出しが別々の既存グループに一致する場合も接続する。
+            others = {id(by_key[k]): by_key[k] for k in keys if k in by_key and by_key[k] is not twin}
+            for other in others.values():
+                absorb(twin, other)
+            if others:
+                existing = [n for n in existing if id(n) not in others]
+                by_key = {k: twin if id(n) in others else n for k, n in by_key.items()}
+            absorb(twin, it)
+            for key in keys:
+                by_key[key] = twin
             continue
-        it = {"id": make_id(it), **it, "related": []}
+        it = {"id": make_id(it), **it, "related": it.get("related", [])}
         existing.append(it)
-        by_url[it["url"]] = it
-        by_title[key] = it
+        for key in keys:
+            by_key[key] = it
         added += 1
+    existing = dedupe(existing)
     existing.sort(key=lambda n: (n["date"], n["cat"] == "official"), reverse=True)
     return existing, added
 
