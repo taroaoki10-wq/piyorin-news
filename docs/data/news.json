@@ -883,6 +883,10 @@
    {
     "source": "オリコンニュース",
     "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1vcjNVY0g2RmdnWXFlaHRCOVh0ODNYc3Nwd0hkdmRjZVJiS0FBelFreDhLSGl1alM1X2RSQzJIUHZxZ3QyR1ptRjZ3czdXYjhpMWl6TDdKSlk0SkU?oc=5"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5YWlRwUUcxWnlJVHZrLUU5RTE0YWJESjZtLUVVQUNaOHU4LUJyVVh3b2pLMlpveXlqSzR0X25pUzFCMHIyRzNQME55dG1vWlowNmJEMG1TRWNuUQ?oc=5"
    }
   ],
   "dv": 3,
@@ -1530,7 +1534,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんのクリスマス限定ケーキという新商品・イベント企画",
+   "why": "ぴよりんのクリスマス限定ケーキという新商品・企画の記事",
    "t": "2026-10-26"
   }
  },
@@ -8818,6 +8822,10 @@
    {
     "source": "walkerplus.com",
     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE56TE4tSTQzZG9oQVA2VDFucGZ2NG54cW5WNjZ4QWRESmdrdExJdTdvZlQ4dm1mTnREal9UbVF2RW9qX0w4MG1pTnZMOHprOXhweV9wZk1fM0tkcXB2d2l1MDEzNndQM1EzM1ptaWFR?oc=5"
+   },
+   {
+    "source": "ウォーカープラス",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE14SENYeHRiQkVpNkpYcmoxdV9QaXhvc3pmNDNSdVlJNVFzcjVsZEViSHppd0pDS3loRkFnZXRDOURneHRSMVlSUnpLa2R3a3loOHNPdEdNa2VnZnRjTTJhSG82VGJwSFFldnc1MXZn?oc=5"
    }
   ],
   "dv": 3,
