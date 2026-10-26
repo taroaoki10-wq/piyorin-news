@@ -27,6 +27,14 @@
    {
     "source": "インサイド",
     "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5TbDhjbnlxdVJWdUVWLVhKMVowUkZQWXRBbjdOd21lMW5HM29GREJfc2VoWElHVS1IM0RaQzhDTGU3ZGRkS1hDN2V0RTFKN0xMZnR1S045VWdSdGFwUWJ5QndFbnVfZmpYVXB2MTkxeGJwdw?oc=5"
+   },
+   {
+    "source": "産経ニュース",
+    "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1rMHV0RVdsYWNrNnFxMk0xRXJTU0NzRnVIU3JBdWh6UW9WTDMyNzNGQnkyWnJ1X1FCcTV2anlmWm8zSEZOSW83OVh3ZVloTEQzYmtsNk4yWDFRT1lXZmMwN29SeW4xNlp0NmlFQlg1LWJKaXpBTFhOSDJzUQ?oc=5"
+   },
+   {
+    "source": "Mantan Web",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNdUk3VEJSMFpGSElTaU42dDVIYXRTOEZ4Y0JzQkEzOVA3dk95cmY0V3hRbHB2MVZEc0s2RmF6RWhkRTRqT2xCUkN0ZGZCcnpYa1AzdmRaUmFyNjk2NzVQMlVleFRzMzhSLVdmUU9zRXV4S2xLYVdqYTVtNWZCRDdDWlhSVlgzam1I?oc=5"
    }
   ],
   "dv": 3,
@@ -48,6 +56,10 @@
    {
     "source": "ｄメニューニュース",
     "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOdzJhNjNfSnJzeVJzZnQtbHUwNy1YaUJobTE3MXB0MDZwNUwtdnoxSTlFOThJdlpBRVVQVWh1R1dzLVFHYzhqRlA4aHp5NHJDS25jUzNObEhJbXJJelplLVlaWklkaGI3dGFhZDh5SFJfTFVQeXVpUW9ZSFBrYVJfYTBoUWNrbHgyM0cwYtIBjAFBVV95cUxOdzJhNjNfSnJzeVJzZnQtbHUwNy1YaUJobTE3MXB0MDZwNUwtdnoxSTlFOThJdlpBRVVQVWh1R1dzLVFHYzhqRlA4aHp5NHJDS25jUzNObEhJbXJJelplLVlaWklkaGI3dGFhZDh5SFJfTFVQeXVpUW9ZSFBrYVJfYTBoUWNrbHgyM0cwYg?oc=5"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPNXZpQlJJU1ZyWVNMUWlWVE9HZE43VTRkazNMQlEwUERLbkRIei1LNjhrTkRvZTg5ZlRSSnU3T3BfSHQ3SjdfTF9yOFRSdjVtaldqOGVjVlppRHZVajBmajhlaVFxZF9iLXpCU3ZSTU92cWU3SDhvMXFRdlVOQjIweF9NUUZYUEnSAYwBQVVfeXFMTncyYTYzX0pyc3lSc2Z0LWx1MDctWGlCaG0xNzFwdDA2cDVMLXZ6MUk5RTk4SXZaQUVVUFVodUdXcy1RR2M4akZQOGh6eTRyQ0tuY1MzTmxISW1ySXpaZS1ZWlpJZGhiN3RhYWQ4eUhSX0xVUHl1aVFvWUhQa2FSX2EwaFFja2x4MjNHMGI?oc=5"
    }
   ],
   "dv": 3,
@@ -89,30 +101,22 @@
   "title": "ゴジラのトサカ付きプリン！名古屋駅の「ぴよりんゴジラ」はお店の中もゴジラ仕様に",
   "source": "いこーよニュース",
   "url": "https://report.iko-yo.net/articles/35066",
-  "related": [],
+  "related": [
+   {
+    "source": "いこーよニュース",
+    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1UVkJJN1UyZWstM2p1N3ZVcF9yZGdxR0FCODNYZGVzZUkyU3BpNzhQS2s5ODJOOXdsRkQwZ1VyX3g3aU1lak81cWtFMkpmTEZ2Zmc?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
    "ok": true,
    "why": "ぴよりんゴジラのコラボ商品の販売情報",
    "t": "2026-10-26"
-  }
- },
- {
-  "id": "n20261026-99007bf2",
-  "date": "2026-10-26",
-  "cat": "media",
-  "title": "ゴジラのトサカ付きプリン！名古屋駅の「ぴよりんゴジラ」はお店 ...",
-  "source": "いこーよニュース",
-  "url": "https://report.iko-yo.net/articles/35066",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんゴジラのコラボ商品の販売情報",
-   "t": "2026-10-26"
-  }
+  },
+  "merged_ids": [
+   "n20261026-99007bf2"
+  ]
  },
  {
   "id": "n20261025-293440f7",
@@ -706,7 +710,12 @@
   "title": "ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も：山陽新聞デジタル｜さんデジ",
   "source": "山陽新聞",
   "url": "https://www.sanyonews.jp/photo/detail?article_id=2009058",
-  "related": [],
+  "related": [
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFB0WjN4V0s5UFFaaWpKSHRSbU1Yeng4c2NkRk1ITlUwaG92ZjNfREtzY0ZWVUVlS2xoZnlhZVo0cDRYYXFuU0RkLXZkUmN5b0t1Yl9BX3QzMGkzVGJEOVhvTHBmUzRXOFk?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -1050,6 +1059,10 @@
    {
     "source": "オリコンニュース",
     "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1ZZ294bGhnYXYxOFpQYkVDVlExdlZHcjBVUk41YWJfV1pTVmZoYW9HTzdPbjVtRGg5NVZ0YTBvdDVLNmJZMk9zQ0Z3R0J1SVJBUUhGUXZaZDEwUQ?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1wZU1yZHVDMklXUmNfeko1OVFlb1VvMW5DY1A0a2JiMmtOVDJ3M1hqWi1meEpzQWRMQ1p4ZHB0aWQyWkhrNlBCM09fbUVVYnZ6UDZKMVViZWZUS0E?oc=5"
    }
   ],
   "dv": 3,
@@ -1307,22 +1320,6 @@
   }
  },
  {
-  "id": "n20261022-b7649ce7",
-  "date": "2026-10-22",
-  "cat": "media",
-  "title": "期間限定「ぴよりんゴジラ」が登場",
-  "source": "産経ニュース",
-  "url": "https://www.sankei.com/article/20261022-4AVL2RIDMZPBNHIZLLP3BYSRXI/photo/5C724V7QABP65B5HSZLEDWZV4U/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんゴジラのコラボ商品の期間限定販売",
-   "t": "2026-10-26"
-  }
- },
- {
   "id": "n20261021-dc9915ac",
   "date": "2026-10-21",
   "cat": "media",
@@ -1425,6 +1422,14 @@
    {
     "source": "オリコンニュース",
     "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9UVjlRSFdQV21YZVprMlRDSFQtcG9JbDZaWHQ2dERtWTdGcEJna0VLS1o1OUpiVmZ4MnFxYnZESV9hTmYtRGplcnNxa1JINlBLRkVxUTJTWFlYdw?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9jZ0I4T3lOOFVPR19YV1dYRDI2YjdmaXNqUjBBa0czUzQ0R1ZUa3QycDlJWFFjdnhSbTExUllZcktVUl9LY2kzS3pKLUdndWRmdHpCM1d5NUlTUQ?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9TVTdfMW5TZ3pFa0hrbEY2ZlFhWXNSOGRjTHhUWmFCSGl4WVdMTk5oVlVhNm9Ob3FIQUhpdGl4VkZyWTZmQTBETVl1MHpURGZQVGkyWE5HYjZnQQ?oc=5"
    }
   ],
   "dv": 3,
@@ -1719,22 +1724,6 @@
    "ok": true,
    "why": "ぴよりんのクリスマスケーキ新商品の予約開始に関する記事",
    "t": "2026-10-22"
-  }
- },
- {
-  "id": "n20261021-bfee00bf",
-  "date": "2026-10-21",
-  "cat": "media",
-  "title": "コメント | サンタやトナカイ姿の「ぴよりん」がずらり クリスマス限定ケーキ2種類、30日から先着順で予約受付",
-  "source": "オリコンニュース",
-  "url": "https://www.oricon.co.jp/news/2487819/comment/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりンのクリスマス限定ケーキ商品",
-   "t": "2026-10-26"
   }
  },
  {
@@ -2569,6 +2558,10 @@
    {
     "source": "Yahoo!ニュース",
     "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9sVzF6elFEcmd1OTdCc2lGUUJ0UUJYUUI0ek1Tdl8tajQtVVVYakc5ZVktNkFBY2w3OWZxWWxKWmhXWXYzbndEdWlHc0NadGFKbTN6cU8tTWk0ci0tdG4tdURfcWNmTDAwLWtzRzg5TXJ5SzB0QUQyTFdKazdwcnc?oc=5"
+   },
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxONEFIS2tOLUJJVzVLUGNxVWxIMENVeFBILUo2a2pGWWpVUERrb1pZcmh1T1p4WHpWYWczWEwyZVJoMTNPempuRktVb0NQazdJdW5vdGljOTJLN0h5Nm1jVEdCNWhwRURjZXRkcGFadnhyTjFORXRBVXBzbzVUMERtX19LVU5od1VtTGNnRkl3?oc=5"
    }
   ],
   "dv": 3,
@@ -9088,6 +9081,10 @@
    {
     "source": "ウォーカープラス",
     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBjdFRlTTVfU18zMzUtNFR5SUhrdjI1MUdUcjZNWWtVdGs0T3RYMGs3SUU3eFVjWmVHMUIxVjRHZnNMQ1NIS3AxTUVoNlJaODVZNktfbUNSWTV6VXMxeFhKS3RPaUN0TDZtMEZxVll3?oc=5"
+   },
+   {
+    "source": "ウォーカープラス",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5XOFF1cjl2VWVfblRVNVJ6Q1dFY05LVUxWWGRqdURwc2F2M09DVm9XVldOTjRjemN4RXZtVEFvVHo1UWxTZzhkcWVQZFZJbUhJd2o5Zmd30gFbQVVfeXFMT25SaEhJMTFWcnh6ZkJUX0MyakQ2MGkxdmxwYVppM3Z0aU5aeC1fa0dlXzJwXzJTTUJZWEdyb3UwWmVaY1I3eGNBYjJMbkFkeXhDUUhaZG1pSktzYw?oc=5"
    }
   ],
   "dv": 3,
