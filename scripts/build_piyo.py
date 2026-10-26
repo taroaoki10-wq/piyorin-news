@@ -35,7 +35,7 @@ MEMO_FILE = DATA / "piyo-memo.json"
 GREETING_FILE = DATA / "piyo-greeting.json"
 
 MEMO_VERSION = 1      # メモの基準を変えたら上げる（作り済みの記事ももう一度メモする）
-GREETING_VERSION = 2  # まとめの基準を変えたら上げる
+GREETING_VERSION = 3  # まとめの基準を変えたら上げる
 KEEP_DAYS = 150       # この日数より古い記事はメモしない・メモから外す
 BATCH = 6             # 1回の呼び出しでメモする記事の数
 MAX_PER_RUN = 24      # 1回の更新でメモする最大数（残りは次の更新で）
@@ -107,7 +107,7 @@ GREETING_PROMPT = """名古屋のひよこ型スイーツ「ぴよりん」の�
 - 終わった販売やイベントは入れない。同じ話題（公式とプレスリリースの重複など）は1つにまとめる。
 - 日付は「11月3日から」「10月31日まで」のように月日で書く（「あと3日」のような相対的な書き方はしない）。
 - いちばん大事な部分（商品名と日付など）を1行に1か所まで **太字** で囲む。
-- 語尾にときどき「ぴよ」を付けた、やさしい話し言葉にする。「ぴよ」は丁寧語（です・ます）に付けず、言い切りの形に付ける（例: 買えますぴよ→買えるぴよ、ありますぴよ→あるぴよ、ですぴよ→だぴよ）。文の終わりに「よ」を付けるときは、かならず「ぴよ」にする（例: だよ→だぴよ、あるよ→あるぴよ、買えるよ→買えるぴよ）。
+- です・ます・ました・でした・ません・くださいなどの丁寧語は使わない。やさしい話し言葉で、すべての文を言い切りの形（常体）にして、終わりに「ぴよ」を付ける（運行します→運行するぴよ／買えます→買えるぴよ／休みです→休みだぴよ／発売しました→発売したぴよ／ありません→ないぴよ／お待ちください→待っててぴよ）。名詞で終わる文は「だぴよ」（10時から→10時からだぴよ）、問いかけは「〜するぴよ？」の形にする。箇条書きの項目・表・見出し・URLだけの行・「参考ページ:」などの一覧と引用の中は例外とし、そこに「ぴよ」を足さない。
 
 質問の候補（suggest）：
 - まとめの話題について、メモと予定だけで答えられる質問を4〜6個。それぞれ16文字以内（例：「ゴジラはいつから？」）。
@@ -116,6 +116,71 @@ GREETING_PROMPT = """名古屋のひよこ型スイーツ「ぴよりん」の�
 
 def today_jst() -> date:
     return datetime.now(JST).date()
+
+
+def piyo_tone(text: str) -> str:
+    """引用・リンク・一覧を保護し、確実な文末だけを直す（ページと同じ規則）。"""
+    kept = []
+
+    def keep(value):
+        kept.append(value)
+        return f"\ue000{len(kept) - 1}\ue001"
+
+    token = re.compile(r"(?:\ue000\d+\ue001|```[\s\S]*?(?:```|$)|~~~[\s\S]*?(?:~~~|$)|`[^`\n]*(?:`|$)|!?\[[^\]\n]*\]\([^\n]*?\)|https?://[^\s<>「」『』。！？]+)")
+    ends = [("ありませんでした", "なかった"), ("なのです", "なんだ"), ("るのです", "るんだ"),
+            ("たのです", "たんだ"), ("いのです", "いんだ"), ("ありません", "ない"),
+            ("でした", "だった"), ("です", "だ"), ("しました", "した")]
+    masked, i = [], 0
+    while i < len(text):
+        found = token.match(text, i)
+        if found:
+            masked.append(keep(found[0]))
+            i = found.end()
+            continue
+        if text[i] in "「『":
+            start, stack = i, []
+            while i < len(text):
+                c = text[i]
+                i += 1
+                if c in "「『":
+                    stack.append("」" if c == "「" else "』")
+                elif stack and c == stack[-1]:
+                    stack.pop()
+                if not stack:
+                    break
+            masked.append(keep(text[start:i]))
+            continue
+        masked.append(text[i])
+        i += 1
+
+    def ending(body):
+        stem, close, space = re.fullmatch(r"(.*?)(\*\*|__)?([ \t\r]*)", body).groups()
+        close = close or ""
+        already = stem.endswith("ぴよ")
+        base = stem[:-2] if already else stem
+        plain = base[:-1] if base.endswith("よ") else base
+        if plain.endswith("ませんでした") and not plain.endswith("ありませんでした"):
+            return body
+        for before, after in ends:
+            if plain.endswith(before):
+                return plain[:-len(before)] + after + "ぴよ" + close + space
+        # 「話します→話する」の誤変換を避ける。
+        if re.search(r"(?:[一-龯々]{2,}|[ァ-ヶー]{2,})します$", plain):
+            return plain[:-3] + "するぴよ" + close + space
+        if already or re.search(r"(?:ます|ました|ません|ください)$", plain):
+            return body
+        if base.endswith("よ"):
+            return plain + "ぴよ" + close + space
+        if re.search(r"[るたいだ]$", plain):
+            return plain + "ぴよ" + close + space
+        return body
+
+    lines = []
+    for line in "".join(masked).split("\n"):
+        if not re.match(r"\s*(?:[-*+]\s+|・\s*|[0-9０-９]+[.)）．、]\s*|#{1,6}(?:\s|$)|>|(?:参考ページ|出典|参考|参照元|リンク|URL)\s*[:：])", line) and not re.search(r"[|｜]", line):
+            line = re.sub(r"([^。！？!?]+)([。！？!?]+|$)", lambda m: ending(m[1]) + m[2], line)
+        lines.append(line)
+    return re.sub(r"\ue000(\d+)\ue001", lambda m: kept[int(m[1])], "\n".join(lines))
 
 
 def load_json(path: Path, default):
@@ -251,7 +316,7 @@ def build_greeting(memos: dict, events: list[dict], api_key: str) -> tuple[dict 
     if isinstance(old, dict) and old.get("basis") == basis:
         return None, {}
     got, usage = call_tool(GREETING_PROMPT, GREETING_TOOL, text, 900, api_key)
-    lines = [re.sub(r"\s+", " ", str(x)).strip()[:80] for x in got.get("lines") or [] if str(x).strip()][:6]
+    lines = [piyo_tone(re.sub(r"\s+", " ", str(x)).strip()[:80]) for x in got.get("lines") or [] if str(x).strip()][:6]
     suggest = [re.sub(r"\s+", " ", str(x)).strip()[:20] for x in got.get("suggest") or [] if str(x).strip()][:6]
     if len(lines) < 2:
         print("ぴよのまとめ: 答えが足りないため作り直しません", file=sys.stderr)
