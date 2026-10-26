@@ -56,7 +56,10 @@
    "ok": true,
    "why": "ぴよりんの期間限定新商品の販売情報",
    "t": "2026-10-26"
-  }
+  },
+  "merged_ids": [
+   "n20261026-079df3fa"
+  ]
  },
  {
   "id": "n20261026-9d73d1a8",
@@ -65,7 +68,12 @@
   "title": "「ぴよりん」が兵庫におでかけ！山陽百貨店「日本列島絶品うまいもの大会」にて『紅茶ぴよりんおでかけセット』販売",
   "source": "いいものタウン",
   "url": "https://iimono.town/topic/events/187944/",
-  "related": [],
+  "related": [
+   {
+    "source": "いいものタウン",
+    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBmZXJ6ZFFxVjVJLWVVNmU3ZlJoNmhmZXh1RWVwX2M3dmU1NlMzWDgzMXhIVkZxd1R5dkUyeVlzZW5CMGdTMU5NSmJsbnllcXRwaXc?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -75,18 +83,34 @@
   }
  },
  {
-  "id": "n20261026-079df3fa",
+  "id": "n20261026-94d0e76e",
   "date": "2026-10-26",
   "cat": "media",
-  "title": "特産の「三島甘藷」がぴよりんに！11月15日から名古屋駅などで期間 ...",
-  "source": "dメニューニュース",
-  "url": "https://topics.smt.docomo.ne.jp/article/wasabee/region/wasabee-20261026-20517248",
+  "title": "ゴジラのトサカ付きプリン！名古屋駅の「ぴよりんゴジラ」はお店の中もゴジラ仕様に",
+  "source": "いこーよニュース",
+  "url": "https://report.iko-yo.net/articles/35066",
   "related": [],
   "dv": 3,
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんの期間限定新商品の販売情報",
+   "why": "ぴよりんゴジラのコラボ商品の販売情報",
+   "t": "2026-10-26"
+  }
+ },
+ {
+  "id": "n20261026-99007bf2",
+  "date": "2026-10-26",
+  "cat": "media",
+  "title": "ゴジラのトサカ付きプリン！名古屋駅の「ぴよりんゴジラ」はお店 ...",
+  "source": "いこーよニュース",
+  "url": "https://report.iko-yo.net/articles/35066",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラのコラボ商品の販売情報",
    "t": "2026-10-26"
   }
  },
@@ -340,6 +364,10 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE05N08tcjhEbTdBV2ctM2I5SUJzTlN0RHREekw2bVVScG1HMHlhV0ZoczU4X0FPZVE4RW9vQW1KaDYtTEdNdDRFcFY0TnBxcDZpeWtReFlqdG1nMkcxUFd4OEgyQUctNS1ZU1p5aDB2VlZvb2k0Ny1zUzc5Zlk?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9wZWdrSE5EdkhVQWNYUVlrc0duX0lEYUZMZ2ZiN2VOdWRUNGZ5Vm9udXRuaUZhU3d5NktDUjhXbW54MzF0ZmIxQ3hvQWF2bmdyUmg2TV9EYnhJU0FsYU9j?oc=5"
    }
   ],
   "dv": 3,
@@ -672,6 +700,22 @@
   "related": []
  },
  {
+  "id": "n20261026-cec157e8",
+  "date": "2026-10-22",
+  "cat": "media",
+  "title": "ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も：山陽新聞デジタル｜さんデジ",
+  "source": "山陽新聞",
+  "url": "https://www.sanyonews.jp/photo/detail?article_id=2009058",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんとゴジラ映画のコラボ企画と販売",
+   "t": "2026-10-26"
+  }
+ },
+ {
   "id": "n20261022-ded7ef30",
   "date": "2026-10-22",
   "cat": "press",
@@ -848,6 +892,10 @@
    {
     "source": "Yahoo!ニュース",
     "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOWmZrWkJ2elRpblE3ZS1GLWtmeTBIb3dXUm9vcXV6akNTbjU4RzNUQmpHNTg0NXhVSkpZNGpoR1JGX0pCbkpxbGlDc0RFYlV0bWZibmxHYjhGbGJabkNicXA5aEF3bWFJSHF5WU1RUXpHRzk4TjNNb3FBNzBzZWNxY2l3RnBiR0x5RFdrX3F3?oc=5"
+   },
+   {
+    "source": "朝日新聞デジタル",
+    "url": "https://www.asahi.com/and/w/article/16979835"
    }
   ],
   "dv": 3,
@@ -856,7 +904,10 @@
    "ok": true,
    "why": "ぴよりんの山口県出張販売イベント情報",
    "t": "2026-10-22"
-  }
+  },
+  "merged_ids": [
+   "n20261022-e218b374"
+  ]
  },
  {
   "id": "n20261022-3fce1123",
@@ -900,22 +951,6 @@
   }
  },
  {
-  "id": "n20261022-e218b374",
-  "date": "2026-10-22",
-  "cat": "media",
-  "title": "山口に出張？ 【ぴよりん】11/1より「ぴよりんおでかけセット」や ...",
-  "source": "朝日新聞デジタル",
-  "url": "https://www.asahi.com/and/w/article/16979835",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの山口イベント出店・販売情報",
-   "t": "2026-10-22"
-  }
- },
- {
   "id": "n20261022-2fa1c064",
   "date": "2026-10-22",
   "cat": "media",
@@ -930,6 +965,10 @@
    {
     "source": "福島民報",
     "url": "https://www.minpo.jp/articles/-/256985"
+   },
+   {
+    "source": "福島民友新聞社 みんゆうNet",
+    "url": "https://www.minyu-net.com/release/oricon/detail/2488179"
    }
   ],
   "dv": 3,
@@ -940,7 +979,8 @@
    "t": "2026-10-22"
   },
   "merged_ids": [
-   "n20261022-4a344871"
+   "n20261022-4a344871",
+   "n20261022-e401acfe"
   ]
  },
  {
@@ -1006,6 +1046,10 @@
    {
     "source": "山陽新聞",
     "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5YWlRwUUcxWnlJVHZrLUU5RTE0YWJESjZtLUVVQUNaOHU4LUJyVVh3b2pLMlpveXlqSzR0X25pUzFCMHIyRzNQME55dG1vWlowNmJEMG1TRWNuUQ?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1ZZ294bGhnYXYxOFpQYkVDVlExdlZHcjBVUk41YWJfV1pTVmZoYW9HTzdPbjVtRGg5NVZ0YTBvdDVLNmJZMk9zQ0Z3R0J1SVJBUUhGUXZaZDEwUQ?oc=5"
    }
   ],
   "dv": 3,
@@ -1263,18 +1307,18 @@
   }
  },
  {
-  "id": "n20261022-e401acfe",
+  "id": "n20261022-b7649ce7",
   "date": "2026-10-22",
   "cat": "media",
-  "title": "ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間 ...",
-  "source": "福島民友新聞社 みんゆうNet",
-  "url": "https://www.minyu-net.com/release/oricon/detail/2488179",
+  "title": "期間限定「ぴよりんゴジラ」が登場",
+  "source": "産経ニュース",
+  "url": "https://www.sankei.com/article/20261022-4AVL2RIDMZPBNHIZLLP3BYSRXI/photo/5C724V7QABP65B5HSZLEDWZV4U/",
   "related": [],
   "dv": 3,
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんとゴジラの公式コラボ企画",
+   "why": "ぴよりんゴジラのコラボ商品の期間限定販売",
    "t": "2026-10-26"
   }
  },
@@ -1373,6 +1417,14 @@
    {
     "source": "オリコンニュース",
     "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5zb25zOFM4Z1Y1V0E0YTZNalR2dEF4WGM3b1g1cWMydTFxWmRjZWgxa1VoUzhxaHliRmlQdHlzNGs2bDJrbFRySFdENlh0MGRaNWxSZURoVUtTams?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE4xV3hZajFiTkhRVlk0VnJfZlFmaTMzdzRJYk9LQ3NMQ3AtWUZ0X2RwZC1fdU1Bay03eWtyZGZndUxBVjBTU1ozTld5bk1fWWZKODhXYS0zeGxHUQ?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9UVjlRSFdQV21YZVprMlRDSFQtcG9JbDZaWHQ2dERtWTdGcEJna0VLS1o1OUpiVmZ4MnFxYnZESV9hTmYtRGplcnNxa1JINlBLRkVxUTJTWFlYdw?oc=5"
    }
   ],
   "dv": 3,
@@ -1681,7 +1733,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "クリスマス限定ぴよりんケーキの販売情報",
+   "why": "ぴよりンのクリスマス限定ケーキ商品",
    "t": "2026-10-26"
   }
  },
@@ -5714,7 +5766,12 @@
   "title": "【きょうから】「ぴよりんコラボ弁当」第2弾が期間限定で登場 オムカレー・ナポリタン弁当など3種の新作＆再販の全7種",
   "source": "山陽新聞",
   "url": "https://www.sanyonews.jp/article/1969349?kw=4",
-  "related": [],
+  "related": [
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5YNkxlSkYycUtOQk5xdnVQRzR5TmpmTEd5Z0h6OTJkV2FnTTBEU1FybnZ2V1NWVm02Zkh0emkzSW1LcDdwVlY1LUJHaXpvV1BOV2tfVDl2V3U?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
