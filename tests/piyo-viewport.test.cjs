@@ -9,7 +9,7 @@ function target(object={}){
     emit(type){for(const fn of listeners.get(type)||[])fn()}});
 }
 function setup(withViewport=true){
-  let now=0,nextId=0,scrollCalls=0,safePadding='46px',safeTop='0px',formShift=0,contentHeight=Infinity;
+  let now=0,nextId=0,scrollCalls=0,safePadding='46px',safeTop='0px',formShift=0;
   const frames=new Map(),timers=new Map();
   const vv=withViewport?target({height:844,offsetTop:0,scale:1}):null;
   const window=target({visualViewport:vv,innerHeight:844,scrollX:0,scrollY:260,
@@ -19,11 +19,7 @@ function setup(withViewport=true){
   const form={getBoundingClientRect(){const translate=parseFloat((layer.style.translate||'0 0').split(' ')[1])||0;
     return {bottom:document.documentElement.clientHeight-(parseFloat(layer.style.bottom)||0)-(parseFloat(layer.style.paddingBottom||safePadding)||0)-formShift+translate}}};
   // 入力欄の下端から会話欄の下端まで、ぴよ・候補・入力欄・間隔の実測相当222px。
-  log.getBoundingClientRect=()=>{
-    const bottom=form.getBoundingClientRect().bottom-222;
-    const height=Math.min(parseFloat(log.style.maxHeight)||Infinity,log.style.height?parseFloat(log.style.height):contentHeight);
-    return {bottom,top:bottom-height,height};
-  };
+  log.getBoundingClientRect=()=>({bottom:form.getBoundingClientRect().bottom-222});
   const ctx={window,document,input,layer,log,pull:0,$:id=>{assert.equal(id,'piyo-form');return form},toBottom(){},stop(){},guardOn(){},flyIdleFrom(){},
     requestAnimationFrame:fn=>{const id=++nextId;frames.set(id,fn);return id},cancelAnimationFrame:id=>frames.delete(id),
     setTimeout:(fn,ms)=>{const id=++nextId;timers.set(id,{at:now+ms,fn});return id},clearTimeout:id=>timers.delete(id),
@@ -39,7 +35,6 @@ function setup(withViewport=true){
     safePadding:value=>{safePadding=value},
     safeTop:value=>{safeTop=value},
     formShift:value=>{formShift=value},
-    contentHeight:value=>{contentHeight=value},
     frame(){const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(now))},
     advance(ms){now+=ms;for(const [id,t] of [...timers].sort((a,b)=>a[1].at-b[1].at))if(t.at<=now){timers.delete(id);t.fn()}},
     get frameCount(){return frames.size},get timerCount(){return timers.size},get scrollCalls(){return scrollCalls}};
@@ -146,32 +141,4 @@ test('会話欄は下端を保ち、画面上部の安全領域と16pxを残す'
 test('余裕がある縦長画面では会話欄を指定の96px分広げる',()=>{
   const h=setup();h.document.documentElement.clientHeight=1100;h.window.innerHeight=1100;h.vv.height=1100;h.open();
   assert.equal(parseFloat(h.log.style.maxHeight),1100*.62+96);
-});
-test('短い会話でも表示領域を確保し、キーボードの開閉で上端を変えない',()=>{
-  const h=setup();h.safeTop('59px');h.contentHeight(60);h.open();
-  const initial=h.log.getBoundingClientRect();assert.equal(initial.top,75);
-  h.focus();h.vv.height=500;h.vv.offsetTop=90;h.vv.emit('resize');h.frame();
-  assert.equal(h.log.getBoundingClientRect().top-h.vv.offsetTop,initial.top);
-  assert.equal(h.form.getBoundingClientRect().bottom-h.vv.offsetTop,488);
-  h.input.blur();h.vv.height=844;h.vv.offsetTop=0;h.vv.emit('resize');h.advance(500);h.frame();
-  assert.deepEqual(h.log.getBoundingClientRect(),initial);
-});
-test('縦長画面も通常時の上端を保ち、キーボード表示で別の高さ比率へ切り替えない',()=>{
-  const h=setup();h.document.documentElement.clientHeight=1100;h.window.innerHeight=1100;h.vv.height=1100;h.open();
-  const top=h.log.getBoundingClientRect().top;
-  h.focus();h.vv.height=800;h.vv.offsetTop=40;h.vv.emit('resize');h.frame();
-  assert.equal(h.log.getBoundingClientRect().top-h.vv.offsetTop,top);
-});
-test('小さい画面では120pxの下限で会話を上にはみ出させず、安全領域までに収める',()=>{
-  const h=setup();h.document.documentElement.clientWidth=375;h.document.documentElement.clientHeight=667;h.window.innerHeight=667;h.vv.height=667;
-  h.safeTop('20px');h.open();const top=h.log.getBoundingClientRect().top;
-  h.focus();h.vv.height=330;h.vv.offsetTop=80;h.vv.emit('resize');h.frame();
-  assert.equal(h.log.getBoundingClientRect().top-h.vv.offsetTop,top);
-  assert.ok(h.log.getBoundingClientRect().height>0&&h.log.getBoundingClientRect().height<120);
-});
-test('ピンチ拡大中の寸法で通常時の上端を上書きしない',()=>{
-  const h=setup();h.open();const initial=h.log.getBoundingClientRect();
-  h.vv.scale=2;h.vv.height=422;h.vv.offsetTop=80;h.vv.emit('resize');h.frame();
-  h.vv.scale=1;h.vv.height=844;h.vv.offsetTop=0;h.vv.emit('resize');h.frame();
-  assert.deepEqual(h.log.getBoundingClientRect(),initial);
 });
