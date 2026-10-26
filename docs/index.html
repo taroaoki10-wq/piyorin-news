@@ -402,7 +402,8 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .piyo-text{white-space:pre-wrap;overflow-wrap:anywhere}
 .piyo-text b{font-weight:700;color:var(--caramel)}
 .piyo-text a{color:var(--caramel);text-decoration:underline;text-underline-offset:2px}
-.piyo-sources{margin-top:8px;color:var(--muted);font-size:11.5px;line-height:1.7;overflow-wrap:anywhere}
+.piyo-sources{margin-top:8px;color:var(--muted);font-size:11.5px;line-height:1.7;overflow-wrap:anywhere;opacity:1;transform:translateY(0);transition:opacity .6s ease-out,transform .6s ease-out}
+.piyo-sources[aria-hidden="true"]{visibility:hidden;opacity:0;transform:translateY(4px)}
 .piyo-sources a{text-decoration:underline;text-underline-offset:2px}
 .piyo-choices{display:flex;gap:8px;margin-top:10px}
 .piyo-choices button{font:inherit;font-size:13.5px;font-weight:700;border-radius:99px;padding:6px 16px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
@@ -426,7 +427,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .piyo-send:disabled{background:#4A4214;color:#A8994A}}
 :root[data-theme="dark"] .piyo-send:disabled{background:#4A4214;color:#A8994A}
 @keyframes piyo-pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.piyo-msg{animation:none}}
+@media (prefers-reduced-motion:reduce){.piyo-msg{animation:none}.piyo-sources{transition:none}}
 @media (max-width:620px){.piyo-idle,.piyo-idle-space{display:block}html.reader-open .piyo-idle{display:none}}
 </style>
 
@@ -1241,17 +1242,20 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   function userMsg(text){const m=document.createElement('div');m.className='piyo-msg from-me';m.textContent=text;log.appendChild(m);markLast();toBottom(true)}
   function piyoMsg(withSources=false){
     const m=document.createElement('div');m.className='piyo-msg from-piyo';m.innerHTML='<div class="piyo-text"></div>';
-    if(withSources)m.insertAdjacentHTML('beforeend','<div class="piyo-sources">出典：天気 <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>（<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>、要約・加工）</div>');
+    if(withSources)m.insertAdjacentHTML('beforeend','<div class="piyo-sources" aria-hidden="true">出典：天気 <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>（<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>、要約・加工）</div>');
     log.appendChild(m);markLast();toBottom(true);
+    const sources=withSources?m.querySelector('.piyo-sources'):null;
     let id=0;
     return{
       say(html,done){ // 文字を少しずつ出す（タグは崩さない）
         const my=++id,el=m.querySelector('.piyo-text');const parts=html.split(/(<[^>]+>)/);let out='',p=0,c=0;
+        if(sources)sources.setAttribute('aria-hidden','true');
         const tick=()=>{
           if(my!==id||!m.isConnected)return;
           for(let n=0;n<2&&p<parts.length;n++){const s=parts[p];if(s.startsWith('<')){out+=s;p++;n--;continue}out+=s[c++]||'';if(c>=s.length){p++;c=0}}
           el.innerHTML=out;toBottom();
-          if(p<parts.length)setTimeout(tick,24);else if(done)done();
+          if(p<parts.length)setTimeout(tick,24);
+          else{if(sources)sources.setAttribute('aria-hidden','false');if(done)done()}
         };
         el.innerHTML='';tick();
       },
