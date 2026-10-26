@@ -49,6 +49,9 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
+      - name: 暦を作る
+        run: python3 scripts/build_koyomi.py
+
       - name: 変更があればコミット
         run: |
           git config user.name  "github-actions[bot]"

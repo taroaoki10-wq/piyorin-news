@@ -6,34 +6,42 @@ const html=fs.readFileSync(require('node:path').join(__dirname,'../docs/index.ht
 const source=html.slice(html.indexOf('  const DATA_TTL='),html.indexOf('  // ---- 開いている間は'));
 function setup(){
   let now=Date.parse('2026-10-26T03:00:00Z'),version=1,fail='',calls=0,release=null;
+  const overrides=new Map();
+  const calendar={built:'2026-10-26',holidays_from:'2026-10-19',holidays_until:'2027-11-30',
+    holidays:[{date:'2026-11-03',name:'文化の日'}],long_weekends:[{start:'2026-11-21',end:'2026-11-23',days:3}],
+    sekki:[{date:'2026-10-23',name:'霜降'},{date:'2026-11-07',name:'立冬'}],
+    moon:[{time:'2026-10-11T00:50',phase:'新月'},{time:'2026-10-26T13:12',phase:'満月'},{time:'2026-11-09T16:02',phase:'新月'}]};
+  const forecast=()=>({daily:{time:Array.from({length:7},(_,i)=>new Date(Date.parse('2026-10-26T00:00:00Z')+i*86400e3).toISOString().slice(0,10)),weather_code:Array(7).fill(version===1?1:63),temperature_2m_max:Array(7).fill(25),temperature_2m_min:Array(7).fill(15),precipitation_probability_max:Array(7).fill(20),sunrise:Array(7).fill('2026-10-26T06:09'),sunset:Array(7).fill('2026-10-26T17:04'),uv_index_max:Array(7).fill(4.2),wind_speed_10m_max:Array(7).fill(5.4),precipitation_sum:Array(7).fill(0)},
+    hourly:{time:Array.from({length:72},(_,i)=>'2026-10-'+(26+Math.floor(i/24))+'T'+String(i%24).padStart(2,'0')+':00'),precipitation_probability:Array.from({length:72},(_,i)=>[0,10,30][i%3])}});
   const ctx={AbortController,setTimeout,clearTimeout,WEATHER:'weather',Date:class extends Date{static now(){return now}},
     fetch:async(url,opts)=>{
       calls++;
       if(release)await release;
       if(url.includes(fail)&&fail)throw Error('offline');
-      const value=url==='weather'?{daily:{time:['2026-10-26'],weather_code:[version===1?1:63],temperature_2m_max:[25],temperature_2m_min:[15],precipitation_probability_max:[20]}}:
+      const value=overrides.has(url)?overrides.get(url):url==='weather'?forecast():
+        url.includes('koyomi')?calendar:
         url.includes('piyo-greeting')?{lines:['summary'+version],suggest:['question'+version]}:
         url.includes('piyo-memo')?{id:{memo:'memo'+version}}:
         url.includes('piyo-basics')?{lines:['basics'+version]}:[{id:'item'+version}];
       return {ok:!url.includes('http-error'),json:async()=>value};
     }};
-  vm.createContext(ctx);vm.runInContext(source+'\nthis.api={loadData,weatherLine,get data(){return data}};',ctx);
-  return {ctx,api:ctx.api,advance:n=>now+=n,setTime:n=>now=Date.parse(n),version:n=>version=n,fail:s=>fail=s,get calls(){return calls},hold:()=>{let done;release=new Promise(r=>done=r);return ()=>{release=null;done()}}};
+  vm.createContext(ctx);vm.runInContext(source+'\n'+html.slice(html.indexOf('  function knowledge(){'),html.indexOf('  async function callClaude('))+'\nthis.api={loadData,weatherLine,knowledge,koyomiKnowledge,weatherKnowledge,get data(){return data}};',ctx);
+  return {ctx,calendar,forecast,respond:(url,value)=>overrides.set(url,value),api:ctx.api,advance:n=>now+=n,setTime:n=>now=Date.parse(n),version:n=>version=n,fail:s=>fail=s,get calls(){return calls},hold:()=>{let done;release=new Promise(r=>done=r);return ()=>{release=null;done()}}};
 }
 test('初回取得、30分未満は再取得せず、30分ちょうどで全データ更新',async()=>{
-  const h=setup();assert.equal(await h.api.loadData(),true);assert.equal(h.calls,6);
-  h.advance(30*60000-1);assert.equal(await h.api.loadData(),false);assert.equal(h.calls,6);
-  h.version(2);h.advance(1);await h.api.loadData();assert.equal(h.calls,12);
+  const h=setup();assert.equal(await h.api.loadData(),true);assert.equal(h.calls,7);
+  h.advance(30*60000-1);assert.equal(await h.api.loadData(),false);assert.equal(h.calls,7);
+  h.version(2);h.advance(1);await h.api.loadData();assert.equal(h.calls,14);
   assert.equal(h.api.data.greeting.lines[0],'summary2');assert.equal(h.api.data.memo.id.memo,'memo2');
   assert.equal(h.api.data.events[0].id,'item2');assert.equal(h.api.data.news[0].id,'item2');assert.equal(h.api.data.basics.lines[0],'basics2');assert.equal(h.api.data.weather[0].word,'雨');
 });
 test('日本時間の日付変更時は30分未満でも更新',async()=>{
-  const h=setup();h.setTime('2026-10-26T14:59:00Z');await h.api.loadData();h.advance(60000);await h.api.loadData();assert.equal(h.calls,12);
+  const h=setup();h.setTime('2026-10-26T14:59:00Z');await h.api.loadData();h.advance(60000);await h.api.loadData();assert.equal(h.calls,14);
 });
 test('部分失敗では既存メモを保持、成功分更新、次回再試行',async()=>{
   const h=setup();await h.api.loadData();h.advance(1800000);h.version(2);h.fail('piyo-memo');await h.api.loadData();
   assert.equal(h.api.data.memo.id.memo,'memo1');assert.equal(h.api.data.greeting.lines[0],'summary2');
-  h.fail('');await h.api.loadData();assert.equal(h.calls,18);assert.equal(h.api.data.memo.id.memo,'memo2');
+  h.fail('');await h.api.loadData();assert.equal(h.calls,21);assert.equal(h.api.data.memo.id.memo,'memo2');
 });
 test('天気取得失敗時は古い予報を使わず次回回復',async()=>{
   const h=setup();await h.api.loadData();h.advance(1800000);h.fail('weather');await h.api.loadData();assert.equal(h.api.data.weather,null);assert.equal(h.api.weatherLine(),'');
@@ -44,8 +52,8 @@ test('初回オフラインでも安全な空データを作り次回回復',asy
   h.fail('');await h.api.loadData();assert.equal(h.api.data.memo.id.memo,'memo1');
 });
 test('同時呼び出しの通信を共有し時計が戻った場合も再取得',async()=>{
-  const h=setup(),done=h.hold(),a=h.api.loadData(),b=h.api.loadData();assert.equal(a,b);done();await a;assert.equal(h.calls,6);
-  h.advance(-1);await h.api.loadData();assert.equal(h.calls,12);
+  const h=setup(),done=h.hold(),a=h.api.loadData(),b=h.api.loadData();assert.equal(a,b);done();await a;assert.equal(h.calls,7);
+  h.advance(-1);await h.api.loadData();assert.equal(h.calls,14);
 });
 test('再オープン時に更新したまとめと候補を表示、会話を消さない',async()=>{
   const h=setup(),messages=[],chips=[];const nodes={};
@@ -68,4 +76,59 @@ test('待機のぴよ：呼ぶボタンは無く、待機のぴよと右の位�
   assert.match(html,/id="piyo-idle"[^>]*aria-label="ぴよと話す"/);
   assert.match(html,/\.piyo-idle\{[^}]*right:26px/);
   assert.match(html,/\.piyo-layer\{[^}]*padding:0 12px/);assert.match(html,/\.piyo-pet\{[^}]*margin-right:14px/);
+});
+test('7日分の天気、日の出・UV・風速・降水量と今日明日の3時間ごとの雨を知識に渡す',async()=>{
+  const h=setup();await h.api.loadData();
+  assert.equal(h.api.data.weather.length,7);
+  const w=h.api.data.weather[0];assert.equal(w.sunrise,'06:09');assert.equal(w.sunset,'17:04');
+  assert.equal(w.uv,4.2);assert.equal(w.wind,5.4);assert.equal(w.precipitation,0);
+  assert.equal(w.rainHours.length,8);assert.equal(w.rainHours[0].rain,30);
+  assert.equal(h.api.data.weather[1].rainHours.length,8);assert.equal(h.api.data.weather[2].rainHours.length,0);
+  const text=h.api.knowledge();
+  for(const fragment of ['日の出06:09','日の入り17:04','最大UV指数4.2','最大風速5.4m/s','降水量0mm','0〜3時 30%','3時間全体で雨が降る確率ではない'])assert.ok(text.includes(fragment),fragment);
+  const url=new URL(html.match(/const WEATHER='([^']+)'/)[1]);
+  assert.equal(url.searchParams.get('forecast_days'),'7');assert.equal(url.searchParams.get('wind_speed_unit'),'ms');
+});
+test('天気の追加項目が欠けても0と捏造せず、欠けた時間帯を省く',async()=>{
+  const h=setup(),f=h.forecast();f.daily.uv_index_max[0]=null;f.daily.wind_speed_10m_max[0]=null;
+  f.daily.precipitation_sum[0]=null;f.hourly.precipitation_probability[1]=null;
+  h.respond('weather',f);await h.api.loadData();
+  assert.equal(h.api.data.weather[0].uv,null);assert.equal(h.api.data.weather[0].rainHours.length,7);
+  const first=h.api.weatherKnowledge().split('\n')[1];assert.ok(!first.includes('最大UV'));assert.ok(!first.includes('最大風速'));assert.ok(!first.includes('降水量'));
+});
+test('3時間の雨の集計は直前1時間の時刻を使い、深夜0時を翌日の区間へ混ぜない',async()=>{
+  const h=setup(),f=h.forecast();f.hourly.precipitation_probability.fill(0);
+  for(const [i,p] of [[0,100],[1,10],[2,20],[3,95],[24,77]])f.hourly.precipitation_probability[i]=p;
+  h.respond('weather',f);await h.api.loadData();
+  assert.equal(h.api.data.weather[0].rainHours[0].rain,95);
+  assert.equal(h.api.data.weather[0].rainHours[7].rain,77);
+  assert.equal(h.api.data.weather[1].rainHours[0].rain,0);
+});
+test('天気のHTTPエラーと気温欠損では古い予報を使わない',async()=>{
+  const h=setup();await h.api.loadData();h.advance(1800000);
+  const original=h.ctx.fetch;h.ctx.fetch=async(url,opts)=>url==='weather'?{ok:false,json:async()=>h.forecast()}:original(url,opts);
+  await h.api.loadData();assert.equal(h.api.data.weather,null);assert.equal(h.api.weatherKnowledge(),'');
+  h.ctx.fetch=original;const f=h.forecast();f.daily.temperature_2m_max.fill(null);h.respond('weather',f);
+  await h.api.loadData();assert.equal(h.api.data.weather,null);
+});
+test('暦は日本時間の曜日・祝日・連休・今と次の節気・月齢を含む',async()=>{
+  const h=setup();await h.api.loadData();const text=h.api.knowledge();
+  for(const fragment of ['<today>2026-10-26（月）</today>','祝日ではない','2026-11-03 文化の日','2026-11-21〜2026-11-23（3連休）','霜降','立冬','次の新月','次の満月','月齢：15.5'])assert.ok(text.includes(fragment),fragment);
+  h.setTime('2026-11-02T15:00:00Z');assert.match(h.api.knowledge(),/<today>2026-11-03（火）<\/today>/);assert.match(h.api.koyomiKnowledge(),/今日：.*文化の日/);
+  h.setTime('2026-11-07T03:00:00Z');assert.ok(!h.api.koyomiKnowledge().includes('次の満月'));
+});
+test('暦の初回欠落でも既存データで動き、更新失敗時は前の暦を保持して再試行',async()=>{
+  const h=setup();h.fail('koyomi');assert.equal(await h.api.loadData(),true);assert.equal(h.api.data.koyomi,null);
+  assert.match(h.api.knowledge(),/暦データを取得できていない/);assert.ok(h.api.data.weather.length);
+  h.fail('');await h.api.loadData();assert.ok(h.api.data.koyomi);assert.equal(h.calls,14);
+  h.advance(1800000);h.fail('koyomi');await h.api.loadData();assert.ok(h.api.data.koyomi);
+  h.setTime('2028-01-01T03:00:00Z');const text=h.api.koyomiKnowledge();
+  assert.ok(text.includes('収録範囲外のため不明'));assert.ok(!text.includes('今の二十四節気'));assert.ok(!text.includes('おおよその月齢'));
+});
+test('あいさつの出典は天気の提供元とCC BY 4.0だけを表示する',()=>{
+  assert.match(html,/piyoMsg\(true\)\.say/);
+  assert.match(html,/class="piyo-sources"/);assert.match(html,/href="https:\/\/open-meteo.com\/"/);
+  assert.match(html,/href="https:\/\/creativecommons.org\/licenses\/by\/4.0\/"/);
+  const sources=html.match(/class="piyo-sources"[^>]*>(.*?)<\/div>/)[1];
+  assert.ok(!sources.includes('祝日'));assert.ok(!sources.includes('内閣府'));
 });
