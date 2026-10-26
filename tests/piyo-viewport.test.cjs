@@ -9,7 +9,7 @@ function target(object={}){
     emit(type){for(const fn of listeners.get(type)||[])fn()}});
 }
 function setup(withViewport=true){
-  let now=0,nextId=0,scrollCalls=0,safePadding='46px',formShift=0;
+  let now=0,nextId=0,scrollCalls=0,safePadding='46px',safeTop='0px',formShift=0;
   const frames=new Map(),timers=new Map();
   const vv=withViewport?target({height:844,offsetTop:0,scale:1}):null;
   const window=target({visualViewport:vv,innerHeight:844,scrollX:0,scrollY:260,
@@ -18,10 +18,12 @@ function setup(withViewport=true){
   const document={activeElement:null,documentElement:{clientWidth:390,clientHeight:844},body:{style:{},getBoundingClientRect:()=>({width:366})}};
   const form={getBoundingClientRect(){const translate=parseFloat((layer.style.translate||'0 0').split(' ')[1])||0;
     return {bottom:document.documentElement.clientHeight-(parseFloat(layer.style.bottom)||0)-(parseFloat(layer.style.paddingBottom||safePadding)||0)-formShift+translate}}};
+  // 入力欄の下端から会話欄の下端まで、ぴよ・候補・入力欄・間隔の実測相当222px。
+  log.getBoundingClientRect=()=>({bottom:form.getBoundingClientRect().bottom-222});
   const ctx={window,document,input,layer,log,pull:0,$:id=>{assert.equal(id,'piyo-form');return form},toBottom(){},stop(){},guardOn(){},flyIdleFrom(){},
     requestAnimationFrame:fn=>{const id=++nextId;frames.set(id,fn);return id},cancelAnimationFrame:id=>frames.delete(id),
     setTimeout:(fn,ms)=>{const id=++nextId;timers.set(id,{at:now+ms,fn});return id},clearTimeout:id=>timers.delete(id),
-    getComputedStyle:el=>({paddingBottom:el.style.paddingBottom||safePadding})};
+    getComputedStyle:el=>({paddingBottom:el.style.paddingBottom||safePadding,getPropertyValue:name=>name==='--piyo-safe-top'?safeTop:''})};
   vm.createContext(ctx);
   const locking=html.slice(html.indexOf('  let lockY=0;'),html.indexOf("  $('piyo-guard').addEventListener"));
   const closing=html.slice(html.indexOf('  function close(o)'),html.indexOf("  idleEl.addEventListener('click',open)"));
@@ -31,6 +33,7 @@ function setup(withViewport=true){
     open(){layer.hidden=false;ctx.api.lockPage();window.scrollY=0;ctx.api.fit()},
     focus(){document.activeElement=input;input.emit('focus')},
     safePadding:value=>{safePadding=value},
+    safeTop:value=>{safeTop=value},
     formShift:value=>{formShift=value},
     frame(){const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(now))},
     advance(ms){now+=ms;for(const [id,t] of [...timers].sort((a,b)=>a[1].at-b[1].at))if(t.at<=now){timers.delete(id);t.fn()}},
@@ -75,7 +78,7 @@ test('拡大表示でのviewport移動をキーボード閉鎖と誤認して巻
 });
 test('VisualViewportがない環境でも画面サイズ変更で会話欄を調整する',()=>{
   const h=setup(false);h.open();h.window.innerHeight=500;h.document.documentElement.clientHeight=500;h.window.emit('resize');h.frame();
-  assert.equal(h.layer.style.bottom,'0px');assert.equal(h.log.style.maxHeight,'226px');
+  assert.equal(h.layer.style.bottom,'0px');assert.equal(h.log.style.maxHeight,'216px');
 });
 test('完了で閉じてもviewportが34px小さいままなら初回の位置・会話欄の高さへ戻す',()=>{
   const h=setup();h.open();const initial={bottom:h.layer.style.bottom,height:h.log.style.maxHeight};
@@ -112,10 +115,11 @@ test('画面の幅が変わったときは新しい向きの高さと余白を�
   assert.equal(h.layer.style.bottom,'0px');assert.equal(h.log.style.maxHeight,'120px');assert.equal(h.layer.style.paddingBottom,'33px');
 });
 test('fixed要素の基準もずれた場合は初回の入力欄の下端と同じ座標へ戻す',()=>{
-  const h=setup();h.open();const bottom=h.form.getBoundingClientRect().bottom;
+  const h=setup();h.open();const bottom=h.form.getBoundingClientRect().bottom,height=h.log.style.maxHeight;
   h.focus();h.vv.height=500;h.vv.emit('resize');h.frame();
   h.formShift(34);h.input.blur();h.vv.height=810;h.vv.emit('resize');h.advance(500);h.frame();
   assert.equal(h.form.getBoundingClientRect().bottom,bottom);
+  assert.equal(h.log.style.maxHeight,height);
   h.vv.emit('resize');h.advance(500);h.frame();assert.equal(h.form.getBoundingClientRect().bottom,bottom);
 });
 test('OSの位置ずれが解けたら補正を外し、次のキーボード展開にも補正を残さない',()=>{
@@ -127,4 +131,14 @@ test('OSの位置ずれが解けたら補正を外し、次のキーボード展
 test('下へ引いている間は初回位置への補正でドラッグを打ち消さない',()=>{
   const h=setup();h.open();h.layer.style.transform='translateY(40px)';h.window.scrollY=25;
   h.vv.emit('resize');h.advance(500);h.frame();assert.equal(h.layer.style.transform,'translateY(40px)');assert.equal(h.window.scrollY,25);
+});
+test('会話欄は下端を保ち、画面上部の安全領域と16pxを残す',()=>{
+  const h=setup();h.safeTop('59px');h.open();
+  assert.equal(parseFloat(h.log.style.maxHeight),h.log.getBoundingClientRect().bottom-59-16);
+  const formBottom=h.form.getBoundingClientRect().bottom;
+  h.api.fit();assert.equal(h.form.getBoundingClientRect().bottom,formBottom);
+});
+test('余裕がある縦長画面では会話欄を指定の96px分広げる',()=>{
+  const h=setup();h.document.documentElement.clientHeight=1100;h.window.innerHeight=1100;h.vv.height=1100;h.open();
+  assert.equal(parseFloat(h.log.style.maxHeight),1100*.62+96);
 });
