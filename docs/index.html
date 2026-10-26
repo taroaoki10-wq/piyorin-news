@@ -1419,7 +1419,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     suggest.hidden=!list.length;
   }
   async function open(){
-    const id=++openId;
+    const id=++openId,wasBusy=busy,lastMessage=log.lastElementChild;
     if(!suggest.children.length)fillSuggest(DEFAULT_SUGGEST); // 候補があとから出てぴよが跳ねないよう、先に場所を取る
     const from=idleEl.hidden?null:idleEl.getBoundingClientRect();if(from)idleRect=from;
     idleHide();guardOn(true);layer.hidden=false;lockPage();fit();frame(0,0);toBottom(true);if(from)slideFrom(pet,from);
@@ -1427,16 +1427,29 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     if(id!==openId)return;
     if(refreshed)greeted=false;
     if(layer.hidden)return; // 取得中にしまった場合は、次の呼び出しで表示する
-    if(!greeted){
-      greeted=true;
+    if(!greeted&&!wasBusy&&!busy){
+      // 到着してから古い会話を薄く消す。途中で会話が始まったら次回へ持ち越す。
+      const current=()=>id===openId&&!layer.hidden&&!busy&&log.lastElementChild===lastMessage;
+      const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(!reduced)await new Promise(resolve=>setTimeout(resolve,400));
+      if(!current())return;
+      const fade=log.children.length&&!reduced
+        ?log.animate([{opacity:1},{opacity:0}],{duration:200,fill:'forwards'}):null;
+      if(fade)await fade.finished.catch(()=>{});
+      if(!current()){if(fade)fade.cancel();return}
+      log.innerHTML='';history=[];pendingChip=null;log.scrollTop=0;toBottom(true);
+      if(fade)fade.cancel();
       const g=data&&data.greeting;
       fillSuggest(g&&Array.isArray(g.suggest)&&g.suggest.length?g.suggest:DEFAULT_SUGGEST);
       const wl=weatherLine(),lines=g?g.lines.slice():['こんにちは、ぴよだぴよ！ぴよりんのことなら聞いてぴよ。'];
       if(wl)lines.unshift(wl);
-      setTimeout(()=>play('wave',()=>{idle();piyoMsg(true).say(lines.map(line=>fmt(piyoTone(line))).join('\n'))}),300);
-    }else setTimeout(()=>play('wave'),300);
+      play('wave',()=>{
+        if(id!==openId||layer.hidden||busy||log.children.length)return;
+        greeted=true;idle();piyoMsg(true).say(lines.map(line=>fmt(piyoTone(line))).join('\n'));
+      });
+    }else setTimeout(()=>{if(id===openId&&!layer.hidden)play('wave')},300);
   }
-  function close(o){const from=o&&o.flown?null:pet.getBoundingClientRect();stop();input.blur();layer.hidden=true;guardOn(false);unlockPage();
+  function close(o){const from=o&&o.flown?null:pet.getBoundingClientRect();stop();input.blur();layer.hidden=true;cancelFit();layer.style.bottom='0px';guardOn(false);unlockPage();
     if(from)flyIdleFrom(from)}
   idleEl.addEventListener('click',open);
 
@@ -1613,14 +1626,27 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 
   // ---- キーボードが出たら持ち上げ、会話の欄の高さも合わせる（iPhone の Safari） ----
   const vv=window.visualViewport;
+  let fitFrame=0,fitTimers=[];
   function fit(){
-    const h=vv?vv.height:window.innerHeight;
-    layer.style.bottom=(vv?Math.max(0,window.innerHeight-vv.height-vv.offsetTop):0)+'px';
+    if(layer.hidden)return;
+    const layoutH=document.documentElement.clientHeight||window.innerHeight,h=vv?Math.min(vv.height,layoutH):layoutH;
+    // body固定中にキーボードが残したルートのスクロールだけを戻す。元の記事位置はlockYに保持。
+    if(document.body.style.position==='fixed'&&(!vv||vv.scale===1)&&h>=layoutH-1&&(window.scrollX||window.scrollY))window.scrollTo(0,0);
+    layer.style.bottom=(vv?Math.max(0,layoutH-h-vv.offsetTop):0)+'px';
     log.style.maxHeight=Math.max(120,Math.min(h*.62,h-104-56-44-70))+'px'; // ぴよ・入力欄・候補・上の余白を引いた残り
     toBottom();
   }
-  if(vv){vv.addEventListener('resize',fit);vv.addEventListener('scroll',fit)}
-  window.addEventListener('resize',fit);
+  function cancelFit(){cancelAnimationFrame(fitFrame);fitFrame=0;fitTimers.forEach(clearTimeout);fitTimers=[]}
+  function queueFit(){if(layer.hidden||fitFrame)return;fitFrame=requestAnimationFrame(()=>{fitFrame=0;fit()})}
+  function settleFit(){
+    cancelFit();if(layer.hidden)return;
+    queueFit(); // WebKitでは通知後にviewportの値が変わることがあるので、次の描画で読む。
+    fitTimers=[120,400].map(ms=>setTimeout(queueFit,ms)); // キーボードの開閉アニメーション後も再確認。
+  }
+  if(vv){vv.addEventListener('resize',settleFit);vv.addEventListener('scroll',queueFit)}
+  window.addEventListener('resize',settleFit);
+  window.addEventListener('scroll',queueFit,{passive:true});
+  input.addEventListener('focus',settleFit);input.addEventListener('blur',settleFit);
   document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!$('piyo-key-modal').hidden)cancelKey();else if(!layer.hidden)close()});
 })();
 </script>

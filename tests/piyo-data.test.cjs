@@ -55,15 +55,118 @@ test('同時呼び出しの通信を共有し時計が戻った場合も再取�
   const h=setup(),done=h.hold(),a=h.api.loadData(),b=h.api.loadData();assert.equal(a,b);done();await a;assert.equal(h.calls,7);
   h.advance(-1);await h.api.loadData();assert.equal(h.calls,14);
 });
-test('再オープン時に更新したまとめと候補を表示、会話を消さない',async()=>{
-  const h=setup(),messages=[],chips=[];const nodes={};
+function chatSetup(){
+  const h=setup(),chips=[],requests=[],animations=[],nodes={};
+  let reduced=false,replyGate=null,fadeGate=null,fadeStarted=null,holdWave=false,waveDone=null;
+  const log={children:[],scrollTop:0,get lastElementChild(){return this.children.at(-1)||null},
+    set innerHTML(value){assert.equal(value,'');this.children.length=0},
+    animate(){
+      const animation={active:true,finished:fadeGate||Promise.resolve(),cancel(){this.active=false}};
+      animations.push(animation);fadeStarted?.();return animation;
+    }};
+  const piyoMsg=()=>{const node={text:'',choices:[]};log.children.push(node);return{
+    say(text,done){node.text=text;done?.()},choices(list){node.choices=list},
+  }};
   vm.runInContext(html.slice(html.indexOf('  function piyoTone('),html.indexOf('  // 返事の文を表示用にする')),h.ctx);
-  Object.assign(h.ctx,{$:id=>nodes[id]||(nodes[id]={}),guardOn(){},layer:{hidden:true},lockPage(){},fit(){},frame(){},toBottom(){},play:(name,fn)=>fn?.(),idle(){},piyoMsg:()=>({say:s=>messages.push(s)}),fmt:s=>s,DEFAULT_SUGGEST:[],setTimeout:fn=>{fn();return 0},clearTimeout(){},fillSuggest:list=>chips.push(list),suggest:{children:[1]},idleEl:{hidden:true},idleHide(){},slideFrom(){}});
+  Object.assign(h.ctx,{$:id=>nodes[id]||(nodes[id]={}),log,guardOn(){},layer:{hidden:true},lockPage(){},fit(){},frame(){},toBottom(){log.scrollTop=log.children.length},
+    play(name,done){if(done&&holdWave)waveDone=done;else done?.()},idle(){},loop(){},piyoMsg,
+    userMsg:text=>log.children.push({text}),fmt:s=>s,DEFAULT_SUGGEST:[],
+    setTimeout:fn=>{fn();return 0},clearTimeout(){},fillSuggest:list=>chips.push(list),suggest:{children:[1]},
+    idleEl:{hidden:true},idleHide(){},slideFrom(){},matchMedia:()=>({matches:reduced}),
+    apiKey:true,NEED_MORE:{},sync(){},textOf:r=>r.content[0].text,
+    async callClaude({messages}){
+      requests.push(JSON.parse(JSON.stringify(messages)));
+      if(replyGate)await replyGate;
+      return {content:[{type:'text',text:'回答だぴよ。'}]};
+    }});
   const open=html.slice(html.indexOf('  async function open(){',html.indexOf('  const DATA_TTL=')),html.indexOf('  function close('));
-  vm.runInContext('let greeted=false,openId=0;'+open+';this.open=open;',h.ctx);
-  await Promise.all([h.ctx.open(),h.ctx.open()]);await h.ctx.open();assert.equal(messages.length,1);
-  h.advance(1800000);h.version(2);h.respond('data/piyo-greeting.json',{lines:['運行します。','・発売しました。'],suggest:['question2']});
-  await h.ctx.open();assert.equal(messages.length,2);assert.match(messages[1],/運行するぴよ。/);assert.match(messages[1],/・発売しました。/);assert.equal(chips[1][0],'question2');
+  const ask=html.slice(html.indexOf('  let busy=false,pendingChip=null;'),html.indexOf('  const sync=()=>'));
+  vm.runInContext('let greeted=false,openId=0,history=[];'+open+ask+`;this.chat={open,ask,
+    get history(){return history},get busy(){return busy},get greeted(){return greeted},
+    get pendingChip(){return pendingChip},set pendingChip(value){pendingChip=value}};`,h.ctx);
+  return Object.assign(h,{log,chat:h.ctx.chat,chips,requests,animations,
+    reduced:value=>{reduced=value},
+    deferReply(){let release;replyGate=new Promise(r=>release=r);return ()=>{replyGate=null;release()}},
+    deferFade(){let release;fadeGate=new Promise(r=>release=r);const started=new Promise(r=>fadeStarted=r);return {started,release:()=>{fadeGate=null;release()}}},
+    holdWave:value=>{holdWave=value},finishWave:()=>{const done=waveDone;waveDone=null;done?.()},
+  });
+}
+test('30分ちょうどで前の吹き出し・確認ボタン・記憶を消し、新しいまとめと候補を表示',async()=>{
+  const h=chatSetup();await h.chat.open();await h.chat.ask('前の質問');
+  h.log.children.push({text:'調べる？',choices:['調べる','やめる']});h.chat.pendingChip={};
+  h.advance(1800000);h.respond('data/piyo-greeting.json',{lines:['運行します。','・発売しました。'],suggest:['question2']});
+  await h.chat.open();assert.equal(h.log.children.length,1);assert.equal(h.chat.history.length,0);assert.equal(h.chat.pendingChip,null);
+  assert.match(h.log.children[0].text,/運行するぴよ。/);assert.match(h.log.children[0].text,/・発売しました。/);
+  assert.equal(h.chips.at(-1)[0],'question2');assert.equal(h.animations.length,1);assert.equal(h.animations[0].active,false);
+  await h.chat.ask('新しい質問');assert.deepEqual(h.requests.at(-1),[{role:'user',content:'新しい質問'}]);
+});
+test('30分未満は吹き出しと記憶を保ち、次の質問にも前の会話を渡す',async()=>{
+  const h=chatSetup();await h.chat.open();await h.chat.ask('前の質問');
+  const nodes=h.log.children.slice();h.advance(1800000-1);await h.chat.open();
+  assert.deepEqual(h.log.children,nodes);assert.equal(h.chips.length,1);assert.equal(h.animations.length,0);
+  await h.chat.ask('続きの質問');assert.deepEqual(h.requests.at(-1).map(m=>m.content),['前の質問','回答だぴよ。','続きの質問']);
+});
+test('日本時間の日付変更時は30分未満でも表示と記憶を消す',async()=>{
+  const h=chatSetup();h.setTime('2026-10-26T14:59:00Z');await h.chat.open();await h.chat.ask('昨日の質問');
+  h.advance(60000);h.version(2);await h.chat.open();
+  assert.equal(h.log.children.length,1);assert.match(h.log.children[0].text,/summary2/);assert.equal(h.chat.history.length,0);
+});
+test('返事待ちで開くと消さず、読込中に返事が完了しても次の呼び出しへ持ち越す',async()=>{
+  const h=chatSetup();await h.chat.open();await h.chat.ask('前の質問');
+  const finishReply=h.deferReply(),answer=h.chat.ask('返事待ちの質問');
+  const nodes=h.log.children.slice(),history=JSON.stringify(h.chat.history);
+  h.advance(1800000);h.version(2);const finishLoad=h.hold(),opening=h.chat.open();
+  assert.equal(h.chat.busy,true);assert.deepEqual(h.log.children,nodes);assert.equal(JSON.stringify(h.chat.history),history);
+  finishReply();await answer;finishLoad();await opening;
+  assert.deepEqual(h.log.children,nodes);assert.equal(h.chat.history.length,4);assert.equal(h.chat.greeted,false);
+  await h.chat.open();assert.equal(h.log.children.length,1);assert.match(h.log.children[0].text,/summary2/);assert.equal(h.chat.history.length,0);
+});
+for(const failed of ['piyo-greeting','weather'])test(failed+'だけの取得失敗でも成功したデータであいさつを更新し、会話を消す',async()=>{
+  const h=chatSetup();await h.chat.open();await h.chat.ask('前の質問');
+  h.advance(1800000);h.version(2);h.fail(failed);await h.chat.open();
+  assert.equal(h.log.children.length,1);assert.equal(h.chat.history.length,0);assert.equal(h.animations.length,1);
+});
+test('まとめと天気の両方が取れないときは表示も記憶も消さない',async()=>{
+  const h=chatSetup();await h.chat.open();await h.chat.ask('前の質問');const nodes=h.log.children.slice();
+  h.advance(1800000);h.respond('data/piyo-greeting.json',null);h.respond('weather',null);await h.chat.open();
+  assert.deepEqual(h.log.children,nodes);assert.equal(h.chat.history.length,2);assert.equal(h.animations.length,0);
+});
+test('同時に呼んでもあいさつは一つ、取得中にしまった場合は次に呼んで消す',async()=>{
+  const h=chatSetup();await Promise.all([h.chat.open(),h.chat.open()]);assert.equal(h.log.children.length,1);assert.equal(h.calls,7);
+  await h.chat.ask('前の質問');const nodes=h.log.children.slice();h.advance(1800000);h.version(2);
+  const finishLoad=h.hold(),opening=h.chat.open();h.ctx.layer.hidden=true;finishLoad();await opening;
+  assert.deepEqual(h.log.children,nodes);assert.equal(h.chat.greeted,false);
+  await h.chat.open();assert.equal(h.log.children.length,1);assert.match(h.log.children[0].text,/summary2/);
+});
+test('動きを減らす設定では古い会話を薄くするアニメーションを使わない',async()=>{
+  const h=chatSetup();h.reduced(true);await h.chat.open();await h.chat.ask('前の質問');h.advance(1800000);await h.chat.open();
+  assert.equal(h.log.children.length,1);assert.equal(h.chat.history.length,0);assert.equal(h.animations.length,0);
+});
+test('消えかけでしまっても古い会話を保ち、次に呼んだとき消す',async()=>{
+  const h=chatSetup();await h.chat.open();await h.chat.ask('前の質問');const nodes=h.log.children.slice();h.advance(1800000);
+  const fade=h.deferFade(),opening=h.chat.open();await fade.started;h.ctx.layer.hidden=true;fade.release();await opening;
+  assert.deepEqual(h.log.children,nodes);assert.equal(h.chat.history.length,2);assert.equal(h.animations[0].active,false);
+  await h.chat.open();assert.equal(h.log.children.length,1);assert.equal(h.chat.history.length,0);
+});
+test('消えかけで新しい質問と返事が入ったら会話を消さず次回へ持ち越す',async()=>{
+  const h=chatSetup();await h.chat.open();await h.chat.ask('前の質問');h.advance(1800000);
+  const fade=h.deferFade(),opening=h.chat.open();await fade.started;await h.chat.ask('いまの質問');
+  const nodes=h.log.children.slice();fade.release();await opening;
+  assert.deepEqual(h.log.children,nodes);assert.equal(h.chat.history.length,4);assert.equal(h.animations[0].active,false);
+  await h.chat.open();assert.equal(h.log.children.length,1);assert.equal(h.chat.history.length,0);
+});
+test('手を振る途中でしまっても裏であいさつせず次の呼び出しに表示する',async()=>{
+  const h=chatSetup();h.holdWave(true);await h.chat.open();h.ctx.layer.hidden=true;h.finishWave();
+  assert.equal(h.log.children.length,0);assert.equal(h.chat.greeted,false);
+  h.holdWave(false);await h.chat.open();assert.equal(h.log.children.length,1);assert.equal(h.chat.greeted,true);
+});
+test('消した吹き出しの文字送りは次のタイマーで停止する',()=>{
+  const children=[],timers=[];let done=0;
+  const log={appendChild:node=>children.push(node)},document={createElement:()=>({text:{innerHTML:''},querySelector(){return this.text},get isConnected(){return children.includes(this)}})};
+  const ctx={log,document,markLast(){},toBottom(){},setTimeout:fn=>timers.push(fn)};
+  vm.createContext(ctx);vm.runInContext(html.slice(html.indexOf('  function piyoMsg('),html.indexOf('  // ---- データ'))+';this.piyoMsg=piyoMsg;',ctx);
+  const msg=ctx.piyoMsg();msg.say('まだ文字を表示しているぴよ。',()=>done++);const node=children.pop(),text=node.text.innerHTML;
+  assert.equal(timers.length,1);timers.shift()();assert.equal(node.text.innerHTML,text);assert.equal(timers.length,0);assert.equal(done,0);
 });
 test('待機のぴよ：下へ引いても待機の位置で止まり、それより下へ行かない',()=>{
   const fn=html.slice(html.indexOf('  function holdPet('),html.indexOf('  function fadeRest('));
