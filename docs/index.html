@@ -1722,8 +1722,15 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     }
     // 下端を保って会話欄を96px上へ広げ、上側に安全領域＋16pxを残す。
     // 会話が短くても、現在の上端でなく下端から収まる最大高さを求める。
-    const safeTop=16+(parseFloat(getComputedStyle(layer).getPropertyValue('--piyo-safe-top'))||0)+(adjust&&vv?vv.offsetTop:0);
-    log.style.maxHeight=Math.max(120,Math.min(logHeight+96,log.getBoundingClientRect().bottom-safeTop))+'px';
+    const safeTop=16+(parseFloat(getComputedStyle(layer).getPropertyValue('--piyo-safe-top'))||0);
+    if(keyboard){
+      // 同じ座標系の差だけを使い、画面の移動量を会話の高さから重ねて引かない。
+      const belowLog=layer.getBoundingClientRect().bottom-log.getBoundingClientRect().bottom;
+      log.style.maxHeight=Math.max(0,visibleH-safeTop-belowLog)+'px';
+    }else{
+      const top=safeTop+(adjust&&vv?vv.offsetTop:0);
+      log.style.maxHeight=Math.max(120,Math.min(logHeight+96,log.getBoundingClientRect().bottom-top))+'px';
+    }
     toBottom();
   }
   function cancelFit(){cancelAnimationFrame(fitFrame);fitFrame=0;fitTimers.forEach(clearTimeout);fitTimers=[]}
