@@ -1431,14 +1431,59 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     m=q.match(/^(.+?)(?:は|って|[、,])(?:いつ|何月何日|何日)(?:から|まで|に)?(?:なの|ですか|買える|(?:発売|販売|開始|終了|開催|予約開始)(?:する|される)?)?[？?]?$/);
     return m?m[1]+'について':q;
   }
+  let suggestUsed=new Set(),suggestLimit=0;
+  function appendSuggest(label){
+    const b=document.createElement('button');b.type='button';b.textContent=label;
+    b.addEventListener('click',()=>{if(busy)return;pendingChip=b;ask(label)});suggest.appendChild(b);
+  }
   function fillSuggest(list){
-    suggest.innerHTML='';
-    list.forEach(q=>{const label=suggestLabel(q),b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',()=>{if(busy)return;pendingChip=b;ask(label)});suggest.appendChild(b)});
-    suggest.hidden=!list.length;
+    const labels=[...new Set(list.filter(q=>typeof q==='string'&&q.trim()).map(suggestLabel))].slice(0,6);
+    suggest.innerHTML='';suggestUsed=new Set();suggestLimit=labels.length;
+    labels.forEach(appendSuggest);suggest.hidden=!labels.length;
+  }
+  // 補充は取得済み情報に答えがある質問だけ。候補作りの通信は行わない。
+  function suggestPool(){
+    if(!data)return [];
+    const basics=(data.basics?.lines||[]).join('\n'),piyo=[],weather=[];
+    for(const [pattern,q] of [
+      [/ひよこ型|スイーツ/,'ぴよりんってどんなお菓子？'],
+      [/名前.*プリン/,'ぴよりんの名前の由来は？'],
+      [/プリン.*ババロア/,'ぴよりんは何でできてる？'],
+      [/値段.*定番ぴよりん/,'定番ぴよりんはいくら？'],
+      [/ぴよりんshop/,'ぴよりんはどこで買える？'],
+      [/持ち帰り|持ち歩き/,'ぴよりんの持ち帰り方は？'],
+      [/消費期限/,'ぴよりんの消費期限は？'],
+      [/買い方.*予約/,'ぴよりんは予約できる？'],
+    ])if(pattern.test(basics))piyo.push(q);
+    // knowledge()に渡す最新80件と同じ範囲に、本文のあるメモがある場合だけ。
+    if(Object.values(data.memo||{}).sort((a,b)=>(b.date||'').localeCompare(a.date||'')).slice(0,80).some(m=>m.memo?.trim()))piyo.push('最近のぴよりんニュースは？');
+    const today=todayStr();
+    for(const [date,day] of [[today,'今日'],[nextDay(today),'明日']]){
+      const w=(data.weather||[]).find(w=>w.date===date);
+      if(!w?.word||!Number.isFinite(w.max)||!Number.isFinite(w.min))continue;
+      weather.push(day+'の名古屋の天気は？');
+      if(Number.isFinite(w.rain))weather.push(day+'の名古屋の雨の確率は？');
+      if(w.sunset)weather.push(day+'の名古屋の日の入りは？');
+    }
+    // 天気とぴよりんを交互に補充し、同じ種類ばかり続くのを避ける。
+    return Array.from({length:Math.max(weather.length,piyo.length)},(_,i)=>[weather[i],piyo[i]]).flat().filter(Boolean);
+  }
+  function consumeSuggest(q){
+    const label=suggestLabel(q);suggestUsed.add(label);
+    const chip=pendingChip||Array.from(suggest.children).find(b=>b.textContent===label);pendingChip=null;
+    if(!chip)return;
+    chip.remove();
+    const excluded=new Set([...suggestUsed,...Array.from(suggest.children,b=>b.textContent)]);
+    for(const candidate of suggestPool()){
+      if(suggest.children.length>=suggestLimit)break;
+      const next=suggestLabel(candidate);if(excluded.has(next))continue;
+      appendSuggest(next);excluded.add(next);
+    }
+    suggest.hidden=!suggest.children.length; // 答えがある新しい候補を使い切ったら、無理に繰り返さない。
   }
   async function open(){
     const id=++openId,wasBusy=busy,lastMessage=log.lastElementChild;
-    if(!suggest.children.length)fillSuggest(DEFAULT_SUGGEST); // 候補があとから出てぴよが跳ねないよう、先に場所を取る
+    if(!suggest.children.length&&!greeted)fillSuggest(DEFAULT_SUGGEST); // 初回は先に場所を取り、使い切った候補は開閉だけで戻さない
     const from=idleEl.hidden?null:idleEl.getBoundingClientRect();if(from)idleRect=from;
     idleHide();guardOn(true);layer.hidden=false;lockPage();fit();frame(0,0);toBottom(true);if(from)slideFrom(pet,from);
     const refreshed=await loadData().catch(()=>false);
@@ -1588,7 +1633,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   async function ask(q){
     if(busy)return;
     if(!apiKey){pendingQ=q;openKey();return} // キーを入れたら続きから送る（候補はそれまで残す）
-    if(pendingChip){pendingChip.remove();pendingChip=null;suggest.hidden=!suggest.children.length} // 聞いた候補は消す
+    consumeSuggest(q); // 聞いた候補を消し、取得済み情報で答えられる別の質問を右へ補充する
     busy=true;$('piyo-send').disabled=true;
     userMsg(q);const msg=piyoMsg();loop('checking');msg.say('考え中だぴよ…');
     const messages=[...history,{role:'user',content:q}];

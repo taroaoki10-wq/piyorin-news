@@ -71,7 +71,7 @@ function chatSetup(){
   Object.assign(h.ctx,{$:id=>nodes[id]||(nodes[id]={}),log,guardOn(){},layer:{hidden:true},lockPage(){},fit(){},frame(){},toBottom(){log.scrollTop=log.children.length},
     play(name,done){if(done&&holdWave)waveDone=done;else done?.()},idle(){},loop(){},piyoMsg,
     userMsg:text=>log.children.push({text}),fmt:s=>s,DEFAULT_SUGGEST:[],
-    setTimeout:fn=>{fn();return 0},clearTimeout(){},fillSuggest:list=>chips.push(list),suggest:{children:[1]},
+    setTimeout:fn=>{fn();return 0},clearTimeout(){},fillSuggest:list=>chips.push(list),consumeSuggest(){},suggest:{children:[1]},
     idleEl:{hidden:true},idleHide(){},slideFrom(){},matchMedia:()=>({matches:reduced}),
     apiKey:true,NEED_MORE:{},sync(){},textOf:r=>r.content[0].text,
     async callClaude({messages}){
