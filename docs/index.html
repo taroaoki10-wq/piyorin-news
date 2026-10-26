@@ -1626,14 +1626,34 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 
   // ---- キーボードが出たら持ち上げ、会話の欄の高さも合わせる（iPhone の Safari） ----
   const vv=window.visualViewport;
-  let fitFrame=0,fitTimers=[];
+  let fitFrame=0,fitTimers=[],fitBase=null;
   function fit(){
-    if(layer.hidden)return;
-    const layoutH=document.documentElement.clientHeight||window.innerHeight,h=vv?Math.min(vv.height,layoutH):layoutH;
-    // body固定中にキーボードが残したルートのスクロールだけを戻す。元の記事位置はlockYに保持。
-    if(document.body.style.position==='fixed'&&(!vv||vv.scale===1)&&h>=layoutH-1&&(window.scrollX||window.scrollY))window.scrollTo(0,0);
-    layer.style.bottom=(vv?Math.max(0,layoutH-h-vv.offsetTop):0)+'px';
+    if(layer.hidden||pull||layer.style.transform)return;
+    const layoutH=document.documentElement.clientHeight||window.innerHeight,visibleH=vv?Math.min(vv.height,layoutH):layoutH;
+    const width=document.documentElement.clientWidth||window.innerWidth,inset=vv?Math.max(0,layoutH-visibleH-vv.offsetTop):0;
+    if(!fitBase||fitBase.width!==width||!vv){
+      layer.style.paddingBottom='';
+      fitBase={width,height:visibleH,inset,padding:getComputedStyle(layer).paddingBottom};
+    }
+    const zoomed=vv&&Math.abs(vv.scale-1)>.01;
+    // 完了でフォーカスが外れたら、OSの寸法が残っていても最初の位置へ戻す。
+    // 格納後もフォーカスが残る場合、小さな残り余白（120px以下）で持ち上げ続けない。
+    const keyboard=!zoomed&&document.activeElement===input&&fitBase.height-visibleH>120,adjust=keyboard||zoomed;
+    const h=adjust?visibleH:fitBase.height;
+    if(!adjust&&document.body.style.position==='fixed'&&(window.scrollX||window.scrollY))window.scrollTo(0,0);
+    const transition=layer.style.transition;
+    if(!adjust)layer.style.transition='none';
+    layer.style.translate='';
+    layer.style.bottom=(adjust?inset:fitBase.inset)+'px';
+    layer.style.paddingBottom=keyboard?'12px':fitBase.padding;
     log.style.maxHeight=Math.max(120,Math.min(h*.62,h-104-56-44-70))+'px'; // ぴよ・入力欄・候補・上の余白を引いた残り
+    if(!adjust){
+      const bottom=$('piyo-form').getBoundingClientRect().bottom;
+      if(fitBase.formBottom===undefined)fitBase.formBottom=bottom;
+      const shift=fitBase.formBottom-bottom;
+      layer.style.translate=Math.abs(shift)>.5?`0 ${shift}px`:'';
+      layer.style.transition=transition;
+    }
     toBottom();
   }
   function cancelFit(){cancelAnimationFrame(fitFrame);fitFrame=0;fitTimers.forEach(clearTimeout);fitTimers=[]}
