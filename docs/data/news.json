@@ -1230,6 +1230,10 @@
    {
     "source": "オリコンニュース",
     "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5EU2IwTlBVeG1iZFFLRl9sbG93TU01cmhZM0REb20zcEw1VFR2bVFCVDFSVC10NDhSRGFSMlhiWndzVGFnZDdHLTI4ZFdvelotenpheFl0Nlk0Zw?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9DMEVpYW1HeC01UkdWNXRRdUFNOGVTV2dLazR6Q2NQV205Z3Z4VHZNbUlCR090bVJKdnhhOGhKaEZfOWJObDhESy1tR3B0bEI3U0gxX0RzNU9SUQ?oc=5"
    }
   ],
   "dv": 3,
@@ -1286,6 +1290,10 @@
    {
     "source": "storyweb.jp",
     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE8yaUNBSjFNSlZxU0VwbE14ZnhRTHd6T2liQWg4eGljV2NKTERFT0RORWtOMVJ6RDBXQWhfNW9MSHpxN3lIdW5LMl8zRQ?oc=5"
+   },
+   {
+    "source": "ぴよりん公式サイト",
+    "url": "https://piyorin.com/news/p5648/"
    }
   ],
   "dv": 3,
@@ -1534,7 +1542,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんのクリスマス限定ケーキという新商品・企画の記事",
+   "why": "クリスマス限定ケーキなど、ぴよりんの季節限定商品企画の記事",
    "t": "2026-10-26"
   }
  },
@@ -1962,6 +1970,10 @@
    {
     "source": "時事ドットコム",
     "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9GN25WY19hLXVsUlBCbFNaTTd6dThrOWtpa2JoTER5cVlTa3h0RWVpVkQtVUdycTdCWk5uV0NBaUM3Q0VUcmVQcFJkeDRmbFBmRXNBVnVlN0U1RWFQSHJFZ3EyQ19ZOGVfOWhZ?oc=5"
+   },
+   {
+    "source": "PR TIMES",
+    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE96eHQ3R1NrdW5wZ2hTbl9CbEI4SGZVeWpxa3NFMW9MQ1pfZjQ0LXFKZDVQOWlYdnZMR0E4MzU1MUZIN1hLZU8tM3BxRGVOVzJlR3N5dks3cDhWQk1TWXNCcUZnWV93UHpHcnc?oc=5"
    }
   ],
   "dv": 3,
@@ -2362,6 +2374,10 @@
    {
     "source": "OHK 岡山放送",
     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5zUDlpb1Q2WWlQMEcyS0tvUzhxREFJTVg0LTJxLXh5T0k0U1hORlhzSVY5YlNFTkduaTFHQWs3d3RtVk5tNDlKVDUta0VjNk1tR3h6akJIZV81ZktkamlCblRPMjk?oc=5"
+   },
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9sVzF6elFEcmd1OTdCc2lGUUJ0UUJYUUI0ek1Tdl8tajQtVVVYakc5ZVktNkFBY2w3OWZxWWxKWmhXWXYzbndEdWlHc0NadGFKbTN6cU8tTWk0ci0tdG4tdURfcWNmTDAwLWtzRzg5TXJ5SzB0QUQyTFdKazdwcnc?oc=5"
    }
   ],
   "dv": 3,
@@ -5783,7 +5799,12 @@
   "title": "「秒で予約してしまった…」【ぴよりん】誕生15周年記念！『ぴよりん 15周年メモリアルブック』7/27発売！ チャームやシールセット付き",
   "source": "朝日新聞",
   "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1XRXJGVUpSM1VvQWVoMEo4dEttNTBLbkJMQVNCem5kUlE2aXZ1Zk5fbnV2bTR3NGY2Zmh3Mk5acmJVS3o1Q1lZTnFxVHRCczRKWFhySVZkT0p5NUliTUNwZHJJMA?oc=5",
-  "related": [],
+  "related": [
+   {
+    "source": "朝日新聞",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1WOXBIMDRGdEhYTnBLOFdnYzdKR195blI5Z2dFUFFhUkV6MEg0Y3lwYkN2RVJyZ2FjeHBoM25haUJsbkRkZTNteml5VU5zUkRvWFVvc2tSUQ?oc=5"
+   }
+  ],
   "jg": {
    "v": 1,
    "ok": true,
@@ -7049,7 +7070,12 @@
   "title": "【ぴよりん】が仙台におでかけ！藤崎本館にて仙台限定ぴよりん販売！",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000153.000124425.html",
-  "related": [],
+  "related": [
+   {
+    "source": "PR TIMES",
+    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBwMklNN3NLMUxEMDFTRFh4VFlwcHNVVVVZZ05KOHhZenFXdjRBSXo4UDNUajlQMnN4S0FvTmJac3ZCUl8tZmszV2pIRUF5WVA0RE9kMEFVZGxJS3JSVnQ5ZVdtMzZEZnZOakE?oc=5"
+   }
+  ],
   "jg": {
    "v": 1,
    "ok": true,
@@ -7133,6 +7159,21 @@
   }
  },
  {
+  "id": "n20260130-6f16b3c3",
+  "date": "2026-01-30",
+  "cat": "media",
+  "title": "期間限定「バレンタインぴよりん」名古屋駅で販売。7種の季節限定クッキーも",
+  "source": "トラベル Watch",
+  "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBhSGg2YS12elNnZTRpRXgxMmd2ZVZSaDdhLWY3TmV2bU1ial9SZkp1Y2JndmFoWGhvZkdYRVRxaGVoN1Z3UDlsaTZtdUIyM3lybVB6eWZwOVl4ODdtT19BNDMtalRWUzha?oc=5",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "バレンタイン限定商品など、ぴよりんの季節限定販売の記事",
+   "t": "2026-10-26"
+  }
+ },
+ {
   "id": "n20260129-6107a997",
   "date": "2026-01-29",
   "cat": "press",
@@ -7199,7 +7240,12 @@
   "title": "「ぴよりん15thアニバーサリー」始動！15年の感謝と、これからの“ご縁”にありがとう！テーマは「いちごいちえん（15一縁）」",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000145.000124425.html",
-  "related": [],
+  "related": [
+   {
+    "source": "PR TIMES",
+    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE85aTFfcFJNQkw2ajhKY2prUi1TQUpzRFpvaFNxN0ZKRUgzekg3Mk9RMUtGcU9XMXB2VjhPTk5hSGx4UWo5MHdMbFY3M0JHaWNRUmtMVm9TVHlRTzlKWVgyU1djUGt1alZzTmc?oc=5"
+   }
+  ],
   "jg": {
    "v": 1,
    "ok": true,
