@@ -560,6 +560,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 </div>
 <script src="news-archive.js"></script>
 <script src="news-identity.js"></script>
+<script defer src="piyo-display-diagnostics.js?v=1"></script>
 <script>
 (function(){
   const CATS={official:'公式',press:'プレスリリース',media:'Webメディア'};
@@ -1731,6 +1732,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       const top=safeTop+(adjust&&vv?vv.offsetTop:0);
       log.style.maxHeight=Math.max(120,Math.min(logHeight+96,log.getBoundingClientRect().bottom-top))+'px';
     }
+    window.PiyoDisplayDiagnostics?.fit({baseHeight:fitBase.height,visibleHeight:visibleH,inset,keyboard,zoomed,logMaxHeight:parseFloat(log.style.maxHeight)});
     toBottom();
   }
   function cancelFit(){cancelAnimationFrame(fitFrame);fitFrame=0;fitTimers.forEach(clearTimeout);fitTimers=[]}
