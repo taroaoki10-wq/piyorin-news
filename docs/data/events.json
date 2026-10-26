@@ -196,6 +196,16 @@
   "auto": true
  },
  {
+  "id": "auto-officialp5653",
+  "title": "ぴよりんカレンダー2027 先行販売",
+  "start": "2026-10-29",
+  "end": "2026-10-29",
+  "place": "ぴよりんMARKET",
+  "kind": "release",
+  "url": "https://piyorin.com/news/p5653/",
+  "auto": true
+ },
+ {
   "id": "auto-officialp5628",
   "title": "おでかけ情報 ぴよりんが山口県へ初めてのおでかけ！「おのだサンパーク」で期間限定販売 記事を見る",
   "start": "2026-11-01",
@@ -203,6 +213,16 @@
   "place": "おのだサンパーク",
   "kind": "sale",
   "url": "https://piyorin.com/news/p5628/",
+  "auto": true
+ },
+ {
+  "id": "auto-officialp5653-2",
+  "title": "ぴよりんカレンダー2027 各店舗販売",
+  "start": "2026-11-02",
+  "end": "2026-11-02",
+  "place": "各店舗",
+  "kind": "release",
+  "url": "https://piyorin.com/news/p5653/",
   "auto": true
  },
  {
