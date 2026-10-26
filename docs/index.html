@@ -1417,9 +1417,18 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 
   // ---- 呼ぶ・しまう ----
   let greeted=false,openId=0;
+  function suggestLabel(value){
+    const q=String(value).trim();
+    let m=q.match(/^(.+?)へ(?:は)?いつおでかけ[？?]?$/);
+    if(m)return m[1]+'へのおでかけについて';
+    m=q.match(/^(.+?)の(?:販売期間|発売日|販売日|開催日|開催期間|日程|日時)(?:は|って)?[？?]?$/);
+    if(m)return m[1]+'について';
+    m=q.match(/^(.+?)(?:は|って|[、,])(?:いつ|何月何日|何日)(?:から|まで|に)?(?:なの|ですか|買える|(?:発売|販売|開始|終了|開催|予約開始)(?:する|される)?)?[？?]?$/);
+    return m?m[1]+'について':q;
+  }
   function fillSuggest(list){
     suggest.innerHTML='';
-    list.forEach(q=>{const b=document.createElement('button');b.type='button';b.textContent=q;b.addEventListener('click',()=>{if(busy)return;pendingChip=b;ask(q)});suggest.appendChild(b)});
+    list.forEach(q=>{const label=suggestLabel(q),b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',()=>{if(busy)return;pendingChip=b;ask(label)});suggest.appendChild(b)});
     suggest.hidden=!list.length;
   }
   async function open(){

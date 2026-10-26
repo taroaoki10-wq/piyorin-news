@@ -23,7 +23,7 @@ class PiyoToneTests(unittest.TestCase):
                 patch.object(piyo, 'load_json', return_value={}), \
                 patch.object(piyo, 'call_tool', return_value=response) as call:
             result, usage = piyo.build_greeting({}, [], 'fake-test-key')
-        self.assertEqual(result['v'], 3)
+        self.assertEqual(result['v'], 4)
         self.assertEqual(result['lines'], ['運行するぴよ。', '・発売しました。'])
         self.assertEqual(result['suggest'], ['買えますか？'])
         self.assertEqual(usage, {'output_tokens': 10})
@@ -31,7 +31,7 @@ class PiyoToneTests(unittest.TestCase):
 
     def test_previous_version_rebuilds_once_and_current_version_is_reused(self):
         text = '<today>2026-10-26</today>'
-        old_basis = hashlib.sha1(f'2\n{piyo.MODEL}\n{text}'.encode()).hexdigest()[:16]
+        old_basis = hashlib.sha1(f'3\n{piyo.MODEL}\n{text}'.encode()).hexdigest()[:16]
         response = ({'lines': ['休みです。', '発売しました。'], 'suggest': []}, {})
         with patch('urllib.request.urlopen', side_effect=AssertionError('network forbidden')), \
                 patch.object(piyo, 'greeting_input', return_value=text), \
