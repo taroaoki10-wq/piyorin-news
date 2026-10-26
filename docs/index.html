@@ -1689,7 +1689,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   input.addEventListener('input',sync);sync();
   $('piyo-form').addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(!q||busy)return;pendingChip=null;input.value='';sync();ask(q)});
 
-  // ---- キーボードが出たら持ち上げ、会話の欄の高さも合わせる（iPhone の Safari） ----
+  // ---- キーボードが出たら持ち上げ、会話の上端を通常時にそろえる（iPhone の Safari） ----
   const vv=window.visualViewport;
   let fitFrame=0,fitTimers=[],fitBase=null;
   function fit(){
@@ -1723,7 +1723,15 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     // 下端を保って会話欄を96px上へ広げ、上側に安全領域＋16pxを残す。
     // 会話が短くても、現在の上端でなく下端から収まる最大高さを求める。
     const safeTop=16+(parseFloat(getComputedStyle(layer).getPropertyValue('--piyo-safe-top'))||0)+(adjust&&vv?vv.offsetTop:0);
-    log.style.maxHeight=Math.max(120,Math.min(logHeight+96,log.getBoundingClientRect().bottom-safeTop))+'px';
+    const logBottom=log.getBoundingClientRect().bottom;
+    const expandedHeight=Math.max(120,Math.min(logHeight+96,logBottom-safeTop));
+    // 内容が短くても同じ表示領域を取り、吹き出しはCSSの下寄せを保つ。
+    // キーボード中は縮んだ画面の高さ比率で決め直さず、通常時の上端まで使う。
+    if(!adjust)fitBase.logTop=logBottom-expandedHeight;
+    const top=keyboard?Math.max(safeTop,vv.offsetTop+fitBase.logTop):safeTop;
+    const height=keyboard?Math.max(0,logBottom-top):expandedHeight;
+    log.style.maxHeight=height+'px';
+    log.style.height=height+'px';
     toBottom();
   }
   function cancelFit(){cancelAnimationFrame(fitFrame);fitFrame=0;fitTimers.forEach(clearTimeout);fitTimers=[]}
