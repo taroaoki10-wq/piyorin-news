@@ -142,7 +142,12 @@
   "title": "アールグレイ香る紅茶ババロアの2ぴよセット！ジェイアール東海フードサービス ぴよりん「紅茶ぴよりんおでかけセット」",
   "source": "ライブドアニュース",
   "url": "https://news.livedoor.com/article/image_detail/32664309/?img_id=57224867",
-  "related": [],
+  "related": [
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9WZ193a2JHRTZjU0hrZHlxUUs2ZWNUZ2hQTzNORklidzctX2lFWjJVSlJOWkFfeVpmdzJwYlNSMTZXMk11Q1VqNDIxRWdhRzNSeG41Q29EMTRMY1RKYlJpa183OHMtM3VEUVRZR0lsZzdGNC1QOWNZVGo1Y1g?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -1377,6 +1382,10 @@
    {
     "source": "Dellows News",
     "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE80cXMybnI0Ym84MG1KRWd2T3JYMkE2M0V4aWxVcTRpRkkwR1h2Y1ZUVG9SR29TSDd3NHZQR09COThGUGQxekNMWDhTTlB1eWJUWGRrM2JKV2NQenRhZUFUeVgyTklYQ1lG?oc=5"
+   },
+   {
+    "source": "Dellows News",
+    "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE9wVXlTenhvZGlVREp2UmhNNHoyY3ZyWHFjQVBYTmNMclpPU2FKd1BFa0JpNDZhLU1tQzdWdUhnRGVjLWs2TVE?oc=5"
    }
   ],
   "dv": 3,
@@ -1543,6 +1552,22 @@
    "ok": true,
    "why": "ぴよりんとゴジラのコラボスイーツに関する公式企画",
    "t": "2026-10-25"
+  }
+ },
+ {
+  "id": "n20261022-b7649ce7",
+  "date": "2026-10-22",
+  "cat": "media",
+  "title": "期間限定「ぴよりんゴジラ」が登場",
+  "source": "産経ニュース",
+  "url": "https://www.sankei.com/article/20261022-4AVL2RIDMZPBNHIZLLP3BYSRXI/photo/5C724V7QABP65B5HSZLEDWZV4U/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんと映画ゴジラの公式コラボ商品の情報",
+   "t": "2026-10-28"
   }
  },
  {
@@ -1950,6 +1975,22 @@
    "ok": true,
    "why": "ぴよりんのクリスマスケーキ新商品の予約開始に関する記事",
    "t": "2026-10-22"
+  }
+ },
+ {
+  "id": "n20261021-bfee00bf",
+  "date": "2026-10-21",
+  "cat": "media",
+  "title": "コメント | サンタやトナカイ姿の「ぴよりん」がずらり クリスマス限定ケーキ2種類、30日から先着順で予約受付",
+  "source": "オリコンニュース",
+  "url": "https://www.oricon.co.jp/news/2487819/comment/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのクリスマス限定商品・ケーキの紹介",
+   "t": "2026-10-28"
   }
  },
  {
@@ -2389,6 +2430,14 @@
    {
     "source": "PR TIMES",
     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE96eHQ3R1NrdW5wZ2hTbl9CbEI4SGZVeWpxa3NFMW9MQ1pfZjQ0LXFKZDVQOWlYdnZMR0E4MzU1MUZIN1hLZU8tM3BxRGVOVzJlR3N5dks3cDhWQk1TWXNCcUZnWV93UHpHcnc?oc=5"
+   },
+   {
+    "source": "産経ニュース",
+    "url": "https://www.sankei.com/pressrelease/prtimes/BO23NFTFDJPPLB3TUUQFEWQ6RE/"
+   },
+   {
+    "source": "MANTANWEB（まんたんウェブ）",
+    "url": "https://mantan-web.jp/prtimes/article/20261015prt00m200000199a.html"
    }
   ],
   "dv": 3,
@@ -2397,7 +2446,10 @@
    "ok": true,
    "why": "ハロウィンぴよりんの新商品販売情報",
    "t": "2026-10-15"
-  }
+  },
+  "merged_ids": [
+   "n20261014-8c5cde0b"
+  ]
  },
  {
   "id": "n20261020-31d74e47",
@@ -2555,27 +2607,6 @@
    "ok": true,
    "why": "ぴよりんの期間限定新商品「ハロウィンぴよりん」の販売情報",
    "t": "2026-10-16"
-  }
- },
- {
-  "id": "n20261014-8c5cde0b",
-  "date": "2026-10-14",
-  "cat": "media",
-  "title": "今年のハロウィンを彩る紫色のぴよりん！「ハロウィンぴよりん ...",
-  "source": "産経ニュース",
-  "url": "https://www.sankei.com/pressrelease/prtimes/BO23NFTFDJPPLB3TUUQFEWQ6RE/",
-  "related": [
-   {
-    "source": "MANTANWEB（まんたんウェブ）",
-    "url": "https://mantan-web.jp/prtimes/article/20261015prt00m200000199a.html"
-   }
-  ],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ハロウィンぴよりんの販売告知",
-   "t": "2026-10-15"
   }
  },
  {
