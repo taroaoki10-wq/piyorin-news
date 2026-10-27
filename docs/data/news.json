@@ -6,28 +6,114 @@
   "title": "ぴよりんがゴジラに!?名古屋名物がゴジラとコラボ! 『ゴジラ-0.0』公開記念",
   "source": "マイナビニュース",
   "url": "https://news.mynavi.jp/article/20261027-5203580/",
-  "related": [],
+  "related": [
+   {
+    "source": "マイナビニュース",
+    "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBJVThWdzE3ZUpscmdEREdHU0JJQ3BJMGdZNzhlLUE5c05sVmplQVJUU0JNTnpZcDJuc29rb0w0UkF1NGViTXNwSW83Rmw3a0swVjdMN2hkYkJLMVRu?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
    "ok": true,
    "why": "ぴよりんとゴジラのコラボ企画。限定商品・店舗装飾・グッズ販売",
    "t": "2026-10-27"
+  },
+  "merged_ids": [
+   "n20261027-0d178580"
+  ]
+ },
+ {
+  "id": "n20261027-5a15d567",
+  "date": "2026-10-27",
+  "cat": "media",
+  "title": "「ぴよりんMARKET」でクリスマスケーキのオンライン予約受け付け（みんなの経済新聞ネットワーク）",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/736c5ebbddc4913d2a45e30513421ceb29b899fc",
+  "related": [
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNNDJ6Mzdkd05FZVBJRnktM25SRXhqdktlc3lZaEVNc1lwSWtsQmZndXVBRFVuQzNKWkl3UVprd3hOM3lfMG9mMU1oREVuaHYweU95S2RLR09ST0JYcVlhVzFQcjg4Q29qUWcyM3ZXZUNrRTA1OGFCOFFfb0VQOEtTSjJPeVZFSjRUWUtGSVV3?oc=5"
+   },
+   {
+    "source": "名駅経済新聞",
+    "url": "https://meieki.keizai.biz/headline/3811/"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのクリスマスケーキ予約販売の新商品企画",
+   "t": "2026-10-27"
   }
  },
  {
-  "id": "n20261027-0d178580",
+  "id": "n20261027-3aa189e5",
   "date": "2026-10-27",
   "cat": "media",
-  "title": "ぴよりんゴジラ、襲来",
-  "source": "マイナビニュース",
-  "url": "https://news.mynavi.jp/article/20261027-5203580/",
+  "title": "国産イチゴをサンドした「ぴよりんデコレーション」",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/photoflash/6555/",
+  "related": [
+   {
+    "source": "名駅経済新聞",
+    "url": "https://meieki.keizai.biz/photoflash/6555/"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのクリスマス限定ケーキ商品の紹介",
+   "t": "2026-10-27"
+  }
+ },
+ {
+  "id": "n20261027-b531ceb7",
+  "date": "2026-10-27",
+  "cat": "media",
+  "title": "名古屋名物「ぴよりん」と「世界の山ちゃん」がそれぞれ、映画「ゴジラ-0.0」とコラボ企画開催を発表し、歓迎の声が集まる",
+  "source": "Togetter",
+  "url": "https://togetter.com/li/2763401",
   "related": [],
   "dv": 3,
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんゴジラの限定販売企画。コラボ商品とイベント内容",
+   "why": "ぴよりんと映画のコラボ企画の発表",
+   "t": "2026-10-27"
+  }
+ },
+ {
+  "id": "n20261027-7ae22b14",
+  "date": "2026-10-27",
+  "cat": "media",
+  "title": "ジェイアール東海フードサービス、ぴよりんカレンダー2027を10月29日先行発売へ",
+  "source": "Dellows News",
+  "url": "https://news.dellows.jp/880433/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんカレンダーグッズの販売企画",
+   "t": "2026-10-27"
+  }
+ },
+ {
+  "id": "n20261027-118825ac",
+  "date": "2026-10-27",
+  "cat": "media",
+  "title": "「パスの軌道とかも分かるのがとても楽しかった」AIで変わる体育 ...",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/d3d82b870b68be34816b7fb3f7236549ece26b11",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": false,
+   "why": "体育の授業とAI活用の話題。ぴよりんと無関係",
    "t": "2026-10-27"
   }
  },
@@ -141,6 +227,10 @@
    {
     "source": "いこーよニュース",
     "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1UVkJJN1UyZWstM2p1N3ZVcF9yZGdxR0FCODNYZGVzZUkyU3BpNzhQS2s5ODJOOXdsRkQwZ1VyX3g3aU1lak81cWtFMkpmTEZ2Zmc?oc=5"
+   },
+   {
+    "source": "いこーよニュース",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1Udy0zRUVwdXdieUZFdWxDZ3F1bmdkblJEUHJVb2ZmalFDMVFrMmlOQlRDdjVxZTU2RWpMb3FFRF85RDRRNWNmNFpLNlNzaEUycVRNWGNsRm53OXc?oc=5"
    }
   ],
   "dv": 3,
@@ -161,7 +251,12 @@
   "title": "2027年版「ぴよりんカレンダー」が今年も登場！ぴよりんの愛らしい姿を再現した組み立て式卓上カレンダー｜Infoseekニュース",
   "source": "Infoseek",
   "url": "https://news.infoseek.co.jp/article/prtimes_000000260_000124425/",
-  "related": [],
+  "related": [
+   {
+    "source": "Infoseek",
+    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBUOTlWTUV4dnF6S0MxR1lWUUpXWHNXTmVWTExqNHhjMEh6UEZEbm5zWTVzMGs2bmhad3lmQW5TRVhCdFk1cENqWVB1QWExV2Z5R1ROa0dxaFp5Vms3N3pYSmxHOW51SzNEVGNZbVFMenZxQQ?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -177,7 +272,12 @@
   "title": "2027年版「ぴよりんカレンダー」が今年も登場！ぴよりんの愛らしい ...",
   "source": "MANTANWEB（まんたんウェブ）",
   "url": "https://mantan-web.jp/prtimes/article/20261026prt00m200000087a.html",
-  "related": [],
+  "related": [
+   {
+    "source": "アニメ！アニメ！",
+    "url": "https://animeanime.jp/release/prtimes/20261026/322220.html"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -1203,6 +1303,10 @@
    {
     "source": "Dellows News",
     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE12MS1MUEt6MHdGQTJDVnkwczd2ejEybmdGSXVObXFuZlZDbWZjcXQ1QkhqbEVqVzJqUnJTTW9YUXNoa3NWd0drQTVva2RkM1RLRllqNDZ3Tkc3c0l2XzI1U2UxQWo?oc=5"
+   },
+   {
+    "source": "Dellows News",
+    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE80cXMybnI0Ym84MG1KRWd2T3JYMkE2M0V4aWxVcTRpRkkwR1h2Y1ZUVG9SR29TSDd3NHZQR09COThGUGQxekNMWDhTTlB1eWJUWGRrM2JKV2NQenRhZUFUeVgyTklYQ1lG?oc=5"
    }
   ],
   "dv": 3,
@@ -1369,22 +1473,6 @@
    "ok": true,
    "why": "ぴよりんとゴジラのコラボスイーツに関する公式企画",
    "t": "2026-10-25"
-  }
- },
- {
-  "id": "n20261022-b7649ce7",
-  "date": "2026-10-22",
-  "cat": "media",
-  "title": "期間限定「ぴよりんゴジラ」が登場",
-  "source": "産経ニュース",
-  "url": "https://www.sankei.com/article/20261022-4AVL2RIDMZPBNHIZLLP3BYSRXI/photo/5C724V7QABP65B5HSZLEDWZV4U/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんゴジラコラボの限定商品とイベント企画",
-   "t": "2026-10-27"
   }
  },
  {
@@ -1806,7 +1894,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりンのクリスマス限定ケーキ。期間限定商品",
+   "why": "ぴよりんのクリスマス限定ケーキ予約の記事",
    "t": "2026-10-27"
   }
  },
@@ -2032,6 +2120,10 @@
    {
     "source": "AERA DIGITAL",
     "url": "https://dot.asahi.com/articles/photo/295434"
+   },
+   {
+    "source": "時事ドットコム",
+    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5mWHVhUUNIcXdUOWZrMldUWk9KRUpwTURGTGFRb2NNdXViOFpmaGJRQmpoMkp6UHdRX3ppdFFuUmZVbUVIMnREOXh6eFN0YlFHejVGVEQxU2pGNC1oMkFTYUtQVzlwaVZKX2Vv?oc=5"
    }
   ],
   "dv": 3,
