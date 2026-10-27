@@ -1,5 +1,37 @@
 [
  {
+  "id": "n20261027-78906490",
+  "date": "2026-10-27",
+  "cat": "media",
+  "title": "ぴよりんがゴジラに!?名古屋名物がゴジラとコラボ! 『ゴジラ-0.0』公開記念",
+  "source": "マイナビニュース",
+  "url": "https://news.mynavi.jp/article/20261027-5203580/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんとゴジラのコラボ企画。限定商品・店舗装飾・グッズ販売",
+   "t": "2026-10-27"
+  }
+ },
+ {
+  "id": "n20261027-0d178580",
+  "date": "2026-10-27",
+  "cat": "media",
+  "title": "ぴよりんゴジラ、襲来",
+  "source": "マイナビニュース",
+  "url": "https://news.mynavi.jp/article/20261027-5203580/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラの限定販売企画。コラボ商品とイベント内容",
+   "t": "2026-10-27"
+  }
+ },
+ {
   "id": "official-p5653",
   "date": "2026-10-26",
   "cat": "official",
@@ -35,6 +67,10 @@
    {
     "source": "Mantan Web",
     "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNdUk3VEJSMFpGSElTaU42dDVIYXRTOEZ4Y0JzQkEzOVA3dk95cmY0V3hRbHB2MVZEc0s2RmF6RWhkRTRqT2xCUkN0ZGZCcnpYa1AzdmRaUmFyNjk2NzVQMlVleFRzMzhSLVdmUU9zRXV4S2xLYVdqYTVtNWZCRDdDWlhSVlgzam1I?oc=5"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE54LWpjeGt4alVsdEdLWmh0bFlMUDRqWjZzTDQtME9UeHlVU1RFRkpSc3JOSlE0eGFyWTNSUFRSdWJMZEVuRnI2MzRXTEFuYXV4WERYTw?oc=5"
    }
   ],
   "dv": 3,
@@ -117,6 +153,22 @@
   "merged_ids": [
    "n20261026-99007bf2"
   ]
+ },
+ {
+  "id": "n20261026-f1bbc8d0",
+  "date": "2026-10-26",
+  "cat": "media",
+  "title": "2027年版「ぴよりんカレンダー」が今年も登場！ぴよりんの愛らしい姿を再現した組み立て式卓上カレンダー｜Infoseekニュース",
+  "source": "Infoseek",
+  "url": "https://news.infoseek.co.jp/article/prtimes_000000260_000124425/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの公式カレンダー商品。グッズ販売情報",
+   "t": "2026-10-27"
+  }
  },
  {
   "id": "n20261025-293440f7",
@@ -1320,6 +1372,22 @@
   }
  },
  {
+  "id": "n20261022-b7649ce7",
+  "date": "2026-10-22",
+  "cat": "media",
+  "title": "期間限定「ぴよりんゴジラ」が登場",
+  "source": "産経ニュース",
+  "url": "https://www.sankei.com/article/20261022-4AVL2RIDMZPBNHIZLLP3BYSRXI/photo/5C724V7QABP65B5HSZLEDWZV4U/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラコラボの限定商品とイベント企画",
+   "t": "2026-10-27"
+  }
+ },
+ {
   "id": "n20261021-dc9915ac",
   "date": "2026-10-21",
   "cat": "media",
@@ -1727,6 +1795,22 @@
   }
  },
  {
+  "id": "n20261021-bfee00bf",
+  "date": "2026-10-21",
+  "cat": "media",
+  "title": "コメント | サンタやトナカイ姿の「ぴよりん」がずらり クリスマス限定ケーキ2種類、30日から先着順で予約受付",
+  "source": "オリコンニュース",
+  "url": "https://www.oricon.co.jp/news/2487819/comment/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりンのクリスマス限定ケーキ。期間限定商品",
+   "t": "2026-10-27"
+  }
+ },
+ {
   "id": "official-p5599",
   "date": "2026-10-20",
   "cat": "official",
@@ -1878,7 +1962,12 @@
   "title": "ぴよりんをモチーフにした人気の「ひよりの手作りクッキー缶」に ...",
   "source": "MANTANWEB（まんたんウェブ）",
   "url": "https://mantan-web.jp/prtimes/article/20261020prt00m200000141a.html",
-  "related": [],
+  "related": [
+   {
+    "source": "時事ドットコム",
+    "url": "https://www.jiji.com/jc/article?k=000000241.000124425&g=prt"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -3200,6 +3289,10 @@
    {
     "source": "komei.or.jp",
     "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1NMDJwOVhMT3ByR09YOW5Nbk55R0ZjYTdxNFQ5TGNmWFNCU2c2VWIyd2FIWXBhOUcyeEQyUHVzMlVWaWhaTnp5Mk1ldU5jU3FMX2l5MlFiRDVlVzUtb2haQUEyM0xYX0pvVkVOaDZTMXlsU0N2dVA4OEJB?oc=5"
+   },
+   {
+    "source": "公明党",
+    "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE42SXhsVUY2Ykw1TW12R1VsU1FZaUQzYmwwY2xNZjdMR1Nnby1CSkIyOTRQN2FpNU5VcC1zY2thTXdUZHk4d0x4Q21qSUNrSzA0dC1DNjQtX3FzMFFXNTFuZWFOWmNydlVYbW9HQzRtZGtvZHRhWlk5WjR3?oc=5"
    }
   ],
   "dv": 3,
@@ -5597,27 +5690,6 @@
   }
  },
  {
-  "id": "n20260917-f987b157",
-  "date": "2026-08-21",
-  "cat": "media",
-  "title": "ぴよりん×バーミキュラ 初の「鍋ぴよりん」体験教室 名古屋市（中京テレビＮＥＷＳ）",
-  "source": "Yahoo!ニュース",
-  "url": "https://news.yahoo.co.jp/articles/c3d68b8092efd43d224fd1968097ceab11586e3d",
-  "related": [
-   {
-    "source": "news.yahoo.co.jp",
-    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE44YnFrSm5hODRzMzI5UEt1QlA5WmhhSzhEVWVacm40anMyVml6cEVZZy1DREVGRGR5Z3NsNU5yM0toaEFTVlE2ZGJlbVFERWM2RHdGRzcyajl6X3VWRWs5cmsyNDl6eUVJRHM5NmhrUmV2SFQ3MUlWWkpOSHpyRjA?oc=5"
-   }
-  ],
-  "checked": true,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんとバーミキュラのコラボ企画体験教室",
-   "t": "2026-10-15"
-  }
- },
- {
   "id": "n20260821-8b94efa3",
   "date": "2026-08-21",
   "cat": "media",
@@ -5644,13 +5716,25 @@
   "title": "ぴよりん×バーミキュラ 初の「鍋ぴよりん」体験教室 名古屋市（2026年8月21日掲載）｜中京テレビNEWS NNN",
   "source": "日テレNEWS NNN",
   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPbzlHTnFLNEw4ejc0R1FmTjFYOXdzUm9DNVFxXzEtTUN0TVlmeG5XTWZiczk2OE5xa0g5X18xQVdhVVpEWWx6X2NwMjdRNEhTdmN6X2czOG5UeXFpZVhQUnU3TTdTUWV2TWs5ZC0zSEdzMWxZUnBXTTVkVmtaQS1tWUVKYw?oc=5",
-  "related": [],
+  "related": [
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.yahoo.co.jp/articles/c3d68b8092efd43d224fd1968097ceab11586e3d"
+   },
+   {
+    "source": "news.yahoo.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE44YnFrSm5hODRzMzI5UEt1QlA5WmhhSzhEVWVacm40anMyVml6cEVZZy1DREVGRGR5Z3NsNU5yM0toaEFTVlE2ZGJlbVFERWM2RHdGRzcyajl6X3VWRWs5cmsyNDl6eUVJRHM5NmhrUmV2SFQ3MUlWWkpOSHpyRjA?oc=5"
+   }
+  ],
   "jg": {
    "v": 1,
    "ok": true,
    "why": "ぴよりん×バーミキュラのコラボイベント記事",
    "t": "2026-10-15"
-  }
+  },
+  "merged_ids": [
+   "n20260917-f987b157"
+  ]
  },
  {
   "id": "n20260818-406ed6b0",
