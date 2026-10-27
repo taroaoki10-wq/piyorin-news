@@ -1704,7 +1704,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     const zoomed=vv&&Math.abs(vv.scale-1)>.01;
     // 完了でフォーカスが外れたら、OSの寸法が残っていても最初の位置へ戻す。
     // 格納後もフォーカスが残る場合、小さな残り余白（120px以下）で持ち上げ続けない。
-    const keyboard=!zoomed&&document.activeElement===input&&fitBase.height-visibleH>120,adjust=keyboard||zoomed;
+    const keyboard=!zoomed&&document.activeElement===input&&Math.max(fitBase.height,layoutH)-visibleH>120,adjust=keyboard||zoomed;
     const h=adjust?visibleH:fitBase.height;
     if(!adjust&&document.body.style.position==='fixed'&&(window.scrollX||window.scrollY))window.scrollTo(0,0);
     const transition=layer.style.transition;
@@ -1713,6 +1713,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     layer.style.bottom=(adjust?inset:fitBase.inset)+'px';
     layer.style.paddingBottom=keyboard?'12px':fitBase.padding;
     const logHeight=Math.max(120,Math.min(h*.62,h-104-56-44-70));
+    log.style.height=''; // 通常時にキーボード専用の高さを残さない。
     log.style.maxHeight=logHeight+'px';
     if(!adjust){
       const bottom=$('piyo-form').getBoundingClientRect().bottom;
@@ -1725,12 +1726,16 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     // 会話が短くても、現在の上端でなく下端から収まる最大高さを求める。
     const safeTop=16+(parseFloat(getComputedStyle(layer).getPropertyValue('--piyo-safe-top'))||0);
     if(keyboard){
-      // 同じ座標系の差だけを使い、画面の移動量を会話の高さから重ねて引かない。
-      const belowLog=layer.getBoundingClientRect().bottom-log.getBoundingClientRect().bottom;
-      log.style.maxHeight=Math.max(0,visibleH-safeTop-belowLog)+'px';
+      // 全画面の固定要素を原点にして、通常時の表示上限と会話欄の下端を同じ座標で測る。
+      // 可視高さからの逆算では、固定要素の実際の位置がずれると上に空きが残る。
+      const origin=$('piyo-guard').getBoundingClientRect().top;
+      const top=origin+(vv?vv.offsetTop:0)+(fitBase.logTop??safeTop);
+      const height=Math.max(0,log.getBoundingClientRect().bottom-top);
+      log.style.maxHeight=log.style.height=height+'px';
     }else{
       const top=safeTop+(adjust&&vv?vv.offsetTop:0);
       log.style.maxHeight=Math.max(120,Math.min(logHeight+96,log.getBoundingClientRect().bottom-top))+'px';
+      if(!adjust)fitBase.logTop=Math.max(safeTop,log.getBoundingClientRect().bottom-parseFloat(log.style.maxHeight)-$('piyo-guard').getBoundingClientRect().top);
     }
     window.PiyoDisplayDiagnostics?.fit({baseHeight:fitBase.height,visibleHeight:visibleH,inset,keyboard,zoomed,logMaxHeight:parseFloat(log.style.maxHeight)});
     toBottom();

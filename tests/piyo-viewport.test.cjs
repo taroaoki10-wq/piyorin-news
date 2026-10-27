@@ -21,7 +21,7 @@ function setup(withViewport=true){
   // 入力欄の下端から会話欄の下端まで、ぴよ・候補・入力欄・間隔の実測相当222px。
   log.getBoundingClientRect=()=>({bottom:form.getBoundingClientRect().bottom-222});
   layer.getBoundingClientRect=()=>({bottom:form.getBoundingClientRect().bottom+(parseFloat(layer.style.paddingBottom||safePadding)||0)});
-  const ctx={window,document,input,layer,log,pull:0,$:id=>{assert.equal(id,'piyo-form');return form},toBottom(){},stop(){},guardOn(){},flyIdleFrom(){},
+  const ctx={window,document,input,layer,log,pull:0,$:id=>{if(id==='piyo-guard')return {getBoundingClientRect:()=>({top:-rectShift})};assert.equal(id,'piyo-form');return form},toBottom(){},stop(){},guardOn(){},flyIdleFrom(){},
     requestAnimationFrame:fn=>{const id=++nextId;frames.set(id,fn);return id},cancelAnimationFrame:id=>frames.delete(id),
     setTimeout:(fn,ms)=>{const id=++nextId;timers.set(id,{at:now+ms,fn});return id},clearTimeout:id=>timers.delete(id),
     getComputedStyle:el=>({paddingBottom:el.style.paddingBottom||safePadding,getPropertyValue:name=>name==='--piyo-safe-top'?safeTop:''})};
@@ -156,13 +156,32 @@ test('キーボード中は会話欄より下の実寸を使い、画面上端�
   const h=setup();h.safeTop('59px');h.open();h.focus();h.vv.height=509;h.vv.offsetTop=180;h.rectShift(180);h.vv.emit('resize');h.frame();
   const visibleTop=h.log.getBoundingClientRect().bottom-parseFloat(h.log.style.maxHeight);
   assert.equal(visibleTop,75);
-  assert.equal(h.log.style.height,undefined);
+  assert.equal(h.log.style.height,h.log.style.maxHeight);
 });
 test('通常時は会話の高さを固定せず、キーボードを閉じると元の表示上限へ戻る',()=>{
   const h=setup();h.open();const initial=h.log.style.maxHeight;
-  assert.equal(h.log.style.height,undefined);
+  assert.equal(h.log.style.height,'');
   h.focus();h.vv.height=509;h.vv.offsetTop=180;h.rectShift(180);h.vv.emit('resize');h.frame();
   h.rectShift(0);h.vv.offsetTop=0;h.vv.height=844;h.input.blur();h.vv.emit('resize');h.advance(500);h.frame();
   assert.equal(h.log.style.maxHeight,initial);
-  assert.equal(h.log.style.height,undefined);
+  assert.equal(h.log.style.height,'');
+});
+
+test('キーボード中に固定下端が60px下へずれても、会話の上限は通常時の上端にそろう',()=>{
+  const h=setup();h.safeTop('59px');h.open();h.focus();
+  h.vv.height=509;h.vv.offsetTop=180;h.rectShift(180);h.formShift(-60);h.vv.emit('resize');h.frame();
+  assert.equal(h.log.getBoundingClientRect().bottom-parseFloat(h.log.style.maxHeight),75);
+  assert.equal(h.log.style.height,h.log.style.maxHeight);
+});
+test('初回の可視高さが小さくても、レイアウトとの差でキーボードを判定する',()=>{
+  const h=setup();h.vv.height=600;h.open();h.focus();h.vv.height=509;h.vv.emit('resize');h.frame();
+  assert.equal(h.layer.style.bottom,'335px');
+  assert.equal(h.layer.style.paddingBottom,'12px');
+  assert.equal(h.log.style.height,h.log.style.maxHeight);
+});
+test('縦長画面でも通常時の上限を基準にし、キーボード中だけ高さを確保する',()=>{
+  const h=setup();h.document.documentElement.clientHeight=1100;h.window.innerHeight=1100;h.vv.height=1100;h.open();
+  const normalTop=h.log.getBoundingClientRect().bottom-parseFloat(h.log.style.maxHeight);
+  h.focus();h.vv.height=700;h.vv.emit('resize');h.frame();
+  assert.equal(h.log.getBoundingClientRect().bottom-parseFloat(h.log.style.height),normalTop);
 });
