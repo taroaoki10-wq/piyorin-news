@@ -72,6 +72,17 @@
   "url": "https://piyorin.com/news/p5491/"
  },
  {
+  "id": "auto-n202608264b1d64fa",
+  "title": "ぴよりんおでかけセット販売",
+  "start": "2026-09-26",
+  "end": "2026-09-26",
+  "place": "近鉄百貨店上本町店",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000227.000124425.html",
+  "src": "n20260826-4b1d64fa",
+  "auto": true
+ },
+ {
   "id": "e-fes",
   "title": "ぴよりんステーションフェス",
   "start": "2026-10-01",
@@ -81,6 +92,28 @@
   "url": "https://www.toyohashi-kalmia.jp/topics/piyorinstationfes2026/"
  },
  {
+  "id": "auto-n20260915ea7e6c93-2",
+  "title": "ぴよりんステーションフェス",
+  "start": "2026-10-01",
+  "end": "2026-10-04",
+  "place": "豊橋駅ビル カルミア",
+  "kind": "event",
+  "url": "https://prtimes.jp/main/html/rd/p/000000274.000076395.html",
+  "src": "n20260915-ea7e6c93",
+  "auto": true
+ },
+ {
+  "id": "auto-n20260828d720510d",
+  "title": "ぴよりん特別住民票交付式",
+  "start": "2026-10-02",
+  "end": "2026-10-02",
+  "place": "勝川駅",
+  "kind": "event",
+  "url": "https://prtimes.jp/main/html/rd/p/000000225.000124425.html",
+  "src": "n20260828-d720510d",
+  "auto": true
+ },
+ {
   "id": "e-thunder",
   "title": "ブラックサンダーぴよりん",
   "start": "2026-10-02",
@@ -88,6 +121,28 @@
   "place": "豊橋駅ビル カルミア 4F",
   "kind": "sale",
   "url": "https://piyorin.com/news/p5546/"
+ },
+ {
+  "id": "auto-n20260915ea7e6c93",
+  "title": "ブラックサンダーぴよりんコラボアフタヌーンティー",
+  "start": "2026-10-02",
+  "end": "2026-10-03",
+  "place": "ホテルアソシア豊橋",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000274.000076395.html",
+  "src": "n20260915-ea7e6c93",
+  "auto": true
+ },
+ {
+  "id": "auto-n20260915ea7e6c93-3",
+  "title": "ブラックサンダーぴよりん豊橋おでかけセット販売",
+  "start": "2026-10-02",
+  "end": "2026-10-03",
+  "place": "カルミア",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000274.000076395.html",
+  "src": "n20260915-ea7e6c93",
+  "auto": true
  },
  {
   "id": "e-oshitabi",
@@ -100,22 +155,35 @@
  },
  {
   "id": "auto-officialp5593",
-  "title": "ぴよりん×ドクターイエロー シャカシャカキーホルダー販売",
+  "title": "ぴよりん×ドクターイエロー キーホルダー販売（TOICAデザイン）",
   "start": "2026-10-07",
   "end": "2026-10-07",
   "place": "ぴよりんMARKET",
   "kind": "release",
   "url": "https://piyorin.com/news/p5593/",
+  "src": "official-p5593",
+  "auto": true
+ },
+ {
+  "id": "auto-officialp5593-2",
+  "title": "ぴよりん×ドクターイエロー キーホルダー販売（15周年デザイン）",
+  "start": "2026-10-07",
+  "end": "2026-10-07",
+  "place": "ぴよりんMARKET",
+  "kind": "release",
+  "url": "https://piyorin.com/news/p5593/",
+  "src": "official-p5593",
   "auto": true
  },
  {
   "id": "auto-officialp5585",
-  "title": "オニぴよりん限定販売",
+  "title": "オニぴよりん販売",
   "start": "2026-10-10",
   "end": "2026-10-12",
   "place": "岡山髙島屋",
   "kind": "sale",
   "url": "https://piyorin.com/news/p5585/",
+  "src": "official-p5585",
   "auto": true
  },
  {
@@ -138,12 +206,24 @@
  },
  {
   "id": "auto-officialp5612",
-  "title": "ドデ祭2026 ぴよりん出店（ウルフィコラボ）",
+  "title": "ドデ祭2026 ウルフィぴよりん販売",
   "start": "2026-10-17",
   "end": "2026-10-18",
   "place": "ドデ祭2026会場",
   "kind": "sale",
   "url": "https://piyorin.com/news/p5612/",
+  "src": "official-p5612",
+  "auto": true
+ },
+ {
+  "id": "auto-officialp5612-3",
+  "title": "ドデ祭2026",
+  "start": "2026-10-17",
+  "end": "2026-10-18",
+  "place": "メ~テレ本社屋・東別院境内",
+  "kind": "event",
+  "url": "https://piyorin.com/news/p5612/",
+  "src": "official-p5612",
   "auto": true
  },
  {
@@ -151,9 +231,10 @@
   "title": "ウズミンぴよりん販売",
   "start": "2026-10-17",
   "end": "2026-10-19",
-  "place": "",
+  "place": "ぴよりんshop、ぴよりんshopアトリエ店、ぴよりんvillage",
   "kind": "sale",
   "url": "https://piyorin.com/news/p5609/",
+  "src": "official-p5609",
   "auto": true
  },
  {
@@ -166,23 +247,47 @@
   "url": "https://piyorin.com/news/p5558/"
  },
  {
-  "id": "auto-officialp5633",
-  "title": "ぴよりんゴジラ販売",
+  "id": "auto-officialp5612-2",
+  "title": "ウルフィぴよりン実店舗販売",
+  "start": "2026-10-19",
+  "end": "2026-12-31",
+  "place": "名古屋駅中央コンコース",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5612/",
+  "src": "official-p5612",
+  "auto": true
+ },
+ {
+  "id": "auto-officialp5633-2",
+  "title": "ぴよりんゴジラグッズ先行販売（JR東海MARKET）",
   "start": "2026-10-22",
   "end": "2026-10-22",
-  "place": "ぴよりんvillage",
+  "place": "JR東海MARKET",
   "kind": "release",
   "url": "https://piyorin.com/news/p5633/",
+  "src": "official-p5633",
+  "auto": true
+ },
+ {
+  "id": "auto-officialp5633-3",
+  "title": "ゴジラコラボスタンプラリー",
+  "start": "2026-10-22",
+  "end": "2026-11-30",
+  "place": "",
+  "kind": "campaign",
+  "url": "https://piyorin.com/news/p5633/",
+  "src": "official-p5633",
   "auto": true
  },
  {
   "id": "auto-officialp5599",
-  "title": "ひよりの手作りクッキー缶 ハロウィンver. 販売",
+  "title": "ひよりの手作りクッキー缶ハロウィンver.販売",
   "start": "2026-10-23",
   "end": "2026-10-23",
-  "place": "ぴよりんshop、アトリエ店",
+  "place": "ぴよりんshop・アトリエ店",
   "kind": "release",
   "url": "https://piyorin.com/news/p5599/",
+  "src": "official-p5599",
   "auto": true
  },
  {
@@ -190,49 +295,76 @@
   "title": "ハロウィンぴよりん販売",
   "start": "2026-10-23",
   "end": "2026-10-31",
-  "place": "",
+  "place": "ぴよりんshop、ぴよりんshopアトリエ店、ぴよりんvillage",
   "kind": "sale",
   "url": "https://piyorin.com/news/p5620/",
+  "src": "official-p5620",
   "auto": true
  },
  {
   "id": "auto-officialp5653",
-  "title": "ぴよりんカレンダー2027 先行販売",
+  "title": "ぴよりんカレンダー2027先行販売（MARKET）",
   "start": "2026-10-29",
   "end": "2026-10-29",
   "place": "ぴよりんMARKET",
   "kind": "release",
   "url": "https://piyorin.com/news/p5653/",
+  "src": "official-p5653",
+  "auto": true
+ },
+ {
+  "id": "auto-n2026102183b7c75c",
+  "title": "クリスマスケーキ予約受付開始",
+  "start": "2026-10-30",
+  "end": "2026-10-30",
+  "place": "ぴよりんMARKET",
+  "kind": "release",
+  "url": "https://prtimes.jp/main/html/rd/p/000000261.000124425.html",
+  "src": "n20261021-83b7c75c",
   "auto": true
  },
  {
   "id": "auto-officialp5628",
-  "title": "おでかけ情報 ぴよりんが山口県へ初めてのおでかけ！「おのだサンパーク」で期間限定販売 記事を見る",
+  "title": "ぴよりんおでかけセット（おのだサンパーク）",
   "start": "2026-11-01",
   "end": "2026-11-03",
   "place": "おのだサンパーク",
   "kind": "sale",
   "url": "https://piyorin.com/news/p5628/",
+  "src": "official-p5628",
   "auto": true
  },
  {
   "id": "auto-officialp5653-2",
-  "title": "ぴよりんカレンダー2027 各店舗販売",
+  "title": "ぴよりんカレンダー2027店舗販売",
   "start": "2026-11-02",
   "end": "2026-11-02",
-  "place": "各店舗",
+  "place": "ぴよりんvillage・shop各店",
   "kind": "release",
   "url": "https://piyorin.com/news/p5653/",
+  "src": "official-p5653",
+  "auto": true
+ },
+ {
+  "id": "auto-officialp5633",
+  "title": "ぴよりんゴジラ販売",
+  "start": "2026-11-03",
+  "end": "2026-11-13",
+  "place": "ぴよりんshop・アトリエ店",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5633/",
+  "src": "official-p5633",
   "auto": true
  },
  {
   "id": "auto-officialp5642",
-  "title": "山陽百貨店 紅茶ぴよりんおでかけセット販売",
+  "title": "紅茶ぴよりんおでかけセット（山陽百貨店）",
   "start": "2026-11-07",
   "end": "2026-11-08",
   "place": "山陽百貨店",
   "kind": "sale",
   "url": "https://piyorin.com/news/p5642/",
+  "src": "official-p5642",
   "auto": true
  },
  {
@@ -246,12 +378,13 @@
  },
  {
   "id": "auto-officialp5638",
-  "title": "三島甘藷ぴよりん期間限定販売",
+  "title": "三島甘藷ぴよりん販売",
   "start": "2026-11-15",
   "end": "2026-11-23",
-  "place": "",
+  "place": "ぴよりんshop・village・アトリエ店",
   "kind": "sale",
   "url": "https://piyorin.com/news/p5638/",
+  "src": "official-p5638",
   "auto": true
  }
 ]

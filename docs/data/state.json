@@ -1,16 +1,24 @@
 {
- "checkedArticles": [
-  "https://piyorin.com/news/p5335/",
-  "https://piyorin.com/news/p5585/",
-  "https://piyorin.com/news/p5593/",
-  "https://piyorin.com/news/p5599/",
-  "https://piyorin.com/news/p5609/",
-  "https://piyorin.com/news/p5612/",
-  "https://piyorin.com/news/p5620/",
-  "https://piyorin.com/news/p5628/",
-  "https://piyorin.com/news/p5633/",
-  "https://piyorin.com/news/p5638/",
-  "https://piyorin.com/news/p5642/",
-  "https://piyorin.com/news/p5653/"
- ]
+ "items": {
+  "n20260826-4b1d64fa": "v2 https://prtimes.jp/main/html/rd/p/000000227.000124425.html",
+  "n20260828-d720510d": "v2 https://prtimes.jp/main/html/rd/p/000000225.000124425.html",
+  "n20260902-reborn": "v2 https://piyorin.com/news/p5335/ https://prtimes.jp/main/html/rd/p/000000215.000124425.html",
+  "n20260915-ea7e6c93": "v2 https://prtimes.jp/main/html/rd/p/000000274.000076395.html",
+  "n20260918-dode": "v2 https://prtimes.jp/main/html/rd/p/000001580.000014977.html",
+  "n20261008-ea14419b": "v2 https://prtimes.jp/main/html/rd/p/000000068.000174790.html",
+  "n20261009-d5c10422": "v2 https://prtimes.jp/main/html/rd/p/000001595.000014977.html",
+  "n20261021-83b7c75c": "v2 https://prtimes.jp/main/html/rd/p/000000261.000124425.html https://piyorin.com/news/p5648/",
+  "n20261022-90c13031": "v2 https://prtimes.jp/main/html/rd/p/000000101.000160429.html",
+  "official-p5585": "v2 https://piyorin.com/news/p5585/ https://prtimes.jp/main/html/rd/p/000000246.000124425.html",
+  "official-p5593": "v2 https://piyorin.com/news/p5593/ https://prtimes.jp/main/html/rd/p/000000249.000124425.html",
+  "official-p5599": "v2 https://piyorin.com/news/p5599/ https://prtimes.jp/main/html/rd/p/000000241.000124425.html",
+  "official-p5609": "v2 https://piyorin.com/news/p5609/ https://prtimes.jp/main/html/rd/p/000000242.000124425.html",
+  "official-p5612": "v2 https://piyorin.com/news/p5612/ https://prtimes.jp/main/html/rd/p/000000243.000124425.html",
+  "official-p5620": "v2 https://piyorin.com/news/p5620/ https://prtimes.jp/main/html/rd/p/000000257.000124425.html",
+  "official-p5628": "v2 https://piyorin.com/news/p5628/ https://prtimes.jp/main/html/rd/p/000000253.000124425.html",
+  "official-p5633": "v2 https://piyorin.com/news/p5633/ https://prtimes.jp/main/html/rd/p/000000250.000124425.html",
+  "official-p5638": "v2 https://piyorin.com/news/p5638/ https://prtimes.jp/main/html/rd/p/000000252.000124425.html",
+  "official-p5642": "v2 https://piyorin.com/news/p5642/ https://prtimes.jp/main/html/rd/p/000000256.000124425.html",
+  "official-p5653": "v2 https://piyorin.com/news/p5653/ https://prtimes.jp/main/html/rd/p/000000260.000124425.html"
+ }
 }
