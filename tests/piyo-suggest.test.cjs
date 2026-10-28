@@ -5,13 +5,13 @@ const vm=require('node:vm');
 const html=fs.readFileSync(require('node:path').join(__dirname,'../docs/index.html'),'utf8');
 function setup(realAsk=false){
   const buttons=[],sent=[];
-  const suggest={get children(){return buttons},set innerHTML(value){assert.equal(value,'');buttons.length=0},appendChild(b){buttons.push(b)}};
+  const suggest={style:{},get children(){return buttons},set innerHTML(value){assert.equal(value,'');buttons.length=0},appendChild(b){buttons.push(b)}};
   const ctx={suggest,data:null,busy:false,pendingChip:null,ask:q=>sent.push(q),
     todayStr:()=> '2026-10-26',nextDay:s=>new Date(Date.parse(s+'T00:00Z')+86400e3).toISOString().slice(0,10),
     fetch(){throw Error('候補補充で通信してはいけない')},
     document:{createElement(){return {remove(){const i=buttons.indexOf(this);if(i>=0)buttons.splice(i,1)},addEventListener(type,fn){assert.equal(type,'click');this.click=fn}}}}};
   vm.createContext(ctx);
-  vm.runInContext(html.slice(html.indexOf('  function suggestLabel('),html.indexOf('  async function open(){'))+';this.api={suggestLabel,fillSuggest,consumeSuggest,suggestPool};',ctx);
+  vm.runInContext(html.slice(html.indexOf('  function suggestLabel('),html.indexOf('  async function open(){'))+';this.api={suggestLabel,fillSuggest,consumeSuggest,suggestPool,holdSuggest,showSuggest};',ctx);
   if(realAsk){
     Object.assign(ctx,{apiKey:true,pendingQ:'',keyPrompts:0,openKey(){ctx.keyPrompts++},$:()=>({}),
       userMsg(){},piyoMsg:()=>({say(text,done){done?.()},choices(){}}),loop(){},idle(){},play(){},sync(){},fmt:s=>s,piyoTone:s=>s,
@@ -132,4 +132,19 @@ test('通信失敗や追加調査の確認でも、補充のための再送信�
     h.ctx.reply={content:[{type:'tool_use',name:'need_more',input:{kind:'article',query:'詳細'}}]};
     h.buttons[0].click();await settled();assert.equal(h.sent.length,1);assert.equal(h.buttons.length,3);assert.equal(h.api.isBusy(),false);
   }
+});
+test('初回のあいさつ中に、仮の候補が見えてから別の候補へ入れ替わらない',async()=>{
+  const h=setup(),seen=[];let finish;
+  const greeting={lines:['こんにちはだぴよ。'],suggest:['ゴジラぴよりんについて','カレンダーはいくら？']};
+  Object.assign(h.ctx,{log:{children:[],scrollTop:0,lastElementChild:null,set innerHTML(v){}},idleEl:{hidden:true},idleHide(){},guardOn(){},
+    layer:{hidden:true},lockPage(){},fit(){},frame(){},toBottom(){},slideFrom(){},matchMedia:()=>({matches:true}),
+    loadData:()=>new Promise(r=>finish=()=>{h.ctx.data={greeting};r(true)}),
+    play(name,done){seen.push([h.ctx.suggest.style.visibility,labels(h).join('|')]);done?.()},idle(){},
+    piyoMsg:()=>({say(){}}),fmt:s=>s,piyoTone:s=>s,weatherLine:()=>'',DEFAULT_SUGGEST:['いま買える限定ぴよりんは？']});
+  vm.runInContext('let greeted=false,openId=0,history=[];'+html.slice(html.indexOf('  async function open(){'),html.indexOf('  function close('))+';this.api.open=open;',h.ctx);
+  const opening=h.api.open();
+  assert.equal(h.ctx.suggest.style.visibility,'hidden');assert.deepEqual(labels(h),['いま買える限定ぴよりんは？']); // 場所だけ取って見せない
+  finish();await opening;
+  assert.equal(h.ctx.suggest.style.visibility,'');assert.deepEqual(labels(h),greeting.suggest);
+  assert.deepEqual(seen,[['','ゴジラぴよりんについて|カレンダーはいくら？']]); // あいさつの時点で、もう決まった候補が見えている
 });

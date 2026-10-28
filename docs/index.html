@@ -1448,6 +1448,16 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
     suggest.innerHTML='';suggestUsed=new Set();suggestLimit=labels.length;
     labels.forEach(appendSuggest);suggest.hidden=!labels.length;
   }
+  // あいさつの候補が決まるまでは場所だけ取って見せない（途中で別の候補に入れ替わって見えないように）。
+  function holdSuggest(){suggest.style.visibility='hidden'}
+  function showSuggest(){
+    if(suggest.style.visibility!=='hidden')return;suggest.style.visibility='';
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches)suggest.animate([{opacity:0},{opacity:1}],{duration:200});
+  }
+  function fadeSuggest(){ // 新しいあいさつの前に、前の候補を会話と一緒に薄く消す
+    return suggest.children.length&&suggest.style.visibility!=='hidden'
+      ?suggest.animate([{opacity:1},{opacity:0}],{duration:200,fill:'forwards'}):null;
+  }
   // 補充は取得済み情報に答えがある質問だけ。候補作りの通信は行わない。
   function suggestPool(){
     if(!data)return [];
@@ -1490,7 +1500,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   }
   async function open(){
     const id=++openId,wasBusy=busy,lastMessage=log.lastElementChild;
-    if(!suggest.children.length&&!greeted)fillSuggest(DEFAULT_SUGGEST); // 初回は先に場所を取り、使い切った候補は開閉だけで戻さない
+    if(!suggest.children.length&&!greeted){fillSuggest(DEFAULT_SUGGEST);holdSuggest()} // 初回は先に場所だけ取り、使い切った候補は開閉だけで戻さない
     const from=idleEl.hidden?null:idleEl.getBoundingClientRect();if(from)idleRect=from;
     idleHide();guardOn(true);layer.hidden=false;lockPage();fit();frame(0,0);toBottom(true);if(from)slideFrom(pet,from);
     const refreshed=await loadData().catch(()=>false);
@@ -1502,22 +1512,25 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
       const current=()=>id===openId&&!layer.hidden&&!busy&&log.lastElementChild===lastMessage;
       const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
       if(!reduced)await new Promise(resolve=>setTimeout(resolve,400));
-      if(!current())return;
+      if(!current())return showSuggest();
       const fade=log.children.length&&!reduced
         ?log.animate([{opacity:1},{opacity:0}],{duration:200,fill:'forwards'}):null;
-      if(fade)await fade.finished.catch(()=>{});
-      if(!current()){if(fade)fade.cancel();return}
+      const chipFade=reduced?null:fadeSuggest();
+      await Promise.all([fade,chipFade].map(a=>a&&a.finished.catch(()=>{})));
+      if(!current()){if(fade)fade.cancel();if(chipFade)chipFade.cancel();return showSuggest()}
       log.innerHTML='';history=[];pendingChip=null;log.scrollTop=0;toBottom(true);
       if(fade)fade.cancel();
+      holdSuggest();if(chipFade)chipFade.cancel();
       const g=data&&data.greeting;
       fillSuggest(g&&Array.isArray(g.suggest)&&g.suggest.length?g.suggest:DEFAULT_SUGGEST);
+      showSuggest(); // 決まった候補だけを出す。あいさつの途中では入れ替えない
       const wl=weatherLine(),lines=g?g.lines.slice():['こんにちは、ぴよだぴよ！ぴよりんのことなら聞いてぴよ。'];
       if(wl)lines.unshift(wl);
       play('wave',()=>{
         if(id!==openId||layer.hidden||busy||log.children.length)return;
         greeted=true;idle();piyoMsg(true).say(lines.map(line=>fmt(piyoTone(line))).join('\n'));
       });
-    }else setTimeout(()=>{if(id===openId&&!layer.hidden)play('wave')},300);
+    }else{showSuggest();setTimeout(()=>{if(id===openId&&!layer.hidden)play('wave')},300)}
   }
   function close(o){const from=o&&o.flown?null:pet.getBoundingClientRect();stop();input.blur();layer.hidden=true;cancelFit();layer.style.bottom='0px';guardOn(false);unlockPage();
     if(from)flyIdleFrom(from)}
