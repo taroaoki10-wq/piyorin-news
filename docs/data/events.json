@@ -1,5 +1,126 @@
 [
  {
+  "id": "auto-n202607010eed7d1d",
+  "title": "15th Anniversary ぴよりん販売",
+  "start": "2026-07-15",
+  "end": "2026-07-29",
+  "place": "ぴよりんshop、アトリエ店、village",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000205.000124425.html",
+  "src": "n20260701-0eed7d1d",
+  "auto": true
+ },
+ {
+  "id": "auto-n20260716b2a14aeb",
+  "title": "ぴよりん×鳥獣戯画グッズ発売",
+  "start": "2026-07-17",
+  "end": "2026-07-17",
+  "place": "ぴよりんvillage",
+  "kind": "release",
+  "url": "https://prtimes.jp/main/html/rd/p/000000210.000124425.html",
+  "src": "n20260716-b2a14aeb",
+  "auto": true
+ },
+ {
+  "id": "auto-n20260713490962fd",
+  "title": "冷感ブランケット第2弾発売",
+  "start": "2026-07-17",
+  "end": "2026-07-17",
+  "place": "",
+  "kind": "release",
+  "url": "https://prtimes.jp/main/html/rd/p/000000206.000124425.html",
+  "src": "n20260713-490962fd",
+  "auto": true
+ },
+ {
+  "id": "auto-n202607102d30401a",
+  "title": "ぴよりんと市バスでぷち旅 乗車券販売",
+  "start": "2026-07-17",
+  "end": "2026-10-26",
+  "place": "名古屋市交通局地下鉄駅",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000207.000124425.html",
+  "src": "n20260710-2d30401a",
+  "auto": true
+ },
+ {
+  "id": "auto-n20260730599e5fae",
+  "title": "ぴよりん日傘・雨傘兼用折り畳み傘発売",
+  "start": "2026-08-01",
+  "end": "2026-08-01",
+  "place": "",
+  "kind": "release",
+  "url": "https://prtimes.jp/main/html/rd/p/000000216.000124425.html",
+  "src": "n20260730-599e5fae",
+  "auto": true
+ },
+ {
+  "id": "auto-n20260730e3c904d2",
+  "title": "なつまつりぴよりん販売",
+  "start": "2026-08-04",
+  "end": "2026-08-06",
+  "place": "ぴよりんshop、アトリエ店、village",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000214.000124425.html",
+  "src": "n20260730-e3c904d2",
+  "auto": true
+ },
+ {
+  "id": "auto-n202608039c811fb3",
+  "title": "ぴよりんコラボ弁当 第2弾",
+  "start": "2026-08-08",
+  "end": "2026-08-16",
+  "place": "ジェイアール名古屋タカシマヤ",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000218.000124425.html",
+  "src": "n20260803-9c811fb3",
+  "auto": true
+ },
+ {
+  "id": "auto-n202608054f1762b9",
+  "title": "ブルーベリーぴよりん",
+  "start": "2026-08-08",
+  "end": "2026-08-20",
+  "place": "",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000217.000124425.html",
+  "src": "n20260805-4f1762b9",
+  "auto": true
+ },
+ {
+  "id": "auto-n20260721b41543e3",
+  "title": "ぴよりんとチャレンジしよう！",
+  "start": "2026-08-14",
+  "end": "2026-08-14",
+  "place": "イオンモール熱田",
+  "kind": "event",
+  "url": "https://prtimes.jp/main/html/rd/p/000000211.000124425.html",
+  "src": "n20260721-b41543e3",
+  "auto": true
+ },
+ {
+  "id": "auto-n202608179c88bcad",
+  "title": "ぴよりんドール缶発売",
+  "start": "2026-08-20",
+  "end": "2026-08-20",
+  "place": "ぴよりんvillage",
+  "kind": "release",
+  "url": "https://prtimes.jp/main/html/rd/p/000000226.000124425.html",
+  "src": "n20260817-9c88bcad",
+  "auto": true
+ },
+ {
+  "id": "auto-n20260818406ed6b0",
+  "title": "なつまつりぴよりん ~夏休みの思い出~",
+  "start": "2026-08-24",
+  "end": "2026-08-26",
+  "place": "",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000228.000124425.html",
+  "src": "n20260818-406ed6b0",
+  "auto": true
+ },
+ {
   "id": "e-halloween",
   "title": "ハロウィン限定グッズ発売",
   "start": "2026-09-01",
@@ -9,6 +130,17 @@
   "url": "https://piyorin.com/news/p5363/"
  },
  {
+  "id": "auto-n20260825a5270119",
+  "title": "エヴァンゲリオンコラボグッズ展示販売",
+  "start": "2026-09-04",
+  "end": "2026-10-12",
+  "place": "名古屋PARCO",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000229.000124425.html",
+  "src": "n20260825-a5270119",
+  "auto": true
+ },
+ {
   "id": "e-keikyu",
   "title": "ぴよりん出張販売（京急百貨店）",
   "start": "2026-09-10",
@@ -16,6 +148,28 @@
   "place": "京急百貨店 7階催事場（横浜）",
   "kind": "sale",
   "url": "https://prtimes.jp/main/html/rd/p/000000223.000124425.html"
+ },
+ {
+  "id": "auto-n20260822501de54a",
+  "title": "SKE48ぴよりん 推しメンセット先行販売",
+  "start": "2026-09-13",
+  "end": "2026-09-13",
+  "place": "赤門明王殿",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000221.000124425.html",
+  "src": "n20260822-501de54a",
+  "auto": true
+ },
+ {
+  "id": "auto-n20260822501de54a-2",
+  "title": "今日から推しメン!SKE48ぴよりん",
+  "start": "2026-09-14",
+  "end": "2026-09-17",
+  "place": "",
+  "kind": "sale",
+  "url": "https://prtimes.jp/main/html/rd/p/000000221.000124425.html",
+  "src": "n20260822-501de54a",
+  "auto": true
  },
  {
   "id": "e-tour-entry",
@@ -163,17 +317,6 @@
   "url": "https://piyorin.com/news/p5558/"
  },
  {
-  "id": "auto-officialp5612",
-  "title": "ウルフィ×ぴよりん ぬいぐるみ ドデ祭2026オンライン発売",
-  "start": "2026-10-17",
-  "end": "2026-10-17",
-  "place": "",
-  "kind": "release",
-  "url": "https://piyorin.com/news/p5612/",
-  "src": "official-p5612",
-  "auto": true
- },
- {
   "id": "e-dode",
   "title": "ドデ祭2026",
   "start": "2026-10-17",
@@ -201,17 +344,6 @@
   "place": "ぴよりんvillage",
   "kind": "sale",
   "url": "https://piyorin.com/news/p5558/"
- },
- {
-  "id": "auto-officialp5612-2",
-  "title": "ウルフィ×ぴよりん ぬいぐるみ 店頭販売開始",
-  "start": "2026-10-19",
-  "end": "2026-12-31",
-  "place": "",
-  "kind": "sale",
-  "url": "https://piyorin.com/news/p5612/",
-  "src": "official-p5612",
-  "auto": true
  },
  {
   "id": "auto-officialp5633-2",
@@ -255,6 +387,17 @@
   "kind": "sale",
   "url": "https://piyorin.com/news/p5620/",
   "src": "official-p5620",
+  "auto": true
+ },
+ {
+  "id": "auto-n2026082453fbd57d",
+  "title": "さわやかウォーキング特別企画「黄色で集まろう」",
+  "start": "2026-10-25",
+  "end": "2026-10-25",
+  "place": "ぴよりんshopアトリエ店",
+  "kind": "campaign",
+  "url": "https://prtimes.jp/main/html/rd/p/000000222.000124425.html",
+  "src": "n20260824-53fbd57d",
   "auto": true
  },
  {
