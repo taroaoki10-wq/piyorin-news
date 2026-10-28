@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#FBDB16">
+<meta name="theme-color" media="(max-width:620px) and (prefers-color-scheme:dark)" content="#13120E">
+<meta name="theme-color" media="(max-width:620px)" content="#F3F2EE">
+<meta name="theme-color" content="#FBDB16"><!-- スマホの幅だけ地の色にして、iPhone が上の端のぼかしに黄色を混ぜないようにする -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -435,10 +437,13 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 @keyframes piyo-pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.piyo-msg{animation:none}.piyo-sources{transition:none}}
 @media (max-width:620px){.piyo-idle,.piyo-idle-space{display:block}html.reader-open .piyo-idle{display:none}}
+.top-band{display:none}
+@media (max-width:620px){.top-band{display:block;position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:7;pointer-events:none}} /* 状態バーの裏に地の色の帯を固定。iPhone が上の端にかけるぼかしの代わりに、この色を使わせる */
 </style>
 
 </head>
 <body>
+<div class="top-band" aria-hidden="true"></div>
 <div class="shell">
   <aside>
     <div class="brand">
