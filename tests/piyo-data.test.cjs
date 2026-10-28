@@ -73,7 +73,7 @@ function chatSetup(){
     userMsg:text=>log.children.push({text}),fmt:s=>s,DEFAULT_SUGGEST:[],
     setTimeout:fn=>{fn();return 0},clearTimeout(){},fillSuggest:list=>chips.push(list),consumeSuggest(){},suggest:{children:[1]},holdSuggest(){},showSuggest(){},fadeSuggest:()=>null,
     idleEl:{hidden:true},idleHide(){},slideFrom(){},matchMedia:()=>({matches:reduced}),
-    apiKey:true,NEED_MORE:{},sync(){},textOf:r=>r.content[0].text,
+    apiKey:true,mac:null,routeMode:'mac-first',NEED_MORE:{},sync(){},textOf:r=>r.content[0].text,
     async callClaude({messages}){
       requests.push(JSON.parse(JSON.stringify(messages)));
       if(replyGate)await replyGate;

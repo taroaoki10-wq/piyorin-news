@@ -13,7 +13,7 @@ function setup(realAsk=false){
   vm.createContext(ctx);
   vm.runInContext(html.slice(html.indexOf('  function suggestLabel('),html.indexOf('  async function open(){'))+';this.api={suggestLabel,fillSuggest,consumeSuggest,suggestPool,holdSuggest,showSuggest};',ctx);
   if(realAsk){
-    Object.assign(ctx,{apiKey:true,pendingQ:'',keyPrompts:0,openKey(){ctx.keyPrompts++},$:()=>({}),
+    Object.assign(ctx,{apiKey:true,mac:null,routeMode:'mac-first',pendingQ:'',keyPrompts:0,openKey(){ctx.keyPrompts++},$:()=>({}),
       userMsg(){},piyoMsg:()=>({say(text,done){done?.()},choices(){}}),loop(){},idle(){},play(){},sync(){},fmt:s=>s,piyoTone:s=>s,
       NEED_MORE:{},textOf:r=>r.content?.[0]?.text||'',errText:()=> '接続できないぴよ。',esc:s=>s,
       callClaude:async body=>{sent.push(body);if(ctx.replyError)throw Error('offline');return ctx.reply||{content:[{type:'text',text:'回答だぴよ。'}]}}});

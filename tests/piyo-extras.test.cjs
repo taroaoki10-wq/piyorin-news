@@ -145,7 +145,7 @@ test('予定のカレンダーのファイル（.ics）は終日の予定で、1
 });
 test('会話：その場で答えられる質問は、API キーが無くても Claude を呼ばずに答える',async()=>{
   const said=[],sent=[],linked=[],played=[];
-  const c={PiyoExtras:X,data:{events,basics,koyomi,weather,news:[],greeting:null},apiKey:'',pendingQ:'',keyPrompts:0,openKey(){c.keyPrompts++},$:()=>({}),
+  const c={PiyoExtras:X,data:{events,basics,koyomi,weather,news:[],greeting:null},apiKey:'',mac:null,routeMode:'mac-first',pendingQ:'',keyPrompts:0,openKey(){c.keyPrompts++},$:()=>({}),
     todayStr:()=>'2026-10-28',localStorage:{getItem:()=>null,setItem(){}},Math,OMIKUJI:'piyo-omikuji',refLinks:refs=>(refs||[]).map(r=>({id:r.id})),
     userMsg(){},piyoMsg:()=>({say(text,done){said.push(text);done?.()},choices(){},links(l){linked.push(l)}}),loop(){},idle(){},play(n){played.push(n)},sync(){},fmt:s=>s,piyoTone:tone.piyoTone,
     consumeSuggest(){},NEED_MORE:{},textOf:r=>r.content[0].text,callClaude:async b=>{sent.push(b);return{content:[{type:'text',text:'答えだぴよ。'}]}}};

@@ -388,9 +388,9 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .run-btn.mob .run-t{display:none}
 }
 /* ---------- ぴよ（呼ぶとページの手前に出てきてチャットできる。スマホの幅だけ） ---------- */
-:root{--piyo-dim:rgba(0,0,0,.22);--piyo-scroll:rgba(85,78,64,.23)} /* ぴよを出している間、画面全体にかける暗さ */
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--piyo-scroll:rgba(225,217,199,.26)}}
-:root[data-theme="dark"]{--piyo-scroll:rgba(225,217,199,.26)}
+:root{--piyo-dim:rgba(0,0,0,.22);--piyo-scroll:rgba(85,78,64,.23);--piyo-ok:#25744A;--piyo-ng:#C2412D} /* ぴよを出している間、画面全体にかける暗さ */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--piyo-scroll:rgba(225,217,199,.26);--piyo-ok:#6BC490;--piyo-ng:#F2836B}}
+:root[data-theme="dark"]{--piyo-scroll:rgba(225,217,199,.26);--piyo-ok:#6BC490;--piyo-ng:#F2836B}
 .piyo-idle{display:none;position:fixed;right:26px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:44;width:96px;height:104px;border:0;padding:0;background:url(piyo-sprite-v2.png) 0 0/768px 624px no-repeat;filter:drop-shadow(0 6px 8px rgba(60,40,0,.28));cursor:pointer;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent} /* 待機しているぴよ。右の位置はチャットのぴよ（層の余白 12px＋右の余白 14px）とそろえる */
 .piyo-idle[hidden]{display:none!important}
 .piyo-idle:focus-visible{outline:2px solid var(--caramel);outline-offset:2px;border-radius:12px}
@@ -436,6 +436,21 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .piyo-send svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .piyo-send:disabled{background:#FDF1A6;color:#9A8B3C;opacity:1;cursor:default}
 .piyo-close{border:1px solid var(--line);background:var(--bg);color:var(--muted);font-size:20px;line-height:1}
+.piyo-way{align-self:flex-start;display:flex;gap:4px;height:30px;margin:-36px 0 0 2px} /* 答える Claude の札（Mac・API）。両方準備したときだけ、ぴよの足もとの左に出す（上へ重ねて、全体の高さは変えない） */
+.piyo-way button{-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent;font:inherit;font-size:12.5px;font-weight:700;line-height:1;border:1px solid var(--line);border-radius:99px;padding:0 12px;background:var(--surface);color:var(--muted);box-shadow:var(--shadow);cursor:pointer}
+.piyo-way button.on{background:var(--yolk);border-color:var(--yolk);color:var(--yolk-ink)}
+#piyo-key-modal fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:13.5px}
+#piyo-key-modal legend{padding:0;margin-bottom:4px;font-weight:700}
+#piyo-key-modal fieldset label{display:flex;align-items:flex-start;gap:8px;cursor:pointer}
+#piyo-key-modal fieldset small{display:inline;font-size:12px}
+#piyo-key-modal input[type="radio"]{width:auto;flex:none;margin:4px 0 0;padding:0;accent-color:var(--caramel)}
+#piyo-key-modal .piyo-prep{display:flex;flex-direction:column;gap:14px;font-size:13.5px}
+#piyo-key-modal .piyo-prep a{color:var(--caramel);font-weight:700}
+.piyo-mac-test{font:inherit;font-size:12.5px;font-weight:700;margin-top:8px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 14px;cursor:pointer}
+#piyo-key-modal .piyo-mac-result{margin:6px 0 0;font-size:12.5px;line-height:1.55;color:var(--muted)}
+#piyo-key-modal .piyo-mac-result:empty{display:none}
+#piyo-key-modal .piyo-mac-result.ok{color:var(--piyo-ok)}
+#piyo-key-modal .piyo-mac-result.ng,#piyo-key-modal .run-err{color:var(--piyo-ng)} /* 暗い画面でも読める赤（ぴよの準備の画面だけ） */
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .piyo-send:disabled{background:#4A4214;color:#A8994A}}
 :root[data-theme="dark"] .piyo-send:disabled{background:#4A4214;color:#A8994A}
 @keyframes piyo-pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
@@ -613,16 +628,25 @@ window.PiyoSplash=(function(){
 <div class="run-scrim" id="piyo-key-scrim" hidden></div>
   <form class="run-modal" id="piyo-key-modal" hidden autocomplete="off" role="dialog" aria-labelledby="piyo-key-h">
     <h2 id="piyo-key-h">ぴよと話す準備</h2>
-    <p>ぴよの返事は Claude が考えます。使うには、あなたの Claude の API キーが必要です。</p>
-    <ol>
-      <li><a href="https://platform.claude.com/settings/keys" target="_blank" rel="noopener">Claude のコンソールで API キーを作る ↗</a>
-        <small>「Create Key」を押して名前（例：ぴよりんニュース）を付け、表示された sk-ant- で始まる文字をコピーします。使いすぎが心配なら、コンソールで月の使用額の上限を決めておくと安心です。</small></li>
-      <li>貼り付けて「保存して話す」を押します。
-        <input type="password" id="piyo-key" placeholder="sk-ant-…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="API キー"></li>
-    </ol>
+    <p>ぴよの返事は Claude が考えます。Mac の Claude（Claude Pet を通して、定額の範囲で答える）か、Claude の API キー（使った分だけ料金）で話せます。片方だけでも話せます。</p>
+    <fieldset>
+      <legend>話し方</legend>
+      <label><input type="radio" name="piyo-route" value="mac-first" checked><span>Mac の Claude を優先<small>（つながらないときは API）</small></span></label>
+      <label><input type="radio" name="piyo-route" value="mac"><span>Mac の Claude だけ</span></label>
+      <label><input type="radio" name="piyo-route" value="api"><span>API だけ</span></label>
+    </fieldset>
+    <div class="piyo-prep">
+      <div><b>Mac の Claude</b>：Mac の Claude Pet の設定で「つなぎ方をコピー」を押して、ここに貼り付けます。
+        <input type="password" id="piyo-mac" placeholder="piyo-mac v1 https://…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Mac の Claude のつなぎ方">
+        <button type="button" class="piyo-mac-test" id="piyo-mac-test">つながるか試す</button>
+        <p class="piyo-mac-result" id="piyo-mac-result" role="status" aria-live="polite"></p></div>
+      <div><b>API キー</b>：<a href="https://platform.claude.com/settings/keys" target="_blank" rel="noopener">Claude のコンソールで API キーを作る ↗</a>
+        <small>「Create Key」を押して名前（例：ぴよりんニュース）を付け、表示された sk-ant- で始まる文字をコピーします。使いすぎが心配なら、コンソールで月の使用額の上限を決めておくと安心です。</small>
+        <input type="password" id="piyo-key" placeholder="sk-ant-…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="API キー"></div>
+    </div>
     <p class="run-err" id="piyo-key-err" hidden></p>
     <div class="run-btns"><button type="button" id="piyo-key-cancel">キャンセル</button><button type="submit" class="primary">保存して話す</button></div>
-    <small>API キーはこの端末のブラウザにだけ保存されます。1 回の質問で 1〜5 円ほどかかります（最初のまとめは無料）。解除は「ブックマーク」タブの下からできます。</small>
+    <small>つなぎ方と API キーはこの端末のブラウザにだけ保存されます。Mac の Claude は、Mac が起きていて iPhone の Tailscale がオンのときに使えます。API キーは 1 回の質問で 1〜5 円ほどかかります（最初のまとめは無料）。解除は「ブックマーク」タブの下からできます。</small>
   </form>
   <div class="reader-scrim" id="reader-scrim" hidden aria-hidden="true"></div>
 <div class="reader" id="reader" hidden role="dialog" aria-labelledby="reader-title">
@@ -637,7 +661,7 @@ window.PiyoSplash=(function(){
 </div>
 <script src="news-archive.js"></script>
 <script src="news-identity.js"></script>
-<script src="piyo-extras.js?v=1"></script>
+<script src="piyo-extras.js?v=2"></script>
 <script defer src="piyo-display-diagnostics.js?v=1"></script>
 <script>
 (function(){
@@ -1325,6 +1349,7 @@ window.PiyoSplash=(function(){
 // ぴよりんの基本情報（data/piyo-basics.json）は手で書く（公式サイトで確かめた値段・店・営業時間など）。
 // 名古屋の天気は、呼んだときに Open-Meteo（無料・キー不要）から取る。最初のあいさつに足し、質問にも使う。
 // 質問の返事は、この端末に保存した API キーで Claude API をページから直接呼んで作る。
+// または、Mac の Claude Pet の窓口（Tailscale の中だけの道）へ送り、Mac の Claude（定額の範囲）で作る。どちらで話すかは「ぴよと話す準備」で選ぶ。
 (function(){
   const $=id=>document.getElementById(id);
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1344,6 +1369,7 @@ window.PiyoSplash=(function(){
 <div class="piyo-layer" id="piyo-layer" hidden>
   <div class="piyo-log" id="piyo-log" role="log" aria-live="polite" aria-label="ぴよとの会話"></div>
   <button type="button" class="piyo-pet" id="piyo-pet" aria-label="ぴよ（タップすると手を振る）"></button>
+  <div class="piyo-way" id="piyo-way" role="group" aria-label="答える Claude" hidden><button type="button" data-way="mac" aria-pressed="false">Mac</button><button type="button" data-way="api" aria-pressed="false">API</button></div>
   <div class="piyo-suggest" id="piyo-suggest" role="group" aria-label="質問の候補"></div>
   <form class="piyo-bar" id="piyo-form" autocomplete="off">
     <input id="piyo-input" type="text" maxlength="300" placeholder="ぴよに聞く" enterkeyhint="send" aria-label="ぴよに聞く">
@@ -1767,7 +1793,7 @@ window.PiyoSplash=(function(){
     pet.style.transition='';pet.style.transform=over?`translateY(${-over}px)`:'';
   }
   function fadeRest(v,anim){ // 引いている間、ぴよ以外（会話・候補・入力欄・後ろの幕）だけ薄くする
-    [log,suggest,$('piyo-form')].forEach(el=>{el.style.transition=anim?'opacity .2s ease-out':'';el.style.opacity=v===1?'':String(v)});
+    [log,suggest,$('piyo-form'),$('piyo-way')].forEach(el=>{el.style.transition=anim?'opacity .2s ease-out':'';el.style.opacity=v===1?'':String(v)});
     layer.style.setProperty('--pull-op',String(v));
   }
   iIdle();
@@ -1791,24 +1817,87 @@ window.PiyoSplash=(function(){
   function markOmikuji(){try{localStorage.setItem(OMIKUJI,todayStr())}catch(_){}}
   function extrasCtx(){const now=Date.now();return{now,today:todayStr(),hour:new Date(now+9*3600e3).getUTCHours(),events:data&&data.events||[],basics:data&&data.basics,koyomi:data&&data.koyomi,weather:data&&data.weather}}
 
-  // ---- API キー（この端末のブラウザにだけ保存） ----
+  // ---- API キー・Mac の Claude のつなぎ方・話し方（ぴよと話す準備。この端末のブラウザにだけ保存） ----
+  const MAC_KEY='piyo-mac',ROUTE_KEY='piyo-route',ROUTES=['mac-first','mac','api'];
+  const ROUTE_LABEL={'mac-first':'Mac の Claude を優先（つながらないときは API）',mac:'Mac の Claude だけ',api:'API だけ'};
   let apiKey=(()=>{try{return localStorage.getItem(KEY)||''}catch(_){return''}})();
-  let pendingQ='';
+  // つなぎ方（Claude Pet の窓口のつなぎ先・合言葉・Mac の名前）。合言葉は Authorization の見出しでだけ送り、画面・URL には出さない
+  let mac=(()=>{try{const v=JSON.parse(localStorage.getItem(MAC_KEY)||'null');return v&&/^https:\/\/[^\s/]+$/.test(v.url)&&/^[A-Za-z0-9_-]{20,}$/.test(v.token)?{url:v.url,token:v.token,name:typeof v.name==='string'?v.name.slice(0,64):''}:null}catch(_){return null}})();
+  let routeMode=(()=>{try{const v=localStorage.getItem(ROUTE_KEY);return ROUTES.includes(v)?v:'mac-first'}catch(_){return'mac-first'}})(); // 話し方（既定は Mac を優先）
+  let lastMacMode=routeMode==='mac'?'mac':'mac-first'; // 札で API にしたあと Mac に戻すときの話し方
+  let pendingQ='',tested=null; // tested: 「つながるか試す」で分かった Mac の名前 {url,name}
   function saveKey(k){apiKey=k||'';try{k?localStorage.setItem(KEY,k):localStorage.removeItem(KEY)}catch(_){}paintMeta()}
-  function paintMeta(){const m=$('piyo-meta');if(m){m.hidden=!apiKey;m.innerHTML=apiKey?'ぴよと話すための Claude の API キーをこの端末に保存中です。<button type="button" data-piyo="off">解除</button>':''}}
-  function openKey(msg){$('piyo-key-err').hidden=!msg;$('piyo-key-err').textContent=msg||'';$('piyo-key').value='';$('piyo-key-scrim').hidden=false;$('piyo-key-modal').hidden=false;setTimeout(()=>$('piyo-key').focus(),0)}
+  function saveMac(v){mac=v||null;macOk=0;try{v?localStorage.setItem(MAC_KEY,JSON.stringify(v)):localStorage.removeItem(MAC_KEY)}catch(_){}paintMeta()}
+  function saveRoute(v){routeMode=v;if(v!=='api')lastMacMode=v;try{localStorage.setItem(ROUTE_KEY,v)}catch(_){}paintMeta()}
+  function paintMeta(){
+    const m=$('piyo-meta');
+    if(m){
+      const lines=[];
+      if(mac)lines.push('ぴよと話すための Mac の Claude のつなぎ方'+(mac.name?'（'+esc(mac.name)+'）':'')+'をこの端末に保存中です。<button type="button" data-piyo="mac-off">解除</button>');
+      if(apiKey)lines.push('ぴよと話すための Claude の API キーをこの端末に保存中です。<button type="button" data-piyo="off">解除</button>');
+      if(lines.length)lines.push('ぴよの話し方：'+(mac&&apiKey?ROUTE_LABEL[routeMode]:mac?'Mac の Claude':'API')+'<button type="button" data-piyo="setup">変える</button>');
+      m.hidden=!lines.length;m.innerHTML=lines.join('<br>');
+    }
+    paintWay();
+  }
+  // 会話の中の札「Mac」「API」（両方準備したときだけ）。押すと次の質問から切り替わる
+  function paintWay(){
+    const box=$('piyo-way');if(!box)return;
+    box.hidden=!(mac&&apiKey);
+    const now=routeMode==='api'?'api':'mac';
+    box.querySelectorAll('button').forEach(b=>{const on=b.dataset.way===now;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on))});
+  }
+  $('piyo-way').addEventListener('click',e=>{const b=e.target.closest('button[data-way]');if(!b)return;const v=b.dataset.way==='api'?'api':lastMacMode;if(v!==routeMode)saveRoute(v)});
+  function openKey(msg){
+    $('piyo-key-err').hidden=!msg;$('piyo-key-err').textContent=msg||'';
+    $('piyo-key').value='';$('piyo-mac').value='';$('piyo-mac-result').textContent='';$('piyo-mac-result').className='piyo-mac-result';
+    $('piyo-key').placeholder=apiKey?'保存済み':'sk-ant-…'; // 入れ直すと入れ替わる
+    $('piyo-mac').placeholder=mac?'保存済み'+(mac.name?'（'+mac.name+'）':''):'piyo-mac v1 https://…';
+    const r=$('piyo-key-modal').querySelector(`input[name="piyo-route"][value="${routeMode}"]`);if(r)r.checked=true;
+    $('piyo-key-scrim').hidden=false;$('piyo-key-modal').hidden=false;setTimeout(()=>$(!mac||apiKey?'piyo-mac':'piyo-key').focus(),0);
+  }
   function closeKey(){$('piyo-key-scrim').hidden=true;$('piyo-key-modal').hidden=true}
   const cancelKey=()=>{pendingQ='';pendingChip=null;closeKey()};
   $('piyo-key-cancel').addEventListener('click',cancelKey);
   $('piyo-key-scrim').addEventListener('click',cancelKey);
+  // 片方だけでも保存できる。空の欄は、保存済みのものをそのまま使う
   $('piyo-key-modal').addEventListener('submit',e=>{
     e.preventDefault();
-    const k=$('piyo-key').value.trim();
-    if(!/^sk-ant-[A-Za-z0-9_-]{20,}$/.test(k)){$('piyo-key-err').hidden=false;$('piyo-key-err').textContent='API キーの形が違うようです。sk-ant- で始まる文字をそのまま貼り付けてください。';return}
-    saveKey(k);closeKey();
+    const X=globalThis.PiyoExtras,err=t=>{$('piyo-key-err').hidden=false;$('piyo-key-err').textContent=t};
+    const k=$('piyo-key').value.trim(),m=$('piyo-mac').value.trim();
+    const way=($('piyo-key-modal').querySelector('input[name="piyo-route"]:checked')||{}).value;
+    if(k&&!/^sk-ant-[A-Za-z0-9_-]{20,}$/.test(k))return err('API キーの形が違うようです。sk-ant- で始まる文字をそのまま貼り付けてください。');
+    const link=m&&X?X.parseMacLink(m):null;
+    if(m&&!link)return err('つなぎ方の形が違うようです。Mac の Claude Pet の設定で「つなぎ方をコピー」を押して写した 1 行を、そのまま貼り付けてください。');
+    const hasMac=!!(link||mac),hasApi=!!(k||apiKey);
+    if(!hasMac&&!hasApi)return err('Mac の Claude のつなぎ方か API キーの、どちらかを入れてください。');
+    if(way==='mac'&&!hasMac)return err('「Mac の Claude だけ」にするには、つなぎ方を貼り付けてください。');
+    if(way==='api'&&!hasApi)return err('「API だけ」にするには、API キーを入れてください。');
+    if(k)saveKey(k);
+    if(link)saveMac({...link,name:tested&&tested.url===link.url?tested.name:''});
+    if(ROUTES.includes(way))saveRoute(way);
+    closeKey();
     if(pendingQ){const q=pendingQ;pendingQ='';ask(q)}
   });
-  $('piyo-meta').addEventListener('click',e=>{if(e.target.closest('[data-piyo="off"]'))saveKey('')});
+  // 「つながるか試す」：貼り付けた（無ければ保存済みの）つなぎ方で、窓口に聞く。合言葉は出さない
+  let testId=0;
+  $('piyo-mac-test').addEventListener('click',async()=>{
+    const X=globalThis.PiyoExtras,v=$('piyo-mac').value.trim(),out=$('piyo-mac-result'),my=++testId;
+    const show=(ok,t)=>{if(my!==testId)return;out.className='piyo-mac-result'+(ok===null?'':ok?' ok':' ng');out.textContent=t};
+    const link=v?(X?X.parseMacLink(v):null):mac;
+    if(!link)return show(false,v?'× つなぎ方の形が違うぴよ。Claude Pet の「つなぎ方をコピー」で写した 1 行を貼り付けてね。':'× つなぎ方を貼り付けてね。');
+    show(null,'確かめてるぴよ…');
+    const h=await macHealth(link,5000);
+    if(!h.ok)return show(false,'× '+(h.kind==='unreachable'?'Mac につながらないぴよ。Mac が起きているか、iPhone の Tailscale がオンか、Claude Pet の「つなぐ」が入りか確かめてね。'
+      :h.kind==='token'?'つなぎ方が古いみたいぴよ。Claude Pet でコピーし直してね。':h.kind==='account'?macErrText(h):'うまくつながらなかったぴよ…'+(h.status?'（エラー '+h.status+'）':'')));
+    tested={url:link.url,name:h.name};
+    if(mac&&mac.url===link.url&&mac.token===link.token&&h.name&&mac.name!==h.name)saveMac({...mac,name:h.name});
+    show(true,'✓ '+(h.name||'Mac')+' につながったぴよ。'+(h.login===false?'でも Mac の Claude にログインしていないみたいぴよ。Claude Pet でログインしてね。':''));
+  });
+  $('piyo-meta').addEventListener('click',e=>{
+    const b=e.target.closest('[data-piyo]');if(!b)return;
+    if(b.dataset.piyo==='off')saveKey('');else if(b.dataset.piyo==='mac-off')saveMac(null);else if(b.dataset.piyo==='setup')openKey();
+  });
   paintMeta();
 
   // ---- Claude に聞く ----
@@ -1824,6 +1913,12 @@ window.PiyoSplash=(function(){
 - 答えに <memo> や <event> を使ったときは、答えの最後に改行して [[参照:m3,e2]] の形で、使ったものの id を3つまで書く（この印は画面には出ず、記事や予定を開く札になる）。基本情報・暦・天気だけで答えたときは書かない。`;
   const NEED_MORE={name:'need_more',description:'基本情報・メモ・予定・暦・天気では答えられないときに、もっと調べてよいか利用者に聞く',
     input_schema:{type:'object',properties:{kind:{type:'string',enum:['article','web'],description:'article=記事の本文を読む、web=Web で調べる'},query:{type:'string',description:'調べたいこと（短く）'}},required:['kind','query']}};
+  // Mac の Claude（Claude Pet の窓口）で答えるときの指示。need_more で聞き返す代わりに、記事を読む・Web で調べてから答える（追加の料金がないため）
+  const SYSTEM_MAC=SYSTEM.split('\n').map(line=>
+    line.startsWith('- 「〇〇について」')?line.replace('need_more を使わない。','記事を読んだり Web で調べたりしない。')
+    :line.startsWith('- 利用者が求めた内容に答える情報が')?'- 利用者が求めた内容に答える情報が基本情報とメモと予定と暦と天気にないときは、推測で答えず、利用者に聞き返さずに調べてから答える。概要を聞かれた話題の情報がない場合も同じ。記事の本文に書いてありそうなこと（値段・購入方法・整理券などの細かい条件）は、<memo> の url の記事を WebFetch で読む。その記事に書いてなければ、関連する PR TIMES のページを読んだり WebSearch で調べたりもする。<basics> にも記事にも無さそうなこと（店の周りの道順、ぴよりん以外の話など）は WebSearch で調べ、必要なら見つけたページを WebFetch で読む。調べるのは合わせて3回まで。調べても分からなければ、分からないと伝える。Web で調べて答えたときは、答えの最後に改行して「参考ページ: 」に続けて、もとにしたページの URL を1つか2つ書く。'
+    :line.startsWith('- 答えに <memo> や <event> を使ったときは')?line.replace('基本情報・暦・天気だけで答えたときは書かない。','<memo> も <event> も使わなかったとき（基本情報・暦・天気や、Web で調べたことだけで答えたとき）は、[[参照:]] の印そのものを書かない。')
+    :line).join('\n');
   let history=[]; // 答えまで終わったやり取りだけを残す（直近5往復）
   let refMap={}; // 返事の [[参照:m1,e2]] を、記事と予定に戻す
 
@@ -1907,24 +2002,35 @@ window.PiyoSplash=(function(){
     busy=false;sync();
   }
   // 返事を作りながら、言い終わった文から順に出す（「ます」が「るぴよ」に変わって見えないよう、文の途中は出さない）
+  // Mac の Claude が調べたあと答えを書き直すとき（空の文が届く・調べ始めた）は restart() で、次の文を初めから出し直す
   function streamTo(msg){
-    const s={started:false,shown:'',onText(raw){
+    const s={started:false,shown:'',fresh:false,onText(raw){
+      if(!raw)return s.restart();
       const part=globalThis.PiyoExtras?globalThis.PiyoExtras.streamView(raw):'';
       if(part.length<=s.shown.length)return;
-      const resume=s.started;s.shown=part;
-      if(!resume){s.started=true;play('jump')}
+      const resume=s.started&&!s.fresh;s.shown=part;s.fresh=false;
+      if(!s.started){s.started=true;play('jump')}
       msg.say(fmt(piyoTone(part)),null,resume);
-    }};
+    },restart(){s.shown='';if(s.started)s.fresh=true}};
     return s;
+  }
+  // どちらで答えるか（Mac の Claude・API）。どちらも準備していなければ null。fallback: Mac につながらないときは API で答える
+  function route(){
+    if(!mac&&!apiKey)return null;
+    if(mac&&(!apiKey||routeMode!=='api'))return{way:'mac',fallback:!!apiKey&&routeMode==='mac-first'};
+    return{way:'api',fallback:false};
   }
   async function ask(q){
     if(busy)return;
-    const local=localReply(q);
-    if(!local&&!apiKey){pendingQ=q;openKey();return} // キーを入れたら続きから送る（候補はそれまで残す）
+    const local=localReply(q),way=local?null:route();
+    if(!local&&!way){pendingQ=q;openKey();return} // 準備したら続きから送る（候補はそれまで残す）
     consumeSuggest(q); // 聞いた候補を消し、取得済み情報で答えられる別の質問を右へ補充する
     busy=true;$('piyo-send').disabled=true;
     userMsg(q);
     if(local)return answerLocal(q,local);
+    return way.way==='mac'?askMac(q,way.fallback):askApi(q);
+  }
+  async function askApi(q){
     const msg=piyoMsg();loop('fidget');msg.say('考え中だぴよ…');
     const messages=[...history,{role:'user',content:q}],live=streamTo(msg);
     try{
@@ -1963,8 +2069,95 @@ window.PiyoSplash=(function(){
       finish(msg,q,textOf(res),cut(res),live.started,read);
     }catch(e){fail(msg,q,e)}
   }
-  // Web 検索が終わりきらなかった・長さの上限で切れた答え
-  const cut=res=>res.stop_reason==='pause_turn'||res.stop_reason==='max_tokens';
+  // ---- Mac の Claude（Claude Pet の窓口。Tailscale の中だけの道）で答える ----
+  let macOk=0; // 最後に窓口とつながった時刻（60 秒のあいだは、送る前の確かめを省く）
+  const relayKind=status=>({401:'token',403:'account',409:'busy',429:'hourly',413:'size',400:'bad'})[status]||'http';
+  // 窓口に、つながるか聞く（ms まで待つ）。{ok:true,name,login,busy} か {ok:false,kind,status}
+  async function macHealth(link,ms){
+    const ac=new AbortController(),timer=setTimeout(()=>ac.abort(),ms);
+    try{
+      const r=await fetch(link.url+'/piyo-news/health',{headers:{authorization:'Bearer '+link.token},cache:'no-store',signal:ac.signal});
+      let b=null;try{b=await r.json()}catch(_){}
+      if(ac.signal.aborted)return{ok:false,kind:'unreachable'};
+      if(!r.ok)return{ok:false,kind:relayKind(r.status),status:r.status};
+      if(!b||b.ok!==true)return{ok:false,kind:'http',status:r.status};
+      return{ok:true,name:typeof b.name==='string'?b.name.slice(0,64):'',login:b.login,busy:b.busy===true};
+    }catch(_){return{ok:false,kind:'unreachable'}}finally{clearTimeout(timer)}
+  }
+  // 窓口へ質問を送る。8 秒たっても答え始めなければ、つながらないとみなす。断られたら {kind,status} を投げる
+  async function macPost(link,body){
+    const ac=new AbortController(),timer=setTimeout(()=>ac.abort(),8000);
+    let r;
+    try{r=await fetch(link.url+'/piyo-news/chat',{method:'POST',headers:{authorization:'Bearer '+link.token,'content-type':'application/json'},body:JSON.stringify(body),signal:ac.signal})}
+    catch(_){throw{kind:'unreachable'}}
+    finally{clearTimeout(timer)}
+    if(r.ok&&/event-stream/.test(r.headers.get('content-type')||''))return r;
+    throw{kind:r.ok?'failed':relayKind(r.status),status:r.status};
+  }
+  const MAC_STATE={thinking:'考え中だぴよ…',searching:'調べてるぴよ…',reading:'記事を読んでるぴよ…'};
+  // 聞き返さずに調べて答える（Mac の Claude は追加の料金がない）。fallback なら、つながらないとき API で答える
+  async function askMac(q,fallback){
+    const X=globalThis.PiyoExtras,link=mac;
+    const msg=piyoMsg();loop('fidget');msg.say(MAC_STATE.thinking);
+    const live=streamTo(msg);
+    try{
+      if(!X||!X.readRelay)throw{kind:'failed'};
+      const now=Date.now();
+      if(!(macOk&&now>=macOk&&now-macOk<60e3)){ // 60 秒以内に確かめていなければ、送る前に確かめる（2.5 秒まで）
+        const h=await macHealth(link,2500);
+        if(!h.ok)throw h;
+        if(h.login===false)throw{kind:'login'};
+        if(h.busy)throw{kind:'busy'};
+        if(h.name&&mac===link&&mac.name!==h.name)saveMac({...mac,name:h.name});
+      }
+      const r=await macPost(link,{system:SYSTEM_MAC,knowledge:knowledge(),history,question:q});
+      macOk=Date.now();
+      let state='thinking';
+      const res=await X.readRelay(r,raw=>{const before=live.shown;live.onText(raw);if(live.shown&&live.shown!==before)state=''},s=>{
+        if(!MAC_STATE[s]||s===state)return; // 調べ始めた・読み始めた：途中の文を消して、何をしているかを出す
+        state=s;live.restart();loop(s==='thinking'?'fidget':'checking');msg.say(MAC_STATE[s]);
+      });
+      finish(msg,q,textOf(res),cut(res),live.started&&!live.fresh);
+    }catch(e){
+      const kind=e&&e.kind||'failed';
+      if(kind==='unreachable'){macOk=0;if(fallback&&apiKey){msg.say('Mac につながらないから API で答えるぴよ。');return askApi(q)}}
+      macFail(msg,q,{...e,kind});
+    }
+  }
+  // Mac の道でつまずいたとき。API キーがあれば「API で聞く」ボタンも出す
+  function macFail(msg,q,e){
+    play('sad');busy=false;sync();
+    if(e.kind==='token'){ // 合言葉が違う＝つなぎ方が古い。消して、準備の画面で貼り直してもらう
+      saveMac(null);msg.say('つなぎ方が古いみたいぴよ。Claude Pet でコピーし直してね。');pendingQ=q;
+      openKey('このつなぎ方は使えませんでした（Claude Pet で合言葉を作り直したのかもしれません）。Mac の Claude Pet の設定で「つなぎ方をコピー」を押して、貼り付け直してください。');return;
+    }
+    const t=esc(macErrText(e));
+    if(!apiKey)return msg.say(t);
+    msg.say(t,()=>msg.choices([[e.kind==='cut'?'API で聞き直す':'API で聞く',()=>{if(busy)return;busy=true;sync();return askApi(q)},true]]));
+  }
+  function macErrText(e){
+    const t={
+      unreachable:'Mac につながらないぴよ。Mac が起きているか、iPhone の Tailscale がオンか確かめてね。',
+      account:'Tailscale のアカウントが Mac と違うみたいぴよ。iPhone の Tailscale を Mac と同じアカウントにしてね。',
+      login:'Mac の Claude にログインしていないみたいぴよ。Mac の Claude Pet でログインしてね。',
+      busy:'いまほかの質問に答えてるぴよ。少し待ってね。',
+      hourly:'1 時間に聞ける回数をこえたぴよ。少し待ってね。',
+      timeout:'時間がかかりすぎたぴよ…別の聞き方で聞いてみてね。',
+      cut:'途中で切れちゃったぴよ。',
+      size:'送る中身が大きすぎたぴよ…（エラー 413）',
+      bad:'Mac の Claude が質問を読めなかったぴよ…（エラー 400）',
+    }[e.kind];
+    if(t)return t;
+    if(e.kind==='limit')return '5時間枠がいっぱいだぴよ。'+(e.resetsAt?resetAt(e.resetsAt)+'に戻るぴよ。':'少し待ってね。');
+    return 'Mac の Claude で答えを作れなかったぴよ…'+(e.status?'（エラー '+e.status+'）':'');
+  }
+  // 5時間枠が戻る時刻（日本時間。今日でなければ「明日の」など）
+  function resetAt(sec){
+    const d=new Date(sec*1000+9*3600e3),day=d.toISOString().slice(0,10),today=todayStr(),m=d.getUTCMinutes();
+    return (day===today?'':day===nextDay(today)?'明日の':`${Number(day.slice(5,7))}月${Number(day.slice(8))}日の`)+d.getUTCHours()+'時'+(m?m+'分':'');
+  }
+  // Web 検索が終わりきらなかった・長さの上限で切れた・調べる回数の上限で止まった（Mac の Claude）答え
+  const cut=res=>res.stop_reason==='pause_turn'||res.stop_reason==='max_tokens'||res.stop_reason==='max_turns';
   function finish(msg,q,text,partial,streamed,extra){
     const r=globalThis.PiyoExtras?globalThis.PiyoExtras.refs(text):{text,ids:[]};text=r.text;
     if(!text)text=partial?'調べきれなかったぴよ…別の聞き方で聞いてみてね。':'うまく答えられなかったぴよ…別の聞き方で聞いてみてね。';

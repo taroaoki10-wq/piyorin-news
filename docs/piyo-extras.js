@@ -424,6 +424,55 @@ window.PiyoExtras = (function () {
     return { content: blocks.filter(Boolean), stop_reason: stop };
   }
 
+  // ---- Mac の Claude（Claude Pet の窓口）で答える ----
+  // 「つなぎ方」の 1 行（Claude Pet の設定の窓の「つなぎ方をコピー」）を読む。形: piyo-mac v1 https://<機器>.<tailnet>.ts.net <合言葉>
+  // Claude Pet の parseLink と同じ決まり（https だけ・道なし・合言葉は英数字と - _ で 20 文字以上。前後の空白・改行は無視）
+  function parseMacLink(text) {
+    const m = /piyo-mac v1 (https:\/\/[^\s/]+)\/?\s+([A-Za-z0-9_-]{20,})/.exec(typeof text === 'string' ? text : '');
+    return m ? { url: m[1], token: m[2] } : null;
+  }
+  // 窓口の返事（text/event-stream）を読む。event: text は「いまの答えのここまで」（調べたあとの書き直しは空から）で onText(文)、
+  // event: status（thinking・searching・reading）で onStatus(state)。event: done で readMessage と同じ形を返す（調べる回数の上限で
+  // 止まったら stop_reason は 'max_turns'）。event: error は e.kind（login・limit・timeout・failed）と e.resetsAt（秒）で投げる。
+  // 終わりが届かずに切れた・idleMs のあいだ何も届かない（窓口は調べている間も 10 秒ごとに空の行を送る）ときは e.kind='cut'
+  async function readRelay(response, onText, onStatus, idleMs = 35000) {
+    const reader = response.body.getReader(), dec = new TextDecoder();
+    const fail = kind => { const e = new Error('relay'); e.kind = kind; return e; };
+    let buf = '', result = null;
+    const handle = chunk => {
+      let event = 'message'; const lines = [];
+      for (const l of chunk.split(/\r?\n/)) {
+        if (l.startsWith('event:')) event = l.slice(6).trim();
+        else if (l.startsWith('data:')) lines.push(l.slice(5).trimStart());
+      }
+      if (!lines.length) return; // 「: ping」など
+      let d = null; try { d = JSON.parse(lines.join('\n')); } catch (_) { return; }
+      if (!d || typeof d !== 'object') return;
+      if (event === 'text') { if (typeof d.text === 'string' && onText) onText(d.text); }
+      else if (event === 'status') { if (typeof d.state === 'string' && onStatus) onStatus(d.state); }
+      else if (event === 'done') result = { content: [{ type: 'text', text: typeof d.text === 'string' ? d.text : '' }], stop_reason: d.stop === 'max_turns' ? 'max_turns' : 'end_turn' };
+      else if (event === 'error') { const e = fail(typeof d.kind === 'string' ? d.kind : 'failed'); e.resetsAt = typeof d.resetsAt === 'number' ? d.resetsAt : null; throw e; }
+    };
+    try {
+      for (;;) {
+        let timer = 0, step;
+        const idle = new Promise((_, reject) => { timer = setTimeout(() => reject(fail('cut')), idleMs); });
+        try { step = await Promise.race([reader.read(), idle]); }
+        catch (e) { throw e && e.kind ? e : fail('cut'); } // 読んでいる途中で切れた（電波・Mac が寝た）
+        finally { clearTimeout(timer); }
+        buf += dec.decode(step.value || new Uint8Array(), { stream: !step.done });
+        const parts = buf.split(/\r?\n\r?\n/); buf = parts.pop();
+        parts.forEach(handle);
+        if (step.done) { if (buf.trim()) handle(buf); break; }
+      }
+    } catch (e) {
+      try { const p = reader.cancel(); if (p && p.catch) p.catch(() => {}); } catch (_) { /* もう閉じている */ }
+      throw e;
+    }
+    if (!result) throw fail('cut');
+    return result;
+  }
+
   // ---- 予定を iPhone のカレンダーに入れるファイル（.ics） ----
   function ics(e, now) {
     const esc = s => String(s || '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
@@ -445,5 +494,5 @@ window.PiyoExtras = (function () {
     return lines.map(fold).join('\r\n') + '\r\n';
   }
 
-  return { localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, ics, norm };
+  return { localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm };
 })();
