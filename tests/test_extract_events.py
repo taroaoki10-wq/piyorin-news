@@ -41,8 +41,9 @@ class EventExtractionTests(unittest.TestCase):
         if state is not None:
             ex.STATE_FILE.write_text(json.dumps(state))
 
-        def fake_claude(chunk, api_key):
+        def fake_claude(chunk, api_key, known=()):
             self.sent.extend(chunk)
+            self.known = list(known)
             return {j: list(found or []) for j in range(len(chunk))}, {}
 
         with patch.object(ex, "fetch", side_effect=lambda u: PAGES[u]), \
@@ -75,7 +76,8 @@ class EventExtractionTests(unittest.TestCase):
         auto = [e for e in events if e.get("auto")]
         self.assertEqual([(e["start"], e["end"], e["src"]) for e in auto], [("2026-11-03", "2026-11-13", "official-p5633")])
         self.assertIn(manual, events)
-        self.assertEqual(state, {"items": {"official-p5633": "v2 " + OFFICIAL}})
+        self.assertEqual(state, {"items": {"official-p5633": f"v{ex.EXTRACT_VERSION} " + OFFICIAL}})
+        self.assertEqual(self.known, [manual])  # 手で登録した予定を Claude に伝える
         # 同じ組み合わせは読み直さない。PR TIMES がまとまって元が増えたら読み直す
         self.sent.clear()
         self.run_main([self.item()], events, state, found)
@@ -108,7 +110,38 @@ class EventExtractionTests(unittest.TestCase):
         b = {"title": "ぴよりんゴジラ 販売", "start": "2026-11-03", "end": "2026-11-13", "auto": True, "src": "b"}
         c = {"title": "ぴよりんゴジラ 店内飲食", "start": "2026-11-03", "end": "2026-11-13", "auto": True, "src": "a"}
         manual = {"title": "ぴよりんゴジラ販売", "start": "2026-11-03", "end": "2026-11-13"}
-        self.assertEqual(ex.drop_duplicates([manual, a, b, c]), [manual, a, c])
+        self.assertEqual(ex.drop_duplicates([manual, a, b, c]), [manual, c])  # 名前も期間も手の予定と同じ a・似た b は外す
+
+    def test_auto_event_same_as_manual_one_dropped_but_different_sale_kept(self):
+        manual = {"title": "ドデ祭2026", "start": "2026-10-17", "end": "2026-10-18", "kind": "event"}
+        same = {"title": "ドデ祭 2026", "start": "2026-10-17", "end": "2026-10-18", "auto": True, "src": "p1"}
+        sale = {"title": "ドデ祭2026 ウルフィぴよりん販売", "start": "2026-10-17", "end": "2026-10-18", "auto": True, "src": "p1"}
+        other_day = {"title": "ドデ祭2026", "start": "2026-10-18", "end": "2026-10-18", "auto": True, "src": "p1"}
+        self.assertEqual(ex.drop_duplicates([manual, same, sale, other_day]), [manual, sale, other_day])
+
+    def test_known_events_sent_and_katakana_typo_fixed(self):
+        import claude_events as ce
+        captured = {}
+
+        class Res:
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+            def read(self): return b""
+
+        def fake_open(req, timeout):
+            captured["body"] = json.loads(req.data)
+            return Res()
+
+        art = {"title": "ウルフィ", "date": "2026-10-09"}
+        reply = {"content": [{"type": "tool_use", "name": "save_events", "input": {"events": [
+            {"article": 0, "title": "ウルフィぴよりン実店舗販売", "start": "2026-10-19", "end": "2026-12-31", "kind": "sale"}]}}]}
+        with patch("urllib.request.urlopen", side_effect=fake_open), patch.object(ce.json, "load", return_value=reply):
+            found, _ = ce.claude_events_batch([(art, "抜粋")], "fake-test-key",
+                                              [{"title": "ウルフィ×ぴよりん ぬいぐるみ 店頭販売", "start": "2026-10-19", "end": "2026-12-31"}])
+        content = captured["body"]["messages"][0]["content"]
+        self.assertIn("<known>", content)
+        self.assertIn("ウルフィ×ぴよりん ぬいぐるみ 店頭販売", content)
+        self.assertEqual(found[0][0]["title"], "ウルフィぴよりん実店舗販売")
 
 
 if __name__ == "__main__":

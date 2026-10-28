@@ -60,6 +60,8 @@ kind：限定販売・出張販売の販売期間 → "sale" ／ イベント・
 - 「10月下旬」など日付が特定できないもの、過去の実績の紹介、整理券の時刻などの細かい時間は入れない。
 - 記事の公開日・配信日は予定ではない。本文に書かれた販売・開催の日付だけを使う。
 - 同じ予定が公式サイトと PR TIMES の両方に書かれていたら1つにする。
+- <known> はカレンダーに手で登録済みの予定。名前の言い方が違っても同じ商品・同じ催しで同じ期間のものは出さない（別の商品や、催しの中の別の販売などは出してよい）。
+- 商品名やイベント名は記事の表記どおりに書く。
 - title は何の予定か分かる短い名前（例：「ブラックサンダーぴよりん販売」「ドデ祭2026 会場販売」）。
 - 予定がない記事は何も出さない。
 必ず save_events ツールで答えてください。"""
@@ -84,6 +86,13 @@ def snippet(lines: list[str]) -> str:
     return "\n".join(out)
 
 
+def known_block(known: list[dict]) -> str:
+    """手で登録済みの予定（同じ予定を出さないように渡す）。"""
+    lines = [f'<event start="{e.get("start", "")}" end="{e.get("end") or e.get("start", "")}">{e.get("title", "")}</event>'
+             for e in known]
+    return "<known>\n" + "\n".join(lines) + "\n</known>\n\n" if lines else ""
+
+
 def validate(raw: list, article: dict) -> list[dict]:
     """Claude の答えを確かめ、おかしな日付を落とす。"""
     base = date.fromisoformat(article["date"])
@@ -102,13 +111,15 @@ def validate(raw: list, article: dict) -> list[dict]:
             continue
         kind = e.get("kind") if e.get("kind") in KINDS else "sale"
         title = re.sub(r"\s+", " ", str(e.get("title") or article["title"])).strip()[:40]
+        title = title.replace("ぴよりン", "ぴよりん")  # 読み取りで混ざった表記の揺れ
         place = re.sub(r"\s+", " ", str(e.get("place") or "")).strip()[:40]
         out.append({"title": title, "start": s.isoformat(), "end": en.isoformat(), "place": place, "kind": kind})
     return out
 
 
-def claude_events_batch(items: list[tuple[dict, str]], api_key: str) -> tuple[dict[int, list[dict]], dict]:
-    """[(記事, 抜粋)] をまとめて読ませ、({記事の番号: 予定のリスト}, 使用量) を返す。"""
+def claude_events_batch(items: list[tuple[dict, str]], api_key: str,
+                        known: list[dict] = ()) -> tuple[dict[int, list[dict]], dict]:
+    """[(記事, 抜粋)] をまとめて読ませ、({記事の番号: 予定のリスト}, 使用量) を返す。known は手で登録済みの予定。"""
     parts = [
         f'<article n="{i}">\nタイトル: {a["title"]}\n公開日: {a["date"]}\n{text}\n</article>'
         for i, (a, text) in enumerate(items)
@@ -119,7 +130,7 @@ def claude_events_batch(items: list[tuple[dict, str]], api_key: str) -> tuple[di
         "system": PROMPT,
         "tools": [TOOL],
         "tool_choice": {"type": "tool", "name": "save_events"},
-        "messages": [{"role": "user", "content": "\n\n".join(parts)}],
+        "messages": [{"role": "user", "content": known_block(list(known)) + "\n\n".join(parts)}],
     }
     req = urllib.request.Request(
         API_URL,

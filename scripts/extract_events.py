@@ -37,7 +37,7 @@ STATE_FILE = DATA / "state.json"
 UA = "Mozilla/5.0 (piyorin-news-watch; +https://github.com/)"
 MAX_ARTICLES_PER_RUN = 20
 LOOKBACK_DAYS = 120  # これより古い記事は読まない
-EXTRACT_VERSION = 2  # 読み取り方を変えたら上げる（期間内の記事を読み直し、自動の予定を入れ替える）
+EXTRACT_VERSION = 3  # 読み取り方を変えたら上げる（期間内の記事を読み直し、自動の予定を入れ替える）
 # 本文の終わり。ここから下は関連記事の一覧などで、別の記事の日付が並ぶ
 STOP_LINE = re.compile(r"^(?:お知らせカテゴリ|関連記事|SHARE\b|このプレスリリースには|プレスリリース素材|一覧に戻る|お知らせ一覧)")
 # 予定ではない行（公式サイトの投稿日と分類の札、PR TIMES の配信日時）
@@ -238,15 +238,26 @@ def similar(a: str, b: str) -> bool:
     return len(ga & gb) / max(1, len(ga | gb)) >= 0.5
 
 
+def same_name(a: str, b: str) -> bool:
+    na, nb = (re.sub(r"[\W_]+", "", unicodedata.normalize("NFKC", x)).lower() for x in (a, b))
+    return bool(na) and na == nb
+
+
 def drop_duplicates(events: list[dict]) -> list[dict]:
-    """別々の記事から読んだ同じ予定（期間が同じで名前が似ている自動の予定）は1つにする。"""
+    """別々の記事から読んだ同じ予定（期間が同じで名前が似ている自動の予定）と、
+    手で登録した予定と期間も名前も同じ自動の予定は1つにする（手で登録した予定を残す）。"""
+    manual = [e for e in events if not e.get("auto")]
     kept = []
     for e in events:
         end = e.get("end") or e.get("start")
-        if e.get("auto") and any(
-                k.get("auto") and k.get("src", k.get("url")) != e.get("src", e.get("url"))
-                and k.get("start") == e.get("start") and (k.get("end") or k.get("start")) == end
-                and similar(k.get("title", ""), e.get("title", "")) for k in kept):
+
+        def same_span(k):
+            return k.get("start") == e.get("start") and (k.get("end") or k.get("start")) == end
+
+        if e.get("auto") and (
+                any(same_span(k) and same_name(k.get("title", ""), e.get("title", "")) for k in manual)
+                or any(k.get("auto") and k.get("src", k.get("url")) != e.get("src", e.get("url"))
+                       and same_span(k) and similar(k.get("title", ""), e.get("title", "")) for k in kept)):
             print(f"重なる予定を外す: {e['start']}〜{end} {e.get('title', '')}")
             continue
         kept.append(e)
@@ -280,6 +291,8 @@ def main() -> int:
     manual = {e.get("url") for e in events if not e.get("auto")}  # 手で予定を登録した記事は読まない
     cutoff = (datetime.now(JST).date() - timedelta(days=LOOKBACK_DAYS)).isoformat()
 
+    # 手で登録した予定（Claude に渡し、同じ予定を出さないようにする）
+    known = [e for e in events if not e.get("auto") and (e.get("end") or e.get("start", "")) >= cutoff]
     todo = [n for n in news if n.get("cat") in ("official", "press") and n.get("date", "") >= cutoff
             and not SKIP_TITLE.search(n.get("title", ""))
             and not (isinstance(n.get("jg"), dict) and n["jg"].get("ok") is False)
@@ -320,7 +333,7 @@ def main() -> int:
     for i in range(0, len(ask), 8):  # 8記事ずつまとめて1回で読ませる
         chunk = ask[i:i + 8]
         try:
-            found, usage = claude_events_batch(chunk, api_key)
+            found, usage = claude_events_batch(chunk, api_key, known)
         except Exception as e:  # APIが失敗した記事は次回もう一度読む
             print(f"Claude API 失敗: {e}", file=sys.stderr)
             continue
