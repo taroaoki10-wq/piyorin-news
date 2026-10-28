@@ -237,3 +237,16 @@ test('あいさつの出典は天気の提供元とCC BY 4.0だけを表示す�
   const sources=html.match(/class="piyo-sources"[^>]*>(.*?)<\/div>/)[1];
   assert.ok(!sources.includes('祝日'));assert.ok(!sources.includes('内閣府'));
 });
+test('天気だけ取れないまま開き直しても会話と記憶を消さず、30分たったら新しいあいさつにする',async()=>{
+  const h=chatSetup();h.fail('weather');await h.chat.open();await h.chat.ask('前の質問');const nodes=h.log.children.slice();
+  for(let i=0;i<3;i++){h.advance(60000);await h.chat.open()}
+  assert.deepEqual(h.log.children,nodes);assert.equal(h.chat.history.length,2);assert.equal(h.animations.length,0);
+  h.fail('');h.advance(60000);await h.chat.open();assert.deepEqual(h.log.children,nodes); // 天気が取れても、取り直しだけなら消さない
+  assert.ok(h.api.data.weather.length);
+  h.advance(1800000);h.version(2);await h.chat.open();assert.equal(h.log.children.length,1);assert.equal(h.chat.history.length,0);
+});
+test('部分失敗の取り直しは新しいあいさつ扱いにしない',async()=>{
+  const h=setup();assert.equal(await h.api.loadData(),true);h.advance(1800000);h.fail('weather');assert.equal(await h.api.loadData(),true);
+  h.advance(60000);assert.equal(await h.api.loadData(),false);h.fail('');assert.equal(await h.api.loadData(),false);
+  assert.equal(await h.api.loadData(),false);h.advance(1800000);assert.equal(await h.api.loadData(),true);
+});

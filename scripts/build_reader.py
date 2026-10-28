@@ -33,7 +33,9 @@ NEWS_DAYS = 45    # この日数以内の記事を対象にする
 NEWS_MAX = 120    # 記事の最大数
 UA = "Mozilla/5.0 (piyorin-news-watch; +https://github.com/)"
 MAX_BLOCKS = 120
-STOP_WORDS = ("一覧に戻る", "お知らせ一覧", "一覧へ戻る", "BACK TO", "関連記事", "SHARE", "シェアする")
+STOP_WORDS = ("一覧に戻る", "お知らせ一覧", "一覧へ戻る", "BACK TO", "関連記事", "SHARE", "シェアする", "お知らせカテゴリ")
+# 公式サイトの記事の頭にある投稿日と分類の札（本文ではないので表示しない）
+META_LINE = re.compile(r"^(?:\d{4}\.\d{1,2}\.\d{1,2}|NEW|店舗|限定商品|おでかけ情報|お知らせ|イベント|新商品|グッズ)$")
 
 
 def fetch(url: str) -> str:
@@ -89,6 +91,8 @@ def parse(url: str, page: str) -> dict:
             if len(text) >= 2:
                 if any(w in text for w in STOP_WORDS) and len(text) < 30:
                     break
+                if "piyorin.com" in url and META_LINE.match(text):
+                    continue
                 blocks.append({"t": "p", "x": text[:600]})
         if len(blocks) >= MAX_BLOCKS:
             break

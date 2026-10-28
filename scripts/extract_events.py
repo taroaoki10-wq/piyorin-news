@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""公式サイトの新しいお知らせ記事を読み、販売期間や開催日を
+"""公式サイトのお知らせと PR TIMES のプレスリリースを読み、販売期間や開催日を
 docs/data/events.json（カレンダー）に自動で追加する。
 
-- 対象は news.json にある公式サイトの記事のうち、まだ確認していないもの
-- 記事内の「販売期間」「開催日」「実施期間」などの見出しから日付を読み取る
+- 対象は news.json の公式・プレスリリースの記事。同じ話題としてまとめた公式サイトと
+  PR TIMES の記事、公式の記事が「詳しくは下記URL」として載せた PR TIMES の記事もあわせて読む
+  （公式の記事には日付が書かれず、PR TIMES にだけ書かれていることがあるため）
+- 本文だけを読む。投稿日・分類の札・関連記事の一覧（別の記事の日付）は読まない
+- 記事の「読んだ元の組み合わせ」を docs/data/state.json に記録し、新しい元（PR TIMES など）が
+  加わったとき、または読み取り方の版（EXTRACT_VERSION）を上げたときは読み直して、
+  その記事の自動の予定を入れ替える
 - 手で登録した予定（auto が付いていないもの）は書き換えない
-- 確認済みの記事は docs/data/state.json に記録し、次回から読み直さない
 """
 from __future__ import annotations
 
@@ -22,6 +26,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from claude_events import claude_events_batch, snippet
+from news_store import linked_sources, primary_sources
 
 JST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent.parent
@@ -32,6 +37,12 @@ STATE_FILE = DATA / "state.json"
 UA = "Mozilla/5.0 (piyorin-news-watch; +https://github.com/)"
 MAX_ARTICLES_PER_RUN = 20
 LOOKBACK_DAYS = 120  # これより古い記事は読まない
+EXTRACT_VERSION = 2  # 読み取り方を変えたら上げる（期間内の記事を読み直し、自動の予定を入れ替える）
+# 本文の終わり。ここから下は関連記事の一覧などで、別の記事の日付が並ぶ
+STOP_LINE = re.compile(r"^(?:お知らせカテゴリ|関連記事|SHARE\b|このプレスリリースには|プレスリリース素材|一覧に戻る|お知らせ一覧)")
+# 予定ではない行（公式サイトの投稿日と分類の札、PR TIMES の配信日時）
+META_LINE = re.compile(r"^(?:\d{4}\.\d{1,2}\.\d{1,2}|\d{4}年\d{1,2}月\d{1,2}日\s*\d{1,2}時\d{2}分"
+                       r"|NEW|店舗|限定商品|おでかけ情報|お知らせ|イベント|新商品|グッズ)$")
 # 予定ではない種類のお知らせ
 SKIP_TITLE = re.compile(r"お詫び|訂正|休業|営業時間|価格改定|終了のお知らせ|採用|募集要項")
 
@@ -69,6 +80,17 @@ def html_to_lines(page: str) -> list[str]:
         if ln:
             lines.append(ln)
     return lines
+
+
+def article_lines(page: str) -> list[str]:
+    """本文の行だけを返す（投稿日・分類の札を除き、関連記事の一覧より前で止める）。"""
+    out = []
+    for ln in html_to_lines(page):
+        if STOP_LINE.match(ln):
+            break
+        if not META_LINE.match(ln):
+            out.append(ln)
+    return out
 
 
 def _mkdate(y: int, m: int, d: int) -> date | None:
@@ -157,9 +179,8 @@ def guess_kind(title: str, label: str, single_day: bool) -> str:
     return "sale"
 
 
-def extract(article: dict, page: str) -> dict | None:
+def extract(article: dict, lines: list[str]) -> dict | None:
     base = date.fromisoformat(article["date"])
-    lines = html_to_lines(page)
     found = None
     for label, value in find_labeled(lines, DATE_LABELS):
         r = parse_range(value, base)
@@ -206,54 +227,94 @@ def count_ranges(text: str, base: date) -> int:
     return len(found)
 
 
+def similar(a: str, b: str) -> bool:
+    """予定の名前が似ているか（片方がもう片方を含む、または2文字ずつの並びが半分以上重なる）。"""
+    na, nb = (re.sub(r"[\W_]+", "", unicodedata.normalize("NFKC", x)).lower() for x in (a, b))
+    if not na or not nb:
+        return False
+    if na in nb or nb in na:
+        return True
+    ga, gb = ({x[i:i + 2] for i in range(len(x) - 1)} for x in (na, nb))
+    return len(ga & gb) / max(1, len(ga | gb)) >= 0.5
+
+
+def drop_duplicates(events: list[dict]) -> list[dict]:
+    """別々の記事から読んだ同じ予定（期間が同じで名前が似ている自動の予定）は1つにする。"""
+    kept = []
+    for e in events:
+        end = e.get("end") or e.get("start")
+        if e.get("auto") and any(
+                k.get("auto") and k.get("src", k.get("url")) != e.get("src", e.get("url"))
+                and k.get("start") == e.get("start") and (k.get("end") or k.get("start")) == end
+                and similar(k.get("title", ""), e.get("title", "")) for k in kept):
+            print(f"重なる予定を外す: {e['start']}〜{end} {e.get('title', '')}")
+            continue
+        kept.append(e)
+    return kept
+
+
+def read_pages(urls) -> dict[str, list[str] | None]:
+    """URLごとの本文の行（読めなかったものは None）。"""
+    def load(u):
+        try:
+            return u, article_lines(fetch(u))
+        except Exception as e:
+            print(f"読み取り失敗 {u}: {e}", file=sys.stderr)
+            return u, None
+
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        return dict(ex.map(load, sorted(urls)))
+
+
+def basis(item: dict) -> str:
+    """読んだ元の組み合わせ。これが変わったら読み直す。"""
+    return f"v{EXTRACT_VERSION} " + " ".join(primary_sources(item))
+
+
 def main() -> int:
     t0 = time.time()
     news = json.loads(NEWS_FILE.read_text(encoding="utf-8"))
     events = json.loads(EVENTS_FILE.read_text(encoding="utf-8")) if EVENTS_FILE.exists() else []
     state = json.loads(STATE_FILE.read_text(encoding="utf-8")) if STATE_FILE.exists() else {}
-    checked = set(state.get("checkedArticles", []))
-    covered = {e.get("url") for e in events}  # すでに予定がある記事（手動分を含む）
+    done = state.get("items") if isinstance(state.get("items"), dict) else {}
+    manual = {e.get("url") for e in events if not e.get("auto")}  # 手で予定を登録した記事は読まない
     cutoff = (datetime.now(JST).date() - timedelta(days=LOOKBACK_DAYS)).isoformat()
 
-    todo = [n for n in news if n.get("cat") == "official" and n["url"] not in checked
-            and n["url"] not in covered and n.get("date", "") >= cutoff
-            and not SKIP_TITLE.search(n.get("title", ""))][:MAX_ARTICLES_PER_RUN]
+    todo = [n for n in news if n.get("cat") in ("official", "press") and n.get("date", "") >= cutoff
+            and not SKIP_TITLE.search(n.get("title", ""))
+            and not (isinstance(n.get("jg"), dict) and n["jg"].get("ok") is False)
+            and primary_sources(n) and not manual.intersection(primary_sources(n))
+            and done.get(n["id"]) != basis(n)][:MAX_ARTICLES_PER_RUN]
     if not todo:
-        print(f"新しい公式記事なし（{time.time() - t0:.1f}秒）")
+        print(f"新しく読む記事なし（{time.time() - t0:.1f}秒）")
         return 0
 
     api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
-
-    def load(art):
-        try:
-            return art, fetch(art["url"]), None
-        except Exception as e:
-            return art, None, e
-
-    with ThreadPoolExecutor(max_workers=8) as ex:
-        pages = list(ex.map(load, todo))
+    pages = read_pages({u for n in todo for u in primary_sources(n)})
+    linked = {u for lines in pages.values() if lines for u in linked_sources("\n".join(lines))} - set(pages)
+    pages.update(read_pages(linked))
 
     results: dict[str, list[dict]] = {}
+    sources: dict[str, list[str]] = {}
     ask: list[tuple[dict, str]] = []
-    for art, page, err in pages:
-        if err:  # 読めなかった記事は次回もう一度読む
-            print(f"読み取り失敗 {art['url']}: {err}", file=sys.stderr)
+    for art in todo:
+        own = primary_sources(art)
+        srcs = list(dict.fromkeys(own + [u for s in own for u in linked_sources("\n".join(pages.get(s) or []))]))
+        if any(pages.get(u) is None for u in srcs):  # 読めなかった元がある記事は次回もう一度読む
             continue
-        lines = html_to_lines(page)
-        text = snippet(lines)
+        sources[art["id"]] = srcs
+        lines = [ln for u in srcs for ln in pages[u]]
+        text = "\n\n".join(t for t in (snippet(pages[u]) for u in srcs) if t)
         base = date.fromisoformat(art["date"])
         n = count_ranges(text, base)
         if n == 0:
-            results[art["url"]] = []  # 日付がない記事はAPIに送らない
+            results[art["id"]] = []  # 日付がない記事はAPIに送らない
             continue
-        one = extract(art, page)
-        if n == 1 and one:
-            results[art["url"]] = [one]  # 日付が1つだけの単純な記事はパターンで十分
-            continue
-        if api_key:
+        if api_key:  # 予定の名前を短く分かりやすくするため、日付がある記事は Claude に読ませる
             ask.append((art, text))
-        else:
-            results[art["url"]] = [one] if one else []
+        else:  # APIキーが無いときは見出しのパターンで読む
+            one = extract(art, lines)
+            results[art["id"]] = [one] if one else []
 
     tokens = {"input_tokens": 0, "output_tokens": 0}
     for i in range(0, len(ask), 8):  # 8記事ずつまとめて1回で読ませる
@@ -266,33 +327,44 @@ def main() -> int:
         for k in tokens:
             tokens[k] += usage.get(k, 0)
         for j, (art, _) in enumerate(chunk):
-            results[art["url"]] = found.get(j, [])
+            results[art["id"]] = found.get(j, [])
 
     added = 0
     for art in todo:
-        if art["url"] not in results:
+        if art["id"] not in results:
             continue
-        checked.add(art["url"])
-        found = results[art["url"]]
+        # この記事から前に読んだ自動の予定を、今回読んだ予定に入れ替える
+        ids, srcs = {art["id"], *art.get("merged_ids", [])}, set(sources[art["id"]])
+        old = [e for e in events if e.get("auto") and (e.get("src") in ids or (not e.get("src") and e.get("url") in srcs))]
+        found = results[art["id"]]
         if not found:
-            print(f"予定なし: {art['title'][:40]}")
+            # 読み直して何も見つからないときは、前の予定を消さずに残す（ページの作りが変わったときに予定を失わないため）
+            print(f"予定なし: {art['title'][:40]}" + (f"（前の予定 {len(old)}件は残す）" if old else ""))
+            old = []
+        events = [e for e in events if not any(e is o for o in old)]
         base_id = "auto-" + re.sub(r"\W", "", art["id"])[-24:]
         for n, ev in enumerate(found):
             ev = {"id": base_id if n == 0 else f"{base_id}-{n + 1}", **{k: v for k, v in ev.items() if k != "id"},
-                  "url": art["url"], "auto": True}
+                  "url": art["url"], "src": art["id"], "auto": True}
             events.append(ev)
             added += 1
-            print(f"予定を追加: {ev['start']}〜{ev['end']} {ev['title']}（{ev['kind']}）")
+            print(f"予定を{'入れ替え' if old else '追加'}: {ev['start']}〜{ev['end']} {ev['title']}（{ev['kind']}）")
+        for e in old:
+            if not any(f["start"] == e["start"] and f["end"] == e.get("end") and f["title"] == e["title"] for f in found):
+                print(f"前の予定を外す: {e['start']}〜{e.get('end')} {e['title']}")
+        done[art["id"]] = basis(art)
 
     events.sort(key=lambda e: (e.get("start", ""), e.get("end", "")))
-    print(f"確認 {len(results)}記事（うちAPI {len(ask)}記事）/ 予定追加 {added}件 / 予定合計 {len(events)}件（{time.time() - t0:.1f}秒）")
+    events = drop_duplicates(events)
+    print(f"確認 {len(results)}記事（うちAPI {len(ask)}記事）/ 予定 {added}件 / 予定合計 {len(events)}件（{time.time() - t0:.1f}秒）")
     if tokens["input_tokens"]:
         print(f"Claude API 使用量: 入力 {tokens['input_tokens']} / 出力 {tokens['output_tokens']} トークン")
     before = EVENTS_FILE.read_text(encoding="utf-8") if EVENTS_FILE.exists() else ""
     after = json.dumps(events, ensure_ascii=False, indent=1) + "\n"
     if after != before:
         EVENTS_FILE.write_text(after, encoding="utf-8")
-    state["checkedArticles"] = sorted(checked)[-2000:]
+    known = {n["id"] for n in news}
+    state = {"items": {k: v for k, v in sorted(done.items()) if k in known}}
     STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return 0
 

@@ -15,7 +15,7 @@ function setup(withViewport=true){
   const window=target({visualViewport:vv,innerHeight:844,scrollX:0,scrollY:260,
     scrollTo(x,y){scrollCalls++;this.scrollX=x;this.scrollY=y}});
   const input=target({blur(){document.activeElement=null;this.emit('blur')}}),layer={hidden:true,style:{}},log={style:{}};
-  const document={activeElement:null,documentElement:{clientWidth:390,clientHeight:844},body:{style:{},getBoundingClientRect:()=>({width:366})}};
+  const document={activeElement:null,documentElement:{clientWidth:390,clientHeight:844,classList:{add(){},remove(){}}},body:{style:{},getBoundingClientRect:()=>({width:366})}};
   const form={getBoundingClientRect(){const translate=parseFloat((layer.style.translate||'0 0').split(' ')[1])||0;
     return {bottom:document.documentElement.clientHeight-(parseFloat(layer.style.bottom)||0)-(parseFloat(layer.style.paddingBottom||safePadding)||0)-formShift+translate-rectShift}}};
   // 入力欄の下端から会話欄の下端まで、ぴよ・候補・入力欄・間隔の実測相当222px。

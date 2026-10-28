@@ -3,6 +3,20 @@ import json
 import re
 from pathlib import Path
 
+# 本文が読める一次情報（公式サイトのお知らせ・PR TIMES のプレスリリース）
+SOURCE_RE = re.compile(r"https://(?:piyorin\.com/news/p\d+/?|prtimes\.jp/main/html/rd/p/\d+\.\d+\.html)")
+
+
+def primary_sources(item: dict) -> list[str]:
+    """記事と、同じ話題としてまとめた記事のうち、公式サイトと PR TIMES のURL（代表の記事を先に）。"""
+    urls = [item.get("url", "")] + [r.get("url", "") for r in item.get("related", [])]
+    return [u for u in dict.fromkeys(urls) if u and SOURCE_RE.fullmatch(u)]
+
+
+def linked_sources(text: str) -> list[str]:
+    """本文に書かれた公式サイト・PR TIMES のURL（公式の記事が「詳しくは下記URL」とする場合）。"""
+    return list(dict.fromkeys(m.group(0) for m in SOURCE_RE.finditer(text)))
+
 
 def read_news(data: Path) -> list[dict]:
     index = data / "archive" / "index.json"

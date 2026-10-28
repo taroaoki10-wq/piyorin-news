@@ -1,5 +1,7 @@
 import copy
+import json
 import sys
+import tempfile
 import time
 import unittest
 from datetime import date
@@ -46,6 +48,22 @@ class MemoShopNameTests(unittest.TestCase):
             self.assertEqual(memos, expected)
             self.assertEqual(piyo.build_memos(news, memos, "fake-test-key", time.time()), (0, 0, 0))
             self.assertEqual(memos, expected)
+
+    def test_press_release_text_added_and_memo_remade_when_source_grows(self):
+        official, press = "https://piyorin.com/news/p1/", "https://prtimes.jp/main/html/rd/p/000000001.000124425.html"
+        with tempfile.TemporaryDirectory() as d, patch.object(piyo, "READER_DIR", Path(d)):
+            for url, blocks in [(official, [{"t": "p", "x": "詳しくは下記URLよりご覧ください。"}, {"t": "p", "x": press}]),
+                                (press, [{"t": "p", "x": "販売期間 2026年11月3日~11月13日"}])]:
+                (Path(d) / (piyo.reader_id(url) + ".json")).write_text(json.dumps({"blocks": blocks}, ensure_ascii=False))
+            item = {"id": "official-p1", "cat": "official", "date": "2026-10-22", "url": official, "related": []}
+            self.assertEqual(piyo.memo_sources(item), [official, press])  # 本文に載った PR TIMES もたどる
+            self.assertIn("11月3日", piyo.article_text(item))
+            old = {"official-p1": {"v": 1, "url": official, "memo": "詳細は記事で確認。"}}
+            self.assertTrue(piyo.needs_memo(item, old))
+            done = {"official-p1": {"v": 1, "url": official, "memo": "販売期間は11月3日から。", "b": f"{official} {press}"}}
+            self.assertFalse(piyo.needs_memo(item, done))
+            (Path(d) / (piyo.reader_id(press) + ".json")).unlink()  # 本文の保存が消えても作り直さない
+            self.assertFalse(piyo.needs_memo(item, done))
 
     def test_missing_key_still_skips_all_writes_and_api_calls(self):
         with patch.dict(piyo.os.environ, {"ANTHROPIC_API_KEY": ""}), \

@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from fetch_news import article_key, clean_title, dedupe, merge
+from fetch_news import article_key, clean_title, dedupe, merge, official_title, parse_official
 
 
 def article(id, title, url, **extra):
@@ -111,6 +111,76 @@ class PhotoDedupeTests(unittest.TestCase):
         result = dedupe([old, new])[0]
         self.assertEqual(result['id'], 'old')
         self.assertEqual(result['title'], new['title'])
+
+
+class AuditFixTests(unittest.TestCase):
+    """2026-10-28 の点検で見つかった見出し・重複・関連リンクの直し。"""
+
+    def test_official_labels_and_read_more_removed(self):
+        self.assertEqual(official_title('店舗 限定商品 お知らせ 静岡県三島市の「三島甘藷ぴよりん」が販売！ 記事を見る'),
+                         '静岡県三島市の「三島甘藷ぴよりん」が販売！')
+        self.assertEqual(official_title('おでかけ情報 ぴよりんが山口県へ初めてのおでかけ！'), 'ぴよりんが山口県へ初めてのおでかけ！')
+        self.assertEqual(official_title('NEW「ぴよりん」新商品'), '「ぴよりん」新商品')
+        self.assertEqual(official_title('お知らせ'), 'お知らせ')  # 札だけの短い見出しは消さない
+
+    def test_parse_official_uses_title_element(self):
+        page = """<a href="https://piyorin.com/news/p5653/" class="news-pickup__box"><div class="meta">
+          <p class="date">2026.10.26</p><p class="cate"><span>お知らせ</span></p></div>
+          <p class="title">2027年版「ぴよりんカレンダー」が今年も登場！</p><p class="btn"><span>記事を見る</span></p></a>"""
+        items = parse_official(page)
+        self.assertEqual([(i['date'], i['title']) for i in items], [('2026-10-26', '2027年版「ぴよりんカレンダー」が今年も登場！')])
+
+    def test_official_and_press_with_same_headline_merge_without_copying_judgment(self):
+        official = dict(article('official-p1', '店舗 お知らせ 「三島甘藷ぴよりん」が期間限定で販売！ 記事を見る',
+                                'https://piyorin.com/news/p1/'), cat='official', source='ぴよりん公式サイト')
+        press = dict(article('press', '「三島甘藷ぴよりん」が期間限定で販売！',
+                             'https://prtimes.jp/main/html/rd/p/000000252.000124425.html', jg={'ok': False}),
+                     cat='press', source='PR TIMES')
+        result = dedupe([press, official])
+        self.assertEqual(len(result), 1)
+        self.assertEqual((result[0]['id'], result[0]['title']), ('official-p1', '「三島甘藷ぴよりん」が期間限定で販売！'))
+        self.assertEqual(result[0]['merged_ids'], ['press'])
+        self.assertNotIn('jg', result[0])
+
+    def test_fashion_press_gallery_and_photo_number_prefix(self):
+        self.assertEqual(clean_title('写真3/3｜ひよこ型スイーツ「ぴよりんゴジラ」'), 'ひよこ型スイーツ「ぴよりんゴジラ」')
+        self.assertEqual(article_key('https://www.fashion-press.net/news/gallery/152337/2575500'),
+                         article_key('https://www.fashion-press.net/news/152337'))
+        photos = [article(str(i), f'写真{i}/3｜ひよこ型スイーツ「ぴよりんゴジラ」',
+                          f'https://www.fashion-press.net/news/gallery/152337/257550{i}') for i in (1, 2, 3)]
+        self.assertEqual(len(dedupe(photos)), 1)
+
+    def test_media_suffix_removed_and_matched(self):
+        self.assertEqual(clean_title('「ぴよりんカレンダー」が今年も登場！｜Infoseekニュース'), '「ぴよりんカレンダー」が今年も登場！')
+        self.assertEqual(clean_title('ぴよりん｜新商品のお知らせ'), 'ぴよりん｜新商品のお知らせ')  # 普通の「｜」は残す
+        result = dedupe([article('a', '「ぴよりんカレンダー」が今年も登場！', 'https://example.com/a'),
+                         article('b', '「ぴよりんカレンダー」が今年も登場！ | 名駅経済新聞', 'https://example.com/b')])
+        self.assertEqual(len(result), 1)
+
+    def test_truncated_headline_joins_near_complete_one(self):
+        full = article('full', '2027年版「ぴよりんカレンダー」が今年も登場！ぴよりんの愛らしい姿を再現', 'https://example.com/full')
+        cut = dict(article('cut', '2027年版「ぴよりんカレンダー」が今年も登場！ぴよりんの愛らしい ...', 'https://example.com/cut'),
+                   date='2026-10-25')
+        far = dict(article('far', '2027年版「ぴよりんカレンダー」が今年も登場！ぴよりん ...', 'https://example.com/far'),
+                   date='2026-08-01')
+        short = article('short', 'ぴよりん ...', 'https://example.com/short')
+        result = dedupe([cut, full, far, short])
+        self.assertEqual(len(result), 3)
+        joined = next(r for r in result if r['id'] in ('full', 'cut'))
+        self.assertEqual(joined['title'], full['title'])
+        self.assertEqual({joined['id'], *joined['merged_ids']}, {'full', 'cut'})
+
+    def test_google_relay_of_same_media_not_listed_as_another_link(self):
+        main = article('main', 'ぴよりんがゴジラに', 'https://news.mynavi.jp/article/1/')
+        main['source'] = 'マイナビニュース'
+        main['related'] = [{'source': 'マイナビニュース', 'url': 'https://news.google.com/rss/articles/OLD'},
+                           {'source': '別の媒体', 'url': 'https://news.google.com/rss/articles/OTHER'}]
+        result = dedupe([main])[0]
+        self.assertEqual(result['related'], [{'source': '別の媒体', 'url': 'https://news.google.com/rss/articles/OTHER'}])
+        incoming = dict(article('x', 'ぴよりんがゴジラに', 'https://news.google.com/rss/articles/NEW'), source='マイナビニュース')
+        incoming.pop('id')
+        merged, added = merge([result], [incoming])
+        self.assertEqual((added, merged[0]['related']), (0, result['related']))
 
 
 if __name__ == '__main__':

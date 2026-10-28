@@ -24,6 +24,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from claude_events import API_URL, MODEL  # noqa: E402  モデルや接続先は予定の抽出と同じ設定を使う
+from news_store import linked_sources, primary_sources  # noqa: E402
 
 JST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent.parent
@@ -39,7 +40,7 @@ GREETING_VERSION = 4  # まとめの基準を変えたら上げる
 KEEP_DAYS = 150       # この日数より古い記事はメモしない・メモから外す
 BATCH = 6             # 1回の呼び出しでメモする記事の数
 MAX_PER_RUN = 24      # 1回の更新でメモする最大数（残りは次の更新で）
-TEXT_MAX = 2200       # 1記事あたりに渡す本文の最大文字数
+TEXT_MAX = 3000       # 1記事あたりに渡す本文の最大文字数（公式とPR TIMESを合わせて）
 GREET_DAYS = 45       # まとめに使うメモの日数
 TIME_BUDGET = 120     # 秒。これを超えたら残りは次の更新に回す
 
@@ -128,7 +129,7 @@ def piyo_tone(text: str) -> str:
         kept.append(value)
         return f"\ue000{len(kept) - 1}\ue001"
 
-    token = re.compile(r"(?:\ue000\d+\ue001|```[\s\S]*?(?:```|$)|~~~[\s\S]*?(?:~~~|$)|`[^`\n]*(?:`|$)|!?\[[^\]\n]*\]\([^\n]*?\)|https?://[^\s<>「」『』。！？]+)")
+    token = re.compile(r"(?:\ue000\d+\ue001|```[\s\S]*?(?:```|$)|~~~[\s\S]*?(?:~~~|$)|`[^`\n]*(?:`|$)|!?\[[^\]\n]*\]\([^\n]*?\)|https?://[^\s<>「」『』、。！？]+)")
     ends = [("ありませんでした", "なかった"), ("なのです", "なんだ"), ("るのです", "るんだ"),
             ("たのです", "たんだ"), ("いのです", "いんだ"), ("ありません", "ない"),
             ("でした", "だった"), ("です", "だ"), ("しました", "した")]
@@ -196,10 +197,10 @@ def reader_id(url: str) -> str:
     return hashlib.sha1(url.encode("utf-8")).hexdigest()[:12]
 
 
-def article_text(item: dict) -> str:
-    """リーダー用に保存済みの本文（無ければ空）。"""
-    f = READER_DIR / (reader_id(item.get("url", "")) + ".json")
-    art = load_json(f, None) if f.exists() else None
+def reader_text(url: str) -> str:
+    """リーダー用に保存済みの1記事の本文（無ければ空）。"""
+    f = READER_DIR / (reader_id(url) + ".json")
+    art = load_json(f, None) if url and f.exists() else None
     if not isinstance(art, dict):
         return ""
     lines = []
@@ -209,7 +210,29 @@ def article_text(item: dict) -> str:
             if x == "お知らせカテゴリ":  # 公式サイトの記事の下にある分類の一覧は要らない
                 break
             lines.append(x)
-    return "\n".join(lines)[:TEXT_MAX]
+    return "\n".join(lines)
+
+
+def memo_sources(item: dict) -> list[str]:
+    """メモに使う本文の元。代表の記事、同じ話題としてまとめた公式サイトと PR TIMES の記事、
+    公式の記事が「詳しくは下記URL」として載せた PR TIMES の記事のうち、本文を保存してあるもの。"""
+    url = item.get("url", "")
+    urls = [url] + primary_sources(item) + linked_sources(reader_text(url))
+    return [u for u in dict.fromkeys(urls) if u and (READER_DIR / (reader_id(u) + ".json")).exists()]
+
+
+def article_text(item: dict) -> str:
+    """メモに渡す本文（公式サイトに日付が無く PR TIMES にだけ書かれている場合も読めるよう、まとめて渡す）。"""
+    return "\n".join(t for t in (reader_text(u) for u in memo_sources(item)) if t)[:TEXT_MAX]
+
+
+def needs_memo(item: dict, memos: dict) -> bool:
+    """メモが無い・版が古い・本文の元（PR TIMES など）があとから増えたときに作り直す。"""
+    memo = memos.get(item["id"], {})
+    if memo.get("v", 0) < MEMO_VERSION:
+        return True
+    had = set(memo["b"].split()) if memo.get("b") else {memo.get("url") or item.get("url", "")}
+    return bool(set(memo_sources(item)) - had)
 
 
 def call_tool(system: str, tool: dict, content: str, max_tokens: int, api_key: str) -> tuple[dict, dict]:
@@ -267,7 +290,7 @@ def build_memos(news: list[dict], memos: dict, api_key: str, t0: float) -> tuple
         n for n in news
         if n.get("cat") in ("official", "press") and n.get("date", "") >= since
         and not (isinstance(n.get("jg"), dict) and n["jg"].get("ok") is False)
-        and (memos.get(n["id"], {}).get("v", 0) < MEMO_VERSION)
+        and needs_memo(n, memos)
     ][:MAX_PER_RUN]  # news.json は新しい順なので、新しい記事からメモする
     done = tin = tout = 0
     now = today_jst().isoformat()
@@ -286,7 +309,8 @@ def build_memos(news: list[dict], memos: dict, api_key: str, t0: float) -> tuple
         for k, it in enumerate(batch):
             if k in res:  # 答えが抜けた記事は次回もう一度
                 memos[it["id"]] = {"v": MEMO_VERSION, "t": now, "date": it.get("date", ""),
-                                   "title": it.get("title", ""), "url": it.get("url", ""), "memo": res[k]}
+                                   "title": it.get("title", ""), "url": it.get("url", ""), "memo": res[k],
+                                   "b": " ".join(memo_sources(it))}
                 done += 1
     return done, tin, tout
 
@@ -352,6 +376,10 @@ def main() -> int:
     since = (today_jst() - timedelta(days=KEEP_DAYS)).isoformat()
     memos = {k: v for k, v in sorted(memos.items(), key=lambda kv: kv[1].get("date", ""), reverse=True)
              if k in ids and v.get("date", "") >= since}
+    titles = {n["id"]: n.get("title", "") for n in news}
+    for k, v in memos.items():  # 見出しの整理（公式サイトの分類の札を外すなど）をメモにも反映する
+        if titles.get(k) and v.get("title") != titles[k]:
+            v["title"] = titles[k]
     write_if_changed(MEMO_FILE, memos)
     print(f"ぴよメモ: {done}件を作成（全{len(memos)}件、入力{tin}・出力{tout}トークン）")
 

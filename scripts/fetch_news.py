@@ -82,17 +82,46 @@ def norm(title: str) -> str:
     """重複判定用に、記号や空白を取り除いたタイトル。"""
     t = unicodedata.normalize("NFKC", title).lower()
     t = re.sub(r"[(（]\s*[^)）]{1,20}\s*[)）]\s*$", "", t)  # 末尾の（媒体名）
+    t = re.sub(r"\s*[|｜][^|｜]{1,30}$", "", t)  # 末尾の「｜媒体名」（比べるときだけ外す）
     return re.sub(r"[\s\W_]+", "", t)
 
 
+def stem(title: str) -> str:
+    """途中で切れた見出し（「…」「...」で終わる）の、残っている前半。"""
+    return norm(re.sub(r"\s*(?:\.\.\.|…)$", "", title))
+
+
+def truncated(title: str) -> bool:
+    return title.endswith(("...", "…"))
+
+
+# 見出しの末尾に付く掲載サイトの名前（表示から外す）。普通の「｜」を使った見出しは残す。
+MEDIA_SUFFIX = re.compile(r"\s*[|｜]\s*[^|｜]{0,30}(?:ニュース|NEWS|News|新聞|さんデジ|グルメとフード|公式ウェブサイト|のプレスリリース)$")
+
+
 def clean_title(title: str) -> str:
-    """写真ページの飾りだけを外す。普通の見出し末尾の日付は残す。"""
+    """写真ページの飾りと末尾の掲載サイト名だけを外す。普通の見出し末尾の日付は残す。"""
     t = title.strip()
-    prefix = r"^(?:[＜<]\s*画像\s*\d+\s*/\s*\d+\s*[＞>]|【画像】|画像・写真\s*[|｜]|写真・図版[（(]\d+枚目[）)]\s*[|｜])\s*"
+    prefix = (r"^(?:[＜<]\s*画像\s*\d+\s*/\s*\d+\s*[＞>]|【画像】|画像・写真\s*[|｜]|写真・図版[（(]\d+枚目[）)]\s*[|｜]"
+              r"|(?:写真|画像)\s*\d+\s*/\s*\d+\s*[|｜])\s*")
+    t = re.sub(r"^HOME\s+PR\s+TIMES\s+", "", t)  # 掲載サイトのパンくずが見出しに入ったもの
     cleaned = re.sub(prefix, "", t)
     if cleaned != t:
         cleaned = re.sub(r"\s+(?:\d+\s*/\s*\d+|\d+枚目)$", "", cleaned)
-    return cleaned.strip()
+    stripped = MEDIA_SUFFIX.sub("", cleaned)
+    return (stripped if len(stripped) >= 6 else cleaned).strip()
+
+
+# 公式サイトの一覧では、リンクの中に分類の札（店舗・限定商品など）と「記事を見る」が入る（2026年9月末から）
+OFFICIAL_LABEL = re.compile(r"^(?:NEW\s*|(?:お知らせ|イベント|新商品|グッズ|店舗|限定商品|おでかけ情報)(?:\s+|(?=[「『【])))")
+
+
+def official_title(title: str) -> str:
+    """公式サイトの記事の見出しから、分類の札と「記事を見る」を外す。"""
+    t = re.sub(r"\s*記事を見る$", "", title.strip())
+    while (m := OFFICIAL_LABEL.match(t)) and len(t) - m.end() >= 6:
+        t = t[m.end():]
+    return t.strip()
 
 
 def article_key(url: str) -> str:
@@ -104,6 +133,7 @@ def article_key(url: str) -> str:
         "www.oricon.co.jp": r"/news/(\d+)/(?:full/|photo/\d+/|comment/)?",
         "www.sankei.com": r"/article/([^/]+)/(?:photo/[^/]+/)?",
         "dot.asahi.com": r"/articles/(?:photo|-)/(\d+)/?",
+        "www.fashion-press.net": r"/news/(?:gallery/)?(\d+)(?:/\d+)?/?",
     }
     m = re.fullmatch(patterns.get(host, r"(?!)"), p.path)
     return host + ":" + m.group(1) if m else url
@@ -116,6 +146,16 @@ def article_keys(item: dict) -> set[str]:
     }
 
 
+def is_relay(url: str) -> bool:
+    """Googleニュースの中継URL。"""
+    return "news.google.com" in url
+
+
+def direct_sources(item: dict, extra: list[dict] = ()) -> set[str]:
+    links = [item] + item.get("related", []) + list(extra)
+    return {r["source"] for r in links if not is_relay(r["url"])}
+
+
 def absorb(first: dict, other: dict) -> None:
     """代表記事のID・判定を維持し、まとめた記事のIDと元リンクを残す。"""
     aliases = set(first.get("merged_ids", [])) | set(other.get("merged_ids", []))
@@ -125,12 +165,25 @@ def absorb(first: dict, other: dict) -> None:
     if aliases:
         first["merged_ids"] = sorted(aliases)
     seen = {first["url"]} | {r["url"] for r in first.get("related", [])}
-    for r in [other] + other.get("related", []):
-        if r["url"] not in seen:
+    links = [other] + other.get("related", [])
+    direct = direct_sources(first, links)
+    for r in links:
+        # 同じ媒体の元記事があるときは、Googleニュース経由の同じ記事を「ほか◯件」に足さない
+        if r["url"] not in seen and not (is_relay(r["url"]) and r["source"] in direct):
             first.setdefault("related", []).append({"source": r["source"], "url": r["url"]})
             seen.add(r["url"])
-    if "jg" not in first and "jg" in other:
+    # 公式の記事は関連判定の対象外なので、まとめた記事の判定で隠さない
+    if "jg" not in first and "jg" in other and first.get("cat") != "official":
         first["jg"] = copy.deepcopy(other["jg"])
+
+
+def prune_relays(item: dict) -> None:
+    """保存済みの「ほか◯件」から、同じ媒体の元記事と重なるGoogleニュース経由のリンクを外す。"""
+    related = item.get("related", [])
+    direct = direct_sources(item)
+    kept = [r for r in related if not (is_relay(r["url"]) and r["source"] in direct)]
+    if len(kept) != len(related):
+        item["related"] = kept
 
 
 def has_keyword(text: str) -> bool:
@@ -155,14 +208,18 @@ def category(source: str, url: str) -> str:
 def parse_official(page: str) -> list[dict]:
     items, seen = [], set()
     date_re = re.compile(r"(20\d{2})[./年-]\s*(\d{1,2})[./月-]\s*(\d{1,2})")
+    title_el = re.compile(r'<(h\d|p)\b[^>]*class="[^"]*\btitle\b[^"]*"[^>]*>(.*?)</\1>', re.S)
+    date_el = re.compile(r'class="[^"]*\bdate\b[^"]*"[^>]*>(.*?)</', re.S)
     for m in re.finditer(r'<a\b[^>]*href="((?:https://piyorin\.com)?/news/p\d+/?)"[^>]*>(.*?)</a>', page, re.S):
         url = urljoin(OFFICIAL_URL, m.group(1))
         if url in seen:
             continue
-        text = re.sub(r"\s+", " ", strip_tags(m.group(2)))
-        dm = date_re.search(text) or date_re.search(page[max(0, m.start() - 600): m.end() + 300])
-        title = date_re.sub("", text).strip(" 　|-")
-        title = re.sub(r"^(NEW|お知らせ|イベント|新商品|グッズ)\s*", "", title)
+        # 見出しと日付の要素があればそれを使う（分類の札や「記事を見る」を見出しに混ぜない）
+        te, de = title_el.search(m.group(2)), date_el.search(m.group(2))
+        text = re.sub(r"\s+", " ", strip_tags(te.group(2) if te else m.group(2)))
+        dm = (date_re.search(strip_tags(de.group(1))) if de else None) or date_re.search(text) \
+            or date_re.search(page[max(0, m.start() - 600): m.end() + 300])
+        title = official_title(date_re.sub("", text).strip(" 　|-"))
         if len(title) < 6:
             continue
         seen.add(url)
@@ -252,10 +309,22 @@ def dedupe(existing: list[dict]) -> list[dict]:
     seen = {}
     for i, item in enumerate(items):
         item["title"] = clean_title(item["title"])
+        if item.get("cat") == "official":
+            item["title"] = official_title(item["title"])
         for key in article_keys(item):
             if key in seen:
                 parents[root(i)] = root(seen[key])
             seen[key] = i
+    # 途中で切れた見出しは、前半が同じで日付が近い（7日以内）記事にまとめる
+    full = [(norm(it["title"]), j) for j, it in enumerate(items) if not truncated(it["title"])]
+    for i, item in enumerate(items):
+        head = stem(item["title"]) if truncated(item["title"]) else ""
+        if len(head) < 12:
+            continue
+        near = [(gap, j) for t, j in full if t.startswith(head)
+                and (gap := abs((datetime.fromisoformat(items[j]["date"]) - datetime.fromisoformat(item["date"])).days)) <= 7]
+        if near:
+            parents[root(i)] = root(min(near)[1])
     groups = {}
     for i, item in enumerate(items):
         groups.setdefault(root(i), []).append(item)
@@ -267,13 +336,15 @@ def dedupe(existing: list[dict]) -> list[dict]:
                    bool(re.search(r"/(?:image_detail|photo|comment)/", n["url"])),
                    n["date"], -len(n["title"])))
         first = group[0]
-        if first["title"].endswith(("...", "…")):
-            complete = [n["title"] for n in group if n["url"] == first["url"]
-                        and not n["title"].endswith(("...", "…"))]
+        if truncated(first["title"]):
+            head = stem(first["title"])
+            complete = [n["title"] for n in group if not truncated(n["title"])
+                        and (n["url"] == first["url"] or norm(n["title"]).startswith(head))]
             if complete:
                 first["title"] = max(complete, key=len)
         for other in group[1:]:
             absorb(first, other)
+        prune_relays(first)
         result.append(first)
     return result
 
@@ -285,6 +356,8 @@ def merge(existing: list[dict], incoming: list[dict]) -> tuple[list[dict], int]:
     order = {"official": 0, "press": 1, "media": 2}
     for it in sorted(copy.deepcopy(incoming), key=lambda x: order.get(x["cat"], 9)):
         it["title"] = clean_title(it["title"])
+        if it.get("cat") == "official":
+            it["title"] = official_title(it["title"])
         keys = article_keys(it)
         # URLを先に照合し、同じ写真が違う見出しで配信されても再追加しない。
         twin = next((by_key[k] for k in sorted(keys, reverse=True) if k in by_key), None)
