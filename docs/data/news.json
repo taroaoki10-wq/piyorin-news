@@ -1,5 +1,29 @@
 [
  {
+  "id": "n20261028-0086cb3b",
+  "date": "2026-10-28",
+  "cat": "media",
+  "title": "静岡県三島市のブランドさつまいも「三島甘藷」を使ったスイーツ「ぴよりん」が、愛知県で期間限定販売！",
+  "source": "STRAIGHT PRESS",
+  "url": "https://straightpress.jp/20261028/1748901",
+  "related": [
+   {
+    "source": "ガジェット通信 GetNews",
+    "url": "https://getnews.jp/archives/3751733"
+   }
+  ],
+  "merged_ids": [
+   "n20261028-651d7bef"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの期間限定商品販売に関する記事",
+   "t": "2026-10-28"
+  }
+ },
+ {
   "id": "n20261027-78906490",
   "date": "2026-10-27",
   "cat": "media",
@@ -5008,22 +5032,6 @@
    "ok": true,
    "why": "ぴよりんのイベント企画",
    "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20261021-755bac54",
-  "date": "2026-07-17",
-  "cat": "media",
-  "title": "名古屋駅にオープンした話題の新施設「ぴよりんvillage」をSKE48センター大村杏がレポート！",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/1405058/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの新施設「ぴよりんvillage」のレポート記事",
-   "t": "2026-10-28"
   }
  },
  {
