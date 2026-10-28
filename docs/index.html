@@ -438,6 +438,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 @media (prefers-reduced-motion:reduce){.piyo-msg{animation:none}.piyo-sources{transition:none}}
 @media (max-width:620px){.piyo-idle,.piyo-idle-space{display:block}html.reader-open .piyo-idle{display:none}}
 .top-band{display:none}
+@media (max-width:620px) and (display-mode:standalone){.shell{padding-top:calc(env(safe-area-inset-top,0px) + 56px)}} /* ホーム画面版だけ、題名の行を iPhone が上の端にかけるぼかし（状態バーの下 40pt ほど）の外へ下げる */
 @media (max-width:620px){.top-band{display:block;position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:7;pointer-events:none}} /* 状態バーの裏に地の色の帯を固定。iPhone が上の端にかけるぼかしの代わりに、この色を使わせる */
 </style>
 
@@ -1152,19 +1153,6 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
   load();
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){load();doSync()}});
   setInterval(()=>{load();doSync()},5*60*1000);
-})();
-</script>
-<script>
-// iPhone のホーム画面版で、開いた直後だけ上の端（題名の行）がぼやける対策。iOS のぼかしの不具合と見ている。
-// 少しスクロールして戻すと消えるので、開いたとき・裏から戻ったときに、見えないほど少し動かしてすぐ戻す。
-(()=>{
-  if(!navigator.standalone)return;
-  const nudge=()=>{
-    if(window.scrollY!==0||document.body.style.position==='fixed'||document.documentElement.classList.contains('reader-open'))return;
-    requestAnimationFrame(()=>{window.scrollTo(0,2);requestAnimationFrame(()=>{if(window.scrollY<=2)window.scrollTo(0,0)})});
-  };
-  addEventListener('pageshow',()=>setTimeout(nudge,300));
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')setTimeout(nudge,300)});
 })();
 </script>
 <script>
