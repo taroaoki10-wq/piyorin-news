@@ -1155,6 +1155,19 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 })();
 </script>
 <script>
+// iPhone のホーム画面版で、開いた直後だけ上の端（題名の行）がぼやける対策。iOS のぼかしの不具合と見ている。
+// 少しスクロールして戻すと消えるので、開いたとき・裏から戻ったときに、見えないほど少し動かしてすぐ戻す。
+(()=>{
+  if(!navigator.standalone)return;
+  const nudge=()=>{
+    if(window.scrollY!==0||document.body.style.position==='fixed'||document.documentElement.classList.contains('reader-open'))return;
+    requestAnimationFrame(()=>{window.scrollTo(0,2);requestAnimationFrame(()=>{if(window.scrollY<=2)window.scrollTo(0,0)})});
+  };
+  addEventListener('pageshow',()=>setTimeout(nudge,300));
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')setTimeout(nudge,300)});
+})();
+</script>
+<script>
 // ---------- ぴよ（右下のボタンで呼ぶと、ページの手前に出てきてチャットできる。スマホの幅だけ） ----------
 // まとめ（data/piyo-greeting.json）とぴよメモ（data/piyo-memo.json）は GitHub Actions が作り置きする。
 // ぴよりんの基本情報（data/piyo-basics.json）は手で書く（公式サイトで確かめた値段・店・営業時間など）。
