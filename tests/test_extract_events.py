@@ -119,6 +119,19 @@ class EventExtractionTests(unittest.TestCase):
         other_day = {"title": "ドデ祭2026", "start": "2026-10-18", "end": "2026-10-18", "auto": True, "src": "p1"}
         self.assertEqual(ex.drop_duplicates([manual, same, sale, other_day]), [manual, sale, other_day])
 
+    def test_reworded_manual_duplicates_dropped_but_other_events_kept(self):
+        def ev(title, start, end, auto=True):
+            return {"title": title, "start": start, "end": end, **({"auto": True, "src": "p"} if auto else {})}
+        store = ev("ウルフィ×ぴよりん ぬいぐるみ 店頭販売", "2026-10-19", "2026-12-31", auto=False)
+        online = ev("ウルフィ×ぴよりん ぬいぐるみ オンライン発売", "2026-10-17", "2026-10-17", auto=False)
+        thunder = ev("ブラックサンダーぴよりん", "2026-10-02", "2026-10-03", auto=False)
+        events = [store, online, thunder,
+                  ev("ウルフィ×ぴよりん ぬいぐるみ 店頭販売開始", "2026-10-19", "2026-12-31"),
+                  ev("ウルフィ×ぴよりん ぬいぐるみ ドデ祭2026オンライン発売", "2026-10-17", "2026-10-17"),
+                  ev("ブラックサンダーぴよりんコラボアフタヌーンティー", "2026-10-02", "2026-10-03"),
+                  ev("ぴよりんゴジラ 店内飲食", "2026-10-19", "2026-12-31")]
+        self.assertEqual(ex.drop_duplicates(events), [store, online, thunder, events[5], events[6]])
+
     def test_known_events_sent_and_katakana_typo_fixed(self):
         import claude_events as ce
         captured = {}

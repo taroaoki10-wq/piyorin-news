@@ -227,25 +227,27 @@ def count_ranges(text: str, base: date) -> int:
     return len(found)
 
 
+def overlap(a: str, b: str) -> float:
+    """予定の名前の2文字ずつの並びが重なる割合（0〜1）。"""
+    na, nb = (re.sub(r"[\W_]+", "", unicodedata.normalize("NFKC", x)).lower() for x in (a, b))
+    if not na or not nb:
+        return 0.0
+    if na == nb:
+        return 1.0
+    ga, gb = ({x[i:i + 2] for i in range(len(x) - 1)} for x in (na, nb))
+    return len(ga & gb) / max(1, len(ga | gb))
+
+
 def similar(a: str, b: str) -> bool:
     """予定の名前が似ているか（片方がもう片方を含む、または2文字ずつの並びが半分以上重なる）。"""
     na, nb = (re.sub(r"[\W_]+", "", unicodedata.normalize("NFKC", x)).lower() for x in (a, b))
-    if not na or not nb:
-        return False
-    if na in nb or nb in na:
-        return True
-    ga, gb = ({x[i:i + 2] for i in range(len(x) - 1)} for x in (na, nb))
-    return len(ga & gb) / max(1, len(ga | gb)) >= 0.5
-
-
-def same_name(a: str, b: str) -> bool:
-    na, nb = (re.sub(r"[\W_]+", "", unicodedata.normalize("NFKC", x)).lower() for x in (a, b))
-    return bool(na) and na == nb
+    return bool(na and nb) and (na in nb or nb in na or overlap(a, b) >= 0.5)
 
 
 def drop_duplicates(events: list[dict]) -> list[dict]:
     """別々の記事から読んだ同じ予定（期間が同じで名前が似ている自動の予定）と、
-    手で登録した予定と期間も名前も同じ自動の予定は1つにする（手で登録した予定を残す）。"""
+    手で登録した予定と期間が同じで名前がほぼ同じ自動の予定は1つにする（手で登録した予定を残す）。
+    手の予定との比べ方は「含む」では判断しない（「ドデ祭2026」と「ドデ祭2026 会場販売」のような別の予定を残すため）。"""
     manual = [e for e in events if not e.get("auto")]
     kept = []
     for e in events:
@@ -255,7 +257,7 @@ def drop_duplicates(events: list[dict]) -> list[dict]:
             return k.get("start") == e.get("start") and (k.get("end") or k.get("start")) == end
 
         if e.get("auto") and (
-                any(same_span(k) and same_name(k.get("title", ""), e.get("title", "")) for k in manual)
+                any(same_span(k) and overlap(k.get("title", ""), e.get("title", "")) >= 0.6 for k in manual)
                 or any(k.get("auto") and k.get("src", k.get("url")) != e.get("src", e.get("url"))
                        and same_span(k) and similar(k.get("title", ""), e.get("title", "")) for k in kept)):
             print(f"重なる予定を外す: {e['start']}〜{end} {e.get('title', '')}")
