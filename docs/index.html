@@ -241,6 +241,8 @@ details.rel li a:hover{color:var(--caramel)}
 .reader-ev b{font-family:var(--f-mono);font-weight:500}
 .reader-note{color:var(--muted);font-size:13px}
 .reader-rel summary{font-size:13px}
+.reader-evs{display:none}
+@media (max-width:620px){.reader-evs{display:block;margin:12px 0 4px}.reader-evs>p{margin:0;font-size:12.5px;font-weight:700;color:var(--muted)}.reader-evs .reader-ev{margin-top:6px}.reader-evs-t{flex-basis:100%;font-weight:700}}
 @media (max-width:620px){.reader-body{padding:20px 18px 48px}.reader-body h2{font-size:20px}}
 
 /* ---------- bookmarks ---------- */
@@ -421,6 +423,8 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .piyo-choices button{font:inherit;font-size:13.5px;font-weight:700;border-radius:99px;padding:6px 16px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 .piyo-choices button.primary{background:var(--yolk);color:var(--yolk-ink);border-color:var(--yolk)}
 .piyo-choices button:disabled{cursor:default}
+.piyo-choices.wrap{flex-wrap:wrap}.piyo-choices.wrap button{white-space:nowrap}
+.piyo-choices.stack{flex-direction:column;align-items:flex-start}.piyo-choices.stack button{text-align:left;border-radius:14px}
 .piyo-choices button.chosen{background:var(--bg);color:var(--muted);border-color:var(--line)}
 .piyo-pet{align-self:flex-end;margin-right:14px;width:96px;height:104px;flex:none;border:0;padding:0;background:url(piyo-sprite-v2.png) 0 0/768px 624px no-repeat;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .piyo-pet:focus-visible{outline:2px solid var(--caramel);outline-offset:2px;border-radius:12px}
@@ -978,13 +982,21 @@ window.PiyoSplash=(function(){
     if(!links.length)return '';
     return `<details class="rel reader-rel"><summary>ほか${links.length}件の掲載元</summary><ul>${links.map(x=>`<li><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener" data-news="${esc(it.id)}" data-url="${esc(safeUrl(x.url))}" data-src="${esc(x.source)}">${esc(x.source)}</a>${mark(x.url)}</li>`).join('')}</ul></details>`;
   }
+  // 記事から読み取ったこれからの予定（スマホだけ。予定ごとに「iPhoneのカレンダーへ」）
+  function articleEvents(src){
+    if(!src.id)return '';
+    const it=state.news.find(x=>x.id===src.id),ids=new Set(it?idsOf(it):[src.id]),t=todayStr();
+    const evs=state.events.filter(e=>ids.has(e.src)&&(e.end||e.start)>=t).sort((a,b)=>a.start.localeCompare(b.start)).slice(0,4);
+    if(!evs.length)return '';
+    return `<div class="reader-evs"><p>この記事の予定</p>${evs.map(ev=>`<div class="reader-ev"><span class="reader-evs-t">${esc(ev.title)}</span>${eventSource(ev).chip}</div>`).join('')}</div>`;
+  }
   function paintStar(pop){const on=!!curSrc&&isBm(curSrc.url);const b=$('reader-star');b.setAttribute('aria-pressed',on);const l=on?'ブックマークを外す':'ブックマークに追加';b.setAttribute('aria-label',l);b.title=l;b.classList.remove('pop');if(pop&&on){void b.offsetWidth;b.classList.add('pop')}}
   async function openReader(src){
     const token=++readerToken;
     curSrc=src;paintStar(false);paintDel();
     const paint=(art,loading)=>{
       const tt=cleanTitle(art&&art.title||src.title);
-      let h=`<h2 id="reader-title">${esc(tt)}</h2><div class="reader-ev">${src.chip}</div>${readerRel(src)}${hiddenNote(src)}`;
+      let h=`<h2 id="reader-title">${esc(tt)}</h2><div class="reader-ev">${src.chip}</div>${readerRel(src)}${articleEvents(src)}${hiddenNote(src)}`;
       if(loading)h+='<p class="reader-note">読み込み中…</p>';
       else if(art&&art.blocks&&art.blocks.length){
         h+=renderBlocks(art,tt);
@@ -1281,15 +1293,35 @@ window.PiyoSplash=(function(){
   window.PiyoPage={
     openNews(id){const it=state.news.find(x=>idsOf(x).includes(id));if(it)openReader(newsSource(it))},
     openEvent(id){const ev=state.events.find(x=>x.id===id);if(ev)openReader(eventSource(ev))},
+    icsInfo(id){return state.ics&&state.ics[id]||null}, // 予定のカレンダーのファイル（時刻・選べる知らせ方）
+    addToCalendar(id,alarm){return addToCalendar(id,alarm)},
+    planned(){return loadPlanned()},
   };
-  // 予定を iPhone のカレンダーに入れる（.ics のファイルを開く。ボタンはスマホだけ）
-  document.addEventListener('click',e=>{
-    const b=e.target.closest('[data-ics]');if(!b||!window.PiyoExtras)return;
-    const ev=state.events.find(x=>x.id===b.dataset.ics);if(!ev)return;
-    const url=URL.createObjectURL(new Blob([PiyoExtras.ics(ev,Date.now())],{type:'text/calendar;charset=utf-8'}));
-    const a=document.createElement('a');a.href=url;a.download='piyorin-'+ev.id+'.ics';document.body.appendChild(a);a.click();a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),60000);
-  });
+  // 予定を iPhone のカレンダーに入れる（ボタンはスマホだけ）。自動更新でサイトに置いたファイル（data/ics/）を開くと、iPhone が「カレンダーに追加」を出す
+  // alarm：eve＝前の日の夜20時・morning＝当日の朝9時・hour＝始まる1時間前・none＝知らせない（ボタンからは、時刻つきは1時間前・ほかは当日の朝）
+  // 開いた予定は「入れた予定」としてこの端末に覚え、ぴよが前の日と当日のあいさつで声をかける
+  const PLANNED='piyo-planned';
+  function loadPlanned(){try{const v=JSON.parse(localStorage.getItem(PLANNED)||'[]');return Array.isArray(v)?v.filter(p=>p&&p.id&&p.start):[]}catch(_){return[]}}
+  function savePlanned(ev,info,alarm){
+    const t=todayStr(),list=loadPlanned().filter(p=>p.id!==ev.id&&(p.end||p.start)>=t);
+    list.push({id:ev.id,title:ev.title,start:ev.start,end:ev.end||ev.start,time:info&&info.time||'',alarm});
+    try{localStorage.setItem(PLANNED,JSON.stringify(list.slice(-30)))}catch(_){}
+  }
+  const defaultAlarm=info=>!info?'none':info.timed&&info.alarms.includes('hour')?'hour':info.alarms.includes('morning')?'morning':info.alarms[0];
+  function addToCalendar(id,alarm){
+    const ev=state.events.find(x=>x.id===id);if(!ev)return false;
+    const info=state.ics&&state.ics[id],al=info&&info.alarms.includes(alarm)?alarm:defaultAlarm(info);
+    const a=document.createElement('a');a.rel='noopener';
+    if(info){a.href='data/ics/'+encodeURIComponent(info.f)+'-'+al+'.ics';a.target='_blank'}
+    else if(window.PiyoExtras){ // まだファイルが無い予定（次の自動更新で作られる）は、ページの中で作る（知らせる時は付かない）
+      const url=URL.createObjectURL(new Blob([PiyoExtras.ics(ev,Date.now())],{type:'text/calendar;charset=utf-8'}));
+      a.href=url;a.download='piyorin-'+ev.id+'.ics';setTimeout(()=>URL.revokeObjectURL(url),60000);
+    }else return false;
+    document.body.appendChild(a);a.click();a.remove();
+    savePlanned(ev,info,info?al:'none');
+    return true;
+  }
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-ics]');if(b)addToCalendar(b.dataset.ics)});
 
   // ---------- 引っ張って更新（スマホだけ。いちばん上で下に引いて離すと、ぴよが跳ねながら読み直す） ----------
   {
@@ -1327,11 +1359,12 @@ window.PiyoSplash=(function(){
     const serial=++newsLoadSerial;
     const bust='?t='+Date.now();
     try{
-      const [n,e,m]=await Promise.all(['news','events','meta'].map(f=>fetch('data/'+f+'.json'+bust).then(r=>r.ok?r.json():null).catch(()=>null)));
+      const [n,e,m,ic]=await Promise.all(['news','events','meta','ics/index'].map(f=>fetch('data/'+f+'.json'+bust).then(r=>r.ok?r.json():null).catch(()=>null)));
       if(serial!==newsLoadSerial)return;
       if(Array.isArray(n))currentNews=n;
       state.news=PiyoNewsArchive.combine(currentNews,archivedNews);
       if(Array.isArray(e))state.events=e;
+      if(ic&&typeof ic==='object'&&!Array.isArray(ic))state.ics=ic; // 予定ごとのカレンダーのファイル（scripts/build_ics.py）
       if(m&&m.updatedAt)state.updatedAt=m.updatedAt;
       if(Array.isArray(n))noteSeen();
       renderAll();
@@ -1782,8 +1815,10 @@ window.PiyoSplash=(function(){
       fillSuggest(X&&!omikujiDrawn()?[...base.slice(0,5),'今日のおみくじ']:base); // おみくじは1日1回、候補のいちばん右に出す
       showSuggest(); // 決まった候補だけを出す。あいさつの途中では入れ替えない
       const ex=X?X.greeting(extrasCtx()):null; // 時間帯のあいさつと、近い予定の「あと◯日」
+      const P=globalThis.PiyoPage,pl=X&&X.plannedLine&&P&&P.planned?X.plannedLine(P.planned(),todayStr()):null; // カレンダーに入れた予定（当日と前の日）
       const wl=weatherLine(),lines=g?g.lines.slice():[ex?'ぴよりんのことなら聞いてぴよ。':'こんにちは、ぴよだぴよ！ぴよりんのことなら聞いてぴよ。'];
-      if(ex&&ex.countdown)lines.unshift(ex.countdown.text);
+      if(ex&&ex.countdown&&!(pl&&ex.countdown.event&&ex.countdown.event.id===pl.id))lines.unshift(ex.countdown.text);
+      if(pl)lines.unshift(pl.text);
       if(wl)lines.unshift(wl);
       if(ex)lines.unshift(ex.hello);
       play('wave',()=>{
@@ -2024,17 +2059,18 @@ window.PiyoSplash=(function(){
   }
   let busy=false,pendingChip=null;
   let asked={q:'',chip:'',way:'',web:false},fixPending=null; // asked: いま答えている質問（「ちがうよ」の記録に使う。web は Web で調べたか）。fixPending: 「どこがちがう？」と聞いている途中
-  let lastKnowledge='',lastExtra=''; // いまの答えのもとにした知識と、読んだ記事（答えの日付と値段を確かめる）
+  let lastKnowledge='',lastExtra='',lastCalendar=[]; // いまの答えのもとにした知識と、読んだ記事（答えの日付と値段を確かめる）。さっき話したこれからの予定（「カレンダーに入れて」だけのとき）
   // 天気・暦・予定・基本情報・おみくじは、手元のデータでその場で答える（Claude を使わないので料金もキーもいらない）
   function localReply(q){
     const X=globalThis.PiyoExtras;if(!X||!data)return null;
     return X.localAnswer(q,{...extrasCtx(),omikuji:{seed:omikujiSeed(),drawn:omikujiDrawn()}});
   }
   function answerLocal(q,a){
+    if(a.kind==='calendar')return answerCalendar(q,a);
     const text=piyoTone(a.text),msg=piyoMsg(a.sources==='weather');
     history=[...history,{role:'user',content:q},{role:'assistant',content:text}].slice(-10);
     if(a.kind==='omikuji')markOmikuji();
-    play(a.mood||'wave');msg.say(fmt(text),()=>{msg.links(refLinks(a.refs));addFollowUps(a.refs);if(msg.fix)msg.fix({src:'local',q:asked.q||q,a:text,chip:asked.chip})});
+    play(a.mood||'wave');msg.say(fmt(text),()=>{msg.links(refLinks(a.refs));offerCalendar(msg,a.refs);addFollowUps(a.refs);if(msg.fix)msg.fix({src:'local',q:asked.q||q,a:text,chip:asked.chip})});
     busy=false;sync();
   }
   // 返事を作りながら、言い終わった文から順に出す（「ます」が「るぴよ」に変わって見えないよう、文の途中は出さない）
@@ -2208,7 +2244,7 @@ window.PiyoSplash=(function(){
     history=[...history,{role:'user',content:q},{role:'assistant',content:text}].slice(-10);
     if(!streamed)play('jump'); // 流して出したときは、最初の文が出たときにもう跳ねている
     const refs=[...r.ids.map(id=>refMap[id]).filter(Boolean),...(extra||[])],links=refLinks(refs);
-    msg.say(fmt(text+note),()=>{if(msg.links)msg.links(links);addFollowUps(refs);if(msg.fix)msg.fix({src:asked.way||'api',q:asked.q||q,a:text,chip:asked.chip})},streamed);busy=false;sync();
+    msg.say(fmt(text+note),()=>{if(msg.links)msg.links(links);offerCalendar(msg,refs);addFollowUps(refs);if(msg.fix)msg.fix({src:asked.way||'api',q:asked.q||q,a:text,chip:asked.chip})},streamed);busy=false;sync();
   }
   // 答えの日付と値段が、渡した知識・読んだ記事・聞かれた文に無いときの一言（手元で確かめる。料金はかからない）。
   // Web で調べた答えは、調べたページが手元に無いので確かめない
@@ -2229,6 +2265,46 @@ window.PiyoSplash=(function(){
     [...qs].reverse().forEach(x=>suggest.prepend(chipFor(x)));
     while(suggest.children.length>6)suggest.lastElementChild.remove(); // 並べるのは6つまで（押した候補の補充で、またあとから出てくる）
     suggestLimit=Math.max(suggestLimit,suggest.children.length);suggest.hidden=false;suggest.scrollLeft=0;
+  }
+  // 答えに出たこれからの予定を、カレンダーに入れられるようにする（押すと、いつ知らせるかをぴよが聞く。料金はかからない）
+  function upcomingFrom(refs){
+    if(!data||!refs)return [];
+    const t=todayStr(),out=[],seen=new Set();
+    for(const r of refs){
+      for(const e of (data.events||[]).filter(e=>r.type==='event'?e.id===r.id:e.src===r.id))
+        if((e.end||e.start)>=t&&!seen.has(e.id)){seen.add(e.id);out.push(e)}
+    }
+    return out.slice(0,3);
+  }
+  function offerCalendar(msg,refs){
+    const P=globalThis.PiyoPage,evs=upcomingFrom(refs);
+    if(evs.length)lastCalendar=evs;
+    if(!evs.length||!msg.choices||!P||!P.addToCalendar)return;
+    msg.choices([['カレンダーに入れる',()=>calendarFlow(evs),true]]);
+  }
+  function calendarFlow(evs){
+    if(evs.length>1)return piyoMsg().say('どれをカレンダーに入れるぴよ？',m=>m.choices(evs.map(e=>[e.title.slice(0,24),()=>alarmFlow(e)])).classList.add('stack'));
+    alarmFlow(evs[0]);
+  }
+  const hourBefore=t=>{const [h,m]=t.split(':').map(Number),x=(h*60+m+1380)%1440;return Math.floor(x/60)+'時'+(x%60?String(x%60).padStart(2,'0')+'分':'')};
+  function alarmFlow(ev){
+    const P=globalThis.PiyoPage,info=P&&P.icsInfo?P.icsInfo(ev.id):null,alarms=info?info.alarms:['none'];
+    const label={eve:'前の日の夜（20時）',morning:'当日の朝（9時）',hour:info&&info.time?`始まる1時間前（${hourBefore(info.time)}）`:'',none:'知らせなくていい'};
+    piyoMsg().say(fmt(`**${ev.title}**をカレンダーに入れるぴよ！いつ知らせるぴよ？`),m=>m.choices(alarms.map(a=>[label[a],()=>putCalendar(ev,a,info),a===alarms[0]])).classList.add('wrap'));
+  }
+  function putCalendar(ev,alarm,info){
+    const P=globalThis.PiyoPage;
+    if(!P||!P.addToCalendar(ev.id,alarm)){play('sad');piyoMsg().say('ごめんぴよ…カレンダーの画面を開けなかったぴよ。');return}
+    const md=s=>`${Number(s.slice(5,7))}月${Number(s.slice(8,10))}日`,prev=new Date(Date.parse(ev.start+'T00:00:00Z')-864e5).toISOString();
+    const when={eve:`${md(prev)}の夜20時に知らせるぴよ。`,morning:`${md(ev.start)}の朝9時に知らせるぴよ。`,hour:info&&info.time?`${md(ev.start)}の${hourBefore(info.time)}に知らせるぴよ。`:''}[alarm];
+    play('jump');piyoMsg().say(`カレンダーに入れる画面を開いたぴよ！「追加」を押せば${when?'、'+when:'入るぴよ。'}`);
+  }
+  // 「〇〇をカレンダーに入れて」（その場で答える。予定の名前が無ければ、さっき話した予定）
+  function answerCalendar(q,a){
+    const evs=a.events&&a.events.length?a.events:lastCalendar;
+    busy=false;sync();
+    if(!evs.length){play('sad');piyoMsg().say('どの予定を入れるか分からなかったぴよ…。予定の名前を入れて、もう一度言ってみてぴよ。');return}
+    calendarFlow(evs);
   }
   // 返事に出た記事・予定を札にする（3つまで。データに無いものは出さない）
   function refLinks(refs){

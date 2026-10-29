@@ -309,6 +309,8 @@ window.PiyoExtras = (function () {
   function localAnswer(q, ctx) {
     const t = norm(q);
     if (!t || t.length > 48) return null;
+    const cal = calendarAsk(t, ctx);
+    if (cal) return cal;
     if (/なぜ|どうして|理由|比べ|違い|おすすめ|オススメ|どっち|調べ|検索|ウェブ|web|ネット|記事/i.test(t)) return null;
     if (/おみくじ|占い|うらない|運勢/.test(t)) {
       if (!ctx.omikuji) return null;
@@ -559,5 +561,31 @@ window.PiyoExtras = (function () {
     return [...new Set(out)].slice(0, 2);
   }
 
-  return { localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf };
+  // ---- カレンダーに入れてほしい（「〇〇をカレンダーに入れて」「〇〇を知らせて」） ----
+  // 予定の名前があればその予定、無ければ空（ページが、さっき話した予定を使う）。「知らせて」だけで予定の名前が無いときは、ふつうの質問にする
+  function calendarAsk(t, ctx) {
+    const cal = /カレンダー|リマインダ|リマインド/.test(t);
+    if (!(cal && /入れ|追加|登録|して|設定|お願い/.test(t)) && !/知らせて|通知して/.test(t)) return null;
+    const upcoming = (ctx.events || []).filter(e => e && e.start && e.title && endOf(e) >= ctx.today);
+    // お願いの言葉（「カレンダーに入れて」など）は外してから探す（「カレンダー」が「ぴよりんカレンダー2027」に当たらないように）
+    const name = t.replace(/^(?:iphoneの)?(?:カレンダー|リマインダー?|リマインド)(?:に|へ|で)?/i, '')
+      .replace(/(?:を|の)?(?:iphoneの)?(?:カレンダー|リマインダー?|リマインド)?(?:に|へ|で)?(?:入れ|追加|登録|設定|知らせ|通知)(?:し)?(?:て|る)?(?:ね|ください|お願い|ほしい|欲しい|おいて)?$/i, '');
+    const hits = name ? matchEvents(name, upcoming).slice(0, 3) : [];
+    if (!hits.length && !cal) return null;
+    return { kind: 'calendar', events: hits, text: '' };
+  }
+
+  // ---- カレンダーに入れた予定を、当日と前の日のあいさつで話す ----
+  function plannedLine(planned, today) {
+    const list = (planned || []).filter(p => p && p.start && p.title);
+    const at = p => p.time ? `（${Number(p.time.slice(0, 2))}時${p.time.slice(3) !== '00' ? p.time.slice(3) + '分' : ''}から）` : '';
+    const first = d => list.filter(p => p.start === d).sort((a, b) => (a.time || '').localeCompare(b.time || ''))[0];
+    let p = first(today);
+    if (p) return { id: p.id, text: `今日は**${p.title}**の日だぴよ${at(p)}！カレンダーに入れてたぴよね。` };
+    p = first(addDays(today, 1));
+    if (p) return { id: p.id, text: `明日は**${p.title}**だぴよ${at(p)}！カレンダーに入れてたぴよね。` };
+    return null;
+  }
+
+  return { localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf, plannedLine };
 })();

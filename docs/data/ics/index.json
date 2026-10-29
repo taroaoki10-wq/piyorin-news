@@ -1,0 +1,143 @@
+{
+ "auto-n2026102183b7c75c": {
+  "alarms": [
+   "eve",
+   "morning",
+   "hour",
+   "none"
+  ],
+  "f": "auto-n2026102183b7c75c",
+  "time": "12:00",
+  "timed": true
+ },
+ "auto-n2026102183b7c75c-2": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-n2026102183b7c75c-2",
+  "time": "",
+  "timed": false
+ },
+ "auto-officialp5620": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5620",
+  "time": "",
+  "timed": false
+ },
+ "auto-officialp5628": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5628",
+  "time": "",
+  "timed": false
+ },
+ "auto-officialp5633": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5633",
+  "time": "",
+  "timed": false
+ },
+ "auto-officialp5633-3": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5633-3",
+  "time": "",
+  "timed": false
+ },
+ "auto-officialp5638": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5638",
+  "time": "",
+  "timed": false
+ },
+ "auto-officialp5642": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5642",
+  "time": "",
+  "timed": false
+ },
+ "auto-officialp5653": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5653",
+  "time": "",
+  "timed": false
+ },
+ "auto-officialp5653-2": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5653-2",
+  "time": "",
+  "timed": false
+ },
+ "auto-officialp5657": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5657",
+  "time": "",
+  "timed": false
+ },
+ "e-oshitabi": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "e-oshitabi",
+  "time": "",
+  "timed": false
+ },
+ "e-tour": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "e-tour",
+  "time": "",
+  "timed": false
+ },
+ "e-wolfy-village": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "e-wolfy-village",
+  "time": "",
+  "timed": false
+ }
+}
