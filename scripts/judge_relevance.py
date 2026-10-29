@@ -22,7 +22,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from claude_events import API_URL, MODEL  # noqa: E402  モデルや接続先は予定の抽出と同じ設定を使う
+from claude_events import API_URL, MODEL, note_stop  # noqa: E402  モデルや接続先は予定の抽出と同じ設定を使う
 
 JST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent.parent
@@ -105,7 +105,7 @@ def judge_batch(items: list[dict], api_key: str) -> tuple[dict[int, tuple[bool, 
         )
     payload = {
         "model": MODEL,
-        "max_tokens": 300 + 90 * len(items),
+        "max_tokens": 400 + 120 * len(items),
         "system": PROMPT,
         "tools": [TOOL],
         "tool_choice": {"type": "tool", "name": "save_judgments"},
@@ -118,6 +118,7 @@ def judge_batch(items: list[dict], api_key: str) -> tuple[dict[int, tuple[bool, 
     )
     with urllib.request.urlopen(req, timeout=60) as r:
         res = json.load(r)
+    note_stop(res, "関連判定")
     out: dict[int, tuple[bool, str]] = {}
     for block in res.get("content", []):
         if block.get("type") == "tool_use" and block.get("name") == "save_judgments":

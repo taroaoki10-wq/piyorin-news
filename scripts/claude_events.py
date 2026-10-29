@@ -1,7 +1,9 @@
 """Claude API に公式記事を渡し、カレンダーの予定を読み取ってもらう。
 
 GitHub の Secrets に ANTHROPIC_API_KEY を登録すると使われます。
-モデルは環境変数 CLAUDE_MODEL で変更できます（既定は Haiku 4.5）。
+モデルは環境変数 CLAUDE_MODEL で変更できます（既定は Haiku 5.5。2026-10-29 に Haiku 4.5 から替えた）。
+Haiku 5.5 は同じ文を約 3 割多いトークンで数えるので、答えの長さの上限は Haiku 4.5 のころより広げてある。
+どれも道具を 1 つ決めて呼ぶ（tool_choice）ので、答える前に考える（thinking）ことはない。
 
 トークンを節約するため、
   - 記事全文ではなく、日付や会場が書かれた行とその前後だけを渡す
@@ -13,11 +15,12 @@ from __future__ import annotations
 import json
 import os
 import re
+import sys
 import urllib.request
 from datetime import date, timedelta
 
 API_URL = "https://api.anthropic.com/v1/messages"
-MODEL = os.environ.get("CLAUDE_MODEL") or "claude-haiku-4-5-20251001"
+MODEL = os.environ.get("CLAUDE_MODEL") or "claude-haiku-5-5"
 KINDS = ["sale", "event", "campaign", "release"]
 MAX_SNIPPET = 2500  # 1記事あたりに渡す最大文字数
 
@@ -117,6 +120,13 @@ def validate(raw: list, article: dict) -> list[dict]:
     return out
 
 
+def note_stop(res: dict, what: str) -> None:
+    """答えが途中で止まったとき（長さの上限・安全のしくみで断られた）は、更新の記録に残す（Haiku 5.5 から断られることがある）。"""
+    stop = res.get("stop_reason")
+    if stop in ("max_tokens", "refusal"):
+        print(f"{what}: 答えが途中で止まりました（{stop}）", file=sys.stderr)
+
+
 def claude_events_batch(items: list[tuple[dict, str]], api_key: str,
                         known: list[dict] = ()) -> tuple[dict[int, list[dict]], dict]:
     """[(記事, 抜粋)] をまとめて読ませ、({記事の番号: 予定のリスト}, 使用量) を返す。known は手で登録済みの予定。"""
@@ -126,7 +136,7 @@ def claude_events_batch(items: list[tuple[dict, str]], api_key: str,
     ]
     payload = {
         "model": MODEL,
-        "max_tokens": 400 + 250 * len(items),
+        "max_tokens": 600 + 350 * len(items),
         "system": PROMPT,
         "tools": [TOOL],
         "tool_choice": {"type": "tool", "name": "save_events"},
@@ -139,6 +149,7 @@ def claude_events_batch(items: list[tuple[dict, str]], api_key: str,
     )
     with urllib.request.urlopen(req, timeout=120) as r:
         res = json.load(r)
+    note_stop(res, "予定の読み取り")
     raw = []
     for block in res.get("content", []):
         if block.get("type") == "tool_use" and block.get("name") == "save_events":

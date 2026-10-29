@@ -23,7 +23,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from claude_events import API_URL, MODEL  # noqa: E402  モデルや接続先は予定の抽出と同じ設定を使う
+from claude_events import API_URL, MODEL, note_stop  # noqa: E402  モデルや接続先は予定の抽出と同じ設定を使う
 from news_store import linked_sources, nfkc, primary_sources  # noqa: E402
 
 JST = timezone(timedelta(hours=9))
@@ -254,6 +254,7 @@ def call_tool(system: str, tool: dict, content: str, max_tokens: int, api_key: s
     )
     with urllib.request.urlopen(req, timeout=90) as r:
         res = json.load(r)
+    note_stop(res, "ぴよのメモとまとめ")
     for block in res.get("content", []):
         if block.get("type") == "tool_use" and block.get("name") == tool["name"]:
             return block.get("input") or {}, res.get("usage", {})
@@ -298,7 +299,7 @@ def memo_batch(items: list[dict], api_key: str) -> tuple[dict[int, str], dict]:
             f'<article n="{i}">\nタイトル: {it.get("title", "")}\n公開日: {it.get("date", "")}\n'
             f'本文:\n{text or "（本文なし。タイトルだけで書く）"}\n</article>'
         )
-    got, usage = call_tool(MEMO_PROMPT, MEMO_TOOL, "\n\n".join(parts), 300 + 220 * len(items), api_key)
+    got, usage = call_tool(MEMO_PROMPT, MEMO_TOOL, "\n\n".join(parts), 400 + 300 * len(items), api_key)
     out: dict[int, str] = {}
     for m in got.get("memos") or []:
         if isinstance(m, dict) and isinstance(m.get("n"), int) and 0 <= m["n"] < len(items) and m.get("memo"):
@@ -369,7 +370,7 @@ def build_greeting(memos: dict, events: list[dict], api_key: str) -> tuple[dict 
     old = load_json(GREETING_FILE, {})
     if isinstance(old, dict) and old.get("basis") == basis:
         return None, {}
-    got, usage = call_tool(GREETING_PROMPT, GREETING_TOOL, text, 900, api_key)
+    got, usage = call_tool(GREETING_PROMPT, GREETING_TOOL, text, 1200, api_key)
     today = today_jst()
     lines = [piyo_tone(absolute_days(correct_memo_names(re.sub(r"\s+", " ", str(x)).strip()), today)[:80])
              for x in got.get("lines") or [] if str(x).strip()][:6]
