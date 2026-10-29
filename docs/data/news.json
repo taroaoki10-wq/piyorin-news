@@ -30,6 +30,10 @@
    {
     "source": "MANTANWEB（まんたんウェブ）",
     "url": "https://mantan-web.jp/prtimes/article/20261029prt00m200000263a.html"
+   },
+   {
+    "source": "Mantan Web",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNcUtCNFZwSkpzVVNsQjRUemgxN2hFSWhMeWF3OFdaVUwwV2E3b1N0eEZhQlBJaXFUQnNObkw1LTNnYUFyYVJQaFdtUi1uMFJuTWdvc19zbUFjZE9jeTlOU3ZmLVlPa00tQmRWM0stV0RPWXNfMW1mMUNQS0Z5OWhpYUJmdFdHNDR5?oc=5"
    }
   ],
   "merged_ids": [
@@ -67,6 +71,10 @@
    {
     "source": "フーズチャネル",
     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE55cmM5YTBvYUk5aDJkbW0xYXBaaWVDT2VFQ3FuS0U3ZnVGbnQxU090NDNRaURqdGJXbWw4XzdkUG8tSFREcHlQMzFNQ3FHaDlHYjdiYUdB?oc=5"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5lV0JXanloVlU3WFI0dFo5UTI1ZzNoeUkySkxLV3JWcXR5S1NpZUZPR2dISFRXNEwyZEVHUjZUSmdLR05SWXRkZEwtWHpSNzlQckFsR0pYUm05emc4aUJXdUNqWGZkQnFqR1Njc2tPYXdoSGJYalNiVzE5SQ?oc=5"
    }
   ],
   "dv": 3,
@@ -235,9 +243,14 @@
    {
     "source": "dメニューニュース",
     "url": "https://topics.smt.docomo.ne.jp/article/jtown/region/jtown-367413"
+   },
+   {
+    "source": "アメーバニュース",
+    "url": "https://news.ameba.jp/entry/20261029-89671714/"
    }
   ],
   "merged_ids": [
+   "n20261029-cc905ad5",
    "n20261029-e5d75809"
   ],
   "dv": 3,
