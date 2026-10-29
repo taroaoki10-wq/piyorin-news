@@ -101,13 +101,15 @@ class GreetingGroundingTests(unittest.TestCase):
              "・クリスマスケーキ予約**あした12時**から受け付けるぴよ", "・**紅茶ぴよりんおでかけセット**11月7日・8日に山陽百貨店で売るぴよ"],
             ["ぴよりんゴジラについて", "ゴジラコラボセットについて", "紅茶ぴよりんセットについて", "クリスマスケーキについて"], text)
         self.assertEqual(result["v"], 5)
-        self.assertEqual(result["lines"][1], "・**ぴよりんカレンダー2027**10月29日先行販売開始だぴよ")
+        self.assertEqual(result["lines"][1], "・**ぴよりんカレンダー2027**、10月29日先行販売開始だぴよ")  # 数字とつながらないように
         self.assertEqual(result["lines"][2], "・クリスマスケーキ予約**10月30日12時**から受け付けるぴよ")
         self.assertEqual(result["suggest"], ["ぴよりんゴジラについて", "紅茶ぴよりんセットについて", "クリスマスケーキについて"])
 
     def test_absolute_days_covers_kanji_and_month_end(self):
         self.assertEqual(piyo.absolute_days("今日から・明日まで・あさって・明後日・本日", date(2026, 10, 31)),
                          "10月31日から・11月1日まで・11月2日・11月2日・10月31日")
+        self.assertEqual(piyo.absolute_days("限定セット3きょう発売・**第2弾3**あした12時・第2弾あさって", date(2026, 10, 29)),
+                         "限定セット3、10月29日発売・**第2弾3**、10月30日12時・第2弾10月31日")
 
 
 if __name__ == "__main__":
