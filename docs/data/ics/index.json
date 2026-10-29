@@ -80,16 +80,6 @@
   "time": "",
   "timed": false
  },
- "auto-officialp5653": {
-  "alarms": [
-   "eve",
-   "morning",
-   "none"
-  ],
-  "f": "auto-officialp5653",
-  "time": "",
-  "timed": false
- },
  "auto-officialp5653-2": {
   "alarms": [
    "eve",
@@ -114,11 +104,10 @@
   "alarms": [
    "eve",
    "morning",
-   "hour",
    "none"
   ],
   "f": "auto-officialp5661",
-  "time": "15:00",
+  "time": "",
   "timed": false
  },
  "e-oshitabi": {

@@ -18,28 +18,22 @@
    {
     "source": "時事ドットコム",
     "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBKdUZnQk93RkxZSHFMRVQzcGYyUlJTOHFfSlp4MkdEREVkWjk3X3JsMTBUYWJ2aXR6eHFwX2V3ZW9yTHhzNndXMUNucUx4QUZIUUF3dG1KWHBNaEJoTFJ0ZGtZNl9KdEVHRkZR?oc=5"
-   }
-  ]
- },
- {
-  "id": "official-p5661",
-  "date": "2026-10-29",
-  "cat": "official",
-  "title": "ぎゅっと楽しむ新感覚の「ぴよりん」が手のひらサイズYogibo「Squeezibo」で登場！",
-  "source": "ぴよりん公式サイト",
-  "url": "https://piyorin.com/news/p5661/",
-  "related": [
+   },
    {
-    "source": "PR TIMES",
-    "url": "https://prtimes.jp/main/html/rd/p/000000266.000124425.html"
+    "source": "Infoseek",
+    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5OQmJLSV8tSVBlUms1RzJaVUt5QW8wUnh3NDEzVWxza2I3cjRJcWEzZ2NsbG9ySm41bjRLb1pFa0c5ZFViZ2lhdkgzRHoydkRKcUdNOE9jM1ZlY2ZxQTNuSjVNOHhIUWdhOVJ3VmZLWG5Hdw?oc=5"
+   },
+   {
+    "source": "フーズチャネル",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5SbXUzTnhzNFl4Y1ktTngzTWNqMDlocnBFYW5vQmljUURsbHhQd3lfc1RYcDh2T0YyVEdBYWRRcGtrQW5XWlVXR19JdmN6QUw3aUtHclVB?oc=5"
    },
    {
     "source": "MANTANWEB（まんたんウェブ）",
-    "url": "https://mantan-web.jp/prtimes/article/20261029prt00m200001105a.html"
+    "url": "https://mantan-web.jp/prtimes/article/20261029prt00m200000263a.html"
    }
   ],
   "merged_ids": [
-   "n20261029-46708c8a"
+   "n20261029-4612fe69"
   ]
  },
  {
@@ -49,14 +43,43 @@
   "title": "プレスリリース：ぎゅっと楽しむ新感覚の「ぴよりん」が手のひらサイズYogibo「Squeezibo」で登場！（PR TIMES）",
   "source": "毎日新聞",
   "url": "https://mainichi.jp/articles/20261029/pr2/00m/020/927000c",
-  "related": [],
+  "related": [
+   {
+    "source": "ぴよりん公式サイト",
+    "url": "https://piyorin.com/news/p5661/"
+   },
+   {
+    "source": "PR TIMES",
+    "url": "https://prtimes.jp/main/html/rd/p/000000266.000124425.html"
+   },
+   {
+    "source": "MANTANWEB（まんたんウェブ）",
+    "url": "https://mantan-web.jp/prtimes/article/20261029prt00m200001105a.html"
+   },
+   {
+    "source": "イザ！",
+    "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5lY0hHOElydUdVZEFDVjVjNTBFZHZ1bUVweUYtVzNTVnZ1MXA2TEpEZGEzbHFLSXdqSnM0OHJSOVpKdXdVbFFLelh5cE44RjZweFFxank5YThFSGVvNm9jMmtHVGY1Y2NLLUlvMVRtNUV6Y2JGUWtfa0lB?oc=5"
+   },
+   {
+    "source": "Excite エキサイト",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1od1dfMk45SldUNWlTeTVUUFBmeWdQNzBQdnVMU01uM08xamhPSTNJcjI5Q1pqN1BxSEczdFAwN3BpQmZVOXhfZnBSTm91QmttdldFWFBYckJFdE84VWlOLUVVbThCbWQ1OU5JZ2ZIN3MzQ1oyaVE?oc=5"
+   },
+   {
+    "source": "フーズチャネル",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE55cmM5YTBvYUk5aDJkbW0xYXBaaWVDT2VFQ3FuS0U3ZnVGbnQxU090NDNRaURqdGJXbWw4XzdkUG8tSFREcHlQMzFNQ3FHaDlHYjdiYUdB?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
    "ok": true,
    "why": "ぴよりんのYogiboコラボ・クラファンの記事",
    "t": "2026-10-29"
-  }
+  },
+  "merged_ids": [
+   "n20261029-46708c8a",
+   "official-p5661"
+  ]
  },
  {
   "id": "n20261029-a7a833be",
@@ -117,7 +140,16 @@
   "title": "【JR東海】ぎゅっと楽しむ新感覚のぴよりん・イコちゃん誕生",
   "source": "MANTANWEB（まんたんウェブ）",
   "url": "https://mantan-web.jp/prtimes/article/20261029prt00m200001138a.html",
-  "related": [],
+  "related": [
+   {
+    "source": "PR TIMES",
+    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9JQzRDdnFhV1pDODJaZElrMEJZUnpkcC1QbDZveU03NHdoLVlGT1pfeWR1YnJ6Ui1ESm9PZzc0TUNmQlFSLUxReUd4MjlpSC1RcUxmRnFTa2R1MnBoRE8yWnNfaGloZkdJZ3c?oc=5"
+   },
+   {
+    "source": "時事ドットコム",
+    "url": "https://www.jiji.com/jc/article?k=000000103.000160429&g=prt"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -137,6 +169,14 @@
    {
     "source": "アニメ！アニメ！",
     "url": "https://animeanime.jp/release/prtimes/20261029/323372.html"
+   },
+   {
+    "source": "ＪＲ東海",
+    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1LMWw4aUkyQlRyYUVZSXk4T05Ta215d1FQYWgwUTVoRnlaRmtablNqVm1EUVdRMi1nQ3lhTlpfOU45MEZiYmRJOEFJVVczYjVDZ09FQlBveEllZmtMNVV2RmZQcEtNT2hJeFE?oc=5"
+   },
+   {
+    "source": "時事ドットコム",
+    "url": "https://www.jiji.com/jc/article?k=000002435.000095753&g=prt"
    }
   ],
   "dv": 3,
@@ -145,6 +185,83 @@
    "ok": true,
    "why": "ぴよりん×Yogiboコラボ商品の記事",
    "t": "2026-10-29"
+  }
+ },
+ {
+  "id": "n20261029-98f34122",
+  "date": "2026-10-29",
+  "cat": "media",
+  "title": "ぴよりんクリスマスケーキの予約受付が10月30日から開始",
+  "source": "名古屋情報通",
+  "url": "https://jouhou.nagoya/piyorin-christmas2026/",
+  "related": [
+   {
+    "source": "名古屋情報通",
+    "url": "https://jouhou.nagoya/piyorin-christmas2026/"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのクリスマスケーキの予約販売についての記事",
+   "t": "2026-10-30"
+  }
+ },
+ {
+  "id": "n20261029-e975ddeb",
+  "date": "2026-10-29",
+  "cat": "media",
+  "title": "名古屋の「ぴよりん」がゴジラになっちゃった 可愛すぎるコラボグッズ続々、ぬいぐるみは受注生産受付中",
+  "source": "Infoseek",
+  "url": "https://news.infoseek.co.jp/article/jtownnet_367413/",
+  "related": [
+   {
+    "source": "千葉テレビ放送株式会社",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE01V21rd1J4WVl1RnVTQ0NFYlVPSHgxTVVIamkzc21Jb3BFamZ5dS13NC1wWmo4QkxoYWl2OUF0eDdBUjdXWjYxelpuc3A1UldGQzZZbUlGNS1HLUMyelVz?oc=5"
+   },
+   {
+    "source": "Jタウンネット",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE95dnB0em43ZW8zQU15eUphYmJEZTU5VjRYWmt5LXRRTmxyWjhpODVrNU5rZkphSGR1YWlpWjBWN1dtbVFEaUsydUwxUGxaR3V5TFJ5NnZIN1pLdw?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1vUGY1Zmo3dkJiNk5vQy1nNTlHai1OdlNMRDZMQ0FmWndvZHdKZ1FzRVVtbm0yTWFpTXpUclVSRzNJNXZBX21GUHR1NVlwSFpLYUQzZFQ2QW5PeUt5N1E?oc=5"
+   },
+   {
+    "source": "Infoseekニュース",
+    "url": "https://news.infoseek.co.jp/article/jtownnet_367413/"
+   },
+   {
+    "source": "dメニューニュース",
+    "url": "https://topics.smt.docomo.ne.jp/article/jtown/region/jtown-367413"
+   }
+  ],
+  "merged_ids": [
+   "n20261029-e5d75809"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんと映画『ゴジラ-0.0』のコラボグッズ記事",
+   "t": "2026-10-30"
+  }
+ },
+ {
+  "id": "n20261029-6d7da8cd",
+  "date": "2026-10-29",
+  "cat": "media",
+  "title": "ぎゅっと楽しむ新感覚のぴよりん・イコちゃん！？Yogiboのコラボで 手のひらサイズのスクイーズ「スクイージボー」が登場！",
+  "source": "千葉テレビ放送株式会社",
+  "url": "https://www.chiba-tv.com/plus/detail/2026102174194",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんとYogiboのコラボスクイーズの記事",
+   "t": "2026-10-30"
   }
  },
  {
@@ -170,6 +287,10 @@
    {
     "source": "TRILL【トリル】",
     "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9odmlpS2N3WmU1anNWTDJuX3M3aGFJc3lXd2VsVXR1OHN1LU05NDhfY2FJUmVvdmZpakZVa3Z6dDhHMThTU1NNQWNtRnZQUjg?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5aR2ExTmZRYXdiT0VqWXA2dkRzRFZaWU5DNkxPbFRQYzc4UGtURGFmRFBXVExwYXNsYUZrd0J3VEtmc0dBZ1FKTkZxMk5paGh5UmdfRzhheGpVTmdHZlRj?oc=5"
    }
   ],
   "merged_ids": [
@@ -222,7 +343,12 @@
   "title": "アスティ静岡開業35周年&リニューアルオープン記念特別販売",
   "source": "産経ニュース",
   "url": "https://www.sankei.com/pressrelease/prtimes/DEP3UJRBYBNBPH4MQFR5NIASN4/",
-  "related": [],
+  "related": [
+   {
+    "source": "リセマム",
+    "url": "https://resemom.jp/release/prtimes/20261029/224207.html"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -599,6 +725,22 @@
    "n20261023-a1f6b18e",
    "n20261024-499b8037"
   ]
+ },
+ {
+  "id": "n20261029-49e5deb1",
+  "date": "2026-10-23",
+  "cat": "media",
+  "title": "三島甘藷ぴよりんが11月15日から期間限定販売へ ブランドさつまいもを使用",
+  "source": "Dellows News",
+  "url": "https://news.dellows.jp/871117/?from=related-reading-list",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの期間限定商品『三島甘藷ぴよりん』の販売記事",
+   "t": "2026-10-30"
+  }
  },
  {
   "id": "n20261023-af600193",
@@ -1011,6 +1153,10 @@
    {
     "source": "MANTANWEB（まんたんウェブ）",
     "url": "https://mantan-web.jp/prtimes/article/20261022prt00m200001002a.html"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9WN0NZUkpLSVlHU1ZLckRPMnF3UmM4eHJwZ0ZqQlMxSnpwRHkyWldxbEx4Sm9ubFJRZmJsXzkyT3ZXMnJ3UEhPMnRVelI0WmdYbWRuZg?oc=5"
    }
   ],
   "dv": 3,
@@ -1039,6 +1185,10 @@
    {
     "source": "朝日新聞デジタル",
     "url": "https://www.asahi.com/and/w/article/16979835"
+   },
+   {
+    "source": "朝日新聞",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9leVNfR1UtWGhzSENqOUxCMkgtN1UxamNITnVkWDd0NlRJYXYxVmdyYmtCYU5aY1UtUU1aeC1Ecm0zMmFjZjlhOGRGazIzUEQ1XzlLX1lLbw?oc=5"
    }
   ],
   "dv": 3,
