@@ -290,6 +290,18 @@ def grounded_memo(memo: str, item: dict, text: str) -> str:
     return "".join(kept).strip() or str(item.get("title", ""))[:160]
 
 
+MEMO_MAX = 200  # 保存するメモの最大文字数（指示は160文字。Haiku 5.5 は少し長く書くことがある）
+
+
+def clip_memo(memo: str, limit: int = MEMO_MAX) -> str:
+    """長すぎるメモを、言葉の途中ではなく最後の「。」で切る（「ALL-」で切れたメモがあった）。"""
+    if len(memo) <= limit:
+        return memo
+    cut = memo[:limit]
+    end = cut.rfind("。")
+    return cut[:end + 1] if end >= limit // 2 else cut
+
+
 def memo_batch(items: list[dict], api_key: str) -> tuple[dict[int, str], dict]:
     parts, texts = [], []
     for i, it in enumerate(items):
@@ -304,7 +316,7 @@ def memo_batch(items: list[dict], api_key: str) -> tuple[dict[int, str], dict]:
     for m in got.get("memos") or []:
         if isinstance(m, dict) and isinstance(m.get("n"), int) and 0 <= m["n"] < len(items) and m.get("memo"):
             memo = correct_memo_names(re.sub(r"\s+", " ", str(m["memo"])).strip())
-            out[m["n"]] = grounded_memo(memo, items[m["n"]], texts[m["n"]])[:200]
+            out[m["n"]] = clip_memo(grounded_memo(memo, items[m["n"]], texts[m["n"]]))
     return out, usage
 
 

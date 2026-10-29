@@ -65,6 +65,18 @@ class MemoShopNameTests(unittest.TestCase):
             (Path(d) / (piyo.reader_id(press) + ".json")).unlink()  # 本文の保存が消えても作り直さない
             self.assertFalse(piyo.needs_memo(item, done))
 
+    def test_long_memo_is_cut_at_sentence_end_not_mid_word(self):
+        # Haiku 5.5 が 160 文字の指示より長く書き、200 文字で「目標金額4,400,000円、ALL-」と切れたことがある
+        long = "あ" * 170 + "。目標金額4,400,000円、ALL-or-Nothing方式で、目標に届かないと全額返金される。" + "い" * 40
+        item = {"id": "new", "cat": "official", "date": "2026-10-25", "title": "商品", "url": "https://example.com/a"}
+        response = ({"memos": [{"n": 0, "memo": long}]}, {"input_tokens": 1, "output_tokens": 1})
+        memos = {}
+        with patch.object(piyo, "call_tool", return_value=response), patch.object(piyo, "article_text", return_value=long):
+            piyo.build_memos([item], memos, "fake-test-key", time.time())
+        self.assertEqual(memos["new"]["memo"], "あ" * 170 + "。")
+        self.assertEqual(piyo.clip_memo("短いメモ。"), "短いメモ。")
+        self.assertEqual(piyo.clip_memo("う" * 250), "う" * 200)  # 「。」が無ければ文字数で切る
+
     def test_missing_key_still_skips_all_writes_and_api_calls(self):
         with patch.dict(piyo.os.environ, {"ANTHROPIC_API_KEY": ""}), \
                 patch.object(piyo, "write_if_changed", side_effect=AssertionError("write forbidden")), \

@@ -114,10 +114,11 @@
   "alarms": [
    "eve",
    "morning",
+   "hour",
    "none"
   ],
   "f": "auto-officialp5661",
-  "time": "",
+  "time": "15:00",
   "timed": false
  },
  "e-oshitabi": {

@@ -33,8 +33,11 @@ class StartTimeTests(unittest.TestCase):
 class IcsTests(unittest.TestCase):
     def test_one_day_event_with_time_becomes_a_one_hour_event(self):
         text = build_ics.ics_text(XMAS, "12:00", "hour")
-        self.assertIn("DTSTART:20261030T030000Z", text)  # 日本の12時
-        self.assertIn("DTEND:20261030T040000Z", text)
+        self.assertIn("DTSTART;TZID=Asia/Tokyo:20261030T120000", text)  # 日本時間で書く（世界の時刻だと「(GMT)」も出る）
+        self.assertIn("DTEND;TZID=Asia/Tokyo:20261030T130000", text)
+        self.assertIn("BEGIN:VTIMEZONE\r\nTZID:Asia/Tokyo\r\n", text)
+        self.assertLess(text.index("END:VTIMEZONE"), text.index("BEGIN:VEVENT"))
+        self.assertNotIn("VTIMEZONE", build_ics.ics_text(TEA, None, "eve"))  # 終日の予定には要らない
         self.assertIn("TRIGGER:-PT60M", text)
         self.assertIn("TRIGGER:-PT960M", build_ics.ics_text(XMAS, "12:00", "eve"))  # 前の日の20時
         self.assertIn("TRIGGER:-PT180M", build_ics.ics_text(XMAS, "12:00", "morning"))  # 当日の9時

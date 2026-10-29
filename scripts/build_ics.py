@@ -78,16 +78,19 @@ def ics_text(event: dict, time: str | None, alarm: str) -> str:
 
     start, end = event["start"], event.get("end") or event["start"]
     timed = bool(time) and end == start
-    utc = lambda d: d.astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    # 時刻は日本時間で書く（世界の時刻で書くと、iPhone の画面に「3:00–4:00 (GMT)」も並んで出た）
+    jst = lambda d: d.strftime("%Y%m%dT%H%M%S")
+    zone = ["BEGIN:VTIMEZONE", "TZID:Asia/Tokyo", "BEGIN:STANDARD", "DTSTART:19700101T000000",
+            "TZOFFSETFROM:+0900", "TZOFFSETTO:+0900", "TZNAME:JST", "END:STANDARD", "END:VTIMEZONE"]
     if timed:
-        begin = datetime.fromisoformat(f"{start}T{time}:00").replace(tzinfo=JST)
-        when = [f"DTSTART:{utc(begin)}", f"DTEND:{utc(begin + timedelta(hours=1))}"]
+        begin = datetime.fromisoformat(f"{start}T{time}:00")
+        when = [f"DTSTART;TZID=Asia/Tokyo:{jst(begin)}", f"DTEND;TZID=Asia/Tokyo:{jst(begin + timedelta(hours=1))}"]
     else:
         when = [f"DTSTART;VALUE=DATE:{start.replace('-', '')}",
                 f"DTEND;VALUE=DATE:{(date.fromisoformat(end) + timedelta(days=1)).isoformat().replace('-', '')}"]
     url = event.get("url") if re.match(r"https?://", event.get("url") or "") else ""
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//piyorin-news//JA", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
-             "BEGIN:VEVENT", f"UID:{safe_name(event.get('id') or start + event['title'])}@piyorin-news",
+             *(zone if timed else []), "BEGIN:VEVENT", f"UID:{safe_name(event.get('id') or start + event['title'])}@piyorin-news",
              f"DTSTAMP:{start.replace('-', '')}T000000Z",  # 毎回同じ中身にする（更新のたびに差分を出さない）
              *when, f"SUMMARY:{esc(event['title'])}",
              *([f"LOCATION:{esc(event['place'])}"] if event.get("place") else []), *([f"URL:{url}"] if url else []),

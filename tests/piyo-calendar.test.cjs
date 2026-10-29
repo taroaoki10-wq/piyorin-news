@@ -43,11 +43,11 @@ test('カレンダーに入れた予定を、前の日と当日のあいさつ�
   assert.equal(X.plannedLine([],'2026-10-29'),null);
 });
 
-function setup(){
+function setup(how=true){
   const msgs=[],added=[];
   const c={PiyoExtras:X,data:{events:EVENTS,memo:{},news:[],basics:null,koyomi:null,weather:[]},mac:null,apiKey:'',routeMode:'mac-first',refMap:{e1:{type:'event',id:'x'},m1:{type:'news',id:'official-p5633'}},
     PiyoPage:{icsInfo:id=>id==='x'?{f:'x',time:'12:00',timed:true,alarms:['eve','morning','hour','none']}:{f:id,time:'',timed:false,alarms:['eve','morning','none']},
-      addToCalendar:(id,alarm)=>{added.push([id,alarm]);return true},planned:()=>[]},
+      addToCalendar:(id,alarm)=>{added.push([id,alarm]);return how},planned:()=>[]},
     $:()=>({}),todayStr:()=>'2026-10-29',extrasCtx:()=>({...CTX}),omikujiSeed:()=>'s',omikujiDrawn:()=>false,markOmikuji(){},
     fmt:s=>s,piyoTone:s=>s,play(){},loop(){},sync(){},userMsg(){},consumeSuggest:q=>q,badSuggest:()=>new Set(),
     piyoMsg:()=>{const m={said:[],list:null,say(t,done){this.said.push(t);done?.(m)},choices(list){this.list=list;return{remove(){},classList:{add(){}}}},links(){},fix(){}};msgs.push(m);return m}};
@@ -64,10 +64,10 @@ test('ぴよに頼むと、いつ知らせるかを聞いて、選んだ知ら�
   assert.deepEqual(plain(h.last().list.map(([label])=>label)),['前の日の夜（20時）','当日の朝（9時）','始まる1時間前（11時）','知らせなくていい']);
   h.last().list[2][1]();
   assert.deepEqual(plain(h.added),[['x','hour']]);
-  assert.equal(h.last().said[0],'カレンダーに入れる画面を開いたぴよ！「追加」を押せば、10月30日の11時に知らせるぴよ。');
+  assert.equal(h.last().said[0],'カレンダーに入れる画面を開いたぴよ！「カレンダーに追加」を押せば、10月30日の11時に知らせるぴよ。');
   await h.c.api.ask('ゴジラをカレンダーに入れて');
   h.last().list[0][1]();
-  assert.equal(h.last().said[0],'カレンダーに入れる画面を開いたぴよ！「追加」を押せば、11月2日の夜20時に知らせるぴよ。');
+  assert.equal(h.last().said[0],'カレンダーに入れる画面を開いたぴよ！「カレンダーに追加」を押せば、11月2日の夜20時に知らせるぴよ。');
 });
 
 test('答えに出たこれからの予定には「カレンダーに入れる」を出し、名前の無い「カレンダーに入れて」はその予定を使う',async()=>{
@@ -87,4 +87,47 @@ test('答えに出たこれからの予定には「カレンダーに入れる�
   const h3=setup();
   await h3.c.api.ask('カレンダーに入れて');
   assert.match(h3.last().said[0],/分からなかったぴよ/);
+});
+
+test('ホーム画面のアプリから入れたときは、Safari からの戻り方も言う',async()=>{
+  const h=setup('safari');
+  await h.c.api.ask('クリスマスケーキの予約をカレンダーに入れて');
+  h.last().list[2][1]();
+  assert.equal(h.last().said[0],'Safari でカレンダーに入れる画面を開いたぴよ！「カレンダーに追加」を押せば、10月30日の11時に知らせるぴよ。左上の「◀」で戻ってこられるぴよ。');
+  const h2=setup(false);
+  await h2.c.api.ask('クリスマスケーキの予約をカレンダーに入れて');
+  h2.last().list[2][1]();
+  assert.equal(h2.last().said[0],'ごめんぴよ…カレンダーの画面を開けなかったぴよ。');
+});
+
+// ページの addToCalendar：ホーム画面のアプリ（navigator.standalone）は x-safari-https: で Safari に渡す（アプリの中ではファイルが白いページになる）
+function page({standalone,href='https://taroaoki10-wq.github.io/piyorin-news/',ics={x:{f:'auto-x',time:'12:00',timed:true,alarms:['eve','morning','hour','none']}}}){
+  const clicked=[],store={};
+  const c={navigator:{standalone},location:{href},URL,state:{events:EVENTS,ics},todayStr:()=>'2026-10-29',window:{PiyoExtras:X},PiyoExtras:X,Blob,
+    localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v}},setTimeout(){},
+    document:{body:{appendChild(){}},createElement:()=>({click(){clicked.push({href:this.href,target:this.target,download:this.download})},remove(){}})}};
+  c.URL={createObjectURL:()=>'blob:x',revokeObjectURL(){}};
+  c.URL=Object.assign(function(u,b){return new URL(u,b)},c.URL);
+  vm.createContext(c);
+  vm.runInContext(part('  const PLANNED=',"  document.addEventListener('click',e=>{const b=e.target.closest('[data-ics]')")+';this.add=addToCalendar;',c);
+  return {c,clicked,planned:()=>JSON.parse(store['piyo-planned']||'[]')};
+}
+
+test('ホーム画面のアプリでは Safari に渡し、Safari のタブでは新しいタブで開く',()=>{
+  const a=page({standalone:true});
+  assert.equal(a.c.add('x','hour'),'safari');
+  assert.equal(a.c.location.href,'x-safari-https://taroaoki10-wq.github.io/piyorin-news/data/ics/auto-x-hour.ics');
+  assert.equal(a.clicked.length,0);
+  assert.deepEqual(plain(a.planned().map(p=>[p.id,p.time,p.alarm])),[['x','12:00','hour']]);
+  const b=page({standalone:undefined});
+  assert.equal(b.c.add('x','morning'),true);
+  assert.deepEqual(plain(b.clicked),[{href:'data/ics/auto-x-morning.ics',target:'_blank'}]);
+  assert.equal(b.c.location.href,'https://taroaoki10-wq.github.io/piyorin-news/');
+  // ファイルの無い予定は、ホーム画面のアプリでは開けないので false（Safari のタブでは前と同じくページの中で作る）
+  assert.equal(page({standalone:true,ics:{}}).c.add('x','hour'),false);
+  const d=page({standalone:false,ics:{}});
+  assert.equal(d.c.add('x','hour'),true);
+  assert.equal(d.clicked[0].href,'blob:x');
+  // https でない所（手元の確かめ）では Safari に渡せない
+  assert.equal(page({standalone:true,href:'http://localhost:18791/'}).c.add('x','hour'),false);
 });

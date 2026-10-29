@@ -1308,9 +1308,20 @@ window.PiyoSplash=(function(){
     try{localStorage.setItem(PLANNED,JSON.stringify(list.slice(-30)))}catch(_){}
   }
   const defaultAlarm=info=>!info?'none':info.timed&&info.alarms.includes('hour')?'hour':info.alarms.includes('morning')?'morning':info.alarms[0];
+  // iPhone のホーム画面のアプリでは、新しいタブ（アプリの中の小さな画面）も同じ画面もカレンダーのファイルを開けない（白いページ・何も起きない。2026-10-29 にシミュレーターで確認）。
+  // x-safari-https: で Safari に渡すと「カレンダーに追加」が出る。戻り値 'safari' のとき、ぴよが Safari からの戻り方を言う
+  const homeApp=()=>navigator.standalone===true;
   function addToCalendar(id,alarm){
     const ev=state.events.find(x=>x.id===id);if(!ev)return false;
     const info=state.ics&&state.ics[id],al=info&&info.alarms.includes(alarm)?alarm:defaultAlarm(info);
+    if(info&&homeApp()){
+      const url=new URL('data/ics/'+encodeURIComponent(info.f)+'-'+al+'.ics',location.href).href;
+      if(!/^https:/.test(url))return false;
+      location.href='x-safari-'+url;
+      savePlanned(ev,info,al);
+      return 'safari';
+    }
+    if(homeApp())return false; // ファイルの無い予定は、ページの中で作っても開けない
     const a=document.createElement('a');a.rel='noopener';
     if(info){a.href='data/ics/'+encodeURIComponent(info.f)+'-'+al+'.ics';a.target='_blank'}
     else if(window.PiyoExtras){ // まだファイルが無い予定（次の自動更新で作られる）は、ページの中で作る（知らせる時は付かない）
@@ -2293,11 +2304,12 @@ window.PiyoSplash=(function(){
     piyoMsg().say(fmt(`**${ev.title}**をカレンダーに入れるぴよ！いつ知らせるぴよ？`),m=>m.choices(alarms.map(a=>[label[a],()=>putCalendar(ev,a,info),a===alarms[0]])).classList.add('wrap'));
   }
   function putCalendar(ev,alarm,info){
-    const P=globalThis.PiyoPage;
-    if(!P||!P.addToCalendar(ev.id,alarm)){play('sad');piyoMsg().say('ごめんぴよ…カレンダーの画面を開けなかったぴよ。');return}
+    const P=globalThis.PiyoPage,how=P&&P.addToCalendar(ev.id,alarm);
+    if(!how){play('sad');piyoMsg().say('ごめんぴよ…カレンダーの画面を開けなかったぴよ。');return}
     const md=s=>`${Number(s.slice(5,7))}月${Number(s.slice(8,10))}日`,prev=new Date(Date.parse(ev.start+'T00:00:00Z')-864e5).toISOString();
     const when={eve:`${md(prev)}の夜20時に知らせるぴよ。`,morning:`${md(ev.start)}の朝9時に知らせるぴよ。`,hour:info&&info.time?`${md(ev.start)}の${hourBefore(info.time)}に知らせるぴよ。`:''}[alarm];
-    play('jump');piyoMsg().say(`カレンダーに入れる画面を開いたぴよ！「追加」を押せば${when?'、'+when:'入るぴよ。'}`);
+    const done=`「カレンダーに追加」を押せば${when?'、'+when:'入るぴよ。'}`;
+    play('jump');piyoMsg().say(how==='safari'?`Safari でカレンダーに入れる画面を開いたぴよ！${done}左上の「◀」で戻ってこられるぴよ。`:`カレンダーに入れる画面を開いたぴよ！${done}`);
   }
   // 「〇〇をカレンダーに入れて」（その場で答える。予定の名前が無ければ、さっき話した予定）
   function answerCalendar(q,a){
