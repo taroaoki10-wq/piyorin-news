@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F3F2EE">
+<title>カレンダーに入れる｜ぴよりんニュース</title>
+<style>
+:root{
+  --bg:#F3F2EE; --surface:#FFFFFF; --ink:#1E1B16; --muted:#6D675C; --line:#E3DFD5;
+  --yolk:#FBDB16; --yolk-ink:#2A2000;
+  --shadow:0 1px 2px rgba(40,30,10,.05),0 8px 24px -12px rgba(40,30,10,.12);
+  --f-display:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  color-scheme:dark;
+  --bg:#13120E; --surface:#1C1A15; --ink:#F2EEE3; --muted:#A09887; --line:#2D2A22;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
+}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+main{max-width:440px;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 40px) 16px calc(env(safe-area-inset-bottom,0px) + 24px);text-align:center}
+.icon{width:72px;height:72px;border-radius:18px;box-shadow:var(--shadow)}
+h1{margin:16px 0 18px;font-family:var(--f-display);font-weight:900;font-size:24px;line-height:1.4}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px 18px;text-align:left}
+.card .t{margin:0;font-family:var(--f-display);font-weight:700;font-size:18px;line-height:1.5}
+.card .d,.card .n{margin:6px 0 0;color:var(--muted);font-size:14px}
+.go{display:block;margin:22px 0 0;padding:15px 16px;border-radius:99px;background:var(--yolk);color:var(--yolk-ink);font-family:var(--f-display);font-weight:900;font-size:18px;text-decoration:none;box-shadow:var(--shadow)}
+.go:active{transform:translateY(1px)}
+.hint{margin:14px 4px 0;color:var(--muted);font-size:13px}
+.back{margin:18px auto 0;display:block;font:inherit;font-size:14px;color:var(--muted);background:none;border:0;padding:8px 16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.err{margin:16px 0 0}
+.err a{color:inherit}
+</style>
+</head>
+<body>
+<main>
+  <img class="icon" src="apple-touch-icon.png?v=2" alt="">
+  <h1>カレンダーに入れるぴよ</h1>
+  <div class="card" id="card" hidden>
+    <p class="t" id="title"></p>
+    <p class="d" id="when"></p>
+    <p class="n" id="alarm"></p>
+  </div>
+  <a class="go" id="go" href="./" hidden>カレンダーに追加する</a>
+  <p class="hint" id="hint" hidden>次の画面で「カレンダーに追加」を押して×で閉じると、ぴよりんニュースに戻るぴよ。</p>
+  <p class="err" id="err" hidden>予定が見つからなかったぴよ…。<a href="./">ぴよりんニュースへ</a></p>
+  <button class="back" id="back" type="button">やめて戻る</button>
+</main>
+<script>
+// ホーム画面のアプリから開く、予定をカレンダーに入れるためだけの画面（2026-10-29）。
+// アプリの中で .ics を直接開くと白いページになり、この画面を開いてから自動で .ics へ進むと「許可しますか？」と聞かれる。
+// この画面のボタンを押して .ics を開くと「カレンダーに追加」がすぐ出る。出たあとこの画面を閉じてもカレンダーの画面は残るので、
+// 「カレンダーに追加」→ × で、そのままぴよりんニュースの元の画面に戻る（iOS 27 のシミュレーターで確認）
+window.PiyoCal=(function(){
+  const ALARM={eve:'前の日の夜20時に知らせる',morning:'当日の朝9時に知らせる',hour:'始まる1時間前に知らせる',none:'知らせない'};
+  const DOW='日月火水木金土',DAY=/^\d{4}-\d{2}-\d{2}$/;
+  const md=s=>{const d=new Date(s+'T00:00:00Z');return `${d.getUTCMonth()+1}月${d.getUTCDate()}日（${DOW[d.getUTCDay()]}）`};
+  // ?f=ファイルの名前（data/ics/ の中だけ）&t=題名&s=始まり&e=終わり&h=時刻（1日だけの時刻つきの予定）
+  function read(search){
+    const q=new URLSearchParams(search),f=q.get('f')||'',m=f.match(/^[A-Za-z0-9_-]+-(eve|morning|hour|none)\.ics$/);
+    const s=q.get('s')||'',e=q.get('e')||s,h=q.get('h')||'';
+    if(!m||!DAY.test(s)||!DAY.test(e))return null;
+    const time=s===e&&/^\d{2}:\d{2}$/.test(h)?` ${Number(h.slice(0,2))}:${h.slice(3)}から`:'';
+    return {file:'data/ics/'+f,title:(q.get('t')||'ぴよりんの予定').slice(0,80),when:md(s)+(e!==s?' 〜 '+md(e):'')+time,alarm:ALARM[m[1]]};
+  }
+  return {read};
+})();
+(function(){
+  const $=id=>document.getElementById(id),v=PiyoCal.read(location.search);
+  const close=()=>{window.close();setTimeout(()=>{$('err').hidden=false;$('err').firstChild.textContent='閉じられなかったぴよ…。'},400)};
+  $('back').addEventListener('click',close);
+  if(!v){$('err').hidden=false;return}
+  $('title').textContent=v.title;$('when').textContent=v.when;$('alarm').textContent=v.alarm;
+  $('go').href=v.file;$('card').hidden=$('go').hidden=$('hint').hidden=false;
+  fetch(v.file).catch(()=>{}); // 先に読んでおく（押したあと、カレンダーの画面が早く出る）
+  $('go').addEventListener('click',()=>setTimeout(()=>window.close(),1500)); // カレンダーの画面が出たら、この画面は閉じる
+})();
+</script>
+</body>
+</html>
