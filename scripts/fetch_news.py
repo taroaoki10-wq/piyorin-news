@@ -27,7 +27,7 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import parse_qs, quote, urlencode, urljoin, urlparse
-from news_store import read_news, write_news
+from news_store import page_html, read_news, request_url, write_news
 
 JST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent.parent
@@ -51,11 +51,11 @@ def bing(q: str, newest: bool = False) -> str:
 
 
 def fetch(url: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "ja"})
+    req = urllib.request.Request(request_url(url), headers={"User-Agent": UA, "Accept-Language": "ja"})
     with urllib.request.urlopen(req, timeout=20) as r:
         raw = r.read()
         charset = r.headers.get_content_charset() or "utf-8"
-    return raw.decode(charset, errors="replace")
+    return page_html(url, raw.decode(charset, errors="replace"))
 
 
 def today() -> str:

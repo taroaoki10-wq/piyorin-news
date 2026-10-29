@@ -26,7 +26,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from claude_events import claude_events_batch, snippet
-from news_store import linked_sources, nfkc, primary_sources
+from news_store import linked_sources, nfkc, page_html, primary_sources, request_url
 
 JST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent.parent
@@ -61,9 +61,9 @@ RANGE_RE = re.compile(FULL + r"(?:" + SEP + r"(?:" + FULL + r"|" + DAY_ONLY + r"
 
 
 def fetch(url: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "ja"})
+    req = urllib.request.Request(request_url(url), headers={"User-Agent": UA, "Accept-Language": "ja"})
     with urllib.request.urlopen(req, timeout=30) as r:
-        return r.read().decode(r.headers.get_content_charset() or "utf-8", errors="replace")
+        return page_html(url, r.read().decode(r.headers.get_content_charset() or "utf-8", errors="replace"))
 
 
 def html_to_lines(page: str) -> list[str]:

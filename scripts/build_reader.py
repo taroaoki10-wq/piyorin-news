@@ -21,7 +21,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urljoin
 
-from news_store import nfkc
+from news_store import MSN_ARTICLE, nfkc, page_html, request_url
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "docs" / "data"
@@ -40,9 +40,9 @@ META_LINE = re.compile(r"^(?:\d{4}\.\d{1,2}\.\d{1,2}|NEW|店舗|限定商品|お
 
 
 def fetch(url: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "ja"})
+    req = urllib.request.Request(request_url(url), headers={"User-Agent": UA, "Accept-Language": "ja"})
     with urllib.request.urlopen(req, timeout=20) as r:
-        return r.read().decode(r.headers.get_content_charset() or "utf-8", errors="replace")
+        return page_html(url, r.read().decode(r.headers.get_content_charset() or "utf-8", errors="replace"))
 
 
 def clean(s: str) -> str:
@@ -111,6 +111,14 @@ def reader_id(url: str) -> str:
     return hashlib.sha1(url.encode("utf-8")).hexdigest()[:12]
 
 
+def has_article(url: str) -> bool:
+    """もう保存してあるか。MSN の記事は前に中身の無いまま保存していたので、空なら記事データから読み直す。"""
+    f = READER_DIR / (reader_id(url) + ".json")
+    if not f.exists():
+        return False
+    return not MSN_ARTICLE.match(url) or bool(json.loads(f.read_text(encoding="utf-8")).get("blocks"))
+
+
 def summary(url: str, page: str) -> dict:
     """掲載元が用意した説明文と画像だけを使う（記事本文は保存しない）。"""
     title = meta(page, "og:title") or clean((re.search(r"<title>(.*?)</title>", page, re.S | re.I) or [None, ""])[1])
@@ -151,7 +159,7 @@ def main() -> int:
             removed += 1
     if OLD_FILE.exists():
         OLD_FILE.unlink()  # 以前の1ファイル方式の名残を消す
-    todo = [u for u in targets if not (READER_DIR / (reader_id(u) + ".json")).exists()]
+    todo = [u for u in targets if not has_article(u)]
 
     def load(u):
         try:

@@ -1,18 +1,61 @@
 """最新記事と年別保管庫。記事ID・判定結果・関連リンクをそのまま保存する。"""
+import html
 import json
 import re
 import unicodedata
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import quote, urlsplit, urlunsplit
 
 # 本文が読める一次情報（公式サイトのお知らせ・PR TIMES のプレスリリース）
 SOURCE_RE = re.compile(r"https://(?:piyorin\.com/news/p\d+/?|prtimes\.jp/main/html/rd/p/\d+\.\d+\.html)")
 # 丸数字（①〜⑳・㉑〜㊿など）。NFKC では「1」になり、すぐ後ろの数字とつながって「①10:00」が「110:00」になる
 CIRCLED_NUM = re.compile("([\u2460-\u2473\u24ea-\u24ff\u3251-\u325f\u32b1-\u32bf])")
+# MSN の記事。ページには中身が無く（ページが記事データを読み込んで出す）、そのまま読むと題名が「MSN」だけで空になる
+MSN_ARTICLE = re.compile(r"https://www\.msn\.com/([a-z]{2}-[a-z]{2})/.*/ar-([A-Za-z0-9]+)")
+JST = timezone(timedelta(hours=9))
 
 
 def nfkc(text: str) -> str:
     """全角の英数字・記号を NFKC でそろえる。丸数字だけはそのまま残す。"""
     return "".join(p if CIRCLED_NUM.fullmatch(p) else unicodedata.normalize("NFKC", p) for p in CIRCLED_NUM.split(text))
+
+
+def ascii_url(url: str) -> str:
+    """住所に日本語や空白が入っていても読めるように、その部分だけ %XX に書き直す（もとからある %XX や記号はそのまま）。
+    urllib は ASCII の住所しか送れず、MSN の記事（/news/other/ぴよりんがゴジラになった-…/）を「'ascii' codec」で読めなかった。"""
+    if url.isascii() and not re.search(r"[\x00-\x20\x7f]", url):
+        return url
+    p = urlsplit(url.strip())
+    host = p.netloc if p.netloc.isascii() else p.netloc.encode("idna").decode("ascii")
+    safe = "/?%:@!$&'()*+,;=~"
+    return urlunsplit((p.scheme, host, quote(p.path, safe=safe), quote(p.query, safe=safe), quote(p.fragment, safe=safe)))
+
+
+def request_url(url: str) -> str:
+    """記事を読むときに送る住所。MSN の記事は、ページが読み込むのと同じ記事データ（JSON）の住所にする。"""
+    m = MSN_ARTICLE.match(url)
+    if m:
+        return f"https://assets.msn.com/content/view/v2/Detail/{m.group(1)}/{m.group(2)}"
+    return ascii_url(url)
+
+
+def page_html(url: str, text: str) -> str:
+    """MSN の記事データを、ふつうの記事のページと同じ形（題名・説明文・画像・公開日・本文）にする。ほかはそのまま返す。"""
+    if not MSN_ARTICLE.match(url):
+        return text
+    d = json.loads(text)
+    title = d.get("title") or ""
+    image = next((i["url"] for i in d.get("imageResources") or [] if str(i.get("url", "")).startswith("https://")), "")
+    try:
+        published = datetime.fromisoformat(str(d.get("publishedDateTime") or "").replace("Z", "+00:00")).astimezone(JST).isoformat()
+    except ValueError:
+        published = ""
+    metas = "".join(f'<meta property="{k}" content="{html.escape(v)}">' for k, v in (
+        ("og:title", title), ("og:description", d.get("abstract") or ""), ("og:image", image),
+        ("article:published_time", published)) if v)
+    return (f"<html><head><title>{html.escape(title)}</title>{metas}</head>"
+            f"<body><article><h1>{html.escape(title)}</h1>{d.get('body') or ''}</article></body></html>")
 
 
 def primary_sources(item: dict) -> list[str]:

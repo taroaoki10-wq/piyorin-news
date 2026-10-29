@@ -391,12 +391,13 @@ def build_greeting(memos: dict, events: list[dict], api_key: str) -> tuple[dict 
 
 def absolute_days(text: str, today: date) -> str:
     """「きょう」「あした」「あさって」を月日にする（まとめは次の更新まで何時間も使うので、日付が変わるとずれる）。
-    数字のすぐ後ろなら「、」をはさむ（「カレンダー2027きょう」が「カレンダー202710月29日」と読めないように）。"""
+    数字のすぐ後ろなら「、」をはさむ（「カレンダー2027きょう」が「カレンダー202710月29日」と読めないように）。
+    同じ月日がすぐ隣に並んだら 1 つにする（「きょう10月29日から」が「10月29日10月29日から」にならないように）。"""
     for words, days in (("きょう|今日|本日", 0), ("あした|明日", 1), ("あさって|明後日", 2)):
         d = today + timedelta(days=days)
         md = f"{d.month}月{d.day}日"
         text = re.sub(rf"(\d(?:\*\*)?)?(?:{words})", lambda m, md=md: (m.group(1) + "、" if m.group(1) else "") + md, text)
-    return text
+    return re.sub(r"(?<!\d)(\d{1,2}月\d{1,2}日)(\*\*)?[、 ]?(?:[（(]\1[）)]|\1)", r"\1\2", text)
 
 
 def write_if_changed(path: Path, obj) -> None:
