@@ -1,5 +1,19 @@
 [
  {
+  "id": "official-p5657",
+  "date": "2026-10-29",
+  "cat": "official",
+  "title": "アスティ静岡開業35周年を記念して「静岡みかんぴよりんおでかけセット」を期間限定販売！",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5657/",
+  "related": [
+   {
+    "source": "PR TIMES",
+    "url": "https://prtimes.jp/main/html/rd/p/000000258.000124425.html"
+   }
+  ]
+ },
+ {
   "id": "n20261028-0086cb3b",
   "date": "2026-10-28",
   "cat": "media",
@@ -10,6 +24,10 @@
    {
     "source": "ガジェット通信 GetNews",
     "url": "https://getnews.jp/archives/3751733"
+   },
+   {
+    "source": "ガジェット通信",
+    "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBaaWxSNVZKbkdSVzJHX2lqWEozMy1TLXRsTmlVSzRJc1FabEVZUFJGWGhuWHY4ZnRrZmNxWVpISFVsSll4TUV2OTc5SQ?oc=5"
    }
   ],
   "merged_ids": [
@@ -21,6 +39,22 @@
    "ok": true,
    "why": "ぴよりんの期間限定商品販売に関する記事",
    "t": "2026-10-28"
+  }
+ },
+ {
+  "id": "n20261028-87552ef5",
+  "date": "2026-10-28",
+  "cat": "media",
+  "title": "アスティ静岡35周年記念",
+  "source": "news.3rd-in",
+  "url": "https://news.3rd-in.co.jp/article/f4ac6a8a-d339-11f1-8448-9ca3ba09c411",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの期間限定商品（静岡みかんぴよりんおでかけセット）が紹介されている",
+   "t": "2026-10-29"
   }
  },
  {
@@ -1228,6 +1262,10 @@
    {
     "source": "産経ニュース",
     "url": "https://www.sankei.com/pressrelease/prtimes/PS7EHXLFTRIJBN6IIVBEMVXNWQ/"
+   },
+   {
+    "source": "時事ドットコム",
+    "url": "https://www.jiji.com/jc/article?k=000000261.000124425&g=prt"
    }
   ],
   "dv": 3,
@@ -1238,7 +1276,8 @@
    "t": "2026-10-21"
   },
   "merged_ids": [
-   "n20261020-ff9c3d53"
+   "n20261020-ff9c3d53",
+   "n20261021-588d0baf"
   ]
  },
  {

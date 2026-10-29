@@ -487,6 +487,17 @@
   "auto": true
  },
  {
+  "id": "auto-officialp5657",
+  "title": "静岡みかんぴよりんおでかけセット販売（アスティ静岡）",
+  "start": "2026-11-26",
+  "end": "2026-11-27",
+  "place": "アスティ静岡",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5657/",
+  "src": "official-p5657",
+  "auto": true
+ },
+ {
   "id": "auto-n2026102183b7c75c-2",
   "title": "ぴよりんクリスマスケーキ 受取期間",
   "start": "2026-12-19",
