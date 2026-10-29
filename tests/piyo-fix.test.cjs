@@ -20,7 +20,7 @@ function stream(chunks){
 }
 const health=()=>({ok:true,status:200,json:async()=>({ok:true,v:1,name:'Mac-Studio',login:true,busy:false})});
 
-function setup({mac=null,apiKey='',answers=['ゴジラとのコラボの紅茶セットだぴよ。'],chips=['ゴジラコラボセットについて','山口へのおでかけについて']}={}){
+function setup({mac=null,apiKey='',answers=['ゴジラとのコラボの紅茶セットだぴよ。'],chips=['ゴジラコラボセットについて','山口へのおでかけについて'],claude=null}={}){
   const msgs=[],users=[],sent=[],relayed=[],store={};
   const chipEls=chips.map(t=>({textContent:t,remove(){const i=suggest.children.indexOf(this);if(i>=0)suggest.children.splice(i,1)}}));
   const suggest={children:chipEls,hidden:false};
@@ -37,7 +37,7 @@ function setup({mac=null,apiKey='',answers=['ゴジラとのコラボの紅茶�
       say(t,done){this.said.push(t);done?.(m)},choices(list){this.choices=list;return{remove(){m.choices=null}}},links(){},fix(info){this.fixInfo=info}};msgs.push(m);return m},
     openKey(){},saveMac(){},NEED_MORE:{},SYSTEM_MAC:'MAC 用の指示',knowledge:()=>'<knowledge/>',
     textOf:r=>(r.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('').trim(),errText:()=>'エラーだぴよ。',
-    callClaude:async b=>{sent.push(b);return{content:[{type:'text',text:'API で確かめたぴよ。'}]}},pickArticles:async()=>[],pickedNews:[],
+    callClaude:claude||(async b=>{sent.push(b);return{content:[{type:'text',text:'API で確かめたぴよ。'}]}}),pickArticles:async()=>[],pickedNews:[],
     fetch:async(url,opts={})=>{if(url.endsWith('/health'))return health();relayed.push(JSON.parse(opts.body));const t=answers[Math.min(relayed.length-1,answers.length-1)];
       return stream([ev('text',{text:t}),ev('done',{text:t,stop:'end'})])}};
   vm.createContext(c);
@@ -149,4 +149,10 @@ test('候補：「質問がまちがい」の札は、あいさつの候補に�
 test('あいさつにも「ちがうよ」を付ける（出典と同じく、言い終わってから）',()=>{
   assert.match(html,/piyoMsg\(true\)\.say\(lines\.map\(line=>fmt\(piyoTone\(line\)\)\)\.join\('\\n'\),m=>\{if\(m&&m\.fix\)m\.fix\(\{src:'greeting'/);
   assert.match(html,/<div class="run-meta piyo-reports" id="piyo-reports" hidden><\/div>/);
+});
+
+test('API の道で安全のしくみに断られたら（Haiku 5.5 から）、別の聞き方をすすめる',async()=>{
+  const h=setup({apiKey:'fake-test-key',claude:async()=>({content:[],stop_reason:'refusal'})});
+  await h.api.ask('質問');
+  assert.equal(h.last().said.at(-1),'うまく答えられなかったぴよ…別の聞き方で聞いてみてね。');
 });

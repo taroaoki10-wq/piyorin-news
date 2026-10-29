@@ -494,5 +494,70 @@ window.PiyoExtras = (function () {
     return lines.map(fold).join('\r\n') + '\r\n';
   }
 
-  return { localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm };
+  // ---- 答えの日付と値段を、手元の知識と照らす（知識に無い日付・値段を返す。通信も料金もかからない） ----
+  // 「11月3日〜13日」「11月7日(土)・8日(日)」の書き方と、予定の start〜end（YYYY-MM-DD）は、間の日もすべて知っている日にする
+  function factSet(text, today) {
+    const t = String(text || '').normalize('NFKC'), dates = new Set(), prices = new Set();
+    const year = Number(String(today || '').slice(0, 4)) || new Date().getUTCFullYear();
+    const md = (m, d) => `${m}月${d}日`;
+    const range = (m1, d1, m2, d2, y1 = year) => { // 年をまたぐ（12月→1月）ときは次の年まで
+      let a = Date.UTC(y1, m1 - 1, d1);
+      const b = Date.UTC(m2 < m1 ? y1 + 1 : y1, m2 - 1, d2);
+      for (let i = 0; i < 400 && a <= b; i++, a += 86400e3) { const x = new Date(a); dates.add(md(x.getUTCMonth() + 1, x.getUTCDate())); }
+    };
+    for (const m of t.matchAll(/(20\d{2})-(\d{2})-(\d{2})/g)) dates.add(md(+m[2], +m[3]));
+    for (const m of t.matchAll(/start="(20\d{2})-(\d{2})-(\d{2})" end="20\d{2}-(\d{2})-(\d{2})"/g)) range(+m[2], +m[3], +m[4], +m[5], +m[1]);
+    for (const m of t.matchAll(/(?<![\d/.])(\d{1,2})\/(\d{1,2})(?![\d/])/g)) dates.add(md(+m[1], +m[2]));
+    const re = /(\d{1,2})月(\d{1,2})日/g;
+    for (let m; (m = re.exec(t));) {
+      let mon = +m[1], day = +m[2], rest = t.slice(re.lastIndex);
+      dates.add(md(mon, day));
+      for (let n; (n = rest.match(/^\s*(?:[(（][^)）]{1,4}[)）])?\s*([~〜\-–―・、,]|から)\s*(?:(\d{1,2})月)?(\d{1,2})日/));) {
+        const mon2 = n[2] ? +n[2] : mon, day2 = +n[3];
+        if (/[~〜\-–―]|から/.test(n[1])) range(mon, day, mon2, day2); else dates.add(md(mon2, day2));
+        mon = mon2; day = day2; rest = rest.slice(n[0].length);
+      }
+    }
+    for (const m of t.matchAll(/(\d[\d,]*)\s*円/g)) prices.add(m[1].replace(/,/g, ''));
+    return { dates, prices };
+  }
+  function checkFacts(answer, sources, today) {
+    const known = factSet(sources, today), seen = factSet(answer, today);
+    if (today) for (let i = 0; i <= 7; i++) { const s = addDays(today, i); known.dates.add(`${+s.slice(5, 7)}月${+s.slice(8)}日`); } // 今日から1週間は <today> から数えられる
+    return { dates: [...seen.dates].filter(d => !known.dates.has(d)), prices: [...seen.prices].filter(p => !known.prices.has(p)) };
+  }
+
+  // ---- 答えに使った記事や予定から、続けて聞けそうな質問を作る（手元のメモに答えがある質問だけ） ----
+  // 日にちの質問は作らない（あいさつで伝えていて、「〇〇について」でまとめて聞けるため）
+  function topicOf(title) {
+    const t = String(title || '').normalize('NFKC');
+    const quoted = [...t.matchAll(/[「『"]([^」』"]{2,30})[」』"]/g)].map(m => m[1].trim()).filter(x => x !== 'ぴよりん');
+    const named = quoted.filter(x => x.includes('ぴよりん')).sort((a, b) => b.length - a.length)[0] || quoted[0];
+    if (named) return named;
+    const s = t.replace(/[（(【\[][^）)】\]]*[）)】\]]/g, '').replace(/\s*(?:の)?(?:先行販売|販売開始|販売|発売|予約受付開始|予約受付|受取期間|開催|キャンペーン)$/, '').trim();
+    return s.length >= 2 && s.length <= 24 ? s : '';
+  }
+  function followUps(refs, ctx) {
+    const out = [];
+    for (const r of refs || []) {
+      let topic = '', text = '', place = '';
+      if (r.type === 'event') {
+        const e = (ctx.events || []).find(x => x.id === r.id); if (!e) continue;
+        const memo = (ctx.memo || {})[e.src];
+        topic = topicOf(e.title); place = e.place || ''; text = memo ? memo.memo || '' : '';
+      } else {
+        const n = (ctx.news || []).find(x => x.id === r.id), memo = (ctx.memo || {})[r.id];
+        if (!n || !memo) continue;
+        topic = topicOf(n.title); text = memo.memo || '';
+      }
+      if (!topic) continue;
+      if (/\d\s*円/.test(text)) out.push(`${topic}の値段は？`);
+      if (place || /(店|百貨店|会場|shop|village|館|ホテル|モール|パーク)/i.test(text)) out.push(`${topic}の場所は？`);
+      if (/(整理券|先着|おひとり|1人|ひとり|予約)/.test(text)) out.push(`${topic}の買い方は？`);
+      if (out.length >= 2) break;
+    }
+    return [...new Set(out)].slice(0, 2);
+  }
+
+  return { localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf };
 })();

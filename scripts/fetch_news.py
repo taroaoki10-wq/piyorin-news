@@ -102,7 +102,7 @@ MEDIA_SUFFIX = re.compile(r"\s*[|｜]\s*[^|｜]{0,30}(?:ニュース|NEWS|News|�
 def clean_title(title: str) -> str:
     """写真ページの飾りと末尾の掲載サイト名だけを外す。普通の見出し末尾の日付は残す。"""
     t = title.strip()
-    prefix = (r"^(?:[＜<]\s*画像\s*\d+\s*/\s*\d+\s*[＞>]|【画像】|画像・写真\s*[|｜]|写真・図版[（(]\d+枚目[）)]\s*[|｜]"
+    prefix = (r"^(?:[＜<]?\s*画像\s*\d+\s*/\s*\d+\s*[＞>]|【画像】|画像・写真\s*[|｜]|写真・図版[（(]\d+枚目[）)]\s*[|｜]"
               r"|(?:写真|画像)\s*\d+\s*/\s*\d+\s*[|｜])\s*")
     t = re.sub(r"^HOME\s+PR\s+TIMES\s+", "", t)  # 掲載サイトのパンくずが見出しに入ったもの
     cleaned = re.sub(prefix, "", t)
@@ -110,6 +110,34 @@ def clean_title(title: str) -> str:
         cleaned = re.sub(r"\s+(?:\d+\s*/\s*\d+|\d+枚目)$", "", cleaned)
     stripped = MEDIA_SUFFIX.sub("", cleaned)
     return (stripped if len(stripped) >= 6 else cleaned).strip()
+
+
+# Google ニュースは長い見出しを「...」で切る。記事のページの題名で補う（同じ書き出しのときだけ）
+TRUNCATED = re.compile(r"\s*(?:\.\.\.|…)$")
+# ページの題名の終わりに付く掲載サイト名（「 - Yahoo!ニュース」「:山陽新聞デジタル｜さんデジ」「（静岡放送（SBS））」）
+SITE_TAIL = re.compile(r"\s+[-–—]\s+[^-–—]{1,30}$|\s*[:：]\s*[^:：]{0,30}(?:新聞|デジタル|ニュース|NEWS)[^:：]{0,20}$")
+MEDIA_PAREN = re.compile(r"\s*（[^（）]*(?:（[^（）]*）[^（）]*)?）$")
+MEDIA_WORD = re.compile(r"放送|新聞|テレビ|ニュース|NEWS|SBS|CBC|中京|メ[~〜～]テレ")
+
+
+def page_title(page: str) -> str:
+    m = (re.search(r'<meta[^>]+property="og:title"[^>]+content="([^"]*)"', page, re.I)
+         or re.search(r'<meta[^>]+content="([^"]*)"[^>]+property="og:title"', page, re.I)
+         or re.search(r"<title[^>]*>(.*?)</title>", page, re.S | re.I))
+    return re.sub(r"\s+", " ", html.unescape(m.group(1))).strip() if m else ""
+
+
+def full_title(title: str, page: str) -> str | None:
+    """「...」で切れた見出しを、ページの題名で補う。書き出しが同じで、補ったほうが長いときだけ。"""
+    if not TRUNCATED.search(title):
+        return None
+    head, t = TRUNCATED.sub("", title), SITE_TAIL.sub("", page_title(page))
+    tail = MEDIA_PAREN.search(t)
+    if tail and MEDIA_WORD.search(tail.group(0)):
+        t = t[:tail.start()]
+    t = clean_title(t)
+    key = lambda s: re.sub(r"[\W_]+", "", unicodedata.normalize("NFKC", s))
+    return t if len(key(t)) > len(key(head)) and key(t).startswith(key(head)) else None
 
 
 # 公式サイトの一覧では、リンクの中に分類の札（店舗・限定商品など）と「記事を見る」が入る（2026年9月末から）
@@ -474,15 +502,17 @@ def article_url(url: str) -> str:
     return re.sub(r"/(?:image|photo|img)\d+\.html?$", "/", url)
 
 
-def verify(item: dict) -> tuple[dict, str | None, str | None]:
+def verify(item: dict) -> tuple[dict, str | None, str | None, str | None]:
+    """元記事の住所・掲載日・（見出しが「...」で切れていれば）補った見出し。"""
     url = direct_url(item)
     if not url:
-        return item, None, None
+        return item, None, None, None
     url = article_url(url)
     try:
-        return item, url, published_date(fetch(url))
+        page = fetch(url)
+        return item, url, published_date(page), full_title(item["title"], page)
     except Exception:
-        return item, url, None
+        return item, url, None, None
 
 
 def verify_dates(items: list[dict]) -> int:
@@ -491,7 +521,7 @@ def verify_dates(items: list[dict]) -> int:
             and n.get("dv", 0) < DATE_CHECK_VERSION and n.get("tries", 0) < 3][:VERIFY_MAX]
     fixed = 0
     with ThreadPoolExecutor(max_workers=6) as ex:
-        for item, url, real in ex.map(verify, todo):
+        for item, url, real, title in ex.map(verify, todo):
             if not url:  # 元記事が分からなかったものは次回もう一度（3回まで）
                 item["tries"] = item.get("tries", 0) + 1
                 continue
@@ -499,6 +529,9 @@ def verify_dates(items: list[dict]) -> int:
             item.pop("tries", None)
             item.pop("checked", None)
             item["url"] = url  # 元記事のURLに置き換える
+            if title:
+                print(f"見出しを補う: {item['title'][:30]} → {title[:40]}")
+                item["title"] = title
             if real and abs((datetime.fromisoformat(real) - datetime.fromisoformat(item["date"])).days) > 3:
                 print(f"日付を修正: {item['date']} → {real} {item['title'][:40]}")
                 item["date"] = real
