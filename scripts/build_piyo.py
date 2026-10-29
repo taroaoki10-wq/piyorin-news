@@ -24,7 +24,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from claude_events import API_URL, MODEL  # noqa: E402  モデルや接続先は予定の抽出と同じ設定を使う
-from news_store import linked_sources, primary_sources  # noqa: E402
+from news_store import linked_sources, nfkc, primary_sources  # noqa: E402
 
 JST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent.parent
@@ -36,9 +36,9 @@ MEMO_FILE = DATA / "piyo-memo.json"
 GREETING_FILE = DATA / "piyo-greeting.json"
 
 MEMO_VERSION = 1      # メモの基準を変えたら上げる（作り済みの記事ももう一度メモする）
-GREETING_VERSION = 4  # まとめの基準を変えたら上げる
+GREETING_VERSION = 5  # まとめの基準を変えたら上げる
 KEEP_DAYS = 150       # この日数より古い記事はメモしない・メモから外す
-BATCH = 6             # 1回の呼び出しでメモする記事の数
+BATCH = 1             # 1回の呼び出しでメモする記事の数（まとめて渡すと別の記事の話が混ざる。紅茶ぴよりんのメモに「ゴジラとのコラボ」が入った）
 MAX_PER_RUN = 24      # 1回の更新でメモする最大数（残りは次の更新で）
 TEXT_MAX = 3000       # 1記事あたりに渡す本文の最大文字数（公式とPR TIMESを合わせて）
 GREET_DAYS = 45       # まとめに使うメモの日数
@@ -75,7 +75,7 @@ MEMO_PROMPT = """名古屋のひよこ型スイーツ「ぴよりん」のニュ
 - 値段（税込で書いてあれば税込）
 - 販売・開催の期間や日付（年月日で。曜日は不要）
 - 場所・店舗、予約や整理券の方法、数量限定・なくなり次第終了などの条件
-「ぴよりんshop」に言及するときは、この表記を使い、「ぴよりnshop」と書かないでください。
+「ぴよりんshop」「ぴよりんvillage」「ぴよりん」は、この表記を使い、「ぴよりnshop」「ぴよりン」のように書かないでください。
 必ず save_memos ツールで、すべての記事の番号について答えてください。"""
 
 GREETING_TOOL = {
@@ -106,7 +106,8 @@ GREETING_PROMPT = """名古屋のひよこ型スイーツ「ぴよりん」の�
 - 1行目は「最近のぴよりんニュースだぴよ！」のような短いあいさつ。
 - 2行目から、今日から先に関係する話題を、大事な順に2〜5個。1行に1話題で、「・」から始めて50文字以内。
 - 終わった販売やイベントは入れない。同じ話題（公式とプレスリリースの重複など）は1つにまとめる。
-- 日付は「11月3日から」「10月31日まで」のように月日で書く（「あと3日」のような相対的な書き方はしない）。
+- 日付は「11月3日から」「10月31日まで」のように月日で書く（「きょう」「あした」「あと3日」のような相対的な書き方はしない。まとめは何時間も使われるので、日付が変わるとずれる）。
+- メモと予定に書いてあることだけを書く。商品名・コラボ相手・場所は、その話題のメモのとおりに書き、別の話題（別のメモ）の商品名やコラボ相手を組み合わせない。
 - いちばん大事な部分（商品名と日付など）を1行に1か所まで **太字** で囲む。
 - です・ます・ました・でした・ません・くださいなどの丁寧語は使わない。やさしい話し言葉で、すべての文を言い切りの形（常体）にして、終わりに「ぴよ」を付ける（運行します→運行するぴよ／買えます→買えるぴよ／休みです→休みだぴよ／発売しました→発売したぴよ／ありません→ないぴよ／お待ちください→待っててぴよ）。名詞で終わる文は「だぴよ」（10時から→10時からだぴよ）、問いかけは「〜するぴよ？」の形にする。箇条書きの項目・表・見出し・URLだけの行・「参考ページ:」などの一覧と引用の中は例外とし、そこに「ぴよ」を足さない。
 
@@ -114,6 +115,7 @@ GREETING_PROMPT = """名古屋のひよこ型スイーツ「ぴよりん」の�
 - まとめの話題について、メモと予定だけで答えられる候補を4〜6個。それぞれ16文字以内。
 - 商品・イベントの日時はまとめで伝えていることが多いので、「いつから？」「いつまで？」「いつ発売？」「発売日は？」など日時を聞き直す候補は作らない。代わりに「ゴジラぴよりんについて」「山口へのおでかけについて」のように、商品名・話題名に「について」を付けて詳しく聞く文言にする。候補だけで対象の話題が分かるようにする。
 - 値段や買える場所など、日時以外を聞く候補は質問の形でもよい。
+- 候補の商品名・話題名は、メモと予定にある名前をそのまま使う。メモと予定に無い名前や組み合わせ（別々の話題の名前をつないだもの）を作らない。
 必ず save_greeting ツールで答えてください。"""
 
 
@@ -258,15 +260,40 @@ def call_tool(system: str, tool: dict, content: str, max_tokens: int, api_key: s
     return {}, res.get("usage", {})
 
 
-def correct_memo_shop_name(text: str) -> str:
-    """確認済みの店名の誤字だけを補正する（一般的な表記変換はしない）。"""
-    return text.replace("ぴよりnshop", "ぴよりんshop")
+def correct_memo_names(text: str) -> str:
+    """確認済みの書き間違いだけを直す（ぴよりnshop・ぴよりnvillage・ぴよりン → ぴよりん。一般的な表記変換はしない）。"""
+    return re.sub(r"ぴよりn(?=[A-Za-z])", "ぴよりん", text).replace("ぴよりン", "ぴよりん")
+
+
+KATAKANA_WORD = re.compile(r"[ァ-ヴ][ァ-ヴー]{2,}")
+
+
+def unknown_katakana(text: str, source: str) -> list[str]:
+    """text の中のカタカナの言葉（3文字以上）のうち、source に無いもの（別の記事・別の話題が混ざったしるし）。"""
+    src = nfkc(source).replace(" ", "")
+    words = []
+    for w in KATAKANA_WORD.findall(nfkc(text)):
+        if w in src or (w == "コラボ" and "×" in src):  # 「シェ・シバタ×ぴよりん」を「コラボ」と書くのはよい
+            continue
+        words.append(w)
+    return list(dict.fromkeys(words))
+
+
+def grounded_memo(memo: str, item: dict, text: str) -> str:
+    """元の記事（見出し・本文）に無いカタカナの言葉を含む文を外す。全部外れたら見出しだけにする。"""
+    source = f'{item.get("title", "")}\n{text}'
+    kept = [x for x in re.findall(r"[^。]+。?", memo) if x.strip() and not unknown_katakana(x, source)]
+    if len(kept) == len([x for x in re.findall(r"[^。]+。?", memo) if x.strip()]):
+        return memo
+    print(f'ぴよメモ: 記事に無い言葉 {"・".join(unknown_katakana(memo, source))} を含む文を外しました（{item.get("id", "")}）')
+    return "".join(kept).strip() or str(item.get("title", ""))[:160]
 
 
 def memo_batch(items: list[dict], api_key: str) -> tuple[dict[int, str], dict]:
-    parts = []
+    parts, texts = [], []
     for i, it in enumerate(items):
         text = article_text(it)
+        texts.append(text)
         parts.append(
             f'<article n="{i}">\nタイトル: {it.get("title", "")}\n公開日: {it.get("date", "")}\n'
             f'本文:\n{text or "（本文なし。タイトルだけで書く）"}\n</article>'
@@ -275,7 +302,8 @@ def memo_batch(items: list[dict], api_key: str) -> tuple[dict[int, str], dict]:
     out: dict[int, str] = {}
     for m in got.get("memos") or []:
         if isinstance(m, dict) and isinstance(m.get("n"), int) and 0 <= m["n"] < len(items) and m.get("memo"):
-            out[m["n"]] = correct_memo_shop_name(re.sub(r"\s+", " ", str(m["memo"])).strip())[:200]
+            memo = correct_memo_names(re.sub(r"\s+", " ", str(m["memo"])).strip())
+            out[m["n"]] = grounded_memo(memo, items[m["n"]], texts[m["n"]])[:200]
     return out, usage
 
 
@@ -284,7 +312,7 @@ def build_memos(news: list[dict], memos: dict, api_key: str, t0: float) -> tuple
     # 作り済みのメモはAPIで再生成せず補正し、ID・出典・作成日・版を保つ。
     for memo in memos.values():
         if isinstance(memo, dict) and isinstance(memo.get("memo"), str):
-            memo["memo"] = correct_memo_shop_name(memo["memo"])
+            memo["memo"] = correct_memo_names(memo["memo"])
     since = (today_jst() - timedelta(days=KEEP_DAYS)).isoformat()
     todo = [
         n for n in news
@@ -342,13 +370,33 @@ def build_greeting(memos: dict, events: list[dict], api_key: str) -> tuple[dict 
     if isinstance(old, dict) and old.get("basis") == basis:
         return None, {}
     got, usage = call_tool(GREETING_PROMPT, GREETING_TOOL, text, 900, api_key)
-    lines = [piyo_tone(re.sub(r"\s+", " ", str(x)).strip()[:80]) for x in got.get("lines") or [] if str(x).strip()][:6]
-    suggest = [re.sub(r"\s+", " ", str(x)).strip()[:20] for x in got.get("suggest") or [] if str(x).strip()][:6]
+    today = today_jst()
+    lines = [piyo_tone(absolute_days(correct_memo_names(re.sub(r"\s+", " ", str(x)).strip()), today)[:80])
+             for x in got.get("lines") or [] if str(x).strip()][:6]
+    suggest = []
+    for x in got.get("suggest") or []:
+        q = correct_memo_names(re.sub(r"\s+", " ", str(x)).strip())[:20]
+        bad = unknown_katakana(q, text)  # メモと予定に無い名前の候補（「ゴジラコラボセット」など）は出さない
+        if bad:
+            print(f'ぴよのまとめ: メモと予定に無い言葉 {"・".join(bad)} の候補を外しました（{q}）')
+        elif q:
+            suggest.append(q)
+    suggest = suggest[:6]
     if len(lines) < 2:
         print("ぴよのまとめ: 答えが足りないため作り直しません", file=sys.stderr)
         return None, usage
     return {"v": GREETING_VERSION, "at": datetime.now(JST).strftime("%Y-%m-%dT%H:%M+09:00"),
             "basis": basis, "lines": lines, "suggest": suggest}, usage
+
+
+def absolute_days(text: str, today: date) -> str:
+    """「きょう」「あした」「あさって」を月日にする（まとめは次の更新まで何時間も使うので、日付が変わるとずれる）。"""
+    def md(days: int) -> str:
+        d = today + timedelta(days=days)
+        return f"{d.month}月{d.day}日"
+    for words, days in (("きょう|今日|本日", 0), ("あした|明日", 1), ("あさって|明後日", 2)):
+        text = re.sub(words, md(days), text)
+    return text
 
 
 def write_if_changed(path: Path, obj) -> None:

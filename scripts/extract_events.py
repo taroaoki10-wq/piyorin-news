@@ -26,7 +26,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from claude_events import claude_events_batch, snippet
-from news_store import linked_sources, primary_sources
+from news_store import linked_sources, nfkc, primary_sources
 
 JST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent.parent
@@ -76,7 +76,7 @@ def html_to_lines(page: str) -> list[str]:
     text = html.unescape(re.sub(r"<[^>]+>", " ", body))
     lines = []
     for ln in text.split("\n"):
-        ln = unicodedata.normalize("NFKC", re.sub(r"[ \t　]+", " ", ln)).strip()
+        ln = nfkc(re.sub(r"[ \t　]+", " ", ln)).strip()  # 丸数字は残す（「①11月1日」を「111月1日」にしない）
         if ln:
             lines.append(ln)
     return lines

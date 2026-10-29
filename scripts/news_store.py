@@ -1,10 +1,18 @@
 """最新記事と年別保管庫。記事ID・判定結果・関連リンクをそのまま保存する。"""
 import json
 import re
+import unicodedata
 from pathlib import Path
 
 # 本文が読める一次情報（公式サイトのお知らせ・PR TIMES のプレスリリース）
 SOURCE_RE = re.compile(r"https://(?:piyorin\.com/news/p\d+/?|prtimes\.jp/main/html/rd/p/\d+\.\d+\.html)")
+# 丸数字（①〜⑳・㉑〜㊿など）。NFKC では「1」になり、すぐ後ろの数字とつながって「①10:00」が「110:00」になる
+CIRCLED_NUM = re.compile("([\u2460-\u2473\u24ea-\u24ff\u3251-\u325f\u32b1-\u32bf])")
+
+
+def nfkc(text: str) -> str:
+    """全角の英数字・記号を NFKC でそろえる。丸数字だけはそのまま残す。"""
+    return "".join(p if CIRCLED_NUM.fullmatch(p) else unicodedata.normalize("NFKC", p) for p in CIRCLED_NUM.split(text))
 
 
 def primary_sources(item: dict) -> list[str]:

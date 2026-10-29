@@ -15,12 +15,13 @@ import json
 import re
 import sys
 import time
-import unicodedata
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urljoin
+
+from news_store import nfkc
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "docs" / "data"
@@ -46,7 +47,7 @@ def fetch(url: str) -> str:
 
 def clean(s: str) -> str:
     s = html.unescape(re.sub(r"<[^>]+>", " ", s))
-    return unicodedata.normalize("NFKC", re.sub(r"[ \t　\r\n]+", " ", s)).strip()
+    return nfkc(re.sub(r"[ \t　\r\n]+", " ", s)).strip()  # 「①10:00」を「110:00」にしない
 
 
 def meta(page: str, prop: str) -> str:

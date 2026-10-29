@@ -23,7 +23,7 @@ class PiyoToneTests(unittest.TestCase):
                 patch.object(piyo, 'load_json', return_value={}), \
                 patch.object(piyo, 'call_tool', return_value=response) as call:
             result, usage = piyo.build_greeting({}, [], 'fake-test-key')
-        self.assertEqual(result['v'], 4)
+        self.assertEqual(result['v'], 5)
         self.assertEqual(result['lines'], ['運行するぴよ。', '・発売しました。'])
         self.assertEqual(result['suggest'], ['買えますか？'])
         self.assertEqual(usage, {'output_tokens': 10})
