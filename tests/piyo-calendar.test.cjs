@@ -160,3 +160,37 @@ test('cal.html は予定の中身を読み、ほかの場所のファイルは�
   assert.equal(r('?f=x-hour.ics&s=10/30'),null);
   assert.equal(r(''),null);
 });
+
+// cal.html のボタン：先にファイルを読み、押したらその中身を開く（通信が遅くても、閉じる前にカレンダーの画面が出る）
+async function calPage(ok){
+  const cal=read('docs/cal.html'),code=cal.slice(cal.indexOf('window.PiyoCal='),cal.lastIndexOf('</script>'));
+  const els={},timers=[],el=id=>els[id]||(els[id]={id,hidden:true,textContent:'',href:'',classList:{s:new Set(),add(c){this.s.add(c)},remove(c){this.s.delete(c)}},firstChild:{},on:{},addEventListener(t,f){this.on[t]=f}});
+  let resolve;const loaded=new Promise(r=>{resolve=r});
+  const c={URLSearchParams,location:{search:'?f=auto-x-hour.ics&t=予定&s=2026-10-30&e=2026-10-30&h=12:00'},
+    document:{getElementById:el},setTimeout:(f,ms)=>timers.push([f,ms]),Blob:class{constructor(p,o){this.p=p;this.o=o}},
+    URL:{createObjectURL:b=>'blob:'+b.o.type},
+    fetch:u=>{c.fetched=u;const p=ok?Promise.resolve({ok:true,text:()=>Promise.resolve('BEGIN:VCALENDAR')}):Promise.reject(new Error('net'));p.finally(()=>setImmediate(resolve)).catch(()=>{});return p}};
+  c.window=c;c.close=()=>{c.closed=true}; // ブラウザでは window が全体の入れ物
+  vm.createContext(c);vm.runInContext(code,c);
+  const click=()=>{const e={prevented:false,preventDefault(){this.prevented=true}};els.go.on.click(e);return e};
+  return {c,els,timers,click,loaded};
+}
+test('cal.html は読み終わるまで押せず、読んだら中身を開き、少しして閉じる',async()=>{
+  const a=await calPage(true);
+  assert.equal(a.c.fetched,'data/ics/auto-x-hour.ics');
+  assert.equal(a.els.go.textContent,'準備しているぴよ…');
+  assert.equal(a.click().prevented,true); // まだ読んでいない
+  assert.equal(a.timers.length,0);
+  await a.loaded;
+  assert.equal(a.els.go.href,'blob:text/calendar');
+  assert.equal(a.els.go.textContent,'カレンダーに追加する');
+  assert.equal(a.click().prevented,false);
+  assert.equal(a.timers.at(-1)[1],1500);
+  a.timers.at(-1)[0]();
+  assert.equal(a.c.closed,true);
+  // 読めなかったときは、サイトのファイルを直接開き、閉じるのを遅らせる
+  const b=await calPage(false);await b.loaded;
+  assert.equal(b.els.go.href,'data/ics/auto-x-hour.ics');
+  b.click();
+  assert.equal(b.timers.at(-1)[1],4000);
+});

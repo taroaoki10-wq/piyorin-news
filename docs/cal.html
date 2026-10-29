@@ -29,6 +29,7 @@ h1{margin:16px 0 18px;font-family:var(--f-display);font-weight:900;font-size:24p
 .card .d,.card .n{margin:6px 0 0;color:var(--muted);font-size:14px}
 .go{display:block;margin:22px 0 0;padding:15px 16px;border-radius:99px;background:var(--yolk);color:var(--yolk-ink);font-family:var(--f-display);font-weight:900;font-size:18px;text-decoration:none;box-shadow:var(--shadow)}
 .go:active{transform:translateY(1px)}
+.go.wait{opacity:.55}
 .hint{margin:14px 4px 0;color:var(--muted);font-size:13px}
 .back{margin:18px auto 0;display:block;font:inherit;font-size:14px;color:var(--muted);background:none;border:0;padding:8px 16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .err{margin:16px 0 0}
@@ -74,9 +75,15 @@ window.PiyoCal=(function(){
   $('back').addEventListener('click',close);
   if(!v){$('err').hidden=false;return}
   $('title').textContent=v.title;$('when').textContent=v.when;$('alarm').textContent=v.alarm;
-  $('go').href=v.file;$('card').hidden=$('go').hidden=$('hint').hidden=false;
-  fetch(v.file).catch(()=>{}); // 先に読んでおく（押したあと、カレンダーの画面が早く出る）
-  $('go').addEventListener('click',()=>setTimeout(()=>window.close(),1500)); // カレンダーの画面が出たら、この画面は閉じる
+  const go=$('go');let ready=false,wait=1500;
+  go.textContent='準備しているぴよ…';go.classList.add('wait');$('card').hidden=go.hidden=$('hint').hidden=false;
+  // 先にファイルを読み、押したらその中身を開く（通信を待たないので、この画面を閉じる前にカレンダーの画面が出る。
+  // サイトのファイルを開く形だと、通信が遅いと出る前にこの画面が閉じて、何も出なかった）。読めなければファイルを直接開き、閉じるのを遅らせる
+  fetch(v.file).then(r=>{if(!r.ok)throw new Error(r.status);return r.text()})
+    .then(t=>{go.href=URL.createObjectURL(new Blob([t],{type:'text/calendar'}))})
+    .catch(()=>{go.href=v.file;wait=4000})
+    .finally(()=>{ready=true;go.textContent='カレンダーに追加する';go.classList.remove('wait')});
+  go.addEventListener('click',e=>{if(!ready){e.preventDefault();return}setTimeout(()=>window.close(),wait)}); // カレンダーの画面が出たら、この画面は閉じる
 })();
 </script>
 </body>
