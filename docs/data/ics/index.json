@@ -110,6 +110,16 @@
   "time": "",
   "timed": false
  },
+ "auto-officialp5661": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5661",
+  "time": "",
+  "timed": false
+ },
  "e-oshitabi": {
   "alarms": [
    "eve",

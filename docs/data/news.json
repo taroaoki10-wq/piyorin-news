@@ -10,8 +10,142 @@
    {
     "source": "PR TIMES",
     "url": "https://prtimes.jp/main/html/rd/p/000000258.000124425.html"
+   },
+   {
+    "source": "アットエス",
+    "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5URkdEU0tlOGNkanRiNjVlM0FoNjExT1lqXzRKQTh6N0VVMzRxNlhMcGpPaVc1Ql9PeWRZc1BDbm1SVkJTN2F4SEhWN2tSZmJjeE9qdTFFaVlGZmxMWDBYSzZxSldIZw?oc=5"
+   },
+   {
+    "source": "時事ドットコム",
+    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBKdUZnQk93RkxZSHFMRVQzcGYyUlJTOHFfSlp4MkdEREVkWjk3X3JsMTBUYWJ2aXR6eHFwX2V3ZW9yTHhzNndXMUNucUx4QUZIUUF3dG1KWHBNaEJoTFJ0ZGtZNl9KdEVHRkZR?oc=5"
    }
   ]
+ },
+ {
+  "id": "official-p5661",
+  "date": "2026-10-29",
+  "cat": "official",
+  "title": "ぎゅっと楽しむ新感覚の「ぴよりん」が手のひらサイズYogibo「Squeezibo」で登場！",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5661/",
+  "related": [
+   {
+    "source": "PR TIMES",
+    "url": "https://prtimes.jp/main/html/rd/p/000000266.000124425.html"
+   },
+   {
+    "source": "MANTANWEB（まんたんウェブ）",
+    "url": "https://mantan-web.jp/prtimes/article/20261029prt00m200001105a.html"
+   }
+  ],
+  "merged_ids": [
+   "n20261029-46708c8a"
+  ]
+ },
+ {
+  "id": "n20261029-d8635ad3",
+  "date": "2026-10-29",
+  "cat": "media",
+  "title": "プレスリリース：ぎゅっと楽しむ新感覚の「ぴよりん」が手のひらサイズYogibo「Squeezibo」で登場！（PR TIMES）",
+  "source": "毎日新聞",
+  "url": "https://mainichi.jp/articles/20261029/pr2/00m/020/927000c",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのYogiboコラボ・クラファンの記事",
+   "t": "2026-10-29"
+  }
+ },
+ {
+  "id": "n20261029-a7a833be",
+  "date": "2026-10-29",
+  "cat": "media",
+  "title": "生スイーツ「ぴよりん」のYogiboスクイーズ、JR東海クラファンで販売。イコちゃん版も",
+  "source": "トラベル Watch",
+  "url": "https://travel.watch.impress.co.jp/docs/news/2152306.html",
+  "related": [
+   {
+    "source": "トラベル Watch on MSN",
+    "url": "https://www.msn.com/ja-jp/news/other/%E7%94%9F%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%AEyogibo%E3%82%B9%E3%82%AF%E3%82%A4%E3%83%BC%E3%82%BA-jr%E6%9D%B1%E6%B5%B7%E3%82%AF%E3%83%A9%E3%83%95%E3%82%A1%E3%83%B3%E3%81%A7%E8%B2%A9%E5%A3%B2-%E3%82%A4%E3%82%B3%E3%81%A1%E3%82%83%E3%82%93%E7%89%88%E3%82%82/ar-AA2gjsZn"
+   },
+   {
+    "source": "トラベル Watch",
+    "url": "https://travel.watch.impress.co.jp/docs/news/2152306.html"
+   }
+  ],
+  "merged_ids": [
+   "n20261029-2a0d0e91"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのYogiboスクイーズ販売の記事",
+   "t": "2026-10-29"
+  }
+ },
+ {
+  "id": "n20261029-91c9fb41",
+  "date": "2026-10-29",
+  "cat": "media",
+  "title": "ぴよりんとカモノハシのイコちゃんがYogiboと初コラボ クラファン開始へ",
+  "source": "news.dellows.jp",
+  "url": "https://news.dellows.jp/949772/",
+  "related": [
+   {
+    "source": "Dellows News",
+    "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1Cck5VTmstWFBCZ1FyNTg2bEV2ekZLTk1kVGgxcWNRc2VvWUwyMXBNZ2NnZUxzdjhkSHUxVmdTeW9Gel90ZjhYSUV5amk5QzU2REtyZGE4eGozUTdNYTVoZUcwUnM?oc=5"
+   }
+  ],
+  "merged_ids": [
+   "n20261029-e0c7829b"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのYogiboとの初コラボ・クラファン記事",
+   "t": "2026-10-29"
+  }
+ },
+ {
+  "id": "n20261029-1e49bdbd",
+  "date": "2026-10-29",
+  "cat": "media",
+  "title": "【JR東海】ぎゅっと楽しむ新感覚のぴよりん・イコちゃん誕生",
+  "source": "MANTANWEB（まんたんウェブ）",
+  "url": "https://mantan-web.jp/prtimes/article/20261029prt00m200001138a.html",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん×イコちゃん×Yogiboコラボ商品の記事",
+   "t": "2026-10-29"
+  }
+ },
+ {
+  "id": "n20261029-69836180",
+  "date": "2026-10-29",
+  "cat": "media",
+  "title": "ぎゅっと楽しむ新感覚のぴよりん・イコちゃん誕生",
+  "source": "インサイド",
+  "url": "https://www.inside-games.jp/release/prtimes/20261029/315359.html",
+  "related": [
+   {
+    "source": "アニメ！アニメ！",
+    "url": "https://animeanime.jp/release/prtimes/20261029/323372.html"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん×Yogiboコラボ商品の記事",
+   "t": "2026-10-29"
+  }
  },
  {
   "id": "n20261028-0086cb3b",
@@ -28,6 +162,14 @@
    {
     "source": "ガジェット通信",
     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBaaWxSNVZKbkdSVzJHX2lqWEozMy1TLXRsTmlVSzRJc1FabEVZUFJGWGhuWHY4ZnRrZmNxWVpISFVsSll4TUV2OTc5SQ?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5Mc1JVc0l3RlVKR050RDk3VmdTTWRuVThRQTBUMk5feGZ0Rl85SEg0ZzBvZjBEUm9DNDQtMW8xVTh4YUdhYjRNQkxDWmFLODhaYUJpd21LSlRURXBieWc?oc=5"
+   },
+   {
+    "source": "TRILL【トリル】",
+    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9odmlpS2N3WmU1anNWTDJuX3M3aGFJc3lXd2VsVXR1OHN1LU05NDhfY2FJUmVvdmZpakZVa3Z6dDhHMThTU1NNQWNtRnZQUjg?oc=5"
    }
   ],
   "merged_ids": [
@@ -54,6 +196,38 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんの期間限定商品（静岡みかんぴよりんおでかけセット）が紹介されている",
+   "t": "2026-10-29"
+  }
+ },
+ {
+  "id": "n20261028-feaea369",
+  "date": "2026-10-28",
+  "cat": "media",
+  "title": "アスティ静岡35周年セール",
+  "source": "news.3rd-in",
+  "url": "https://news.3rd-in.co.jp/article/6afabdde-d33c-11f1-a10e-9ca3ba09c411",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん限定の静岡みかんぴよりんおでかけセットの販売記事",
+   "t": "2026-10-29"
+  }
+ },
+ {
+  "id": "n20261028-92254ec8",
+  "date": "2026-10-28",
+  "cat": "media",
+  "title": "アスティ静岡開業35周年&リニューアルオープン記念特別販売",
+  "source": "産経ニュース",
+  "url": "https://www.sankei.com/pressrelease/prtimes/DEP3UJRBYBNBPH4MQFR5NIASN4/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "アスティ静岡の記念販売記事、ぴよりん関連の可能性が高い",
    "t": "2026-10-29"
   }
  },
@@ -257,11 +431,16 @@
    {
     "source": "Infoseek",
     "url": "https://news.infoseek.co.jp/article/prtimes_000000260_000124425/"
+   },
+   {
+    "source": "毎日新聞デジタル",
+    "url": "https://mainichi.jp/articles/20261026/pr2/00m/020/086000c"
    }
   ],
   "merged_ids": [
    "n20261025-293440f7",
    "n20261026-381e5d3b",
+   "n20261026-a51552e7",
    "n20261026-f1bbc8d0"
   ]
  },
