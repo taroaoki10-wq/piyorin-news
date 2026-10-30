@@ -12,23 +12,25 @@ function target(object={}){
     emit(type){for(const fn of listeners.get(type)||[])fn()}});
 }
 // 読み込み画面のスクリプトを、時計・保存・画面の大きさを差し替えて動かす
-function setup({last,mobile=true,reduced=false,broken=false}={}){
+function setup({seen=false,last,mobile=true,reduced=false,broken=false}={}){
   let now=START,nextId=0;
-  const timers=new Map(),store=new Map(),log=[];
+  const timers=new Map(),store=new Map(),session=new Map(),log=[];
+  if(seen)session.set('piyo-splash-seen','1');
   if(last!==undefined)store.set('piyo-last-open',String(last));
   const classes=new Set();
   const el={removed:false,classList:{add(c){classes.add(c);log.push([c,now-START])},contains:c=>classes.has(c)},remove(){this.removed=true;log.push(['remove',now-START])}};
   const document=target({visibilityState:'visible',getElementById:id=>{assert.equal(id,'splash');return el}});
   const window=target({});
   const fail=()=>{throw Error('storage blocked')};
-  const localStorage={getItem:k=>broken?fail():store.has(k)?store.get(k):null,setItem:(k,v)=>broken?fail():store.set(k,String(v))};
-  const ctx={window,document,localStorage,addEventListener:window.addEventListener,
+  const storage=m=>({getItem:k=>broken?fail():m.has(k)?m.get(k):null,setItem:(k,v)=>broken?fail():m.set(k,String(v)),removeItem:k=>broken?fail():m.delete(k)});
+  const localStorage=storage(store),sessionStorage=storage(session);
+  const ctx={window,document,localStorage,sessionStorage,addEventListener:window.addEventListener,
     Date:class extends Date{static now(){return now}},
     getComputedStyle:()=>({display:mobile?'flex':'none'}),
     matchMedia:q=>({matches:reduced&&q.includes('reduce')}),
     setTimeout:(fn,ms)=>{const id=++nextId;timers.set(id,{at:now+ms,fn});return id}};
   vm.createContext(ctx);vm.runInContext(source,ctx);
-  return {el,log,store,document,window,splash:ctx.window.PiyoSplash,
+  return {el,log,store,session,document,window,splash:ctx.window.PiyoSplash,
     advance(ms){const end=now+ms;for(;;){const next=[...timers].filter(([,t])=>t.at<=end).sort((a,b)=>a[1].at-b[1].at)[0];if(!next)break;timers.delete(next[0]);now=next[1].at;next[1].fn()}now=end},
     at:name=>(log.find(([c])=>c===name)||[])[1]};
 }
@@ -54,29 +56,20 @@ test('動きを減らす設定でも、消え始めるまで3秒',()=>{
   const h=setup({reduced:true});h.advance(100);h.splash.done();
   h.advance(2900);assert.equal(h.at('wave'),2850);assert.equal(h.at('bye'),3000);
 });
-test('前に開いていた時から10分以内なら出さない。10分ちょうどからは出す',()=>{
-  const recent=setup({last:START-9*MIN});assert.equal(recent.el.removed,true);
-  recent.splash.done();recent.advance(6000);assert.deepEqual(recent.log.map(([c])=>c),['remove']);
-  const justTen=setup({last:START-10*MIN});assert.equal(justTen.el.removed,false);
-  const old=setup({last:START-3*60*MIN});assert.equal(old.el.removed,false);
+test('アプリを終了させて開き直したとき（印が無い）は、前に開いてから何分でも出す',()=>{
+  for(const last of [undefined,START-1*MIN,START-9*MIN,START-3*60*MIN])assert.equal(setup({last}).el.removed,false);
 });
-test('記録が未来の時刻（時計の巻き戻り）や壊れた値なら、いつもどおり出す',()=>{
-  assert.equal(setup({last:START+5*MIN}).el.removed,false);
-  assert.equal(setup({last:'abc'}).el.removed,false);
+test('同じ開いている間に読み直したとき（印がある）は出さない',()=>{
+  const h=setup({seen:true});assert.equal(h.el.removed,true);
+  h.splash.done();h.advance(6000);assert.deepEqual(h.log.map(([c])=>c),['remove']);
 });
-test('開いた時と、閉じた・ほかのアプリへ移った時の時刻を記録する',()=>{
-  const h=setup();assert.equal(h.store.get('piyo-last-open'),String(START));
-  h.advance(7*MIN);h.document.visibilityState='hidden';h.document.emit('visibilitychange');
-  assert.equal(h.store.get('piyo-last-open'),String(START+7*MIN));
-  h.advance(MIN);h.document.visibilityState='visible';h.document.emit('visibilitychange');
-  assert.equal(h.store.get('piyo-last-open'),String(START+7*MIN)); // 戻ってきた時は書かない
-  h.advance(MIN);h.window.emit('pagehide');assert.equal(h.store.get('piyo-last-open'),String(START+9*MIN));
+test('開いたら印を付け、前の決まりの記録は片づける',()=>{
+  const h=setup({last:START-MIN});assert.equal(h.session.get('piyo-splash-seen'),'1');assert.equal(h.store.has('piyo-last-open'),false);
 });
 test('保存が使えない端末でもエラーにならず、いつもどおり出す',()=>{
   const h=setup({broken:true});assert.equal(h.el.removed,false);
   h.advance(200);h.splash.done();h.advance(3400);assert.equal(h.el.removed,true);
-  h.document.visibilityState='hidden';h.document.emit('visibilitychange');
 });
-test('PC の幅では出さないが、開いた時刻は記録する',()=>{
-  const h=setup({mobile:false});assert.equal(h.el.removed,true);assert.equal(h.store.get('piyo-last-open'),String(START));
+test('PC の幅では出さないが、印は付ける',()=>{
+  const h=setup({mobile:false});assert.equal(h.el.removed,true);assert.equal(h.session.get('piyo-splash-seen'),'1');
 });

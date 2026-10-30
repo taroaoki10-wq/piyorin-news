@@ -529,13 +529,13 @@ html.piyo-open .reader{z-index:48}
 <div class="splash" id="splash" aria-hidden="true"><div class="splash-piyo"></div><div class="splash-shadow"></div><p class="splash-title">ぴよりんニュース</p><p class="splash-dots"><i></i><i></i><i></i></p></div>
 <script>
 // 読み込み画面（スマホだけ）。最初のニュースを読み終えたら、ぴよが手を振ってふわっと消える。消え始めるまで最低3秒は見せ、読めなくても5秒で消す
-// 前にアプリを開いていた時（閉じた・ほかのアプリへ移った時）から10分以内に開き直したときは、iPhone がページを覚えている間なので出さない
+// アプリを開くたびに出す（アプリの切り替え画面で上にスワイプして終了させたあとも）。ホーム画面に戻って開き直しただけのときは、iPhone がページを覚えていてここは動かないので出ない
+// 同じ開いている間にページを読み直したとき（iPhone が裏で読み直すなど）は出さない。印は sessionStorage にだけ置き、アプリを終了させると消える
 window.PiyoSplash=(function(){
-  const el=document.getElementById('splash'),t0=Date.now(),LAST='piyo-last-open',SHOW=3000,FRESH=10*60000;let ended=false,last=0;
-  try{last=Number(localStorage.getItem(LAST))||0}catch(e){}
-  const save=()=>{try{localStorage.setItem(LAST,String(Date.now()))}catch(e){}};
-  save();document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')save()});addEventListener('pagehide',save);
-  if(getComputedStyle(el).display==='none'||(t0>=last&&t0-last<FRESH)){el.remove();ended=true}
+  const el=document.getElementById('splash'),t0=Date.now(),SEEN='piyo-splash-seen',SHOW=3000;let ended=false,seen=false;
+  try{seen=sessionStorage.getItem(SEEN)==='1';sessionStorage.setItem(SEEN,'1')}catch(e){}
+  try{localStorage.removeItem('piyo-last-open')}catch(e){} // 前の決まり（10分以内は出さない）の記録を片づける
+  if(getComputedStyle(el).display==='none'||seen){el.remove();ended=true}
   function done(){
     if(ended)return;ended=true;
     const wave=matchMedia('(prefers-reduced-motion: reduce)').matches?150:640;
