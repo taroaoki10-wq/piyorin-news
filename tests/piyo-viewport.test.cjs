@@ -103,6 +103,26 @@ test('フォーカスが残っても、小さな残り（120px以下）では持
   const h=setup();h.open();h.focus();h.view(806);h.vv.emit('resize');h.settle();
   assert.equal(h.document.activeElement,h.input);assert.equal(h.layer.style.bottom,'0px');assert.equal(h.log.style.height,'');
 });
+// iPhone 15 Pro Max の実機（2026-10-30）：キーボードを消したあと、入力欄とぴよがキーボードの上の帯の高さ（約68px）だけ浮いたまま止まった。
+// 画面の下まで暗くする覆いは届いていたので、層だけが古い持ち上げのまま。iPhone が最後の寸法の変化を知らせなかった形をまねる。
+test('キーボードが消えたことを iPhone が知らせなくても、0.3 秒以内に下へ戻す',()=>{
+  const h=setup();h.open();h.focus();keyboardForms['箱をずらさない'](h);h.vv.emit('resize');h.settle();
+  h.view(874-68,0);h.vv.emit('resize');h.view(874-300,0);h.vv.emit('resize');h.settle(); // 閉じる途中の寸法で合わせたまま
+  assert.equal(h.layer.style.bottom,'300px');
+  h.view(874,0); // ここで寸法が戻るが、知らせ（resize）が来ない
+  h.advance(300);h.frame();
+  assert.equal(h.layer.style.bottom,'0px');assert.equal(h.layerBottom,874);assert.equal(h.layer.style.paddingBottom,'');assert.equal(h.log.style.height,'');
+});
+test('寸法が変わらない間は、見張りが位置合わせをくり返さない',()=>{
+  const h=setup();h.open();h.settle();
+  let calls=0;const orig=h.ctx.requestAnimationFrame;h.ctx.requestAnimationFrame=fn=>{calls++;return orig(fn)};
+  for(let i=0;i<10;i++){h.advance(300);h.frame()}
+  assert.equal(calls,0);assert.equal(h.layer.style.bottom,'0px');
+});
+test('しまうと見張りも止まる',()=>{
+  const h=setup();h.open();h.settle();h.api.close({flown:true});h.advance(1000);h.frame();
+  assert.equal(h.timerCount,0);
+});
 test('Safari のタブ（状態バーの余白なし）でも、キーボードのすぐ上に置き、上16pxまで会話欄を確保する',()=>{
   const h=setup({screen:714,safeTop:'0px'});h.open();assert.equal(h.logTop,16);
   h.focus();h.box(-338,714);h.view(376,338);h.vv.emit('resize');h.frame();

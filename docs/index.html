@@ -2448,9 +2448,21 @@ window.PiyoSplash=(function(){
   // 全画面の覆い（piyo-guard）は固定の部品の基準と同じ箱なので、その位置と visualViewport から見えている範囲を出す。
   // iOS はキーボードを出す途中で、この箱を見えている範囲の上へずらしたり（箱の上端が負になる）戻したりする。どの形でも同じ見た目になるようにする。
   const vv=window.visualViewport;
-  let fitFrame=0,fitTimers=[];
+  let fitFrame=0,fitTimers=[],fitSeen='',watchTimer=0;
+  // iPhone の実機では、キーボードが消えたあとの最後の寸法の変化を知らせないことがある（入力欄とぴよが、キーボードの上の帯の高さ＝約68px だけ浮いたまま止まった）。
+  // 会話を開いている間は 0.3 秒ごとに寸法を見て、前に合わせたときと変わっていたら合わせ直す。
+  function fitKey(){
+    const b=$('piyo-guard').getBoundingClientRect();
+    return [b.top,b.bottom,vv?vv.height:0,vv?vv.offsetTop:0,vv?vv.scale*100:100].map(Math.round).join(',')+(document.activeElement===input?'i':'');
+  }
+  function watchFit(){
+    watchTimer=0;if(layer.hidden)return;
+    if(fitKey()!==fitSeen)queueFit();
+    watchTimer=setTimeout(watchFit,300);
+  }
   function fit(){
     if(layer.hidden||pull||layer.style.transform)return;
+    fitSeen=fitKey();if(!watchTimer)watchTimer=setTimeout(watchFit,300);
     const box=$('piyo-guard').getBoundingClientRect();
     const top=box.top+(vv?vv.offsetTop:0),bottom=vv?top+vv.height:box.bottom; // 見えている範囲（box と同じ座標）
     const zoomed=vv&&Math.abs(vv.scale-1)>.01;
@@ -2474,13 +2486,13 @@ window.PiyoSplash=(function(){
     window.PiyoDisplayDiagnostics?.fit({baseHeight:box.height,visibleHeight:bottom-top,inset:lift,keyboard,zoomed,logMaxHeight:parseFloat(log.style.maxHeight)});
     toBottom();
   }
-  function cancelFit(){cancelAnimationFrame(fitFrame);fitFrame=0;fitTimers.forEach(clearTimeout);fitTimers=[]}
+  function cancelFit(){cancelAnimationFrame(fitFrame);fitFrame=0;fitTimers.forEach(clearTimeout);fitTimers=[];clearTimeout(watchTimer);watchTimer=0}
   function queueFit(){if(layer.hidden||fitFrame)return;fitFrame=requestAnimationFrame(()=>{fitFrame=0;fit()})}
   function settleFit(){
     cancelFit();if(layer.hidden)return;
     relockPage(); // 向きが変わったときは、裏のページの幅も取り直す（幅が同じなら何もしない）
     queueFit(); // WebKitでは通知後にviewportの値が変わることがあるので、次の描画で読む。
-    fitTimers=[120,400].map(ms=>setTimeout(queueFit,ms)); // キーボードの開閉アニメーション後も再確認。
+    fitTimers=[120,400,900].map(ms=>setTimeout(queueFit,ms)); // キーボードの開閉アニメーション後も再確認。
   }
   if(vv){vv.addEventListener('resize',settleFit);vv.addEventListener('scroll',queueFit)}
   window.addEventListener('resize',settleFit);
