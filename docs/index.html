@@ -1566,7 +1566,7 @@ window.PiyoSplash=(function(){
 
   // ---- データ（呼んだときに読み込む） ----
   const DATA_TTL=30*60*1000;
-  let data=null,dataLoadedAt=null,dataLoadedDay='',dataLoading=null,greetAt=null,greetDay='';
+  let data=null,weatherAt=null,weatherLoading=null,dataLoadedAt=null,dataLoadedDay='',dataLoading=null,greetAt=null,greetDay='';
   function loadData(){
     if(dataLoading)return dataLoading; // 読み込み途中の再オープンでも通信を重ねない
     const now=Date.now(),today=todayStr();
@@ -1585,6 +1585,7 @@ window.PiyoSplash=(function(){
       data={greeting:valid.greeting?greeting:old.greeting||null,memo:valid.memo?memo:old.memo||{},
         events:valid.events?events:old.events||[],news:valid.news?news:old.news||[],basics:valid.basics?basics:old.basics||null,
         koyomi:valid.koyomi?koyomi:old.koyomi||null,weather:valid.weather?weather:null}; // 古い予報は更新失敗時に使わない
+      weatherAt=valid.weather?now:null;
       // 一部でも失敗したら次に呼んだとき再試行する
       if(Object.values(valid).every(Boolean)){dataLoadedAt=now;dataLoadedDay=new Date(now+9*3600e3).toISOString().slice(0,10)}
       else{dataLoadedAt=null;dataLoadedDay=''}
@@ -1593,6 +1594,20 @@ window.PiyoSplash=(function(){
       greetAt=now;greetDay=today;return true;
     })().finally(()=>{dataLoading=null});
     return dataLoading;
+  }
+  // 質問の前に、取ってから30分以上たった予報（日本時間の日付が変わったときも）を取り直す。
+  // 会話を開いたままにすると、開いたときの予報で答えてしまうため。取り直せなければ古い予報は使わない。
+  // 取り直さなくてよいときは null（待たずにすぐ答える）。
+  function freshWeather(){
+    if(!data)return null;
+    const now=Date.now();
+    if(weatherAt!==null&&now>=weatherAt&&now-weatherAt<DATA_TTL&&new Date(weatherAt+9*3600e3).toISOString().slice(0,10)===todayStr())return null;
+    if(weatherLoading)return weatherLoading;
+    weatherLoading=loadWeather().then(w=>{
+      if(!data)return;
+      if(Array.isArray(w)&&w.length){data.weather=w;weatherAt=now}else{data.weather=null;weatherAt=null}
+    }).finally(()=>{weatherLoading=null});
+    return weatherLoading;
   }
   // 天気の番号（WMO）を言葉に
   function weatherWord(c){
@@ -1669,7 +1684,8 @@ window.PiyoSplash=(function(){
       +(w.rain!=null?`、雨の確率${w.rain}%`:'')+(w.sunrise?`、日の出${w.sunrise}`:'')+(w.sunset?`、日の入り${w.sunset}`:'')
       +(w.uv!=null?`、最大UV指数${w.uv}`:'')+(w.wind!=null?`、最大風速${w.wind}m/s`:'')+(w.precipitation!=null?`、降水量${w.precipitation}mm`:'')
       +((w.date===today||w.date===nextDay(today))&&w.rainHours?.length?`\n  時間帯別の雨の確率（各1時間の予報の最大値）：${w.rainHours.map(h=>`${h.from}〜${h.to}時 ${h.rain}%`).join('、')}`:''));
-    return '<weather place="名古屋" source="Open-Meteo.com">\n'+lines.join('\n')+'\n時間帯別の値は3時間全体で雨が降る確率ではない。欠けた項目は不明。\n</weather>\n';
+    const at=weatherAt===null?'':`取得：${new Date(weatherAt+9*3600e3).toISOString().slice(0,16).replace('T',' ')}（日本時間）\n`;
+    return '<weather place="名古屋" source="Open-Meteo.com">\n'+at+lines.join('\n')+'\n時間帯別の値は3時間全体で雨が降る確率ではない。欠けた項目は不明。\n</weather>\n';
   }
 
   // ---- 開いている間は裏のページを動かさない ----
@@ -1854,6 +1870,7 @@ window.PiyoSplash=(function(){
     hold();
   }
   document.addEventListener('visibilitychange',()=>{if(idleEl.hidden)return;document.hidden?iStop():iIdle()});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!layer.hidden)freshWeather()?.catch(()=>{})}); // 会話を開いたままアプリに戻ったら、古い予報を取り直しておく
   function idleHide(){iStop();idleEl.hidden=true}
   function slideFrom(el,rect){ // el を、画面上の rect の位置から今の位置へ滑らせる
     const r=el.getBoundingClientRect(),dx=rect.left-r.left,dy=rect.top-r.top;
@@ -2107,6 +2124,8 @@ window.PiyoSplash=(function(){
   async function ask(q){
     if(busy)return;
     if(fixPending)endFix(); // 「どこがちがう？」の途中でも、候補を押したら普通の質問にする
+    const refresh=freshWeather(); // 古い予報で答えない（取り直すのは30分以上たったときだけ。待つのは最大1.5秒）
+    if(refresh){busy=true;$('piyo-send').disabled=true;await refresh.catch(()=>{});busy=false;sync()}
     const local=localReply(q),way=local?null:route();
     if(!local&&!way){pendingQ=q;openKey();return} // 準備したら続きから送る（候補はそれまで残す）
     asked={q,chip:consumeSuggest(q)||'',way:'',web:false};lastExtra=''; // 聞いた候補を消し、取得済み情報で答えられる別の質問を右へ補充する

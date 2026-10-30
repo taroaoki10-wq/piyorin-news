@@ -10,7 +10,7 @@ function setup(realAsk=false){
     todayStr:()=> '2026-10-26',nextDay:s=>new Date(Date.parse(s+'T00:00Z')+86400e3).toISOString().slice(0,10),
     fetch(){throw Error('候補補充で通信してはいけない')},
     document:{createElement(){return {remove(){const i=buttons.indexOf(this);if(i>=0)buttons.splice(i,1)},addEventListener(type,fn){assert.equal(type,'click');this.click=fn}}}}};
-  vm.createContext(ctx);
+  vm.createContext(Object.assign(ctx,{freshWeather:ctx.freshWeather||(()=>null)}));
   vm.runInContext(html.slice(html.indexOf('  function suggestLabel('),html.indexOf('  async function open(){'))+';this.api={suggestLabel,fillSuggest,consumeSuggest,suggestPool,holdSuggest,showSuggest};',ctx);
   if(realAsk){
     Object.assign(ctx,{apiKey:true,mac:null,routeMode:'mac-first',pendingQ:'',keyPrompts:0,openKey(){ctx.keyPrompts++},$:()=>({}),

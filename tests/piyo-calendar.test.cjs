@@ -52,7 +52,7 @@ function setup(how=true){
     $:()=>({}),todayStr:()=>'2026-10-29',extrasCtx:()=>({...CTX}),omikujiSeed:()=>'s',omikujiDrawn:()=>false,markOmikuji(){},
     fmt:s=>s,piyoTone:s=>s,play(){},loop(){},sync(){},userMsg(){},consumeSuggest:q=>q,badSuggest:()=>new Set(),
     piyoMsg:()=>{const m={said:[],list:null,say(t,done){this.said.push(t);done?.(m)},choices(list){this.list=list;return{remove(){},classList:{add(){}}}},links(){},fix(){}};msgs.push(m);return m}};
-  vm.createContext(c);
+  vm.createContext(Object.assign(c,{freshWeather:c.freshWeather||(()=>null)}));
   vm.runInContext('let history=[];'+part('  let busy=false,pendingChip=null;','  const sync=()=>')+';this.api={ask,finish,get busy(){return busy}};',c);
   const turn=v=>{doc.visibilityState=v;[...listeners].forEach(f=>f())};
   return {c,msgs,added,last:()=>msgs.at(-1),turn,timers,listeners};
@@ -120,7 +120,7 @@ function page({standalone,href='https://taroaoki10-wq.github.io/piyorin-news/',i
     document:{body:{appendChild(){}},createElement:()=>({click(){clicked.push({href:this.href,target:this.target,download:this.download})},remove(){}})}};
   c.URL={createObjectURL:()=>'blob:x',revokeObjectURL(){}};
   c.URL=Object.assign(function(u,b){return new URL(u,b)},c.URL);
-  vm.createContext(c);
+  vm.createContext(Object.assign(c,{freshWeather:c.freshWeather||(()=>null)}));
   vm.runInContext(part('  const PLANNED=',"  document.addEventListener('click',e=>{const b=e.target.closest('[data-ics]')")+';this.add=addToCalendar;',c);
   return {c,clicked,planned:()=>JSON.parse(store['piyo-planned']||'[]')};
 }
@@ -147,7 +147,7 @@ test('ホーム画面のアプリでは cal.html を開き、Safari のタブで
 // cal.html（カレンダーに入れるだけの画面）：data/ics/ の中のファイルだけ開く
 test('cal.html は予定の中身を読み、ほかの場所のファイルは開かない',()=>{
   const cal=read('docs/cal.html'),code=cal.slice(cal.indexOf('window.PiyoCal='),cal.indexOf('(function(){\n  const $='));
-  const c={window:{},URLSearchParams};vm.createContext(c);vm.runInContext(code,c);
+  const c={window:{},URLSearchParams};vm.createContext(Object.assign(c,{freshWeather:c.freshWeather||(()=>null)}));vm.runInContext(code,c);
   const r=q=>{const v=c.window.PiyoCal.read(q);return v&&plain(v)};
   assert.deepEqual(r('?f=auto-x-hour.ics&t=クリスマスケーキ&s=2026-10-30&e=2026-10-30&h=12:00'),
     {file:'data/ics/auto-x-hour.ics',title:'クリスマスケーキ',when:'10月30日（金） 12:00から',alarm:'始まる1時間前に知らせる'});
@@ -171,7 +171,7 @@ async function calPage(ok){
     URL:{createObjectURL:b=>'blob:'+b.o.type},
     fetch:u=>{c.fetched=u;const p=ok?Promise.resolve({ok:true,text:()=>Promise.resolve('BEGIN:VCALENDAR')}):Promise.reject(new Error('net'));p.finally(()=>setImmediate(resolve)).catch(()=>{});return p}};
   c.window=c;c.close=()=>{c.closed=true}; // ブラウザでは window が全体の入れ物
-  vm.createContext(c);vm.runInContext(code,c);
+  vm.createContext(Object.assign(c,{freshWeather:c.freshWeather||(()=>null)}));vm.runInContext(code,c);
   const click=()=>{const e={prevented:false,preventDefault(){this.prevented=true}};els.go.on.click(e);return e};
   return {c,els,timers,click,loaded};
 }

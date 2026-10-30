@@ -25,7 +25,7 @@ function setup(){
         url.includes('piyo-basics')?{lines:['basics'+version]}:[{id:'item'+version}];
       return {ok:!url.includes('http-error'),json:async()=>value};
     }};
-  vm.createContext(ctx);vm.runInContext(source+'\n'+html.slice(html.indexOf('  function knowledge(){'),html.indexOf('  async function callClaude('))+'\nthis.api={loadData,weatherLine,knowledge,koyomiKnowledge,weatherKnowledge,get data(){return data}};',ctx);
+  vm.createContext(ctx);vm.runInContext(source+'\n'+html.slice(html.indexOf('  function knowledge(){'),html.indexOf('  async function callClaude('))+'\nthis.api={loadData,freshWeather,weatherLine,knowledge,koyomiKnowledge,weatherKnowledge,get data(){return data}};',ctx);
   return {ctx,calendar,forecast,respond:(url,value)=>overrides.set(url,value),api:ctx.api,advance:n=>now+=n,setTime:n=>now=Date.parse(n),version:n=>version=n,fail:s=>fail=s,get calls(){return calls},hold:()=>{let done;release=new Promise(r=>done=r);return ()=>{release=null;done()}}};
 }
 test('初回取得、30分未満は再取得せず、30分ちょうどで全データ更新',async()=>{
@@ -54,6 +54,21 @@ test('初回オフラインでも安全な空データを作り次回回復',asy
 test('同時呼び出しの通信を共有し時計が戻った場合も再取得',async()=>{
   const h=setup(),done=h.hold(),a=h.api.loadData(),b=h.api.loadData();assert.equal(a,b);done();await a;assert.equal(h.calls,7);
   h.advance(-1);await h.api.loadData();assert.equal(h.calls,14);
+});
+test('会話を開いたまま30分たつと、質問の前に天気だけ取り直す',async()=>{
+  const h=setup();await h.api.loadData();assert.equal(h.api.data.weather[0].word,'晴れ');assert.equal(h.calls,7);
+  h.advance(30*60000-1);await h.api.freshWeather();assert.equal(h.calls,7); // 30分未満は取り直さない
+  h.version(2);h.advance(1);await h.api.freshWeather();assert.equal(h.calls,8);assert.equal(h.api.data.weather[0].word,'雨');
+  assert.equal(h.api.data.greeting.lines[0],'summary1'); // あいさつやメモは変えない（会話を消さない）
+  assert.match(h.api.weatherKnowledge(),/取得：2026-10-26 12:30（日本時間）/);
+});
+test('日付が変わったら30分未満でも天気を取り直し、取れなければ古い予報を使わない',async()=>{
+  const h=setup();h.setTime('2026-10-26T14:50:00Z');await h.api.loadData();h.advance(15*60000);
+  h.fail('weather');await h.api.freshWeather();assert.equal(h.api.data.weather,null);assert.equal(h.api.weatherKnowledge(),'');
+  h.fail('');await h.api.freshWeather();assert.ok(h.api.data.weather.length);
+});
+test('天気の取り直しは同時に呼んでも通信を重ねない',async()=>{
+  const h=setup();await h.api.loadData();h.advance(30*60000);const done=h.hold(),a=h.api.freshWeather(),b=h.api.freshWeather();assert.equal(a,b);done();await a;assert.equal(h.calls,8);
 });
 function chatSetup(){
   const h=setup(),chips=[],requests=[],animations=[],nodes={};

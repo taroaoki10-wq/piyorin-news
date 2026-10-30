@@ -69,7 +69,7 @@ test('参照の印が空でも外す（Mac の Claude は使ったメモが無�
 });
 
 test('Mac 用の指示：need_more の代わりに聞き返さず調べる。ほかの行は API と同じ',()=>{
-  const c={};vm.createContext(c);
+  const c={};vm.createContext(Object.assign(c,{freshWeather:c.freshWeather||(()=>null)}));
   vm.runInContext(part('  const SYSTEM=`','  let history=[];')+';this.SYSTEM=SYSTEM;this.SYSTEM_MAC=SYSTEM_MAC;',c);
   const api=c.SYSTEM.split('\n'),mac=c.SYSTEM_MAC.split('\n');
   assert.equal(mac.length,api.length);
@@ -94,7 +94,7 @@ function chat({mac=null,apiKey='',routeMode='mac-first',relay}={}){
     errText:()=>'API のエラーだぴよ。',
     callClaude:async b=>{sent.push(b);return{content:[{type:'text',text:'API の答えだぴよ。'}]}},
     fetch:async(url,opts={})=>{fetched.push({url,opts});return relay(url,opts)}};
-  vm.createContext(c);
+  vm.createContext(Object.assign(c,{freshWeather:c.freshWeather||(()=>null)}));
   vm.runInContext('let history=[];'+part('  let busy=false,pendingChip=null;','  const sync=()=>')+part('  function omikujiSeed(','  // ---- API キー')
     +';this.ask=ask;this.route=route;this.history=()=>history;this.isBusy=()=>busy;this.resetAt=resetAt;',c);
   return {c,said,choices,fetched,saved,keyPrompts,sent,advance:ms=>{now+=ms}};
@@ -244,7 +244,7 @@ function prep({mac=null,apiKey='',routeMode=null,health}={}){
     esc:s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])),
     setTimeout:fn=>fn(),pendingChip:null,ask:q=>asked.push(q),macHealth:async()=>health,
     macErrText:e=>e.kind==='account'?'アカウントが違うぴよ。':'?'};
-  vm.createContext(c);
+  vm.createContext(Object.assign(c,{freshWeather:c.freshWeather||(()=>null)}));
   vm.runInContext(part('  // ---- API キー','  // ---- Claude に聞く')+';this.api={openKey,saveMac,saveKey,get mac(){return mac},get routeMode(){return routeMode},get apiKey(){return apiKey},set pendingQ(v){pendingQ=v}};',c);
   const fire=(id,type,e={})=>Promise.all(($(id).listeners[type]||[]).map(fn=>fn({preventDefault(){},...e})));
   return {c,api:c.api,store,$,radios,wayButtons,asked,fire,

@@ -9,7 +9,7 @@ const ctx={window:{},TextEncoder,TextDecoder};
 vm.runInNewContext(read('docs/piyo-extras.js'),ctx);
 const X=ctx.window.PiyoExtras;
 const html=read('docs/index.html');
-const tone={};vm.createContext(tone);
+const tone={};vm.createContext(Object.assign(tone,{freshWeather:tone.freshWeather||(()=>null)}));
 vm.runInContext(html.slice(html.indexOf('  function piyoTone('),html.indexOf('  // 返事の文を表示用にする'))+';this.piyoTone=piyoTone;',tone);
 
 const basics={lines:[
@@ -149,7 +149,7 @@ test('会話：その場で答えられる質問は、API キーが無くても 
     todayStr:()=>'2026-10-28',localStorage:{getItem:()=>null,setItem(){}},Math,OMIKUJI:'piyo-omikuji',refLinks:refs=>(refs||[]).map(r=>({id:r.id})),
     userMsg(){},piyoMsg:()=>({say(text,done){said.push(text);done?.()},choices(){},links(l){linked.push(l)}}),loop(){},idle(){},play(n){played.push(n)},sync(){},fmt:s=>s,piyoTone:tone.piyoTone,
     consumeSuggest(){},NEED_MORE:{},textOf:r=>r.content[0].text,callClaude:async b=>{sent.push(b);return{content:[{type:'text',text:'答えだぴよ。'}]}}};
-  vm.createContext(c);
+  vm.createContext(Object.assign(c,{freshWeather:c.freshWeather||(()=>null)}));
   vm.runInContext('let history=[];'+html.slice(html.indexOf('  let busy=false,pendingChip=null;'),html.indexOf('  const sync=()=>'))
     +html.slice(html.indexOf('  function omikujiSeed('),html.indexOf('  // ---- API キー'))+';this.ask=ask;this.history=()=>history;',c);
   await c.ask('ゴジラはいつから？');

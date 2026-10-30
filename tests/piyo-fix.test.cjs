@@ -40,7 +40,7 @@ function setup({mac=null,apiKey='',answers=['ゴジラとのコラボの紅茶�
     callClaude:claude||(async b=>{sent.push(b);return{content:[{type:'text',text:'API で確かめたぴよ。'}]}}),pickArticles:async()=>[],pickedNews:[],
     fetch:async(url,opts={})=>{if(url.endsWith('/health'))return health();relayed.push(JSON.parse(opts.body));const t=answers[Math.min(relayed.length-1,answers.length-1)];
       return stream([ev('text',{text:t}),ev('done',{text:t,stop:'end'})])}};
-  vm.createContext(c);
+  vm.createContext(Object.assign(c,{freshWeather:c.freshWeather||(()=>null)}));
   vm.runInContext('let history=[];'+part('  let busy=false,pendingChip=null;','  const sync=()=>')+part('  function omikujiSeed(','  // ---- API キー')
     +part('  // ---- ちがうよ','  // ---- キーボードが出たら')
     +';this.api={ask,startFix,submitFix,get history(){return history},get busy(){return busy},get fixPending(){return fixPending},loadReports,reportsText,paintReports};',c);
@@ -138,7 +138,7 @@ test('候補：「質問がまちがい」の札は、あいさつの候補に�
   const suggest={children:buttons,set innerHTML(v){buttons.length=0},appendChild:b=>buttons.push(b),hidden:false,style:{}};
   const ctx={suggest,localStorage:{getItem:k=>store[k]??null},data:null,busy:false,ask(){},
     document:{createElement(){return {remove(){const i=buttons.indexOf(this);if(i>=0)buttons.splice(i,1)},addEventListener(){}}}}};
-  vm.createContext(ctx);
+  vm.createContext(Object.assign(ctx,{freshWeather:ctx.freshWeather||(()=>null)}));
   vm.runInContext('let pendingChip=null;'+part('  function suggestLabel(','  async function open(){')+';this.api={fillSuggest,consumeSuggest};',ctx);
   ctx.api.fillSuggest(['ぴよりんゴジラについて','ゴジラコラボセットについて','紅茶ぴよりんセットについて']);
   assert.deepEqual(buttons.map(b=>b.textContent),['ぴよりんゴジラについて','紅茶ぴよりんセットについて']);
