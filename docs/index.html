@@ -2453,7 +2453,7 @@ window.PiyoSplash=(function(){
   // 会話を開いている間は 0.3 秒ごとに寸法を見て、前に合わせたときと変わっていたら合わせ直す。
   function fitKey(){
     const b=$('piyo-guard').getBoundingClientRect();
-    return [b.top,b.bottom,vv?vv.height:0,vv?vv.offsetTop:0,vv?vv.scale*100:100].map(Math.round).join(',')+(document.activeElement===input?'i':'');
+    return [b.top,b.bottom,vv?vv.height:0,vv?vv.offsetTop:0,vv?vv.width:0].map(Math.round).join(',')+(document.activeElement===input?'i':'');
   }
   function watchFit(){
     watchTimer=0;if(layer.hidden)return;
@@ -2465,7 +2465,9 @@ window.PiyoSplash=(function(){
     fitSeen=fitKey();if(!watchTimer)watchTimer=setTimeout(watchFit,300);
     const box=$('piyo-guard').getBoundingClientRect();
     const top=box.top+(vv?vv.offsetTop:0),bottom=vv?top+vv.height:box.bottom; // 見えている範囲（box と同じ座標）
-    const zoomed=vv&&Math.abs(vv.scale-1)>.01;
+    // 指で拡大しているときだけ「拡大中」にする。Safari の「ページの拡大/縮小」（例：85%）でも vv.scale は 1 以外になるが、
+    // そのときは見えている幅とページの幅が同じ。拡大率で決めると、縮小表示の人はいつも拡大中の扱いになり、キーボードの位置合わせが効かなかった（2026-10-30・iPhone 15 Pro Max で 0.85）。
+    const zoomed=vv&&vv.width<document.documentElement.clientWidth-1;
     // キーボードかどうかは、見えている高さが箱より大きく縮んだかで決める（箱がずれて下が隠れていない形でも分かる）。
     // 完了でフォーカスが外れたら下へ戻す。フォーカスが残っても、小さな残り（120px以下）では持ち上げない。
     const keyboard=!zoomed&&document.activeElement===input&&box.height-(bottom-top)>120,adjust=keyboard||zoomed;

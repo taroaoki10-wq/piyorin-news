@@ -17,7 +17,7 @@ function setup({viewport=true,screen=874,safeTop='62px',padding='46px'}={}){
   let now=0,nextId=0,scrollCalls=0,drift=0;
   const box={top:0,height:screen};
   const frames=new Map(),timers=new Map();
-  const vv=viewport?target({height:screen,offsetTop:0,scale:1}):null;
+  const vv=viewport?target({height:screen,width:402,offsetTop:0,scale:1}):null;
   const window=target({visualViewport:vv,innerHeight:screen,scrollX:0,scrollY:260,
     scrollTo(x,y){scrollCalls++;this.scrollX=x;this.scrollY=y}});
   const input=target({blur(){document.activeElement=null;this.emit('blur')}}),layer={hidden:true,style:{}},log={style:{}};
@@ -133,8 +133,16 @@ test('余裕がある縦長画面では、通常時の会話欄を 62% ＋96px �
   assert.equal(h.log.style.maxHeight,(Math.min(1366*.62,1366-274)+96)+'px');
 });
 test('拡大表示（ピンチ）では見えている範囲に合わせ、ページのスクロールを巻き戻さない',()=>{
-  const h=setup();h.open();h.vv.scale=2;h.view(437,200);h.window.scrollY=70;h.vv.emit('scroll');h.frame();
+  const h=setup();h.open();h.vv.scale=2;h.vv.width=201;h.view(437,200);h.window.scrollY=70;h.vv.emit('scroll');h.frame();
   assert.equal(h.window.scrollY,70);assert.equal(h.layer.style.bottom,'237px');assert.equal(h.layer.style.paddingBottom,'');
+});
+// iPhone 15 Pro Max の実機（2026-10-30）の表示診断：Safari の「ページの拡大/縮小」を 85% にしていて、vv.scale が 0.85・見えている幅とページの幅はどちらも 506。
+// 拡大率で「拡大中」と決めていたため、キーボードの位置合わせがいつも効かず、閉じたあと入力欄とぴよが浮いたまま止まっていた。
+test('ページ全体を縮小表示（85%）にしていても拡大中とみなさず、キーボードの上に置き、閉じると下へ戻す',()=>{
+  const h=setup();h.vv.scale=.85;h.open();h.focus();keyboardForms['箱をずらさない'](h);h.vv.emit('resize');h.settle();
+  assert.equal(h.layerBottom,470);assert.equal(h.layer.style.paddingBottom,'12px');assert.equal(h.log.style.height,'158px');
+  h.input.blur();h.view(874,0);h.vv.emit('resize');h.settle();
+  assert.equal(h.layer.style.bottom,'0px');assert.equal(h.layerBottom,874);assert.equal(h.layer.style.paddingBottom,'');assert.equal(h.log.style.height,'');
 });
 test('キーボードを閉じた後に残ったページのスクロールを戻し、しまうと元の記事の位置へ戻る',()=>{
   const h=setup();h.open();assert.equal(h.document.body.style.top,'-260px');assert.equal(h.document.body.style.width,'378px');
