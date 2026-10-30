@@ -1,15 +1,4 @@
 {
- "auto-n2026102183b7c75c": {
-  "alarms": [
-   "eve",
-   "morning",
-   "hour",
-   "none"
-  ],
-  "f": "auto-n2026102183b7c75c",
-  "time": "12:00",
-  "timed": true
- },
  "auto-n2026102183b7c75c-2": {
   "alarms": [
    "eve",
