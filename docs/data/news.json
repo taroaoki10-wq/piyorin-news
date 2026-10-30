@@ -1,5 +1,33 @@
 [
  {
+  "id": "n20261030-f663025f",
+  "date": "2026-10-30",
+  "cat": "media",
+  "title": "ぴよりんがゴジラに変身 『ゴジラ-0.0』コラボの「ぴよりんゴジラ」発売",
+  "source": "あとなびマガジン on MSN",
+  "url": "https://www.msn.com/ja-jp/news/other/%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%81%8C%E3%82%B4%E3%82%B8%E3%83%A9%E3%81%AB%E5%A4%89%E8%BA%AB-%E3%82%B4%E3%82%B8%E3%83%A9-00-%E3%82%B3%E3%83%A9%E3%83%9C%E3%81%AE-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%82%B4%E3%82%B8%E3%83%A9-%E7%99%BA%E5%A3%B2/ar-AA2gpmbq",
+  "related": [
+   {
+    "source": "あとなびマガジン on MSN",
+    "url": "https://www.msn.com/ja-jp/entertainment/movies/%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%81%8C%E3%82%B4%E3%82%B8%E3%83%A9%E3%81%AB%E5%A4%89%E8%BA%AB-%E3%82%B4%E3%82%B8%E3%83%A9-0-0-%E3%82%B3%E3%83%A9%E3%83%9C%E3%81%AE-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%82%B4%E3%82%B8%E3%83%A9-%E7%99%BA%E5%A3%B2/ar-AA2gpmbq"
+   },
+   {
+    "source": "千葉テレビ放送株式会社",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5oS3FtSEhCM2U5QkhMbEMzalVPb3hkMXk4R2NwQ1BMU0xnRnlBa3NKREt2SEV2LWpseXZfT1RxLUItdlppZHlMVlNxQl9qY1hnLWdnWGhVN1JEeHNIZVZj?oc=5"
+   }
+  ],
+  "merged_ids": [
+   "n20261030-f8043304"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんと映画『ゴジラ-0.0』のコラボ商品の記事",
+   "t": "2026-10-30"
+  }
+ },
+ {
   "id": "official-p5657",
   "date": "2026-10-29",
   "cat": "official",
@@ -75,6 +103,14 @@
    {
     "source": "ニコニコニュース",
     "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5lV0JXanloVlU3WFI0dFo5UTI1ZzNoeUkySkxLV3JWcXR5S1NpZUZPR2dISFRXNEwyZEVHUjZUSmdLR05SWXRkZEwtWHpSNzlQckFsR0pYUm05emc4aUJXdUNqWGZkQnFqR1Njc2tPYXdoSGJYalNiVzE5SQ?oc=5"
+   },
+   {
+    "source": "AERA DIGITAL",
+    "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE51M2RVZXdWaVNOZ2NYV05RRll0VFJUVDRldTNvTVE1R2lrdDhHWDdWSExKemNnYUhZMEpFSnlfZnBtZkN6N3N6Y1VQdjQ0MUx0?oc=5"
+   },
+   {
+    "source": "ORICON NEWS",
+    "url": "https://www.oricon.co.jp/pressrelease/3061162/"
    }
   ],
   "dv": 3,
@@ -168,6 +204,10 @@
    {
     "source": "Mantan Web",
     "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOTm1VMVpKWXI5bnB3TzBKZ2dRM29CMllPejdvb1FfTm5lNzJBaGg2VndFVnpUVUVzdENpdXFWdTR1N3J2R0l1WUV5ZmtKZE44eUVrc2I1dXVnaDVyazB6cXNSVTJta2EtUjlGb29VcDdfdjJDd0dWMWFwWTFvZ0xHRF9WSzMxdWRQ?oc=5"
+   },
+   {
+    "source": "産経ニュース",
+    "url": "https://www.sankei.com/pressrelease/prtimes/OVUAVWPMVJNPXLJKUVD4OWX46Q/"
    }
   ],
   "merged_ids": [
@@ -1493,6 +1533,22 @@
   }
  },
  {
+  "id": "n20261022-b7649ce7",
+  "date": "2026-10-22",
+  "cat": "media",
+  "title": "期間限定「ぴよりんゴジラ」が登場",
+  "source": "産経ニュース",
+  "url": "https://www.sankei.com/article/20261022-4AVL2RIDMZPBNHIZLLP3BYSRXI/photo/5C724V7QABP65B5HSZLEDWZV4U/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラ（ぴよりんとゴジラのコラボ）の写真ページ",
+   "t": "2026-10-30"
+  }
+ },
+ {
   "id": "n20261021-030f72f2",
   "date": "2026-10-21",
   "cat": "media",
@@ -2586,6 +2642,10 @@
    {
     "source": "日テレNEWS NNN on MSN",
     "url": "https://www.msn.com/ja-jp/food-and-drink/desserts/%E7%89%B9%E5%88%A5%E4%BB%95%E6%A7%98%E3%81%AE-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E7%99%BB%E5%A0%B4-%E3%82%A2%E3%82%B8%E3%82%A2%E3%83%91%E3%83%A9%E5%A4%A7%E4%BC%9A%E3%81%AE%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88-%E3%82%A6%E3%82%BA%E3%83%9F%E3%83%B3-%E3%82%92%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8-%E5%89%8D%E5%9B%9E%E3%81%AE-%E3%83%9B%E3%83%8E%E3%83%9B%E3%83%B3%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%AB%E7%B6%9A%E3%81%8D%E8%B2%A9%E5%A3%B2%E3%81%B8/ar-AA2dO892"
+   },
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQSWozcGd6QUI5T28xdEJ0anpQSzRvVk5yUWxDUEQ5b3R5Z2ZiZ0lTblNRTnNhbEo3ZV9vVjJ5YWJnbWowU0hZazZXOWhfM05CUHF6cS11Z2hvTm9xZF91U0EzbVh1cXROZWN6YW5OZzU2ak1XdEFMQnVHYUl0QzI0cmQ3QjM1V3NVS0FBZkh3?oc=5"
    }
   ],
   "dv": 3,
