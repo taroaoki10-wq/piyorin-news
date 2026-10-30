@@ -104,6 +104,10 @@
    {
     "source": "トラベル Watch",
     "url": "https://travel.watch.impress.co.jp/docs/news/2152306.html"
+   },
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPT0ZFVlYwU2tLbGlUQ2l1MjZwaWdiakxvUHNRTzdQLUtxR0ZvcjZnR2ZwTVp6WklLM2JNbTJKOUVOZ0hqZzktclRoSkdfeUVOdmVQcTM4RHNIdTROd3R2M3ZKdnJndUtXcU13Wks4djMzX2dRUENwQkYyVGJCMVR1UmJaMWxYRndyXzgwODJn?oc=5"
    }
   ],
   "merged_ids": [
@@ -142,13 +146,17 @@
   }
  },
  {
-  "id": "n20261029-1e49bdbd",
+  "id": "n20261029-65c15355",
   "date": "2026-10-29",
   "cat": "media",
   "title": "【JR東海】ぎゅっと楽しむ新感覚のぴよりん・イコちゃん誕生",
   "source": "MANTANWEB（まんたんウェブ）",
-  "url": "https://mantan-web.jp/prtimes/article/20261029prt00m200001138a.html",
+  "url": "https://mantan-web.jp/prtimes/article/20261029prt00m200001138a/photopage/001.html",
   "related": [
+   {
+    "source": "MANTANWEB（まんたんウェブ）",
+    "url": "https://mantan-web.jp/prtimes/article/20261029prt00m200001138a.html"
+   },
    {
     "source": "PR TIMES",
     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9JQzRDdnFhV1pDODJaZElrMEJZUnpkcC1QbDZveU03NHdoLVlGT1pfeWR1YnJ6Ui1ESm9PZzc0TUNmQlFSLUxReUd4MjlpSC1RcUxmRnFTa2R1MnBoRE8yWnNfaGloZkdJZ3c?oc=5"
@@ -156,15 +164,22 @@
    {
     "source": "時事ドットコム",
     "url": "https://www.jiji.com/jc/article?k=000000103.000160429&g=prt"
+   },
+   {
+    "source": "Mantan Web",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOTm1VMVpKWXI5bnB3TzBKZ2dRM29CMllPejdvb1FfTm5lNzJBaGg2VndFVnpUVUVzdENpdXFWdTR1N3J2R0l1WUV5ZmtKZE44eUVrc2I1dXVnaDVyazB6cXNSVTJta2EtUjlGb29VcDdfdjJDd0dWMWFwWTFvZ0xHRF9WSzMxdWRQ?oc=5"
    }
   ],
-  "dv": 3,
+  "merged_ids": [
+   "n20261029-1e49bdbd"
+  ],
   "jg": {
    "v": 1,
    "ok": true,
    "why": "ぴよりん×イコちゃん×Yogiboコラボ商品の記事",
    "t": "2026-10-29"
-  }
+  },
+  "dv": 3
  },
  {
   "id": "n20261029-69836180",
@@ -247,6 +262,10 @@
    {
     "source": "アメーバニュース",
     "url": "https://news.ameba.jp/entry/20261029-89671714/"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9KVXJIeGlyYTh3cHBFXzAwcC1nLU5ETEpZblNvRjhaVUh3NGw4TVVyb1VLbHFJVVJYS0lNS2drT0tOWUlmLVBxcFBjNWZXaDNzdUZCMEN4aGo3My1BVVNBQzEyX3BQUUxpaDRyUjU4aENibTkzbVotcTB6SEQ?oc=5"
    }
   ],
   "merged_ids": [
@@ -274,6 +293,22 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんとYogiboのコラボスクイーズの記事",
+   "t": "2026-10-30"
+  }
+ },
+ {
+  "id": "n20261029-b5bb3578",
+  "date": "2026-10-29",
+  "cat": "media",
+  "title": "ぎゅっと楽しむ新感覚の「ぴよりん」が手のひらサイズYogibo「Squeezibo」で登場！- MANTANWEB（まんたんウェブ）",
+  "source": "MANTANWEB（まんたんウェブ）",
+  "url": "https://mantan-web.jp/prtimes/article/20261029prt00m200001105a/photopage/001.html",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんがYogiboのライセンスグッズとして登場する記事",
    "t": "2026-10-30"
   }
  },
