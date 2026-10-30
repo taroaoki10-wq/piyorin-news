@@ -520,6 +520,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .piyo-reports .acts button:first-child{margin-left:0}
 html.piyo-open .reader-scrim{z-index:46} /* ぴよの会話から開いた記事は、ぴよより手前に出す */
 html.piyo-open .reader{z-index:48}
+@media (display-mode:standalone){html.piyo-open{min-height:100lvh}} /* ホーム画面のアプリでは、本文を止めてページが短くなると iPhone が見える高さを状態バーの分だけ縮め、下に帯が出る。止めている間もページの長さを画面の高さに保つ */
 </style>
 
 </head>
@@ -2442,54 +2443,35 @@ window.PiyoSplash=(function(){
   });
   paintReports();
 
-  // ---- キーボードが出たら持ち上げ、会話の欄の高さも合わせる（iPhone の Safari） ----
+  // ---- キーボードが出たら持ち上げ、会話の欄の高さも合わせる（iPhone の Safari・ホーム画面のアプリ） ----
+  // 位置は、そのときに見えている範囲から毎回測り直す（前に覚えた位置は使わない）。
+  // 全画面の覆い（piyo-guard）は固定の部品の基準と同じ箱なので、その位置と visualViewport から見えている範囲を出す。
+  // iOS はキーボードを出す途中で、この箱を見えている範囲の上へずらしたり（箱の上端が負になる）戻したりする。どの形でも同じ見た目になるようにする。
   const vv=window.visualViewport;
-  let fitFrame=0,fitTimers=[],fitBase=null;
+  let fitFrame=0,fitTimers=[];
   function fit(){
     if(layer.hidden||pull||layer.style.transform)return;
-    const layoutH=document.documentElement.clientHeight||window.innerHeight,visibleH=vv?Math.min(vv.height,layoutH):layoutH;
-    const width=document.documentElement.clientWidth||window.innerWidth,inset=vv?Math.max(0,layoutH-visibleH-vv.offsetTop):0;
-    if(!fitBase||fitBase.width!==width||!vv){
-      layer.style.paddingBottom='';
-      fitBase={width,height:visibleH,inset,padding:getComputedStyle(layer).paddingBottom};
-    }
+    const box=$('piyo-guard').getBoundingClientRect();
+    const top=box.top+(vv?vv.offsetTop:0),bottom=vv?top+vv.height:box.bottom; // 見えている範囲（box と同じ座標）
     const zoomed=vv&&Math.abs(vv.scale-1)>.01;
-    // 完了でフォーカスが外れたら、OSの寸法が残っていても最初の位置へ戻す。
-    // 格納後もフォーカスが残る場合、小さな残り余白（120px以下）で持ち上げ続けない。
-    const keyboard=!zoomed&&document.activeElement===input&&Math.max(fitBase.height,layoutH)-visibleH>120,adjust=keyboard||zoomed;
-    const h=adjust?visibleH:fitBase.height;
+    // キーボードかどうかは、見えている高さが箱より大きく縮んだかで決める（箱がずれて下が隠れていない形でも分かる）。
+    // 完了でフォーカスが外れたら下へ戻す。フォーカスが残っても、小さな残り（120px以下）では持ち上げない。
+    const keyboard=!zoomed&&document.activeElement===input&&box.height-(bottom-top)>120,adjust=keyboard||zoomed;
+    const lift=adjust?Math.max(0,box.bottom-bottom):0; // 下が隠れている高さだけ持ち上げる
     if(!adjust&&document.body.style.position==='fixed'&&(window.scrollX||window.scrollY))window.scrollTo(0,0);
-    const transition=layer.style.transition;
-    if(!adjust)layer.style.transition='none';
     layer.style.translate='';
-    layer.style.bottom=(adjust?inset:fitBase.inset)+'px';
-    layer.style.paddingBottom=keyboard?'12px':fitBase.padding;
-    const logHeight=Math.max(120,Math.min(h*.62,h-104-56-44-70));
-    log.style.height=''; // 通常時にキーボード専用の高さを残さない。
-    log.style.maxHeight=logHeight+'px';
-    if(!adjust){
-      const bottom=$('piyo-form').getBoundingClientRect().bottom;
-      if(fitBase.formBottom===undefined)fitBase.formBottom=bottom;
-      const shift=fitBase.formBottom-bottom;
-      layer.style.translate=Math.abs(shift)>.5?`0 ${shift}px`:'';
-      layer.style.transition=transition;
-    }
-    // 下端を保って会話欄を96px上へ広げ、上側に安全領域＋16pxを残す。
-    // 会話が短くても、現在の上端でなく下端から収まる最大高さを求める。
+    layer.style.bottom=lift+'px';
+    layer.style.paddingBottom=keyboard?'12px':'';
+    // 会話欄は下端を保ち、見えている上端に安全領域＋16pxを残すところまで広げられる。
+    // 下端は、層の下端から会話欄の下端までの長さで出す（持ち上げの動きの途中に測っても変わらない）。
+    // 通常時は内容の高さまで（短い会話で後ろの幕を上まで広げない）、キーボード中はその高さを確保して、見える範囲を狭めない。
     const safeTop=16+(parseFloat(getComputedStyle(layer).getPropertyValue('--piyo-safe-top'))||0);
-    if(keyboard){
-      // 全画面の固定要素を原点にして、通常時の表示上限と会話欄の下端を同じ座標で測る。
-      // 可視高さからの逆算では、固定要素の実際の位置がずれると上に空きが残る。
-      const origin=$('piyo-guard').getBoundingClientRect().top;
-      const top=origin+(vv?vv.offsetTop:0)+(fitBase.logTop??safeTop);
-      const height=Math.max(0,log.getBoundingClientRect().bottom-top);
-      log.style.maxHeight=log.style.height=height+'px';
-    }else{
-      const top=safeTop+(adjust&&vv?vv.offsetTop:0);
-      log.style.maxHeight=Math.max(120,Math.min(logHeight+96,log.getBoundingClientRect().bottom-top))+'px';
-      if(!adjust)fitBase.logTop=Math.max(safeTop,log.getBoundingClientRect().bottom-parseFloat(log.style.maxHeight)-$('piyo-guard').getBoundingClientRect().top);
-    }
-    window.PiyoDisplayDiagnostics?.fit({baseHeight:fitBase.height,visibleHeight:visibleH,inset,keyboard,zoomed,logMaxHeight:parseFloat(log.style.maxHeight)});
+    const below=layer.getBoundingClientRect().bottom-log.getBoundingClientRect().bottom;
+    const h=adjust?bottom-top:box.height,usual=Math.max(120,Math.min(h*.62,h-104-56-44-70))+96;
+    const room=Math.max(0,box.bottom-lift-below-(adjust?top:box.top)-safeTop);
+    if(keyboard)log.style.maxHeight=log.style.height=room+'px';
+    else{log.style.height='';log.style.maxHeight=Math.max(120,Math.min(usual,room))+'px'}
+    window.PiyoDisplayDiagnostics?.fit({baseHeight:box.height,visibleHeight:bottom-top,inset:lift,keyboard,zoomed,logMaxHeight:parseFloat(log.style.maxHeight)});
     toBottom();
   }
   function cancelFit(){cancelAnimationFrame(fitFrame);fitFrame=0;fitTimers.forEach(clearTimeout);fitTimers=[]}
