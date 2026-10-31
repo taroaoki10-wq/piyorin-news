@@ -38,6 +38,10 @@
    {
     "source": "モデルプレス",
     "url": "https://mdpr.jp/other/detail/4868725"
+   },
+   {
+    "source": "マイナビウーマン",
+    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5aaTd1amYzOVl5MkMwV2g5SlVXU3FrMFdyaWVkZFpnSkVSdzIxdEJVQlh0ODg4cDVuT2hKVHZlS1ZWOVBVYUhRU3owVExITUJ6M0NOY2lPQllTNFpvX2VicQ?oc=5"
    }
   ],
   "merged_ids": [
@@ -483,10 +487,15 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1PeHNWdTNBSGt0T0dKdGlzc2RWTDNSN2dxTjJuTXpjWENYN3F1SXZqZzBUSFUyMG15NDFRbFFGMHJwYmZCaTBQMnN6bkhWM3JVUjhydjMtRTNncG5LN2VXV3RtSkh4NlRoSlJaeUR3T3hwNUNfS250OElFLV8?oc=5"
+   },
+   {
+    "source": "アメーバニュース",
+    "url": "https://news.ameba.jp/entry/20261029-22940727/"
    }
   ],
   "merged_ids": [
-   "n20261028-651d7bef"
+   "n20261028-651d7bef",
+   "n20261029-637104e2"
   ],
   "dv": 3,
   "jg": {
