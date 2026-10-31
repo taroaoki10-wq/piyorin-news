@@ -1,5 +1,57 @@
 [
  {
+  "id": "n20261031-3f459919",
+  "date": "2026-10-31",
+  "cat": "media",
+  "title": "「ぴよりんゴジラ」上陸 チョコレートのババロアで包んだ特別仕様 11月3～13日（読売新聞オンライン）",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/f516353eeff5098541d786b86c18efb7946d5f81",
+  "related": [
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.yahoo.co.jp/articles/f516353eeff5098541d786b86c18efb7946d5f81"
+   }
+  ],
+  "merged_ids": [
+   "n20261031-aeb9f8f6"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラの期間限定販売の記事",
+   "t": "2026-10-31"
+  }
+ },
+ {
+  "id": "n20261031-7e11fb1a",
+  "date": "2026-10-31",
+  "cat": "media",
+  "title": "【名古屋・ぴよりん】今年は紫色になって登場！ 「ハロウィンぴよりん」期間限定で発売中",
+  "source": "モデルプレス",
+  "url": "https://mdpr.jp/other/detail/4868725",
+  "related": [
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE52a2V1c1dlb0pfVGE2S1BFSkgxNEFSMUhMUmdOSm1zMVo5SlVMOU55OWR3TWk4WEl3S2pDd3V2eTlFMGtrN2NRTi1lVlBPRXlBS0xlUG1QalZxdXQ5eUZn?oc=5"
+   },
+   {
+    "source": "モデルプレス",
+    "url": "https://mdpr.jp/other/detail/4868725"
+   }
+  ],
+  "merged_ids": [
+   "n20261031-2713b125"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ハロウィンぴよりんの期間限定発売の記事",
+   "t": "2026-10-31"
+  }
+ },
+ {
   "id": "n20261030-f663025f",
   "date": "2026-10-30",
   "cat": "media",
@@ -44,6 +96,30 @@
   }
  },
  {
+  "id": "n20261030-d05cb278",
+  "date": "2026-10-30",
+  "cat": "media",
+  "title": "「ゴジラ―０・０」公開記念 「ぴよりんゴジラ」期間限定販売…１１月３～１３日に：地域ニュース",
+  "source": "読売新聞オンライン",
+  "url": "https://www.yomiuri.co.jp/local/chubu/news/20261031-GYTNT00039/",
+  "related": [
+   {
+    "source": "読売新聞",
+    "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBlQ1BOZmwyUTN3RFRrRkQ3djRXNklPcHNKQUFuVWZERzFsOGZGZHhpaUo5XzZRQzB2TkFpX0h1UjN2di13YndTdVV4OUFTUnVRU3NOVVZ1VXRkbWcwUTNoQVRrQnB4emtWV0xxUl9YTXY?oc=5"
+   }
+  ],
+  "merged_ids": [
+   "n20261031-8318df15"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラの期間限定販売の記事",
+   "t": "2026-10-31"
+  }
+ },
+ {
   "id": "official-p5657",
   "date": "2026-10-29",
   "cat": "official",
@@ -78,6 +154,10 @@
    {
     "source": "Mantan Web",
     "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNcUtCNFZwSkpzVVNsQjRUemgxN2hFSWhMeWF3OFdaVUwwV2E3b1N0eEZhQlBJaXFUQnNObkw1LTNnYUFyYVJQaFdtUi1uMFJuTWdvc19zbUFjZE9jeTlOU3ZmLVlPa00tQmRWM0stV0RPWXNfMW1mMUNQS0Z5OWhpYUJmdFdHNDR5?oc=5"
+   },
+   {
+    "source": "浜松経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE40SmlsSWlXSG1XMEpJalh4TXBhZXpXYzlEelpQbDdNWmlfOXAyTC1MRldpM2lTSkpmQU1ETTV5eGswS1hUeE9rYmhIOEZ5eUI3WmdqRzU5dw?oc=5"
    }
   ],
   "merged_ids": [
@@ -127,6 +207,10 @@
    {
     "source": "ORICON NEWS",
     "url": "https://www.oricon.co.jp/pressrelease/3061162/"
+   },
+   {
+    "source": "AERA DIGITAL",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5mdFU2QnExN0dSNkRJdEVIcEczNUozVlYwcFlETkZKQlNick1RbUFLczF3Y1p4N2wyTFNkbHBZb2tOT1ZTUzdxTjhCeE12Ql91OFB1Qlln?oc=5"
    }
   ],
   "dv": 3,
@@ -1406,6 +1490,10 @@
    {
     "source": "山陽新聞",
     "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE4xWDlheXdnal9FeXdlVmRZQ0stdlV6LVF4VXRoaXpFRmNUSkNwblZIdWYxc1VSTVZCLXM0OV9pMmtLNXc5eE5VaERQRFFxRnFRLU1TMVgybXAwaG5sVWpkYWRCczFSRWVKQWphZg?oc=5"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBfS1RQdm9GSEVscjV5X1NpaGQyUGZTWG9XbmNuWmUyVzd0UFZqRU13M2g3dXIwcmNYWmRKS0ZIUXQ0RVJsdHRyMzhfMTl4bzM1czRiX1plUDZ5Smta?oc=5"
    }
   ],
   "dv": 3,
