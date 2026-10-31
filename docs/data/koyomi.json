@@ -1,5 +1,5 @@
 {
- "built": "2026-10-31",
+ "built": "2026-11-01",
  "note": "暦のデータ。scripts/build_koyomi.py が作る（生成 AI なし）。節気と月は計算値で、日付の境目の近くでは1日ずれることがある。",
  "sources": {
   "holidays": {
@@ -9,8 +9,8 @@
   },
   "astro": "太陽と月の位置の略算（Meeus『Astronomical Algorithms』）"
  },
- "holidays_from": "2026-10-24",
- "holidays_until": "2027-12-05",
+ "holidays_from": "2026-10-25",
+ "holidays_until": "2027-12-06",
  "holidays": [
   {
    "date": "2026-11-03",
@@ -469,6 +469,10 @@
   {
    "time": "2027-11-28T12:24",
    "phase": "新月"
+  },
+  {
+   "time": "2027-12-06T14:22",
+   "phase": "上弦の月"
   }
  ]
 }

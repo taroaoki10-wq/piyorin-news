@@ -9,16 +9,6 @@
   "time": "",
   "timed": false
  },
- "auto-officialp5620": {
-  "alarms": [
-   "eve",
-   "morning",
-   "none"
-  ],
-  "f": "auto-officialp5620",
-  "time": "",
-  "timed": false
- },
  "auto-officialp5628": {
   "alarms": [
    "eve",
