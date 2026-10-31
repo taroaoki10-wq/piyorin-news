@@ -43,15 +43,15 @@ test('カレンダーに入れた予定を、前の日と当日のあいさつ�
   assert.equal(X.plannedLine([],'2026-10-29'),null);
 });
 
-function setup(how=true){
+function setup(how=true,planned=[]){
   const msgs=[],added=[],timers=[],listeners=[];
   const doc={visibilityState:'visible',addEventListener:(t,f)=>listeners.push(f),removeEventListener:(t,f)=>{const i=listeners.indexOf(f);if(i>=0)listeners.splice(i,1)}};
   const c={setTimeout:(f,ms)=>{timers.push(f);return timers.length},clearTimeout:id=>{timers[id-1]=null},document:doc,PiyoExtras:X,data:{events:EVENTS,memo:{},news:[],basics:null,koyomi:null,weather:[]},mac:null,apiKey:'',routeMode:'mac-first',refMap:{e1:{type:'event',id:'x'},m1:{type:'news',id:'official-p5633'}},
     PiyoPage:{icsInfo:id=>id==='x'?{f:'x',time:'12:00',timed:true,alarms:['eve','morning','hour','none']}:{f:id,time:'',timed:false,alarms:['eve','morning','none']},
-      addToCalendar:(id,alarm)=>{added.push([id,alarm]);return how},planned:()=>[]},
+      addToCalendar:(id,alarm)=>{added.push([id,alarm]);return how},planned:()=>planned},
     $:()=>({}),todayStr:()=>'2026-10-29',extrasCtx:()=>({...CTX}),omikujiSeed:()=>'s',omikujiDrawn:()=>false,markOmikuji(){},
     fmt:s=>s,piyoTone:s=>s,play(){},loop(){},sync(){},userMsg(){},consumeSuggest:q=>q,badSuggest:()=>new Set(),
-    piyoMsg:()=>{const m={said:[],list:null,say(t,done){this.said.push(t);done?.(m)},choices(list){this.list=list;return{remove(){},classList:{add(){}}}},links(){},fix(){}};msgs.push(m);return m}};
+    piyoMsg:()=>{const m={said:[],list:null,say(t,done){this.said.push(t);done?.(m)},choices(list,opt){this.list=list;this.opt=opt;return{remove(){},classList:{add(){}}}},links(){},fix(){}};msgs.push(m);return m}};
   vm.createContext(Object.assign(c,{freshWeather:c.freshWeather||(()=>null)}));
   vm.runInContext('let history=[];'+part('  let busy=false,pendingChip=null;','  const sync=()=>')+';this.api={ask,finish,get busy(){return busy}};',c);
   const turn=v=>{doc.visibilityState=v;[...listeners].forEach(f=>f())};
@@ -98,18 +98,48 @@ test('ホーム画面のアプリから入れたときは、カレンダーの�
   h.last().list[2][1]();
   assert.equal(h.msgs.length,n); // 開いている間は話さない
   h.turn('hidden');h.turn('visible');
-  assert.equal(h.last().said[0],'おかえりぴよ！「カレンダーに追加」を押していれば、10月30日の11時に知らせるぴよ。');
+  assert.equal(h.last().said[0],'おかえりぴよ！「カレンダーに追加」を押していれば、10月30日の11時に知らせるぴよ。入っていなかったら、もう一度ボタンを押してぴよ。');
   assert.equal(h.listeners.length,0);
   // 画面が開かなかった（隠れなかった）ときは、少し待って話す
   const h2=setup('window');
   await h2.c.api.ask('クリスマスケーキの予約をカレンダーに入れて');
   h2.last().list[3][1]();
   h2.timers.filter(Boolean).at(-1)();
-  assert.equal(h2.last().said[0],'「カレンダーに追加」を押していれば、入ったぴよ。');
+  assert.equal(h2.last().said[0],'「カレンダーに追加」を押していれば、入ったぴよ。入っていなかったら、もう一度ボタンを押してぴよ。');
   const h3=setup(false);
   await h3.c.api.ask('クリスマスケーキの予約をカレンダーに入れて');
   h3.last().list[2][1]();
   assert.equal(h3.last().said[0],'ごめんぴよ…カレンダーの画面を開けなかったぴよ。');
+});
+
+// カレンダーに入れるボタンは、押しても消さず何度でも押せる（入らなかったときに詰まないように。2026-10-31）
+test('カレンダーに入れる・どの予定・いつ知らせるのボタンは、押したあとも残る',async()=>{
+  const h=setup('window');
+  const answer=h.c.piyoMsg();
+  h.c.api.finish(answer,'クリスマスケーキの予約はいつ？','10月30日12時からだぴよ。\n[[参照:e1]]');
+  assert.equal(answer.opt.keep,true);
+  answer.list[0][1]();
+  const ask=h.last();
+  assert.equal(ask.opt.keep,true);
+  ask.list[2][1]();ask.list[2][1](); // 同じボタンをもう一度押しても、もう一度入れられる
+  assert.deepEqual(plain(h.added),[['x','hour'],['x','hour']]);
+  // そのほかの選ぶボタン（調べる？など）は今までどおり 1 回だけ
+  const ch=part('      choices(list,opt){','      fix(info){');
+  assert.match(ch,/if\(keep\)\{[^}]*now-last<1000\)return;/);
+  assert.match(ch,/x\.disabled=true;if\(x!==b\)x\.remove\(\)/);
+});
+
+test('前にも入れた予定は「カレンダーに追加」が出ないことを伝える',async()=>{
+  const AGAIN='前にも入れた予定は「カレンダーに追加」が出ないで、入っている予定が出るぴよ。知らせる時を変えるときは、そこで「予定を削除」してから入れ直してぴよ。';
+  const h=setup('window',[{id:'x',start:'2026-10-30'}]);
+  await h.c.api.ask('クリスマスケーキの予約をカレンダーに入れて');
+  h.last().list[2][1]();
+  h.turn('hidden');h.turn('visible');
+  assert.equal(h.last().said[0],'おかえりぴよ！'+AGAIN);
+  const h2=setup(true,[{id:'x',start:'2026-10-30'}]);
+  await h2.c.api.ask('クリスマスケーキの予約をカレンダーに入れて');
+  h2.last().list[2][1]();
+  assert.equal(h2.last().said[0],'カレンダーに入れる画面を開いたぴよ！'+AGAIN);
 });
 
 // ページの addToCalendar：ホーム画面のアプリ（navigator.standalone）は cal.html をアプリの中に開く（アプリの中で .ics を直接開くと白いページになる）
@@ -134,6 +164,8 @@ test('ホーム画面のアプリでは cal.html を開き、Safari のタブで
   assert.equal(u.pathname,'/cal.html');
   assert.deepEqual(Object.fromEntries(u.searchParams),{f:'auto-x-hour.ics',t:'ぴよりんクリスマスケーキ 予約受付開始',s:'2026-10-30',e:'2026-10-30',h:'12:00'});
   assert.deepEqual(plain(a.planned().map(p=>[p.id,p.time,p.alarm])),[['x','12:00','hour']]);
+  a.c.add('x','morning'); // 2 回目は「前にも入れた」の印を付ける（cal.html が「カレンダーに追加」が出ないことを先に伝える）
+  assert.equal(new URL(a.clicked[1].href,'https://example.com/').searchParams.get('a'),'1');
   const b=page({standalone:undefined});
   assert.equal(b.c.add('x','morning'),true);
   assert.deepEqual(plain(b.clicked),[{href:'data/ics/auto-x-morning.ics',target:'_blank'}]);
@@ -150,7 +182,8 @@ test('cal.html は予定の中身を読み、ほかの場所のファイルは�
   const c={window:{},URLSearchParams};vm.createContext(Object.assign(c,{freshWeather:c.freshWeather||(()=>null)}));vm.runInContext(code,c);
   const r=q=>{const v=c.window.PiyoCal.read(q);return v&&plain(v)};
   assert.deepEqual(r('?f=auto-x-hour.ics&t=クリスマスケーキ&s=2026-10-30&e=2026-10-30&h=12:00'),
-    {file:'data/ics/auto-x-hour.ics',title:'クリスマスケーキ',when:'10月30日（金） 12:00から',alarm:'始まる1時間前に知らせる'});
+    {file:'data/ics/auto-x-hour.ics',title:'クリスマスケーキ',when:'10月30日（金） 12:00から',alarm:'始まる1時間前に知らせる',again:false});
+  assert.equal(r('?f=auto-x-hour.ics&s=2026-10-30&a=1').again,true);
   assert.equal(r('?f=g-morning.ics&t=ゴジラ&s=2026-11-03&e=2026-11-13&h=10:00').when,'11月3日（火） 〜 11月13日（金）'); // 何日も続く予定に時刻は出さない
   assert.equal(r('?f=g-eve.ics&s=2026-11-03').alarm,'前の日の夜20時に知らせる');
   assert.equal(r('?f=g-eve.ics&s=2026-11-03').title,'ぴよりんの予定');
@@ -162,11 +195,11 @@ test('cal.html は予定の中身を読み、ほかの場所のファイルは�
 });
 
 // cal.html のボタン：先にファイルを読み、押したらその中身を開く（通信が遅くても、閉じる前にカレンダーの画面が出る）
-async function calPage(ok){
+async function calPage(ok,more=''){
   const cal=read('docs/cal.html'),code=cal.slice(cal.indexOf('window.PiyoCal='),cal.lastIndexOf('</script>'));
   const els={},timers=[],el=id=>els[id]||(els[id]={id,hidden:true,textContent:'',href:'',classList:{s:new Set(),add(c){this.s.add(c)},remove(c){this.s.delete(c)}},firstChild:{},on:{},addEventListener(t,f){this.on[t]=f}});
   let resolve;const loaded=new Promise(r=>{resolve=r});
-  const c={URLSearchParams,location:{search:'?f=auto-x-hour.ics&t=予定&s=2026-10-30&e=2026-10-30&h=12:00'},
+  const c={URLSearchParams,location:{search:'?f=auto-x-hour.ics&t=予定&s=2026-10-30&e=2026-10-30&h=12:00'+more},
     document:{getElementById:el},setTimeout:(f,ms)=>timers.push([f,ms]),Blob:class{constructor(p,o){this.p=p;this.o=o}},
     URL:{createObjectURL:b=>'blob:'+b.o.type},
     fetch:u=>{c.fetched=u;const p=ok?Promise.resolve({ok:true,text:()=>Promise.resolve('BEGIN:VCALENDAR')}):Promise.reject(new Error('net'));p.finally(()=>setImmediate(resolve)).catch(()=>{});return p}};
@@ -193,4 +226,11 @@ test('cal.html は読み終わるまで押せず、読んだら中身を開き�
   assert.equal(b.els.go.href,'data/ics/auto-x-hour.ics');
   b.click();
   assert.equal(b.timers.at(-1)[1],4000);
+  // 押したあとも押せる（カレンダーの画面が出なかったら、もう一度押せる）
+  assert.equal(a.click().prevented,false);
+  // もう入っている予定のときは「カレンダーに追加」が出ないことを伝える（前にも入れた予定は、知らせる時の変え方も）
+  assert.equal(a.els.again.hidden,false);
+  assert.match(a.els.again.textContent,/^もう入っている予定のときは/);
+  const c=await calPage(true,'&a=1');
+  assert.match(c.els.again.textContent,/^この予定は前にも入れたぴよ。.*「予定を削除」してから入れ直して/);
 });

@@ -426,6 +426,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .piyo-choices.wrap{flex-wrap:wrap}.piyo-choices.wrap button{white-space:nowrap}
 .piyo-choices.stack{flex-direction:column;align-items:flex-start}.piyo-choices.stack button{text-align:left;border-radius:14px}
 .piyo-choices button.chosen{background:var(--bg);color:var(--muted);border-color:var(--line)}
+.piyo-choices button.picked{border-color:var(--yolk-ink)}
 .piyo-pet{align-self:flex-end;margin-right:14px;width:96px;height:104px;flex:none;border:0;padding:0;background:url(piyo-sprite-v2.png) 0 0/768px 624px no-repeat;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .piyo-pet:focus-visible{outline:2px solid var(--caramel);outline-offset:2px;border-radius:12px}
 .piyo-suggest{display:flex;gap:8px;overflow-x:auto;overscroll-behavior:contain;scrollbar-width:none;margin:0 -12px;padding:2px 12px 4px}
@@ -1319,7 +1320,9 @@ window.PiyoSplash=(function(){
     const a=document.createElement('a');a.rel='noopener';
     if(homeApp()){
       if(!info)return false;
-      a.href='cal.html?'+new URLSearchParams({f:info.f+'-'+al+'.ics',t:ev.title,s:ev.start,e:ev.end||ev.start,h:info.timed?info.time:''});a.target='_blank';
+      const q={f:info.f+'-'+al+'.ics',t:ev.title,s:ev.start,e:ev.end||ev.start,h:info.timed?info.time:''};
+      if(loadPlanned().some(p=>p.id===ev.id))q.a='1'; // 前にも入れた予定（cal.html が「カレンダーに追加」が出ないことを先に伝える）
+      a.href='cal.html?'+new URLSearchParams(q);a.target='_blank';
       document.body.appendChild(a);a.click();a.remove();
       savePlanned(ev,info,al);
       return 'window';
@@ -1543,11 +1546,13 @@ window.PiyoSplash=(function(){
         });
         m.appendChild(box);toBottom();
       },
-      choices(list){
-        const box=document.createElement('div');box.className='piyo-choices';
+      choices(list,opt){ // opt.keep：押しても消さず、何度でも押せる（カレンダーに入れる。入らなかったときにやり直せるように。続けて2回押したときだけ1秒は受け付けない）
+        const box=document.createElement('div');box.className='piyo-choices';const keep=!!(opt&&opt.keep);let last=0;
         list.forEach(([label,fn,primary])=>{
           const b=document.createElement('button');b.type='button';b.textContent=label;if(primary)b.className='primary';
-          b.addEventListener('click',()=>{box.querySelectorAll('button').forEach(x=>{x.disabled=true;if(x!==b)x.remove()});b.classList.add('chosen');fn()});
+          b.addEventListener('click',()=>{
+            if(keep){const now=Date.now();if(now-last<1000)return;last=now;box.querySelectorAll('button').forEach(x=>x.classList.toggle('picked',x===b));fn();return}
+            box.querySelectorAll('button').forEach(x=>{x.disabled=true;if(x!==b)x.remove()});b.classList.add('chosen');fn()});
           box.appendChild(b);
         });
         m.appendChild(box);toBottom();return box;
@@ -2311,26 +2316,29 @@ window.PiyoSplash=(function(){
     const P=globalThis.PiyoPage,evs=upcomingFrom(refs);
     if(evs.length)lastCalendar=evs;
     if(!evs.length||!msg.choices||!P||!P.addToCalendar)return;
-    msg.choices([['カレンダーに入れる',()=>calendarFlow(evs),true]]);
+    msg.choices([['カレンダーに入れる',()=>calendarFlow(evs),true]],{keep:true});
   }
   function calendarFlow(evs){
-    if(evs.length>1)return piyoMsg().say('どれをカレンダーに入れるぴよ？',m=>m.choices(evs.map(e=>[e.title.slice(0,24),()=>alarmFlow(e)])).classList.add('stack'));
+    if(evs.length>1)return piyoMsg().say('どれをカレンダーに入れるぴよ？',m=>m.choices(evs.map(e=>[e.title.slice(0,24),()=>alarmFlow(e)]),{keep:true}).classList.add('stack'));
     alarmFlow(evs[0]);
   }
   const hourBefore=t=>{const [h,m]=t.split(':').map(Number),x=(h*60+m+1380)%1440;return Math.floor(x/60)+'時'+(x%60?String(x%60).padStart(2,'0')+'分':'')};
   function alarmFlow(ev){
     const P=globalThis.PiyoPage,info=P&&P.icsInfo?P.icsInfo(ev.id):null,alarms=info?info.alarms:['none'];
     const label={eve:'前の日の夜（20時）',morning:'当日の朝（9時）',hour:info&&info.time?`始まる1時間前（${hourBefore(info.time)}）`:'',none:'知らせなくていい'};
-    piyoMsg().say(fmt(`**${ev.title}**をカレンダーに入れるぴよ！いつ知らせるぴよ？`),m=>m.choices(alarms.map(a=>[label[a],()=>putCalendar(ev,a,info),a===alarms[0]])).classList.add('wrap'));
+    piyoMsg().say(fmt(`**${ev.title}**をカレンダーに入れるぴよ！いつ知らせるぴよ？`),m=>m.choices(alarms.map(a=>[label[a],()=>putCalendar(ev,a,info),a===alarms[0]]),{keep:true}).classList.add('wrap'));
   }
+  // 前にも入れた予定は、iPhone が「カレンダーに追加」を出さず、入っている予定（下に「予定を削除」）を出す（2026-10-31 にシミュレーターで確認。同じ予定の印 UID で見分けている）
+  const AGAIN='前にも入れた予定は「カレンダーに追加」が出ないで、入っている予定が出るぴよ。知らせる時を変えるときは、そこで「予定を削除」してから入れ直してぴよ。';
+  const RETRY='入っていなかったら、もう一度ボタンを押してぴよ。';
   function putCalendar(ev,alarm,info){
-    const P=globalThis.PiyoPage,how=P&&P.addToCalendar(ev.id,alarm);
+    const P=globalThis.PiyoPage,again=!!(P&&P.planned&&P.planned().some(p=>p.id===ev.id)),how=P&&P.addToCalendar(ev.id,alarm);
     if(!how){play('sad');piyoMsg().say('ごめんぴよ…カレンダーの画面を開けなかったぴよ。');return}
     const md=s=>`${Number(s.slice(5,7))}月${Number(s.slice(8,10))}日`,prev=new Date(Date.parse(ev.start+'T00:00:00Z')-864e5).toISOString();
     const when={eve:`${md(prev)}の夜20時に知らせるぴよ。`,morning:`${md(ev.start)}の朝9時に知らせるぴよ。`,hour:info&&info.time?`${md(ev.start)}の${hourBefore(info.time)}に知らせるぴよ。`:''}[alarm];
-    if(how!=='window'){play('jump');piyoMsg().say(`カレンダーに入れる画面を開いたぴよ！「カレンダーに追加」を押せば${when?'、'+when:'入るぴよ。'}`);return}
+    if(how!=='window'){play('jump');piyoMsg().say(again?'カレンダーに入れる画面を開いたぴよ！'+AGAIN:`カレンダーに入れる画面を開いたぴよ！「カレンダーに追加」を押せば${when?'、'+when:'入るぴよ。'}`);return}
     // ホーム画面のアプリ：カレンダーの画面から戻ってきたら話す（開いた画面が隠すと hidden、閉じると visible になる）
-    const back=`「カレンダーに追加」を押していれば${when?'、'+when:'、入ったぴよ。'}`;
+    const back=again?AGAIN:`「カレンダーに追加」を押していれば${when?'、'+when:'、入ったぴよ。'}${RETRY}`;
     let left=false;
     const say=t=>{document.removeEventListener('visibilitychange',on);clearTimeout(timer);play('jump');piyoMsg().say(t)};
     const on=()=>{if(document.visibilityState==='hidden')left=true;else if(left)say('おかえりぴよ！'+back)};

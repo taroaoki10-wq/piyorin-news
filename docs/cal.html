@@ -47,6 +47,7 @@ h1{margin:16px 0 18px;font-family:var(--f-display);font-weight:900;font-size:24p
   </div>
   <a class="go" id="go" href="./" hidden>カレンダーに追加する</a>
   <p class="hint" id="hint" hidden>次の画面で「カレンダーに追加」を押して×で閉じると、ぴよりんニュースに戻るぴよ。</p>
+  <p class="hint" id="again" hidden></p>
   <p class="err" id="err" hidden>予定が見つからなかったぴよ…。<a href="./">ぴよりんニュースへ</a></p>
   <button class="back" id="back" type="button">やめて戻る</button>
 </main>
@@ -59,13 +60,13 @@ window.PiyoCal=(function(){
   const ALARM={eve:'前の日の夜20時に知らせる',morning:'当日の朝9時に知らせる',hour:'始まる1時間前に知らせる',none:'知らせない'};
   const DOW='日月火水木金土',DAY=/^\d{4}-\d{2}-\d{2}$/;
   const md=s=>{const d=new Date(s+'T00:00:00Z');return `${d.getUTCMonth()+1}月${d.getUTCDate()}日（${DOW[d.getUTCDay()]}）`};
-  // ?f=ファイルの名前（data/ics/ の中だけ）&t=題名&s=始まり&e=終わり&h=時刻（1日だけの時刻つきの予定）
+  // ?f=ファイルの名前（data/ics/ の中だけ）&t=題名&s=始まり&e=終わり&h=時刻（1日だけの時刻つきの予定）&a=1（この端末で前にも入れた予定）
   function read(search){
     const q=new URLSearchParams(search),f=q.get('f')||'',m=f.match(/^[A-Za-z0-9_-]+-(eve|morning|hour|none)\.ics$/);
     const s=q.get('s')||'',e=q.get('e')||s,h=q.get('h')||'';
     if(!m||!DAY.test(s)||!DAY.test(e))return null;
     const time=s===e&&/^\d{2}:\d{2}$/.test(h)?` ${Number(h.slice(0,2))}:${h.slice(3)}から`:'';
-    return {file:'data/ics/'+f,title:(q.get('t')||'ぴよりんの予定').slice(0,80),when:md(s)+(e!==s?' 〜 '+md(e):'')+time,alarm:ALARM[m[1]]};
+    return {file:'data/ics/'+f,title:(q.get('t')||'ぴよりんの予定').slice(0,80),when:md(s)+(e!==s?' 〜 '+md(e):'')+time,alarm:ALARM[m[1]],again:q.get('a')==='1'};
   }
   return {read};
 })();
@@ -75,6 +76,10 @@ window.PiyoCal=(function(){
   $('back').addEventListener('click',close);
   if(!v){$('err').hidden=false;return}
   $('title').textContent=v.title;$('when').textContent=v.when;$('alarm').textContent=v.alarm;
+  // もうカレンダーに入っている予定（同じ予定の印 UID）は、iPhone が「カレンダーに追加」を出さず、入っている予定（下に「予定を削除」）を出す（2026-10-31 にシミュレーターで確認）
+  $('again').textContent=v.again?'この予定は前にも入れたぴよ。カレンダーに入っていると「カレンダーに追加」は出ないで、入っている予定が出るぴよ。知らせる時を変えるときは、そこで「予定を削除」してから入れ直してぴよ。'
+    :'もう入っている予定のときは、「カレンダーに追加」は出ないで、入っている予定が出るぴよ。';
+  $('again').hidden=false;
   const go=$('go');let ready=false,wait=1500;
   go.textContent='準備しているぴよ…';go.classList.add('wait');$('card').hidden=go.hidden=$('hint').hidden=false;
   // 先にファイルを読み、押したらその中身を開く（通信を待たないので、この画面を閉じる前にカレンダーの画面が出る。
