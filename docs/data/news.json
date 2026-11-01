@@ -1,5 +1,58 @@
 [
  {
+  "id": "n20261102-103bafb0",
+  "date": "2026-11-02",
+  "cat": "media",
+  "title": "『ぴよりん』が人気映画とコラボ！ まさかの姿に…「おいしそう」「グッズ買いました」と早くも話題に",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/b15addc95fb0bca603c65ee5ea8877e4347266f4",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんと映画『ゴジラ』のコラボ企画の記事",
+   "t": "2026-11-02"
+  }
+ },
+ {
+  "id": "n20261102-51801a7c",
+  "date": "2026-11-02",
+  "cat": "media",
+  "title": "映画公開記念！「ぴよりんゴジラ」が11月3日から13日まで限定登場",
+  "source": "名古屋情報通",
+  "url": "https://jouhou.nagoya/piyorin-godzilla/",
+  "related": [
+   {
+    "source": "名古屋情報通",
+    "url": "https://jouhou.nagoya/piyorin-godzilla/"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "限定版「ぴよりんゴジラ」の登場を伝える記事",
+   "t": "2026-11-02"
+  }
+ },
+ {
+  "id": "n20261101-50de53bd",
+  "date": "2026-11-01",
+  "cat": "media",
+  "title": "名古屋名物【ぴよりん】11/3より『ゴジラコラボ』を限定発売。「おいしそう」「グッズ買いました」と早くも話題に | 朝日新聞デジタルマガジン＆[and]",
+  "source": "朝日新聞デジタル",
+  "url": "https://www.asahi.com/and/w/article/17001354",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラコラボの販売・グッズ情報の記事",
+   "t": "2026-11-02"
+  }
+ },
+ {
   "id": "n20261031-3f459919",
   "date": "2026-10-31",
   "cat": "media",
