@@ -46,10 +46,19 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5pQjFqZVFtVFN5eWVSTmt5bDZMbHUxRV9TVHQ5ZVhKd0JCcTJFZF91SmZfZ2FfS2oxUFNSRTQ1MUpkQUtUMlBrRTd1UHdVbS1sQVhYNG83Si1zQ0d2bVE?oc=5"
+   },
+   {
+    "source": "Ameba News [アメーバニュース]",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5HZHFSUHp2d3BUWmdrdmtpSHVHRnI2YW83MmxXZGFfR3VJeWhTNWxmM3BENy01UnNpTnpLRUpyLUNXYnNmQXN4b3hzY2dtZ2V6Z3FEQXk1Y2JfQQ?oc=5"
+   },
+   {
+    "source": "アメーバニュース",
+    "url": "https://news.ameba.jp/entry/20261031-46680298/"
    }
   ],
   "merged_ids": [
-   "n20261031-2713b125"
+   "n20261031-2713b125",
+   "n20261031-8b675f11"
   ],
   "dv": 3,
   "jg": {
@@ -1515,6 +1524,10 @@
    {
     "source": "佐賀新聞",
     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE94WTRxWTM1SEt2SHVvTXVUZHIySmNQcUNmVjlSTm5maXpCVEY4eVo2Rmk1N3NNSGR4VnBfNTdhOVZvTm04akx6YWotdUFyVHlNM19iS2h3?oc=5"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFB4WkxabzhqY2RxS1h6YzlNMWhaRTNDVFlRUFhDV2dQZGRna0poQW85c25jX1hTX0l5VGo1ZktkUTYtblRzSm5QaDBxaTJLNlhHUm1GRVVWM2l5WTFk?oc=5"
    }
   ],
   "dv": 3,
