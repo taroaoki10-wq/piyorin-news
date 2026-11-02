@@ -77,12 +77,12 @@
   "url": "https://topics.smt.docomo.ne.jp/article/kisspress/region/kisspress-66530?page=2",
   "related": [
    {
-    "source": "ｄメニューニュース",
-    "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNWmxLZlFlblZlOEwxb1l1Rk9XbmM4OGlJbTMycE95SG1WUFgyZ3RuNlFxTExrSVRJUUdEdGxWd0lTNWZaZ1UxOFNuMEFoY01ncFFEX0QwU1NIOFQ5bVMzOGVtendoZnhpcXpKcG9abDB5Z21YekpXY0tYaDFVdnY2RGpn0gGCAUFVX3lxTE1abEtmUWVuVmU4TDFvWXVGT1duYzg4aUltMzJwT3lIbVZQWDJndG42UXFMTGtJVElRR0R0bFZ3SVM1ZlpnVTE4U24wQWhjTWdwUURfRDBTU0g4VDltUzM4ZW16d2hmeGlxekpwb1psMHlnbVh6SldjS1hoMVV2djZEamc?oc=5"
-   },
-   {
     "source": "dメニューニュース",
     "url": "https://topics.smt.docomo.ne.jp/article/kisspress/region/kisspress-66530"
+   },
+   {
+    "source": "Kiss PRESS(キッスプレス)",
+    "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1sUEtZV0c2bWRJM1dZbXJmNHotUmZBT29XdlFwc0ZQbFhMdl9zYzltRTVoclJrVjhfbDFTSGs3X3BOVXZGVnZsVQ?oc=5"
    }
   ],
   "merged_ids": [
@@ -109,6 +109,66 @@
    "v": 1,
    "ok": false,
    "why": "大道芸ワールドカップの記事で、ぴよりんとは無関係",
+   "t": "2026-11-03"
+  }
+ },
+ {
+  "id": "n20261102-7e736c90",
+  "date": "2026-11-02",
+  "cat": "media",
+  "title": "【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も（オリコン）",
+  "source": "ORICON NEWS",
+  "url": "https://www.oricon.co.jp/news/2490266/full/",
+  "related": [
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5fTUVMNnc3VWMweFl0VWxJR2dtZlhZU1BqaFc5bzlxeXpybjFiZHIyUzJUZkZpXzJvSXVTYUdWa0pYWF9VV081QTFFZFFYdFp3Y3NjWk9SUm9FanZDSnJ3NTllODViSjJKbmZGZ3N4bnU3a2o5bHAzOURld2xTSHc?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBpUWJhcWVaNWlLbmM3QkVyS3BueThVbXM5YjUwWXlQVzFGWkkwaTkydUZMamJTbERTOWFVN3ptalpnQmFPSWJHT3BTZGNQcHZ4dElxQnVB?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBXYnFIWFU1WG5PTGlwZnc5cUpHRWFSdkNrUjFoSGJjSHdRSEJmQlhkRE1MV3FESzBiVzV5UTI1aTlURXhkdnYzbG90a0RWVnZJYjRYN3ZLdWhwUQ?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5YdkZwTGlRdG5ZcDl2cmZqaUZGaFRXSzRwM0RvVTVqdTdrdDlCbnJrYlQ2RFU3NzYyQ1VaeTIzdHh3aUJDQ1VZQ1pWQ0VJXzRmLXBFRUt2TTdmQQ?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5zSVVYZFJLN05PTDBsdWNPRWZXTmlNTnV4VWNvR0Y3WUtZQ1RicHN0Q2N4TU91eGU5Ri1WcjhuUGhrazNTdm52YnZSZE1CanBmbmotU0k1OEhBRUk?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE8xcVBJOVRhNEpQT21rOE9jbkVLd3VkQUVycVBWQXIzX1ZpNXRLMXc2QTE5WExMaW1BQzhodUZWZkxuR3JELTl3cDBxUUNTOVY1aWpUeUVDTGtiWDQ?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9ZbjBrdkVPM0JuQkx5azlQd0VsSERtRlUwd2g5S1Y4Z2hkQkN6X2kwdE9IYjlac19GRnNtSHNxUC1nU0xVQlo3SHdHV0ExRmZjU1NydWpLVjUzeUE?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBibmtRc0tqblhBU1pIV2JPbC1QU0NaRXJfWUMzWEZhYWFzaDRBRWpBWHgwUVhnS3lseXlVdy1RU3prYXRSa0VTMkZlNkg1RTEwOVRZcUg4dEFMTXlia2xtdw?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBlT1pIREZuWjVoY01SbjNyLXY3NHN4MS0yR1ZmbWNhUDBlbVVVZlVKQ0pITFBZeHZiWjFOam9GdjVEVFdLWTB1TFlwSVNrSlB1LWt2VzVBb1g0cFFPTUE?oc=5"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxORTlqOFhXSEw3aHBtcWY0RFUwbUNzMDUyaEE0dU5ycVlMUlRtaF9vQ1o3QUFBWTkxbS1LakxmeWIzWDJDdW5GbWF0bWJxR1JSQjZ2SmUwNG9RUVNiakEyR2NIMjZlaWJaY2dnR1FGdk80TUpua29kbUVyMTZfank0aNIBhgFBVV95cUxPVjFJeHQ5V1NFVUJYUUJaRmdOUGpETXdWTG1Dcl9keTk2REJ2aVRNX1V1aTdiZ0RSbFJXaHhwekJhdE1TVVNxQkM5VzV3c2Y3ZzdfQlY3OTIyMDhuMGlndEwxd3dRU0piQmowMTJLcmV6dHJxcl9iZTlFZndjaW9pRTVqckdVZw?oc=5"
+   }
+  ],
+  "merged_ids": [
+   "n20261103-1e298afe"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんと映画ゴジラのコラボ企画で、限定商品や店内装飾の記事",
    "t": "2026-11-03"
   }
  },
@@ -1830,22 +1890,6 @@
    "ok": true,
    "why": "ぴよりんとゴジラのコラボスイーツに関する公式企画",
    "t": "2026-10-25"
-  }
- },
- {
-  "id": "n20261022-b7649ce7",
-  "date": "2026-10-22",
-  "cat": "media",
-  "title": "期間限定「ぴよりんゴジラ」が登場",
-  "source": "産経ニュース",
-  "url": "https://www.sankei.com/article/20261022-4AVL2RIDMZPBNHIZLLP3BYSRXI/photo/5C724V7QABP65B5HSZLEDWZV4U/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんゴジラの期間限定登場を伝える記事",
-   "t": "2026-11-03"
   }
  },
  {
