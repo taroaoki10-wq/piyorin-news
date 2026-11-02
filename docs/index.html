@@ -389,6 +389,49 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .run-btn.mob{display:inline-flex;flex:none;justify-content:center;width:34px;height:34px;padding:0}
 .run-btn.mob .run-t{display:none}
 }
+/* ---------- 設定（ボタンと設定の画面。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版をまとめる） ---------- */
+.set-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-family:var(--f-body);font-size:12px;font-weight:700;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:4px 12px 4px 10px;cursor:pointer;white-space:nowrap}
+.set-btn:hover{border-color:var(--yolk);background:var(--hover)}
+.set-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tabs .set-btn{align-self:center;margin:0 0 8px 8px;font-size:12px;color:var(--ink)}
+.set-btn.mob{display:none}
+.set-scrim{z-index:44}
+.set-panel{position:fixed;z-index:45;left:50%;top:50%;translate:-50% -50%;width:min(560px,calc(100% - 32px));max-height:calc(100% - 32px);display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
+.set-panel[hidden]{display:none}
+.set-bar{display:flex;align-items:center;gap:8px;padding:16px 18px 12px 22px;border-bottom:1px solid var(--line)}
+.set-bar h2{margin:0;flex:1;font-family:var(--f-display);font-size:19px}
+.set-bar button{font:inherit;font-size:20px;line-height:1;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.set-bar button:hover{border-color:var(--yolk);background:var(--hover)}
+.set-body{overflow-y:auto;overscroll-behavior:contain;padding:6px 22px 22px;display:flex;flex-direction:column}
+.set-sec{padding:16px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:10px;font-size:13.5px}
+.set-sec:last-child{border-bottom:0}
+.set-sec h3{margin:0;font-family:var(--f-display);font-size:15px}
+.set-sec .run-meta{margin:0;line-height:2}
+.set-sec .run-meta[hidden],.set-note[hidden]{display:none}
+.set-sec .sync{margin:0}
+.set-note{margin:0;font-size:12.5px;color:var(--muted);line-height:1.6}
+.set-sec .set-act{align-self:flex-start;font:inherit;font-size:12.5px;font-weight:700;color:var(--yolk-ink);background:var(--yolk);border:1px solid transparent;border-radius:99px;padding:6px 16px;cursor:pointer}
+.set-links{margin:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px}
+.set-links a{color:var(--caramel);font-weight:700}
+#set-infobase section{margin:0!important}
+#set-infobase p{margin:6px 0 0;font-size:12.5px;color:var(--muted)}
+#set-infobase label{display:flex;align-items:center;gap:6px;margin:8px 0 6px}
+#set-infobase textarea{font:inherit;font-family:var(--f-mono);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+#set-infobase button{margin-top:6px;font:inherit;font-size:12.5px;font-weight:700;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:6px 14px;cursor:pointer}
+@media (max-width:620px){
+.tabs .set-btn{display:none}
+.set-btn.mob{display:inline-flex;flex:none;width:34px;height:34px;padding:0}
+.set-btn.mob .set-t{display:none}
+.set-panel{width:calc(100% - 20px);max-height:calc(100% - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 20px)}
+.set-body{padding:4px 18px calc(env(safe-area-inset-bottom,0px) + 18px)}
+}
+@media (max-width:400px){ /* 歯車を足した分、狭い iPhone では題名の行を少し詰めて 1 行に収める */
+.brand{gap:6px}
+.brand h1{font-size:17.5px}
+.brand .stamp-m{font-size:9.5px}
+.brand .yolk{width:26px;height:26px}
+.run-btn.mob,.set-btn.mob{width:30px;height:30px}
+}
 /* ---------- ぴよ（呼ぶとページの手前に出てきてチャットできる。スマホの幅だけ） ---------- */
 :root{--piyo-dim:rgba(0,0,0,.22);--piyo-scroll:rgba(85,78,64,.23);--piyo-ok:#25744A;--piyo-ng:#C2412D} /* ぴよを出している間、画面全体にかける暗さ */
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--piyo-scroll:rgba(225,217,199,.26);--piyo-ok:#6BC490;--piyo-ng:#F2836B}}
@@ -530,7 +573,7 @@ html.piyo-open .reader{z-index:48}
 <div class="splash" id="splash" aria-hidden="true"><div class="splash-piyo"></div><div class="splash-shadow"></div><p class="splash-title">ぴよりんニュース</p><p class="splash-dots"><i></i><i></i><i></i></p></div>
 <script src="infobase-client.js?v=2"></script>
 <script src="infobase-guard.js?v=2"></script>
-<script src="infobase.js?v=2"></script>
+<script src="infobase.js?v=3"></script>
 <script>
 // 読み込み画面（スマホだけ）。最初のニュースを読み終えたら、ぴよが手を振ってふわっと消える。消え始めるまで最低3秒は見せ、読めなくても5秒で消す
 // アプリを開くたびに出す（アプリの切り替え画面で上にスワイプして終了させたあとも）。ホーム画面に戻って開き直しただけのときは、iPhone がページを覚えていてここは動かないので出ない
@@ -556,6 +599,7 @@ window.PiyoSplash=(function(){
       <a href="./" class="home" id="home" aria-label="ぴよりんニュース トップへ"><h1><img class="yolk" src="icon.png?v=2" alt="" width="36" height="36">ぴよりんニュース</h1></a>
       <span class="stamp stamp-m" id="stamp-m" aria-hidden="true"><i></i><span id="stamp-t2">—</span></span>
       <button type="button" class="run-btn mob" id="run-btn-m" title="いますぐ更新" aria-label="いますぐ更新"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 11-2.6-5.9"/><path d="M20 4v5h-5"/></svg><span class="run-t">更新</span></button>
+      <button type="button" class="set-btn mob" data-set="open" title="設定" aria-label="設定"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg><span class="set-t">設定</span></button>
       <p>名古屋のひよこプリン「ぴよりん」の公式発表・プレスリリース・メディア記事をまとめて追いかけます。</p>
     </div>
 
@@ -592,6 +636,7 @@ window.PiyoSplash=(function(){
       <button type="button" role="tab" id="tab-bm" aria-controls="view-bm" data-view="bookmarks" aria-selected="false">ブックマーク<span class="n" id="n-bm"></span></button>
       <span class="stamp" id="stamp" aria-live="polite"><i aria-hidden="true"></i><span class="lbl">最終更新</span><span id="stamp-t">—</span></span>
       <button type="button" class="run-btn" id="run-btn" title="いますぐ更新"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 11-2.6-5.9"/><path d="M20 4v5h-5"/></svg><span class="run-t">更新</span></button>
+      <button type="button" class="set-btn" data-set="open" title="設定"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg><span class="set-t">設定</span></button>
     </div>
     <div id="view-news" role="tabpanel" aria-labelledby="tab-news" style="display:flex;flex-direction:column;gap:28px">
     <div class="toolbar">
@@ -622,10 +667,7 @@ window.PiyoSplash=(function(){
       <div class="agenda" id="agenda"></div>
     </div>
     <div id="view-bm" role="tabpanel" aria-labelledby="tab-bm" hidden>
-      <div class="sync" id="sync"></div>
-      <p class="run-meta" id="run-meta" hidden></p>
-      <p class="run-meta" id="piyo-meta" hidden></p>
-      <div class="run-meta piyo-reports" id="piyo-reports" hidden></div>
+      <p class="set-note" style="margin:0 0 14px">ほかの端末との同期は <button type="button" class="set-btn" data-set="open" style="margin:0 2px;padding:2px 10px">設定</button> からできます。</p>
       <p class="sec-label" id="bm-label" style="margin:0 0 10px">ブックマーク</p>
       <div class="items" id="bm-list"></div>
     </div>
@@ -666,8 +708,43 @@ window.PiyoSplash=(function(){
     </div>
     <p class="run-err" id="piyo-key-err" hidden></p>
     <div class="run-btns"><button type="button" id="piyo-key-cancel">キャンセル</button><button type="submit" class="primary">保存して話す</button></div>
-    <small>つなぎ方と API キーはこの端末のブラウザにだけ保存されます。Mac の Claude は、Mac が起きていて iPhone の Tailscale がオンのときに使えます。API キーは 1 回の質問で 1〜5 円ほどかかります（最初のまとめは無料）。解除は「ブックマーク」タブの下からできます。</small>
+    <small>つなぎ方と API キーはこの端末のブラウザにだけ保存されます。Mac の Claude は、Mac が起きていて iPhone の Tailscale がオンのときに使えます。API キーは 1 回の質問で 1〜5 円ほどかかります（最初のまとめは無料）。解除は右上の「設定」からできます。</small>
   </form>
+<div class="run-scrim set-scrim" id="set-scrim" hidden></div>
+<div class="set-panel" id="set-panel" hidden role="dialog" aria-modal="true" aria-labelledby="set-h">
+  <div class="set-bar"><h2 id="set-h">設定</h2><button type="button" id="set-close" aria-label="閉じる">×</button></div>
+  <div class="set-body">
+    <section class="set-sec" aria-labelledby="set-h-piyo">
+      <h3 id="set-h-piyo">ぴよと話す（Claude）</h3>
+      <p class="set-note" id="set-piyo-state">まだ準備していません。Mac の Claude のつなぎ方か Claude の API キーを入れると、ぴよと話せます（ぴよはスマホの幅で出ます）。</p>
+      <p class="run-meta" id="piyo-meta" hidden></p>
+      <button type="button" class="set-act" id="set-piyo-setup">話す準備を開く</button>
+      <p class="set-links">Claude のコンソール：<a href="https://platform.claude.com/settings/keys" target="_blank" rel="noopener">API キー ↗</a><a href="https://platform.claude.com/usage" target="_blank" rel="noopener">使った額 ↗</a><a href="https://platform.claude.com/settings/limits" target="_blank" rel="noopener">使用額の上限 ↗</a></p>
+    </section>
+    <section class="set-sec" aria-labelledby="set-h-fix">
+      <h3 id="set-h-fix">ぴよへの指摘</h3>
+      <p class="set-note" id="set-fix-none">まだありません。ぴよの答えの下の「ちがうよ」を押すと、ここにたまります。</p>
+      <div class="run-meta piyo-reports" id="piyo-reports" hidden></div>
+    </section>
+    <section class="set-sec" aria-labelledby="set-h-ib">
+      <h3 id="set-h-ib">infobase の一般情報</h3>
+      <div id="set-infobase"></div>
+    </section>
+    <section class="set-sec" aria-labelledby="set-h-sync">
+      <h3 id="set-h-sync">ブックマークの同期</h3>
+      <div class="sync" id="sync"></div>
+    </section>
+    <section class="set-sec" aria-labelledby="set-h-run">
+      <h3 id="set-h-run">いますぐ更新ボタン</h3>
+      <p class="set-note" id="set-run-none">合言葉はまだ保存していません。「更新」ボタンを押すと、準備の画面が開きます。</p>
+      <p class="run-meta" id="run-meta" hidden></p>
+    </section>
+    <section class="set-sec" aria-labelledby="set-h-ver">
+      <h3 id="set-h-ver">このページについて</h3>
+      <p class="set-note">版 <b id="set-ver"></b><br>データの最終更新 <span id="set-data">—</span><br>設定はどれも、この端末のブラウザにだけ保存されます。</p>
+    </section>
+  </div>
+</div>
   <div class="reader-scrim" id="reader-scrim" hidden aria-hidden="true"></div>
 <div class="reader" id="reader" hidden role="dialog" aria-labelledby="reader-title">
   <div class="reader-bar">
@@ -1200,6 +1277,19 @@ window.PiyoSplash=(function(){
     window.scrollTo({top:0,behavior:'smooth'});
   });
 
+  // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
+  const PN_VERSION='2026.11.02-1（設定の画面）';
+  {
+    const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
+    const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
+      scrim.hidden=false;panel.hidden=false;panel.querySelector('.set-body').scrollTop=0;setTimeout(()=>$('set-close').focus(),0)};
+    const closeSet=()=>{scrim.hidden=true;panel.hidden=true;if(back&&back.focus)back.focus()};
+    document.addEventListener('click',e=>{if(e.target.closest('[data-set="open"]'))openSet()});
+    $('set-close').addEventListener('click',closeSet);scrim.addEventListener('click',closeSet);
+    // ほかの窓（話す準備・更新の準備）が上に開いているときは、そちらが先に閉じる
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden&&$('piyo-key-modal').hidden&&$('run-modal').hidden)closeSet()});
+  }
+
   // ---------- いますぐ更新（GitHub Actions を手動で起動して、終わるまで待つ） ----------
     // 合言葉は「このリポジトリの Actions だけ」に絞ったGitHubのトークン。この端末のブラウザにだけ保存する
     const RUN_KEY='piyo-run', REPO='taroaoki10-wq/piyorin-news', WF='update.yml';
@@ -1211,6 +1301,7 @@ window.PiyoSplash=(function(){
     function paintRun(){
       document.querySelectorAll('.run-btn').forEach(b=>{b.disabled=runBusy;b.classList.toggle('busy',runBusy);const t=b.querySelector('.run-t');if(t)t.textContent=runBusy?'更新中…':'更新';b.title=runBusy?'更新しています':'いますぐ更新'});
       const m=$('run-meta');if(m){m.hidden=!runTok;m.innerHTML=runTok?'「いますぐ更新」ボタンの合言葉をこの端末に保存中です。<button type="button" data-run="off">解除</button>':''}
+      const n=$('set-run-none');if(n)n.hidden=!!runTok;
     }
     async function ghRun(path,opt={}){
       const r=await fetch(GH+path,{...opt,cache:'no-store',headers:{Authorization:'Bearer '+runTok,Accept:'application/vnd.github+json',...(opt.body?{'Content-Type':'application/json'}:{})}});
@@ -1348,7 +1439,7 @@ window.PiyoSplash=(function(){
     const label=ptr.querySelector('.ptr-t'),PULL=110,root=document.documentElement;
     let y0=null,x0=0,dy=0,dir=0,busy=false;
     const can=()=>matchMedia('(max-width:620px)').matches&&!root.classList.contains('piyo-open')&&!root.classList.contains('reader-open')
-      &&$('run-modal').hidden&&$('piyo-key-modal').hidden&&!$('splash');
+      &&$('run-modal').hidden&&$('piyo-key-modal').hidden&&$('set-panel').hidden&&!$('splash');
     const place=(d,anim)=>{ptr.classList.toggle('back',!!anim);ptr.style.transform=`translateY(${Math.min(d*.6,80)-80}px)`;ptr.style.opacity=String(Math.min(1,d/70))};
     document.addEventListener('touchstart',e=>{y0=null;if(busy||e.touches.length>1||window.scrollY>0||!can())return;y0=e.touches[0].clientY;x0=e.touches[0].clientX;dy=0;dir=0},{passive:true});
     document.addEventListener('touchmove',e=>{
@@ -1940,6 +2031,8 @@ window.PiyoSplash=(function(){
       if(lines.length)lines.push('ぴよの話し方：'+(mac&&apiKey?ROUTE_LABEL[routeMode]:mac?'Mac の Claude':'API')+'<button type="button" data-piyo="setup">変える</button>');
       m.hidden=!lines.length;m.innerHTML=lines.join('<br>');
     }
+    const st=$('set-piyo-state');if(st)st.hidden=!!(mac||apiKey);
+    const sb=$('set-piyo-setup');if(sb)sb.textContent=mac||apiKey?'話す準備を変える':'話す準備を開く';
     paintWay();
   }
   // 会話の中の札「Mac」「API」（両方準備したときだけ）。押すと次の質問から切り替わる
@@ -2000,6 +2093,7 @@ window.PiyoSplash=(function(){
     const b=e.target.closest('[data-piyo]');if(!b)return;
     if(b.dataset.piyo==='off')saveKey('');else if(b.dataset.piyo==='mac-off')saveMac(null);else if(b.dataset.piyo==='setup')openKey();
   });
+  $('set-piyo-setup').addEventListener('click',()=>openKey());
   paintMeta();
 
   // ---- Claude に聞く ----
@@ -2450,10 +2544,11 @@ window.PiyoSplash=(function(){
       ['やめておく',()=>piyoMsg().say('わかったぴよ。ほかに聞きたいことある？')],
     ]));
   }
-  // 「ブックマーク」タブの下の一覧（見る・まとめてコピー・全部消す）
+  // 設定の画面の一覧（見る・まとめてコピー・全部消す）
   function paintReports(){
     const el=$('piyo-reports');if(!el)return;
     const list=loadReports();el.hidden=!list.length;
+    const none=$('set-fix-none');if(none)none.hidden=!!list.length;
     if(!list.length){el.innerHTML='';reportsOpen=false;return}
     const what=r=>r.src===SRC_LABEL.greeting?'まとめ':'答え';
     el.innerHTML=`ぴよへの指摘：${list.length}件<button type="button" data-fix="toggle" aria-expanded="${reportsOpen}">${reportsOpen?'閉じる':'見る'}</button>`
