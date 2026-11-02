@@ -37,13 +37,55 @@
   }
  },
  {
+  "id": "n20261102-8d639cad",
+  "date": "2026-11-02",
+  "cat": "media",
+  "title": "アスティ静岡35周年記念で限定「みかんぴよりん」が11月26日・27日に登場！定番とのセットで1,300円、グッズも販売",
+  "source": "ｄメニューニュース",
+  "url": "https://topics.smt.docomo.ne.jp/article/wasabee/region/wasabee-20261102-20570578?fm=latestnews",
+  "related": [
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNS2pZdlA1bVhCT0VvWG9VQmMycElKTmZvUUpwQjVsNkZXNVUyVmRpSFhHQk9hYUp1Y21oOUZaSThTWTRzaWQyTWNFYWRLQ0pBZHhJRmdqS1VVd2k3NGhSeWRaZG9VZExlZDhGempkOWZlVzEyR3hhX2lJU08wQXV6TzkwbU1IYmY4T25PRdIBjAFBVV95cUxNS2pZdlA1bVhCT0VvWG9VQmMycElKTmZvUUpwQjVsNkZXNVUyVmRpSFhHQk9hYUp1Y21oOUZaSThTWTRzaWQyTWNFYWRLQ0pBZHhJRmdqS1VVd2k3NGhSeWRaZG9VZExlZDhGempkOWZlVzEyR3hhX2lJU08wQXV6TzkwbU1IYmY4T25PRQ?oc=5"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "静岡駅でのみかんぴよりん限定販売・グッズ記事",
+   "t": "2026-11-02"
+  }
+ },
+ {
+  "id": "n20261102-92c2f0cb",
+  "date": "2026-11-02",
+  "cat": "media",
+  "title": "【サンリオ】スクイーズ、ぴよりん、M! L K、ゲンジブ雑誌など【購入品】",
+  "source": "YouTube",
+  "url": "https://youtu.be/4GZv9xfFLB4?si=YxZ_CXa_-GNqFrG-",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "サンリオ購入品紹介の中にぴよりんグッズが含まれる",
+   "t": "2026-11-02"
+  }
+ },
+ {
   "id": "n20261101-50de53bd",
   "date": "2026-11-01",
   "cat": "media",
   "title": "名古屋名物【ぴよりん】11/3より『ゴジラコラボ』を限定発売。「おいしそう」「グッズ買いました」と早くも話題に | 朝日新聞デジタルマガジン＆[and]",
   "source": "朝日新聞デジタル",
   "url": "https://www.asahi.com/and/w/article/17001354",
-  "related": [],
+  "related": [
+   {
+    "source": "朝日新聞",
+    "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE0xRWdzWWtUYVNwNzNUYzZ2Ujd5SU5EcjQzSldPNmpaQ3NCVzJwM1NGX0FfUXl0c0UzLV8xbXFMYnVrbGZ4LVVWcmNZMnJvNGxXOVplUkV1cTNNcVBCSU03WkdNTS1hSTUzOE5HMXlHdGVnejFHTEs2eUNB?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -484,6 +526,10 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9KVXJIeGlyYTh3cHBFXzAwcC1nLU5ETEpZblNvRjhaVUh3NGw4TVVyb1VLbHFJVVJYS0lNS2drT0tOWUlmLVBxcFBjNWZXaDNzdUZCMEN4aGo3My1BVVNBQzEyX3BQUUxpaDRyUjU4aENibTkzbVotcTB6SEQ?oc=5"
+   },
+   {
+    "source": "Ameba News [アメーバニュース]",
+    "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE04dkgzLVd2RjBqeTBPVDFDZjc2THpKQlFSZGprelpHN2gzdm5lNmZ3WWIxVHJ1dkNNaHZISjNydVhGTmNCNVlCYmtpY2RPNjBmOGpYNjExcU0?oc=5"
    }
   ],
   "merged_ids": [
@@ -1725,6 +1771,22 @@
    "ok": true,
    "why": "ぴよりんとゴジラのコラボスイーツに関する公式企画",
    "t": "2026-10-25"
+  }
+ },
+ {
+  "id": "n20261022-b7649ce7",
+  "date": "2026-10-22",
+  "cat": "media",
+  "title": "期間限定「ぴよりんゴジラ」が登場",
+  "source": "産経ニュース",
+  "url": "https://www.sankei.com/article/20261022-4AVL2RIDMZPBNHIZLLP3BYSRXI/photo/5C724V7QABP65B5HSZLEDWZV4U/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんとゴジラのコラボ商品・店舗企画の記事",
+   "t": "2026-11-02"
   }
  },
  {
