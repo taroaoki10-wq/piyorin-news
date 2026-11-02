@@ -4,10 +4,12 @@
  function config(){try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch{return{};}}
  const client=()=>root.InfobaseClient.create(config());
  async function weather(){const cards=await client().cards({category:'002',tag:'名古屋市',limit:'20'});let data=root.InfobaseClient.toOpenMeteo(cards);if(data&&!data.daily.weather_code.some(Number.isFinite))data=null;weatherCards=data?cards:[];if(data)usedCards=cards;return data;}
+ // ドル円の「いまの値」を聞く短い質問だけ。予想・理由・他の通貨・計算は従来の答え方に任せる
+ function fxAsk(q){return q.length<=30&&/ドル円|為替|円相場|(?:1|１|一)ドル|ドルは.*円/.test(q)&&!/予想|予測|見通し|今後|なぜ|何故|理由|ニュース|株|日経|ユーロ|ポンド|ウォン|人民元|ビットコイン|仮想通貨|換算|計算|変換|推移|グラフ|過去|昨日|明日|明後日|あした|来週|来月|先週|先月|去年|円安|円高|買い|売り|おすすめ|仕組み|とは|って何/.test(q);}
  async function answer(question){
   let category=null;const q=String(question||'').trim();
   const localWeather=/^(?:名古屋(?:市)?の)?(?:今日|明日)?の?天気(?:は|を教えて|どう|？|\?)?[？?。]*$/.test(q)||/^今日の名古屋(?:市)?の天気[は？?。]*$/.test(q);
-  if(localWeather)category='002';else if(/^(?:いまの|今の)?(?:為替|ドル円|円相場)(?:は|を教えて|？|\?)?[？?。]*$/.test(q))category='006';else if(/ニュース/.test(q)&&!q.includes('ぴよりん'))category=/AI|生成/.test(q)?'007':/神社|寺/.test(q)?'008':'003';
+  if(localWeather)category='002';else if(fxAsk(q))category='006';else if(/ニュース/.test(q)&&!q.includes('ぴよりん'))category=/AI|生成/.test(q)?'007':/神社|寺/.test(q)?'008':'003';
   if(!category)return null;
   const cards=await client().cards({category,...(category==='002'?{tag:'名古屋市'}:{}),limit:'20'});if(!cards?.length)return null;
   let picked=[],text='';
