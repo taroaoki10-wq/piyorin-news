@@ -528,6 +528,8 @@ html.piyo-open .reader{z-index:48}
 <body>
 <div class="top-band" aria-hidden="true"></div>
 <div class="splash" id="splash" aria-hidden="true"><div class="splash-piyo"></div><div class="splash-shadow"></div><p class="splash-title">ぴよりんニュース</p><p class="splash-dots"><i></i><i></i><i></i></p></div>
+<script src="infobase-client.js"></script>
+<script src="infobase.js"></script>
 <script>
 // 読み込み画面（スマホだけ）。最初のニュースを読み終えたら、ぴよが手を振ってふわっと消える。消え始めるまで最低3秒は見せ、読めなくても5秒で消す
 // アプリを開くたびに出す（アプリの切り替え画面で上にスワイプして終了させたあとも）。ホーム画面に戻って開き直しただけのときは、iPhone がページを覚えていてここは動かないので出ない
@@ -1624,8 +1626,9 @@ window.PiyoSplash=(function(){
   async function loadWeather(){
     const ac=new AbortController(),timer=setTimeout(()=>ac.abort(),1500); // 遅いときは天気なしで進め、あいさつを待たせない（次に呼んだとき取り直す）
     try{
-      const r=await fetch(WEATHER,{signal:ac.signal});if(!r.ok)return null;
-      const {daily:d,hourly:h}=await r.json(),today=todayStr(),tomorrow=nextDay(today);
+      const pooled=await globalThis.PiyoInfobase?.weather();
+      const r=pooled?null:await fetch(WEATHER,{signal:ac.signal});if(!pooled&&!r.ok)return null;
+      const {daily:d,hourly:h}=pooled||await r.json(),today=todayStr(),tomorrow=nextDay(today);
       const num=(values,i)=>Number.isFinite(values?.[i])?values[i]:null;
       return d.time.map((date,i)=>{
         const rainHours=[];
@@ -2128,6 +2131,13 @@ window.PiyoSplash=(function(){
   }
   async function ask(q){
     if(busy)return;
+    // infobaseで答えられる一般情報は、AIを使わずその場で答える。
+    if(globalThis.PiyoInfobase){
+      busy=true;sync();let pooled=null;
+      try{pooled=await globalThis.PiyoInfobase.answer(q);}finally{busy=false;sync();}
+      if(pooled){asked={q,chip:consumeSuggest(q)||'',way:'infobase',web:false};userMsg(q);const msg=piyoMsg();msg.say(fmt(pooled.text),()=>{if(msg.fix)msg.fix({src:'infobase',q,a:pooled.text});});history=[...history,{role:'user',content:q},{role:'assistant',content:pooled.text}].slice(-10);return;}
+    }
+
     if(fixPending)endFix(); // 「どこがちがう？」の途中でも、候補を押したら普通の質問にする
     const refresh=freshWeather(); // 古い予報で答えない（取り直すのは30分以上たったときだけ。待つのは最大1.5秒）
     if(refresh){busy=true;$('piyo-send').disabled=true;await refresh.catch(()=>{});busy=false;sync()}
@@ -2381,7 +2391,7 @@ window.PiyoSplash=(function(){
   const REPORTS='piyo-reports',REPORT_MAX=100;
   const FIX_LABEL={answer:'答えがまちがい',question:'質問がまちがい',old:'情報が古い',summary:'まとめがまちがい'};
   const FIX_WHY={answer:'答えがまちがっている',question:'質問の前提（話題・商品名・その組み合わせなど）がまちがっている',old:'情報が古い',summary:'最初のまとめ（あいさつ）がまちがっている'};
-  const SRC_LABEL={greeting:'あいさつ',local:'その場の答え',tidbit:'ひとこと',mac:'Mac の Claude',api:'API'};
+  const SRC_LABEL={infobase:'infobase',greeting:'あいさつ',local:'その場の答え',tidbit:'ひとこと',mac:'Mac の Claude',api:'API'};
   const plainText=s=>String(s||'').replace(/\*\*/g,'');
   let reportsOpen=false;
   function loadReports(){try{const v=JSON.parse(localStorage.getItem(REPORTS)||'[]');return Array.isArray(v)?v:[]}catch(_){return[]}}
@@ -2401,7 +2411,7 @@ window.PiyoSplash=(function(){
   function submitFix(kind,comment,fromChoice){
     const p=fixPending;if(!p)return;endFix();
     if(!fromChoice&&p.box)p.box.remove();
-    const info=p.info;kind=kind||(info.src==='greeting'?'summary':'answer');
+    const info=p.info;if(info.src==='infobase')globalThis.PiyoInfobase?.report(info.a,kind).catch(()=>{});kind=kind||(info.src==='greeting'?'summary':'answer');
     if(comment)userMsg(comment);
     saveReports([...loadReports(),{at:new Date(Date.now()+9*3600e3).toISOString().slice(0,16).replace('T',' '),kind:FIX_LABEL[kind],src:SRC_LABEL[info.src]||info.src,
       q:String(info.q||'').slice(0,300),a:plainText(info.a).slice(0,800),comment:String(comment||'').slice(0,300),chip:info.chip||''}]);
