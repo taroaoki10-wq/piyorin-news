@@ -43,12 +43,7 @@
   "title": "アスティ静岡35周年記念で限定「みかんぴよりん」が11月26日・27日に登場！定番とのセットで1,300円、グッズも販売",
   "source": "ｄメニューニュース",
   "url": "https://topics.smt.docomo.ne.jp/article/wasabee/region/wasabee-20261102-20570578?fm=latestnews",
-  "related": [
-   {
-    "source": "ｄメニューニュース",
-    "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNS2pZdlA1bVhCT0VvWG9VQmMycElKTmZvUUpwQjVsNkZXNVUyVmRpSFhHQk9hYUp1Y21oOUZaSThTWTRzaWQyTWNFYWRLQ0pBZHhJRmdqS1VVd2k3NGhSeWRaZG9VZExlZDhGempkOWZlVzEyR3hhX2lJU08wQXV6TzkwbU1IYmY4T25PRdIBjAFBVV95cUxNS2pZdlA1bVhCT0VvWG9VQmMycElKTmZvUUpwQjVsNkZXNVUyVmRpSFhHQk9hYUp1Y21oOUZaSThTWTRzaWQyTWNFYWRLQ0pBZHhJRmdqS1VVd2k3NGhSeWRaZG9VZExlZDhGempkOWZlVzEyR3hhX2lJU08wQXV6TzkwbU1IYmY4T25PRQ?oc=5"
-   }
-  ],
+  "related": [],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -74,6 +69,50 @@
   }
  },
  {
+  "id": "n20261102-1b8804e8",
+  "date": "2026-11-02",
+  "cat": "media",
+  "title": "崎陽軒に博多明太重、ぴよりんshopも！ 「山陽百貨店 日本列島絶品うまいもの大会」 姫路市",
+  "source": "ｄメニューニュース",
+  "url": "https://topics.smt.docomo.ne.jp/article/kisspress/region/kisspress-66530?page=2",
+  "related": [
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNWmxLZlFlblZlOEwxb1l1Rk9XbmM4OGlJbTMycE95SG1WUFgyZ3RuNlFxTExrSVRJUUdEdGxWd0lTNWZaZ1UxOFNuMEFoY01ncFFEX0QwU1NIOFQ5bVMzOGVtendoZnhpcXpKcG9abDB5Z21YekpXY0tYaDFVdnY2RGpn0gGCAUFVX3lxTE1abEtmUWVuVmU4TDFvWXVGT1duYzg4aUltMzJwT3lIbVZQWDJndG42UXFMTGtJVElRR0R0bFZ3SVM1ZlpnVTE4U24wQWhjTWdwUURfRDBTU0g4VDltUzM4ZW16d2hmeGlxekpwb1psMHlnbVh6SldjS1hoMVV2djZEamc?oc=5"
+   },
+   {
+    "source": "dメニューニュース",
+    "url": "https://topics.smt.docomo.ne.jp/article/kisspress/region/kisspress-66530"
+   }
+  ],
+  "merged_ids": [
+   "n20261102-ed3473d5"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりンshopの出店が取り上げられた物産展記事",
+   "t": "2026-11-03"
+  }
+ },
+ {
+  "id": "n20261102-ad224139",
+  "date": "2026-11-02",
+  "cat": "media",
+  "title": "【中継①】「大道芸ワールドカップ」開催3日目の見どころを紹介 現役伝説のジャグラー三雲いおりさん登場（静岡市）（静岡第一テレビ）",
+  "source": "dメニューニュース",
+  "url": "https://topics.smt.docomo.ne.jp/article/tvsdt/region/tvsdt-2026110201493771",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": false,
+   "why": "大道芸ワールドカップの記事で、ぴよりんとは無関係",
+   "t": "2026-11-03"
+  }
+ },
+ {
   "id": "n20261101-50de53bd",
   "date": "2026-11-01",
   "cat": "media",
@@ -84,6 +123,10 @@
    {
     "source": "朝日新聞",
     "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE0xRWdzWWtUYVNwNzNUYzZ2Ujd5SU5EcjQzSldPNmpaQ3NCVzJwM1NGX0FfUXl0c0UzLV8xbXFMYnVrbGZ4LVVWcmNZMnJvNGxXOVplUkV1cTNNcVBCSU03WkdNTS1hSTUzOE5HMXlHdGVnejFHTEs2eUNB?oc=5"
+   },
+   {
+    "source": "朝日新聞",
+    "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFAxc0FxSWE1eWQ4b1Z3N3BtRHBzcjBwTGUzUUo0eWtMWHJOTHBzc3Q3R281RWI5VVhQRnkwQnNEdks1Vk54Vy1WNENDdmJkdEg1Tk5sTG5LZHB3YmFuendvNW9Gcw?oc=5"
    }
   ],
   "dv": 3,
@@ -165,6 +208,22 @@
    "ok": true,
    "why": "ハロウィンぴよりんの期間限定発売の記事",
    "t": "2026-10-31"
+  }
+ },
+ {
+  "id": "n20261031-34455b23",
+  "date": "2026-10-31",
+  "cat": "media",
+  "title": "「ぴよりんゴジラ」上陸 映画記念、来月３～１３日 ：写真",
+  "source": "読売新聞",
+  "url": "https://www.yomiuri.co.jp/pluralphoto/20261030-GYTNI00242/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんとゴジラのコラボ商品の登場を伝える記事",
+   "t": "2026-11-03"
   }
  },
  {
@@ -1785,8 +1844,8 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんとゴジラのコラボ商品・店舗企画の記事",
-   "t": "2026-11-02"
+   "why": "ぴよりんゴジラの期間限定登場を伝える記事",
+   "t": "2026-11-03"
   }
  },
  {
