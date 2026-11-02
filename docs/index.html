@@ -528,9 +528,9 @@ html.piyo-open .reader{z-index:48}
 <body>
 <div class="top-band" aria-hidden="true"></div>
 <div class="splash" id="splash" aria-hidden="true"><div class="splash-piyo"></div><div class="splash-shadow"></div><p class="splash-title">ぴよりんニュース</p><p class="splash-dots"><i></i><i></i><i></i></p></div>
-<script src="infobase-client.js"></script>
-<script src="infobase-guard.js"></script>
-<script src="infobase.js"></script>
+<script src="infobase-client.js?v=2"></script>
+<script src="infobase-guard.js?v=2"></script>
+<script src="infobase.js?v=2"></script>
 <script>
 // 読み込み画面（スマホだけ）。最初のニュースを読み終えたら、ぴよが手を振ってふわっと消える。消え始めるまで最低3秒は見せ、読めなくても5秒で消す
 // アプリを開くたびに出す（アプリの切り替え画面で上にスワイプして終了させたあとも）。ホーム画面に戻って開き直しただけのときは、iPhone がページを覚えていてここは動かないので出ない
@@ -1517,7 +1517,8 @@ window.PiyoSplash=(function(){
   function userMsg(text){const m=document.createElement('div');m.className='piyo-msg from-me';m.textContent=text;log.appendChild(m);markLast();toBottom(true)}
   function piyoMsg(withSources=false){
     const m=document.createElement('div');m.className='piyo-msg from-piyo';m.innerHTML='<div class="piyo-text"></div>';
-    if(withSources)m.insertAdjacentHTML('beforeend','<div class="piyo-sources" aria-hidden="true">出典：天気 <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>（<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>、要約・加工）</div>');
+    if(typeof withSources==='string')m.insertAdjacentHTML('beforeend',`<div class="piyo-sources" aria-hidden="true">${withSources}</div>`); // infobase の答え：出典を小さな別行にして、文が出終わってから出す
+    else if(withSources)m.insertAdjacentHTML('beforeend','<div class="piyo-sources" aria-hidden="true">出典：天気 <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>（<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>、要約・加工）</div>');
     log.appendChild(m);markLast();toBottom(true);
     const sources=withSources?m.querySelector('.piyo-sources'):null;
     let id=0,shown=0; // shown: 出し終えた文字の数
@@ -2138,7 +2139,7 @@ window.PiyoSplash=(function(){
     if(globalThis.PiyoInfobase){
       busy=true;sync();let pooled=null;
       try{pooled=await globalThis.PiyoInfobase.answer(q);}finally{busy=false;sync();}
-      if(pooled){asked={q,chip:consumeSuggest(q)||'',way:'infobase',web:false};userMsg(q);const msg=piyoMsg();msg.say(fmt(pooled.text),()=>{if(msg.fix)msg.fix({src:'infobase',q,a:pooled.text});});history=[...history,{role:'user',content:q},{role:'assistant',content:pooled.text}].slice(-10);return;}
+      if(pooled){asked={q,chip:consumeSuggest(q)||'',way:'infobase',web:false};userMsg(q);const msg=piyoMsg(pooled.source?fmt(pooled.source):false);play('wave');msg.say(fmt(pooled.body??pooled.text),()=>{if(msg.fix)msg.fix({src:'infobase',q,a:pooled.text});});history=[...history,{role:'user',content:q},{role:'assistant',content:pooled.text}].slice(-10);return;}
     }
 
     if(fixPending)endFix(); // 「どこがちがう？」の途中でも、候補を押したら普通の質問にする

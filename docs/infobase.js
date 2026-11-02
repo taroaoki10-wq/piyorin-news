@@ -20,7 +20,7 @@
   }else{picked=cards.slice(0,3);text='取得できた記事の見出しだぴよ。\n'+picked.map(c=>`「${c.title}」\n${c.url}`).join('\n');}
   const checked=root.InfobaseGuard.guard(text,picked);text=checked.text;
   for(const c of picked)client().feedback(c.id,'使った').catch(()=>{});
-  usedCards=picked;usedAnswers.push({text,cards:picked});while(usedAnswers.length>30)usedAnswers.shift();return{text,cards:picked,ids:picked.map(c=>c.id)};
+  usedCards=picked;usedAnswers.push({text,cards:picked});while(usedAnswers.length>30)usedAnswers.shift();const cut=text.indexOf('\n出典：');return{text,body:cut<0?text:text.slice(0,cut),source:cut<0?'':text.slice(cut+1),cards:picked,ids:picked.map(c=>c.id)};
  }
  async function report(text,kind){const record=usedAnswers.findLast(r=>r.text===text);if(!record)return;for(const c of record.cards)await client().feedback(c.id,kind==='old'?'古い':'ちがうよ');}
  async function corrections(){const result=await client().request('/v1/corrections');return(result?.cards||[]).filter(c=>usedCards.some(x=>x.id===c.id));}
