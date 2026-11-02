@@ -529,6 +529,7 @@ html.piyo-open .reader{z-index:48}
 <div class="top-band" aria-hidden="true"></div>
 <div class="splash" id="splash" aria-hidden="true"><div class="splash-piyo"></div><div class="splash-shadow"></div><p class="splash-title">ぴよりんニュース</p><p class="splash-dots"><i></i><i></i><i></i></p></div>
 <script src="infobase-client.js"></script>
+<script src="infobase-guard.js"></script>
 <script src="infobase.js"></script>
 <script>
 // 読み込み画面（スマホだけ）。最初のニュースを読み終えたら、ぴよが手を振ってふわっと消える。消え始めるまで最低3秒は見せ、読めなくても5秒で消す
@@ -2104,7 +2105,8 @@ window.PiyoSplash=(function(){
   }
   function answerLocal(q,a){
     if(a.kind==='calendar')return answerCalendar(q,a);
-    const text=piyoTone(a.text),msg=piyoMsg(a.sources==='weather');
+    const checked=globalThis.PiyoInfobase?.guard(a.text,q);
+    const text=piyoTone(checked?checked.text:a.text),msg=piyoMsg(a.sources==='weather');
     history=[...history,{role:'user',content:q},{role:'assistant',content:text}].slice(-10);
     if(a.kind==='omikuji')markOmikuji();
     play(a.mood||'wave');msg.say(fmt(text),()=>{msg.links(refLinks(a.refs));offerCalendar(msg,a.refs);addFollowUps(a.refs);if(msg.fix)msg.fix({src:'local',q:asked.q||q,a:text,chip:asked.chip})});
@@ -2114,6 +2116,7 @@ window.PiyoSplash=(function(){
   // Mac の Claude が調べたあと答えを書き直すとき（空の文が届く・調べ始めた）は restart() で、次の文を初めから出し直す
   function streamTo(msg){
     const s={started:false,shown:'',fresh:false,onText(raw){
+      if(globalThis.PiyoInfobase?.hasWeatherProof(asked.q))return;
       if(!raw)return s.restart();
       const part=globalThis.PiyoExtras?globalThis.PiyoExtras.streamView(raw):'';
       if(part.length<=s.shown.length)return;
@@ -2285,6 +2288,7 @@ window.PiyoSplash=(function(){
     const failed=!text;
     if(!text)text=partial?'調べきれなかったぴよ…別の聞き方で聞いてみてね。':'うまく答えられなかったぴよ…別の聞き方で聞いてみてね。';
     else if(partial)text+='\n（調べきれなかったので、ここまでの答えだぴよ）';
+    const checked=globalThis.PiyoInfobase?.guard(text,q);if(checked)text=checked.text;
     text=piyoTone(text);
     const note=failed?'':factNote(text,q); // 一言は吹き出しにだけ出し、記憶（history）には入れない（ぴよがまねしないように）
     history=[...history,{role:'user',content:q},{role:'assistant',content:text}].slice(-10);
