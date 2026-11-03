@@ -393,7 +393,9 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .set-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-family:var(--f-body);font-size:12px;font-weight:700;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:4px 12px 4px 10px;cursor:pointer;white-space:nowrap}
 .set-btn:hover{border-color:var(--yolk);background:var(--hover)}
 .set-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.tabs .set-btn{align-self:center;margin:0 0 8px 8px;font-size:12px;color:var(--ink)}
+.tabs .set-btn{align-self:center;margin:0 0 8px 8px;width:30px;height:30px;padding:0;color:var(--ink)} /* PC は歯車だけ */
+.tabs .set-btn svg{width:16px;height:16px}
+.tabs .set-btn .set-t{display:none}
 .set-btn.mob{display:none}
 .set-scrim{z-index:44}
 .set-panel{position:fixed;z-index:45;left:50%;top:50%;translate:-50% -50%;width:min(560px,calc(100% - 32px));max-height:calc(100% - 32px);display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
@@ -995,7 +997,7 @@ window.PiyoSplash=(function(){
     if(v==='calendar')renderCal();
     if(v==='bookmarks')renderBm();
   }
-  document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setView(b.dataset.view)});
+  document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('button[data-view]');if(b)setView(b.dataset.view)}); // 同じ段の「更新」「設定」はタブではないので切りかえない
   $('to-cal').addEventListener('click',e=>{e.preventDefault();setView('calendar');window.scrollTo({top:0,behavior:'smooth'})});
   const shift=n=>{let [y,m]=state.ym;m+=n;y+=Math.floor(m/12);m=((m%12)+12)%12;state.ym=[y,m];renderCal()};
   $('cal-prev').addEventListener('click',()=>shift(-1));$('cal-next').addEventListener('click',()=>shift(1));
@@ -1278,7 +1280,7 @@ window.PiyoSplash=(function(){
   });
 
   // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
-  const PN_VERSION='2026.11.02-1（設定の画面）';
+  const PN_VERSION='2026.11.03-1（PC の歯車・設定で記事が消える直し）';
   {
     const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
     const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
