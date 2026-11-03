@@ -275,6 +275,27 @@
   }
  },
  {
+  "id": "n20261103-91ec6a6f",
+  "date": "2026-11-03",
+  "cat": "media",
+  "title": "「ぴよりん」と「イコちゃん」がYogiboとコラボ スクイーズ制作へクラウドファンディング",
+  "source": "ツーリズムメディアサービス",
+  "url": "https://tms-media.jp/posts/99629/",
+  "related": [
+   {
+    "source": "千葉テレビ放送株式会社",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE0wUUsxSlFaYmpGV3VidVpEd3JaQ19hQ2wyeXBqVTVUNDBIWko3ZDI0UlJxckJ3TTJGMFlhemdKZTg4eWJBbG1ocFJNNk9KZlZRVlVkdUhvOFZUMC1SeTdN?oc=5"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのYogiboコラボスクイーズ記事",
+   "t": "2026-11-04"
+  }
+ },
+ {
   "id": "n20261103-ab111997",
   "date": "2026-11-03",
   "cat": "media",
@@ -286,23 +307,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんと映画ゴジラのコラボ商品の記事",
-   "t": "2026-11-04"
-  }
- },
- {
-  "id": "n20261103-91ec6a6f",
-  "date": "2026-11-03",
-  "cat": "media",
-  "title": "「ぴよりん」と「イコちゃん」がYogiboとコラボ スクイーズ制作へクラウドファンディング",
-  "source": "ツーリズムメディアサービス",
-  "url": "https://tms-media.jp/posts/99629/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんのYogiboコラボスクイーズ記事",
+   "why": "ぴよりんと映画ゴジラのコラボ商品・グッズの記事",
    "t": "2026-11-04"
   }
  },
@@ -341,6 +346,10 @@
    {
     "source": "Yahoo!ニュース",
     "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNUkdsUWYxcUtMVU00Y2plV05IQXp2LUVxYWFwangzZ2RpMVo1S0hLU2xhVG5iVF9UZGowUjNOSllRU2Z1eENmME5aQU5MeWxWUzlGdW9iNFZTb0liRlFwMXdhNnJEMWdOdG91MG5qcnNBeFRCVk5HWTdTYkctYTlLdFFFX0NvSUR2QWROQ3dB?oc=5"
+   },
+   {
+    "source": "佐賀新聞",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9wWDFIT2EzejVwYUhuYWx2LUpvWjZ1eFZ0N19oUXhISGFMY2RlVXBjaE40VF85M3FjY1N4eDFiZ3d3YllwSHFFT3JpbTQxZEpSMjAtYXN3?oc=5"
    }
   ],
   "merged_ids": [
