@@ -18,10 +18,15 @@
    {
     "source": "TBS NEWS DIG on MSN",
     "url": "https://www.msn.com/ja-jp/food-and-drink/%E5%85%A8%E8%88%AC/%E6%98%A0%E7%94%BB%E3%81%A8%E3%82%B3%E3%83%A9%E3%83%9C-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%82%B4%E3%82%B8%E3%83%A9-%E3%81%AB%E8%A1%8C%E5%88%97-%E7%9C%9F%E3%81%A3%E9%BB%92%E3%81%AA%E3%83%81%E3%83%A7%E3%82%B3%E3%83%AC%E3%83%BC%E3%83%88%E3%83%90%E3%83%90%E3%83%AD%E3%82%A2%E3%81%A7%E5%8C%85%E3%82%93%E3%81%A7-11%E6%9C%8813%E6%97%A5%E3%81%BE%E3%81%A7%E3%81%AE%E9%99%90%E5%AE%9A%E8%B2%A9%E5%A3%B2-jr%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93village-%E3%81%AA%E3%81%A9%E3%81%A7/ar-AA2gCMfk"
+   },
+   {
+    "source": "TBS NEWS DIG on MSN",
+    "url": "https://www.msn.com/ja-jp/news/other/%E6%98%A0%E7%94%BB%E3%81%A8%E3%82%B3%E3%83%A9%E3%83%9C-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%82%B4%E3%82%B8%E3%83%A9-%E3%81%AB%E8%A1%8C%E5%88%97-%E7%9C%9F%E3%81%A3%E9%BB%92%E3%81%AA%E3%83%81%E3%83%A7%E3%82%B3%E3%83%AC%E3%83%BC%E3%83%88%E3%83%90%E3%83%90%E3%83%AD%E3%82%A2%E3%81%A7%E5%8C%85%E3%82%93%E3%81%A7-11%E6%9C%8813%E6%97%A5%E3%81%BE%E3%81%A7%E3%81%AE%E9%99%90%E5%AE%9A%E8%B2%A9%E5%A3%B2-jr%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93village-%E3%81%AA%E3%81%A9%E3%81%A7/ar-AA2gCMfk"
    }
   ],
   "merged_ids": [
-   "n20261103-13d41001"
+   "n20261103-13d41001",
+   "n20261103-21a88f80"
   ],
   "dv": 3,
   "jg": {
@@ -40,16 +45,16 @@
   "url": "https://news.yahoo.co.jp/articles/f2da80fa07230ee3ddca559f81bdac091d420b52",
   "related": [
    {
-    "source": "ライブドアニュース",
-    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5nX01sQ2pVdmR1RDVLcWdYdWVjd0c3RTBVRDZEeV9mc3V0UWJHXzNwVU15YzRoWkxhcUhYdHYtT0RlZGdTUlZNM1c2cEktSklvZ0VBUTZXRVpoUlZDSHc?oc=5"
-   },
-   {
     "source": "Yahoo!ニュース",
     "url": "https://news.yahoo.co.jp/articles/f2da80fa07230ee3ddca559f81bdac091d420b52"
    },
    {
     "source": "livedoor ニュース",
     "url": "https://news.livedoor.com/article/image_detail/32721126/?img_id=57355237"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.livedoor.com/article/image_detail/32721126/?img_id=57355234"
    }
   ],
   "merged_ids": [
@@ -87,6 +92,10 @@
    {
     "source": "FNNプライムオンライン on MSN",
     "url": "https://www.msn.com/ja-jp/news/other/%E6%98%A0%E7%94%BB%E3%81%AE%E5%85%AC%E9%96%8B%E8%A8%98%E5%BF%B5%E3%81%A7%E3%82%B3%E3%83%A9%E3%83%9C-%E9%99%90%E5%AE%9A%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%82%B4%E3%82%B8%E3%83%A9-%E8%B2%A9%E5%A3%B2%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88-%E4%BD%93-%E3%81%8C%E3%83%81%E3%83%A7%E3%82%B3%E3%81%AA%E3%81%A9%E3%81%A7%E7%9C%9F%E3%81%A3%E9%BB%92%E3%81%AB/ar-AA2gCYVJ"
+   },
+   {
+    "source": "FNNプライムオンライン",
+    "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5wV3BWWm9tRi1ULUxRQnBLRTJYVGVsRTJLbnVaQWdKM2pjVDR5V1NEeC1uVVVIb1BsY3hkT3RKSFZKczdJZm9JbmhURnJxdw?oc=5"
    }
   ],
   "merged_ids": [
@@ -122,22 +131,6 @@
   }
  },
  {
-  "id": "n20261103-ab111997",
-  "date": "2026-11-03",
-  "cat": "media",
-  "title": "コメント | 【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も",
-  "source": "オリコンニュース",
-  "url": "https://www.oricon.co.jp/news/2490266/comment/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんゴジラのコラボ企画の記事",
-   "t": "2026-11-03"
-  }
- },
- {
   "id": "n20261103-713cc47d",
   "date": "2026-11-03",
   "cat": "media",
@@ -148,6 +141,10 @@
    {
     "source": "毎日新聞デジタル",
     "url": "https://mainichi.jp/articles/20261103/orc/00m/200/006000c"
+   },
+   {
+    "source": "エキサイト",
+    "url": "https://www.excite.co.jp/news/article/Oricon_2490266/"
    }
   ],
   "merged_ids": [
@@ -206,6 +203,155 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんゴジラのコラボ企画の記事",
+   "t": "2026-11-03"
+  }
+ },
+ {
+  "id": "n20261103-e7a147ec",
+  "date": "2026-11-03",
+  "cat": "media",
+  "title": "映画とコラボ 真っ黒でトサカもある「ぴよりんゴジラ」限定販売 午前6時前から並んだ人も…11月13日まで名古屋駅の「ぴよりんvillage」など3店舗で販売（CBCテレビ）",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/c34ec35b365e793bce5d50727e0a5a153f980e56",
+  "related": [
+   {
+    "source": "TBS NEWS DIG",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE43NXZUWUNfWXZSU1ZLS2Q0UENLM255Q1c3Z0ZYUGF3ZG9nNXhHbk1kYlVEUDNFRUlnTTI3OXJSWnNGSWlmcHdJb3lsMDgtZ2hJT21JYkVva0kwVlR4anY0?oc=5"
+   },
+   {
+    "source": "TBS NEWS DIG",
+    "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1XVHpjemNBNGdITWxWei1ZSzZCZ2lJa1pzNEZUNmFidGZXYnQ4MmJDQU43SmNHclVuUFEwSjRWUWZLdUcxZHp2LVZOUlBUWHYzUjBXN2FnRWk1eEZW?oc=5"
+   },
+   {
+    "source": "locipo.jp",
+    "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5faU83YTVLWklubndyNmM3MV9PQlpEcGl0dXBKTUxGRENEd1N5SWJZb0FnUmhLQzREOGF5VmtCam1xcU5ZLUtMSFJmUk1VT1NzZUFFcHMwTFBWZmo0OGJUdnFNQkpjd3QtbFhLU2RjQQ?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.livedoor.com/article/detail/32723907/"
+   }
+  ],
+  "merged_ids": [
+   "n20261103-967b3285"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラの限定販売に関する記事",
+   "t": "2026-11-04"
+  }
+ },
+ {
+  "id": "n20261103-3f34d29c",
+  "date": "2026-11-03",
+  "cat": "media",
+  "title": "ゴジラが名古屋に上陸!? 正体は真っ黒な「ぴよりん」限定コラボ販売開始",
+  "source": "YouTube",
+  "url": "https://youtu.be/Z36_ppfwd9c?si=PKjrx5pMEsgFH8Pz",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラの限定コラボ販売開始の記事",
+   "t": "2026-11-04"
+  }
+ },
+ {
+  "id": "n20261103-300ba10f",
+  "date": "2026-11-03",
+  "cat": "media",
+  "title": "グッズも充実！ 「ぴよりんゴジラ」のぬいぐるみやスマホステッカーなど14種",
+  "source": "おとなの週末Web",
+  "url": "https://otonano-shumatsu.com/images/594362/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラのグッズ紹介記事",
+   "t": "2026-11-04"
+  }
+ },
+ {
+  "id": "n20261103-ab111997",
+  "date": "2026-11-03",
+  "cat": "media",
+  "title": "コメント | 【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も",
+  "source": "オリコンニュース",
+  "url": "https://www.oricon.co.jp/news/2490266/comment/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんと映画ゴジラのコラボ商品の記事",
+   "t": "2026-11-04"
+  }
+ },
+ {
+  "id": "n20261103-91ec6a6f",
+  "date": "2026-11-03",
+  "cat": "media",
+  "title": "「ぴよりん」と「イコちゃん」がYogiboとコラボ スクイーズ制作へクラウドファンディング",
+  "source": "ツーリズムメディアサービス",
+  "url": "https://tms-media.jp/posts/99629/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのYogiboコラボスクイーズ記事",
+   "t": "2026-11-04"
+  }
+ },
+ {
+  "id": "n20261102-7e736c90",
+  "date": "2026-11-02",
+  "cat": "media",
+  "title": "【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も（オリコン）",
+  "source": "ORICON NEWS",
+  "url": "https://www.oricon.co.jp/news/2490266/full/",
+  "related": [
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5fTUVMNnc3VWMweFl0VWxJR2dtZlhZU1BqaFc5bzlxeXpybjFiZHIyUzJUZkZpXzJvSXVTYUdWa0pYWF9VV081QTFFZFFYdFp3Y3NjWk9SUm9FanZDSnJ3NTllODViSjJKbmZGZ3N4bnU3a2o5bHAzOURld2xTSHc?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBlT1pIREZuWjVoY01SbjNyLXY3NHN4MS0yR1ZmbWNhUDBlbVVVZlVKQ0pITFBZeHZiWjFOam9GdjVEVFdLWTB1TFlwSVNrSlB1LWt2VzVBb1g0cFFPTUE?oc=5"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxORTlqOFhXSEw3aHBtcWY0RFUwbUNzMDUyaEE0dU5ycVlMUlRtaF9vQ1o3QUFBWTkxbS1LakxmeWIzWDJDdW5GbWF0bWJxR1JSQjZ2SmUwNG9RUVNiakEyR2NIMjZlaWJaY2dnR1FGdk80TUpua29kbUVyMTZfank0aNIBhgFBVV95cUxPVjFJeHQ5V1NFVUJYUUJaRmdOUGpETXdWTG1Dcl9keTk2REJ2aVRNX1V1aTdiZ0RSbFJXaHhwekJhdE1TVVNxQkM5VzV3c2Y3ZzdfQlY3OTIyMDhuMGlndEwxd3dRU0piQmowMTJLcmV6dHJxcl9iZTlFZndjaW9pRTVqckdVZw?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE80OUZmbGoza01mLVdycjlYNjVHelJmS3lham0zNkI4RFJMb0ZHeHUxYjVnUEhVWEF3WXZiRlJmMXp2ZGM1TllUMEtEMC1FRElYY0RzWmN4VzJuTnd3N3NfaG1Sb0hUdGp5X2lCSGVpTzY1eExYcl9WNVRHcmk?oc=5"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOU2d3SmN0TmgyMlp4Q3Y1S0dsU2ZuTGhxSDdDdjBVMk04RVRfWTBheGZ0U29VMlFiVjg2Qkt1U1lmcXhUWW1SYlJLU3lLZXVDNnFqNkRaUTg2bVJvSGNOM05qTG5pbmFNS3hvaGdhcllQWU5DYXZIVDJtNnVFeUw5UGtXY1VDWEs0b1hJLWxTQnY1VjB5UEFBczBkYnJnR3FMMV8xSXJreHBNX2tWZTN5X2VhMEdORkVGUUNDV1BkRXNNS0xCemt5Vi1lUFFPRS1LeDR2RWN30gGGAUFVX3lxTE9WMUl4dDlXU0VVQlhRQlpGZ05QakRNd1ZMbUNyX2R5OTZEQnZpVE1fVXVpN2JnRFJsUldoeHB6QmF0TVNVU3FCQzlXNXdzZjdnN19CVjc5MjIwOG4waWd0TDF3d1FTSmJCajAxMktyZXp0cnFyX2JlOUVmd2Npb2lFNWpyR1Vn?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://www.oricon.co.jp/news/2490266/comment/"
+   },
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNUkdsUWYxcUtMVU00Y2plV05IQXp2LUVxYWFwangzZ2RpMVo1S0hLU2xhVG5iVF9UZGowUjNOSllRU2Z1eENmME5aQU5MeWxWUzlGdW9iNFZTb0liRlFwMXdhNnJEMWdOdG91MG5qcnNBeFRCVk5HWTdTYkctYTlLdFFFX0NvSUR2QWROQ3dB?oc=5"
+   }
+  ],
+  "merged_ids": [
+   "n20261103-1e298afe",
+   "n20261103-ab111997"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんと映画ゴジラのコラボ企画で、限定商品や店内装飾の記事",
    "t": "2026-11-03"
   }
  },
@@ -319,78 +465,6 @@
    "v": 1,
    "ok": false,
    "why": "大道芸ワールドカップの記事で、ぴよりんとは無関係",
-   "t": "2026-11-03"
-  }
- },
- {
-  "id": "n20261102-7e736c90",
-  "date": "2026-11-02",
-  "cat": "media",
-  "title": "【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も（オリコン）",
-  "source": "ORICON NEWS",
-  "url": "https://www.oricon.co.jp/news/2490266/full/",
-  "related": [
-   {
-    "source": "Yahoo!ニュース",
-    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5fTUVMNnc3VWMweFl0VWxJR2dtZlhZU1BqaFc5bzlxeXpybjFiZHIyUzJUZkZpXzJvSXVTYUdWa0pYWF9VV081QTFFZFFYdFp3Y3NjWk9SUm9FanZDSnJ3NTllODViSjJKbmZGZ3N4bnU3a2o5bHAzOURld2xTSHc?oc=5"
-   },
-   {
-    "source": "オリコンニュース",
-    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBpUWJhcWVaNWlLbmM3QkVyS3BueThVbXM5YjUwWXlQVzFGWkkwaTkydUZMamJTbERTOWFVN3ptalpnQmFPSWJHT3BTZGNQcHZ4dElxQnVB?oc=5"
-   },
-   {
-    "source": "オリコンニュース",
-    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBXYnFIWFU1WG5PTGlwZnc5cUpHRWFSdkNrUjFoSGJjSHdRSEJmQlhkRE1MV3FESzBiVzV5UTI1aTlURXhkdnYzbG90a0RWVnZJYjRYN3ZLdWhwUQ?oc=5"
-   },
-   {
-    "source": "オリコンニュース",
-    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5YdkZwTGlRdG5ZcDl2cmZqaUZGaFRXSzRwM0RvVTVqdTdrdDlCbnJrYlQ2RFU3NzYyQ1VaeTIzdHh3aUJDQ1VZQ1pWQ0VJXzRmLXBFRUt2TTdmQQ?oc=5"
-   },
-   {
-    "source": "オリコンニュース",
-    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5zSVVYZFJLN05PTDBsdWNPRWZXTmlNTnV4VWNvR0Y3WUtZQ1RicHN0Q2N4TU91eGU5Ri1WcjhuUGhrazNTdm52YnZSZE1CanBmbmotU0k1OEhBRUk?oc=5"
-   },
-   {
-    "source": "オリコンニュース",
-    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE8xcVBJOVRhNEpQT21rOE9jbkVLd3VkQUVycVBWQXIzX1ZpNXRLMXc2QTE5WExMaW1BQzhodUZWZkxuR3JELTl3cDBxUUNTOVY1aWpUeUVDTGtiWDQ?oc=5"
-   },
-   {
-    "source": "オリコンニュース",
-    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9ZbjBrdkVPM0JuQkx5azlQd0VsSERtRlUwd2g5S1Y4Z2hkQkN6X2kwdE9IYjlac19GRnNtSHNxUC1nU0xVQlo3SHdHV0ExRmZjU1NydWpLVjUzeUE?oc=5"
-   },
-   {
-    "source": "オリコンニュース",
-    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBibmtRc0tqblhBU1pIV2JPbC1QU0NaRXJfWUMzWEZhYWFzaDRBRWpBWHgwUVhnS3lseXlVdy1RU3prYXRSa0VTMkZlNkg1RTEwOVRZcUg4dEFMTXlia2xtdw?oc=5"
-   },
-   {
-    "source": "ライブドアニュース",
-    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBlT1pIREZuWjVoY01SbjNyLXY3NHN4MS0yR1ZmbWNhUDBlbVVVZlVKQ0pITFBZeHZiWjFOam9GdjVEVFdLWTB1TFlwSVNrSlB1LWt2VzVBb1g0cFFPTUE?oc=5"
-   },
-   {
-    "source": "ｄメニューニュース",
-    "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxORTlqOFhXSEw3aHBtcWY0RFUwbUNzMDUyaEE0dU5ycVlMUlRtaF9vQ1o3QUFBWTkxbS1LakxmeWIzWDJDdW5GbWF0bWJxR1JSQjZ2SmUwNG9RUVNiakEyR2NIMjZlaWJaY2dnR1FGdk80TUpua29kbUVyMTZfank0aNIBhgFBVV95cUxPVjFJeHQ5V1NFVUJYUUJaRmdOUGpETXdWTG1Dcl9keTk2REJ2aVRNX1V1aTdiZ0RSbFJXaHhwekJhdE1TVVNxQkM5VzV3c2Y3ZzdfQlY3OTIyMDhuMGlndEwxd3dRU0piQmowMTJLcmV6dHJxcl9iZTlFZndjaW9pRTVqckdVZw?oc=5"
-   },
-   {
-    "source": "オリコンニュース",
-    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9jVW5YSWtzOHpCTnBTODNhdi1WcEl2ZGNFcjZfelkwSXV0ZmhuRUJtSUJTOWRRaXFoVllFNUhVeWVubGxjdTNST2MtWU04YzdhaG11eXVCMXQ5ZXM?oc=5"
-   },
-   {
-    "source": "ライブドアニュース",
-    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE80OUZmbGoza01mLVdycjlYNjVHelJmS3lham0zNkI4RFJMb0ZHeHUxYjVnUEhVWEF3WXZiRlJmMXp2ZGM1TllUMEtEMC1FRElYY0RzWmN4VzJuTnd3N3NfaG1Sb0hUdGp5X2lCSGVpTzY1eExYcl9WNVRHcmk?oc=5"
-   },
-   {
-    "source": "ｄメニューニュース",
-    "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOU2d3SmN0TmgyMlp4Q3Y1S0dsU2ZuTGhxSDdDdjBVMk04RVRfWTBheGZ0U29VMlFiVjg2Qkt1U1lmcXhUWW1SYlJLU3lLZXVDNnFqNkRaUTg2bVJvSGNOM05qTG5pbmFNS3hvaGdhcllQWU5DYXZIVDJtNnVFeUw5UGtXY1VDWEs0b1hJLWxTQnY1VjB5UEFBczBkYnJnR3FMMV8xSXJreHBNX2tWZTN5X2VhMEdORkVGUUNDV1BkRXNNS0xCemt5Vi1lUFFPRS1LeDR2RWN30gGGAUFVX3lxTE9WMUl4dDlXU0VVQlhRQlpGZ05QakRNd1ZMbUNyX2R5OTZEQnZpVE1fVXVpN2JnRFJsUldoeHB6QmF0TVNVU3FCQzlXNXdzZjdnN19CVjc5MjIwOG4waWd0TDF3d1FTSmJCajAxMktyZXp0cnFyX2JlOUVmd2Npb2lFNWpyR1Vn?oc=5"
-   }
-  ],
-  "merged_ids": [
-   "n20261103-1e298afe"
-  ],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんと映画ゴジラのコラボ企画で、限定商品や店内装飾の記事",
    "t": "2026-11-03"
   }
  },
@@ -785,6 +859,10 @@
    {
     "source": "産経ニュース",
     "url": "https://www.sankei.com/pressrelease/prtimes/OVUAVWPMVJNPXLJKUVD4OWX46Q/"
+   },
+   {
+    "source": "AGARA 紀伊民報",
+    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1zMmNpOWtNMm5uMlhxSElKenFGdmlGSHA1WGM2TVlVN29oNUg2RkFQVE12X21oLTRXMzFTOHVhakRqX3RIaDNBOHBHYVpPWkU?oc=5"
    }
   ],
   "merged_ids": [
@@ -1069,6 +1147,10 @@
    {
     "source": "名駅経済新聞",
     "url": "https://meieki.keizai.biz/headline/3811/"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1sNy14WGdObEllTFE5M3R3RUVLM0d4aU5vZldPQWk1SW05SWtYeFBpUEZobi1RNm1IdnNncS1UXzFSdUFOdTQ4VHRkLVFwVTZFZXZaOWd2SUhaeS1jNUw4MV9rZUhGT3JaRF9vRzhDU25fNWNJTXYwak1TWdIBgAFBVV95cUxPal9CSFJ1MVRjUDk0Tl9uR2cyVm9xUEp4aFF1MUpNN1RJZ05rNWlLWFUzbk12MzZHMTZQcmhkYXVKUEFneUFJcVRUQUEteHJGQnFRbGxYT2dVS2ZZdmhHZWgwZk5UNC12MDlOY0Q3ZGhIWmc4MUQyaVVxbFpBSEx1eg?oc=5"
    }
   ],
   "dv": 3,
