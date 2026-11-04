@@ -10,6 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ぴよりん">
+<meta name="piyo-ver" content="2026.11.04-1">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
@@ -413,6 +414,11 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .set-sec .sync{margin:0}
 .set-note{margin:0;font-size:12.5px;color:var(--muted);line-height:1.6}
 .set-sec .set-act{align-self:flex-start;font:inherit;font-size:12.5px;font-weight:700;color:var(--yolk-ink);background:var(--yolk);border:1px solid transparent;border-radius:99px;padding:6px 16px;cursor:pointer}
+.pl-row{display:flex;align-items:center;gap:6px}
+.pl-state{white-space:pre-line;line-height:1.7!important;font-size:12.5px}
+#set-piyolog textarea{font:inherit;font-size:16px;font-family:var(--f-mono);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px;width:100%;box-sizing:border-box}
+.pl-acts{display:flex;flex-wrap:wrap;gap:8px}
+.pl-acts .set-act:disabled{opacity:.45;cursor:default}
 .set-links{margin:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px}
 .set-links a{color:var(--caramel);font-weight:700}
 #set-infobase section{margin:0!important}
@@ -728,6 +734,10 @@ window.PiyoSplash=(function(){
       <p class="set-note" id="set-fix-none">まだありません。ぴよの答えの下の「ちがうよ」を押すと、ここにたまります。</p>
       <div class="run-meta piyo-reports" id="piyo-reports" hidden></div>
     </section>
+    <section class="set-sec" aria-labelledby="set-h-piyolog">
+      <h3 id="set-h-piyolog">会話の記録</h3>
+      <div id="set-piyolog"></div>
+    </section>
     <section class="set-sec" aria-labelledby="set-h-ib">
       <h3 id="set-h-ib">infobase の一般情報</h3>
       <div id="set-infobase"></div>
@@ -761,6 +771,9 @@ window.PiyoSplash=(function(){
 <script src="news-archive.js"></script>
 <script src="news-identity.js"></script>
 <script src="piyo-extras.js?v=2"></script>
+<script src="piyo-log/schema.js?v=1"></script>
+<script src="piyo-log/recorder.js?v=1"></script>
+<script src="piyo-log.js?v=1"></script>
 <script defer src="piyo-display-diagnostics.js?v=1"></script>
 <script>
 (function(){
@@ -1280,7 +1293,7 @@ window.PiyoSplash=(function(){
   });
 
   // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
-  const PN_VERSION='2026.11.03-1（PC の歯車・設定で記事が消える直し）';
+  const PN_VERSION='2026.11.04-1（会話の記録）';
   {
     const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
     const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
@@ -1938,7 +1951,7 @@ window.PiyoSplash=(function(){
       const chipFade=reduced?null:fadeSuggest();
       await Promise.all([fade,chipFade].map(a=>a&&a.finished.catch(()=>{})));
       if(!current()){if(fade)fade.cancel();if(chipFade)chipFade.cancel();return showSuggest()}
-      log.innerHTML='';history=[];pendingChip=null;log.scrollTop=0;toBottom(true);
+      log.innerHTML='';history=[];pendingChip=null;log.scrollTop=0;toBottom(true);globalThis.PiyoLog?.newConv(); // 会話の記録も新しい会話にする
       if(fade)fade.cancel();
       holdSuggest();if(chipFade)chipFade.cancel();
       const g=data&&data.greeting,X=globalThis.PiyoExtras;
@@ -1954,7 +1967,8 @@ window.PiyoSplash=(function(){
       if(ex)lines.unshift(ex.hello);
       play('wave',()=>{
         if(id!==openId||layer.hidden||busy||log.children.length)return;
-        greeted=true;idle();piyoMsg(true).say(lines.map(line=>fmt(piyoTone(line))).join('\n'),m=>{if(m&&m.fix)m.fix({src:'greeting',q:'',a:lines.map(piyoTone).join('\n')})});
+        greeted=true;idle();const L=globalThis.PiyoLog,said=lines.map(piyoTone).join('\n'),lt=L?L.turn('',{kind:'greeting'}):null;if(lt)L.end(lt,{status:'ok',answer:said,route:'local'});
+        piyoMsg(true).say(lines.map(line=>fmt(piyoTone(line))).join('\n'),m=>{if(m&&m.fix)m.fix({src:'greeting',q:'',a:said,...(lt?{lt}:{})})});
       });
     }else{showSuggest();setTimeout(()=>{if(id===openId&&!layer.hidden)play('wave')},300)}
   }
@@ -2194,6 +2208,10 @@ window.PiyoSplash=(function(){
   }
   let busy=false,pendingChip=null;
   let asked={q:'',chip:'',way:'',web:false},fixPending=null; // asked: いま答えている質問（「ちがうよ」の記録に使う。web は Web で調べたか）。fixPending: 「どこがちがう？」と聞いている途中
+  // 会話の記録（piyo-log.js。既定は記録しない。答え作りや history とは別）。asked.lt はやり取りの ID、asked.t0 は聞いた時刻
+  const logWay=()=>asked.web?'web':({mac:'relay',api:'api',infobase:'infobase'})[asked.way]||'local';
+  function logStart(q,meta,refs){const L=globalThis.PiyoLog;asked.lt=L?L.turn(q,meta,refs):null;asked.t0=Date.now();return asked.lt}
+  function logEnd(r){const L=globalThis.PiyoLog;if(!L||!asked.lt)return;L.end(asked.lt,{route:logWay(),ms:Date.now()-(asked.t0||Date.now()),model:asked.way==='api'&&typeof MODEL==='string'?MODEL:undefined,...r})}
   let lastKnowledge='',lastExtra='',lastCalendar=[]; // いまの答えのもとにした知識と、読んだ記事（答えの日付と値段を確かめる）。さっき話したこれからの予定（「カレンダーに入れて」だけのとき）
   // 天気・暦・予定・基本情報・おみくじは、手元のデータでその場で答える（Claude を使わないので料金もキーもいらない）
   function localReply(q){
@@ -2201,12 +2219,13 @@ window.PiyoSplash=(function(){
     return X.localAnswer(q,{...extrasCtx(),omikuji:{seed:omikujiSeed(),drawn:omikujiDrawn()}});
   }
   function answerLocal(q,a){
-    if(a.kind==='calendar')return answerCalendar(q,a);
+    if(a.kind==='calendar'){logEnd({status:'ok',answer:'（カレンダーに入れる流れ：'+((a.events||[]).map(e=>e.title).join('・')||'さっき話した予定')+'）',errorKind:'calendar'});return answerCalendar(q,a)}
     const checked=globalThis.PiyoInfobase?.guard(a.text,q);
-    const text=piyoTone(checked?checked.text:a.text),msg=piyoMsg(a.sources==='weather');
+    const text=piyoTone(checked?checked.text:a.text),msg=piyoMsg(a.sources==='weather'),lt=asked.lt;
+    logEnd({status:'ok',answer:text});
     history=[...history,{role:'user',content:q},{role:'assistant',content:text}].slice(-10);
     if(a.kind==='omikuji')markOmikuji();
-    play(a.mood||'wave');msg.say(fmt(text),()=>{msg.links(refLinks(a.refs));offerCalendar(msg,a.refs);addFollowUps(a.refs);if(msg.fix)msg.fix({src:'local',q:asked.q||q,a:text,chip:asked.chip})});
+    play(a.mood||'wave');msg.say(fmt(text),()=>{msg.links(refLinks(a.refs));offerCalendar(msg,a.refs);addFollowUps(a.refs);if(msg.fix)msg.fix({src:'local',q:asked.q||q,a:text,chip:asked.chip,...(lt?{lt}:{})})});
     busy=false;sync();
   }
   // 返事を作りながら、言い終わった文から順に出す（「ます」が「るぴよ」に変わって見えないよう、文の途中は出さない）
@@ -2235,7 +2254,7 @@ window.PiyoSplash=(function(){
     if(globalThis.PiyoInfobase){
       busy=true;sync();let pooled=null;
       try{pooled=await globalThis.PiyoInfobase.answer(q);}finally{busy=false;sync();}
-      if(pooled){asked={q,chip:consumeSuggest(q)||'',way:'infobase',web:false};userMsg(q);const msg=piyoMsg(pooled.source?fmt(pooled.source):false);play('wave');msg.say(fmt(pooled.body??pooled.text),()=>{if(msg.fix)msg.fix({src:'infobase',q,a:pooled.text});});history=[...history,{role:'user',content:q},{role:'assistant',content:pooled.text}].slice(-10);return;}
+      if(pooled){asked={q,chip:consumeSuggest(q)||'',way:'infobase',web:false};const lt=logStart(q,asked.chip?{chip:asked.chip}:undefined);logEnd({status:'ok',answer:pooled.text});userMsg(q);const msg=piyoMsg(pooled.source?fmt(pooled.source):false);play('wave');msg.say(fmt(pooled.body??pooled.text),()=>{if(msg.fix)msg.fix({src:'infobase',q,a:pooled.text,...(lt?{lt}:{})});});history=[...history,{role:'user',content:q},{role:'assistant',content:pooled.text}].slice(-10);return;}
     }
 
     if(fixPending)endFix(); // 「どこがちがう？」の途中でも、候補を押したら普通の質問にする
@@ -2243,13 +2262,14 @@ window.PiyoSplash=(function(){
     if(refresh){busy=true;$('piyo-send').disabled=true;await refresh.catch(()=>{});busy=false;sync()}
     const local=localReply(q),way=local?null:route();
     if(!local&&!way){pendingQ=q;openKey();return} // 準備したら続きから送る（候補はそれまで残す）
-    asked={q,chip:consumeSuggest(q)||'',way:'',web:false};lastExtra=''; // 聞いた候補を消し、取得済み情報で答えられる別の質問を右へ補充する
+    asked={q,chip:consumeSuggest(q)||'',way:'',web:false};lastExtra='';logStart(q,asked.chip?{chip:asked.chip}:undefined); // 聞いた候補を消し、取得済み情報で答えられる別の質問を右へ補充する
     busy=true;$('piyo-send').disabled=true;
     userMsg(q);
     if(local)return answerLocal(q,local);
     return way.way==='mac'?askMac(q,way.fallback):askApi(q);
   }
   async function askApi(q){
+    if(asked.lt&&!globalThis.PiyoLog?.isOpen(asked.lt))logStart(q,{retry:'api'},[asked.lt]); // Mac でつまずいたあと「API で聞く」
     asked.way='api';
     const msg=piyoMsg();loop('fidget');msg.say('考え中だぴよ…');
     const messages=[...history,{role:'user',content:q}],live=streamTo(msg);
@@ -2260,7 +2280,9 @@ window.PiyoSplash=(function(){
       if(need){
         play('sad');const web=need.input&&need.input.kind==='web',query=(need.input&&need.input.query)||q;
         busy=false;sync();
-        msg.say(web?'それはぴよメモに載ってないぴよ。Web で調べる？':'それは記事をくわしく読まないと分からないぴよ。調べる？',()=>msg.choices([
+        const askBack=web?'それはぴよメモに載ってないぴよ。Web で調べる？':'それは記事をくわしく読まないと分からないぴよ。調べる？';
+        logEnd({status:'ok',answer:askBack,errorKind:'need-more'});
+        msg.say(askBack,()=>msg.choices([
           ['調べる',()=>deeper(q,query,web),true],
           ['やめる',()=>piyoMsg().say('わかったぴよ。ほかに聞きたいことある？')],
         ]));
@@ -2273,6 +2295,7 @@ window.PiyoSplash=(function(){
   async function deeper(q,query,web){
     if(busy)return;
     busy=true;sync();asked.way='api';asked.web=web;
+    if(!globalThis.PiyoLog?.isOpen(asked.lt))logStart(q,{deeper:web?'web':'article'},[asked.lt]); // 「調べる」を押した＝新しいやり取り
     const msg=piyoMsg();loop('checking');msg.say(web?'Web で調べてるぴよ…':'記事を読んでるぴよ…');
     const live=streamTo(msg);let read=[];
     try{
@@ -2349,6 +2372,7 @@ window.PiyoSplash=(function(){
   // Mac の道でつまずいたとき。API キーがあれば「API で聞く」ボタンも出す
   function macFail(msg,q,e){
     play('sad');busy=false;sync();
+    logEnd({status:e.kind==='timeout'?'timeout':e.kind==='cut'?'cut':'error',answer:e.kind==='token'?'つなぎ方が古いみたいぴよ。Claude Pet でコピーし直してね。':macErrText(e),errorKind:'mac-'+e.kind});
     if(e.kind==='token'){ // 合言葉が違う＝つなぎ方が古い。消して、準備の画面で貼り直してもらう
       saveMac(null);msg.say('つなぎ方が古いみたいぴよ。Claude Pet でコピーし直してね。');pendingQ=q;
       openKey('このつなぎ方は使えませんでした（Claude Pet で合言葉を作り直したのかもしれません）。Mac の Claude Pet の設定で「つなぎ方をコピー」を押して、貼り付け直してください。');return;
@@ -2388,10 +2412,11 @@ window.PiyoSplash=(function(){
     const checked=globalThis.PiyoInfobase?.guard(text,q);if(checked)text=checked.text;
     text=piyoTone(text);
     const note=failed?'':factNote(text,q); // 一言は吹き出しにだけ出し、記憶（history）には入れない（ぴよがまねしないように）
+    const lt=typeof asked==='object'?asked.lt:null;if(typeof logEnd==='function')logEnd({status:failed?'error':partial?'cut':'ok',answer:text+note,errorKind:failed?'empty':partial?'partial':undefined});
     history=[...history,{role:'user',content:q},{role:'assistant',content:text}].slice(-10);
     if(!streamed)play('jump'); // 流して出したときは、最初の文が出たときにもう跳ねている
     const refs=[...r.ids.map(id=>refMap[id]).filter(Boolean),...(extra||[])],links=refLinks(refs);
-    msg.say(fmt(text+note),()=>{if(msg.links)msg.links(links);offerCalendar(msg,refs);addFollowUps(refs);if(msg.fix)msg.fix({src:asked.way||'api',q:asked.q||q,a:text,chip:asked.chip})},streamed);busy=false;sync();
+    msg.say(fmt(text+note),()=>{if(msg.links)msg.links(links);offerCalendar(msg,refs);addFollowUps(refs);if(msg.fix)msg.fix({src:asked.way||'api',q:asked.q||q,a:text,chip:asked.chip,...(lt?{lt}:{})})},streamed);busy=false;sync();
   }
   // 答えの日付と値段が、渡した知識・読んだ記事・聞かれた文に無いときの一言（手元で確かめる。料金はかからない）。
   // Web で調べた答えは、調べたページが手元に無いので確かめない
@@ -2477,6 +2502,7 @@ window.PiyoSplash=(function(){
   function fail(msg,q,e){
     play('sad');busy=false;sync();
     const t=errText(e);
+    logEnd({status:'error',answer:t===null?'API キーが使えなかったぴよ。もう一度入れてね。':t,errorKind:'api-'+(e&&(e.status||e.name||e.type)||'error')});
     if(t===null){saveKey('');msg.say('API キーが使えなかったぴよ。もう一度入れてね。');pendingQ=q;openKey('この API キーは使えませんでした（削除されたか、形が違う可能性があります）。作り直して貼り付けてください。');return}
     msg.say(esc(t));
   }
@@ -2516,6 +2542,7 @@ window.PiyoSplash=(function(){
     if(comment)userMsg(comment);
     saveReports([...loadReports(),{at:new Date(Date.now()+9*3600e3).toISOString().slice(0,16).replace('T',' '),kind:FIX_LABEL[kind],src:SRC_LABEL[info.src]||info.src,
       q:String(info.q||'').slice(0,300),a:plainText(info.a).slice(0,800),comment:String(comment||'').slice(0,300),chip:info.chip||''}]);
+    globalThis.PiyoLog?.feedback(info.lt,{rating:'bad',reason:kind,comment:comment||undefined}); // 会話の記録にも「ちがうよ」を残す
     if(kind==='question'&&info.chip)hideSuggest(info.chip);
     // 会話の記憶の中の答えにも印を付ける（同じまちがいを繰り返さない）
     const i=history.findLastIndex(h=>h.role==='assistant'&&h.content===info.a);
@@ -2539,8 +2566,10 @@ window.PiyoSplash=(function(){
   function recheck(info,kind,comment){
     const way=route(),q=fixPrompt(info,kind,comment),msg=piyoMsg();
     asked={q:info.q||'',chip:info.chip||'',way:''}; // 確かめ直した答えにも「ちがうよ」を付ける（もとの質問で記録する）
-    if(!way)return msg.say('ごめんぴよ。記録しておいたぴよ。「ブックマーク」タブの下の「ぴよへの指摘」から見られるぴよ。');
+    logStart(info.q||'',{recheck:kind||'answer'},[info.lt]);
+    if(!way){logEnd({status:'ok',answer:'（記録だけした。確かめ直す道がない）',errorKind:'no-route'});return msg.say('ごめんぴよ。記録しておいたぴよ。「ブックマーク」タブの下の「ぴよへの指摘」から見られるぴよ。')}
     if(way.way==='mac'){busy=true;sync();msg.say('ごめんぴよ。確かめ直すぴよ。');return askMac(q,way.fallback)}
+    logEnd({status:'ok',answer:'ごめんぴよ。記録しておいたぴよ。記事や Web で確かめ直す？',errorKind:'need-more'});
     msg.say('ごめんぴよ。記録しておいたぴよ。記事や Web で確かめ直す？',()=>msg.choices([
       ['確かめ直す',()=>deeper(q,info.q||'ぴよりんの最近のニュース',true),true],
       ['やめておく',()=>piyoMsg().say('わかったぴよ。ほかに聞きたいことある？')],
