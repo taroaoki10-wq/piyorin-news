@@ -1,5 +1,42 @@
 [
  {
+  "id": "n20261105-a76a4e5f",
+  "date": "2026-11-05",
+  "cat": "media",
+  "title": "スイーツ「ぴよりん」羽ばたき600万ぴよ 藤井名人も食し全国区に（朝日新聞）",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/82351ffacc3556c95b83756070f6e765d4bbd609",
+  "related": [
+   {
+    "source": "朝日新聞デジタル",
+    "url": "https://www.asahi.com/articles/ASVBY1J5MVBYULFA013M.html"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの15周年・累計販売数・コラボ商品の記事",
+   "t": "2026-11-05"
+  }
+ },
+ {
+  "id": "n20261105-68453b2d",
+  "date": "2026-11-05",
+  "cat": "media",
+  "title": "スイーツ「ぴよりん」羽ばたき600万ぴよ 藤井名人も食し全国区に [愛知県]",
+  "source": "朝日新聞",
+  "url": "https://www.asahi.com/articles/ASVBY1J5MVBYULFA013M.html",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの15周年・累計販売数・コラボ商品の記事",
+   "t": "2026-11-05"
+  }
+ },
+ {
   "id": "n20261104-52890251",
   "date": "2026-11-04",
   "cat": "media",
@@ -70,6 +107,10 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5waHAyZTVqb1E3T1h0MWUyR1ppVU9WLUFyNllTSk1NSjFGdHl6a1FaQTVESjFqRWpDT0xYdTMwZ1NvNTF4QUNiaVRCd1YxaEtOOFg2Um5VaHc3ay1wRU5DNzNVVmo5VmdiMlNLaXZTeWxnNWJwdkNVUm15YkQ?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1SWXRCSTd4UUZYUnA3ZFZaMFZ2NnNCZVhRVG5RZXl4OFh0ZUlETExZMzd2aDFvSHJNNGhlb2VIdWk5bTltam9mUFQ1eU0xN2VyNWdvbG9nVkV2ckpGTWNJZ2hUYWdCdGRRREVYQ3Z0QXpmZElKQXQxS2dkTGo?oc=5"
    }
   ],
   "dv": 3,
@@ -2267,6 +2308,10 @@
    {
     "source": "山陽新聞",
     "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFB4WkxabzhqY2RxS1h6YzlNMWhaRTNDVFlRUFhDV2dQZGRna0poQW85c25jX1hTX0l5VGo1ZktkUTYtblRzSm5QaDBxaTJLNlhHUm1GRVVWM2l5WTFk?oc=5"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE11Y19oVjdaRnBwVzJscmV6Smxyc2FKLXN2eUpPZXlZZFBYM0JLQjlKMkVQRVJyM2czWklMUGRSLWFEZXNIT0ZIcmpQXzF0Q0pUQVNXUnBxbmladDFhX1MwNjlwV3lyUEJwTU5SVEZtRk5FUQ?oc=5"
    }
   ],
   "dv": 3,
