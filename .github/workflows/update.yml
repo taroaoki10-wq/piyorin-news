@@ -55,6 +55,10 @@ jobs:
       - name: 暦を作る
         run: python3 scripts/build_koyomi.py
 
+      - name: 購入記録の画像の住所を作る（ぴよりん図鑑・公式リリース）
+        run: python3 scripts/build_images.py
+        continue-on-error: true
+
       - name: 変更があればコミット
         run: |
           git config user.name  "github-actions[bot]"

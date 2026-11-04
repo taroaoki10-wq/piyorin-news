@@ -1,0 +1,3637 @@
+{
+ "note": "購入記録の画像の住所。ぴよりんはぴよりん図鑑、クッキー缶などは公式のプレスリリースの代表画像。画像は公式のサーバーのものをそのまま表示する。",
+ "zukanSource": "https://piyorin.com/detail/",
+ "zukanChecked": "2026-11-04T15:04:22+09:00",
+ "zukan": [
+  {
+   "id": "z1384",
+   "name": "ぴよりん",
+   "en": "Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/86df0dfbdd84d191512257ae7b6a70ad.png",
+   "date": "",
+   "tags": [
+    "通年商品"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/86df0dfbdd84d191512257ae7b6a70ad-300x300.png"
+  },
+  {
+   "id": "z1374",
+   "name": "イチゴぴよりん",
+   "en": "Strawberry Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/f1d4125b4682424b6d1a4f384d9b3103.png",
+   "date": "",
+   "tags": [
+    "通年商品"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/f1d4125b4682424b6d1a4f384d9b3103-300x300.png"
+  },
+  {
+   "id": "z1371",
+   "name": "紅茶ぴよりん",
+   "en": "Tea-Flavored Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/9f9a38b3386d89b1722a02f135cb6bd7.png",
+   "date": "",
+   "tags": [
+    "通年商品"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/9f9a38b3386d89b1722a02f135cb6bd7-300x300.png"
+  },
+  {
+   "id": "z1377",
+   "name": "チョコぴよりん",
+   "en": "Chocolate Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/2c741d62e25ee6312468866aba71ea64.png",
+   "date": "",
+   "tags": [
+    "通年商品",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/2c741d62e25ee6312468866aba71ea64-300x300.png"
+  },
+  {
+   "id": "z1353",
+   "name": "ももぴよりん",
+   "en": "Peach Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/2c2452f8d2048bc9ee8577e69ac6a311.png",
+   "date": "",
+   "tags": [
+    "通年商品"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/2c2452f8d2048bc9ee8577e69ac6a311-300x300.png"
+  },
+  {
+   "id": "z5467",
+   "name": "villageぴよりん",
+   "en": "village Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/9ff4ef6b8ee6730e3724e8e31f597a7e-1024x682.png",
+   "date": "2026年6月",
+   "tags": [
+    "ぴよりんvillage限定",
+    "通年商品"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/9ff4ef6b8ee6730e3724e8e31f597a7e-300x200.png"
+  },
+  {
+   "id": "z5472",
+   "name": "星空ぴよりん（17時以降限定）",
+   "en": "Starry Sky Piyorin (After 5 PM)",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/98f9a6dce559ca0794b977663f4c499b-1024x682.png",
+   "date": "2026年6月",
+   "tags": [
+    "ぴよりんvillage限定",
+    "通年商品"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/98f9a6dce559ca0794b977663f4c499b-300x200.png"
+  },
+  {
+   "id": "z5457",
+   "name": "豊橋おでかけセット",
+   "en": "Black Thunder Piyorin Toyohashi Odekake Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/9bb2c0397ba45eb9dd867d86f0eee1c7-1024x682.png",
+   "date": "2026年10月",
+   "tags": [
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/9bb2c0397ba45eb9dd867d86f0eee1c7-300x200.png"
+  },
+  {
+   "id": "z5465",
+   "name": "近鉄百貨店上本町店 開業90周年記念特別企画 ぴよりんおでかけセット",
+   "en": "Kintetsu Uehommachi 90th Anniversary Piyorin Odekake Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/c9611d2dd56617c162b686cbf9bdb872-1024x685.png",
+   "date": "2026年9月",
+   "tags": [
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/c9611d2dd56617c162b686cbf9bdb872-300x201.png"
+  },
+  {
+   "id": "z5454",
+   "name": "栗きんとんぴよりん おでかけセット",
+   "en": "Kurikinton Piyorin Odekake Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/d38c030866c1a386492e6d7bdb314897-1024x682.png",
+   "date": "2026年9月",
+   "tags": [
+    "秋",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/d38c030866c1a386492e6d7bdb314897-300x200.png"
+  },
+  {
+   "id": "z5461",
+   "name": "京急百貨店 「第14回 小鳥のアートフェスタ」 ぴよりんおでかけセット",
+   "en": "Keikyu Department Store Kotori Art Festa Piyorin Odekake Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/c9611d2dd56617c162b686cbf9bdb872-1024x685.png",
+   "date": "2026年9月",
+   "tags": [
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/c9611d2dd56617c162b686cbf9bdb872-300x201.png"
+  },
+  {
+   "id": "z5418",
+   "name": "今日から推しメン！ SKE48ぴよりん",
+   "en": "SKE48 Collaboration Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/afb32ae939cb4098f4ed77bda5235924-1024x682.png",
+   "date": "2026年9月",
+   "tags": [
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/afb32ae939cb4098f4ed77bda5235924-300x200.png"
+  },
+  {
+   "id": "z5422",
+   "name": "SKE48ぴよりん 推しメンセット",
+   "en": "SKE48 Piyorin Oshimen Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/76372f7b462f33c32465890d4bc985ea-1024x682.png",
+   "date": "2026年9月",
+   "tags": [
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/76372f7b462f33c32465890d4bc985ea-300x200.png"
+  },
+  {
+   "id": "z5414",
+   "name": "なつまつりぴよりん ～夏休みの思い出～",
+   "en": "Summer Festival Piyorin: Summer Vacation Memories",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/d737787b9cdf6358c73413b2f328bf7e-1024x682.png",
+   "date": "2026年8月",
+   "tags": [
+    "夏",
+    "シーズンイベント"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/d737787b9cdf6358c73413b2f328bf7e-300x200.png"
+  },
+  {
+   "id": "z5410",
+   "name": "ブルーベリーぴよりん",
+   "en": "Blueberry Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/ae09098e0904f9ae47c54e969bf9eff9-1024x682.png",
+   "date": "2026年8月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/ae09098e0904f9ae47c54e969bf9eff9-300x200.png"
+  },
+  {
+   "id": "z5406",
+   "name": "なつまつりぴよりん ～はじける夏休み～",
+   "en": "Summer Festival Piyorin: Bursting Summer Vacation!",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/20a1baa20180568e372abc897db14bc9-1024x682.png",
+   "date": "2026年8月",
+   "tags": [
+    "夏",
+    "シーズンイベント"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/20a1baa20180568e372abc897db14bc9-300x200.png"
+  },
+  {
+   "id": "z5402",
+   "name": "TWコラボぴよりん",
+   "en": "TW Collaboration Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/bbc9eed00a50eb15cf874833d556f1a4-1024x682.png",
+   "date": "2026年7月・8月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/bbc9eed00a50eb15cf874833d556f1a4-300x200.png"
+  },
+  {
+   "id": "z5393",
+   "name": "15th Anniversary ぴよりん",
+   "en": "15th Anniversary Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/75e35ff2de5f30b9bb602912bddebfec-1024x682.png",
+   "date": "2026年7月",
+   "tags": [
+    "夏",
+    "アニバーサリー"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/75e35ff2de5f30b9bb602912bddebfec-300x200.png"
+  },
+  {
+   "id": "z5397",
+   "name": "ちょっと大きい 15th Anniversary ぴよりん",
+   "en": "15th Anniversary Piyorin (Large)",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/3375ec922594c091cdc492cd1608aab8-1024x682.png",
+   "date": "2026年7月",
+   "tags": [
+    "夏",
+    "アニバーサリー"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/3375ec922594c091cdc492cd1608aab8-300x200.png"
+  },
+  {
+   "id": "z5389",
+   "name": "恐竜ぴよりん 2026",
+   "en": "Dinosaur Piyorin 2026",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/6cc1259ed3408881526e9572aeab7e6d-1024x682.png",
+   "date": "2026年6月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/6cc1259ed3408881526e9572aeab7e6d-300x200.png"
+  },
+  {
+   "id": "z5450",
+   "name": "父の日ぴよりん",
+   "en": "Father's Day Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/883f9857e4d1d82d02eb415a7d857077-1024x682.png",
+   "date": "2026年6月",
+   "tags": [
+    "シーズンイベント"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/883f9857e4d1d82d02eb415a7d857077-300x200.png"
+  },
+  {
+   "id": "z5375",
+   "name": "GRラリー ドライバーぴよりん（赤）",
+   "en": "GR Rally Driver Piyorin (Red)",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/fecf19509c15eae1fa3ac7fc0a35485d-1024x682.png",
+   "date": "2026年5月",
+   "tags": [
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/fecf19509c15eae1fa3ac7fc0a35485d-300x200.png"
+  },
+  {
+   "id": "z5381",
+   "name": "GRラリー コ・ドライバーぴよりん（黒）",
+   "en": "GR Rally Co-driver Piyorin (Black)",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/7ba17d255921055a70088c7b41524871-1024x682.png",
+   "date": "2026年5月",
+   "tags": [
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/7ba17d255921055a70088c7b41524871-300x200.png"
+  },
+  {
+   "id": "z5385",
+   "name": "GRラリーぴよりん おでかけセット",
+   "en": "GR Rally Piyorin Odekake Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/305257e5105ea628b1092ae1d656542b-1024x682.png",
+   "date": "2026年5月",
+   "tags": [
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/305257e5105ea628b1092ae1d656542b-300x200.png"
+  },
+  {
+   "id": "z4843",
+   "name": "母の日ぴよりん2026",
+   "en": "Mother’s Day Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/05/cc021ac4d078f60437111b6b23c56380.jpg",
+   "date": "2026年5月",
+   "tags": [
+    "春",
+    "シーズンイベント"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/05/cc021ac4d078f60437111b6b23c56380-300x300.jpg"
+  },
+  {
+   "id": "z4836",
+   "name": "こどもの日ぴよりん2026",
+   "en": "Kodomo no Hi Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/05/19386dba7f4b07e54b90d6474b88c2c3.jpg",
+   "date": "2026年4月-5月",
+   "tags": [
+    "春",
+    "シーズンイベント",
+    "こどもの日"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/05/19386dba7f4b07e54b90d6474b88c2c3-300x300.jpg"
+  },
+  {
+   "id": "z5442",
+   "name": "緑茶ぴよりん おでかけセット",
+   "en": "Green Tea Piyorin Odekake Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/3d80f4524e592b29118ea37514366f5c-1024x682.png",
+   "date": "2026年4月",
+   "tags": [
+    "春",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/3d80f4524e592b29118ea37514366f5c-300x200.png"
+  },
+  {
+   "id": "z4829",
+   "name": "緑茶ぴよりん2026",
+   "en": "Green Tea Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/05/da6a3246de7b485b54da2a6951f46bda.jpg",
+   "date": "2026年4月",
+   "tags": [
+    "春"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/05/da6a3246de7b485b54da2a6951f46bda-300x300.jpg"
+  },
+  {
+   "id": "z4825",
+   "name": "ドトールコーヒー ぴよりん2026",
+   "en": "Doutor Coffee Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/05/55f700ebfc9f0fb000cadfdbea9be6b2.jpg",
+   "date": "2026年4月",
+   "tags": [
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/05/55f700ebfc9f0fb000cadfdbea9be6b2-300x300.jpg"
+  },
+  {
+   "id": "z4822",
+   "name": "ダンカーぴよりん おでかけセット",
+   "en": "Dunker Piyorin Odekake Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/05/40a0a0cd8afda14a00f448be728ea562-1024x682.png",
+   "date": "2026年4月",
+   "tags": [
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/05/40a0a0cd8afda14a00f448be728ea562-300x200.png"
+  },
+  {
+   "id": "z5446",
+   "name": "さくらぴよりん おでかけセット",
+   "en": "Sakura Piyorin Odekake Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/58fccd17514020b8ffb681edbf6eaa6e-1024x682.png",
+   "date": "2026年4月",
+   "tags": [
+    "春",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/58fccd17514020b8ffb681edbf6eaa6e-300x200.png"
+  },
+  {
+   "id": "z4819",
+   "name": "さくらぴよりん2026",
+   "en": "Sakura Piyorin 2026",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/05/sakura.jpg",
+   "date": "2026年3月-4月",
+   "tags": [
+    "夏",
+    "シーズンイベント"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/05/sakura-300x300.jpg"
+  },
+  {
+   "id": "z4816",
+   "name": "伊勢茶ぴよりん おでかけセット",
+   "en": "Ise Tea Piyorin Odekake Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/05/f90749c6fdb7962a4ff25a000d2e215a-1024x682.png",
+   "date": "2026年4月",
+   "tags": [
+    "春",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/05/f90749c6fdb7962a4ff25a000d2e215a-300x200.png"
+  },
+  {
+   "id": "z4812",
+   "name": "ホワイトデー ぴよりん",
+   "en": "White Day Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/05/cd2fe8d55086f2d454f51f517060cbc6.jpg",
+   "date": "2026年3月",
+   "tags": [
+    "春",
+    "シーズンイベント"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/05/cd2fe8d55086f2d454f51f517060cbc6-300x300.jpg"
+  },
+  {
+   "id": "z4800",
+   "name": "ひなまつりぴよりん2026",
+   "en": "Hinamatsuri Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/05/f2eba576de78990dc42a0c650c16d398.jpg",
+   "date": "2026年2月",
+   "tags": [
+    "春",
+    "シーズンイベント"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/05/f2eba576de78990dc42a0c650c16d398-300x300.jpg"
+  },
+  {
+   "id": "z5432",
+   "name": "横浜春節祭ぴよりん おでかけセット",
+   "en": "Yokohama Shunsetsu Festival Piyorin Odekake Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/5c69cb1f1da80fed4e87fb7b571ea1ad-1024x682.png",
+   "date": "2026年3月",
+   "tags": [
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/5c69cb1f1da80fed4e87fb7b571ea1ad-300x200.png"
+  },
+  {
+   "id": "z4111",
+   "name": "ぴよりん仙台おでかけセット",
+   "en": "Piyorin Sendai Odekake Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/02/d7bf808a79cf75ee102d697caf32559e-1024x683.png",
+   "date": "2026年2月",
+   "tags": [
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/02/d7bf808a79cf75ee102d697caf32559e-300x200.png"
+  },
+  {
+   "id": "z5427",
+   "name": "温泉ぴよりんおでかけセット",
+   "en": "Onsen Piyorin Odekake Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/08/3cbcbeeeb8c15a23546f327824b776bb-1024x682.png",
+   "date": "2026年2月・3月",
+   "tags": [
+    "冬",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/08/3cbcbeeeb8c15a23546f327824b776bb-300x200.png"
+  },
+  {
+   "id": "z3950",
+   "name": "みちまるくんぴよりん おでかけセット",
+   "en": "Michimaru-kun Piyorin Odekake Setto",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/01/125e93722d941c54e15b368d058797b6-1024x683.png",
+   "date": "2026年2月",
+   "tags": [
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/01/125e93722d941c54e15b368d058797b6-300x200.png"
+  },
+  {
+   "id": "z3913",
+   "name": "ぴよりんとこぐまくん ケーキのなかよしセット",
+   "en": "Piyorin to Koguma-kun Keeki no Nakayoshi Setto",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/01/1759168c9c687adf4f2715444b73fc0d-1-1024x683.png",
+   "date": "2026年2月",
+   "tags": [
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/01/1759168c9c687adf4f2715444b73fc0d-1-300x200.png"
+  },
+  {
+   "id": "z3865",
+   "name": "バレンタインぴよりん2026",
+   "en": "Valentine Piyorin 2026",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/01/e1083fa6e6d8335ca2fd238e8bb144ae-e1769672855769-1024x684.png",
+   "date": "2026年2月",
+   "tags": [
+    "冬",
+    "その他限定ぴよりん",
+    "バレンタイン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/01/e1083fa6e6d8335ca2fd238e8bb144ae-e1769672855769-300x200.png"
+  },
+  {
+   "id": "z3740",
+   "name": "豊臣ぴよ吉",
+   "en": "Toyotomi Piyoyoshi",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/01/e05851afe812ab60ca2d516f5abd208c-1024x1024.jpeg",
+   "date": "2026年1月",
+   "tags": [
+    "冬",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/01/e05851afe812ab60ca2d516f5abd208c-300x300.jpeg"
+  },
+  {
+   "id": "z3744",
+   "name": "豊臣ぴよ長",
+   "en": "Toyotomi Piyonaga",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/01/fcbffd76c3d76baf3d107ad3dc6063c3-1024x1024.jpeg",
+   "date": "2026年1月",
+   "tags": [
+    "冬",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/01/fcbffd76c3d76baf3d107ad3dc6063c3-300x300.jpeg"
+  },
+  {
+   "id": "z3734",
+   "name": "豊臣ミュージアム豊臣ぴよ吉 ぴよ長おでかけセット",
+   "en": "Toyotomi Museum – Toyotomi Piyoyoshi & Piyonaga Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2026/01/39ee2841eee2739f094216a104c8c9ba-1024x1024.jpeg",
+   "date": "2026年1月",
+   "tags": [
+    "冬",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2026/01/39ee2841eee2739f094216a104c8c9ba-300x300.jpeg"
+  },
+  {
+   "id": "z3651",
+   "name": "賀正ぴよりん 2026",
+   "en": "Happy New Year Piyorin 2026",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/12/9769ed1669e3ec5b3bcd05ac4c200cd1-1024x683.png",
+   "date": "2026年1月",
+   "tags": [
+    "冬",
+    "お正月"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/12/9769ed1669e3ec5b3bcd05ac4c200cd1-300x200.png"
+  },
+  {
+   "id": "z3649",
+   "name": "京王百貨店新宿店 「第61回 元祖 有名駅弁と全国うまいもの大会」 ぴよりんおでかけセット",
+   "en": "Keio Department Store, Shinjuku Branch \"61st Annual Original Famous Ekiben and National Delicious Food Competition\" Piyorin Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/09/e9f2956df9185b5978b68d68ea26b06b-1024x805.png",
+   "date": "2026年1月",
+   "tags": [
+    "冬",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/09/e9f2956df9185b5978b68d68ea26b06b-300x236.png"
+  },
+  {
+   "id": "z3621",
+   "name": "京阪百貨店 守口店 「諸国じまん 駅弁とうまいもの大会」 ぴよりんおでかけセット",
+   "en": "Keihan Department Store Moriguchi Store “Regional Specialties: Ekiben & Gourmet Fair” Piyorin Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/09/e9f2956df9185b5978b68d68ea26b06b-1024x805.png",
+   "date": "2026年1月",
+   "tags": [
+    "冬",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/09/e9f2956df9185b5978b68d68ea26b06b-300x236.png"
+  },
+  {
+   "id": "z3564",
+   "name": "500万ぴよ ありがとうぴよりん",
+   "en": "Thank you for 5 million Piyos.",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/11/9604fad1d2bb8e321ce3f11afaaca0d9-1-1024x682.png",
+   "date": "2025年11月",
+   "tags": [
+    "冬",
+    "アニバーサリー",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/11/9604fad1d2bb8e321ce3f11afaaca0d9-1-300x200.png"
+  },
+  {
+   "id": "z3538",
+   "name": "トナカイぴよりん 2025",
+   "en": "Reindeer Piyorin 2025",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/11/b60e414da05c7e17b96434eae6d228cb-1024x683.png",
+   "date": "2025年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/11/b60e414da05c7e17b96434eae6d228cb-300x200.png"
+  },
+  {
+   "id": "z3535",
+   "name": "雪だるまぴよりん 2025",
+   "en": "Snowman Piyorin 2025",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/11/1a6de6a172789979485eba650b6d3bb4-1024x683.png",
+   "date": "2025年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/11/1a6de6a172789979485eba650b6d3bb4-300x200.png"
+  },
+  {
+   "id": "z3531",
+   "name": "サンタぴよりん 2025",
+   "en": "Santa Piyorin 2025",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/11/ece9b2d3018cac68f7a5023922429eda-1024x683.png",
+   "date": "2025年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/11/ece9b2d3018cac68f7a5023922429eda-300x200.png"
+  },
+  {
+   "id": "z3519",
+   "name": "中津川栗きんとん ぴよりん",
+   "en": "Nakatsugawa Chestnut Kinton Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/11/d5a8cf7ed056f3b77c80d2c2395670b2-1024x683.png",
+   "date": "2025年11月",
+   "tags": [
+    "秋",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/11/d5a8cf7ed056f3b77c80d2c2395670b2-300x200.png"
+  },
+  {
+   "id": "z3512",
+   "name": "イオンモール大高 ぴよりんおでかけセット",
+   "en": "AEON Mall Otaka Piyorin Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/09/e9f2956df9185b5978b68d68ea26b06b-1024x805.png",
+   "date": "2025年11月",
+   "tags": [
+    "秋",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/09/e9f2956df9185b5978b68d68ea26b06b-300x236.png"
+  },
+  {
+   "id": "z3487",
+   "name": "将棋の日ぴよりん",
+   "en": "Shogi Day Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/11/170c8ec93fd8fe72568e4a88bad9f565-1024x724.png",
+   "date": "2025年11月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/11/170c8ec93fd8fe72568e4a88bad9f565-300x212.png"
+  },
+  {
+   "id": "z3501",
+   "name": "あべのハルカス近鉄本店 「近鉄 食の大祭典」 ぴよりんおでかけセット",
+   "en": "Kintetsu Department Store Abeno Harukas “Kintetsu Grand Food Festival” – Piyorin Travel Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/11/3de22b5cb0ec1551a2841c9e4bdb99cd-1.jpg",
+   "date": "2025年11月",
+   "tags": [
+    "秋",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/11/3de22b5cb0ec1551a2841c9e4bdb99cd-1.jpg"
+  },
+  {
+   "id": "z3443",
+   "name": "さつまいもぴよりん",
+   "en": "Sweet potato Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/10/39ee2841eee2739f094216a104c8c9ba-1-1024x1024.jpeg",
+   "date": "2025年11月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/10/39ee2841eee2739f094216a104c8c9ba-1-300x300.jpeg"
+  },
+  {
+   "id": "z3369",
+   "name": "東海テレビ 1チャンまつり イッチー×ぴよりん おでかけセット",
+   "en": "Tokai TV 1 Channel Festival Icchi x Piyorin Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/10/e05851afe812ab60ca2d516f5abd208c-1024x805.jpeg",
+   "date": "2025年10月",
+   "tags": [
+    "秋",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/10/e05851afe812ab60ca2d516f5abd208c-300x236.jpeg"
+  },
+  {
+   "id": "z3339",
+   "name": "ハロウィンぴよりん",
+   "en": "Halloween Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/10/0c1ba5cd2842b4e59b88690368e15273-1024x805.jpeg",
+   "date": "2025年10月",
+   "tags": [
+    "秋",
+    "ハロウィン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/10/0c1ba5cd2842b4e59b88690368e15273-300x236.jpeg"
+  },
+  {
+   "id": "z3287",
+   "name": "花咲かタイムズ 秋の大感謝祭 ぴよりんおでかけセット",
+   "en": "Hanasaka Times Autumn Thanksgiving Festival Piyorin Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/09/d1d0e8a85b4e605399c8e0f9132948d4-1024x805.jpeg",
+   "date": "2025年10月",
+   "tags": [
+    "秋",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/09/d1d0e8a85b4e605399c8e0f9132948d4-300x236.jpeg"
+  },
+  {
+   "id": "z3270",
+   "name": "お月見ぴよりん",
+   "en": "Moon Viewing Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/09/eb50698bfde81d02629bbd02850abecc-1-1024x805.jpeg",
+   "date": "2025年10月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/09/eb50698bfde81d02629bbd02850abecc-1-300x236.jpeg"
+  },
+  {
+   "id": "z3251",
+   "name": "ウルフィ×ぴよりん 大好きセット",
+   "en": "Wolfy x Piyorin Love Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/09/eb50698bfde81d02629bbd02850abecc-1024x805.jpeg",
+   "date": "2025年10月",
+   "tags": [
+    "秋",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/09/eb50698bfde81d02629bbd02850abecc-300x236.jpeg"
+  },
+  {
+   "id": "z3213",
+   "name": "まるひろ百貨店 ぴよりんおでかけセット",
+   "en": "Maruhiro Department Store Piyorin Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/09/e9f2956df9185b5978b68d68ea26b06b-1024x805.png",
+   "date": "2025年9月",
+   "tags": [
+    "秋",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/09/e9f2956df9185b5978b68d68ea26b06b-300x236.png"
+  },
+  {
+   "id": "z3216",
+   "name": "栗ぴよりん",
+   "en": "Chestnut Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/09/cc7f56840fcbf7537282cafe7e7a9e6c-1024x805.png",
+   "date": "2025年9月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/09/cc7f56840fcbf7537282cafe7e7a9e6c-300x236.png"
+  },
+  {
+   "id": "z3110",
+   "name": "河文ぴよりん",
+   "en": "KAWABUN piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/09/e7a5900fbbe09d7fb89ca3d740ee62a2-1024x805.png",
+   "date": "2025年9月",
+   "tags": [
+    "秋",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/09/e7a5900fbbe09d7fb89ca3d740ee62a2-300x236.png"
+  },
+  {
+   "id": "z3140",
+   "name": "名古屋ポップアップ ストア in Tokyo おでかけセット",
+   "en": "Nagoya Pop-up Store in Tokyo Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/09/e9f2956df9185b5978b68d68ea26b06b-1024x805.png",
+   "date": "2025年9月",
+   "tags": [
+    "秋",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/09/e9f2956df9185b5978b68d68ea26b06b-300x236.png"
+  },
+  {
+   "id": "z3053",
+   "name": "桃太郎ぴよりん",
+   "en": "Momotaro Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e7a5900fbbe09d7fb89ca3d740ee62a2-1024x805.png",
+   "date": "2025年9月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e7a5900fbbe09d7fb89ca3d740ee62a2-300x236.png"
+  },
+  {
+   "id": "z3061",
+   "name": "白黒ブラックサンダー ぴよりん",
+   "en": "Black and White Black Thunder Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e9f2956df9185b5978b68d68ea26b06b-1024x805.png",
+   "date": "2025年9月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e9f2956df9185b5978b68d68ea26b06b-300x236.png"
+  },
+  {
+   "id": "z2219",
+   "name": "ドトールコーヒー ぴよりん",
+   "en": "DOUTOR Coffee Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/b8e89f2dc349d90302264fd0acbf0dc2.png",
+   "date": "2025年8月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/b8e89f2dc349d90302264fd0acbf0dc2-300x300.png"
+  },
+  {
+   "id": "z1422",
+   "name": "車掌さん ぴよりん",
+   "en": "Conductor’s Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/f7b4506c8ba89ae6355887d9d1869b91.png",
+   "date": "",
+   "tags": [
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/f7b4506c8ba89ae6355887d9d1869b91-300x300.png"
+  },
+  {
+   "id": "z1380",
+   "name": "トアルコトラジャ ぴよりん",
+   "en": "Toarco Toraja Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/338e4669826483fe7a29a3e25eee6e36.png",
+   "date": "",
+   "tags": [
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/338e4669826483fe7a29a3e25eee6e36-300x300.png"
+  },
+  {
+   "id": "z1364",
+   "name": "あんバター ぴよりん",
+   "en": "An Butter Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/432652e6b98b2f344abff7b0d9186848.png",
+   "date": "",
+   "tags": [
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/432652e6b98b2f344abff7b0d9186848-300x300.png"
+  },
+  {
+   "id": "z1466",
+   "name": "ありがとう ジャンシアーヌ Premiumぴよりん",
+   "en": "Thank you Gentiane Premium Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/lok4airs.png",
+   "date": "2025年8月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/lok4airs.png"
+  },
+  {
+   "id": "z1361",
+   "name": "恐竜ぴよりん 2025",
+   "en": "Dinosaur Piyorin 2025",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/32f9575e4dc8c29bbe9ff5b801ce79f9.png",
+   "date": "2025年7月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/32f9575e4dc8c29bbe9ff5b801ce79f9-300x300.png"
+  },
+  {
+   "id": "z1356",
+   "name": "黄金ぴよりん",
+   "en": "Golden Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/93b41f65c508111ffececdfd04024f99.png",
+   "date": "2025年7月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/93b41f65c508111ffececdfd04024f99-300x300.png"
+  },
+  {
+   "id": "z1337",
+   "name": "14thAnniversary ぴよりん",
+   "en": "14th Anniversary Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/618f353b1e040a5aa2b78b9b0987bba3.png",
+   "date": "2025年7月",
+   "tags": [
+    "夏",
+    "アニバーサリー"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/618f353b1e040a5aa2b78b9b0987bba3-300x300.png"
+  },
+  {
+   "id": "z1334",
+   "name": "父の日ぴよりん",
+   "en": "Father’s Day Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/82a4723e8cf9013a0379be5a0691ac8c.png",
+   "date": "2025年6月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/82a4723e8cf9013a0379be5a0691ac8c-300x300.png"
+  },
+  {
+   "id": "z1331",
+   "name": "ゆずぴよりん2025",
+   "en": "Yuzu Piyorin 2025",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/bf700463bfd0b175324a17fd1c9592c4.png",
+   "date": "2025年6月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/bf700463bfd0b175324a17fd1c9592c4-300x300.png"
+  },
+  {
+   "id": "z1327",
+   "name": "タカシマヤローズぴよりん",
+   "en": "Takashimaya Rose Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/cb35dcfbafa672a4aca97e496ea5f579.png",
+   "date": "2025年5月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/cb35dcfbafa672a4aca97e496ea5f579-300x300.png"
+  },
+  {
+   "id": "z1311",
+   "name": "島田緑茶ぴよりん",
+   "en": "Shimada Green Tea Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/4d38605030908f35acab63de6bb960de.png",
+   "date": "2025年5月",
+   "tags": [
+    "春",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/4d38605030908f35acab63de6bb960de-300x300.png"
+  },
+  {
+   "id": "z1488",
+   "name": "エスカ × plea×pleaぴよりん",
+   "en": "Esca × plea × plea Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/3807bdafd0618063fe87826477eb53be-1024x662.png",
+   "date": "2025年4月",
+   "tags": [
+    "春",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/3807bdafd0618063fe87826477eb53be-300x194.png"
+  },
+  {
+   "id": "z1308",
+   "name": "姫君ぴよりん",
+   "en": "Princess Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e04c1a851fd7998d9c45a44fdca3c6dd.png",
+   "date": "2025年4月",
+   "tags": [
+    "春",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e04c1a851fd7998d9c45a44fdca3c6dd-300x300.png"
+  },
+  {
+   "id": "z3320",
+   "name": "イオンモール土岐へおでかけ（１ぴよ・おでかけケース入り）",
+   "en": "Going to AEON Mall Toki",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/10/b7a82367a0f871ea2433e6deafe74246-1024x1024.png",
+   "date": "2025年4月",
+   "tags": [
+    "春",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/10/b7a82367a0f871ea2433e6deafe74246-300x300.png"
+  },
+  {
+   "id": "z1504",
+   "name": "ASTY岐阜 ぴよりんおでかけセット",
+   "en": "Piyorin Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/0218efccfa565d4d2ee80984bd2a639e-1024x805.png",
+   "date": "2025年3月",
+   "tags": [
+    "春",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/0218efccfa565d4d2ee80984bd2a639e-300x236.png"
+  },
+  {
+   "id": "z1288",
+   "name": "キウイぴよりん",
+   "en": "Kiwi Piyorin (Takamatsu Limited)",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/f8584251800ac3865b10dbaca496234b.png",
+   "date": "2025年3月",
+   "tags": [
+    "春",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/f8584251800ac3865b10dbaca496234b-300x300.png"
+  },
+  {
+   "id": "z1519",
+   "name": "山陽新幹線 全線開業50周年 車掌さんぴよりん おでかけセット",
+   "en": "Conductor Piyorin Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/5a497226e54ffd4d3a77fdc9f34d91c9-1024x805.png",
+   "date": "2025年3月",
+   "tags": [
+    "春",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/5a497226e54ffd4d3a77fdc9f34d91c9-300x236.png"
+  },
+  {
+   "id": "z1301",
+   "name": "神戸ポートタワー ぴよりん",
+   "en": "Kobe Port Tower Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/931710731106d374f6d8346f2ec875f7.png",
+   "date": "2025年3月",
+   "tags": [
+    "春",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/931710731106d374f6d8346f2ec875f7-300x300.png"
+  },
+  {
+   "id": "z1297",
+   "name": "阪急電車ぴよりん",
+   "en": "Hankyū piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/454806610172a501864e001440cbfc26.png",
+   "date": "2025年3月",
+   "tags": [
+    "春",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/454806610172a501864e001440cbfc26-300x300.png"
+  },
+  {
+   "id": "z1530",
+   "name": "久屋大通り公園 おでかけセット",
+   "en": "Hisaya Odori Park Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/0218efccfa565d4d2ee80984bd2a639e-1024x805.png",
+   "date": "2025年3月",
+   "tags": [
+    "春",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/0218efccfa565d4d2ee80984bd2a639e-300x236.png"
+  },
+  {
+   "id": "z1285",
+   "name": "Onちゃんぴよりん",
+   "en": "On-chan Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/802d853d5200d0a86c63f82879c60600.png",
+   "date": "2025年3月",
+   "tags": [
+    "春",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/802d853d5200d0a86c63f82879c60600-300x300.png"
+  },
+  {
+   "id": "z1321",
+   "name": "抹茶ぴよりん2025",
+   "en": "Matcha Piyorin 2025",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/279e14a04ec9c924007064e63f103a53.png",
+   "date": "2025年5月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/279e14a04ec9c924007064e63f103a53-300x300.png"
+  },
+  {
+   "id": "z1318",
+   "name": "母の日ぴよりん",
+   "en": "Mother’s Day Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/1298bfc4a2a6196dbda68c4cd6e02bd1.png",
+   "date": "2025年5月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/1298bfc4a2a6196dbda68c4cd6e02bd1-300x300.png"
+  },
+  {
+   "id": "z1305",
+   "name": "こどもの日 ぴよりん2025",
+   "en": "Children’s Day Piyorin 2025",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/ffd6b3e1bd1e6c453b96ec063dd8e746.png",
+   "date": "2025年5月",
+   "tags": [
+    "春",
+    "こどもの日"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/ffd6b3e1bd1e6c453b96ec063dd8e746-300x300.png"
+  },
+  {
+   "id": "z1291",
+   "name": "さくらぴよりん2025",
+   "en": "Sakura Piyorin 2025",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/1fcfe742337fcdc68cdff9df0a0ea105.png",
+   "date": "2025年4月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/1fcfe742337fcdc68cdff9df0a0ea105-300x300.png"
+  },
+  {
+   "id": "z1532",
+   "name": "丸広百貨店 おでかけセット",
+   "en": "Maruhiro Department Store Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/0218efccfa565d4d2ee80984bd2a639e-1024x805.png",
+   "date": "2025年2月",
+   "tags": [
+    "冬",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/0218efccfa565d4d2ee80984bd2a639e-300x236.png"
+  },
+  {
+   "id": "z1281",
+   "name": "ずんだぴよりん",
+   "en": "Zunda Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/6c0621b179595c8282757f86693d0304.png",
+   "date": "2025年2月",
+   "tags": [
+    "冬",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/6c0621b179595c8282757f86693d0304-300x300.png"
+  },
+  {
+   "id": "z1543",
+   "name": "KITTE大阪 おでかけセット",
+   "en": "KITTE Osaka Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/5a497226e54ffd4d3a77fdc9f34d91c9-1024x805.png",
+   "date": "2025年2月",
+   "tags": [
+    "冬",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/5a497226e54ffd4d3a77fdc9f34d91c9-300x236.png"
+  },
+  {
+   "id": "z1536",
+   "name": "阪神百貨店 おでかけセット",
+   "en": "Hanshin Department Store Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/0218efccfa565d4d2ee80984bd2a639e-1024x805.png",
+   "date": "2025年2月",
+   "tags": [
+    "冬",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/0218efccfa565d4d2ee80984bd2a639e-300x236.png"
+  },
+  {
+   "id": "z1538",
+   "name": "セントレア おでかけセット",
+   "en": "Centrair Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/1253961f679a6d78d3ab69a6a75af69a-1024x805.png",
+   "date": "2025年2月",
+   "tags": [
+    "冬",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/1253961f679a6d78d3ab69a6a75af69a-300x236.png"
+  },
+  {
+   "id": "z1553",
+   "name": "鶴屋百貨店 おでかけセット",
+   "en": "Tsuruya Department Store Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/0218efccfa565d4d2ee80984bd2a639e-1024x805.png",
+   "date": "2025年1月",
+   "tags": [
+    "冬",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/0218efccfa565d4d2ee80984bd2a639e-300x236.png"
+  },
+  {
+   "id": "z1277",
+   "name": "Premiumぴよりん",
+   "en": "Premium Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/09fde37c306c52d98ff98a2771df0e87.png",
+   "date": "2025年1月",
+   "tags": [
+    "冬",
+    "その他限定ぴよりん",
+    "バレンタイン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/09fde37c306c52d98ff98a2771df0e87-300x300.png"
+  },
+  {
+   "id": "z1644",
+   "name": "バレンタイン ぴよりん2025",
+   "en": "Valentine Piyorin 2025",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/4ed1384a01521520a0963a272fe3be59-1024x805.png",
+   "date": "2025年2月",
+   "tags": [
+    "冬",
+    "バレンタイン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/4ed1384a01521520a0963a272fe3be59-300x236.png"
+  },
+  {
+   "id": "z1274",
+   "name": "賀正 ぴよりん2025",
+   "en": "New Year Piyorin 2025",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/a5a7d7a160420fc761b8fdad52a8d380.png",
+   "date": "2025年1月",
+   "tags": [
+    "冬",
+    "お正月"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/a5a7d7a160420fc761b8fdad52a8d380-300x300.png"
+  },
+  {
+   "id": "z1264",
+   "name": "トナカイ ぴよりん2024",
+   "en": "Reindeer Piyorin 2024",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/153b257b1710bf38cb5dadacae72bbff.png",
+   "date": "2024年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/153b257b1710bf38cb5dadacae72bbff-300x300.png"
+  },
+  {
+   "id": "z1261",
+   "name": "サンタ ぴよりん2024",
+   "en": "Santa Piyorin 2024",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/2cc061d1c561ac011965b2019a40094d.png",
+   "date": "2024年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/2cc061d1c561ac011965b2019a40094d-300x300.png"
+  },
+  {
+   "id": "z1258",
+   "name": "レアチーズ ぴよりん",
+   "en": "Rare Cheese Mousse Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/70a46fcd1690e2593cdf2c5717a9c9bf.png",
+   "date": "2024年11月",
+   "tags": [
+    "冬",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/70a46fcd1690e2593cdf2c5717a9c9bf-300x300.png"
+  },
+  {
+   "id": "z1255",
+   "name": "「清流の国の ぎふ」 文化祭2024 おでかけセット",
+   "en": "Chestnut Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/10e7a432dc5629357fa371161cdc66c6-1024x805.png",
+   "date": "2024年10月",
+   "tags": [
+    "秋",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/10e7a432dc5629357fa371161cdc66c6-300x236.png"
+  },
+  {
+   "id": "z1244",
+   "name": "ハロウィン ぴよりん2024",
+   "en": "Halloween Piyorin 2024",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/842d2174fd205662df055ed4b1d3f392.png",
+   "date": "2024年10月",
+   "tags": [
+    "秋",
+    "ハロウィン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/842d2174fd205662df055ed4b1d3f392-300x300.png"
+  },
+  {
+   "id": "z1241",
+   "name": "イッチー風 ぴよりん",
+   "en": "Icchy-style Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/019fb809654b00fd1a0edd2ef13640b8.png",
+   "date": "2024年10月",
+   "tags": [
+    "秋",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/019fb809654b00fd1a0edd2ef13640b8-300x300.png"
+  },
+  {
+   "id": "z1574",
+   "name": "ブラックサンダーぴよりん2024",
+   "en": "Black Thunder Piyorin2024",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/06940a6bce48098f5acd29b5e189bf65.png",
+   "date": "2024年9月",
+   "tags": [
+    "秋",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/06940a6bce48098f5acd29b5e189bf65-300x300.png"
+  },
+  {
+   "id": "z1238",
+   "name": "有田焼ぴよりん",
+   "en": "Arita-yaki Porcelain Piyorin 2024",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/6af4446527ed1f8efdcbcc5ef3e7a588.png",
+   "date": "2024年9月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/6af4446527ed1f8efdcbcc5ef3e7a588-300x300.png"
+  },
+  {
+   "id": "z1591",
+   "name": "いいもの探訪 フェア おでかけセット",
+   "en": "Searching for Good Things Fair Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e4b0c1791ad46c4a718d7daa1fa15217-1024x805.png",
+   "date": "2024年7月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e4b0c1791ad46c4a718d7daa1fa15217-300x236.png"
+  },
+  {
+   "id": "z1235",
+   "name": "紅茶と洋ナシのぴよりん",
+   "en": "Tea & Pear Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/9da12d89323473076716cc2d70917a03.png",
+   "date": "2024年8月",
+   "tags": [
+    "秋",
+    "おでかけ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/9da12d89323473076716cc2d70917a03-300x300.png"
+  },
+  {
+   "id": "z1232",
+   "name": "なつやすみ ぴよりん",
+   "en": "Summer Break Piyorin 2024",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e39c8eac5e44f4e56b4545b1c5309118.png",
+   "date": "2024年8月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e39c8eac5e44f4e56b4545b1c5309118-300x300.png"
+  },
+  {
+   "id": "z1223",
+   "name": "13thAnniversary ぴよりん",
+   "en": "13th Anniversary Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/dfa6efb9474d0bb6d49d398c47a1f7e7.png",
+   "date": "2024年7月",
+   "tags": [
+    "夏",
+    "アニバーサリー"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/dfa6efb9474d0bb6d49d398c47a1f7e7-300x300.png"
+  },
+  {
+   "id": "z2197",
+   "name": "揖斐川抹茶ぴよりん",
+   "en": "Ibigawa Matcha Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/bd8fac1465be27ec0c052e81ef715baf-1024x805.png",
+   "date": "2024年5月",
+   "tags": [
+    "春",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/bd8fac1465be27ec0c052e81ef715baf-300x236.png"
+  },
+  {
+   "id": "z1214",
+   "name": "リニアぴよりん",
+   "en": "Linear-Train Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/c4702cf2003be8a1400c68f03984d6ca.png",
+   "date": "2024年5月",
+   "tags": [
+    "春",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/c4702cf2003be8a1400c68f03984d6ca-300x300.png"
+  },
+  {
+   "id": "z1211",
+   "name": "こどもの日 ぴよりん2024",
+   "en": "Children’s Day Piyorin 2024",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/f5d8bc0686d4b16683f6dc7a632c8182.png",
+   "date": "2024年5月",
+   "tags": [
+    "春",
+    "こどもの日"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/f5d8bc0686d4b16683f6dc7a632c8182-300x300.png"
+  },
+  {
+   "id": "z1204",
+   "name": "恐竜ぴよりん 2024",
+   "en": "Dinosaur Piyorin 2024",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e241ba8461cabb91c0ceafb8532260d9.png",
+   "date": "2024年3月",
+   "tags": [
+    "春",
+    "コラボ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e241ba8461cabb91c0ceafb8532260d9-300x300.png"
+  },
+  {
+   "id": "z1198",
+   "name": "ぴよりんDX",
+   "en": "Piyorin DX",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/c5a00ebc703bd6bda576ee23b686a5a5.png",
+   "date": "",
+   "tags": [
+    "通年商品"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/c5a00ebc703bd6bda576ee23b686a5a5-300x300.png"
+  },
+  {
+   "id": "z1191",
+   "name": "バレンタイン ぴよりん2024",
+   "en": "Valentine Piyorin 2024",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/939001f89deeba54b916b757ab866124.png",
+   "date": "2024年2月",
+   "tags": [
+    "冬",
+    "バレンタイン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/939001f89deeba54b916b757ab866124-300x300.png"
+  },
+  {
+   "id": "z1188",
+   "name": "サボテンぴよりん",
+   "en": "Cactus Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/7c6238c8d3c4645acf0e5f9b88a06565.png",
+   "date": "2024年2月",
+   "tags": [
+    "冬",
+    "アニバーサリー",
+    "コラボ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/7c6238c8d3c4645acf0e5f9b88a06565-300x300.png"
+  },
+  {
+   "id": "z1185",
+   "name": "賀正 ぴよりん2024",
+   "en": "New Year Piyorin 2024",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/7954bb45ce319ed4f89bfe9c02184caa.png",
+   "date": "2024年1月",
+   "tags": [
+    "冬",
+    "お正月"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/7954bb45ce319ed4f89bfe9c02184caa-300x300.png"
+  },
+  {
+   "id": "z1181",
+   "name": "愛きらり® いちごぴよりん",
+   "en": "Aikirari Strawberry Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/c301a8bc911d6dad6d1685a3421a3700.png",
+   "date": "2024年1月",
+   "tags": [
+    "冬",
+    "コラボ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/c301a8bc911d6dad6d1685a3421a3700-300x300.png"
+  },
+  {
+   "id": "z1178",
+   "name": "雪だるま ぴよりん2023",
+   "en": "Snowman Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/5927a35713b61a54ebaf37af7cc8578c.png",
+   "date": "2023年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/5927a35713b61a54ebaf37af7cc8578c-300x300.png"
+  },
+  {
+   "id": "z1175",
+   "name": "サンタ ぴよりん2023",
+   "en": "Santa Piyorin 2023",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/c1e9527df46b12245492b8bcc7c20ee7.png",
+   "date": "2023年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/c1e9527df46b12245492b8bcc7c20ee7-300x300.png"
+  },
+  {
+   "id": "z1169",
+   "name": "将棋の日 ぴよりん2023",
+   "en": "Shogi Day Piyorin 2023",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/d791262059359b21e0d48369ed011565.png",
+   "date": "2023年11月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/d791262059359b21e0d48369ed011565-300x300.png"
+  },
+  {
+   "id": "z1163",
+   "name": "JAめぐみの 20周年 お祝いセット",
+   "en": "Sweet Potato Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/4a876125bc4fca59f6d9acd9526810fe-1024x805.png",
+   "date": "2023年11月",
+   "tags": [
+    "秋",
+    "おでかけ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/4a876125bc4fca59f6d9acd9526810fe-300x236.png"
+  },
+  {
+   "id": "z1159",
+   "name": "沼津 おでかけセット",
+   "en": "Salted Caramel Piyorin (Numazu)",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/f3422c7fa5bb634815972a9f935bc47e-1024x805.png",
+   "date": "2023年10月",
+   "tags": [
+    "秋",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/f3422c7fa5bb634815972a9f935bc47e-300x236.png"
+  },
+  {
+   "id": "z1152",
+   "name": "ハロウィン ぴよりん2023",
+   "en": "Halloween Piyorin 2023",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/3efc89f7a3dc7bb7a988188662f263ce.png",
+   "date": "2023年10月",
+   "tags": [
+    "秋",
+    "ハロウィン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/3efc89f7a3dc7bb7a988188662f263ce-300x300.png"
+  },
+  {
+   "id": "z1149",
+   "name": "トルコいちじく ぴよりん",
+   "en": "Turkish Fig Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/b6a27a6c18434df94a05bce6866a093e.png",
+   "date": "2023年10月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/b6a27a6c18434df94a05bce6866a093e-300x300.png"
+  },
+  {
+   "id": "z1143",
+   "name": "ほうじ茶ぴよりん",
+   "en": "Hojicha Piyorin 2023",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/50d5ec4705cf090ed5adf8f888d021d3.png",
+   "date": "2023年9月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/50d5ec4705cf090ed5adf8f888d021d3-300x300.png"
+  },
+  {
+   "id": "z1140",
+   "name": "藤崎百貨店 おでかけセット",
+   "en": "Zunda (Mung Bean) Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/5c937d9597041bd58d0a5284073fb96a-1024x805.png",
+   "date": "2023年9月",
+   "tags": [
+    "秋",
+    "おでかけ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/5c937d9597041bd58d0a5284073fb96a-300x236.png"
+  },
+  {
+   "id": "z1137",
+   "name": "はちみつレモン ぴよりん",
+   "en": "Honey Lemon Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/2b8f4e2b20a7f0de5cc1efd459b21bd4.png",
+   "date": "2023年8月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/2b8f4e2b20a7f0de5cc1efd459b21bd4-300x300.png"
+  },
+  {
+   "id": "z1131",
+   "name": "有田焼ぴよりん",
+   "en": "Arita-yaki Porcelain Piyorin 2023",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/29ad6d00e6e71e1e081294c573385e85.png",
+   "date": "2023年8月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/29ad6d00e6e71e1e081294c573385e85-300x300.png"
+  },
+  {
+   "id": "z1128",
+   "name": "五等分の花嫁 五月ぴよりん",
+   "en": "Itsuki Piyorin Inspired by \"The Quintessential Quintuplets\"",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/8725b9b760887a24f9b2fbf91a22f771.png",
+   "date": "2023年7月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/8725b9b760887a24f9b2fbf91a22f771-300x300.png"
+  },
+  {
+   "id": "z1125",
+   "name": "五等分の花嫁 四葉ぴよりん",
+   "en": "Yotsuba Piyorin Inspired by \"The Quintessential Quintuplets\"",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e2f8f63d6a1e2ad0b644c2032cc9e68f.png",
+   "date": "2023年7月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e2f8f63d6a1e2ad0b644c2032cc9e68f-300x300.png"
+  },
+  {
+   "id": "z1122",
+   "name": "五等分の花嫁 三玖ぴよりん",
+   "en": "Miku Piyorin Inspired by \"The Quintessential Quintuplets\"",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/f7ca2d6d0ca4c5bc5d46b770817afe57.png",
+   "date": "2023年7月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/f7ca2d6d0ca4c5bc5d46b770817afe57-300x300.png"
+  },
+  {
+   "id": "z1119",
+   "name": "五等分の花嫁 二乃ぴよりん",
+   "en": "Nino Piyorin Inspired by \"The Quintessential Quintuplets\"",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/3c0ef011a748aa0afc7078b8b158f4b7.png",
+   "date": "2023年7月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/3c0ef011a748aa0afc7078b8b158f4b7-300x300.png"
+  },
+  {
+   "id": "z1116",
+   "name": "五等分の花嫁 一花ぴよりん",
+   "en": "Ichika Piyorin Inspired by \"The Quintessential Quintuplets\"",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/65cc09015fa992c528ac0e49d2b0919d.png",
+   "date": "2023年7月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/65cc09015fa992c528ac0e49d2b0919d-300x300.png"
+  },
+  {
+   "id": "z1110",
+   "name": "12周年ありがとう ぴよりん",
+   "en": "12th Anniversary Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/8ceeb5be9d2231f25b6720cc5e54f717.png",
+   "date": "2023年7月",
+   "tags": [
+    "夏",
+    "アニバーサリー"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/8ceeb5be9d2231f25b6720cc5e54f717-300x300.png"
+  },
+  {
+   "id": "z1107",
+   "name": "特急南紀ぴよりん",
+   "en": "Limited Express Nanki Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/ed77ae7a0dc5242308d76b71b5ae617a.png",
+   "date": "2023年6月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/ed77ae7a0dc5242308d76b71b5ae617a-300x300.png"
+  },
+  {
+   "id": "z1104",
+   "name": "ゆずぴよりん 2023",
+   "en": "Yuzu Piyorin 2023",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/c52d4ceffa1b16c92cda8320d29f13e5.png",
+   "date": "2023年6月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/c52d4ceffa1b16c92cda8320d29f13e5-300x300.png"
+  },
+  {
+   "id": "z1101",
+   "name": "こどもの日 ぴよりん2023",
+   "en": "Children’s Day Piyorin 2023",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/f4c8115342ecb3a150cfed854e438c9d.png",
+   "date": "2023年5月",
+   "tags": [
+    "春",
+    "こどもの日"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/f4c8115342ecb3a150cfed854e438c9d-300x300.png"
+  },
+  {
+   "id": "z1098",
+   "name": "西尾の抹茶 ぴよりん",
+   "en": "Nishio Matcha Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/1c6af6c66fb817e6a2f06dd51962d089.png",
+   "date": "2023年4月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/1c6af6c66fb817e6a2f06dd51962d089-300x300.png"
+  },
+  {
+   "id": "z1094",
+   "name": "ブラックサンダー ぴよりん2023",
+   "en": "Black Thunder Piyorin2023",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/06940a6bce48098f5acd29b5e189bf65.png",
+   "date": "2023年4月",
+   "tags": [
+    "春",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/06940a6bce48098f5acd29b5e189bf65-300x300.png"
+  },
+  {
+   "id": "z1090",
+   "name": "ミックスジュース ぴよりん",
+   "en": "Mixed Juice Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/14935d91ac0275acaed82844d264a3ea.png",
+   "date": "2023年3月",
+   "tags": [
+    "春",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/14935d91ac0275acaed82844d264a3ea-300x300.png"
+  },
+  {
+   "id": "z1087",
+   "name": "さくら ぴよりん2023",
+   "en": "Sakura Piyorin 2023",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/b4824bc0cc1ce8fecf912fd6c2f325f1.png",
+   "date": "2023年3月",
+   "tags": [
+    "春",
+    "おでかけ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/b4824bc0cc1ce8fecf912fd6c2f325f1-300x300.png"
+  },
+  {
+   "id": "z1084",
+   "name": "南濃 みかんぴよりん",
+   "en": "Nanō Mikan Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/fe58a9ddde700af63cc23792cf5345d5.png",
+   "date": "2023年2月",
+   "tags": [
+    "冬",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/fe58a9ddde700af63cc23792cf5345d5-300x300.png"
+  },
+  {
+   "id": "z1081",
+   "name": "バレンタイン ぴよりん2023",
+   "en": "Valentine Piyorin 2023",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/92aab8079c22c2e08cd599eef6c2874e.png",
+   "date": "2023年2月",
+   "tags": [
+    "冬",
+    "バレンタイン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/92aab8079c22c2e08cd599eef6c2874e-300x300.png"
+  },
+  {
+   "id": "z1078",
+   "name": "徳川ぴよ康",
+   "en": "Tokugawa Piyoyasu",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/ca4433a155095aeba04f83f3acbe8c5b.png",
+   "date": "2023年1月",
+   "tags": [
+    "冬",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/ca4433a155095aeba04f83f3acbe8c5b-300x300.png"
+  },
+  {
+   "id": "z1075",
+   "name": "賀正 ぴよりん2023",
+   "en": "New Year Piyorin 2023",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/9941e28145f1840abc4884fb87f6deec.png",
+   "date": "2023年1月",
+   "tags": [
+    "冬",
+    "お正月"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/9941e28145f1840abc4884fb87f6deec-300x300.png"
+  },
+  {
+   "id": "z1669",
+   "name": "雪だるま ぴよりん2022",
+   "en": "Snowman Piyorin 2022",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/aac1bba4e7e4d9e96669a4812e385230.png",
+   "date": "2022年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/aac1bba4e7e4d9e96669a4812e385230-300x300.png"
+  },
+  {
+   "id": "z1069",
+   "name": "サンタ ぴよりん2022",
+   "en": "Santa Piyorin 2022",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/b88f13a3091bb2e80bd157a00d191b9a.png",
+   "date": "2022年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/b88f13a3091bb2e80bd157a00d191b9a-300x300.png"
+  },
+  {
+   "id": "z1671",
+   "name": "将棋の日 ぴよりん2022",
+   "en": "Shogi Day Piyorin 2022",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/ccb26bc28554d743572ee15fc92e901a-1024x805.png",
+   "date": "2022年11月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/ccb26bc28554d743572ee15fc92e901a-300x236.png"
+  },
+  {
+   "id": "z1062",
+   "name": "ハロウィン ぴよりん2022",
+   "en": "Halloween Piyorin 2022",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/fa719c56a8338e82b098649673510d9e.png",
+   "date": "2022年10月",
+   "tags": [
+    "秋",
+    "ハロウィン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/fa719c56a8338e82b098649673510d9e-300x300.png"
+  },
+  {
+   "id": "z1059",
+   "name": "有田焼ぴよりん",
+   "en": "Arita-yaki Porcelain Piyorin 2022",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/a305d2be3f5b8ab8028ddffa5b25e5b3.png",
+   "date": "2022年9月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/a305d2be3f5b8ab8028ddffa5b25e5b3-300x300.png"
+  },
+  {
+   "id": "z1053",
+   "name": "グランパス ぴよりん",
+   "en": "Grampus-themed Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/35c4f42cf57631a6553f791a1ba97880.png",
+   "date": "2022年9月",
+   "tags": [
+    "秋",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/35c4f42cf57631a6553f791a1ba97880-300x300.png"
+  },
+  {
+   "id": "z1056",
+   "name": "ほうじ茶ぴよりん",
+   "en": "Hojicha Piyorin 2022",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/658b08b6cc656ac086a2eac169fca03b-1024x805.png",
+   "date": "2022年9月",
+   "tags": [
+    "秋",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/658b08b6cc656ac086a2eac169fca03b-300x236.png"
+  },
+  {
+   "id": "z1050",
+   "name": "なつやすみ ぴよりん2022",
+   "en": "Summer Break Piyorin 2022",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/ea448e84d6cbf32008fd90e41fbb9832.png",
+   "date": "2022年8月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/ea448e84d6cbf32008fd90e41fbb9832-300x300.png"
+  },
+  {
+   "id": "z1046",
+   "name": "ドトールコーヒー ぴよりん",
+   "en": "Doutor Coffee Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/b8e89f2dc349d90302264fd0acbf0dc2.png",
+   "date": "2022年7月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/b8e89f2dc349d90302264fd0acbf0dc2-300x300.png"
+  },
+  {
+   "id": "z1686",
+   "name": "ひだっこ ぴよりんセット",
+   "en": "Takayama Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/964fe79c67c93f7ec113ab62011be3e0-1024x805.png",
+   "date": "2022年7月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/964fe79c67c93f7ec113ab62011be3e0-300x236.png"
+  },
+  {
+   "id": "z1043",
+   "name": "11種の やさいぴよりん",
+   "en": "11-Vegetable Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e527060c316d46adf1e71e6c95d87b8b.png",
+   "date": "2022年7月",
+   "tags": [
+    "夏",
+    "アニバーサリー",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e527060c316d46adf1e71e6c95d87b8b-300x300.png"
+  },
+  {
+   "id": "z1040",
+   "name": "梅ぴよりん",
+   "en": "Ume Piyorin 2022",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/b46b6b3fd4819daf2635a62ec03186c2.png",
+   "date": "2022年6月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/b46b6b3fd4819daf2635a62ec03186c2-300x300.png"
+  },
+  {
+   "id": "z1037",
+   "name": "特急ひだぴよりん",
+   "en": "Limited Express Hida Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/c461f0279f2ad69db1238c2972b28de3.png",
+   "date": "2022年6月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/c461f0279f2ad69db1238c2972b28de3-300x300.png"
+  },
+  {
+   "id": "z1034",
+   "name": "ウルフィぴよりん",
+   "en": "Wolfy Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/c37390de399a17899e14aecfd2da525d.png",
+   "date": "2022年6月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/c37390de399a17899e14aecfd2da525d-300x300.png"
+  },
+  {
+   "id": "z1031",
+   "name": "ハートちゃん ぴよりん",
+   "en": "Heart-chan Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/1c8202fdce34afc23f0bedc404a7fdae.png",
+   "date": "2022年5月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/1c8202fdce34afc23f0bedc404a7fdae-300x300.png"
+  },
+  {
+   "id": "z1028",
+   "name": "静岡うちっち ぴよりんとのセット",
+   "en": "Hotel Associa Shizuoka “Uchicchi” Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/dc4805b7b64119cfc5c668df237d60cf.png",
+   "date": "2022年5月",
+   "tags": [
+    "春",
+    "コラボ",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/dc4805b7b64119cfc5c668df237d60cf-300x300.png"
+  },
+  {
+   "id": "z1025",
+   "name": "ごまぴよりん",
+   "en": "Sesame Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/53800cd93f87de3869ad08b22756d999.png",
+   "date": "2022年4月",
+   "tags": [
+    "春",
+    "コラボ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/53800cd93f87de3869ad08b22756d999-300x300.png"
+  },
+  {
+   "id": "z1022",
+   "name": "こどもの日 ぴよりん2022",
+   "en": "Children’s Day Piyorin 2022",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/5739d209da7ae6fc099d968e89af9e13.png",
+   "date": "2022年5月",
+   "tags": [
+    "春",
+    "こどもの日"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/5739d209da7ae6fc099d968e89af9e13-300x300.png"
+  },
+  {
+   "id": "z1019",
+   "name": "のぞみぴよりん",
+   "en": "Nozomi Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/14c4a5c37c7fea6f132b758a0b15709f.png",
+   "date": "2022年3月",
+   "tags": [
+    "春",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/14c4a5c37c7fea6f132b758a0b15709f-300x300.png"
+  },
+  {
+   "id": "z1016",
+   "name": "さくら ぴよりん2022",
+   "en": "Sakura Piyorin 2022",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/0bee07fb83ef993a7bb5e72713c7f90c.png",
+   "date": "2022年3月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/0bee07fb83ef993a7bb5e72713c7f90c-300x300.png"
+  },
+  {
+   "id": "z1013",
+   "name": "抹茶の日ぴよりん",
+   "en": "Matcha Day Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/11f50d0318001d3f2a06b2e0c19449ab.png",
+   "date": "2022年2月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/11f50d0318001d3f2a06b2e0c19449ab-300x300.png"
+  },
+  {
+   "id": "z1010",
+   "name": "バレンタイン ぴよりん2022",
+   "en": "Valentine Piyorin 2022",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/d685e57b6b8f5c36792b48745bd6ad04.png",
+   "date": "2022年2月",
+   "tags": [
+    "冬",
+    "バレンタイン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/d685e57b6b8f5c36792b48745bd6ad04-300x300.png"
+  },
+  {
+   "id": "z1006",
+   "name": "200万羽 ありがとうぴよりん",
+   "en": "2-Million Piyorin Thank You Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/0edffb4af5c0818da8b88f4d8ee28b92.png",
+   "date": "2022年2月",
+   "tags": [
+    "冬",
+    "アニバーサリー"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/0edffb4af5c0818da8b88f4d8ee28b92-300x300.png"
+  },
+  {
+   "id": "z1003",
+   "name": "熱海 だいだいぴよりん",
+   "en": "Atami Bitter Orange Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/779a8e1706c32ebc20a02ecc28683f34.png",
+   "date": "2022年1月",
+   "tags": [
+    "冬",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/779a8e1706c32ebc20a02ecc28683f34-300x300.png"
+  },
+  {
+   "id": "z1000",
+   "name": "賀正 ぴよりん2022",
+   "en": "New Year Piyorin 2022",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/333a573413e98b4f4fc1698ce90515aa.png",
+   "date": "2022年1月",
+   "tags": [
+    "冬",
+    "お正月"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/333a573413e98b4f4fc1698ce90515aa-300x300.png"
+  },
+  {
+   "id": "z997",
+   "name": "雪だるま ぴよりん2021",
+   "en": "Snowman Piyorin 2021",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/fca6ca0a8697536a8ab5df0b8481f116.png",
+   "date": "2021年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/fca6ca0a8697536a8ab5df0b8481f116-300x300.png"
+  },
+  {
+   "id": "z994",
+   "name": "サンタ ぴよりん2021",
+   "en": "Santa Piyorin 2021",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/1984dda760b97575b174c33639556d2d.png",
+   "date": "2021年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/1984dda760b97575b174c33639556d2d-300x300.png"
+  },
+  {
+   "id": "z988",
+   "name": "将棋の日 ぴよりん2021",
+   "en": "Shogi Day Piyorin 2021",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/9444c04ab28e6c375e2d3f273e54a879.png",
+   "date": "2021年11月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/9444c04ab28e6c375e2d3f273e54a879-300x300.png"
+  },
+  {
+   "id": "z974",
+   "name": "オウムぴよりん",
+   "en": "Parrot Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/4ce6be185368ad85980f775dde5035e4.png",
+   "date": "2021年9月",
+   "tags": [
+    "秋",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/4ce6be185368ad85980f775dde5035e4-300x300.png"
+  },
+  {
+   "id": "z968",
+   "name": "ハロウィン ぴよりん2021",
+   "en": "Halloween Piyorin 2021",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/4d3366b67aa45a749d8277f710b604fb.png",
+   "date": "2021年10月",
+   "tags": [
+    "秋",
+    "ハロウィン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/4d3366b67aa45a749d8277f710b604fb-300x300.png"
+  },
+  {
+   "id": "z965",
+   "name": "タワーズガーデン おでかけセット",
+   "en": "Ghost Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/d1d0e8a85b4e605399c8e0f9132948d4-1024x805.png",
+   "date": "2021年10月",
+   "tags": [
+    "秋",
+    "おでかけ",
+    "ハロウィン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/d1d0e8a85b4e605399c8e0f9132948d4-300x236.png"
+  },
+  {
+   "id": "z3315",
+   "name": "静岡おでかけセット",
+   "en": "Shizuoka Outing Set",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/10/39ee2841eee2739f094216a104c8c9ba-1024x1024.jpeg",
+   "date": "2021年10月",
+   "tags": [
+    "秋",
+    "おでかけ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/10/39ee2841eee2739f094216a104c8c9ba-300x300.jpeg"
+  },
+  {
+   "id": "z962",
+   "name": "人気投票第3位 あまおうぴよりん",
+   "en": "Amaou Strawberry Piyorin (Revival)",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/6e6a5878c533c7f1cd7a7e40de65b442.png",
+   "date": "2021年8月",
+   "tags": [
+    "夏",
+    "アニバーサリー"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/6e6a5878c533c7f1cd7a7e40de65b442-300x300.png"
+  },
+  {
+   "id": "z1735",
+   "name": "人気投票第2位 車掌さんぴよりん",
+   "en": "Conductor Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/3b3b8efdcabdb821da94944685982563-1024x805.png",
+   "date": "2021年8月",
+   "tags": [
+    "夏",
+    "アニバーサリー"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/3b3b8efdcabdb821da94944685982563-300x236.png"
+  },
+  {
+   "id": "z1740",
+   "name": "人気投票第1位 みつばちぴよりん",
+   "en": "Honeybee Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/23980fb711cc13954001f43287418f6d-1024x805.png",
+   "date": "2021年8月",
+   "tags": [
+    "夏",
+    "アニバーサリー"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/23980fb711cc13954001f43287418f6d-300x236.png"
+  },
+  {
+   "id": "z945",
+   "name": "ぴよりんアイス",
+   "en": "Piyorin Ice Cream",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/2231a61a7476473597e694fb4c72b871.png",
+   "date": "2021年8月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/2231a61a7476473597e694fb4c72b871-300x300.png"
+  },
+  {
+   "id": "z942",
+   "name": "ホテルシェフ ぴよりん",
+   "en": "Hotel Chef Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/f3afd5921291c879fcdb629fb18e9c74.png",
+   "date": "2021年8月",
+   "tags": [
+    "夏",
+    "コラボ",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/f3afd5921291c879fcdb629fb18e9c74-300x300.png"
+  },
+  {
+   "id": "z1754",
+   "name": "駅長さんぴよりん21",
+   "en": "Stationmaster Piyorin21",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/21cd0edd74978c969d3e1d6ab402962b-1024x805.png",
+   "date": "2021年8月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/21cd0edd74978c969d3e1d6ab402962b-300x236.png"
+  },
+  {
+   "id": "z939",
+   "name": "梅ぴよりん",
+   "en": "Ume Piyorin 2021",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/30181cd49e9666b6dc2ebcbd90b8f6e0.png",
+   "date": "2021年6月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/30181cd49e9666b6dc2ebcbd90b8f6e0-300x300.png"
+  },
+  {
+   "id": "z936",
+   "name": "抹茶ぴよりん",
+   "en": "Matcha Piyorin 2021",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/ab9435ba6f7c99bcd3e1f6f88e3a5c53.png",
+   "date": "2021年5月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/ab9435ba6f7c99bcd3e1f6f88e3a5c53-300x300.png"
+  },
+  {
+   "id": "z927",
+   "name": "ちょっと大きい こどもの日ぴよりん",
+   "en": "Extra‑Large Children’s Day Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/31d568bcd53fc534a2d3d0f33161997f.png",
+   "date": "2021年5月",
+   "tags": [
+    "春",
+    "こどもの日"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/31d568bcd53fc534a2d3d0f33161997f-300x300.png"
+  },
+  {
+   "id": "z924",
+   "name": "さくら ぴよりん2021",
+   "en": "Sakura Piyorin 2021",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/cf2b49551e57cab05f756bc7f2f97172.png",
+   "date": "2021年4月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/cf2b49551e57cab05f756bc7f2f97172-300x300.png"
+  },
+  {
+   "id": "z921",
+   "name": "こどもの日 ぴよりん2021",
+   "en": "Children’s Day Piyorin 2021",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/112a5de0efb346644c68250404e8fa93.png",
+   "date": "2021年4月",
+   "tags": [
+    "春",
+    "こどもの日"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/112a5de0efb346644c68250404e8fa93-300x300.png"
+  },
+  {
+   "id": "z918",
+   "name": "みつばちぴよりん",
+   "en": "Honey Bee Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/9031d9a4080f7a1600e57df7539c6c6c.png",
+   "date": "2021年3月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/9031d9a4080f7a1600e57df7539c6c6c-300x300.png"
+  },
+  {
+   "id": "z912",
+   "name": "お内裏様ぴよりん",
+   "en": "ODAIRISAMA Piyorin 2021",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/385cbb9f88689fb391c7e7c84fc10c76.png",
+   "date": "2021年2月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/385cbb9f88689fb391c7e7c84fc10c76-300x300.png"
+  },
+  {
+   "id": "z909",
+   "name": "お雛様ぴよりん",
+   "en": "OHINASAMA Piyorin 2021",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/35e835d7fc65ba2ab9f5bb857f97c358.png",
+   "date": "2021年2月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/35e835d7fc65ba2ab9f5bb857f97c358-300x300.png"
+  },
+  {
+   "id": "z899",
+   "name": "バレンタイン ぴよりん2021",
+   "en": "Valentine Piyorin 2021",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/737b7434703137d5549eeece17c67d5e.png",
+   "date": "2021年2月",
+   "tags": [
+    "冬",
+    "バレンタイン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/737b7434703137d5549eeece17c67d5e-300x300.png"
+  },
+  {
+   "id": "z896",
+   "name": "賀正 ぴよりん2021",
+   "en": "New Year Piyorin 2021",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/be15e7e20445ae183c4debea2142110f.png",
+   "date": "2021年1月",
+   "tags": [
+    "冬",
+    "お正月"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/be15e7e20445ae183c4debea2142110f-300x300.png"
+  },
+  {
+   "id": "z891",
+   "name": "クリスマス ぴよりん",
+   "en": "Christmas Piyorin 2020",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/7fb16e15fec197cfdb987b7d605fc9fa.png",
+   "date": "2020年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/7fb16e15fec197cfdb987b7d605fc9fa-300x300.png"
+  },
+  {
+   "id": "z885",
+   "name": "ハロウィン ぴよりん2020",
+   "en": "Halloween Piyorin 2020",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/914f3cd9533925d71218789d8e780a31.png",
+   "date": "2020年10月",
+   "tags": [
+    "秋",
+    "ハロウィン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/914f3cd9533925d71218789d8e780a31-300x300.png"
+  },
+  {
+   "id": "z882",
+   "name": "車掌さんぴよりん",
+   "en": "Conductor Piyorin 2020",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/ffb3d187e2442f5a2733a919e5bb939a.png",
+   "date": "2020年10月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/ffb3d187e2442f5a2733a919e5bb939a-300x300.png"
+  },
+  {
+   "id": "z879",
+   "name": "駅長さんぴよりん",
+   "en": "Stationmaster Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e912377a3fa49ce6b92719e8f90fabfe.png",
+   "date": "2020年8月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e912377a3fa49ce6b92719e8f90fabfe-300x300.png"
+  },
+  {
+   "id": "z876",
+   "name": "なつやすみ ぴよりん",
+   "en": "Summer Break Piyorin 2020",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/87d3b63cd84dbf994af92ab10c6046f4.png",
+   "date": "2020年8月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/87d3b63cd84dbf994af92ab10c6046f4-300x300.png"
+  },
+  {
+   "id": "z873",
+   "name": "彦星ぴよりん",
+   "en": "HIKOBOSHI Piyorin 2020",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/6142af868268d76e276df76671f77c32.png",
+   "date": "2020年7月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/6142af868268d76e276df76671f77c32-300x300.png"
+  },
+  {
+   "id": "z870",
+   "name": "織姫ぴよりん",
+   "en": "ORIHIME Piyorin 2020",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e2b44e2cdb2d0cb913ae009209bb729c.png",
+   "date": "2020年7月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e2b44e2cdb2d0cb913ae009209bb729c-300x300.png"
+  },
+  {
+   "id": "z861",
+   "name": "9周年ぴよりん",
+   "en": "9th Anniversary Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/fa5bed2dcb62805867ec69b4e20e2295.png",
+   "date": "2020年7月",
+   "tags": [
+    "夏",
+    "アニバーサリー"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/fa5bed2dcb62805867ec69b4e20e2295-300x300.png"
+  },
+  {
+   "id": "z858",
+   "name": "ホワイトデー ぴよりん",
+   "en": "White Day Piyorin 2020",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/61ed7f4e6445d0e14deb1d7836970324.png",
+   "date": "2020年3月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/61ed7f4e6445d0e14deb1d7836970324-300x300.png"
+  },
+  {
+   "id": "z855",
+   "name": "さくら ぴよりん2020",
+   "en": "Sakura Piyorin 2020",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/6f471a2ea9e6e7d5af94e71319b60d42.png",
+   "date": "2020年3月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/6f471a2ea9e6e7d5af94e71319b60d42-300x300.png"
+  },
+  {
+   "id": "z851",
+   "name": "カフェジャンシアーヌ 10周年 おめでとうぴよりん",
+   "en": "Cafe 10th Anniversary Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/c14be5910959dc0be3cc8f03086ccb44.png",
+   "date": "2020年3月",
+   "tags": [
+    "春",
+    "アニバーサリー"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/c14be5910959dc0be3cc8f03086ccb44-300x300.png"
+  },
+  {
+   "id": "z845",
+   "name": "お内裏様ぴよりん",
+   "en": "ODAIRISAMA Piyorin 2020",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/951e6ce61b72fe22e1dd56df1434ec99.png",
+   "date": "2020年2月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/951e6ce61b72fe22e1dd56df1434ec99-300x300.png"
+  },
+  {
+   "id": "z842",
+   "name": "お雛様ぴよりん",
+   "en": "OHINASAMA Piyorin 2020",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/8c9cec58dfe475778a8b43c9f6df3eba.png",
+   "date": "2020年2月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/8c9cec58dfe475778a8b43c9f6df3eba-300x300.png"
+  },
+  {
+   "id": "z1791",
+   "name": "バレンタイン ぴよりん2020",
+   "en": "Valentine Piyorin 2020",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/8b6ebef6ef24f74c61f9ca72ab3ae378-1024x805.png",
+   "date": "2020年1月",
+   "tags": [
+    "冬",
+    "バレンタイン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/8b6ebef6ef24f74c61f9ca72ab3ae378-300x236.png"
+  },
+  {
+   "id": "z839",
+   "name": "あまおうぴよりん",
+   "en": "Amaou Strawberry Piyorin 2020",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/3687ae3a12daf840f37c6ee718723d9c.png",
+   "date": "2020年1月",
+   "tags": [
+    "冬",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/3687ae3a12daf840f37c6ee718723d9c-300x300.png"
+  },
+  {
+   "id": "z784",
+   "name": "クリスマス ぴよりん2019",
+   "en": "Christmas Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e9c4ba6e3c7a2791dbedd6b54c738ca7.png",
+   "date": "2019年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e9c4ba6e3c7a2791dbedd6b54c738ca7-300x300.png"
+  },
+  {
+   "id": "z781",
+   "name": "紅茶ぴよりん",
+   "en": "Tea‑flavored Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/fd49361bbb8212b2ad9981ef9a5d968f.png",
+   "date": "2019年11月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/fd49361bbb8212b2ad9981ef9a5d968f-300x300.png"
+  },
+  {
+   "id": "z778",
+   "name": "ハロウィン ぴよりん2019",
+   "en": "Halloween Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/a7d408529756753f2e473285df6969a7.png",
+   "date": "2019年10月",
+   "tags": [
+    "秋",
+    "ハロウィン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/a7d408529756753f2e473285df6969a7-300x300.png"
+  },
+  {
+   "id": "z775",
+   "name": "りんごぴよりん",
+   "en": "Apple Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/8b886344fb8c25b3ea89d921bbf5f309.png",
+   "date": "2019年8月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/8b886344fb8c25b3ea89d921bbf5f309-300x300.png"
+  },
+  {
+   "id": "z772",
+   "name": "卵型カプセルぴよりん",
+   "en": "8th Anniversary Capsule-Egg Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/189d54eb23c6048d99110d27edbe5290.png",
+   "date": "2019年7月",
+   "tags": [
+    "夏",
+    "アニバーサリー"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/189d54eb23c6048d99110d27edbe5290-300x300.png"
+  },
+  {
+   "id": "z769",
+   "name": "彦星ぴよりん",
+   "en": "HIKOBOSHI Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/022e597f908b15acb58a2fe221b36af5.png",
+   "date": "2019年7月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/022e597f908b15acb58a2fe221b36af5-300x300.png"
+  },
+  {
+   "id": "z766",
+   "name": "織姫ぴよりん",
+   "en": "ORIHIME Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/4b979264ce0598a033f303b0989f2af2.png",
+   "date": "2019年7月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/4b979264ce0598a033f303b0989f2af2-300x300.png"
+  },
+  {
+   "id": "z759",
+   "name": "なつやすみ ぴよりん",
+   "en": "Summer Break Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/7787ee9e7884aa3a220fb5c73c2f3808.png",
+   "date": "2019年7月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/7787ee9e7884aa3a220fb5c73c2f3808-300x300.png"
+  },
+  {
+   "id": "z756",
+   "name": "抹茶ぴよりん",
+   "en": "Matcha Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/5bde727c78cf80807df9f9a85206e2bc.png",
+   "date": "2019年4月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/5bde727c78cf80807df9f9a85206e2bc-300x300.png"
+  },
+  {
+   "id": "z749",
+   "name": "さくら ぴよりん2019",
+   "en": "Sakura Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/9f3b9623fc45e2b1b85d678a388a76a6.png",
+   "date": "2019年4月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/9f3b9623fc45e2b1b85d678a388a76a6-300x300.png"
+  },
+  {
+   "id": "z746",
+   "name": "ホワイトデーぴよりん",
+   "en": "White Day Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/230a23567899d21a70e6b979714efb00.png",
+   "date": "2019年3月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/230a23567899d21a70e6b979714efb00-300x300.png"
+  },
+  {
+   "id": "z740",
+   "name": "バレンタイン ぴよりん2019",
+   "en": "Valentine Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/674cfadb439faede9ad31ab3d01d42df.png",
+   "date": "2019年2月",
+   "tags": [
+    "冬",
+    "バレンタイン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/674cfadb439faede9ad31ab3d01d42df-300x300.png"
+  },
+  {
+   "id": "z737",
+   "name": "お内裏様ぴよりん",
+   "en": "ODAIRISAMA Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/743ee27e745ccee8b6d31505e77db87a.png",
+   "date": "2019年2月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/743ee27e745ccee8b6d31505e77db87a-300x300.png"
+  },
+  {
+   "id": "z734",
+   "name": "お雛様ぴよりん",
+   "en": "OHINASAMA Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/afc2cc49b8fe7fcb755d562bbfadd947.png",
+   "date": "2019年2月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/afc2cc49b8fe7fcb755d562bbfadd947-300x300.png"
+  },
+  {
+   "id": "z731",
+   "name": "福岡県産 あまおうぴよりん",
+   "en": "Fukuoka Amaou Strawberry Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/d06eb1fce1cff93f948e35cd3e866544.png",
+   "date": "2019年1月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/d06eb1fce1cff93f948e35cd3e866544-300x300.png"
+  },
+  {
+   "id": "z728",
+   "name": "賀正 ぴよりん2019",
+   "en": "New Year Piyorin 2019",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/63004a77e28f671888af98e0be6c49ee.png",
+   "date": "2019年1月",
+   "tags": [
+    "冬",
+    "お正月"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/63004a77e28f671888af98e0be6c49ee-300x300.png"
+  },
+  {
+   "id": "z725",
+   "name": "クリスマス ぴよりん",
+   "en": "Christmas Piyorin 2018",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/ba35f9c55174532542e82db764bc8e9c.png",
+   "date": "2018年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/ba35f9c55174532542e82db764bc8e9c-300x300.png"
+  },
+  {
+   "id": "z722",
+   "name": "紅茶ぴよりん",
+   "en": "Tea‑flavored Piyorin 2018",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/0dd36a3d6099ed355f9b292df97544d3.png",
+   "date": "2018年11月",
+   "tags": [
+    "冬",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/0dd36a3d6099ed355f9b292df97544d3-300x300.png"
+  },
+  {
+   "id": "z719",
+   "name": "ハロウィン ぴよりん2018",
+   "en": "Halloween Piyorin 2018",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/f3a059b4462fe487be998acf12c4d928.png",
+   "date": "2018年10月",
+   "tags": [
+    "秋",
+    "ハロウィン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/f3a059b4462fe487be998acf12c4d928-300x300.png"
+  },
+  {
+   "id": "z712",
+   "name": "卵型カプセル ぴよりん",
+   "en": "Capsule‑Egg Piyorin 2018",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/3442dff805161049841bd364007d9677.png",
+   "date": "2018年6月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/3442dff805161049841bd364007d9677-300x300.png"
+  },
+  {
+   "id": "z709",
+   "name": "彦星ぴよりん",
+   "en": "HIKOBOSHI Piyorin 2018",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/0c8f4822366b5596777c1760cf37a76e.png",
+   "date": "2018年6月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/0c8f4822366b5596777c1760cf37a76e-300x300.png"
+  },
+  {
+   "id": "z706",
+   "name": "織姫ぴよりん",
+   "en": "ORIHIME Piyorin 2018",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/1eee2fbff753478256503206afbdb28a.png",
+   "date": "2018年6月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/1eee2fbff753478256503206afbdb28a-300x300.png"
+  },
+  {
+   "id": "z698",
+   "name": "トアルコトラジャ ぴよりん",
+   "en": "Toarco Toraja Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/404adf28a8bc02b499046c704d5e3f95.png",
+   "date": "2018年6月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/404adf28a8bc02b499046c704d5e3f95-300x300.png"
+  },
+  {
+   "id": "z694",
+   "name": "お雛様ぴよりん",
+   "en": "OHINASAMA Piyorin 2018",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/04d6caa8be0bc1ab062580a1f3f0d2eb.png",
+   "date": "2018年2月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/04d6caa8be0bc1ab062580a1f3f0d2eb-300x300.png"
+  },
+  {
+   "id": "z691",
+   "name": "サンタ ぴよりん2017",
+   "en": "Santa Piyorin 2017",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/dd8b469a57af0f4b963eb7606f161751.png",
+   "date": "2017年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/dd8b469a57af0f4b963eb7606f161751-300x300.png"
+  },
+  {
+   "id": "z688",
+   "name": "七夕ぴよりんBOX",
+   "en": "Tanabata Piyorin Box 2017",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e23c576b6662c3eb5068947dff34a5b9.png",
+   "date": "2017年7月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e23c576b6662c3eb5068947dff34a5b9-300x300.png"
+  },
+  {
+   "id": "z685",
+   "name": "ひなまつりぴよりん",
+   "en": "Hinamatsuri Piyorin 2017",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/81d769b162e5bffe06278f56c3f90999.png",
+   "date": "2017年2月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/81d769b162e5bffe06278f56c3f90999-300x300.png"
+  },
+  {
+   "id": "z682",
+   "name": "だるまぴよりん",
+   "en": "Daruma Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/522d8785235aba1ec4fdb5576922cb99.png",
+   "date": "2017年2月",
+   "tags": [
+    "冬",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/522d8785235aba1ec4fdb5576922cb99-300x300.png"
+  },
+  {
+   "id": "z673",
+   "name": "イースターぴよりん",
+   "en": "Easter Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/627d899bfcbd7f391a275416b3f00a69.png",
+   "date": "2016年3月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/627d899bfcbd7f391a275416b3f00a69-300x300.png"
+  },
+  {
+   "id": "z670",
+   "name": "クリスマス ぴよりん2015",
+   "en": "Christmas Piyorin 2015",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/1a59e691555323006835aefa3a7d3421.png",
+   "date": "2015年11月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/1a59e691555323006835aefa3a7d3421-300x300.png"
+  },
+  {
+   "id": "z667",
+   "name": "野菜生活 ぴよりん（黄）",
+   "en": "YASAI SEIKATSU Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/540f9113aa0660dd5c29aade722062b9.png",
+   "date": "2015年8月",
+   "tags": [
+    "夏",
+    "コラボ"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/540f9113aa0660dd5c29aade722062b9-300x300.png"
+  },
+  {
+   "id": "z664",
+   "name": "ハロウィン ぴよりん2015",
+   "en": "Halloween Piyorin 2015",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/10d6ec54057b36f70100becbe7ace40d.png",
+   "date": "2015年10月",
+   "tags": [
+    "秋",
+    "ハロウィン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/10d6ec54057b36f70100becbe7ace40d-300x300.png"
+  },
+  {
+   "id": "z661",
+   "name": "さくら ぴよりん2015",
+   "en": "Sakura Piyorin 2015",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/2ffcebbd848a2ed619c0613c3506672d.png",
+   "date": "2015年3月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/2ffcebbd848a2ed619c0613c3506672d-300x300.png"
+  },
+  {
+   "id": "z655",
+   "name": "クリスマス ぴよりん",
+   "en": "Christmas Piyorin 2014",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/92e17d5759b7dd17eac8fd746b720ee2.png",
+   "date": "2014年11月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/92e17d5759b7dd17eac8fd746b720ee2-300x300.png"
+  },
+  {
+   "id": "z652",
+   "name": "紅茶ぴよりん",
+   "en": "Tea-Flavored Piyorin 2014",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/ab65dea7d48ac4803d6efaba3197576b.png",
+   "date": "2014年11月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/ab65dea7d48ac4803d6efaba3197576b-300x300.png"
+  },
+  {
+   "id": "z649",
+   "name": "ハロウィン ぴよりん2014",
+   "en": "Halloween Piyorin 2014",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e5032806295f1a663b47dd40ee1fcf8c.png",
+   "date": "2014年10月",
+   "tags": [
+    "秋",
+    "ハロウィン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e5032806295f1a663b47dd40ee1fcf8c-300x300.png"
+  },
+  {
+   "id": "z646",
+   "name": "ひなまつり ぴよりん",
+   "en": "Hinamatsuri Piyorin 2014",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/e58ccb6deffbbd4e47cc29bd0c42b67a.png",
+   "date": "2014年2月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/e58ccb6deffbbd4e47cc29bd0c42b67a-300x300.png"
+  },
+  {
+   "id": "z643",
+   "name": "ホワイトデーぴよりん",
+   "en": "White Day Piyorin 2014",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/520b081c557b6b700e6f2cb3abac652b.png",
+   "date": "2014年2月",
+   "tags": [
+    "冬",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/520b081c557b6b700e6f2cb3abac652b-300x300.png"
+  },
+  {
+   "id": "z640",
+   "name": "クリスマス ぴよりん",
+   "en": "Christmas Piyorin 2013",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/54fc3537e37a3016791e5d35be20ff5f.png",
+   "date": "2013年11月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/54fc3537e37a3016791e5d35be20ff5f-300x300.png"
+  },
+  {
+   "id": "z637",
+   "name": "七夕ぴよりん",
+   "en": "Tanabata Piyorin 2013",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/3feea7817bf242c3fa690628c2bb5136.png",
+   "date": "2013年7月",
+   "tags": [
+    "夏",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/3feea7817bf242c3fa690628c2bb5136-300x300.png"
+  },
+  {
+   "id": "z634",
+   "name": "さくら ぴよりん2013",
+   "en": "Sakura Piyorin 2013",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/409b6e2e157795c4dd2af45d878d3819.png",
+   "date": "2013年3月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/409b6e2e157795c4dd2af45d878d3819-300x300.png"
+  },
+  {
+   "id": "z631",
+   "name": "バレンタイン ぴよりん2013",
+   "en": "Valentine Piyorin 2013",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/4beef0098bd6e505f38de7a052b4c337.png",
+   "date": "2013年2月",
+   "tags": [
+    "冬",
+    "バレンタイン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/4beef0098bd6e505f38de7a052b4c337-300x300.png"
+  },
+  {
+   "id": "z625",
+   "name": "クリスマス ぴよりん",
+   "en": "Christmas Piyorin 2012",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/946d2d05eac53cef1920c65679751dca.png",
+   "date": "2012年11月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/946d2d05eac53cef1920c65679751dca-300x300.png"
+  },
+  {
+   "id": "z622",
+   "name": "あまおうぴよりん",
+   "en": "Amaou Strawberry Piyorin 2012",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/324c0d8a22f49ad6744137f85c89136e.png",
+   "date": "2012年12月",
+   "tags": [
+    "冬",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/324c0d8a22f49ad6744137f85c89136e-300x300.png"
+  },
+  {
+   "id": "z619",
+   "name": "秋ぴよりん",
+   "en": "Autumn Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/0815bb32dc46872677ebef4b96e50b4e.png",
+   "date": "2012年9月",
+   "tags": [
+    "秋",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/0815bb32dc46872677ebef4b96e50b4e-300x300.png"
+  },
+  {
+   "id": "z613",
+   "name": "抹茶ぴよりん",
+   "en": "Matcha Piyorin 2012",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/bd5358823df503ee4b663736b1439411.png",
+   "date": "2012年4月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/bd5358823df503ee4b663736b1439411-300x300.png"
+  },
+  {
+   "id": "z610",
+   "name": "ぴよりん 雛祭りセット",
+   "en": "Hinamatsuri Piyorin 2012",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/61a7875a634038fc27c785ebfd6030ac.png",
+   "date": "2012年2月",
+   "tags": [
+    "春",
+    "その他限定ぴよりん"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/61a7875a634038fc27c785ebfd6030ac-300x300.png"
+  },
+  {
+   "id": "z607",
+   "name": "バレンタイン ぴよりん2012",
+   "en": "Valentine Piyorin 2012",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/b1d4fd4595d66e0784b9229f4f11114d.png",
+   "date": "2012年1月",
+   "tags": [
+    "冬",
+    "バレンタイン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/b1d4fd4595d66e0784b9229f4f11114d-300x300.png"
+  },
+  {
+   "id": "z604",
+   "name": "賀正 ぴよりん2012",
+   "en": "New Year Piyorin 2012",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/996be793cacba66bb6f42b8177938d8f.png",
+   "date": "2012年1月",
+   "tags": [
+    "冬",
+    "お正月"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/996be793cacba66bb6f42b8177938d8f-300x300.png"
+  },
+  {
+   "id": "z597",
+   "name": "サンタ ぴよりん2011",
+   "en": "Santa Piyorin",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/dca685e00c0b6f4bc265b6ebb6d85800.png",
+   "date": "2011年12月",
+   "tags": [
+    "冬",
+    "クリスマス"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/dca685e00c0b6f4bc265b6ebb6d85800-300x300.png"
+  },
+  {
+   "id": "z594",
+   "name": "ハロウィン ぴよりん2011",
+   "en": "Halloween Piyorin 2011",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/74d4ae8c353c38122d969f10bd5f0207.png",
+   "date": "2011年10月",
+   "tags": [
+    "秋",
+    "ハロウィン"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/74d4ae8c353c38122d969f10bd5f0207-300x300.png"
+  },
+  {
+   "id": "z591",
+   "name": "初期ぴよりん",
+   "en": "The First Piyorins",
+   "img": "https://piyorin.com/wp/wp-content/uploads/2025/08/9311c433120b5c357fc2f341e02702b5.png",
+   "date": "2011年7月",
+   "tags": [
+    "通年商品"
+   ],
+   "thumb": "https://piyorin.com/wp/wp-content/uploads/2025/08/9311c433120b5c357fc2f341e02702b5-300x300.png"
+  }
+ ],
+ "releases": {
+  "auto-n2026102183b7c75c-2": {
+   "cat": "piyorin",
+   "title": "ぴよりんクリスマスケーキ 受取期間",
+   "date": "2026-12-19",
+   "url": "https://prtimes.jp/main/html/rd/p/000000261.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/261/124425-261-d2905be8e78c24c5b33ac65ead9ea340-842x595.jpg",
+   "from": "event"
+  },
+  "auto-officialp5657": {
+   "cat": "piyorin",
+   "title": "静岡みかんぴよりんおでかけセット販売（アスティ静岡）",
+   "date": "2026-11-26",
+   "url": "https://piyorin.com/news/p5657/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/258/124425-258-3e2d7756c593edd90f5ad998cfd2be54-842x595.jpg",
+   "from": "event"
+  },
+  "auto-officialp5638": {
+   "cat": "piyorin",
+   "title": "三島甘藷ぴよりん販売",
+   "date": "2026-11-15",
+   "url": "https://piyorin.com/news/p5638/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/252/124425-252-2b8d1ff8d87f1d918919cd862b5a335c-842x595.jpg",
+   "from": "event"
+  },
+  "auto-officialp5642": {
+   "cat": "piyorin",
+   "title": "紅茶ぴよりんおでかけセット 山陽百貨店",
+   "date": "2026-11-07",
+   "url": "https://piyorin.com/news/p5642/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/256/124425-256-22530134c4a5a159f82221b9e2f1133e-842x595.jpg",
+   "from": "event"
+  },
+  "auto-officialp5633": {
+   "cat": "piyorin",
+   "title": "ぴよりんゴジラ販売",
+   "date": "2026-11-03",
+   "url": "https://piyorin.com/news/p5633/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/250/124425-250-7715a9d8013e79afafbeb8668a95ac3c-842x595.jpg",
+   "from": "event"
+  },
+  "auto-officialp5653-2": {
+   "cat": "goods",
+   "title": "ぴよりんカレンダー2027 販売開始",
+   "date": "2026-11-02",
+   "url": "https://piyorin.com/news/p5653/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/260/124425-260-eea3dc9416c8e7118913fd7286f9f3c7-1920x1005.jpg",
+   "from": "event"
+  },
+  "auto-officialp5628": {
+   "cat": "piyorin",
+   "title": "ぴよりんおでかけセット おのだサンパーク",
+   "date": "2026-11-01",
+   "url": "https://piyorin.com/news/p5628/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/253/124425-253-f42df17fe8e8d5fb53d2e043e24d46c0-1920x1005.jpg",
+   "from": "event"
+  },
+  "auto-n2026102183b7c75c": {
+   "cat": "goods",
+   "title": "ぴよりんクリスマスケーキ 予約受付開始",
+   "date": "2026-10-30",
+   "url": "https://prtimes.jp/main/html/rd/p/000000261.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/261/124425-261-d2905be8e78c24c5b33ac65ead9ea340-842x595.jpg",
+   "from": "event"
+  },
+  "auto-officialp5653": {
+   "cat": "goods",
+   "title": "ぴよりんカレンダー2027 先行販売",
+   "date": "2026-10-29",
+   "url": "https://piyorin.com/news/p5653/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/260/124425-260-eea3dc9416c8e7118913fd7286f9f3c7-1920x1005.jpg",
+   "from": "event"
+  },
+  "auto-officialp5599": {
+   "cat": "cookie",
+   "title": "ひよりの手作りクッキー缶（ハロウィンver.）販売",
+   "date": "2026-10-23",
+   "url": "https://piyorin.com/news/p5599/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/241/124425-241-daab9ea83ed9e9b17719e85abe993299-842x595.jpg",
+   "from": "event"
+  },
+  "auto-officialp5620": {
+   "cat": "piyorin",
+   "title": "ハロウィンぴよりん販売",
+   "date": "2026-10-23",
+   "url": "https://piyorin.com/news/p5620/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/257/124425-257-4c02e18a7cb2d157e2be0e907b3a3459-842x595.jpg",
+   "from": "event"
+  },
+  "auto-officialp5633-2": {
+   "cat": "goods",
+   "title": "ぴよりんゴジラ グッズ先行販売",
+   "date": "2026-10-22",
+   "url": "https://piyorin.com/news/p5633/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/250/124425-250-7715a9d8013e79afafbeb8668a95ac3c-842x595.jpg",
+   "from": "event"
+  },
+  "official-p5599": {
+   "cat": "cookie",
+   "title": "ぴよりんをモチーフにした人気の「ひよりの手作りクッキー缶」にハロウィンver.が登場！名古屋駅でも販売",
+   "date": "2026-10-20",
+   "url": "https://piyorin.com/news/p5599/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/241/124425-241-daab9ea83ed9e9b17719e85abe993299-842x595.jpg",
+   "from": "news",
+   "name": "ひよりの手作りクッキー缶（ハロウィンver.）"
+  },
+  "e-wolfy-village": {
+   "cat": "piyorin",
+   "title": "ウルフィ×ぴよりん ぬいぐるみ 店頭販売",
+   "date": "2026-10-19",
+   "url": "https://piyorin.com/news/p5558/",
+   "img": null,
+   "from": "event"
+  },
+  "e-wolfy-online": {
+   "cat": "goods",
+   "title": "ウルフィ×ぴよりん ぬいぐるみ オンライン発売",
+   "date": "2026-10-17",
+   "url": "https://piyorin.com/news/p5558/",
+   "img": null,
+   "from": "event"
+  },
+  "auto-officialp5609": {
+   "cat": "piyorin",
+   "title": "ウズミンぴよりん販売",
+   "date": "2026-10-17",
+   "url": "https://piyorin.com/news/p5609/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/242/124425-242-b62c16a711fa7ebb67120cdf195b82d6-842x595.jpg",
+   "from": "event"
+  },
+  "auto-officialp5585": {
+   "cat": "piyorin",
+   "title": "オニぴよりん販売（岡山髙島屋）",
+   "date": "2026-10-10",
+   "url": "https://piyorin.com/news/p5585/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/246/124425-246-e0113fea84c04816f0ff27874166683a-1200x848.jpg",
+   "from": "event"
+  },
+  "auto-officialp5593": {
+   "cat": "goods",
+   "title": "ぴよりん×ドクターイエロー シャカシャカキーホルダー販売",
+   "date": "2026-10-07",
+   "url": "https://piyorin.com/news/p5593/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/249/124425-249-2575957d09155bda7afd2db15089baa4-1920x1005.jpg",
+   "from": "event"
+  },
+  "e-thunder": {
+   "cat": "piyorin",
+   "title": "ブラックサンダーぴよりん",
+   "date": "2026-10-02",
+   "url": "https://piyorin.com/news/p5546/",
+   "img": null,
+   "from": "event"
+  },
+  "auto-n20260915ea7e6c93": {
+   "cat": "piyorin",
+   "title": "ブラックサンダーぴよりんコラボアフタヌーンティー",
+   "date": "2026-10-02",
+   "url": "https://prtimes.jp/main/html/rd/p/000000274.000076395.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/76395/274/76395-274-bb67f2ab22f9f2a73b7e75e6d9aaccc9-840x560.png",
+   "from": "event"
+  },
+  "auto-n202608264b1d64fa": {
+   "cat": "piyorin",
+   "title": "ぴよりん おでかけセット販売（近鉄百貨店上本町）",
+   "date": "2026-09-26",
+   "url": "https://prtimes.jp/main/html/rd/p/000000227.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/227/124425-227-5ebece53c43012ffb38ba3a54deb1210-3508x2482.jpg",
+   "from": "event"
+  },
+  "e-bento": {
+   "cat": "piyorin",
+   "title": "ぴよりんコラボ弁当 第3弾",
+   "date": "2026-09-19",
+   "url": "https://piyorin.com/news/p5491/",
+   "img": null,
+   "from": "event"
+  },
+  "e-cookie": {
+   "cat": "cookie",
+   "title": "秋限定クッキー缶 発売",
+   "date": "2026-09-18",
+   "url": "https://piyorin.com/news/p5538/",
+   "img": null,
+   "from": "event"
+  },
+  "e-kuri": {
+   "cat": "piyorin",
+   "title": "栗きんとんぴよりん",
+   "date": "2026-09-18",
+   "url": "https://piyorin.com/news/p5507/",
+   "img": null,
+   "from": "event"
+  },
+  "e-kawagoe": {
+   "cat": "piyorin",
+   "title": "ぴよりん出張販売（まるひろ川越）",
+   "date": "2026-09-18",
+   "url": "https://piyorin.com/news/p5520/",
+   "img": null,
+   "from": "event"
+  },
+  "e-honohon": {
+   "cat": "piyorin",
+   "title": "ホノホンぴよりん",
+   "date": "2026-09-18",
+   "url": "https://piyorin.com/news/p5512/",
+   "img": null,
+   "from": "event"
+  },
+  "e-tour-entry": {
+   "cat": "goods",
+   "title": "新幹線ツアー募集開始（完売）",
+   "date": "2026-09-17",
+   "url": "https://piyorin.com/news/p5529/",
+   "img": null,
+   "from": "event"
+  },
+  "n20260915-atelier": {
+   "cat": "cookie",
+   "title": "「ぴよりんアトリエ」手作りの人気クッキー缶に秋の味わいを詰め込んだ限定版が登場！",
+   "date": "2026-09-15",
+   "url": "https://piyorin.com/news/p5538/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/240/124425-240-c6b9e41967f68542cfba172ef2fa02b6-842x595.jpg",
+   "from": "news",
+   "name": "ひよりの手作りクッキー缶（秋限定）"
+  },
+  "auto-n20260822501de54a-2": {
+   "cat": "piyorin",
+   "title": "今日から推しメン!SKE48ぴよりん",
+   "date": "2026-09-14",
+   "url": "https://prtimes.jp/main/html/rd/p/000000221.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/221/124425-221-8a6aae9e220c31f90e7ca8add5c64738-842x595.jpg",
+   "from": "event"
+  },
+  "auto-n20260822501de54a": {
+   "cat": "piyorin",
+   "title": "SKE48ぴよりん 推しメンセット先行販売",
+   "date": "2026-09-13",
+   "url": "https://prtimes.jp/main/html/rd/p/000000221.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/221/124425-221-8a6aae9e220c31f90e7ca8add5c64738-842x595.jpg",
+   "from": "event"
+  },
+  "e-keikyu": {
+   "cat": "piyorin",
+   "title": "ぴよりん出張販売（京急百貨店）",
+   "date": "2026-09-10",
+   "url": "https://prtimes.jp/main/html/rd/p/000000223.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/223/124425-223-c67100c137588cd30f16fe5f92438c94-3508x2482.jpg",
+   "from": "event"
+  },
+  "auto-n20260825a5270119": {
+   "cat": "goods",
+   "title": "エヴァンゲリオンコラボグッズ展示販売",
+   "date": "2026-09-04",
+   "url": "https://prtimes.jp/main/html/rd/p/000000229.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/229/124425-229-4613883680d3a2aaad52afda96598ccc-3031x1486.jpg",
+   "from": "event"
+  },
+  "e-halloween": {
+   "cat": "goods",
+   "title": "ハロウィン限定グッズ発売",
+   "date": "2026-09-01",
+   "url": "https://piyorin.com/news/p5363/",
+   "img": null,
+   "from": "event"
+  },
+  "auto-n20260818406ed6b0": {
+   "cat": "piyorin",
+   "title": "なつまつりぴよりん ~夏休みの思い出~",
+   "date": "2026-08-24",
+   "url": "https://prtimes.jp/main/html/rd/p/000000228.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/228/124425-228-8cdb8d8fd1cac368dadc260a22827784-842x595.jpg",
+   "from": "event"
+  },
+  "auto-n202608179c88bcad": {
+   "cat": "goods",
+   "title": "ぴよりんドール缶発売",
+   "date": "2026-08-20",
+   "url": "https://prtimes.jp/main/html/rd/p/000000226.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/226/124425-226-1659891807572aafea06d08315cbf88a-842x595.jpg",
+   "from": "event"
+  },
+  "auto-n202608039c811fb3": {
+   "cat": "piyorin",
+   "title": "ぴよりんコラボ弁当 第2弾",
+   "date": "2026-08-08",
+   "url": "https://prtimes.jp/main/html/rd/p/000000218.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/218/124425-218-8a03d4ecdda2be800d85246f5b30db5f-3508x2482.jpg",
+   "from": "event"
+  },
+  "auto-n202608054f1762b9": {
+   "cat": "piyorin",
+   "title": "ブルーベリーぴよりん",
+   "date": "2026-08-08",
+   "url": "https://prtimes.jp/main/html/rd/p/000000217.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/217/124425-217-4ed43f3122113a28873c217b1ec700d2-842x595.jpg",
+   "from": "event"
+  },
+  "auto-n20260730e3c904d2": {
+   "cat": "piyorin",
+   "title": "なつまつりぴよりん販売",
+   "date": "2026-08-04",
+   "url": "https://prtimes.jp/main/html/rd/p/000000214.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/214/124425-214-e89948ebfe5644cebf346f648dafeb3f-842x595.jpg",
+   "from": "event"
+  },
+  "auto-n20260730599e5fae": {
+   "cat": "goods",
+   "title": "ぴよりん日傘・雨傘兼用折り畳み傘発売",
+   "date": "2026-08-01",
+   "url": "https://prtimes.jp/main/html/rd/p/000000216.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/216/124425-216-812e5331f2c6d559b4b8c36dc0b85646-1600x969.jpg",
+   "from": "event"
+  },
+  "auto-n20260716b2a14aeb": {
+   "cat": "goods",
+   "title": "ぴよりん×鳥獣戯画グッズ発売",
+   "date": "2026-07-17",
+   "url": "https://prtimes.jp/main/html/rd/p/000000210.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/210/124425-210-95a5c848730bb8e7d576ddd5518e8e10-3000x2120.jpg",
+   "from": "event"
+  },
+  "auto-n20260713490962fd": {
+   "cat": "goods",
+   "title": "冷感ブランケット第2弾発売",
+   "date": "2026-07-17",
+   "url": "https://prtimes.jp/main/html/rd/p/000000206.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/206/124425-206-693e4dd9878f84035cd228644ceb12a7-3000x2120.jpg",
+   "from": "event"
+  },
+  "auto-n202607102d30401a": {
+   "cat": "piyorin",
+   "title": "ぴよりんと市バスでぷち旅 乗車券販売",
+   "date": "2026-07-17",
+   "url": "https://prtimes.jp/main/html/rd/p/000000207.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/207/124425-207-9921ad612421b0134f62091d4853d0d6-1280x720.jpg",
+   "from": "event"
+  },
+  "auto-n202607010eed7d1d": {
+   "cat": "piyorin",
+   "title": "15th Anniversary ぴよりん販売",
+   "date": "2026-07-15",
+   "url": "https://prtimes.jp/main/html/rd/p/000000205.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/205/124425-205-d598363a9e168b3cfb5719c69f1ca7c6-842x595.jpg",
+   "from": "event"
+  },
+  "n20260703-996d4145": {
+   "cat": "cookie",
+   "title": "【シェ・シバタ×ぴよりん】ぴよりんクッキー缶第１弾が登場！",
+   "date": "2026-07-03",
+   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1MMmdQS0R2M1BYcHpzOThsR1RVbDMweXJBNWE2RFZZREgyT0Z0NnRfTkc5bUUyZVZNbk1yZmFGOThiTE0wcGk4bUVTMVlhZk1Bc05CZUhGQUZQTm5XWTdOaFk2X3MwVkJmckE?oc=5",
+   "img": null,
+   "from": "news",
+   "name": "ぴよりんクッキー缶（シェ・シバタ 第1弾）"
+  },
+  "n20260508-0932794f": {
+   "cat": "cookie",
+   "title": "ぴよりんモチーフの「クッキー缶」愛知県外で初販売！「そごう横浜店」に登場",
+   "date": "2026-05-08",
+   "url": "https://prtimes.jp/main/html/rd/p/000000192.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/192/124425-192-ef48c29e1cd04b469f09080da02ccf41-1200x848.jpg",
+   "from": "news",
+   "name": "ひよりの手作りクッキー缶"
+  },
+  "n20260422-69bc1678": {
+   "cat": "cookie",
+   "title": "「ぴよりんアトリエ」手作りの人気クッキー缶に春らしい「新緑ver.」限定版が登場！名古屋駅でも販売！",
+   "date": "2026-04-22",
+   "url": "https://prtimes.jp/main/html/rd/p/000000186.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/186/124425-186-75744457967d4ffbc372234d605fd1c1-842x595.jpg",
+   "from": "news",
+   "name": "ひよりの手作りクッキー缶（新緑ver.）"
+  },
+  "n20251217-a1e112f5": {
+   "cat": "cookie",
+   "title": "「ぴよりんアトリエ」手作りの人気クッキー缶に「お正月限定版」が登場！名古屋駅でも購入可能！",
+   "date": "2025-12-17",
+   "url": "https://prtimes.jp/main/html/rd/p/000000142.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/142/124425-142-12dca094f7cc18e5fa21ebbca11504b4-1200x848.jpg",
+   "from": "news",
+   "name": "ひよりの手作りクッキー缶（お正月限定）"
+  },
+  "n20251204-91979b86": {
+   "cat": "cookie",
+   "title": "「ぴよりんアトリエ」手作りの人気クッキー缶にクリスマス限定版が登場！名古屋駅でも購入可能！",
+   "date": "2025-12-04",
+   "url": "https://prtimes.jp/main/html/rd/p/000000137.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/137/124425-137-c8c4de2437a28fae3bdcdf33be965867-1200x848.jpg",
+   "from": "news",
+   "name": "ひよりの手作りクッキー缶（クリスマス限定）"
+  },
+  "n20251017-2ceaca21": {
+   "cat": "cookie",
+   "title": "【ぴよりんアトリエ】大人気の「ひよりの手作りクッキー缶」にハロウィン特別版が登場！",
+   "date": "2025-10-17",
+   "url": "https://prtimes.jp/main/html/rd/p/000000126.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/126/124425-126-aeb40a034cb3fd077975e775d49c22f0-1200x848.jpg",
+   "from": "news",
+   "name": "ひよりの手作りクッキー缶（ハロウィン特別版）"
+  },
+  "n20250904-c3dfbfb4": {
+   "cat": "cookie",
+   "title": "【ぴよりんアトリエ】こだわりの新商品！「ひよりの手作りクッキー缶」発売！7種の手作りクッキーを詰め合わせた特別なスイーツギフト",
+   "date": "2025-09-04",
+   "url": "https://prtimes.jp/main/html/rd/p/000000109.000124425.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/109/124425-109-13693b73c20b3c7277f29e6a285912f7-1200x848.jpg",
+   "from": "news",
+   "name": "ひよりの手作りクッキー缶"
+  }
+ }
+}
