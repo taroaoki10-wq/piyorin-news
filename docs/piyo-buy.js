@@ -21,6 +21,13 @@
     {name:'スマートぴよ約',short:'スマートぴよ約',slots:[]},
     {name:'ぴよりんMARKET（通販）',short:'MARKET',slots:[]}
   ];
+  // 「9:00」→「09:00」（時刻の欄の形）
+  const slotTime=s=>String(s||'').padStart(5,'0');
+  // 場所の名前から店を探す（選んだ名前のほか、自由に書いた「アトリエ店」「ぴよりんshop」なども）
+  function shopOf(name){
+    const n=String(name||'').trim();if(!n)return null;
+    return SHOPS.find(s=>s.name===n)||[...SHOPS].sort((a,b)=>b.short.length-a.short.length).find(s=>n.toLowerCase().includes(s.short.toLowerCase()))||null;
+  }
   const CROWD=[null,'すいていた','少し並んだ','ふつうに並んだ','長い列','大行列・整理券'];
   const RATE=[null,'いまひとつ','まあまあ','ふつう','おいしい','最高！'];
 
@@ -82,7 +89,7 @@
   }
 
   // ---------- 画像（data/piyo-images.json：ぴよりん図鑑と公式リリースの画像の住所） ----------
-  // 記録には画像を入れず、表示するたびに最新の一覧から探す。買ったあとに図鑑に載れば、図鑑の画像に替わる。
+  // 記録には画像を入れず、表示するたびに最新の一覧から探す。公式リリースの絵が先で、リリースが無い物だけ図鑑の絵。
   const ALIAS={'定番ぴよりん':'ぴよりん','いちごぴよりん':'イチゴぴよりん'};
   const nkey=s=>String(s||'').normalize('NFKC').replace(/[\s・･「」『』]/g,'').toLowerCase();
   const noParen=k=>k.replace(/[（(][^）)]*[）)]/g,'');
@@ -93,25 +100,35 @@
     if(!images||typeof images!=='object')return null;
     if(ixCache.has(images))return ixCache.get(images);
     const zk=new Map(),rel=new Map(),add=(m,k,v)=>{if(k&&!m.has(k))m.set(k,v)};
-    for(const z of Array.isArray(images.zukan)?images.zukan:[]){ // 図鑑は新しい順。同じ名前は新しい方
-      if(!z||!IMG_OK.test(z.img||''))continue;const k=nkey(z.name);add(zk,k,z);add(zk,noParen(k),z);
+    // 同じ名前の物（毎年のハロウィンぴよりん など）は全部持っておき、買った日に合う物を選ぶ
+    const put=(m,k,v)=>{if(!k)return;const a=m.get(k);if(a){if(!a.includes(v))a.push(v)}else m.set(k,[v])};
+    for(const z of Array.isArray(images.zukan)?images.zukan:[]){ // 図鑑は新しい順
+      if(!z||!IMG_OK.test(z.img||''))continue;const k=nkey(z.name);put(zk,k,z);put(zk,noParen(k),z);
     }
     const rs=Object.entries(images.releases&&typeof images.releases==='object'?images.releases:{})
       .filter(([,v])=>v&&IMG_OK.test(v.img||'')).sort((a,b)=>(a[1].date<b[1].date?1:-1));
-    for(const [id,v] of rs){add(rel,nkey(v.name||itemName(v.title)),v)}
+    for(const [id,v] of rs){put(rel,nkey(v.name||itemName(v.title)),v)}
     const ix={zk,rel,byId:images.releases||{}};ixCache.set(images,ix);return ix;
   }
+  // 「2026-10-31」「2025年10月」→ 月の通し番号。読めなければ null
+  function monthNo(d){const m=String(d||'').normalize('NFKC').match(/(20\d\d)\D{1,2}(\d{1,2})/);return m?(+m[1])*12+(+m[2]-1):null}
   const relThumb=u=>/prcdn\.freetls\.fastly\.net/.test(u)?u+'?width=360&height=360&fit=bounds&format=jpeg':u;
   // {src（小さい画像）, full, from: 'zukan' | 'release', page}
   function imageFor(it,date,images){
     const ix=imageIndex(images);if(!ix||!it||!it.name)return null;
-    const k=nkey(ALIAS[it.name]||it.name),y=String(date||'').slice(0,4);
+    const k=nkey(ALIAS[it.name]||it.name),y=String(date||'').slice(0,4),bm=monthNo(date);
+    // 限定は、買った日の前 6 か月〜あと 1 か月に出た物だけ（去年の同じ名前の絵を出さない）。通年商品と日付の無い物はいつでも。
+    const fits=(m,always)=>always||m==null||bm==null||(m<=bm+1&&m>=bm-6);
+    const pick=(arr,mOf,always)=>(arr||[]).find(v=>fits(mOf(v),always(v)));
+    // 公式リリースの絵が先（2026-11-04 ユーザーの決定）。リリースが無い物（定番など）だけ図鑑の絵。
+    const relPick=kk=>pick(ix.rel.get(kk),v=>monthNo(v.date),()=>false);
+    const r=(it.lid&&ix.byId[it.lid]&&IMG_OK.test(ix.byId[it.lid].img||'')?ix.byId[it.lid]:null)||relPick(k)||relPick(noParen(k));
+    if(r)return {src:relThumb(r.img),full:r.img,from:'release',page:r.url||''};
     if(it.cat!=='goods'&&it.cat!=='cookie'){
-      for(const kk of [k+y,k,noParen(k)+y,noParen(k),noYear(k)+y,noYear(k)]){const z=ix.zk.get(kk);
+      for(const kk of [k+y,k,noParen(k)+y,noParen(k),noYear(k)+y,noYear(k)]){
+        const z=pick(ix.zk.get(kk),v=>monthNo(v.date),v=>(v.tags||[]).includes('通年商品'));
         if(z)return {src:z.thumb&&IMG_OK.test(z.thumb)?z.thumb:z.img,full:z.img,from:'zukan',page:images.zukanSource||'https://piyorin.com/detail/'}}
     }
-    const r=(it.lid&&ix.byId[it.lid]&&IMG_OK.test(ix.byId[it.lid].img||'')?ix.byId[it.lid]:null)||ix.rel.get(k)||ix.rel.get(noParen(k));
-    if(r)return {src:relThumb(r.img),full:r.img,from:'release',page:r.url||''};
     return null;
   }
   // 過去の記録の候補：図鑑の限定（通年商品は除く）と、ニュースから見つけたクッキー缶のリリース
@@ -198,7 +215,7 @@
     return !list.some(r=>r.id!==rec.id&&(r.date<rec.date||(r.date===rec.date&&r.createdAt<rec.createdAt))&&r.items.some(x=>x.name===it.name));
   }
 
-  const PiyoBuy={KEY,CATS,REGULAR,SHOPS,CROWD,RATE,itemName,eventCat,memoPrices,limitedFor,allLimited,imageFor,archiveItems,nkey,normalize,total,count,sortRecs,
+  const PiyoBuy={KEY,CATS,REGULAR,SHOPS,shopOf,slotTime,CROWD,RATE,itemName,eventCat,memoPrices,limitedFor,allLimited,imageFor,archiveItems,nkey,normalize,total,count,sortRecs,
     parseStore,dumpStore,merge,filter,stats,firstTime,todayJst,addDays,yen,newId};
   root.PiyoBuy=PiyoBuy;
   if(typeof module!=='undefined'&&module.exports)module.exports=PiyoBuy;
@@ -327,12 +344,29 @@
       if(again){form.id=null;form.date=B.todayJst();form.time='';form.crowd=null;form.wait='';form.soldout=false;form.memo='';form.photo=false;form.fav=false;form.items.forEach(x=>{x.rating=null;x.note=''})}
     }else form=blank();
     $('buy-scrim').hidden=false;$('buy-modal').hidden=false;
-    document.documentElement.classList.add('buy-open');
+    lockPage();document.documentElement.classList.add('buy-open');
     renderForm();
     $('buy-modal').querySelector('.set-body').scrollTop=0;
   }
+  // 開いている間は裏のページを止める（ぴよとの会話と同じ形）。overflow:hidden だけだと、iPhone は入力欄を選んだときに裏のページを動かし、
+  // 閉じたあとページが飛んだり、待機のぴよがスクロールで上下にずれたりした（2026-11-04）。
+  let lockY=null;
+  function lockPage(){
+    if(lockY!==null)return;
+    lockY=window.scrollY;const w=document.body.getBoundingClientRect().width;
+    Object.assign(document.body.style,{position:'fixed',top:-lockY+'px',left:'0',right:'',width:w+'px'});
+  }
+  function unlockPage(){
+    if(lockY===null)return;
+    const y=lockY;lockY=null;
+    Object.assign(document.body.style,{position:'',top:'',left:'',right:'',width:''});
+    window.scrollTo(0,y);
+  }
   function closeForm(){
+    // 入力中のまま隠すと、iPhone はキーボードの候補の帯と入力の状態を残し、待機のぴよがスクロールでずれる。先に入力を終わらせる。
+    const a=document.activeElement;if(a&&$('buy-modal').contains(a)&&a.blur)a.blur();
     form=null;$('buy-scrim').hidden=true;$('buy-modal').hidden=true;document.documentElement.classList.remove('buy-open');
+    unlockPage();
     const p=$('by-prev');if(p&&p.dataset.u){URL.revokeObjectURL(p.dataset.u)}
   }
   const chip=(attr,label,on,sub,img)=>`<button type="button" class="by-chip${on?' on':''}${img?' has-img':''}" ${attr} aria-pressed="${!!on}">${img||''}<span>${esc(label)}${sub?`<small>${esc(sub)}</small>`:''}</span></button>`;
@@ -348,7 +382,7 @@
     const used=[...new Set(recs.map(r=>r.shop).filter(Boolean))];
     const limPlaces=[...new Set(allLim.filter(x=>x.onSale&&x.place&&x.cat!=='goods').flatMap(x=>x.place.split(/[、,，・]/)).map(p=>p.trim()).filter(p=>p&&!B.SHOPS.some(sh=>sh.name.includes(p)||p.includes(sh.short)||/^ぴよりん(shop|village)?$/.test(p))))];
     const shops=[...B.SHOPS.map(s=>s.name),...limPlaces,...used].filter((v,i,a)=>a.indexOf(v)===i).slice(0,10);
-    const shopDef=B.SHOPS.find(s=>s.name===f.shop);
+    const shopDef=B.shopOf(f.shop);
     const tot=B.total({items:f.items.map(x=>({qty:+x.qty||1,price:x.price===''?null:+x.price}))});
     const hit=lim.find(x=>x.name===it.name);
     $('buy-h').textContent=f.id?'記録を直す':'ぴよりんを記録する';
@@ -357,7 +391,6 @@
         <div class="by-row"><input type="date" id="by-date" value="${esc(f.date)}" max="${B.addDays(B.todayJst(),1)}" aria-label="買った日">
           <input type="time" id="by-time" value="${esc(f.time)}" aria-label="買った時刻（わからなければ空で）"></div>
         <div class="by-chips">${chip('data-day="0"','今日',f.date===B.todayJst())}${chip('data-day="-1"','昨日',f.date===B.addDays(B.todayJst(),-1))}${chip('data-day="-2"','おととい',f.date===B.addDays(B.todayJst(),-2))}${f.date<B.addDays(B.todayJst(),-2)?`<span class="by-past">過去の記録（${esc(f.date.replaceAll('-','.'))}）</span>`:''}</div>
-        ${shopDef&&shopDef.slots.length?`<div class="by-chips">${shopDef.slots.map(s=>chip(`data-slot="${s}"`,s+' の回',f.time===s.padStart(5,'0')||f.time===s)).join('')}</div>`:''}
       </section>
       <section class="set-sec"><h3>買った物 <small>${f.items.length>1?`${f.items.length}つ`:''}</small></h3>
         ${f.items.length>1?`<div class="by-lines">${f.items.map((x,i)=>`<button type="button" class="by-line${i===f.tab?' on':''}" data-tab="${i}">${esc(x.name||'（未入力）')}${+x.qty>1?' ×'+x.qty:''}</button>`).join('')}</div>`:''}
@@ -385,6 +418,7 @@
       <section class="set-sec"><h3>どこで</h3>
         <div class="by-chips">${shops.map(s=>chip(`data-shop="${esc(s)}"`,s,f.shop===s)).join('')}</div>
         <label class="by-fld"><span>場所（自由に入力もできます）</span><input type="text" id="by-shop" value="${esc(f.shop)}" maxlength="60" placeholder="例：アスティ静岡"></label>
+        ${shopDef&&shopDef.slots.length?`<p class="by-lab">${esc(shopDef.short)}の販売の回（選ぶと買った時刻に入ります。選ばなくても記録できます）</p><div class="by-chips">${chip('data-noslot','選ばない',!shopDef.slots.some(s=>f.time===B.slotTime(s)))}${shopDef.slots.map(s=>chip(`data-slot="${s}"`,s+' の回',f.time===B.slotTime(s))).join('')}</div>`:''}
       </section>
       <section class="set-sec"><h3>混み具合</h3>
         <div class="by-crowd5" role="radiogroup" aria-label="混雑度">${[1,2,3,4,5].map(n=>`<button type="button" role="radio" data-crowd="${n}" aria-checked="${f.crowd===n}"><b>${n}</b><small>${B.CROWD[n]}</small></button>`).join('')}</div>
@@ -515,8 +549,12 @@
       else if('add' in t.dataset){form.items.push({cat:it.cat,name:'',qty:1,price:'',limited:'',period:'',rating:null,note:''});form.tab=form.items.length-1}
       else if('rm' in t.dataset){form.items.splice(form.tab,1);form.tab=Math.max(0,form.tab-1)}
       else if(t.dataset.tab)form.tab=+t.dataset.tab;
-      else if(t.dataset.shop)form.shop=t.dataset.shop;
-      else if(t.dataset.slot)form.time=t.dataset.slot.padStart(5,'0');
+      else if(t.dataset.shop){ // 店を替えたら、前の店の販売の回で入れた時刻は消す
+        const old=B.shopOf(form.shop),nw=B.shopOf(t.dataset.shop);form.shop=t.dataset.shop;
+        if(old&&old!==nw&&old.slots.some(x=>B.slotTime(x)===form.time)&&!(nw&&nw.slots.some(x=>B.slotTime(x)===form.time)))form.time='';
+      }
+      else if('noslot' in t.dataset){const d=B.shopOf(form.shop);if(d&&d.slots.some(x=>B.slotTime(x)===form.time))form.time=''} // 回で入れた時刻だけ消す（自分で打った時刻は残す）
+      else if(t.dataset.slot){const v=B.slotTime(t.dataset.slot);form.time=form.time===v?'':v} // もう一度押すと消す
       else if(t.dataset.rate){const n=+t.dataset.rate;it.rating=it.rating===n?null:n}
       else if(t.dataset.crowd){const n=+t.dataset.crowd;form.crowd=form.crowd===n?null:n}
       else if('nophoto' in t.dataset){form.newPhoto=null;form.dropPhoto=true}

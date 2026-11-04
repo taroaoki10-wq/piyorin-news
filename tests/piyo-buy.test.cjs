@@ -117,12 +117,12 @@ test('ページに購入記録のタブ・画面・読み込みがある',()=>{
   assert.match(html,/id="view-buy"/);
   assert.match(html,/id="buy-modal"/);
   assert.match(html,/id="set-buy"/);
-  assert.match(html,/<script src="piyo-buy\.js\?v=3"><\/script>/);
+  assert.match(html,/<script src="piyo-buy\.js\?v=6"><\/script>/);
   assert.match(html,/PiyoBuyUI\.mount\(/);
 });
 
 const images=JSON.parse(fs.readFileSync(path.join(__dirname,'..','docs/data/piyo-images.json'),'utf8'));
-test('画像：ぴよりんは図鑑、クッキー缶は公式リリース',()=>{
+test('画像：定番は図鑑、クッキー缶は公式リリース',()=>{
   const im=n=>B.imageFor({cat:'piyorin',name:n},'2026-11-04',images);
   assert.equal(im('定番ぴよりん').from,'zukan');
   assert.match(im('定番ぴよりん').full,/^https:\/\/piyorin\.com\/wp\/wp-content\/uploads\//);
@@ -138,16 +138,15 @@ test('画像：ぴよりんは図鑑、クッキー缶は公式リリース',()=
   assert.equal(B.imageFor({cat:'piyorin',name:'定番ぴよりん'},'2026-11-04',null),null);
 });
 
-test('画像：買ったときに図鑑に無くても、あとで図鑑に載れば図鑑の画像に替わる',()=>{
+test('画像：公式リリースがあればリリースの絵、無い物だけ図鑑の絵（記録には画像を入れない）',()=>{
   const rec=B.normalize({date:'2026-11-05',items:[{cat:'piyorin',name:'ぴよりんゴジラ',lid:'auto-officialp5633',limited:'ぴよりんゴジラ'}]});
   const before={zukanSource:'https://piyorin.com/detail/',zukan:images.zukan.filter(z=>!/ゴジラ/.test(z.name)),releases:images.releases};
-  const a=B.imageFor(rec.items[0],rec.date,before);
-  assert.equal(a.from,'release');                                    // 図鑑に無いあいだは公式リリース
-  const after=Object.assign({},before,{zukan:[{id:'z9999',name:'ぴよりんゴジラ',img:'https://piyorin.com/wp/wp-content/uploads/2026/11/godzilla.png',thumb:'https://piyorin.com/wp/wp-content/uploads/2026/11/godzilla-300x300.png',tags:[]},...before.zukan]});
-  const b=B.imageFor(rec.items[0],rec.date,after);
-  assert.equal(b.from,'zukan');
-  assert.equal(b.src,'https://piyorin.com/wp/wp-content/uploads/2026/11/godzilla-300x300.png');
-  assert.ok(!('img' in rec.items[0]));                               // 記録には画像を入れない
+  assert.equal(B.imageFor(rec.items[0],rec.date,before).from,'release');
+  const after=Object.assign({},before,{zukan:[{id:'z9999',name:'ぴよりんゴジラ',date:'2026年11月',img:'https://piyorin.com/wp/wp-content/uploads/2026/11/godzilla.png',thumb:'https://piyorin.com/wp/wp-content/uploads/2026/11/godzilla-300x300.png',tags:[]},...before.zukan]});
+  assert.equal(B.imageFor(rec.items[0],rec.date,after).from,'release'); // 図鑑に載っても、リリースの絵のまま
+  const noRel=Object.assign({},after,{releases:{}});
+  assert.equal(B.imageFor(rec.items[0],rec.date,noRel).src,'https://piyorin.com/wp/wp-content/uploads/2026/11/godzilla-300x300.png'); // リリースが無ければ図鑑
+  assert.ok(!('img' in rec.items[0]));
   assert.equal(rec.items[0].lid,'auto-officialp5633');
   assert.equal(B.imageFor({cat:'piyorin',name:'x'},'2026-11-05',{zukan:[{name:'x',img:'https://evil.example/x.png'}]}),null); // 公式以外の住所は使わない
 });
@@ -177,4 +176,41 @@ test('商品ごとの評価（5 段階）とメモ',()=>{
   assert.deepEqual(B.filter([r,r2],{q:'かっこいい'}).map(x=>x.date),['2026-11-03']); // 品のメモでも探せる
   assert.equal(B.RATE[5],'最高！');
   assert.deepEqual(plain(B.parseStore(B.dumpStore([r]))[0].items[0]),plain(r.items[0]));
+});
+
+test('記録の画面：開いている間は裏のページを止め、閉じる前に入力を終わらせる（スクロールでぴよがずれない）',()=>{
+  const src=fs.readFileSync(path.join(__dirname,'..','docs/piyo-buy.js'),'utf8');
+  const open=src.slice(src.indexOf('function openForm'),src.indexOf('function closeForm'));
+  const close=src.slice(src.indexOf('function closeForm'),src.indexOf('const chip='));
+  assert.match(open,/lockPage\(\)/);
+  assert.match(src,/position:'fixed',top:-lockY\+'px'/);
+  assert.ok(close.indexOf('.blur()')>=0&&close.indexOf('.blur()')<close.indexOf("$('buy-modal').hidden=true"),'隠す前に blur する');
+  assert.match(close,/unlockPage\(\)/);
+});
+
+test('画像：2026 年のハロウィンぴよりんに、図鑑の去年（2025）の絵を出さない',()=>{
+  const z25=images.zukan.find(z=>z.name==='ハロウィンぴよりん').img;
+  const a=B.imageFor({cat:'piyorin',name:'ハロウィンぴよりん'},'2026-10-25',images);
+  assert.notEqual(a.full,z25);
+  assert.equal(a.from,'release');                                    // 公式リリースの 2026 年の絵
+  assert.equal(a.full,images.releases['auto-officialp5620'].img);
+  const b=B.imageFor({cat:'piyorin',name:'ハロウィンぴよりん',lid:'auto-officialp5620'},'2026-10-25',images);
+  assert.equal(b.full,images.releases['auto-officialp5620'].img);   // 限定の選択肢から選んだときも同じ
+  assert.equal(B.imageFor({cat:'piyorin',name:'ハロウィンぴよりん'},'2025-10-25',images).full,z25); // 2025 年に買った物は 2025 年の絵
+  // 図鑑に 2026 年の物が載っても、2026 年はリリースの絵。2025 年に買った物は 2025 年の図鑑の絵のまま（2026 年のリリースは使わない）
+  const after=Object.assign({},images,{zukan:[{id:'z9998',name:'ハロウィンぴよりん',date:'2026年10月',img:'https://piyorin.com/wp/wp-content/uploads/2026/10/h26.png',tags:['ハロウィン']},...images.zukan]});
+  assert.equal(B.imageFor({cat:'piyorin',name:'ハロウィンぴよりん'},'2026-10-25',after).full,images.releases['auto-officialp5620'].img);
+  assert.equal(B.imageFor({cat:'piyorin',name:'ハロウィンぴよりん'},'2025-10-25',after).full,z25);
+  assert.equal(B.imageFor({cat:'piyorin',name:'定番ぴよりん'},'2030-01-01',images).from,'zukan'); // 通年商品はいつでも
+});
+
+test('店から販売の回を出す：選んだ店・自由に書いた店名から探し、時刻は 09:00 の形',()=>{
+  assert.deepEqual(plain(B.shopOf('ぴよりんshop（名古屋駅）').slots),['9:00','12:00','15:00','18:00']);
+  assert.deepEqual(plain(B.shopOf('ぴよりんshop アトリエ店（勝川）').slots),['13:00']);
+  assert.equal(B.shopOf('アトリエ店').short,'アトリエ店');          // 「ぴよりんshop」より長い名前を先に見る
+  assert.equal(B.shopOf('名古屋駅のぴよりんshop').short,'ぴよりんshop');
+  assert.equal(B.shopOf('アスティ静岡'),null);
+  assert.equal(B.shopOf(''),null);
+  assert.equal(B.slotTime('9:00'),'09:00');
+  assert.equal(B.slotTime('13:00'),'13:00');
 });
