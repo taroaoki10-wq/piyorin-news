@@ -4,9 +4,9 @@
 // 部品 piyo-log/schema.js・recorder.js の元は、本人の OneDrive「ぴよりん/会話品質共有/collector」（3 つのぴよで共通）。
 (function(){
   'use strict';
-  const R=window.PiyoLogRecorder,S=window.PiyoLogSchema;
+  const R=window.PiyoLogRecorder,S=window.PiyoLogSchema,RU=window.PiyoLogRules,APPNAME='piyorin-news';
   if(!R||!S)return;
-  const ON='piyo-log-on',LINK='piyo-log-link',DEV='piyo-log-device',STATE='piyo-log-state';
+  const ON='piyo-log-on',LINK='piyo-log-link',DEV='piyo-log-device',STATE='piyo-log-state',RULES='piyo-log-rules';
   const APP_VER=(document.querySelector('meta[name="piyo-ver"]')||{}).content||'';
   const ls={get:k=>{try{return localStorage.getItem(k)}catch(_){return null}},set:(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(_){}}};
 
@@ -34,6 +34,16 @@
   function link(){try{const v=JSON.parse(ls.get(LINK)||'null');return v&&/^https:\/\//.test(v.url)&&v.token?v:null}catch(_){return null}}
 
   const quiet=p=>{p.catch(()=>{});return p};
+  // 確かめて採用した改善（版つき。Mac の窓口から 1 時間に 1 回まで取る）。答えの記録に、使っている版（ruleVer）を書く
+  let rulesAt=0;
+  function rulesDoc(){try{return JSON.parse(ls.get(RULES)||'null')}catch(_){return null}}
+  async function pullRules(l){
+    if(Date.now()-rulesAt<3600e3)return;rulesAt=Date.now();
+    try{const r=await fetch(l.url+'/piyo-log/rules',{cache:'no-store',headers:{authorization:'Bearer '+l.token}});if(!r.ok)return;
+      const cur=rulesDoc(),next=RU?RU.pick(cur,await r.json()):cur;if(next&&next!==cur)ls.set(RULES,JSON.stringify(next))}catch(_){}
+  }
+  const rules=kind=>RU?RU.select(rulesDoc(),APPNAME,{kind}):[];
+
   // 質問を受けた。返すのはやり取りの ID（記録しないときは null）。meta は読み取りの印など（小さな物だけ）
   function turn(q,meta,refs){
     if(!enabled())return null;
@@ -45,7 +55,7 @@
   function end(id,r){
     if(!id||!open.has(id))return;
     open.delete(id);
-    quiet(rec.endTurn(id,{status:r.status||'ok',answer:r.answer==null?undefined:String(r.answer).slice(0,S.LIMITS.answer),route:r.route,model:r.model,ms:r.ms,errorKind:r.errorKind==null?undefined:String(r.errorKind).slice(0,40)}).then(soon));
+    quiet(rec.endTurn(id,{status:r.status||'ok',answer:r.answer==null?undefined:String(r.answer).slice(0,S.LIMITS.answer),route:r.route,model:r.model,ms:r.ms,ruleVer:(rulesDoc()||{}).version,errorKind:r.errorKind==null?undefined:String(r.errorKind).slice(0,40)}).then(soon));
   }
   const isOpen=id=>!!id&&open.has(id);
   function feedback(id,f){
@@ -72,7 +82,7 @@
     if(sending)return sending;
     if(!force&&Date.now()-lastTry<rec.nextRetryMs())return Promise.resolve(null);
     lastTry=Date.now();
-    sending=rec.flush(sender(l)).finally(()=>{sending=null;paint()});
+    sending=rec.flush(sender(l)).then(r=>{if(r&&!r.offline)pullRules(l);return r}).finally(()=>{sending=null;paint()});
     return sending;
   }
   function soon(){clearTimeout(timer);timer=setTimeout(()=>flush(false),1500)}
@@ -93,6 +103,7 @@
       if(st.rejected)parts.push('Mac が受け付けなかった記録 '+st.rejected+' 件');
       if(st.saveError)parts.push('この端末に保存できませんでした（'+st.saveError+'）');
     }
+    parts.push('使っている改善の版：'+((rulesDoc()||{}).version||'まだ'));
     parts.push(l?'送り先：'+l.url.replace(/^https:\/\//,''):'送り先：まだ（つなぎ方を貼ると Mac へ送ります。それまではこの端末にためます）');
     s.textContent=parts.join('\n');
     el.querySelector('[data-pl="on"]').checked=enabled();
@@ -124,5 +135,5 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',settings);else settings();
   document.addEventListener('click',e=>{if(e.target.closest('[data-set="open"]'))setTimeout(()=>{settings();paint()},0)});
 
-  window.PiyoLog={turn,end,feedback,isOpen,newConv,flush,parseLink,status:()=>rec.status(),_rec:rec};
+  window.PiyoLog={turn,end,feedback,isOpen,newConv,flush,parseLink,rules,rulesVersion:()=>(rulesDoc()||{}).version||null,status:()=>rec.status(),_rec:rec};
 })();

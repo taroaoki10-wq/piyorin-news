@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ぴよりん">
-<meta name="piyo-ver" content="2026.11.04-1">
+<meta name="piyo-ver" content="2026.11.04-2">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
@@ -773,7 +773,8 @@ window.PiyoSplash=(function(){
 <script src="piyo-extras.js?v=2"></script>
 <script src="piyo-log/schema.js?v=1"></script>
 <script src="piyo-log/recorder.js?v=1"></script>
-<script src="piyo-log.js?v=1"></script>
+<script src="piyo-log/rules.js?v=1"></script>
+<script src="piyo-log.js?v=2"></script>
 <script defer src="piyo-display-diagnostics.js?v=1"></script>
 <script>
 (function(){
@@ -1293,7 +1294,7 @@ window.PiyoSplash=(function(){
   });
 
   // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
-  const PN_VERSION='2026.11.04-1（会話の記録）';
+  const PN_VERSION='2026.11.04-2（会話の記録・改善の版）';
   {
     const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
     const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';

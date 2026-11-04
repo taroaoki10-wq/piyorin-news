@@ -17,10 +17,10 @@ function setup({on=true,link=true,online=true,status=200,store:init=null}={}){
     localStorage:{getItem:k=>k in store?store[k]:null,setItem:(k,v)=>{store[k]=String(v)},removeItem:k=>{delete store[k]}},
     document:{readyState:'complete',querySelector:()=>null,getElementById:()=>null,addEventListener(){},visibilityState:'visible'},
     confirm:()=>true,
-    fetch:async(url,o)=>{if(!net.online)throw new TypeError('Load failed');const b=JSON.parse(o.body);sent.push({url,auth:o.headers.authorization,events:b.events});
+    fetch:async(url,o)=>{if(!net.online)throw new TypeError('Load failed');if(/\/piyo-log\/rules$/.test(url))return{ok:true,status:200,json:async()=>net.rules||{v:1,version:'2026.11.04-1',rules:[]}};const b=JSON.parse(o.body);sent.push({url,auth:o.headers.authorization,events:b.events});
       return{ok:net.status===200,status:net.status,json:async()=>({accepted:b.events.map(e=>e.eventId),duplicate:[],rejected:[]})}}};
   ctx.window=ctx;ctx.self=ctx;ctx.globalThis=ctx;vm.createContext(ctx);
-  for(const f of ['docs/piyo-log/schema.js','docs/piyo-log/recorder.js','docs/piyo-log.js'])vm.runInContext(read(f),ctx);
+  for(const f of ['docs/piyo-log/schema.js','docs/piyo-log/recorder.js','docs/piyo-log/rules.js','docs/piyo-log.js'])vm.runInContext(read(f),ctx);
   return{L:ctx.PiyoLog,S:ctx.PiyoLogSchema,store,sent,net};
 }
 
@@ -96,6 +96,17 @@ test('index.html のどの答えの道も記録につながっている', ()=>{
     "errorKind:'calendar'", "errorKind:'need-more'", "{deeper:web?'web':'article'}", "{retry:'api'}", "{recheck:kind||'answer'}",
     "logEnd({status:failed?'error':partial?'cut':'ok'", "errorKind:'api-'", "errorKind:'mac-'+e.kind",
     "L.turn('',{kind:'greeting'})", "PiyoLog?.feedback(info.lt", "PiyoLog?.newConv()",
-    '<script src="piyo-log/schema.js?v=1"></script>','<script src="piyo-log/recorder.js?v=1"></script>','<script src="piyo-log.js?v=1"></script>','id="set-piyolog"'])
+    '<script src="piyo-log/schema.js?v=1"></script>','<script src="piyo-log/recorder.js?v=1"></script>','<script src="piyo-log/rules.js?v=1"></script>','<script src="piyo-log.js?v=2"></script>','id="set-piyolog"'])
     assert.ok(h.includes(s),s);
+});
+
+test('送れたあとで、確かめた改善の版を取り、次の答えの記録に使っている版を書く（壊れた版は使わない）', async()=>{
+  const {L,sent,net,store}=setup();
+  net.rules={v:1,version:'2026.11.05-1',rules:[{id:'R001',status:'adopted',area:'fresh',apps:['piyorin-news'],kinds:['weather'],guidance:'天気は取った時刻を確かめる',tests:['T001']}]};
+  await L.flush(true);await tick();
+  assert.equal(L.rulesVersion(),'2026.11.05-1');
+  assert.deepEqual(JSON.parse(JSON.stringify(L.rules('weather'))).map(r=>r.id),['R001']);
+  const id=L.turn('天気は？（架空）');L.end(id,{status:'ok',answer:'晴れだぴよ'});await tick();await L.flush(true);
+  assert.equal(sent.flatMap(s=>s.events).find(e=>e.kind==='turn.end').ruleVer,'2026.11.05-1');
+  assert.ok(store['piyo-log-rules']);
 });
