@@ -3,7 +3,7 @@
 (function(root){
   'use strict';
   const KEY='piyo-purchases', VER=1;
-  const CATS={piyorin:'ぴよりん',cookie:'クッキー缶',goods:'その他'};
+  const CATS={piyorin:'ぴよりん',cookie:'クッキー缶',village:'villageメニュー',goods:'その他'};
   // 定番（data/piyo-basics.json と公式サイト 2026-10-25 の値段。変わったら直す）
   const REGULAR={
     piyorin:[
@@ -21,8 +21,10 @@
     {name:'ぴよりんかき氷',price:1480},{name:'ホイップバターぴよりんの小倉トースト',price:1180},{name:'やわかわラテ',price:960},
     {name:'ひよりのガーデンパーティー（アフタヌーンティー）',price:3800}
   ];
-  // 分類ごとに押せる決まった品（定番と village 限定）
-  const fixedFor=cat=>[...(REGULAR[cat]||[]),...(cat==='piyorin'?VILLAGE:[])];
+  REGULAR.village=VILLAGE;
+  // 分類ごとに押せる決まった品（village は「villageメニュー」の分類。2026-11-04 ユーザーの決定）
+  const fixedFor=cat=>REGULAR[cat]||[];
+  const isVillage=n=>VILLAGE.some(v=>v.name===n);
   const SHOPS=[
     {name:'ぴよりんshop（名古屋駅）',short:'ぴよりんshop',slots:['9:00','12:00','15:00','18:00']},
     {name:'ぴよりんshop アトリエ店（勝川）',short:'アトリエ店',slots:['13:00']},
@@ -157,7 +159,7 @@
   function normItem(it){
     if(!it||typeof it!=='object')return null;
     const name=str(it.name,60);if(!name)return null;
-    return {cat:CATS[it.cat]?it.cat:'goods',name,qty:int(it.qty,1,999)??1,price:int(it.price,0,999999),
+    return {cat:it.cat==='piyorin'&&isVillage(name)?'village':CATS[it.cat]?it.cat:'goods',name,qty:int(it.qty,1,999)??1,price:int(it.price,0,999999),
       limited:it.limited?str(it.limited,80):'',period:it.period?str(it.period,30):'',
       lid:/^[\w.-]{1,60}$/.test(it.lid||'')?it.lid:'',
       rating:int(it.rating,1,5),note:String(it.note??'').trim().slice(0,500)};
@@ -206,7 +208,7 @@
     const s={visits:list.length,pieces:0,piyorin:0,yen:0,kinds:new Set(),byName:new Map(),crowd:{sum:0,n:0},byShop:new Map(),rate:{sum:0,n:0},byRate:new Map()};
     for(const r of list){
       const t=total(r);if(t!=null)s.yen+=t;
-      for(const it of r.items){s.pieces+=it.qty;if(it.cat==='piyorin'){s.piyorin+=it.qty;s.kinds.add(it.name)}
+      for(const it of r.items){s.pieces+=it.qty;if(it.cat==='piyorin'||it.name==='villageぴよりん'){s.piyorin+=it.qty;s.kinds.add(it.name)}
         s.byName.set(it.name,(s.byName.get(it.name)||0)+it.qty);
         if(it.rating){s.rate.sum+=it.rating;s.rate.n++;const b=s.byRate.get(it.name)||{sum:0,n:0};b.sum+=it.rating;b.n++;s.byRate.set(it.name,b)}}
       if(r.crowd){s.crowd.sum+=r.crowd;s.crowd.n++;
@@ -303,7 +305,7 @@
     const list=B.filter(recs,view),s=B.stats(list);
     const per=periods();if(!per.some(p=>p[0]===view.period))view.period='all';
     $('buy-period').innerHTML=per.map(([k,l])=>`<option value="${k}"${k===view.period?' selected':''}>${l}</option>`).join('');
-    $('buy-seg').innerHTML=[['all','すべて'],['piyorin','ぴよりん'],['cookie','クッキー缶'],['goods','その他'],['fav','★ お気に入り']].map(([k,l])=>
+    $('buy-seg').innerHTML=[['all','すべて'],['piyorin','ぴよりん'],['cookie','クッキー缶'],['village','villageメニュー'],['goods','その他'],['fav','★ お気に入り']].map(([k,l])=>
       `<button type="button" data-k="${k}" aria-pressed="${view.cat===k}">${l}</button>`).join('');
     $('buy-sum').innerHTML=recs.length?`
       <div><b>${s.visits}</b><span>回</span></div>
@@ -405,14 +407,13 @@
         ${f.items.length>1?`<div class="by-lines">${f.items.map((x,i)=>`<button type="button" class="by-line${i===f.tab?' on':''}" data-tab="${i}">${esc(x.name||'（未入力）')}${+x.qty>1?' ×'+x.qty:''}</button>`).join('')}</div>`:''}
         <div class="by-seg" role="group" aria-label="分類">${Object.entries(B.CATS).map(([k,l])=>`<button type="button" data-cat="${k}" aria-pressed="${it.cat===k}">${l}</button>`).join('')}</div>
         ${onSale.length?`<p class="by-lab">${md(f.date)} に${f.date<B.todayJst()?'売っていた':'売っている'}限定</p><div class="by-chips">${onSale.map(x=>chip(`data-lim="${esc(x.id)}"`,x.name,it.name===x.name,`${md(x.start)}${x.end!==x.start?'〜'+md(x.end):''}${x.price!=null?' · '+B.yen(x.price):''}`,thumb({cat:x.cat,name:x.name,lid:x.id},f.date))).join('')}</div>`:''}
-        ${regular.length?`<p class="by-lab">${it.cat==='goods'?'定番のおかし':'定番'}</p><div class="by-chips">${regular.map(x=>chip(`data-reg="${esc(x.name)}"`,x.name,it.name===x.name,x.price!=null?B.yen(x.price):'',thumb({cat:it.cat,name:x.name},f.date))).join('')}</div>`:''}
-        ${it.cat==='piyorin'?`<p class="by-lab">ぴよりんvillage 限定</p><div class="by-chips">${B.VILLAGE.map(x=>chip(`data-reg="${esc(x.name)}"`,x.name,it.name===x.name,x.price!=null?B.yen(x.price):'',thumb({cat:it.cat,name:x.name},f.date))).join('')}</div>`:''}
+        ${regular.length?`<p class="by-lab">${it.cat==='goods'?'定番のおかし':it.cat==='village'?'ぴよりんvillage 限定のメニュー':'定番'}</p><div class="by-chips">${regular.map(x=>chip(`data-reg="${esc(x.name)}"`,x.name,it.name===x.name,x.price!=null?B.yen(x.price):'',thumb({cat:it.cat,name:x.name},f.date))).join('')}</div>`:''}
         ${near.length?`<details class="by-near"${near.some(x=>x.name===it.name)?' open':''}><summary>前後 1 週間の限定（${near.length}）</summary><div class="by-chips">${near.map(x=>chip(`data-lim="${esc(x.id)}"`,x.name,it.name===x.name,`${md(x.start)}${x.end!==x.start?'〜'+md(x.end):''}`,thumb({cat:x.cat,name:x.name,lid:x.id},x.start))).join('')}</div></details>`:''}
-        ${it.cat!=='goods'||allLim.some(x=>x.cat==='goods')?`<details class="by-near" id="by-all"${f.allOpen?' open':''}><summary>これまでの限定から探す</summary>
+        ${it.cat==='village'?'':it.cat!=='goods'||allLim.some(x=>x.cat==='goods')?`<details class="by-near" id="by-all"${f.allOpen?' open':''}><summary>これまでの限定から探す</summary>
           <input type="search" id="by-allq" value="${esc(f.allQ||'')}" placeholder="例：ハロウィン、2025、ゴジラ" aria-label="これまでの限定を探す">
           <div class="by-chips" id="by-allres">${allChips(f,it)}</div></details>`:''}
         <label class="by-fld"><span>${it.cat==='goods'?'品名（自由に入力）':'名前（自由に入力もできます）'}</span>
-          <input type="text" id="by-name" value="${esc(it.name)}" maxlength="60" placeholder="${it.cat==='goods'?'例：ぴよりんトートバッグ':it.cat==='cookie'?'例：ひよりの手作りクッキー缶（冬ver.）':'例：ハロウィンぴよりん'}" list="by-names" autocomplete="off"></label>
+          <input type="text" id="by-name" value="${esc(it.name)}" maxlength="60" placeholder="${it.cat==='goods'?'例：ぴよりんトートバッグ':it.cat==='cookie'?'例：ひよりの手作りクッキー缶（冬ver.）':it.cat==='village'?'例：ぴよりんパフェ':'例：ハロウィンぴよりん'}" list="by-names" autocomplete="off"></label>
         <datalist id="by-names">${[...new Set(recs.flatMap(r=>r.items.filter(x=>x.cat===it.cat).map(x=>x.name)))].map(n=>`<option value="${esc(n)}">`).join('')}</datalist>
         <div class="by-row">
           <label class="by-fld by-qty"><span>数</span><span class="by-step"><button type="button" data-qty="-1" aria-label="1つ減らす">−</button><input type="number" id="by-qty" inputmode="numeric" min="1" max="999" value="${esc(it.qty)}"><button type="button" data-qty="1" aria-label="1つ増やす">＋</button></span></label>

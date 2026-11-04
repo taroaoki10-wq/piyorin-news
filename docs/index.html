@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ぴよりん">
-<meta name="piyo-ver" content="2026.11.04-10">
+<meta name="piyo-ver" content="2026.11.04-11">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
@@ -451,6 +451,7 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .by-cat.c-piyorin{background:var(--yolk);color:var(--yolk-ink)}
 .by-cat.c-cookie{background:var(--c-press);color:var(--c-press-ink)}
 .by-cat.c-goods{background:var(--c-media);color:var(--c-media-ink)}
+.by-cat.c-village{background:var(--hover);color:var(--caramel);border:1px solid var(--line)}
 .by-n em{font-style:normal;font-size:10.5px;color:var(--caramel);border:1px solid var(--caramel);border-radius:99px;padding:0 6px;margin-left:6px;vertical-align:1px}
 .by-n em.by-new{background:var(--caramel);color:var(--surface)}
 .by-q{font-family:var(--f-mono);font-size:12.5px;font-weight:400;text-align:right;white-space:nowrap}
@@ -487,7 +488,8 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .by-chip.on{background:var(--yolk);border-color:transparent;color:var(--yolk-ink)}
 .by-chip.on small{color:rgba(42,32,0,.7)}
 .by-seg{display:flex;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:3px;align-self:flex-start}
-.by-seg button{font:inherit;font-size:13px;font-weight:700;border:0;background:none;color:var(--muted);padding:5px 14px;border-radius:99px;cursor:pointer}
+.by-seg button{font:inherit;font-size:13px;font-weight:700;border:0;background:none;color:var(--muted);padding:5px 14px;border-radius:99px;cursor:pointer;white-space:nowrap}
+@media (max-width:400px){.by-seg button{font-size:12.5px;padding:5px 10px}}
 .by-seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 .by-lines{display:flex;flex-wrap:wrap;gap:6px}
 .by-line{font:inherit;font-size:12.5px;background:none;border:1px dashed var(--line);color:var(--muted);border-radius:99px;padding:3px 11px;cursor:pointer}
@@ -905,7 +907,7 @@ window.PiyoSplash=(function(){
 <script src="news-archive.js"></script>
 <script src="news-identity.js"></script>
 <script src="piyo-extras.js?v=2"></script>
-<script src="piyo-buy.js?v=7"></script>
+<script src="piyo-buy.js?v=8"></script>
 <script src="piyo-log/schema.js?v=1"></script>
 <script src="piyo-log/recorder.js?v=1"></script>
 <script src="piyo-log/rules.js?v=1"></script>
