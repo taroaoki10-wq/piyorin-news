@@ -1,5 +1,21 @@
 [
  {
+  "id": "n20261104-52890251",
+  "date": "2026-11-04",
+  "cat": "media",
+  "title": "映画とコラボ 真っ黒でトサカもある｢ぴよりんゴジラ｣限定販売 午前6時前から並んだ人も…11月13日まで名古屋駅の｢ぴよりんvillage｣など3店舗で販売 | 名古屋・愛知・岐阜・三重のニュース【CBC news】 | CBC web (1ページ)",
+  "source": "TBS NEWS DIG",
+  "url": "https://newsdig.tbs.co.jp/articles/cbc/3058247?display=1",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラの限定販売と名古屋駅の店舗の記事",
+   "t": "2026-11-04"
+  }
+ },
+ {
   "id": "n20261103-2d1ae801",
   "date": "2026-11-03",
   "cat": "media",
@@ -229,9 +245,14 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.livedoor.com/article/detail/32723907/"
+   },
+   {
+    "source": "newsdig.tbs",
+    "url": "https://newsdig.tbs.co.jp/articles/-/3058247?page=2"
    }
   ],
   "merged_ids": [
+   "n20261103-80d9113f",
    "n20261103-967b3285"
   ],
   "dv": 3,
@@ -292,22 +313,6 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんのYogiboコラボスクイーズ記事",
-   "t": "2026-11-04"
-  }
- },
- {
-  "id": "n20261103-ab111997",
-  "date": "2026-11-03",
-  "cat": "media",
-  "title": "コメント | 【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も",
-  "source": "オリコンニュース",
-  "url": "https://www.oricon.co.jp/news/2490266/comment/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんと映画ゴジラのコラボ商品・グッズの記事",
    "t": "2026-11-04"
   }
  },
