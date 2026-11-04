@@ -26,6 +26,22 @@
    {
     "source": "時事ドットコム",
     "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1NNGcySXphMkl0aXFkRzhWa3J6aWlSV0swelhpRDZLcnVzX3BRM3haY0R0Ymk4RUh1U0U1WE8wLUttRS1DN2kxMHpldmZHeDhZWE1kajljVW1XMUpkWl93M0wzWjFTUUtGdmY4?oc=5"
+   },
+   {
+    "source": "PR TIMES",
+    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9PemVMeEQwNVlyd3laUm1VdmY2M1dBTDdsdzVPVFd4djA1cnJ5YmtyZ2pPNHFBTEdUOExVUlc3Z09jVUNoOENoX1Rpa3NvRmMxUThfcUxpSlVCLVVHTGJ3cGVhSTg5MDZFZnc?oc=5"
+   },
+   {
+    "source": "AERA DIGITAL",
+    "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5jaC1hY0RlZThhemY2Z1B0aS15YXIxWU5lN0ZyQ3pHQ1N1VW9oQXpNaDVkcEtkVXFvYTZ0b3R4VVc3SlNPa1RPV2pCUl8xYTdE?oc=5"
+   },
+   {
+    "source": "Infoseek",
+    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFB2Z1ZpNmQ0b3QwMXZidHJSejQ2MHBFckE4TXVybW5HbWotMklSQVJFRVFDdWRjN1pXY2U3dEs3VHhSTmdzWkZFcm12SEpaQVVIT1pxN1NsSFIydk9DZFpPTGNWN0Y5RmZGQ3VrYUJPX190dw?oc=5"
+   },
+   {
+    "source": "AERA dot. (アエラドット)",
+    "url": "https://dot.asahi.com/articles/-/296871?page=1"
    }
   ],
   "dv": 3,
@@ -34,7 +50,10 @@
    "ok": true,
    "why": "TOICA20周年とぴよりん15周年の限定グッズ予約販売の記事",
    "t": "2026-11-04"
-  }
+  },
+  "merged_ids": [
+   "n20261104-504dcf75"
+  ]
  },
  {
   "id": "n20261104-b2719cf0",
@@ -47,6 +66,10 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5QdHladUNsZk1RbTJiSF9JOWdqdDJaeUFpSnFkMUw3Y1RPNzY5WmN0YmpBTTU1OXlzNE9ZdDRVSWhNS2lnYTZpa3N4YThxRUhxZ0ZxWGRjU0psOEY0OGlV?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5waHAyZTVqb1E3T1h0MWUyR1ppVU9WLUFyNllTSk1NSjFGdHl6a1FaQTVESjFqRWpDT0xYdTMwZ1NvNTF4QUNiaVRCd1YxaEtOOFg2Um5VaHc3ay1wRU5DNzNVVmo5VmdiMlNLaXZTeWxnNWJwdkNVUm15YkQ?oc=5"
    }
   ],
   "dv": 3,
@@ -80,12 +103,7 @@
   "title": "「ぴよりん」がゴジラ仕様に！映画『ゴジラ-0.0』公開記念「ぴよりんゴジラ」期間限定販売＆名古屋駅の「ぴよりんvillage」も特別装飾",
   "source": "シネアナゴヤ",
   "url": "https://cineana.net/archives/22665/amp",
-  "related": [
-   {
-    "source": "シネアナゴヤ",
-    "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE4wMG1haDEyQm5OYk5KOFY1OS0wRzJhdERvMmlkU2dJdmlXaE9DYkxZVlhSdWtPR3ZQZmYtbURSQk9ZNnRvcXJNMU5R0gFPQVVfeXFMUEtvM0JQNjhIVmloTjFKYzY4VjU5dmVUZ2FhUl9zdjduTjc1OUxxT3lBZ1B3TUVPX0dMZ2VxVTgzamdnZXA5ZGI0T042aTJaTQ?oc=5"
-   }
-  ],
+  "related": [],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -117,6 +135,10 @@
    {
     "source": "TBS NEWS DIG on MSN",
     "url": "https://www.msn.com/ja-jp/news/other/%E6%98%A0%E7%94%BB%E3%81%A8%E3%82%B3%E3%83%A9%E3%83%9C-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%82%B4%E3%82%B8%E3%83%A9-%E3%81%AB%E8%A1%8C%E5%88%97-%E7%9C%9F%E3%81%A3%E9%BB%92%E3%81%AA%E3%83%81%E3%83%A7%E3%82%B3%E3%83%AC%E3%83%BC%E3%83%88%E3%83%90%E3%83%90%E3%83%AD%E3%82%A2%E3%81%A7%E5%8C%85%E3%82%93%E3%81%A7-11%E6%9C%8813%E6%97%A5%E3%81%BE%E3%81%A7%E3%81%AE%E9%99%90%E5%AE%9A%E8%B2%A9%E5%A3%B2-jr%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93village-%E3%81%AA%E3%81%A9%E3%81%A7/ar-AA2gCMfk"
+   },
+   {
+    "source": "TBS NEWS DIG",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5vMVJzZzVxR0hVQkYxcDdCREVMQ1VxSm9XWmxFVTZ5TzB0bHd0MFU5Mm9qWTMtRDk4dDU5OGNvdE0zd3FBbE9XemYxY09uREFDeVBCdEo4N1hmWUVzSHRv?oc=5"
    }
   ],
   "merged_ids": [
@@ -195,6 +217,10 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBxbGRWaUFkNmNoVnV2dXgxMmRsWkVtTVJQbmt3LTRNWmtQM1NmUlh2bVBTV0g5TGpmR05BUFNFdXpjaGNvajk1NEl4WDBacVZqM0ZocWduMHNLRy1ZVGsxdURIVG9UVzFWLVlETllqT0w4TVZMZERKYnhGdXo?oc=5"
+   },
+   {
+    "source": "東海テレビ放送",
+    "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1pYW4tQ2hEanlaR0lNRENNdWkwd1V2NU9nU3RBSS1mdU1JQm5HemQxclFJV0ZFdF9yWEN6ZVp1YU1TVDBFZThKRk42blJNSzN5V2wxU1N1cnhKV3hEY0t0b29UM0psUlROWnQ3SDIyVm14bVE?oc=5"
    }
   ],
   "merged_ids": [
@@ -244,6 +270,10 @@
    {
     "source": "エキサイト",
     "url": "https://www.excite.co.jp/news/article/Oricon_2490266/"
+   },
+   {
+    "source": "西スポWEB OTTO!",
+    "url": "https://nishispo.nishinippon.co.jp/article/1054374"
    }
   ],
   "merged_ids": [
@@ -336,6 +366,14 @@
    {
     "source": "エキサイト",
     "url": "https://www.excite.co.jp/news/article/cbc_article3058247/"
+   },
+   {
+    "source": "TBS NEWS DIG",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5neUNOZmVVeS1EVGc4XzR6dkhnbFV2dFBDVzJPVUpsR25PTXRtdlhZYTlwXy1pQVZRUzlJNFdkZG42QkhvRUxvZW9lUmZ1ZXpUTXMxek9Tbw?oc=5"
+   },
+   {
+    "source": "Infoseek",
+    "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5mTzVlT3E1UzNVTGIycFEtYWY0V2xSWXl3OVNBOXJXQVQ0NjlQVWJXSUV2N2ZXVG56OFZPSnZQSEFZVl8wemhhSFF0S3FVN3oxWFowd0pMU3kwQ0Z0?oc=5"
    }
   ],
   "merged_ids": [
@@ -405,22 +443,6 @@
   }
  },
  {
-  "id": "n20261103-ab111997",
-  "date": "2026-11-03",
-  "cat": "media",
-  "title": "コメント | 【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も",
-  "source": "オリコンニュース",
-  "url": "https://www.oricon.co.jp/news/2490266/comment/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんゴジラの販売とグッズ展開を紹介する記事",
-   "t": "2026-11-04"
-  }
- },
- {
   "id": "n20261103-e745672d",
   "date": "2026-11-03",
   "cat": "media",
@@ -434,6 +456,22 @@
    "ok": true,
    "why": "名古屋駅で買ったぴよりんを題材にした個人note記事",
    "t": "2026-11-04"
+  }
+ },
+ {
+  "id": "n20261103-dce1abb6",
+  "date": "2026-11-03",
+  "cat": "media",
+  "title": "🍵 名古屋の学会帰りに何を買う？ぴよりんは自分用、職場には日持ちする焼き菓子を｜Dr. ユタイ",
+  "source": "note",
+  "url": "https://note.com/dr_yutai/n/n6a0bcccb33f9",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "名古屋土産の紹介記事で、ぴよりんを自分用に挙げている",
+   "t": "2026-11-05"
   }
  },
  {
@@ -1984,6 +2022,22 @@
    "n20261022-ded7ef30",
    "n20261023-c7925588"
   ]
+ },
+ {
+  "id": "n20261104-c04c5323",
+  "date": "2026-10-22",
+  "cat": "media",
+  "title": "【写真・画像】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も |",
+  "source": "佐賀新聞",
+  "url": "https://www.saga-s.co.jp/articles/gallery/1815547?ph=1",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんと映画ゴジラのコラボ商品・グッズの記事",
+   "t": "2026-11-05"
+  }
  },
  {
   "id": "n20261026-cec157e8",
