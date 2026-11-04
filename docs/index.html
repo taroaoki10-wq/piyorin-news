@@ -581,7 +581,8 @@ html.piyo-open .reader{z-index:48}
 <div class="splash" id="splash" aria-hidden="true"><div class="splash-piyo"></div><div class="splash-shadow"></div><p class="splash-title">ぴよりんニュース</p><p class="splash-dots"><i></i><i></i><i></i></p></div>
 <script src="infobase-client.js?v=2"></script>
 <script src="infobase-guard.js?v=2"></script>
-<script src="infobase.js?v=3"></script>
+<script src="infobase-brief.js?v=1"></script>
+<script src="infobase.js?v=4"></script>
 <script>
 // 読み込み画面（スマホだけ）。最初のニュースを読み終えたら、ぴよが手を振ってふわっと消える。消え始めるまで最低3秒は見せ、読めなくても5秒で消す
 // アプリを開くたびに出す（アプリの切り替え画面で上にスワイプして終了させたあとも）。ホーム画面に戻って開き直しただけのときは、iPhone がページを覚えていてここは動かないので出ない
@@ -1294,7 +1295,7 @@ window.PiyoSplash=(function(){
   });
 
   // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
-  const PN_VERSION='2026.11.04-2（会話の記録・改善の版）';
+  const PN_VERSION='2026.11.04-3（infobase のぴよ札で天気・警報・地震・為替・祝日にすぐ答える）';
   {
     const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
     const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
