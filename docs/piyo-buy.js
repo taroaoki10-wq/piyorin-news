@@ -8,12 +8,21 @@
   const REGULAR={
     piyorin:[
       {name:'定番ぴよりん',price:450},{name:'いちごぴよりん',price:480},{name:'紅茶ぴよりん',price:480},
-      {name:'チョコぴよりん',price:480},{name:'ももぴよりん',price:480},{name:'villageぴよりん',price:750},
+      {name:'チョコぴよりん',price:480},{name:'ももぴよりん',price:480},
       {name:'ぴよりんDX',price:6500},{name:'ぴよりんアイス',price:null}
     ],
     cookie:[{name:'ひよりの手作りクッキー缶',price:2800}],
     goods:[{name:'ぴよりんサブレ',price:750},{name:'ぴよりんマシュマロ',price:890}]
   };
+  // ぴよりんvillage 限定のメニュー（公式サイトの village のページ 2026-11-04 の値段。変わったら直す）
+  const VILLAGE=[
+    {name:'villageぴよりん',price:750},{name:'villageプレート',price:1580},{name:'villageナイトプレート',price:1580},
+    {name:'ぴよりんパフェ',price:1680},{name:'ぴよりんクリームソーダ（いちご）',price:980},{name:'ぴよりんクリームソーダ（メロン）',price:980},
+    {name:'ぴよりんかき氷',price:1480},{name:'ホイップバターぴよりんの小倉トースト',price:1180},{name:'やわかわラテ',price:960},
+    {name:'ひよりのガーデンパーティー（アフタヌーンティー）',price:3800}
+  ];
+  // 分類ごとに押せる決まった品（定番と village 限定）
+  const fixedFor=cat=>[...(REGULAR[cat]||[]),...(cat==='piyorin'?VILLAGE:[])];
   const SHOPS=[
     {name:'ぴよりんshop（名古屋駅）',short:'ぴよりんshop',slots:['9:00','12:00','15:00','18:00']},
     {name:'ぴよりんshop アトリエ店（勝川）',short:'アトリエ店',slots:['13:00']},
@@ -215,7 +224,7 @@
     return !list.some(r=>r.id!==rec.id&&(r.date<rec.date||(r.date===rec.date&&r.createdAt<rec.createdAt))&&r.items.some(x=>x.name===it.name));
   }
 
-  const PiyoBuy={KEY,CATS,REGULAR,SHOPS,shopOf,slotTime,CROWD,RATE,itemName,eventCat,memoPrices,limitedFor,allLimited,imageFor,archiveItems,nkey,normalize,total,count,sortRecs,
+  const PiyoBuy={KEY,CATS,REGULAR,VILLAGE,fixedFor,SHOPS,shopOf,slotTime,CROWD,RATE,itemName,eventCat,memoPrices,limitedFor,allLimited,imageFor,archiveItems,nkey,normalize,total,count,sortRecs,
     parseStore,dumpStore,merge,filter,stats,firstTime,todayJst,addDays,yen,newId};
   root.PiyoBuy=PiyoBuy;
   if(typeof module!=='undefined'&&module.exports)module.exports=PiyoBuy;
@@ -397,6 +406,7 @@
         <div class="by-seg" role="group" aria-label="分類">${Object.entries(B.CATS).map(([k,l])=>`<button type="button" data-cat="${k}" aria-pressed="${it.cat===k}">${l}</button>`).join('')}</div>
         ${onSale.length?`<p class="by-lab">${md(f.date)} に${f.date<B.todayJst()?'売っていた':'売っている'}限定</p><div class="by-chips">${onSale.map(x=>chip(`data-lim="${esc(x.id)}"`,x.name,it.name===x.name,`${md(x.start)}${x.end!==x.start?'〜'+md(x.end):''}${x.price!=null?' · '+B.yen(x.price):''}`,thumb({cat:x.cat,name:x.name,lid:x.id},f.date))).join('')}</div>`:''}
         ${regular.length?`<p class="by-lab">${it.cat==='goods'?'定番のおかし':'定番'}</p><div class="by-chips">${regular.map(x=>chip(`data-reg="${esc(x.name)}"`,x.name,it.name===x.name,x.price!=null?B.yen(x.price):'',thumb({cat:it.cat,name:x.name},f.date))).join('')}</div>`:''}
+        ${it.cat==='piyorin'?`<p class="by-lab">ぴよりんvillage 限定</p><div class="by-chips">${B.VILLAGE.map(x=>chip(`data-reg="${esc(x.name)}"`,x.name,it.name===x.name,x.price!=null?B.yen(x.price):'',thumb({cat:it.cat,name:x.name},f.date))).join('')}</div>`:''}
         ${near.length?`<details class="by-near"${near.some(x=>x.name===it.name)?' open':''}><summary>前後 1 週間の限定（${near.length}）</summary><div class="by-chips">${near.map(x=>chip(`data-lim="${esc(x.id)}"`,x.name,it.name===x.name,`${md(x.start)}${x.end!==x.start?'〜'+md(x.end):''}`,thumb({cat:x.cat,name:x.name,lid:x.id},x.start))).join('')}</div></details>`:''}
         ${it.cat!=='goods'||allLim.some(x=>x.cat==='goods')?`<details class="by-near" id="by-all"${f.allOpen?' open':''}><summary>これまでの限定から探す</summary>
           <input type="search" id="by-allq" value="${esc(f.allQ||'')}" placeholder="例：ハロウィン、2025、ゴジラ" aria-label="これまでの限定を探す">
@@ -539,10 +549,10 @@
       if(t.id==='buy-save')return submit(false);
       if(t.id==='buy-more')return submit(true);
       pull();const it=form.items[form.tab];
-      if(t.dataset.cat){if(it.cat!==t.dataset.cat){it.cat=t.dataset.cat;if(it.limited||B.REGULAR[it.cat]&&!B.REGULAR[it.cat].some(x=>x.name===it.name)){it.name='';it.price='';it.limited='';it.period='';it.lid=''}}}
+      if(t.dataset.cat){if(it.cat!==t.dataset.cat){it.cat=t.dataset.cat;if(it.limited||B.REGULAR[it.cat]&&!B.fixedFor(it.cat).some(x=>x.name===it.name)){it.name='';it.price='';it.limited='';it.period='';it.lid=''}}}
       else if(t.dataset.lim){pickLimited(t.dataset.lim,!!t.dataset.setdate);form.allOpen=!!t.dataset.setdate}
       else if(t.dataset.day)form.date=B.addDays(B.todayJst(),+t.dataset.day);
-      else if(t.dataset.reg){const x=(B.REGULAR[it.cat]||[]).find(r=>r.name===t.dataset.reg);if(x){it.name=x.name;it.price=x.price??'';it.limited='';it.period='';it.lid=''}}
+      else if(t.dataset.reg){const x=B.fixedFor(it.cat).find(r=>r.name===t.dataset.reg);if(x){it.name=x.name;it.price=x.price??'';it.limited='';it.period='';it.lid=''}}
       else if(t.dataset.arc){pickArchive(t.dataset.arc);form.allOpen=true}
       else if(t.dataset.pp)it.price=+t.dataset.pp;
       else if(t.dataset.qty)it.qty=Math.max(1,Math.min(999,(+it.qty||1)+(+t.dataset.qty)));

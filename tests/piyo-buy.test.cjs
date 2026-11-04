@@ -117,7 +117,7 @@ test('ページに購入記録のタブ・画面・読み込みがある',()=>{
   assert.match(html,/id="view-buy"/);
   assert.match(html,/id="buy-modal"/);
   assert.match(html,/id="set-buy"/);
-  assert.match(html,/<script src="piyo-buy\.js\?v=6"><\/script>/);
+  assert.match(html,/<script src="piyo-buy\.js\?v=7"><\/script>/);
   assert.match(html,/PiyoBuyUI\.mount\(/);
 });
 
@@ -213,4 +213,13 @@ test('店から販売の回を出す：選んだ店・自由に書いた店名�
   assert.equal(B.shopOf(''),null);
   assert.equal(B.slotTime('9:00'),'09:00');
   assert.equal(B.slotTime('13:00'),'13:00');
+});
+
+test('ぴよりんvillage 限定のメニューを、ぴよりんの分類で押せる',()=>{
+  const B=require('../docs/piyo-buy.js');
+  const names=B.fixedFor('piyorin').map(x=>x.name);
+  for(const n of ['villageぴよりん','ぴよりんパフェ','villageプレート','ぴよりんクリームソーダ（いちご）','ぴよりんかき氷'])assert.ok(names.includes(n),n);
+  assert.equal(B.VILLAGE.find(x=>x.name==='villageぴよりん').price,750);
+  assert.ok(!B.REGULAR.piyorin.some(x=>x.name==='villageぴよりん'),'定番と village 限定で二重にしない');
+  assert.ok(!B.fixedFor('cookie').some(x=>x.name.includes('village')));
 });
