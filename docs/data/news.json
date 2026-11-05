@@ -24,22 +24,6 @@
   ]
  },
  {
-  "id": "n20261105-68453b2d",
-  "date": "2026-11-05",
-  "cat": "media",
-  "title": "スイーツ「ぴよりん」羽ばたき600万ぴよ 藤井名人も食し全国区に [愛知県]",
-  "source": "朝日新聞",
-  "url": "https://www.asahi.com/articles/ASVBY1J5MVBYULFA013M.html",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりん発売15周年・累計販売数の記事",
-   "t": "2026-11-05"
-  }
- },
- {
   "id": "n20261105-38fa516e",
   "date": "2026-11-05",
   "cat": "media",
@@ -53,6 +37,38 @@
    "ok": true,
    "why": "説明が無く不明だが、百貨店の全国うまいもの催事でぴよりんが出る可能性があり迷うと",
    "t": "2026-11-05"
+  }
+ },
+ {
+  "id": "n20261105-68453b2d",
+  "date": "2026-11-05",
+  "cat": "media",
+  "title": "スイーツ「ぴよりん」羽ばたき600万ぴよ 藤井名人も食し全国区に [愛知県]",
+  "source": "朝日新聞",
+  "url": "https://www.asahi.com/articles/ASVBY1J5MVBYULFA013M.html",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの発売15周年・累計販売数に関する記事",
+   "t": "2026-11-06"
+  }
+ },
+ {
+  "id": "n20261105-b5d25bcf",
+  "date": "2026-11-05",
+  "cat": "media",
+  "title": "ぴよりんの新作ボンドロ！「旅する東海道」ボンボンドロップシールの絵柄・販売情報",
+  "source": "ボンボンナビ",
+  "url": "https://bonbon-navi.com/items/new_arrival/piyorin-tokaido-bonbon-drop-seal/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんとのコラボ新作ボンドロ（シール）の販売情報",
+   "t": "2026-11-06"
   }
  },
  {
@@ -98,6 +114,10 @@
    {
     "source": "AERA dot. (アエラドット)",
     "url": "https://dot.asahi.com/articles/-/296871?page=1"
+   },
+   {
+    "source": "AERA DIGITAL",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBORnBLYWtQSDRvUmFZRnlIc2lRMHZRdFU2Q0Q1VWtoNGp6MUd3NTdFcDE5WGZsWVpINWtzalVfR1NoTEo0S2lxdVJpRURvY1FfTkJ2eTV3?oc=5"
    }
   ],
   "dv": 3,
