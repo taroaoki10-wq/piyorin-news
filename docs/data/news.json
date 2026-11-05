@@ -18,7 +18,10 @@
    "ok": true,
    "why": "ぴよりんの15周年・累計販売数・コラボ商品の記事",
    "t": "2026-11-05"
-  }
+  },
+  "merged_ids": [
+   "n20261105-68453b2d"
+  ]
  },
  {
   "id": "n20261105-68453b2d",
@@ -32,7 +35,23 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんの15周年・累計販売数・コラボ商品の記事",
+   "why": "ぴよりん発売15周年・累計販売数の記事",
+   "t": "2026-11-05"
+  }
+ },
+ {
+  "id": "n20261105-38fa516e",
+  "date": "2026-11-05",
+  "cat": "media",
+  "title": "山陽百貨店で全国のうまいものが集まるイベント始まってる！週末 ...",
+  "source": "姫路の種",
+  "url": "https://budou-chan.jp/sanyo-umaimono-2026/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "説明が無く不明だが、百貨店の全国うまいもの催事でぴよりんが出る可能性があり迷うと",
    "t": "2026-11-05"
   }
  },
@@ -151,6 +170,22 @@
    "ok": true,
    "why": "ぴよりんゴジラの期間限定販売・名古屋駅装飾の記事",
    "t": "2026-11-04"
+  }
+ },
+ {
+  "id": "n20261104-04b86210",
+  "date": "2026-11-04",
+  "cat": "media",
+  "title": "ＪＲ東海 TOICA 20周年 ＆ ぴよりん 15周年を記念して20周年記念 限定100個 懐中時計、ぴよりん",
+  "source": "ニコニコニュース",
+  "url": "https://news.nicovideo.jp/watch/nw19954704?news_ref=watch_20_nw19790425",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん15周年記念のTOICA20周年限定グッズ記事",
+   "t": "2026-11-05"
   }
  },
  {
@@ -415,6 +450,10 @@
    {
     "source": "Infoseek",
     "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5mTzVlT3E1UzNVTGIycFEtYWY0V2xSWXl3OVNBOXJXQVQ0NjlQVWJXSUV2N2ZXVG56OFZPSnZQSEFZVl8wemhhSFF0S3FVN3oxWFowd0pMU3kwQ0Z0?oc=5"
+   },
+   {
+    "source": "locipo.jp",
+    "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBOc1k1eDY5ZWxuSzJMRk5CVG5OZWFGQXROeFppV1B3dW5laEw4Y0x3WVp6NVJsXzNOVVJOc1l6OXlteTI3MVktOXduSURGME9YX05Cbm9MYTFTeUtjSGd4ZmU4Yk1VTzlIbWZDdVI0REY?oc=5"
    }
   ],
   "merged_ids": [
@@ -554,6 +593,10 @@
    {
     "source": "佐賀新聞",
     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9wWDFIT2EzejVwYUhuYWx2LUpvWjZ1eFZ0N19oUXhISGFMY2RlVXBjaE40VF85M3FjY1N4eDFiZ3d3YllwSHFFT3JpbTQxZEpSMjAtYXN3?oc=5"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9mTjctQ0NCQ05NcW1kVVlxcGhIN292OGhQVkpPWWVnb05SQy16dTR5MHF1Q3lKQ2VocnlSWmljZmZZTG1pNlVJNl9md2h2ZTVONnc?oc=5"
    }
   ],
   "merged_ids": [
@@ -7380,6 +7423,21 @@
    "ok": true,
    "why": "巨大ぴよりんバルーンの設置概要発表。",
    "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20260321-51ebe814",
+  "date": "2026-03-21",
+  "cat": "media",
+  "title": "春限定ひよこ型スイーツ「さくらぴよりん」桜風味ババロアや桜餅 ...",
+  "source": "FASHOIN PRESS",
+  "url": "https://www.fashion-press.net/news/144569",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "春限定のさくらぴよりん商品の記事",
+   "t": "2026-11-05"
   }
  },
  {
