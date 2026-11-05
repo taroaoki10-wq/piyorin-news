@@ -1,5 +1,21 @@
 [
  {
+  "id": "n20261106-a3eb9df5",
+  "date": "2026-11-06",
+  "cat": "media",
+  "title": "「ぴよりん」発売15周年",
+  "source": "朝日新聞",
+  "url": "https://www.asahi.com/asagakuplus/article/asasho/17026292",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの発売15周年を伝える記事",
+   "t": "2026-11-06"
+  }
+ },
+ {
   "id": "n20261105-a76a4e5f",
   "date": "2026-11-05",
   "cat": "media",
@@ -40,22 +56,6 @@
   }
  },
  {
-  "id": "n20261105-68453b2d",
-  "date": "2026-11-05",
-  "cat": "media",
-  "title": "スイーツ「ぴよりん」羽ばたき600万ぴよ 藤井名人も食し全国区に [愛知県]",
-  "source": "朝日新聞",
-  "url": "https://www.asahi.com/articles/ASVBY1J5MVBYULFA013M.html",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの発売15周年・累計販売数に関する記事",
-   "t": "2026-11-06"
-  }
- },
- {
   "id": "n20261105-b5d25bcf",
   "date": "2026-11-05",
   "cat": "media",
@@ -68,6 +68,22 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんとのコラボ新作ボンドロ（シール）の販売情報",
+   "t": "2026-11-06"
+  }
+ },
+ {
+  "id": "n20261105-68453b2d",
+  "date": "2026-11-05",
+  "cat": "media",
+  "title": "スイーツ「ぴよりん」羽ばたき600万ぴよ 藤井名人も食し全国区に [愛知県]",
+  "source": "朝日新聞",
+  "url": "https://www.asahi.com/articles/ASVBY1J5MVBYULFA013M.html",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの累計販売数・コラボ・グッズを紹介する記事",
    "t": "2026-11-06"
   }
  },
@@ -474,6 +490,10 @@
    {
     "source": "locipo.jp",
     "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBOc1k1eDY5ZWxuSzJMRk5CVG5OZWFGQXROeFppV1B3dW5laEw4Y0x3WVp6NVJsXzNOVVJOc1l6OXlteTI3MVktOXduSURGME9YX05Cbm9MYTFTeUtjSGd4ZmU4Yk1VTzlIbWZDdVI0REY?oc=5"
+   },
+   {
+    "source": "TBS NEWS DIG",
+    "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5YMXVXZjBRLUp5X0lsZXBiaHVJQS1iTEF6aDhSNDl6bFJzWjNTR1FBeS1abUNpY2tmenh3bzkzeElHdmJjRktBNWtFXzl2dFdySDZsVVpkR1E5eHY3YmNqcHFUbTI?oc=5"
    }
   ],
   "merged_ids": [
@@ -2375,6 +2395,10 @@
    {
     "source": "山陽新聞",
     "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE11Y19oVjdaRnBwVzJscmV6Smxyc2FKLXN2eUpPZXlZZFBYM0JLQjlKMkVQRVJyM2czWklMUGRSLWFEZXNIT0ZIcmpQXzF0Q0pUQVNXUnBxbmladDFhX1MwNjlwV3lyUEJwTU5SVEZtRk5FUQ?oc=5"
+   },
+   {
+    "source": "福井新聞社",
+    "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5Rd3ZnaUpaQjRjbEFUSHh0Q2Y5Q25Kb2plYUtLbm05VW1UWmhCU1oxeE9Sc1Y5RGM5VUc4cEpmSENodmNWMDNjeG83NHI1WmhRa0d5T0J2dmJlb0lrN203ZnhQYzk2UVpMcFdnOA?oc=5"
    }
   ],
   "dv": 3,
@@ -2608,6 +2632,10 @@
    {
     "source": "山形新聞",
     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFA1MG4wSTk5NXQ0SkYwOVpLemtIR2ZxZkxudEx3b0ZwN3hhbWpKb0ZjS3RsMGIyc3NwR2lqZ0xlWHRkNVB0RGNQQnozUDZtX1dzYUZmeU9zVGt0MmpYWGRfeE9UM20?oc=5"
+   },
+   {
+    "source": "福井新聞社",
+    "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5ZNEpyemwtaExTeGNyOE1vTkwzUTVZbElVTUNRUjcxWVBuMjFIR085d2R1dVFZeUFpbThROThlZWRuVlExNW9Wcnp0NEpLaXBtRFVSTE0xNGRyOXZGSUdzWjBPUWpreFp6T2tZRw?oc=5"
    }
   ],
   "dv": 3,
