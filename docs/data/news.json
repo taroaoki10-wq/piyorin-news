@@ -16,6 +16,22 @@
   }
  },
  {
+  "id": "n20261106-5d2f3066",
+  "date": "2026-11-06",
+  "cat": "media",
+  "title": "黄金の怪獣が頭上に迫る3つの時報演出！スカイメディア金山 映画『ゴジラ-0.0』特別タイアップ放映",
+  "source": "dtimes",
+  "url": "https://dtimes.jp/post-1452738/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラ登場の映画タイアップ時報演出で、ぴよりんが取り上げられている",
+   "t": "2026-11-06"
+  }
+ },
+ {
   "id": "n20261105-a76a4e5f",
   "date": "2026-11-05",
   "cat": "media",
@@ -83,7 +99,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんの発売15周年・累計販売数・コラボ商品の話題",
+   "why": "ぴよりん発売15周年・累計販売数・コラボ商品に関する記事",
    "t": "2026-11-06"
   }
  },
@@ -494,6 +510,14 @@
    {
     "source": "TBS NEWS DIG",
     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5YMXVXZjBRLUp5X0lsZXBiaHVJQS1iTEF6aDhSNDl6bFJzWjNTR1FBeS1abUNpY2tmenh3bzkzeElHdmJjRktBNWtFXzl2dFdySDZsVVpkR1E5eHY3YmNqcHFUbTI?oc=5"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5STVFkbzRYSzF1bnFvV1JxNnROdDA0dXpEZkFDcmUzc0Yzc09FU1U3S0RGcE9PSUJUNDI5clppR3Y3VlQwT3A5WHc1czYtNXNvRktsS2tuRXBiekptcG9rWVdZNnlSaFR2dmRvUzRuYXF2SFpl0gF6QVVfeXFMTlJzQTRFdTY5Mmd4S1Z1bE8xMjNlbGl0d0dTbThTaF93MzRDUnhZNTg0X3duS09ZUHBWR2k4a0plUmZtUVRnN25FbGRncm5vUmgwLU5qXzFDM3UzSGd1S2JaRkFnYkJYaXJTQ0NqcUhvZWpUS1Fwb2c5Z1E?oc=5"
+   },
+   {
+    "source": "TBS NEWS DIG",
+    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE42aFFsM1hrdFFweW1RaXhzbnRkQ195SmQxNVZXUkFJcmk2NjhfT3U1ckwwNzkyUWtwM1FmWTRhejliRmxxVEx3Vi1UakdIWXNPM3FjOGJXT2htODJsV0lfdQ?oc=5"
    }
   ],
   "merged_ids": [
@@ -2636,6 +2660,10 @@
    {
     "source": "福井新聞社",
     "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5ZNEpyemwtaExTeGNyOE1vTkwzUTVZbElVTUNRUjcxWVBuMjFIR085d2R1dVFZeUFpbThROThlZWRuVlExNW9Wcnp0NEpLaXBtRFVSTE0xNGRyOXZGSUdzWjBPUWpreFp6T2tZRw?oc=5"
+   },
+   {
+    "source": "福井新聞社",
+    "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5TNlhpNWxlYU5hUjJTNEppcVRGRVo0aFUwSTA5bVVCUDRJQUlyOC1IYkMwZ0tNTkdBRF9EZkZkOG1UTlZXblJmbDE3cGJucUl1UnRQTGREczlhWG8yZkdINU5fVFlSdw?oc=5"
    }
   ],
   "dv": 3,
