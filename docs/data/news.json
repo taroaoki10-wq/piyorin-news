@@ -99,8 +99,8 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりん発売15周年・累計販売数・コラボ商品に関する記事",
-   "t": "2026-11-06"
+   "why": "ぴよりんの15周年・累計販売数・コラボ商品の話題",
+   "t": "2026-11-07"
   }
  },
  {
@@ -150,6 +150,10 @@
    {
     "source": "AERA DIGITAL",
     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBORnBLYWtQSDRvUmFZRnlIc2lRMHZRdFU2Q0Q1VWtoNGp6MUd3NTdFcDE5WGZsWVpINWtzalVfR1NoTEo0S2lxdVJpRURvY1FfTkJ2eTV3?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE4tMVNTYUxzN1kxUnB0SEY0RmZVMkZ5dUNhM0N2THg2WVNLVHlWZWE4MzJTUHBCdnNEeTJRWUloc21VUnVsbW9EN1RaSXF0ckY1NnNiMEc2eUFRZGZMNTJCWkZn?oc=5"
    }
   ],
   "dv": 3,
