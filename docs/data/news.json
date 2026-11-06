@@ -1748,11 +1748,16 @@
    {
     "source": "Infoseek",
     "url": "https://news.infoseek.co.jp/article/prtimes_000000256_000124425/"
+   },
+   {
+    "source": "ORICON NEWS",
+    "url": "https://www.oricon.co.jp/pressrelease/3050469/"
    }
   ],
   "merged_ids": [
    "n20261022-65d96dc5",
    "n20261023-0599aec3",
+   "n20261023-a11eb343",
    "n20261023-a4594ff3"
   ]
  },
