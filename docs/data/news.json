@@ -21,6 +21,31 @@
   }
  },
  {
+  "id": "n20261107-a74a5751",
+  "date": "2026-11-07",
+  "cat": "media",
+  "title": "【静岡駅】限定「みかんぴよりん」が登場！アスティ静岡で11月26、27日に整理券配布し特別販売",
+  "source": "アットエス",
+  "url": "https://www.at-s.com/life/article/ats/2090982.html",
+  "related": [
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPNE1KcG1PazBqejFIcmRIR3FWZFVOV0tWOHFoX2lodHNaSEc0RmRNZjFnQVp3V20zSDJ5LWtpUUFOYjFzY3E3LWg5UkFqekJSc19qQWRWVGU4UlJhYXo5RkxGNE9vWjFNb2dmcElwLUVDNUxVQmdLUG53WGxxb2pfbXJ4R1lJZDExdGhpcG5aTmhGdk0tMmk4RXJLM2liaFRfdUxvWXBXeGN2OGNKQ2p5OHdpRU44TWIxaS1lQlFsRHd3N1MwWEQteExBYlY5T1HSAX9BVV95cUxNUE1nRy1hYTJaTFJNTG1FcnpXRG84MmkyX3hwaGRsN0tfenVZbTl2S0pFU2NndVdpNm1BSmZ3SWZfOHREdUpvcXRoQVppV2NSSnlsM1NfVGF1UWtaeG5pQ05lSDhwbE5YLWxaTVc4QnhkSHdtLXNiRTdNdTg1dGxB?oc=5"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1QTWdHLWFhMlpMUk1MbUVyeldEbzgyaTJfeHBoZGw3S196dVltOXZLSkVTY2d1V2k2bUFKZndJZl84dER1Sm9xdGhBWmlXY1JKeWwzU19UYXVRa1p4bmlDTmVIOHBsTlgtbFpNVzhCeGRId20tc2JFN011ODV0bEHSAX9BVV95cUxNUE1nRy1hYTJaTFJNTG1FcnpXRG84MmkyX3hwaGRsN0tfenVZbTl2S0pFU2NndVdpNm1BSmZ3SWZfOHREdUpvcXRoQVppV2NSSnlsM1NfVGF1UWtaeG5pQ05lSDhwbE5YLWxaTVc4QnhkSHdtLXNiRTdNdTg1dGxB?oc=5"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん限定「みかんぴよりん」の販売記事",
+   "t": "2026-11-07"
+  }
+ },
+ {
   "id": "n20261106-a3eb9df5",
   "date": "2026-11-06",
   "cat": "media",
@@ -120,7 +145,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりん発売15周年・累計販売数などぴよりん自体の記事",
+   "why": "ぴよりんの発売15周年と累計販売数に関する記事",
    "t": "2026-11-07"
   }
  },
@@ -641,6 +666,22 @@
    "ok": true,
    "why": "名古屋土産の紹介記事で、ぴよりんを自分用に挙げている",
    "t": "2026-11-05"
+  }
+ },
+ {
+  "id": "n20261103-4a69d671",
+  "date": "2026-11-03",
+  "cat": "media",
+  "title": "映画とコラボ｢ぴよりんゴジラ｣に行列 真っ黒なチョコレートババロアで包んで…11月13日までの限定販売 JR名古屋駅｢ぴよりんvillage｣などで | 名古屋・愛知・岐阜・三重のニュース【CBC news】 | CBC web",
+  "source": "TBS NEWS DIG",
+  "url": "https://newsdig.tbs.co.jp/articles/cbc/3057794",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんとゴジラのコラボ限定販売の記事",
+   "t": "2026-11-07"
   }
  },
  {
@@ -6630,6 +6671,26 @@
    "ok": true,
    "why": "ぴよりnvillage新商品・コラボグッズ",
    "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20260716-76391320",
+  "date": "2026-07-16",
+  "cat": "media",
+  "title": "【静岡駅】限定「みかんぴよりん」が登場！アスティ静岡で11月26 ...",
+  "source": "dメニューニュース",
+  "url": "https://topics.smt.docomo.ne.jp/article/ats_sbs/region/ats_sbs-2090982",
+  "related": [
+   {
+    "source": "＠S[アットエス]",
+    "url": "https://www.at-s.com/life/article/ats/2090982.html"
+   }
+  ],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん限定「みかんぴよりん」の販売記事（重複）",
+   "t": "2026-11-07"
   }
  },
  {
