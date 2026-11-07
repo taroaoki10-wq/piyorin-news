@@ -20,6 +20,27 @@
   const norm = s => String(s || '').normalize('NFKC').toLowerCase().replace(/\s+/g, '');
   const has = (text, words) => (words || []).some(w => text.includes(norm(w)));
   const longest = (text, words) => (words || []).filter(w => text.includes(norm(w))).sort((a, b) => b.length - a.length)[0] || null;
+  // 町・県の言い方（2026-11-07「津の天気」が名古屋で答えられた件）。前が漢字・カタカナなら別の地名の一部（大津・天津・中津）。
+  // ただし「三重県津市」「静岡県浜松市」のように県・府・都・道のあとは町の名前。1 文字の名前（津）は、後ろが の・は・市・天気 などのときだけ（津波・津島・津軽を外す）
+  const PLACE_PREV = /[一-龥々ァ-ヶー]/u, PLACE_PREV_OK = /[県府都道]/u;
+  const ONE_NEXT = /^(?:$|市|の|は|が|で|って|も|に|へ|と|や|周辺|あたり|方面|駅|地方|天気|気温|予報|警報|注意報|雨|雪|晴|曇|くもり|今|いま|明日|あした|あす|明後日|あさって|週間|今日|きょう|[、,?？!！。・])/u;
+  // 当たった所（いちばん後ろ）。当たらなければ -1
+  const placeAt = (text, words) => {
+    let at = -1;
+    for (const w0 of words || []) {
+      const w = norm(w0);
+      if (!w) continue;
+      for (let i = text.indexOf(w); i >= 0; i = text.indexOf(w, i + 1)) {
+        if (i > 0 && PLACE_PREV.test(text[i - 1]) && !PLACE_PREV_OK.test(text[i - 1])) continue;
+        if (w.length === 1 && !ONE_NEXT.test(text.slice(i + 1))) continue;
+        at = Math.max(at, i);
+      }
+    }
+    return at;
+  };
+  const hasPlace = (text, words) => placeAt(text, words) >= 0;
+  // いくつも当たったら後ろに書かれた方（「静岡県浜松市」は浜松。前は県の名前の静岡を先に選んでいた）
+  const findPlace = (text, list) => list.map((x, k) => ({ x, k, at: placeAt(text, x.words) })).filter(o => o.at >= 0).sort((a, b) => b.at - a.at || a.k - b.k)[0]?.x;
 
   function usable(brief, bundle, now) {
     if (!brief) return false;
@@ -74,7 +95,7 @@
 
     // 天気・今の気温
     if (ix.weather && (has(t, ix.weather.words) || has(t, ix.weather.now_words))) {
-      const area = (ix.weather.areas.find(a => has(t, a.words)) || {}).area || ix.weather.default_area;
+      const area = (findPlace(t, ix.weather.areas) || {}).area || ix.weather.default_area;
       // 今の空：その町の札（古い札の bundle は名古屋だけ。無い町の札は pick が「まだ無い」を返す）
       if (has(t, ix.weather.now_words)) add(`now:${area}`);
       if (day === '週間' && !wd) add(`weather:${area}:週間`);
@@ -83,7 +104,7 @@
     }
     // 警報・注意報
     if (ix.warning && has(t, ix.warning.words)) {
-      const pref = (ix.warning.prefs.find(p => has(t, p.words)) || {}).pref || ix.warning.default_pref;
+      const pref = (findPlace(t, ix.warning.prefs) || {}).pref || ix.warning.default_pref;
       add(`warning:${pref}`);
     }
     if (ix.quake && has(t, ix.quake.words)) add('quake:latest');
@@ -187,6 +208,6 @@
     return { load, answer, get, feedback, briefFeedback, enabled, get bundle() { return bundle; } };
   }
 
-  const api = { create, match, pick, usable, voice };
+  const api = { create, match, pick, usable, voice, hasPlace };
   if (typeof module === 'object' && module.exports) module.exports = api; else root.InfobaseBrief = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
