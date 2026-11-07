@@ -1,5 +1,26 @@
 [
  {
+  "id": "n20261107-9e23f50f",
+  "date": "2026-11-07",
+  "cat": "media",
+  "title": "山陽百貨店、朝からすごい行列。ぴよりん…",
+  "source": "姫路の種",
+  "url": "https://budou-chan.jp/sanyo-umaimono-2026-piyorin/",
+  "related": [
+   {
+    "source": "姫路の種",
+    "url": "https://budou-chan.jp/sanyo-umaimono-2026-piyorin/"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "山陽百貨店の行列記事でぴよりんが話題、販売関連と思われる",
+   "t": "2026-11-07"
+  }
+ },
+ {
   "id": "n20261106-a3eb9df5",
   "date": "2026-11-06",
   "cat": "media",
@@ -99,7 +120,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんの15周年・累計販売数・コラボ商品の話題",
+   "why": "ぴよりん発売15周年・累計販売数などぴよりん自体の記事",
    "t": "2026-11-07"
   }
  },
