@@ -1,4 +1,4 @@
-// infobase/app/src/shared/brief-client.cjs の写し（2026-11-04）。直すときは infobase 側を直して写し直す。
+// infobase/app/src/shared/brief-client.cjs の写し（2026-11-07 写し直し）。直すときは infobase 側を直して写し直す。
 /*
  * ぴよ札の共通クライアント。ブラウザ（blue tree・ぴよりんニュース）と Node（Claude Pet）の両方で使う。
  *
@@ -11,7 +11,7 @@
  *   const brief = InfobaseBrief.create({url, key});
  *   const r = await brief.answer('名古屋の明日の天気は？');
  *   // r.briefs[0].say … 口調のない文。アプリが口調を付けて言う。
- *   // r.briefs[0].status が 'あり' 以外なら、推測せず「まだ分からない」と言う。
+ *   // r.briefs[0].status が 'あり' 以外（古い・食い違い・まだ無い）なら、推測せず「まだ分からない」と言う。
  */
 (function (root) {
   const DAY = 86400000;
@@ -75,7 +75,8 @@
     // 天気・今の気温
     if (ix.weather && (has(t, ix.weather.words) || has(t, ix.weather.now_words))) {
       const area = (ix.weather.areas.find(a => has(t, a.words)) || {}).area || ix.weather.default_area;
-      if (has(t, ix.weather.now_words) && area === '名古屋市') add('now:名古屋市');
+      // 今の空：その町の札（古い札の bundle は名古屋だけ。無い町の札は pick が「まだ無い」を返す）
+      if (has(t, ix.weather.now_words)) add(`now:${area}`);
       if (day === '週間' && !wd) add(`weather:${area}:週間`);
       else if (wd && !['今日', '明日', '明後日'].includes(day)) add(`weather:${area}:${wd}`);
       else add(`weather:${area}:${day && day !== '週間' ? day : '今日'}`);
@@ -86,9 +87,24 @@
       add(`warning:${pref}`);
     }
     if (ix.quake && has(t, ix.quake.words)) add('quake:latest');
-    if (ix.fx) {
+    // ユーロドル（ユーロと米ドルの間）は円の札では答えない
+    if (ix.fx && !has(t, ix.fx.not_words)) {
       if (has(t, ix.fx.eur_words)) add('fx:eur_jpy');
       if (has(t, ix.fx.usd_words)) add('fx:usd_jpy');
+    }
+    // 株価指数：名前が当たればその指数、「株価」などだけなら全部のまとめ
+    if (ix.stock) {
+      const named = (ix.stock.indices || []).filter(i => has(t, i.words));
+      named.forEach(i => add(i.id));
+      if (!named.length && has(t, ix.stock.words)) add('index:all');
+    }
+    // 決まった形の話題（金・国債・経済指標・運行・停電など。2026-11-07）。辞書の topics に足すだけで増やせる
+    // 名前で当たった札（「JR」「名鉄」）があれば、広い言葉（「電車」「運行」）の札の組は足さない
+    const hitsT = (ix.topics || []).filter(r => has(t, r.words));
+    const named = hitsT.filter(r => (r.by || []).some(b => has(t, b.words)) || !r.ids);
+    for (const r of hitsT) {
+      const by = (r.by || []).find(b => has(t, b.words));
+      if (by) add(by.id); else if (!r.ids) add(r.default); else if (!named.length) r.ids.forEach(add);
     }
     if (ix.piyorin && has(t, ix.piyorin.words)) { add('piyorin:latest'); add('news:001'); }
     if (ix.holiday && has(t, ix.holiday.words)) add(['今日', '明日'].includes(day) ? `calendar:${day}` : 'holiday:next');
@@ -111,13 +127,13 @@
    * 文の終わりだけを変える。数字・日付・出典のかっこはそのまま。
    */
   const VOICE = {
-    piyo: { 'ではありません': 'ではないぴよ', 'られません': 'られないぴよ', 'ありません': 'ないぴよ', 'ありました': 'あったぴよ', 'ています': 'ているぴよ', 'です': 'だぴよ', '': 'ぴよ' },
-    blue: { 'ではありません': 'じゃないよ', 'られません': 'られないんだ', 'ありません': 'ないよ', 'ありました': 'あったよ', 'ています': 'ているよ', 'です': 'だよ', '': '' },
+    piyo: { 'ではありません': 'ではないぴよ', 'られません': 'られないぴよ', 'ていません': 'ていないぴよ', 'えません': 'えないぴよ', 'ありません': 'ないぴよ', 'ありました': 'あったぴよ', 'ています': 'ているぴよ', 'です': 'だぴよ', '': 'ぴよ' },
+    blue: { 'ではありません': 'じゃないよ', 'られません': 'られないんだ', 'ていません': 'ていないよ', 'えません': 'えないんだ', 'ありません': 'ないよ', 'ありました': 'あったよ', 'ています': 'ているよ', 'です': 'だよ', '': '' },
   };
   function voice(text, style = 'piyo') {
     const v = VOICE[style];
     if (!v || !text) return text || '';
-    return String(text).replace(/([^。]*?)(ではありません|られません|ありません|ありました|ています|です)?((?:（[^）]*）)?)。/g, (m, body, end, paren, at, all) => `${body}${end ? v[end] : at + m.length >= all.trimEnd().length ? v[''] : ''}${paren}。`); // 動詞のない文（「晴れのち雨。」）は、最後の文だけに語尾を付ける
+    return String(text).replace(/([^。]*?)(ではありません|られません|ていません|えません|ありません|ありました|ています|です)?((?:（[^）]*）)?)。/g, (m, body, end, paren, at, all) => `${body}${end ? v[end] : at + m.length >= all.trimEnd().length ? v[''] : ''}${paren}。`); // 動詞のない文（「晴れのち雨。」）は、最後の文だけに語尾を付ける
   }
 
   function create(config = {}) {
@@ -149,7 +165,11 @@
       const b = await load();
       if (!b) return { ids: [], briefs: [], offline: true };
       const ids = match(text, b, now);
-      return { ids, briefs: ids.map(id => pick(b, id, now)) };
+      // 「あり」なのに文が届いていない札（この鍵には中身を渡さない札。例：ぴよりんニュースの鍵の「今の空」）は後ろへ。
+      // 先に中身のある札（その町の予報など）で答える。「古い」「まだ無い」は断るのに使うので、順番を変えない（2026-11-07）
+      const hidden = x => x.status === 'あり' && !x.say;
+      const all = ids.map(id => pick(b, id, now));
+      return { ids, briefs: [...all.filter(x => !hidden(x)), ...all.filter(hidden)] };
     }
     async function get(id, now = Date.now()) { const b = await load(); return b ? pick(b, id, now) : missing(id, 'infobase につながりません'); }
     /** 答えに使った札の反応を返す。札の元のカードの番号で送る（今のフィードバックの窓口のまま）。 */
@@ -158,7 +178,13 @@
       if (!enabled || !card) return null;
       try { const r = await doFetch(base + '/v1/feedback', { method: 'POST', headers: { Authorization: 'Bearer ' + config.key, 'Content-Type': 'application/json' }, body: JSON.stringify({ card_id: card.id, kind }), signal: AbortSignal.timeout(2500) }); return r.ok ? r.json() : null; } catch { return null; }
     }
-    return { load, answer, get, feedback, enabled, get bundle() { return bundle; } };
+    /** 札への評価（2026-11-07）。材料の区画（well dock）とカードの両方へ届く。kind：good・bad・wrong・old */
+    async function briefFeedback(brief, kind, note = '') {
+      const id = typeof brief === 'string' ? brief : brief?.id;
+      if (!enabled || !id) return null;
+      try { const r = await doFetch(base + '/v1/brief/feedback', { method: 'POST', headers: { Authorization: 'Bearer ' + config.key, 'Content-Type': 'application/json' }, body: JSON.stringify({ brief: id, kind, note: String(note || '').slice(0, 280) }), signal: AbortSignal.timeout(2500) }); return r.ok ? r.json() : null; } catch { return null; }
+    }
+    return { load, answer, get, feedback, briefFeedback, enabled, get bundle() { return bundle; } };
   }
 
   const api = { create, match, pick, usable, voice };
