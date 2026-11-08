@@ -136,7 +136,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんの15周年・累計販売数・コラボ・グッズの記事",
+   "why": "ぴよりんの15周年・累計販売数・コラボ商品の記事",
    "t": "2026-11-08"
   }
  },
@@ -994,7 +994,12 @@
   "title": "「ぴよりんゴジラ」上陸 映画記念、来月3～13日",
   "source": "読売新聞オンライン",
   "url": "https://www.yomiuri.co.jp/local/aichi/news/20261030-GYTNT00239/",
-  "related": [],
+  "related": [
+   {
+    "source": "読売新聞",
+    "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBBQWZQRW4wbGxXWE9qZ2RkYi1ZVkpaWjRmNmV3SXBHdzJEUmdNck4xZnBocm40WHdhZnlCVFAxZzZ6WElQNUJndWw3YUVvVkd2aFl3RzVEdFI2LWtXNzZsN1dqZm9xczlvZUQyeF9aR0c?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -1769,6 +1774,21 @@
   "merged_ids": [
    "n20261026-99007bf2"
   ]
+ },
+ {
+  "id": "n20261024-00fab9d1",
+  "date": "2026-10-24",
+  "cat": "media",
+  "title": "山陽百貨店にぴよりんが11月7日と8日限定出店 紅茶ぴよりんのセットを販売へ",
+  "source": "Dellows News",
+  "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTFAtZGxOMUl6d3diRXJJMTZTSUgzWS1ERXMxbkVuZTVoejU0ZzZmVUtETmY5MXZHUV9kcFdNbEJjUTV2RGZqOGc?oc=5",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの百貨店出店と紅茶ぴよりん販売の記事",
+   "t": "2026-11-08"
+  }
  },
  {
   "id": "official-p5642",
