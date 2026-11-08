@@ -136,7 +136,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんの15周年・累計販売数・コラボ商品の記事",
+   "why": "ぴよりんの15周年・累計販売数・コラボ商品に関する記事",
    "t": "2026-11-08"
   }
  },
@@ -2746,6 +2746,10 @@
    {
     "source": "福井新聞社",
     "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5TNlhpNWxlYU5hUjJTNEppcVRGRVo0aFUwSTA5bVVCUDRJQUlyOC1IYkMwZ0tNTkdBRF9EZkZkOG1UTlZXblJmbDE3cGJucUl1UnRQTGREczlhWG8yZkdINU5fVFlSdw?oc=5"
+   },
+   {
+    "source": "北國新聞",
+    "url": "https://www.hokkoku.co.jp/articles/tym/2265809"
    }
   ],
   "dv": 3,
@@ -2758,6 +2762,7 @@
   "merged_ids": [
    "n20261021-46058b77",
    "n20261021-515859f5",
+   "n20261021-83ed3d47",
    "n20261021-8d213e77",
    "n20261021-9982e9cc",
    "n20261021-a0df6672",
