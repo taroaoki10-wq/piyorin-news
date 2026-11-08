@@ -1,5 +1,21 @@
 [
  {
+  "id": "n20261109-ab111997",
+  "date": "2026-11-09",
+  "cat": "media",
+  "title": "コメント | 【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も",
+  "source": "オリコンニュース",
+  "url": "https://www.oricon.co.jp/news/2490266/comment/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんと映画ゴジラのコラボ商品・店内装飾の記事",
+   "t": "2026-11-09"
+  }
+ },
+ {
   "id": "n20261107-9e23f50f",
   "date": "2026-11-07",
   "cat": "media",
@@ -136,7 +152,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんの15周年・累計販売数・コラボやグッズの話題",
+   "why": "ぴよりんの発売15周年・累計販売数に関する記事",
    "t": "2026-11-09"
   }
  },
@@ -864,6 +880,10 @@
    {
     "source": "朝日新聞",
     "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFAxc0FxSWE1eWQ4b1Z3N3BtRHBzcjBwTGUzUUo0eWtMWHJOTHBzc3Q3R281RWI5VVhQRnkwQnNEdks1Vk54Vy1WNENDdmJkdEg1Tk5sTG5LZHB3YmFuendvNW9Gcw?oc=5"
+   },
+   {
+    "source": "朝日新聞",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBnd2NHNnRmbUV6azU2WVVIeWcwcTJEck9qUVhETmVRVHJkN3hIOVc4cEdKdlRTZDRQckljOUZkQmxsSTlmQ2ZwYkhqdmo4N1ZGMEdPN3VuRQ?oc=5"
    }
   ],
   "dv": 3,
@@ -5679,6 +5699,22 @@
     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBpaXVPZzlTVmdRS2p6MXpGRFdVeHppT1hyc0hzOFEtMEY4Y1lMSm5SRjQ5LU14Rm9TNXMzQ1d4dklNREdTbDVQLTFFaTBwYU5vWUpXbjNURGZMZ1hWU2VuUmlMQ1VDblM5ZUE?oc=5"
    }
   ]
+ },
+ {
+  "id": "n20261108-c2f40c9f",
+  "date": "2026-09-10",
+  "cat": "media",
+  "title": "中川運河でOVERLAP開催へ ドローンショーや巨大ぴよりんバルーン展示",
+  "source": "Dellows News",
+  "url": "https://news.dellows.jp/255708/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "イベントで巨大ぴよりんバルーン展示があり、ぴよりん登場企画",
+   "t": "2026-11-09"
+  }
  },
  {
   "id": "n20260910-33932775",
