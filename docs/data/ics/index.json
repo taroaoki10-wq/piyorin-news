@@ -39,16 +39,6 @@
   "time": "",
   "timed": false
  },
- "auto-officialp5642": {
-  "alarms": [
-   "eve",
-   "morning",
-   "none"
-  ],
-  "f": "auto-officialp5642",
-  "time": "",
-  "timed": false
- },
  "auto-officialp5657": {
   "alarms": [
    "eve",
