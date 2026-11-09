@@ -1,7 +1,7 @@
 {
  "note": "購入記録の画像の住所。ぴよりんはぴよりん図鑑、クッキー缶などは公式のプレスリリースの代表画像。画像は公式のサーバーのものをそのまま表示する。",
  "zukanSource": "https://piyorin.com/detail/",
- "zukanChecked": "2026-11-08T16:30:01+09:00",
+ "zukanChecked": "2026-11-09T15:53:44+09:00",
  "zukan": [
   {
    "id": "z1384",
@@ -3632,6 +3632,14 @@
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/109/124425-109-13693b73c20b3c7277f29e6a285912f7-1200x848.jpg",
    "from": "news",
    "name": "ひよりの手作りクッキー缶"
+  },
+  "auto-officialp5666-2": {
+   "cat": "goods",
+   "title": "ぴよりんハイハイレース予約受付開始",
+   "date": "2026-11-09",
+   "url": "https://piyorin.com/news/p5666/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/262/124425-262-7520756eb116bf01d70fc49ede82d378-1535x1024.png",
+   "from": "event"
   }
  }
 }

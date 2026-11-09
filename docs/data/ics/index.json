@@ -59,6 +59,28 @@
   "time": "",
   "timed": false
  },
+ "auto-officialp5666": {
+  "alarms": [
+   "eve",
+   "morning",
+   "hour",
+   "none"
+  ],
+  "f": "auto-officialp5666",
+  "time": "10:00",
+  "timed": true
+ },
+ "auto-officialp5666-2": {
+  "alarms": [
+   "eve",
+   "morning",
+   "hour",
+   "none"
+  ],
+  "f": "auto-officialp5666-2",
+  "time": "10:00",
+  "timed": true
+ },
  "e-oshitabi": {
   "alarms": [
    "eve",

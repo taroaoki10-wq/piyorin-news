@@ -1,5 +1,54 @@
 [
  {
+  "id": "official-p5666",
+  "date": "2026-11-09",
+  "cat": "official",
+  "title": "「ぴよりんとチャレンジしよう！」第2弾開催決定！ ご家族で楽しめる体験型イベントをイオンモール熱田にて開催",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5666/",
+  "related": [
+   {
+    "source": "PR TIMES",
+    "url": "https://prtimes.jp/main/html/rd/p/000000262.000124425.html"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5HcGFNdk01dGZFYkNGczJ6Yl9Dak1lUDV5azYzY1kxMVEwRmRjbV9MMVN1MkFieUhFU2hNZ3B1dFVyZ1FfS3lVUnNoRHA5aVVvS29sNy1UZzVlck9TQTk3bTktRmE3SW1ub1NrdHdub0FHRncxOXVkZkhORQ?oc=5"
+   },
+   {
+    "source": "MANTANWEB（まんたんウェブ）",
+    "url": "https://mantan-web.jp/prtimes/article/20261109prt00m200000090a.html"
+   }
+  ],
+  "merged_ids": [
+   "n20261108-07f5349d"
+  ]
+ },
+ {
+  "id": "n20261109-3c61ec93",
+  "date": "2026-11-09",
+  "cat": "media",
+  "title": "三島市の特産品「三島甘藷」が「ぴよりん」に！ JR名古屋駅などで15日から期間限定販売",
+  "source": "静岡新聞DIGITAL",
+  "url": "https://news.at-s.com/article/2094442",
+  "related": [
+   {
+    "source": "静岡新聞DIGITAL",
+    "url": "https://news.at-s.com/article/2094442"
+   }
+  ],
+  "merged_ids": [
+   "n20261109-d17161f7"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "三島甘藷がぴよりんになる期間限定販売の記事",
+   "t": "2026-11-09"
+  }
+ },
+ {
   "id": "n20261109-ab111997",
   "date": "2026-11-09",
   "cat": "media",
@@ -11,7 +60,23 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんと映画ゴジラのコラボ商品・店内装飾の記事",
+   "why": "ぴよりんと映画ゴジラのコラボ商品の記事",
+   "t": "2026-11-09"
+  }
+ },
+ {
+  "id": "n20261109-3b91f15a",
+  "date": "2026-11-09",
+  "cat": "media",
+  "title": "イオンモール熱田でぴよりんの体験イベントが2026年11月21日に開催へ",
+  "source": "news.dellows.jp",
+  "url": "https://news.dellows.jp/1085587/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの体験イベント開催の記事",
    "t": "2026-11-09"
   }
  },
@@ -152,7 +217,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんの発売15周年・累計販売数に関する記事",
+   "why": "ぴよりんの発売15周年・累計販売数の記事",
    "t": "2026-11-09"
   }
  },
@@ -742,7 +807,8 @@
   ],
   "merged_ids": [
    "n20261103-1e298afe",
-   "n20261103-ab111997"
+   "n20261103-ab111997",
+   "n20261109-ab111997"
   ],
   "dv": 3,
   "jg": {
@@ -2529,6 +2595,10 @@
    {
     "source": "福井新聞社",
     "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5Rd3ZnaUpaQjRjbEFUSHh0Q2Y5Q25Kb2plYUtLbm05VW1UWmhCU1oxeE9Sc1Y5RGM5VUc4cEpmSENodmNWMDNjeG83NHI1WmhRa0d5T0J2dmJlb0lrN203ZnhQYzk2UVpMcFdnOA?oc=5"
+   },
+   {
+    "source": "Excite エキサイト",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5FTXZWZ0FVYUtlNzh5cGkxOW9mTFdkOFpMRFFERExka0w4OFFLcDBIUjFjcGoxOGxsM3BSdFZnaWZwdkFvY2lfazFXeWRsU1JFSXJFYUJLU1c4TXM2M2tJNzd3?oc=5"
    }
   ],
   "dv": 3,

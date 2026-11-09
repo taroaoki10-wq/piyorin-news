@@ -478,6 +478,17 @@
   "auto": true
  },
  {
+  "id": "auto-officialp5666-2",
+  "title": "ぴよりんハイハイレース予約受付開始",
+  "start": "2026-11-09",
+  "end": "2026-11-09",
+  "place": "イオンモール熱田",
+  "kind": "release",
+  "url": "https://piyorin.com/news/p5666/",
+  "src": "official-p5666",
+  "auto": true
+ },
+ {
   "id": "e-tour",
   "title": "ぴよりん新幹線ツアー（いいぴよの日）",
   "start": "2026-11-14",
@@ -495,6 +506,17 @@
   "kind": "sale",
   "url": "https://piyorin.com/news/p5638/",
   "src": "official-p5638",
+  "auto": true
+ },
+ {
+  "id": "auto-officialp5666",
+  "title": "ぴよりんとチャレンジしよう！第2弾",
+  "start": "2026-11-21",
+  "end": "2026-11-21",
+  "place": "イオンモール熱田",
+  "kind": "event",
+  "url": "https://piyorin.com/news/p5666/",
+  "src": "official-p5666",
   "auto": true
  },
  {
