@@ -18,10 +18,15 @@
    {
     "source": "MANTANWEB（まんたんウェブ）",
     "url": "https://mantan-web.jp/prtimes/article/20261109prt00m200000090a.html"
+   },
+   {
+    "source": "産経ニュース",
+    "url": "https://www.sankei.com/pressrelease/prtimes/TKINR2PJE5NH7DOKJLDIRPZKYM/"
    }
   ],
   "merged_ids": [
-   "n20261108-07f5349d"
+   "n20261108-07f5349d",
+   "n20261109-7bb1bae4"
   ]
  },
  {
@@ -49,22 +54,6 @@
   }
  },
  {
-  "id": "n20261109-ab111997",
-  "date": "2026-11-09",
-  "cat": "media",
-  "title": "コメント | 【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も",
-  "source": "オリコンニュース",
-  "url": "https://www.oricon.co.jp/news/2490266/comment/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんと映画ゴジラのコラボ商品の記事",
-   "t": "2026-11-09"
-  }
- },
- {
   "id": "n20261109-3b91f15a",
   "date": "2026-11-09",
   "cat": "media",
@@ -78,6 +67,22 @@
    "ok": true,
    "why": "ぴよりんの体験イベント開催の記事",
    "t": "2026-11-09"
+  }
+ },
+ {
+  "id": "n20261109-ab111997",
+  "date": "2026-11-09",
+  "cat": "media",
+  "title": "コメント | 【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も",
+  "source": "オリコンニュース",
+  "url": "https://www.oricon.co.jp/news/2490266/comment/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんと映画ゴジラのコラボ商品・店内装飾の記事",
+   "t": "2026-11-10"
   }
  },
  {
@@ -217,8 +222,8 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんの発売15周年・累計販売数の記事",
-   "t": "2026-11-09"
+   "why": "ぴよりんの15周年・累計販売数・コラボ商品の記事",
+   "t": "2026-11-10"
   }
  },
  {
@@ -2599,6 +2604,10 @@
    {
     "source": "Excite エキサイト",
     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5FTXZWZ0FVYUtlNzh5cGkxOW9mTFdkOFpMRFFERExka0w4OFFLcDBIUjFjcGoxOGxsM3BSdFZnaWZwdkFvY2lfazFXeWRsU1JFSXJFYUJLU1c4TXM2M2tJNzd3?oc=5"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBOTmdLUVRMcEs2MG55ZU8xUkxlamRGY3FCbm5QeHpRbU0zWHlZZGtoUnBwUXZLNVlaZnRsV1FvQ3BOUWtCYUFObl9ubVRPX0NHNUE?oc=5"
    }
   ],
   "dv": 3,
