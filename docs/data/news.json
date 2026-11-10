@@ -1,5 +1,42 @@
 [
  {
+  "id": "official-p5673",
+  "date": "2026-11-10",
+  "cat": "official",
+  "title": "「ぴよりん」が京都に初めてのおでかけ！「dancyu祭2027 in 京都」に登場！",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5673/",
+  "related": [
+   {
+    "source": "PR TIMES",
+    "url": "https://prtimes.jp/main/html/rd/p/000000264.000124425.html"
+   },
+   {
+    "source": "クレアウェブ",
+    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBQYTJZMHlQbEVtSG5ManJOclRYQkRNMms2UURvVjBxRDNyeWd5b2FXQUFJeXdLQjJPN1BvZjVZRGN4T1Q5ZU1CZGx1di1hX0ZxZ0pobTFEWVFqQllXQlNlZ1R0ejNhdEFCWGtiWjRxUkNGdw?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBaVzYzNGFJbXZLb0Q1UFV3enVnR1JuSXJZdG9oZWFvM0pJVGJ0YmJoNXZ1VGM2ZTJNdFVjWGFxVjVobVNlOWJPcFdfbDZ6ZDlGd0hvRF80Zk1EY2JMd0lvUGZ3?oc=5"
+   },
+   {
+    "source": "シブヤ経済新聞",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBNSWE0NktoNVpRMGVfYVJGajhnbEtmSGYyNmhkem8yZEhaLTRmOG1tR0l0UjVvTzJya1NzelJXaUFqR3lEXzV1OERzVW9DZnNnYXFKbjgtblNEejY0eVNF?oc=5"
+   },
+   {
+    "source": "時事ドットコム",
+    "url": "https://www.jiji.com/jc/article?k=000000264.000124425&g=prt"
+   },
+   {
+    "source": "MANTANWEB（まんたんウェブ）",
+    "url": "https://mantan-web.jp/prtimes/article/20261110prt00m200000777a.html"
+   }
+  ],
+  "merged_ids": [
+   "n20261110-f9502616"
+  ]
+ },
+ {
   "id": "n20261110-b01c7b08",
   "date": "2026-11-10",
   "cat": "media",
@@ -17,6 +54,22 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんが主役のイオンモール熱田のイベント記事",
+   "t": "2026-11-10"
+  }
+ },
+ {
+  "id": "n20261110-389ce92f",
+  "date": "2026-11-10",
+  "cat": "media",
+  "title": "京都初上陸！「ぴよりん」がきなこ×抹茶×黒糖の和味に dancyu祭で各日180セット",
+  "source": "いこーよニュース",
+  "url": "https://report.iko-yo.net/articles/35565",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんのdancyu祭出店・新商品登場の記事",
    "t": "2026-11-10"
   }
  },
@@ -51,12 +104,33 @@
    {
     "source": "毎日新聞デジタル",
     "url": "https://mainichi.jp/articles/20261109/pr2/00m/020/116000c"
+   },
+   {
+    "source": "千葉テレビ放送株式会社",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5sUWhqb1Z2MjBicnVfT1M0RFFLT21vUmNpUmZjS2ZROHJ3WW9aemtaYkw0VDVZaWtSXzMyb3lBdTRNOEZDRi04THBldmRrQ010U0ctMVZkQl9oSDZ6ZU13?oc=5"
+   },
+   {
+    "source": "au Webポータル",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9xeG8zem9uY2Rzbkx4b042S2FSRmxkYTBrQk80NGxlRHRnOS13cDdKNDg2NnhiSjhsTmhoRXFCc1pocnBGenNvak9xNm40TEIxdjVWdEFkRFZHUTVNamQ0Q2ozTkMyLTQ0eTJ4aFdR?oc=5"
+   },
+   {
+    "source": "ラブすぽ",
+    "url": "https://news.google.com/rss/articles/CBMizgJBVV95cUxPQVZyRjdEbFVIazc2aXY1a3IzaENZa0p6U2JtT3BhQXFzU1llQUtnNUxaaFJJeEZxbkh0Q1VfVWZrM0Z2ZnZZUkFSekZpQnVWRlVTV2YyZ2xoQ0VxeHRKRnRyRFBPeF9LQkdkcEtCVlk1WUpyaXVTa3M0YkZUbXRPMlJuTjFNVXpJMzYwNGt1WTZwa0U4NDlXU2hwWGtLOFdlYVZEU2ltNjFiYzlKeGdMV2pxNVJBNXgxaTJvbE1vQlNrcUtMN3lfTXQ1YXpGMHl2d0llNi1pSW50ajFBOWs2VlBkam1fQzIyOTBjVmRib2NQeW9tM3BCTjR0QXBTbGJpNlVNNms1VUdXSjlwdHVVMjRCSzE3MkxBTmlISU1mTXJlWW12aXoxQjBIbWpjMmYtOF8wR3hEMmFrejVLRUpseXF6MmhIZmd4ZTNfRjVR?oc=5"
+   },
+   {
+    "source": "フーズチャネル",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9HNXcyZXFmbmpMQTNwejl2N3lsWC1TVk1rNDhjSFF3QUdQSnFOVmJJY2hlNEd6V19LYXJ1d0VyS2h0aF9HYmhhaDY2dExNMVp5S2d6TjFn?oc=5"
+   },
+   {
+    "source": "ラブすぽ on MSN",
+    "url": "https://www.msn.com/ja-jp/food-and-drink/recipes/%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%81%A8%E3%83%81%E3%83%A3%E3%83%AC%E3%83%B3%E3%82%B8%E3%81%97%E3%82%88%E3%81%86-%E7%AC%AC2%E5%BC%BE%E9%96%8B%E5%82%AC%E6%B1%BA%E5%AE%9A-%E3%81%94%E5%AE%B6%E6%97%8F%E3%81%A7%E6%A5%BD%E3%81%97%E3%82%81%E3%82%8B%E4%BD%93%E9%A8%93%E5%9E%8B%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%82%92%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E7%86%B1%E7%94%B0%E3%81%AB%E3%81%A6%E9%96%8B%E5%82%AC/ar-AA2h72GQ"
    }
   ],
   "merged_ids": [
    "n20261108-07f5349d",
    "n20261109-7bb1bae4",
-   "n20261109-e3e706d3"
+   "n20261109-e3e706d3",
+   "n20261110-7046f5f0"
   ]
  },
  {
@@ -236,7 +310,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりん発売15周年・累計販売数・コラボ商品の記事",
+   "why": "ぴよりんの15周年・累計販売数・コラボ商品の記事",
    "t": "2026-11-10"
   }
  },
@@ -822,6 +896,10 @@
    {
     "source": "山陽新聞",
     "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9mTjctQ0NCQ05NcW1kVVlxcGhIN292OGhQVkpPWWVnb05SQy16dTR5MHF1Q3lKQ2VocnlSWmljZmZZTG1pNlVJNl9md2h2ZTVONnc?oc=5"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBJdzNZYXJaUzBkUzBOQU1IU2dPNkpxLUVwWjE3X0RzdHA5YWhnZTE2MWE2anJPd1c1VHUtZDVvMTMyd0RrRWlMbkU4NC1CZ0d4N0lqc1pOc1hyVkxEVGxoRHJTZw?oc=5"
    }
   ],
   "merged_ids": [
@@ -1934,11 +2012,16 @@
    {
     "source": "ORICON NEWS",
     "url": "https://www.oricon.co.jp/pressrelease/3050469/"
+   },
+   {
+    "source": "MANTANWEB（まんたんウェブ）",
+    "url": "https://mantan-web.jp/prtimes/article/20261023prt00m200000210a.html"
    }
   ],
   "merged_ids": [
    "n20261022-65d96dc5",
    "n20261023-0599aec3",
+   "n20261023-7bc3aed1",
    "n20261023-a11eb343",
    "n20261023-a4594ff3"
   ]

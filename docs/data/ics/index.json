@@ -70,6 +70,36 @@
   "time": "10:00",
   "timed": true
  },
+ "auto-officialp5673": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5673",
+  "time": "",
+  "timed": false
+ },
+ "auto-officialp5673-2": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5673-2",
+  "time": "",
+  "timed": false
+ },
+ "auto-officialp5673-3": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-officialp5673-3",
+  "time": "",
+  "timed": false
+ },
  "e-oshitabi": {
   "alarms": [
    "eve",

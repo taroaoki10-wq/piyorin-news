@@ -1,7 +1,7 @@
 {
  "note": "購入記録の画像の住所。ぴよりんはぴよりん図鑑、クッキー缶などは公式のプレスリリースの代表画像。画像は公式のサーバーのものをそのまま表示する。",
  "zukanSource": "https://piyorin.com/detail/",
- "zukanChecked": "2026-11-09T15:53:44+09:00",
+ "zukanChecked": "2026-11-10T19:02:36+09:00",
  "zukan": [
   {
    "id": "z1384",
@@ -3639,6 +3639,22 @@
    "date": "2026-11-09",
    "url": "https://piyorin.com/news/p5666/",
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/262/124425-262-7520756eb116bf01d70fc49ede82d378-1535x1024.png",
+   "from": "event"
+  },
+  "auto-officialp5673-2": {
+   "cat": "piyorin",
+   "title": "dancyu祭2027 in 京都 ぴよりん おでかけセット販売（1月24日）",
+   "date": "2027-01-24",
+   "url": "https://piyorin.com/news/p5673/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/264/124425-264-7530067f7d4c8da167ad0d078d865dd8-1920x1005.jpg",
+   "from": "event"
+  },
+  "auto-officialp5673": {
+   "cat": "piyorin",
+   "title": "dancyu祭2027 in 京都 ぴよりん おでかけセット販売（1月23日）",
+   "date": "2027-01-23",
+   "url": "https://piyorin.com/news/p5673/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/264/124425-264-7530067f7d4c8da167ad0d078d865dd8-1920x1005.jpg",
    "from": "event"
   }
  }
