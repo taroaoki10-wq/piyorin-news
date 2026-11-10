@@ -1,5 +1,26 @@
 [
  {
+  "id": "n20261110-b01c7b08",
+  "date": "2026-11-10",
+  "cat": "media",
+  "title": "ハイハイレースと手づくり体験が楽しめる1日限定イベント！イオンモール熱田 “ぴよりんとチャレンジしよう！”",
+  "source": "Dtimes",
+  "url": "https://dtimes.jp/post-1464087/",
+  "related": [
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBLUXhkMld5VVRyWFZCWFR3RE9NUC1FdVpGMzZKcnRfUzllaVE5eVNoLXVzNjNmNkZxSklUREFZVXhTanRXaDg5dTRsNU5kVVQ0OUdza3YwQWhFMWhpdW9v?oc=5"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんが主役のイオンモール熱田のイベント記事",
+   "t": "2026-11-10"
+  }
+ },
+ {
   "id": "official-p5666",
   "date": "2026-11-09",
   "cat": "official",
@@ -22,11 +43,20 @@
    {
     "source": "産経ニュース",
     "url": "https://www.sankei.com/pressrelease/prtimes/TKINR2PJE5NH7DOKJLDIRPZKYM/"
+   },
+   {
+    "source": "毎日新聞",
+    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1uWEYzWG8xMDlsV3pEcUhFLTU0UGxibDJadklxbzlNQjVDMkFaNmFGZmRmOHhHYURfMUpLallIWUVsVDJ1QWt1RHBGZjJaX1Vsd3dkaVN0VHFhdVNwUDNJa1JkRkRleVRr?oc=5"
+   },
+   {
+    "source": "毎日新聞デジタル",
+    "url": "https://mainichi.jp/articles/20261109/pr2/00m/020/116000c"
    }
   ],
   "merged_ids": [
    "n20261108-07f5349d",
-   "n20261109-7bb1bae4"
+   "n20261109-7bb1bae4",
+   "n20261109-e3e706d3"
   ]
  },
  {
@@ -67,22 +97,6 @@
    "ok": true,
    "why": "ぴよりんの体験イベント開催の記事",
    "t": "2026-11-09"
-  }
- },
- {
-  "id": "n20261109-ab111997",
-  "date": "2026-11-09",
-  "cat": "media",
-  "title": "コメント | 【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も",
-  "source": "オリコンニュース",
-  "url": "https://www.oricon.co.jp/news/2490266/comment/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんと映画ゴジラのコラボ商品・店内装飾の記事",
-   "t": "2026-11-10"
   }
  },
  {
@@ -222,7 +236,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんの15周年・累計販売数・コラボ商品の記事",
+   "why": "ぴよりん発売15周年・累計販売数・コラボ商品の記事",
    "t": "2026-11-10"
   }
  },
@@ -2922,6 +2936,10 @@
    {
     "source": "時事ドットコム",
     "url": "https://www.jiji.com/jc/article?k=000000261.000124425&g=prt"
+   },
+   {
+    "source": "AERA dot. (アエラドット)",
+    "url": "https://dot.asahi.com/articles/-/295698?page=1"
    }
   ],
   "dv": 3,
@@ -2933,7 +2951,8 @@
   },
   "merged_ids": [
    "n20261020-ff9c3d53",
-   "n20261021-588d0baf"
+   "n20261021-588d0baf",
+   "n20261021-9610ed2d"
   ]
  },
  {
