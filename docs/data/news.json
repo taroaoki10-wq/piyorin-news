@@ -30,6 +30,22 @@
    {
     "source": "MANTANWEB（まんたんウェブ）",
     "url": "https://mantan-web.jp/prtimes/article/20261110prt00m200000777a.html"
+   },
+   {
+    "source": "AERA DIGITAL",
+    "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBtQi05Zl9tV3lZZEdiWlQzRC1MeVVqNHZFTmc1WHZiam5qY2ZOTXRmVlZ5cjJTNVFnekE4aEthVEpoNlhHM2dwZVRJOEZXNjdK?oc=5"
+   },
+   {
+    "source": "AERA DIGITAL",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBnWEJEZjd0Tmx0STlFc3RqdjdsN1JzR3ZTZmY3bkFrNXVoOHIwRTViTEctUHBKeFVvWmw4NkRENDQ3ZDJwS3RrcU5VZXZpNXVMbXNLNDlRTk1zZw?oc=5"
+   },
+   {
+    "source": "Mantan Web",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbnN0MWZzRVhFeVIwZDJMUVBUZkZMS3QzdHdFQWRISHllY1ZCNVNXaUQtSWYweHF2ZV9yYzlaSFBjcWxoLXBlYV91aEVGVktiNDhIU0c5Ym4xOXZLM0xXeU8tUUhOS1NzanFOMUdwc25mN2U4UkVLbzRvbTExTTc5YVduMUhTN24t?oc=5"
+   },
+   {
+    "source": "ORICON NEWS",
+    "url": "https://www.oricon.co.jp/pressrelease/3078988/"
    }
   ],
   "merged_ids": [
@@ -174,6 +190,22 @@
   }
  },
  {
+  "id": "n20261109-ab111997",
+  "date": "2026-11-09",
+  "cat": "media",
+  "title": "コメント | 【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も",
+  "source": "オリコンニュース",
+  "url": "https://www.oricon.co.jp/news/2490266/comment/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんと映画ゴジラのコラボ企画・グッズ販売の記事",
+   "t": "2026-11-11"
+  }
+ },
+ {
   "id": "n20261107-9e23f50f",
   "date": "2026-11-07",
   "cat": "media",
@@ -310,8 +342,8 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんの15周年・累計販売数・コラボ商品の記事",
-   "t": "2026-11-10"
+   "why": "ぴよりんの15周年・累計販売数・コラボ商品に関する記事",
+   "t": "2026-11-11"
   }
  },
  {
