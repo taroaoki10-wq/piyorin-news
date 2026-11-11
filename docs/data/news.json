@@ -1,5 +1,14 @@
 [
  {
+  "id": "official-p5676",
+  "date": "2026-11-11",
+  "cat": "official",
+  "title": "【お詫び】ぴよりんの販売開始時間変更について",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5676/",
+  "related": []
+ },
+ {
   "id": "n20261111-98056884",
   "date": "2026-11-11",
   "cat": "media",
@@ -17,6 +26,54 @@
    "v": 1,
    "ok": true,
    "why": "三島甘藷を使ったぴよりんの愛知での限定販売の記事",
+   "t": "2026-11-11"
+  }
+ },
+ {
+  "id": "n20261111-36785446",
+  "date": "2026-11-11",
+  "cat": "media",
+  "title": "昨年早期完売した「ドクターイエロー」エコカイロが進化！今年は「ぴよりん」も仲間入りし、ふわふわのぬいぐるみ仕様で新登場",
+  "source": "Digital PR Platform",
+  "url": "https://digitalpr.jp/r/147708",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんがドクターイエロー商品に仲間入りするコラボ新商品",
+   "t": "2026-11-11"
+  }
+ },
+ {
+  "id": "n20261111-0eda5710",
+  "date": "2026-11-11",
+  "cat": "media",
+  "title": "真っ黒「ぴよりんゴジラ」限定販売",
+  "source": "日本経済新聞",
+  "url": "https://www.nikkei.com/article/DGXZQOUC058NG0V01C26A1000000/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんゴジラ（ぴよりんとゴジラのコラボ菓子）の販売記事",
+   "t": "2026-11-11"
+  }
+ },
+ {
+  "id": "n20261111-d8630464",
+  "date": "2026-11-11",
+  "cat": "media",
+  "title": "最大400種類のパンが集結 名古屋に新スポット誕生 NY発やフランスの老舗など6ブランド",
+  "source": "shizuoka-life",
+  "url": "https://www.shizuoka-life.jp/post-15911/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": false,
+   "why": "名古屋駅のパン売場の新スポット記事で、ぴよりんへの言及なし",
    "t": "2026-11-11"
   }
  },
@@ -227,7 +284,23 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんと映画ゴジラのコラボ商品の記事",
+   "why": "ぴよりんゴジラの期間限定販売とグッズを伝える記事",
+   "t": "2026-11-11"
+  }
+ },
+ {
+  "id": "n20261109-4fed22d6",
+  "date": "2026-11-09",
+  "cat": "media",
+  "title": "初めての名古屋ひとり旅。迷って、歩いて、食べて、最後はぴよりん",
+  "source": "note",
+  "url": "https://note.com/hip_sheep2149/n/nccf981f087c2",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "名古屋旅行記の締めにぴよりんが登場し、名古屋土産として紹介",
    "t": "2026-11-11"
   }
  },
@@ -357,22 +430,6 @@
   }
  },
  {
-  "id": "n20261105-68453b2d",
-  "date": "2026-11-05",
-  "cat": "media",
-  "title": "スイーツ「ぴよりん」羽ばたき600万ぴよ 藤井名人も食し全国区に [愛知県]",
-  "source": "朝日新聞",
-  "url": "https://www.asahi.com/articles/ASVBY1J5MVBYULFA013M.html",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの発売15周年と累計販売数に関する記事",
-   "t": "2026-11-11"
-  }
- },
- {
   "id": "n20261105-161db592",
   "date": "2026-11-05",
   "cat": "media",
@@ -385,6 +442,22 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんを題材にした動画で、ぴよりん関連の内容と判断",
+   "t": "2026-11-11"
+  }
+ },
+ {
+  "id": "n20261105-68453b2d",
+  "date": "2026-11-05",
+  "cat": "media",
+  "title": "スイーツ「ぴよりん」羽ばたき600万ぴよ 藤井名人も食し全国区に [愛知県]",
+  "source": "朝日新聞",
+  "url": "https://www.asahi.com/articles/ASVBY1J5MVBYULFA013M.html",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの発売15周年と累計販売数を伝える記事",
    "t": "2026-11-11"
   }
  },
@@ -974,6 +1047,10 @@
    {
     "source": "山陽新聞",
     "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBJdzNZYXJaUzBkUzBOQU1IU2dPNkpxLUVwWjE3X0RzdHA5YWhnZTE2MWE2anJPd1c1VHUtZDVvMTMyd0RrRWlMbkU4NC1CZ0d4N0lqc1pOc1hyVkxEVGxoRHJTZw?oc=5"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOMWxubWhhRjMySG9ib1owM0pKX1psQ2hxRlJCbTBYTDRPLVdxc3phQVN3WTFES0JkT2g1eFhDSzQxbVkweklVOWFZX0t5a2JNclpOTjlxaWhRNnN1N1ctQmhQUHhjRnhZQWJzazc2RnhOcWJWTmRXNVBYSW1hMnFLSHJxUFI?oc=5"
    }
   ],
   "merged_ids": [
