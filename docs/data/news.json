@@ -36,7 +36,12 @@
   "title": "昨年早期完売した「ドクターイエロー」エコカイロが進化！今年は「ぴよりん」も仲間入りし、ふわふわのぬいぐるみ仕様で新登場",
   "source": "Digital PR Platform",
   "url": "https://digitalpr.jp/r/147708",
-  "related": [],
+  "related": [
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9sSU5UdWZnSW1Sd0hPa2VzXzdycmhBUWpac0o5QlMxSndxU2dXUE9STUZaWTJvUHFmSUgyaVA0RVFQNHB2ZFNLS1lMYkxCWmFuNTl3VEpyOWNlZWZTTVdDYi1n?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -75,6 +80,31 @@
    "ok": false,
    "why": "名古屋駅のパン売場の新スポット記事で、ぴよりんへの言及なし",
    "t": "2026-11-11"
+  }
+ },
+ {
+  "id": "n20261111-01fec883",
+  "date": "2026-11-11",
+  "cat": "media",
+  "title": "ドクターイエロー・ぴよりん 巾着つきリウォームエコカイロ 販売（2026年11月16日～）",
+  "source": "Tetsudo.com（鉄道コム）",
+  "url": "https://www.tetsudo.com/event/62464/",
+  "related": [
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPRkVlSjAzUFhIYUpVSWNqOEJjY0tCNVlKZ29jR2FZYWZ0QS1qLS1aenVHNXZrZjFlX19KaE83eGhRU1JjQTJwWVZnY09jTGxodDlzaHhHa3dMU3ltbmIxWk5xQ0tsNFFydkVQSERuUGtDaGR3UzhqOW16YlZLQXhKSG1od9IBgwFBVV95cUxPRkVlSjAzUFhIYUpVSWNqOEJjY0tCNVlKZ29jR2FZYWZ0QS1qLS1aenVHNXZrZjFlX19KaE83eGhRU1JjQTJwWVZnY09jTGxodDlzaHhHa3dMU3ltbmIxWk5xQ0tsNFFydkVQSERuUGtDaGR3UzhqOW16YlZLQXhKSG1odw?oc=5"
+   },
+   {
+    "source": "dメニューニュース",
+    "url": "https://topics.smt.docomo.ne.jp/article/tetsudo/trend/tetsudo-Event-62464"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん巾着付きカイロの販売記事でグッズ・コラボ商品",
+   "t": "2026-11-12"
   }
  },
  {
@@ -273,22 +303,6 @@
   }
  },
  {
-  "id": "n20261109-ab111997",
-  "date": "2026-11-09",
-  "cat": "media",
-  "title": "コメント | 【きょうから】ぴよりんと映画『ゴジラ』がコラボした『ぴよりんゴジラ』が期間限定で登場「弱そう」「可愛いが隠せない」 店内装飾やオリジナルグッズ販売も",
-  "source": "オリコンニュース",
-  "url": "https://www.oricon.co.jp/news/2490266/comment/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんゴジラの期間限定販売とグッズを伝える記事",
-   "t": "2026-11-11"
-  }
- },
- {
   "id": "n20261109-4fed22d6",
   "date": "2026-11-09",
   "cat": "media",
@@ -457,8 +471,8 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんの発売15周年と累計販売数を伝える記事",
-   "t": "2026-11-11"
+   "why": "ぴよりん発売15周年・累計販売数や関連グッズの記事",
+   "t": "2026-11-12"
   }
  },
  {
@@ -2856,6 +2870,10 @@
    {
     "source": "山陽新聞",
     "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBOTmdLUVRMcEs2MG55ZU8xUkxlamRGY3FCbm5QeHpRbU0zWHlZZGtoUnBwUXZLNVlaZnRsV1FvQ3BOUWtCYUFObl9ubVRPX0NHNUE?oc=5"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9qZ3Z6TXVBd0RwOF8zQ1RCTVhBRGdOT2t4eEl2V2JtZ2g2eklPQjI5VWR5VlJOV21iZk5kdDlOcWZTMVlxbExoNzhVeVBZQjJHeHVBX1FPQWc5M2djTFpwZExjQnQ4UlVydkh3bWF3?oc=5"
    }
   ],
   "dv": 3,
