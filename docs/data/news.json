@@ -40,6 +40,10 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9sSU5UdWZnSW1Sd0hPa2VzXzdycmhBUWpac0o5QlMxSndxU2dXUE9STUZaWTJvUHFmSUgyaVA0RVFQNHB2ZFNLS1lMYkxCWmFuNTl3VEpyOWNlZWZTTVdDYi1n?oc=5"
+   },
+   {
+    "source": "沖縄タイムス社",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9BVUVIM1Z0RmJSckgwVEpMYUhSUFA0X25ONXUxQmRZZ1BWY0NVRU1UOWpmZzZpaW1MQjl3V1JYR1NUZXhoUjd2Q0o4Q1FaU3QxaGowN1hGZThtU253VHc?oc=5"
    }
   ],
   "dv": 3,
@@ -277,10 +281,19 @@
    {
     "source": "静岡新聞DIGITAL",
     "url": "https://news.at-s.com/article/2094442"
+   },
+   {
+    "source": "47NEWS",
+    "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE9uVmNqS0lQYmJwT2k3eXMweWo2TGZmSzFXYm9tM2xTcTdyTWdzaThzTGdfT3pXSWxaZFVtWjJTR3liWnVCZ1BpUlN1QQ?oc=5"
+   },
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.yahoo.co.jp/articles/f3b4023a03249219ba6b06baa51e4bf9a5b15728"
    }
   ],
   "merged_ids": [
-   "n20261109-d17161f7"
+   "n20261109-d17161f7",
+   "n20261112-4dede679"
   ],
   "dv": 3,
   "jg": {
@@ -334,7 +347,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんと映画ゴジラのコラボ商品・グッズ販売の記事",
+   "why": "ぴよりんと映画ゴジラのコラボ商品・グッズの記事",
    "t": "2026-11-12"
   }
  },
@@ -2189,6 +2202,10 @@
    {
     "source": "MANTANWEB（まんたんウェブ）",
     "url": "https://mantan-web.jp/prtimes/article/20261023prt00m200000210a.html"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1RbjE1bTc0dC1YRUNOVlpnRHE0M0xUbm9hQ2MzZ2tuYXk0X3UxMHZkaENlNXlSTmJVVXhxWnhucjRkcC01Y241Rm1JSmh2RFNIeHhaVE9QM3BkZmFmMFJIT3ZB?oc=5"
    }
   ],
   "merged_ids": [
@@ -9975,6 +9992,21 @@
    "ok": true,
    "why": "ぴよりんの購入情報・値段などの解説",
    "t": "2026-10-22"
+  }
+ },
+ {
+  "id": "n20230205-4db2a985",
+  "date": "2023-02-05",
+  "cat": "media",
+  "title": "名古屋のスイーツ「ぴよりん」のシュガーセットを購入してみたら、安易な気持ちでお迎えしたことを後悔した",
+  "source": "ロケットニュース24",
+  "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE94ZUVOVzltbi04Mm9GSHlpZmU0SGdWemVsQlBYUWYxZ3Njd2g3Nm90Q1M3QTV6NDQyY19fZHRSVzhoSWpZTlZpckV5MHgtX1hTWmFjdFgya9IBXEFVX3lxTFBVNlktRGlyaFQ4eG5kYUxkR1FmTzRYY3FvZTJyN1gtLS1Cb2phWE1QX3dVV2dfbnZTN1lPQzVuWnNyQjFEbWMxNDVXNFljTE4zcV8xNVdteWVzOE9K?oc=5",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "名古屋スイーツぴよりんの購入レビュー記事",
+   "t": "2026-11-12"
   }
  },
  {
