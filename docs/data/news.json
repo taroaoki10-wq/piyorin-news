@@ -287,12 +287,12 @@
     "url": "https://news.at-s.com/article/2094442"
    },
    {
-    "source": "47NEWS",
-    "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE9uVmNqS0lQYmJwT2k3eXMweWo2TGZmSzFXYm9tM2xTcTdyTWdzaThzTGdfT3pXSWxaZFVtWjJTR3liWnVCZ1BpUlN1QQ?oc=5"
-   },
-   {
     "source": "Yahoo!ニュース",
     "url": "https://news.yahoo.co.jp/articles/f3b4023a03249219ba6b06baa51e4bf9a5b15728"
+   },
+   {
+    "source": "47NEWS",
+    "url": "https://www.47news.jp/15218650.html"
    }
   ],
   "merged_ids": [
@@ -351,8 +351,8 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんとゴジラのコラボ商品・グッズの記事",
-   "t": "2026-11-12"
+   "why": "ぴよりんと映画ゴジラのコラボ商品・店内企画の記事",
+   "t": "2026-11-13"
   }
  },
  {
@@ -494,6 +494,22 @@
    "ok": true,
    "why": "ぴよりんを題材にした動画で、ぴよりん関連の内容と判断",
    "t": "2026-11-11"
+  }
+ },
+ {
+  "id": "n20261112-4e10a1da",
+  "date": "2026-11-04",
+  "cat": "media",
+  "title": "TOICA20周年記念の懐中時計やぴよりんコラボグッズが数量限定で予約開始へ",
+  "source": "Dellows News",
+  "url": "https://news.dellows.jp/1012712/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "TOICA20周年とぴよりんコラボグッズの予約記事",
+   "t": "2026-11-13"
   }
  },
  {
@@ -3148,6 +3164,10 @@
    {
     "source": "北國新聞",
     "url": "https://www.hokkoku.co.jp/articles/tym/2265809"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5iOWg0cjJUVUp0RjMtOUdTVUUzd1NrdnNzTVpwMzlhRnpobHh1bkJjY0pvMTNaa1Zpd0k1NWNyVXNRamV2SjRlRXdlZWVpelNDVjF0S2NRclYwekJ3R2V5VGx5MHVLVlNRdGkzMHN3QVgxM3dWSzNWSg?oc=5"
    }
   ],
   "dv": 3,
