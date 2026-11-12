@@ -260,6 +260,10 @@
    {
     "source": "イザ！",
     "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBocEVZckY4NEtvQzJ5TUVSbWp0MTdoTlhzQnk2THE5OWFnSHRfXzNrVW9FMk9lQkFqbHJUS1hzb0paa0xHM0hOVEtSVEI3dUl0S2RCYzRCMk1KSUJxcGRsaEVMWDY2WDg1WGFPNDN6VVlrVnc0ZTRfQWRR?oc=5"
+   },
+   {
+    "source": "Mantan Web",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOT04wTk1NVldGSk1JUVVaWURwcHBYalB6bXhJanRrQV9jcXRQdnlHTC1EZExvbmJyNUhDaGRocWJzZXlHVUNfbEZHNlNDSmttOXNaVUJsaDQ3VWF2VjNFTnZJZXkwMVNLc2RFaElSYnVRZUpmY0lkbGc0UVlldUFNZzNYcE42MXdQ?oc=5"
    }
   ],
   "merged_ids": [
@@ -347,7 +351,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "ぴよりんと映画ゴジラのコラボ商品・グッズの記事",
+   "why": "ぴよりんとゴジラのコラボ商品・グッズの記事",
    "t": "2026-11-12"
   }
  },
@@ -8039,6 +8043,21 @@
   }
  },
  {
+  "id": "n20260323-3de870c4",
+  "date": "2026-03-23",
+  "cat": "media",
+  "title": "名古屋・中川運河に「巨大ぴよりんバルーン」出現。JRがクラファン始動、返礼品に新店舗招待券・手づくり体験など",
+  "source": "トラベル Watch",
+  "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBhVFNaLXpPeEpmWi10YXNKOFplN2k2VFVjV2QySjQtWGxKelNIMUZOcWN5d0draVdpMFU0UWJqTGI1ZEZPMWZ2LTBxdllZRGhqOWZjLTRVSlJfbVJqZzlYdDlyb3VDNVU0?oc=5",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "巨大ぴよりんバルーンとJRのクラファンの記事",
+   "t": "2026-11-12"
+  }
+ },
+ {
   "id": "n20260321-51ebe814",
   "date": "2026-03-21",
   "cat": "media",
@@ -8066,6 +8085,21 @@
    "ok": true,
    "why": "ぴよりんの新商品「さくらぴよりん」の紹介。",
    "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20260319-ada2f810",
+  "date": "2026-03-19",
+  "cat": "media",
+  "title": "春限定ひよこ型スイーツ「さくらぴよりん」桜風味ババロアやさくら餡のもちもちジュレ入り、名古屋で",
+  "source": "ファッションプレス",
+  "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE13T1RsVTVfazh3U1I2cmt0YVg5SUV1WEhGbkpHZnRsN0xDVXhRUGdETXZ0akJFNmFPUThXYU45SDVDbGlSdVVJbHlpUmFtQ3NXRWNV?oc=5",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "春限定のさくらぴよりん新商品の記事",
+   "t": "2026-11-12"
   }
  },
  {
