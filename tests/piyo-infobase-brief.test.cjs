@@ -30,3 +30,23 @@ test('岐阜の天気・ドル円・古い警報を、札から語尾ぴよで�
   assert.equal(await globalThis.PiyoInfobase.answer('ドル円の予想は'),null);
  }finally{globalThis.fetch=f;}
 });
+test('「株価は」は日経平均の札で答える。名前のある株・中身の届かない札は、ほかの答え方へ回す',async()=>{
+ setup();const vm=require('node:vm'),c={window:{},TextEncoder,TextDecoder};vm.createContext(c);vm.runInContext(fs.readFileSync(path.join(__dirname,'../docs/piyo-extras.js'),'utf8'),c);
+ const X=globalThis.PiyoExtras=c.window.PiyoExtras;
+ for(const q of['株価は','株価は？','今日の株価','株価教えて','日本の株価はどう？','株は'])assert.equal(X.bareStock(q),true,q);
+ for(const q of['トヨタの株価','JR東海の株価は','ぴよりんの会社の株価','NYダウは','天気は','株価の予想'])assert.equal(X.bareStock(q),false,q);
+ const src=[{id:'006-00000300-000',origin:'Yahoo!ファイナンス',url:'https://finance.yahoo.co.jp/'}],idx=id=>({id,words:[id.slice(6)]});
+ const nk={id:'index:日経平均',topic:'stock',title:'日経平均',status:'あり',say:'日経平均は51,234.56で、前の日より123.45上がっています（+0.24%）。Yahoo!ファイナンスの表示で、11/13 15:45 に取った値です。',facts:{value:51234.56,change:123.45,change_rate:0.24},as_of:asOf,fresh_until:later,sources:src};
+ const all={id:'index:all',topic:'stock',title:'株価指数',status:'あり',say:'日経平均は51,234.56で、前の日より123.45上がっています（+0.24%）。NYダウは47,000.10で、前の日より10.00下がっています（-0.02%）。',facts:{indices:[{value:51234.56,change:123.45,change_rate:0.24},{value:47000.1,change:10,change_rate:-0.02}]},as_of:asOf,fresh_until:later,sources:src};
+ const dow={...nk,id:'index:NYダウ',title:'NYダウ',say:'NYダウは47,000.10で、前の日より10.00下がっています（-0.02%）。',facts:{value:47000.1,change:10,change_rate:-0.02}};
+ const make=briefs=>({...bundle,etag:'s'+Math.random(),index:{...bundle.index,stock:{words:['株価','株は'],indices:[idx('index:日経平均'),idx('index:NYダウ')]}},briefs:[...bundle.briefs,...briefs]});
+ const f=globalThis.fetch;let cur=make([nk,all,dow]);globalThis.fetch=async url=>new Response(JSON.stringify(String(url).includes('/v1/brief')?cur:{cards:[]}));
+ try{
+  const a=await globalThis.PiyoInfobase.answer('株価は');assert.equal(a.brief,'index:日経平均');assert.match(a.body,/^日経平均は51,234\.56で/);assert.doesNotMatch(a.body,/NYダウ/);
+  assert.equal((await globalThis.PiyoInfobase.answer('NYダウは？')).brief,'index:NYダウ');
+  assert.equal(await globalThis.PiyoInfobase.answer('トヨタの株価'),null); // 指数のまとめでは答えない
+  // この鍵に中身が届かない札（say が空）では答えず、ほかの答え方へ回す
+  setup();globalThis.PiyoExtras=X;cur=make([{...nk,say:null,facts:null,headline_only:true},{...all,say:null,facts:null,headline_only:true}]);
+  assert.equal(await globalThis.PiyoInfobase.answer('株価は'),null);
+ }finally{globalThis.fetch=f;delete globalThis.PiyoExtras;}
+});

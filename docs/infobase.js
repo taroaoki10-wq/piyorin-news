@@ -10,15 +10,18 @@
  // 天気（東海の 5 つの町・週間・いまの気温）・警報・地震・ドル円・祝日を、AI を使わずに答える。合わなければ前の答え方へ。
  let briefClient=null,briefKey='';
  function brief(){const c=config(),k=JSON.stringify([c.url,c.key,c.enabled]);if(!root.InfobaseBrief)return null;if(!briefClient||k!==briefKey){briefKey=k;briefClient=root.InfobaseBrief.create({...c,maxAgeMs:300000});}return briefClient;}
- const BRIEF_TOPICS=['weather','now','warning','quake','fx','holiday'];
+ const BRIEF_TOPICS=['weather','now','warning','quake','fx','holiday','stock'];
  const hm=v=>{const t=new Date(+new Date(v)+9*3600000).toISOString();return t.slice(0,10)+' '+t.slice(11,16);};
  async function briefAnswer(q){
   const b=brief();if(!b||!b.enabled||q.length>40||/ニュース|予想|予測|見通し|なぜ|理由|仕組み|とは|って何|ぴよりん/.test(q))return null;
-  const r=await b.answer(q).catch(()=>null);const one=r&&r.briefs&&r.briefs[0];
+  const r=await b.answer(q).catch(()=>null);let one=r&&r.briefs&&r.briefs[0];
+  // 「株価は」とだけ聞かれたら、指数のまとめではなく日経平均の札で答える（2026-11-13 ユーザー「株価はって聞いたら基本的に日経平均株価を答えてほしい」）
+  if(one&&one.id==='index:all'&&root.PiyoExtras&&root.PiyoExtras.bareStock&&root.PiyoExtras.bareStock(q))one=await b.get('index:日経平均').catch(()=>null)||one;
+  if(one&&one.topic==='stock'&&one.id==='index:all')return null; // どの株か分からないまとめでは答えない
   if(!one||!BRIEF_TOPICS.includes(one.topic)||!one.say||one.status==='まだ無い')return null;
   if(one.topic==='fx'&&!fxAsk(q))return null;
   const src=(one.sources||[]).find(x=>x.id)||(one.sources||[])[0]||{};
-  const card={id:src.id,category:{weather:'002',now:'002',warning:'005',quake:'005',fx:'006',holiday:'011'}[one.topic],type:'メイン',status:'確定',verdict:'確認済み',title:one.title||one.id,summary:one.say,structured:one.facts||null,url:src.url||'',origin:src.origin||'',attribution:src.attribution||'',published_at:one.as_of,expires_at:one.fresh_until||new Date(Date.now()+3600000).toISOString()};
+  const card={id:src.id,category:{weather:'002',now:'002',warning:'005',quake:'005',fx:'006',stock:'006',holiday:'011'}[one.topic],type:'メイン',status:'確定',verdict:'確認済み',title:one.title||one.id,summary:one.say,structured:one.facts||null,url:src.url||'',origin:src.origin||'',attribution:src.attribution||'',published_at:one.as_of,expires_at:one.fresh_until||new Date(Date.now()+3600000).toISOString()};
   // 数字・日付の照らし合わせは本文だけ（出典の行の「CC BY 4.0」や取得の時刻は、答えの数字ではない）
   const body=root.InfobaseBrief.voice(one.say,'piyo'),checked=root.InfobaseGuard.guard(body,[card]);if(!checked.ok)return null;
   const text=checked.text+`\n出典：${src.attribution||src.origin||'infobase'}（${one.as_of?hm(one.as_of)+'、日本時間':'infobase'}）`;

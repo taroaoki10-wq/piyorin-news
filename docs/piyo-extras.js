@@ -595,7 +595,7 @@ window.PiyoExtras = (function () {
 
   // ---- 記憶と性格をつなぐ（Claude Pet との受け渡しの約束 2026-11-13） ----
   // 設定は localStorage の鍵が '1' のときだけ切（鍵が無いときは入り）
-  const FLAG_KEYS = { persona: 'piyo-persona-off', memory: 'piyo-memory-off', convo: 'piyo-convo-off', buysync: 'piyo-buysync-off' };
+  const FLAG_KEYS = { persona: 'piyo-persona-off', memory: 'piyo-memory-off', convo: 'piyo-convo-off', buysync: 'piyo-buysync-off', wxfig: 'piyo-wxfig-off' };
   function flagOn(storage, name) { try { return !storage || storage.getItem(FLAG_KEYS[name]) !== '1'; } catch (_) { return true; } }
   const MEMORY_KEY = 'piyo-memory-card', MEMORY_DAYS = 7;
   function personaBlock(p) {
@@ -655,6 +655,49 @@ window.PiyoExtras = (function () {
     };
   }
 
-  return { weatherAsk, localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf, plannedLine,
+  // 「株価は」「今日の株価」のように、どの株かを言わない聞き方か（このときは日経平均で答える。Claude Pet と同じ決め方）
+  // 「トヨタの株価」「ぴよりんの会社の株価」は false（名前が残る）
+  function bareStock(q) {
+    const t = String(q || '').replace(/[\s　?？!！。、．.]/g, '');
+    if (!/株/.test(t)) return false;
+    return t.replace(/今日|きょう|本日|現在|今|いま|日本|株価|株式|指数|相場|市場|市況|株|値段|いくら|どう|教えて|ください|おしえて|って|は|の|を|が|も|で|ね|よ|かな|か/g, '') === '';
+  }
+
+  // ---- 天気の図（7 日分の天気・最高と最低・雨の確率を、ひと目で見る帯。答えの文の下に出す） ----
+  const WX_ICON = {
+    sun: '<circle cx="12" cy="12" r="4.6" class="s"/><path class="sl" d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.4 5.4l1.8 1.8M16.8 16.8l1.8 1.8M5.4 18.6l1.8-1.8M16.8 7.2l1.8-1.8"/>',
+    partly: '<circle cx="8.6" cy="8.8" r="3.8" class="s"/><path class="sl" d="M8.6 1.9v1.8M1.7 8.8h1.8M3.7 3.9l1.3 1.3M13.5 3.9l-1.3 1.3"/><path class="c" d="M9.4 19.6h8.2a3.6 3.6 0 0 0 .5-7.2 4.9 4.9 0 0 0-9.3 1.2 3 3 0 0 0 .6 6z"/>',
+    cloud: '<path class="c" d="M7 18.6h10.2a4.2 4.2 0 0 0 .6-8.4 5.7 5.7 0 0 0-10.9 1.4A3.5 3.5 0 0 0 7 18.6z"/>',
+    rain: '<path class="c" d="M7 15h10.2a4.2 4.2 0 0 0 .6-8.4A5.7 5.7 0 0 0 6.9 8 3.5 3.5 0 0 0 7 15z"/><path class="rl" d="M8.4 17.6l-1 2.9M12.4 17.6l-1 2.9M16.4 17.6l-1 2.9"/>',
+    snow: '<path class="c" d="M7 15h10.2a4.2 4.2 0 0 0 .6-8.4A5.7 5.7 0 0 0 6.9 8 3.5 3.5 0 0 0 7 15z"/><circle class="r" cx="8" cy="19" r="1.2"/><circle class="r" cx="12" cy="19.6" r="1.2"/><circle class="r" cx="16" cy="19" r="1.2"/>',
+    thunder: '<path class="c" d="M7 15h10.2a4.2 4.2 0 0 0 .6-8.4A5.7 5.7 0 0 0 6.9 8 3.5 3.5 0 0 0 7 15z"/><path class="s" d="M12.6 14.2l-3 4.2h2.3l-1 3.4 3.3-4.6h-2.3z"/>',
+  };
+  function weatherKind(word) {
+    const w = String(word || '');
+    if (/雷/.test(w)) return 'thunder';
+    if (/雪/.test(w)) return 'snow';
+    if (/雨/.test(w)) return 'rain';
+    if (/晴れ/.test(w)) return /くもり/.test(w) ? 'partly' : 'sun';
+    return 'cloud';
+  }
+  function weatherFigure(days, today) {
+    const list = (days || []).filter(d => d && d.date >= today && Number.isFinite(d.max) && Number.isFinite(d.min)).slice(0, 7);
+    if (list.length < 2) return '';
+    const hi = Math.max(...list.map(d => d.max)), lo = Math.min(...list.map(d => d.min)), span = Math.max(1, hi - lo);
+    const pct = v => Math.round((v / span) * 1000) / 10;
+    const label = '名古屋の天気：' + list.map(d => `${dayLabel(d.date, today)} ${d.word} 最高${d.max}℃ 最低${d.min}℃${d.rain != null ? ` 雨${d.rain}%` : ''}`).join('、');
+    const cols = list.map(d => {
+      const w = wd(d.date), cls = (d.date === today ? ' now' : '') + (w === '土' ? ' sat' : w === '日' ? ' sun' : '');
+      return `<div class="piyo-wx-day${cls}"><span class="piyo-wx-d">${d.date === today ? '今日' : w}</span>`
+        + `<svg class="piyo-wx-i" viewBox="0 0 24 24" aria-hidden="true">${WX_ICON[weatherKind(d.word)]}</svg>`
+        + `<span class="piyo-wx-hi">${d.max}°</span>`
+        + `<span class="piyo-wx-bar"><i style="top:${pct(hi - d.max)}%;bottom:${pct(d.min - lo)}%"></i></span>`
+        + `<span class="piyo-wx-lo">${d.min}°</span>`
+        + `<span class="piyo-wx-r${d.rain >= 50 ? ' wet' : ''}">${d.rain != null ? d.rain + '%' : '–'}</span></div>`;
+    }).join('');
+    return `<div class="piyo-wx" role="img" aria-label="${label.replace(/"/g, '&quot;')}">${cols}</div>`;
+  }
+
+  return { weatherAsk, weatherFigure, weatherKind, bareStock, localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf, plannedLine,
     flagOn, FLAG_KEYS, personaBlock, memoryBlock, saveMemoryCard, readMemoryCard, composeSystem, readMacLink, macJson, syncBody };
 })();

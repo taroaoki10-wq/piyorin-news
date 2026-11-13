@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ぴよりん">
-<meta name="piyo-ver" content="2026.11.13-2">
+<meta name="piyo-ver" content="2026.11.13-3">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
@@ -589,6 +589,19 @@ html.buy-open .piyo-idle{visibility:hidden}
 .piyo-sources{margin-top:8px;color:var(--muted);font-size:11.5px;line-height:1.7;overflow-wrap:anywhere;opacity:1;transform:translateY(0);transition:opacity .6s ease-out,transform .6s ease-out}
 .piyo-sources[aria-hidden="true"]{visibility:hidden;opacity:0;transform:translateY(4px)}
 .piyo-sources a{text-decoration:underline;text-underline-offset:2px}
+.piyo-wx{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:2px;margin-top:10px;padding:8px 4px 6px;background:var(--bg);border-radius:14px;animation:piyo-pop .3s ease-out}
+.piyo-wx-day{display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 0;border-radius:10px;font-size:11.5px;line-height:1.35;font-variant-numeric:tabular-nums}
+.piyo-wx-day.now{background:var(--surface);box-shadow:0 0 0 1px var(--line)}
+.piyo-wx-d{font-weight:700;color:var(--muted)}.piyo-wx-day.now .piyo-wx-d{color:var(--ink)}
+.piyo-wx-day.sat .piyo-wx-d{color:#4E7FB8}.piyo-wx-day.sun .piyo-wx-d{color:#C4605A}
+.piyo-wx-i{width:24px;height:24px;margin:1px 0}
+.piyo-wx-i .s{fill:#F2B632}.piyo-wx-i .sl{fill:none;stroke:#F2B632;stroke-width:1.9;stroke-linecap:round}
+.piyo-wx-i .c{fill:#B9BDC4}.piyo-wx-i .r{fill:#5E9BD6}.piyo-wx-i .rl{fill:none;stroke:#5E9BD6;stroke-width:1.9;stroke-linecap:round}
+.piyo-wx-hi{font-weight:700;color:var(--ink)}.piyo-wx-lo{color:var(--muted)}
+.piyo-wx-bar{position:relative;width:6px;height:38px;border-radius:99px;background:var(--line)}
+.piyo-wx-bar i{position:absolute;left:0;right:0;min-height:6px;border-radius:99px;background:linear-gradient(#F2A23A,#F7D25A)}
+.piyo-wx-r{margin-top:2px;font-size:10.5px;color:var(--muted)}.piyo-wx-r.wet{color:#3F82C4;font-weight:700}
+@media (prefers-reduced-motion:reduce){.piyo-wx{animation:none}}
 .piyo-choices{display:flex;gap:8px;margin-top:10px}
 .piyo-choices button{font:inherit;font-size:13.5px;font-weight:700;border-radius:99px;padding:6px 16px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 .piyo-choices button.primary{background:var(--yolk);color:var(--yolk-ink);border-color:var(--yolk)}
@@ -701,7 +714,7 @@ html.piyo-open .reader{z-index:48}
 <script src="infobase-client.js?v=2"></script>
 <script src="infobase-guard.js?v=2"></script>
 <script src="infobase-brief.js?v=3"></script>
-<script src="infobase.js?v=4"></script>
+<script src="infobase.js?v=5"></script>
 <script>
 // 読み込み画面（スマホだけ）。最初のニュースを読み終えたら、ぴよが手を振ってふわっと消える。消え始めるまで最低3秒は見せ、読めなくても5秒で消す
 // アプリを開くたびに出す（アプリの切り替え画面で上にスワイプして終了させたあとも）。ホーム画面に戻って開き直しただけのときは、iPhone がページを覚えていてここは動かないので出ない
@@ -859,6 +872,7 @@ window.PiyoSplash=(function(){
       <p class="run-meta" id="piyo-meta" hidden></p>
       <button type="button" class="set-act" id="set-piyo-setup">話す準備を開く</button>
       <div class="set-toggles" id="set-toggles">
+        <label><input type="checkbox" data-flag="wxfig" checked><span>天気の図<small>天気を聞いたとき、7 日分の天気と気温の図を答えの下に出します。</small></span></label>
         <label><input type="checkbox" data-flag="persona" checked><span>ぴよの性格<small>Claude Pet のぴよの人柄で、あいさつや雑談に答えます。</small></span></label>
         <label><input type="checkbox" data-flag="memory" checked><span>Mac の記憶を受け取る<small>Mac が覚えているあなたの好みを、答えの参考にします。</small></span></label>
         <label><input type="checkbox" data-flag="convo" checked><span>会話を Mac のぴよに覚えてもらう<small>要約だけを送ります（全文は送りません）。ブックマークと見た記事も送ります。</small></span></label>
@@ -919,7 +933,7 @@ window.PiyoSplash=(function(){
 <script src="news-archive.js"></script>
 <script src="news-identity.js"></script>
 <script src="piyo-persona.js?v=1"></script>
-<script src="piyo-extras.js?v=4"></script>
+<script src="piyo-extras.js?v=5"></script>
 <script src="piyo-buy.js?v=9"></script>
 <script src="piyo-log/schema.js?v=1"></script>
 <script src="piyo-log/recorder.js?v=1"></script>
@@ -1448,7 +1462,7 @@ window.PiyoSplash=(function(){
   });
 
   // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
-  const PN_VERSION='2026.11.13-2（天気が取れないときにねばる）';
+  const PN_VERSION='2026.11.13-3（天気の図・株価は日経平均）';
   {
     const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
     const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
@@ -1894,6 +1908,13 @@ window.PiyoSplash=(function(){
     try{const s=JSON.parse(localStorage.getItem(WEATHER_SAVE)||'null');if(s&&Array.isArray(s.w)&&s.w.length&&keepable(s.at,now)){data.weather=s.w;weatherAt=s.at;return}}catch(_){}
     data.weather=null;weatherAt=null;
   }
+  // 天気の図（設定「天気の図」で入り切り）。予報が無いときは出さない
+  function weatherFig(msg){
+    const X=globalThis.PiyoExtras;if(!X||!X.weatherFigure||!msg||!msg.el||!data||!data.weather)return;
+    try{if(X.flagOn&&!X.flagOn(localStorage,'wxfig'))return}catch(_){}
+    const html=X.weatherFigure(data.weather,todayStr()),t=msg.el.querySelector('.piyo-text');
+    if(html&&t&&!msg.el.querySelector('.piyo-wx')){t.insertAdjacentHTML('afterend',html);if(typeof toBottom==='function')toBottom(true)}
+  }
   // 取り直せずに前の予報で答えるときの一言（30分以上前の予報のときだけ）
   function weatherNote(){
     if(weatherAt===null||!data||!data.weather||Date.now()-weatherAt<DATA_TTL)return'';
@@ -2306,6 +2327,7 @@ window.PiyoSplash=(function(){
 - 「〇〇について」など話題の概要を求める質問には、<knowledge> にあるその話題の情報をまとめて答える。載っている特徴・期間・値段・場所などの範囲でよく、質問されていない細部まで調べようとしない。概要を答えられるなら、メモの「詳細は記事で確認」という記述や未記載の細部だけを理由に need_more を使わない。
 - 利用者が求めた内容に答える情報が基本情報とメモと予定と暦と天気にないときは、推測で答えずに need_more ツールを使う。概要を聞かれた話題の情報がない場合も同じ。記事の本文に書いてありそうなこと（値段・購入方法・整理券などの細かい条件）は kind="article"、<basics> にも記事にも無さそうなこと（店の周りの道順、ぴよりん以外の話など）は kind="web"。
 - ぴよりんと関係ない質問にも、知っている範囲で短く答えてよい。
+- 「株価は」「今日の株価」のように、どの株かを言わずに株価を聞かれたら、日経平均株価を答える（ぴよりんの会社や親会社の株価にしない）。株価・為替の値は、今日か直前の取引日の値だけを、日付と時刻をつけて答える。それより古い値しか分からないときは、古い値を書かずに「新しい値は見つからなかった」と伝える。
 - URL を書くときは前後に空白か改行を入れ、日本語の文とくっつけない。
 - 答えに <memo> や <event> を使ったときは、答えの最後に改行して [[参照:m3,e2]] の形で、使ったものの id を3つまで書く（この印は画面には出ず、記事や予定を開く札になる）。基本情報・暦・天気だけで答えたときは書かない。
 - 話し方の手本（〇〇は例の言葉。答えには <knowledge> の内容だけを使い、手本の名前・日付・決まりは使わない）:
@@ -2411,7 +2433,7 @@ window.PiyoSplash=(function(){
     logEnd({status:'ok',answer:text});
     history=[...history,{role:'user',content:q},{role:'assistant',content:text}].slice(-10);
     if(a.kind==='omikuji')markOmikuji();
-    play(a.mood||'wave');msg.say(fmt(text),()=>{msg.links(refLinks(a.refs));offerCalendar(msg,a.refs);addFollowUps(a.refs);if(msg.fix)msg.fix({src:'local',q:asked.q||q,a:text,chip:asked.chip,...(lt?{lt}:{})})});
+    play(a.mood||'wave');msg.say(fmt(text),()=>{if(a.sources==='weather'&&typeof weatherFig==='function')weatherFig(msg);msg.links(refLinks(a.refs));offerCalendar(msg,a.refs);addFollowUps(a.refs);if(msg.fix)msg.fix({src:'local',q:asked.q||q,a:text,chip:asked.chip,...(lt?{lt}:{})})});
     busy=false;sync();
   }
   // 返事を作りながら、言い終わった文から順に出す（「ます」が「るぴよ」に変わって見えないよう、文の途中は出さない）
@@ -2440,7 +2462,7 @@ window.PiyoSplash=(function(){
     if(globalThis.PiyoInfobase){
       busy=true;sync();let pooled=null;
       try{pooled=await globalThis.PiyoInfobase.answer(q);}finally{busy=false;sync();}
-      if(pooled){asked={q,chip:consumeSuggest(q)||'',way:'infobase',web:false};const lt=logStart(q,asked.chip?{chip:asked.chip}:undefined);logEnd({status:'ok',answer:pooled.text});userMsg(q);const msg=piyoMsg(pooled.source?fmt(pooled.source):false);play('wave');msg.say(fmt(pooled.body??pooled.text),()=>{if(msg.fix)msg.fix({src:'infobase',q,a:pooled.text,...(lt?{lt}:{})});});history=[...history,{role:'user',content:q},{role:'assistant',content:pooled.text}].slice(-10);return;}
+      if(pooled){asked={q,chip:consumeSuggest(q)||'',way:'infobase',web:false};const lt=logStart(q,asked.chip?{chip:asked.chip}:undefined);logEnd({status:'ok',answer:pooled.text});userMsg(q);const msg=piyoMsg(pooled.source?fmt(pooled.source):false);play('wave');msg.say(fmt(pooled.body??pooled.text),()=>{if(/^(weather|now):名古屋/.test(pooled.brief||'')&&typeof weatherFig==='function')weatherFig(msg);if(msg.fix)msg.fix({src:'infobase',q,a:pooled.text,...(lt?{lt}:{})});});history=[...history,{role:'user',content:q},{role:'assistant',content:pooled.text}].slice(-10);return;}
     }
 
     if(fixPending)endFix(); // 「どこがちがう？」の途中でも、候補を押したら普通の質問にする

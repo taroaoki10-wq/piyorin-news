@@ -159,3 +159,18 @@ test('会話：その場で答えられる質問は、API キーが無くても 
   await c.ask('ぴよりんゴジラについて'); // その場で答えられない質問は、今までどおりキーを聞く
   assert.equal(c.keyPrompts,1);assert.equal(sent.length,0);
 });
+
+test('天気の図：7日分の天気・最高と最低・雨の確率を帯にする',()=>{
+  const day=(i,word,max,min,rain)=>({date:'2026-11-'+(13+i),word,max,min,rain});
+  const w=[day(0,'晴れ',20,9,0),day(1,'晴れときどきくもり',18,8,10),day(2,'雨',15,10,80),day(3,'くもり',16,7,30),day(4,'雪',5,-1,60),day(5,'雷雨',14,6,90),day(6,'霧',12,4,null),day(7,'晴れ',13,5,0)];
+  const h=X.weatherFigure(w,'2026-11-13');
+  assert.equal((h.match(/class="piyo-wx-day/g)||[]).length,7); // 7 日まで
+  assert.match(h,/piyo-wx-day now"><span class="piyo-wx-d">今日<\/span>/);assert.match(h,/piyo-wx-day sat"><span class="piyo-wx-d">土/);assert.match(h,/piyo-wx-day sun"><span class="piyo-wx-d">日/);
+  assert.match(h,/<span class="piyo-wx-hi">20°<\/span><span class="piyo-wx-bar"><i style="top:0%;bottom:47\.6%">/); // いちばん高い日は帯の上の端から
+  assert.match(h,/<span class="piyo-wx-lo">-1°<\/span>/);assert.match(h,/piyo-wx-r wet">80%/);assert.match(h,/piyo-wx-r">–</);
+  assert.match(h,/role="img" aria-label="名古屋の天気：今日 晴れ 最高20℃ 最低9℃ 雨0%、明日 /);
+  assert.deepEqual(['晴れ','晴れときどきくもり','くもり','霧','小雨','にわか雨','冷たい雨','雪','にわか雪','雷雨','ひょうまじりの雷雨'].map(X.weatherKind),['sun','partly','cloud','cloud','rain','rain','rain','snow','snow','thunder','thunder']);
+  assert.equal(X.weatherFigure(w,'2026-11-20'),''); // 残りが 1 日だけなら出さない
+  assert.equal(X.weatherFigure(null,'2026-11-13'),'');assert.equal(X.weatherFigure(w.slice(3),'2026-11-13').includes('今日'),false);
+  assert.equal(X.weatherAsk('今日の天気'),true);assert.equal(X.weatherAsk('雨の日でも買える？'),false);assert.equal(X.weatherAsk('ぴよりんの値段'),false);
+});

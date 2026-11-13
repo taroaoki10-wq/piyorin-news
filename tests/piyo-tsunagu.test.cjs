@@ -21,10 +21,11 @@ function systems(){
   return {SYSTEM:c.S,SYSTEM_MAC:c.M};
 }
 
+// 2026-11-13：ユーザーの頼みで「株価は → 日経平均・古い値は書かない」の 1 行を足したので、指紋を取り直した
 test('SYSTEM と SYSTEM_MAC の文は 1 文字も変わっていない',()=>{
   const {SYSTEM,SYSTEM_MAC}=systems();
-  assert.equal(sha(SYSTEM),'fa8224835cd51e9acb7f24ae7ccdefe545d716e95727f75d8ad176c92772c7af');
-  assert.equal(sha(SYSTEM_MAC),'e560b9ed8baebba529f5209afc5b446305bd9be3bb7bb935572d1809911b09d5');
+  assert.equal(sha(SYSTEM),'037750be4b29e64137af2f00a5bde916b5bb4c576fa61c9439525bbf1729a1fe');
+  assert.equal(sha(SYSTEM_MAC),'7b478a3204e42fa985a86d9a5ec7193ea77781af1b3c4ac5c4421c1976a03c56');
 });
 
 test('性格は入りのときだけ、指示の末尾に約束どおりの 1 ブロックで足される',()=>{
@@ -133,13 +134,13 @@ test('設定の既定はどれも入り（鍵が無いとき入り・\'1\' で�
     assert.equal(X.flagOn(mem({[X.FLAG_KEYS[n]]:'0'}),n),true);
     assert.match(html,new RegExp(`<input type="checkbox" data-flag="${n}" checked>`));
   }
-  assert.deepEqual(plain(X.FLAG_KEYS),{persona:'piyo-persona-off',memory:'piyo-memory-off',convo:'piyo-convo-off',buysync:'piyo-buysync-off'});
+  assert.deepEqual(plain(X.FLAG_KEYS),{persona:'piyo-persona-off',memory:'piyo-memory-off',convo:'piyo-convo-off',buysync:'piyo-buysync-off',wxfig:'piyo-wxfig-off'});
   assert.match(html,/要約だけを送ります（全文は送りません）/);
 });
 
 test('版・読み込み・Mac への送り',()=>{
-  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.13-2">/);
-  assert.match(html,/PN_VERSION='2026\.11\.13-2（天気が取れないときにねばる）'/);
+  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.13-3">/);
+  assert.match(html,/PN_VERSION='2026\.11\.13-3（天気の図・株価は日経平均）'/);
   assert.match(html,/<script src="piyo-persona\.js\?v=\d+"><\/script>/);
   assert.match(html,/memory:flag\('memory'\),remember:flag\('convo'\)/);
 });
