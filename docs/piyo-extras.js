@@ -437,7 +437,7 @@ window.PiyoExtras = (function () {
   // event: status（thinking・searching・reading）で onStatus(state)。event: done で readMessage と同じ形を返す（調べる回数の上限で
   // 止まったら stop_reason は 'max_turns'）。event: error は e.kind（login・limit・timeout・failed）と e.resetsAt（秒）で投げる。
   // 終わりが届かずに切れた・idleMs のあいだ何も届かない（窓口は調べている間も 10 秒ごとに空の行を送る）ときは e.kind='cut'
-  async function readRelay(response, onText, onStatus, idleMs = 35000) {
+  async function readRelay(response, onText, onStatus, idleMs = 35000, onMemory) {
     const reader = response.body.getReader(), dec = new TextDecoder();
     const fail = kind => { const e = new Error('relay'); e.kind = kind; return e; };
     let buf = '', result = null;
@@ -452,6 +452,7 @@ window.PiyoExtras = (function () {
       if (!d || typeof d !== 'object') return;
       if (event === 'text') { if (typeof d.text === 'string' && onText) onText(d.text); }
       else if (event === 'status') { if (typeof d.state === 'string' && onStatus) onStatus(d.state); }
+      else if (event === 'memory') { if (typeof d.text === 'string' && onMemory) onMemory(d); }
       else if (event === 'done') result = { content: [{ type: 'text', text: typeof d.text === 'string' ? d.text : '' }], stop_reason: d.stop === 'max_turns' ? 'max_turns' : 'end_turn' };
       else if (event === 'error') { const e = fail(typeof d.kind === 'string' ? d.kind : 'failed'); e.resetsAt = typeof d.resetsAt === 'number' ? d.resetsAt : null; throw e; }
     };
@@ -587,5 +588,68 @@ window.PiyoExtras = (function () {
     return null;
   }
 
-  return { localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf, plannedLine };
+  // ---- 記憶と性格をつなぐ（Claude Pet との受け渡しの約束 2026-11-13） ----
+  // 設定は localStorage の鍵が '1' のときだけ切（鍵が無いときは入り）
+  const FLAG_KEYS = { persona: 'piyo-persona-off', memory: 'piyo-memory-off', convo: 'piyo-convo-off', buysync: 'piyo-buysync-off' };
+  function flagOn(storage, name) { try { return !storage || storage.getItem(FLAG_KEYS[name]) !== '1'; } catch (_) { return true; } }
+  const MEMORY_KEY = 'piyo-memory-card', MEMORY_DAYS = 7;
+  function personaBlock(p) {
+    const t = p && typeof p.text === 'string' ? p.text.trim() : '';
+    return t ? '\n\n<persona>（ぴよの人柄。あいさつ・雑談・ありがとう・まちがいを言われたときだけ出す。ぴよりん情報の答え方・語尾・長さは上の決まりが先で、人柄で変えない）\n' + t + '\n</persona>' : '';
+  }
+  function memoryBlock(text) {
+    const t = typeof text === 'string' ? text.trim() : '';
+    return t ? '\n\n<memory>（ユーザーについて覚えていること。関係があるときだけ使い、無理に出さない。ぴよりん情報の答えは knowledge が先）\n' + t + '\n</memory>' : '';
+  }
+  function saveMemoryCard(storage, d, now = Date.now()) {
+    const text = d && typeof d.text === 'string' ? d.text.trim().slice(0, 600) : '';
+    if (!text) return false;
+    try { storage.setItem(MEMORY_KEY, JSON.stringify({ text, at: Number.isFinite(d.at) ? d.at : now })); return true; } catch (_) { return false; }
+  }
+  // 7 日以内の札の文。古い・壊れている・無いときは ''
+  function readMemoryCard(storage, now = Date.now()) {
+    try {
+      const v = JSON.parse(storage.getItem(MEMORY_KEY) || 'null');
+      if (!v || typeof v.text !== 'string' || !Number.isFinite(v.at)) return '';
+      return now - v.at <= MEMORY_DAYS * 86400e3 ? v.text.trim().slice(0, 600) : '';
+    } catch (_) { return ''; }
+  }
+  // 指示の末尾に <persona>（入りのとき）、memory: true なら <memory>（入りで 7 日以内の札があるとき）を足す。前の文は変えない
+  function composeSystem(base, { storage, persona, memory = false, now = Date.now() } = {}) {
+    let out = base;
+    if (flagOn(storage, 'persona')) out += personaBlock(persona);
+    if (memory && flagOn(storage, 'memory')) out += memoryBlock(readMemoryCard(storage, now));
+    return out;
+  }
+  // 保存済みのつなぎ方（index.html の mac と同じ検査）
+  function readMacLink(storage) {
+    try {
+      const v = JSON.parse(storage.getItem('piyo-mac') || 'null');
+      return v && /^https:\/\/[^\s/]+$/.test(v.url) && /^[A-Za-z0-9_-]{20,}$/.test(v.token) ? { url: v.url, token: v.token } : null;
+    } catch (_) { return null; }
+  }
+  // 窓口へ JSON を送る（8 秒で打ち切り）。{ok, status, body} か {ok:false, kind:'unreachable'}
+  async function macJson(link, path, body, fetchFn) {
+    const f = fetchFn || (typeof fetch === 'function' ? fetch : null);
+    if (!f) return { ok: false, kind: 'unreachable' };
+    const ac = typeof AbortController === 'function' ? new AbortController() : null;
+    const timer = setTimeout(() => ac && ac.abort(), 8000);
+    try {
+      const r = await f(link.url + path, { method: 'POST', headers: { authorization: 'Bearer ' + link.token, 'content-type': 'application/json' }, body: JSON.stringify(body), signal: ac ? ac.signal : undefined });
+      let b = null; try { b = await r.json(); } catch (_) { /* 中身なし */ }
+      return { ok: !!r.ok, status: r.status, body: b };
+    } catch (_) { return { ok: false, kind: 'unreachable' }; }
+    finally { clearTimeout(timer); }
+  }
+  // ブックマークと見た記事の送る形（最大 200 件・300 件）
+  function syncBody(bookmarks, seenIds) {
+    return {
+      bookmarks: (Array.isArray(bookmarks) ? bookmarks : []).filter(b => b && typeof b.url === 'string' && /^https?:\/\//.test(b.url))
+        .slice(0, 200).map(b => ({ url: b.url, title: String(b.title || '').slice(0, 200), date: typeof b.date === 'string' ? b.date : '' })),
+      seen: (Array.isArray(seenIds) ? seenIds : []).filter(x => typeof x === 'string').slice(0, 300)
+    };
+  }
+
+  return { localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf, plannedLine,
+    flagOn, FLAG_KEYS, personaBlock, memoryBlock, saveMemoryCard, readMemoryCard, composeSystem, readMacLink, macJson, syncBody };
 })();

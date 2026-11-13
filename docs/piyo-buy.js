@@ -193,6 +193,28 @@
       if(!o){map.set(r.id,r);added++}else if(r.updatedAt>o.updatedAt){map.set(r.id,r);updated++}}
     return {list:sortRecs([...map.values()]),added,updated};
   }
+  // ---------- Mac の selfbase へ送る差分（約束 3 章） ----------
+  // state: { sent:{id:updatedAt}, removed:[id], asked } 。送る記録（新しい・直した物。最大 50）と、消えた id（最大 200）を返す
+  function syncDiff(records, state) {
+    const st = state && typeof state === 'object' ? state : {};
+    const sent = st.sent && typeof st.sent === 'object' ? st.sent : {};
+    const list = Array.isArray(records) ? records.filter(r => r && r.id) : [];
+    const have = new Set(list.map(r => r.id));
+    const out = list.filter(r => !(r.id in sent) || (r.updatedAt || 0) > (sent[r.id] || 0)).slice(0, 50);
+    const gone = new Set([...(Array.isArray(st.removed) ? st.removed : []), ...Object.keys(sent)].filter(id => typeof id === 'string' && !have.has(id)));
+    return { records: out, removed: [...gone].slice(0, 200) };
+  }
+  // 送れた結果を state に反映する（failed の id は送れていない扱い）。新しい state を返す
+  function syncApply(state, sentRecords, removedIds, failed) {
+    const st = state && typeof state === 'object' ? state : {};
+    const bad = new Set(Array.isArray(failed) ? failed : []);
+    const sent = Object.assign({}, st.sent);
+    for (const r of sentRecords || []) if (!bad.has(r.id)) sent[r.id] = r.updatedAt || 0;
+    const gone = new Set((removedIds || []).filter(id => !bad.has(id))); // 消すのに失敗した id は、消した印を残して次に送り直す
+    for (const id of gone) delete sent[id];
+    return { sent, removed: (Array.isArray(st.removed) ? st.removed : []).filter(id => !gone.has(id)), asked: st.asked === true };
+  }
+
   // 絞り込み：期間（'all' | 'YYYY' | 'YYYY-MM'）・分類・ことば
   function filter(list,{period='all',cat='all',q=''}={}){
     const words=String(q||'').toLowerCase().split(/[\s　]+/).filter(Boolean);
@@ -227,7 +249,7 @@
   }
 
   const PiyoBuy={KEY,CATS,REGULAR,VILLAGE,fixedFor,SHOPS,shopOf,slotTime,CROWD,RATE,itemName,eventCat,memoPrices,limitedFor,allLimited,imageFor,archiveItems,nkey,normalize,total,count,sortRecs,
-    parseStore,dumpStore,merge,filter,stats,firstTime,todayJst,addDays,yen,newId};
+    parseStore,dumpStore,merge,filter,stats,firstTime,todayJst,addDays,yen,newId,syncDiff,syncApply};
   root.PiyoBuy=PiyoBuy;
   if(typeof module!=='undefined'&&module.exports)module.exports=PiyoBuy;
 })(typeof window!=='undefined'?window:globalThis);
@@ -248,7 +270,7 @@
   const urls=new Map(); // 写真の表示用 URL
 
   function load(){try{recs=B.sortRecs(B.parseStore(localStorage.getItem(B.KEY)))}catch(e){recs=[]}}
-  function save(){try{localStorage.setItem(B.KEY,B.dumpStore(recs));return true}catch(e){opts.toast('保存できませんでした（ブラウザの空きが足りないかもしれません）');return false}}
+  function save(){try{localStorage.setItem(B.KEY,B.dumpStore(recs));setTimeout(buySync,0);return true}catch(e){opts.toast('保存できませんでした（ブラウザの空きが足りないかもしれません）');return false}}
 
   // ---------- 写真（IndexedDB） ----------
   let dbp=null;
@@ -505,6 +527,36 @@
     closeForm();renderList();opts.toast('記録を消しました');
   }
 
+  // ---------- Mac の selfbase へ送る（Mac のつなぎ方があり、設定が入りのとき。iPhone の中の保存は今のまま） ----------
+  const SENT_KEY='piyo-buy-sent';
+  function readSent(){try{const v=JSON.parse(localStorage.getItem(SENT_KEY)||'null');return {sent:v&&v.sent&&typeof v.sent==='object'?v.sent:{},removed:v&&Array.isArray(v.removed)?v.removed:[],asked:v&&typeof v.asked==='boolean'?v.asked:undefined}}catch(_){return {sent:{},removed:[],asked:undefined}}}
+  function writeSent(st){try{localStorage.setItem(SENT_KEY,JSON.stringify(st))}catch(_){}}
+  let syncing=false,syncAgain=false;
+  async function buySync(){
+    const X=window.PiyoExtras;if(!X||!X.flagOn||!X.macJson)return;
+    if(syncing){syncAgain=true;return}
+    syncing=true;
+    try{
+      if(!X.flagOn(localStorage,'buysync'))return;
+      const link=X.readMacLink(localStorage);if(!link)return;
+      let st=readSent();
+      if(st.asked!==true){ // 最初の 1 回だけ聞く。いいえなら、今ある記録は送った扱いにして、あとの記録だけ送る
+        if(recs.length&&!confirm(`今までの記録 ${recs.length}件を Mac の selfbase にも送りますか`))st.sent=Object.fromEntries(recs.map(r=>[r.id,r.updatedAt]));
+        st.asked=true;writeSent(st);
+      }
+      for(let i=0;i<10;i++){ // 50 件ずつ。つながらない・503 のときはそのまま（次に開いたとき送り直す）
+        const d=B.syncDiff(recs,st);
+        if(!d.records.length&&!d.removed.length)break;
+        const r=await X.macJson(link,'/piyo-news/buy',d);
+        if(!r.ok||!r.body||r.body.ok!==true)break;
+        const failed=Array.isArray(r.body.failed)?r.body.failed:[];
+        st=B.syncApply(st,d.records,d.removed,failed);writeSent(st);
+        if(failed.length)break;
+      }
+    }catch(_){/* 送れなかった分は次に開いたとき */}
+    finally{syncing=false;if(syncAgain){syncAgain=false;buySync()}}
+  }
+
   // ---------- 書き出し・読み込み（設定の画面） ----------
   async function exportAll(){
     const out=[];for(const r of recs){const o=Object.assign({},r);if(r.photo){const b=await getPhoto(r.id);if(b)o.photoData=await blobToData(b)}out.push(o)}
@@ -587,6 +639,7 @@
       sb.addEventListener('change',e=>{if(e.target.id==='buy-import'&&e.target.files[0]){importFile(e.target.files[0]);e.target.value=''}})}
     window.addEventListener('storage',e=>{if(e.key===B.KEY){load();renderList();renderSet()}});
     renderList();renderSet();
+    setTimeout(buySync,2500);
   }
   window.PiyoBuyUI={mount,render:()=>{needImages();renderList();renderSet()},open:()=>openForm(null),get count(){return recs.length}};
 })();

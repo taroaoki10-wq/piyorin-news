@@ -117,7 +117,7 @@ test('ページに購入記録のタブ・画面・読み込みがある',()=>{
   assert.match(html,/id="view-buy"/);
   assert.match(html,/id="buy-modal"/);
   assert.match(html,/id="set-buy"/);
-  assert.match(html,/<script src="piyo-buy\.js\?v=8"><\/script>/);
+  assert.match(html,/<script src="piyo-buy\.js\?v=9"><\/script>/);
   assert.match(html,/PiyoBuyUI\.mount\(/);
 });
 

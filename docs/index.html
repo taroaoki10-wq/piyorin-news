@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ぴよりん">
-<meta name="piyo-ver" content="2026.11.07-2">
+<meta name="piyo-ver" content="2026.11.13-1">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
@@ -140,6 +140,11 @@ details.rel li a:hover{color:var(--caramel)}
 .stamp{margin-left:auto;align-self:center;margin-bottom:8px;display:flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:11px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
 .stamp i{width:6px;height:6px;border-radius:50%;background:var(--line)}
 .stamp.fresh i{background:var(--yolk)}
+.set-toggles{display:flex;flex-direction:column;gap:10px}
+.set-toggles label{display:flex;align-items:flex-start;gap:8px;cursor:pointer;line-height:1.5}
+.set-toggles input[type="checkbox"]{width:auto;flex:none;margin:3px 0 0;padding:0;accent-color:var(--caramel)}
+.set-toggles small{display:block;font-size:12px;color:var(--muted)}
+@media (max-width:620px){.set-toggles{gap:14px}.set-toggles input[type="checkbox"]{width:20px;height:20px;margin-top:1px}}
 @media (max-width:620px){.stamp .lbl{display:none}}
 .toolbar{top:env(safe-area-inset-top,0px)}
 
@@ -853,6 +858,13 @@ window.PiyoSplash=(function(){
       <p class="set-note" id="set-piyo-state">まだ準備していません。Mac の Claude のつなぎ方か Claude の API キーを入れると、ぴよと話せます（ぴよはスマホの幅で出ます）。</p>
       <p class="run-meta" id="piyo-meta" hidden></p>
       <button type="button" class="set-act" id="set-piyo-setup">話す準備を開く</button>
+      <div class="set-toggles" id="set-toggles">
+        <label><input type="checkbox" data-flag="persona" checked><span>ぴよの性格<small>Claude Pet のぴよの人柄で、あいさつや雑談に答えます。</small></span></label>
+        <label><input type="checkbox" data-flag="memory" checked><span>Mac の記憶を受け取る<small>Mac が覚えているあなたの好みを、答えの参考にします。</small></span></label>
+        <label><input type="checkbox" data-flag="convo" checked><span>会話を Mac のぴよに覚えてもらう<small>要約だけを送ります（全文は送りません）。ブックマークと見た記事も送ります。</small></span></label>
+        <label><input type="checkbox" data-flag="buysync" checked><span>購入記録を Mac の selfbase に送る<small>購入記録を保存・削除したときに、Mac にも送ります（写真は送りません）。</small></span></label>
+        <small class="set-note">Mac のつなぎ方を入れているときだけ働きます。</small>
+      </div>
       <p class="set-links">Claude のコンソール：<a href="https://platform.claude.com/settings/keys" target="_blank" rel="noopener">API キー ↗</a><a href="https://platform.claude.com/usage" target="_blank" rel="noopener">使った額 ↗</a><a href="https://platform.claude.com/settings/limits" target="_blank" rel="noopener">使用額の上限 ↗</a></p>
     </section>
     <section class="set-sec" aria-labelledby="set-h-fix">
@@ -906,8 +918,9 @@ window.PiyoSplash=(function(){
 </div>
 <script src="news-archive.js"></script>
 <script src="news-identity.js"></script>
-<script src="piyo-extras.js?v=2"></script>
-<script src="piyo-buy.js?v=8"></script>
+<script src="piyo-persona.js?v=1"></script>
+<script src="piyo-extras.js?v=3"></script>
+<script src="piyo-buy.js?v=9"></script>
 <script src="piyo-log/schema.js?v=1"></script>
 <script src="piyo-log/recorder.js?v=1"></script>
 <script src="piyo-log/rules.js?v=1"></script>
@@ -1014,7 +1027,7 @@ window.PiyoSplash=(function(){
 
   const isBm=u=>!!u&&bms.some(b=>b.url===u);
   const mark=u=>isBm(u)?`<span class="bm-mark" role="img" aria-label="ブックマーク済み" title="ブックマーク済み">${STAR}</span>`:'';
-  function saveBm(push=true){try{localStorage.setItem(BM_KEY,JSON.stringify(bms));localStorage.setItem(RM_KEY,JSON.stringify(bmRemoved))}catch(_){}if(push&&typeof queueSync==='function')queueSync()}
+  function saveBm(push=true){try{localStorage.setItem(BM_KEY,JSON.stringify(bms));localStorage.setItem(RM_KEY,JSON.stringify(bmRemoved))}catch(_){}if(push&&typeof queueSync==='function')queueSync();try{window.dispatchEvent(new Event('piyo-bm-saved'))}catch(_){}}
 
   function relLinks(it){
     const r=(it.related||[]).filter(x=>x&&x.url);
@@ -1435,7 +1448,7 @@ window.PiyoSplash=(function(){
   });
 
   // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
-  const PN_VERSION='2026.11.07-2（「津の天気」を名古屋で答えない・「大津」「津波」を津と取り違えない・「静岡県浜松市」は浜松）';
+  const PN_VERSION='2026.11.13-1（Claude Pet のぴよと記憶と性格をつなぐ）';
   {
     const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
     const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
@@ -2299,7 +2312,7 @@ window.PiyoSplash=(function(){
   async function callClaude(body,onText){
     const stream=!!onText&&!!globalThis.PiyoExtras;
     const r=await fetch(API,{method:'POST',headers:{'x-api-key':apiKey,'anthropic-version':'2023-06-01','content-type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:MODEL,max_tokens:2048,output_config:{effort:'low'},system:[{type:'text',text:SYSTEM},{type:'text',text:knowledge(),cache_control:{type:'ephemeral'}}],...body,...(stream?{stream:true}:{})})});
+      body:JSON.stringify({model:MODEL,max_tokens:2048,output_config:{effort:'low'},system:[{type:'text',text:(globalThis.PiyoExtras&&globalThis.PiyoExtras.composeSystem?globalThis.PiyoExtras.composeSystem(SYSTEM,{storage:localStorage,persona:globalThis.PiyoPersona,memory:true}):SYSTEM)},{type:'text',text:knowledge(),cache_control:{type:'ephemeral'}}],...body,...(stream?{stream:true}:{})})});
     if(stream&&r.ok&&r.body&&/event-stream/.test(r.headers.get('content-type')||''))return globalThis.PiyoExtras.readMessage(r,onText);
     let res=null;try{res=await r.json()}catch(_){}
     if(!r.ok){const err=new Error('http');err.status=r.status;err.detail=res&&res.error&&res.error.message||'';throw err}
@@ -2497,13 +2510,14 @@ window.PiyoSplash=(function(){
         if(h.busy)throw{kind:'busy'};
         if(h.name&&mac===link&&mac.name!==h.name)saveMac({...mac,name:h.name});
       }
-      const r=await macPost(link,{system:SYSTEM_MAC,knowledge:knowledge(),history,question:q});
+      const flag=n=>!X.flagOn||X.flagOn(localStorage,n);
+      const r=await macPost(link,{system:X.composeSystem?X.composeSystem(SYSTEM_MAC,{storage:localStorage,persona:globalThis.PiyoPersona}):SYSTEM_MAC,knowledge:knowledge(),history,question:q,memory:flag('memory'),remember:flag('convo')});
       macOk=Date.now();
       let state='thinking';
       const res=await X.readRelay(r,raw=>{const before=live.shown;live.onText(raw);if(live.shown&&live.shown!==before)state=''},s=>{
         if(!MAC_STATE[s]||s===state)return; // 調べ始めた・読み始めた：途中の文を消して、何をしているかを出す
         state=s;if(s!=='thinking')asked.web=true;live.restart();loop(s==='thinking'?'fidget':'checking');msg.say(MAC_STATE[s]);
-      });
+      },undefined,d=>{if(flag('memory')&&X.saveMemoryCard)X.saveMemoryCard(localStorage,d)});
       finish(msg,q,textOf(res),cut(res),live.started&&!live.fresh);
     }catch(e){
       const kind=e&&e.kind||'failed';
@@ -2811,6 +2825,33 @@ window.PiyoSplash=(function(){
   window.addEventListener('scroll',queueFit,{passive:true});
   input.addEventListener('focus',settleFit);input.addEventListener('blur',settleFit);
   document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!$('piyo-key-modal').hidden)cancelKey();else if(!layer.hidden)close()});
+  // ---- 記憶と性格の入り切り（設定の画面。鍵が無いときは入り）と、Mac のぴよへ送るブックマーク・見た記事 ----
+  (function(){
+    const X=globalThis.PiyoExtras;if(!X||!X.flagOn)return;
+    const box=$('set-toggles');
+    let bmTimer=0;
+    async function convoSync(){
+      bmTimer=0;
+      if(!X.flagOn(localStorage,'convo'))return;
+      const link=X.readMacLink(localStorage);if(!link)return;
+      let bm=[],ids=[];
+      try{const r=JSON.parse(localStorage.getItem('piyo-bookmarks')||'[]');if(Array.isArray(r))bm=r.slice().sort((a,b)=>(b.ts||b.savedAt||0)-(a.ts||a.savedAt||0))}catch(_){}
+      try{const v=JSON.parse(localStorage.getItem('piyo-seen')||'null');if(v&&Array.isArray(v.ids))ids=v.ids}catch(_){}
+      await X.macJson(link,'/piyo-news/sync',X.syncBody(bm,ids));
+    }
+    const queue=()=>{if(!bmTimer)bmTimer=setTimeout(convoSync,30000)}; // ブックマークを変えたら、30 秒まとめて 1 回
+    if(box){
+      box.querySelectorAll('input[data-flag]').forEach(i=>{
+        i.checked=X.flagOn(localStorage,i.dataset.flag);
+        i.addEventListener('change',()=>{
+          try{i.checked?localStorage.removeItem(X.FLAG_KEYS[i.dataset.flag]):localStorage.setItem(X.FLAG_KEYS[i.dataset.flag],'1')}catch(_){}
+          if(i.dataset.flag==='convo'&&i.checked)queue();
+        });
+      });
+    }
+    window.addEventListener('piyo-bm-saved',queue);
+    setTimeout(convoSync,4000); // ページを開いたとき
+  })();
 })();
 </script>
 </body>

@@ -124,7 +124,7 @@ test('Mac の Claude で答える：確かめてから送り、文を流して�
   assert.deepEqual(h.fetched.map(f=>f.url),[URL0+'/piyo-news/health',URL0+'/piyo-news/chat']);
   for(const f of h.fetched){assert.ok(!f.url.includes(TOKEN));assert.equal(f.opts.headers.authorization,'Bearer '+TOKEN)}
   const body=JSON.parse(h.fetched[1].opts.body);
-  assert.deepEqual(body,{system:'MAC 用の指示',knowledge:'<knowledge>知識</knowledge>',history:[],question:Q});
+  assert.deepEqual(body,{system:'MAC 用の指示',knowledge:'<knowledge>知識</knowledge>',history:[],question:Q,memory:true,remember:true});
   assert.equal(h.fetched[1].opts.method,'POST');assert.equal(h.fetched[1].opts.headers['content-type'],'application/json');
   assert.deepEqual(h.said.map(s=>s.text),['考え中だぴよ…','名古屋駅の中央改札から歩いて1分だぴよ。','名古屋駅の中央改札から歩いて1分だぴよ。']);
   assert.equal(h.said[2].resume,true); // 最後は続きから（流して出した文を出し直さない）
