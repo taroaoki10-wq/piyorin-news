@@ -43,9 +43,31 @@ test('部分失敗では既存メモを保持、成功分更新、次回再試�
   assert.equal(h.api.data.memo.id.memo,'memo1');assert.equal(h.api.data.greeting.lines[0],'summary2');
   h.fail('');await h.api.loadData();assert.equal(h.calls,21);assert.equal(h.api.data.memo.id.memo,'memo2');
 });
-test('天気取得失敗時は古い予報を使わず次回回復',async()=>{
-  const h=setup();await h.api.loadData();h.advance(1800000);h.fail('weather');await h.api.loadData();assert.equal(h.api.data.weather,null);assert.equal(h.api.weatherLine(),'');
-  h.fail('');await h.api.loadData();assert.ok(h.api.data.weather.length);
+test('天気取得失敗時、3時間以内の予報は取った時刻を添えて残し、3時間を過ぎたら使わず、次回回復',async()=>{
+  const h=setup();await h.api.loadData();h.advance(1800000);h.fail('weather');await h.api.loadData();
+  assert.equal(h.api.data.weather[0].word,'晴れ');assert.match(h.api.weatherLine(),/（12時00分に取った予報だぴよ。新しい予報はいま取れなかったぴよ。）$/);
+  h.advance(3*3600e3-1800000);await h.api.freshWeather();assert.equal(h.api.data.weather,null);assert.equal(h.api.weatherLine(),'');
+  h.fail('');await h.api.loadData();assert.ok(h.api.data.weather.length);assert.doesNotMatch(h.api.weatherLine(),/取った予報/);
+});
+test('つながらないことがあっても、質問の前の取り直しは3回までねばる（1回目と2回目が失敗、3回目で取れる）',async()=>{
+  const h=setup();h.fail('weather');await h.api.loadData();
+  await new Promise(r=>setTimeout(r,900)); // 裏の取り直し（3回）が終わるのを待つ
+  assert.equal(h.api.data.weather,null);
+  const before=h.calls;let n=0;const real=h.ctx.fetch;
+  h.fail('');h.ctx.fetch=async(url,opts)=>{if(url==='weather'&&++n<3)throw Error('connect');return real(url,opts)};
+  await h.api.freshWeather();assert.equal(n,3);assert.equal(h.calls-before,1);assert.equal(h.api.data.weather[0].word,'晴れ');
+});
+test('応答が固まったら1回ごとに打ち切って、次の1回で取れる',async()=>{
+  const h=setup();await h.api.loadData();h.advance(1800000);let n=0;const real=h.ctx.fetch;
+  h.ctx.fetch=(url,opts)=>url==='weather'&&++n===1?new Promise((_,rej)=>opts.signal.addEventListener('abort',()=>rej(Error('aborted')))):real(url,opts);
+  h.version(2);await h.api.freshWeather();assert.equal(n,2);assert.equal(h.api.data.weather[0].word,'雨');
+});
+test('開き直して取れなくても、端末に覚えた3時間以内の予報で答える（前の日の予報は使わない）',async()=>{
+  const store=new Map(),ls={getItem:k=>store.has(k)?store.get(k):null,setItem:(k,v)=>store.set(k,String(v))};
+  const a=setup();a.ctx.localStorage=ls;await a.api.loadData();assert.ok(store.get('piyo-weather-last'));
+  const b=setup();b.ctx.localStorage=ls;b.advance(3600e3);b.fail('weather');await b.api.loadData();
+  assert.equal(b.api.data.weather[0].word,'晴れ');assert.match(b.api.weatherLine(),/12時00分に取った予報/);
+  const c=setup();c.ctx.localStorage=ls;c.setTime('2026-10-26T15:30:00Z');c.fail('weather');await c.api.loadData();assert.equal(c.api.data.weather,null);
 });
 test('初回オフラインでも安全な空データを作り次回回復',async()=>{
   const h=setup();h.fail('a');assert.equal(await h.api.loadData(),false);assert.equal(Object.keys(h.api.data.memo).length,0);
@@ -224,8 +246,8 @@ test('3時間の雨の集計は直前1時間の時刻を使い、深夜0時を�
   assert.equal(h.api.data.weather[0].rainHours[7].rain,77);
   assert.equal(h.api.data.weather[1].rainHours[0].rain,0);
 });
-test('天気のHTTPエラーと気温欠損では古い予報を使わない',async()=>{
-  const h=setup();await h.api.loadData();h.advance(1800000);
+test('天気のHTTPエラーと気温欠損では、3時間を過ぎた古い予報を使わない',async()=>{
+  const h=setup();await h.api.loadData();h.advance(3*3600e3);
   const original=h.ctx.fetch;h.ctx.fetch=async(url,opts)=>url==='weather'?{ok:false,json:async()=>h.forecast()}:original(url,opts);
   await h.api.loadData();assert.equal(h.api.data.weather,null);assert.equal(h.api.weatherKnowledge(),'');
   h.ctx.fetch=original;const f=h.forecast();f.daily.temperature_2m_max.fill(null);h.respond('weather',f);

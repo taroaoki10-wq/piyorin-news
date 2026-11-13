@@ -138,8 +138,8 @@ test('設定の既定はどれも入り（鍵が無いとき入り・\'1\' で�
 });
 
 test('版・読み込み・Mac への送り',()=>{
-  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.13-1">/);
-  assert.match(html,/PN_VERSION='2026\.11\.13-1（Claude Pet のぴよと記憶と性格をつなぐ）'/);
+  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.13-2">/);
+  assert.match(html,/PN_VERSION='2026\.11\.13-2（天気が取れないときにねばる）'/);
   assert.match(html,/<script src="piyo-persona\.js\?v=\d+"><\/script>/);
   assert.match(html,/memory:flag\('memory'\),remember:flag\('convo'\)/);
 });

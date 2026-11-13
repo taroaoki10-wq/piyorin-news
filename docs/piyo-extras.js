@@ -82,9 +82,14 @@ window.PiyoExtras = (function () {
     const n = diff(today, date);
     return n === 0 ? '今日' : n === 1 ? '明日' : n === 2 ? 'あさって' : jp(date);
   }
+  // 天気の予報で答える聞き方か（画面は、これが true のときだけ予報の取り直しを最後まで待つ）
+  function weatherAsk(t) {
+    t = String(t || '');
+    if (!/天気|予報|気温|暑い|寒い|何度|雨|傘|日の出|日の入|日没|降水|風速|強風|風が|風は|紫外線|uv|日焼け/i.test(t)) return false;
+    return !/雨の日|雨でも|雨だと|雨なら/.test(t); // 天気予報ではない聞き方
+  }
   function weather(t, ctx) {
-    if (!/天気|予報|気温|暑い|寒い|何度|雨|傘|日の出|日の入|日没|降水|風速|強風|風が|風は|紫外線|uv|日焼け/i.test(t)) return null;
-    if (/雨の日|雨でも|雨だと|雨なら/.test(t)) return null; // 天気予報ではない聞き方
+    if (!weatherAsk(t)) return null;
     if (OTHER_PLACE.test(t.replace(/名古屋|愛知/g, ''))) return null;
     const w = (ctx.weather || []).filter(x => x.date >= ctx.today);
     if (!w.length) return { text: 'いま天気を取れてないぴよ…少しあとで、また呼んで聞いてね。', mood: 'sad', kind: 'weather' };
@@ -650,6 +655,6 @@ window.PiyoExtras = (function () {
     };
   }
 
-  return { localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf, plannedLine,
+  return { weatherAsk, localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf, plannedLine,
     flagOn, FLAG_KEYS, personaBlock, memoryBlock, saveMemoryCard, readMemoryCard, composeSystem, readMacLink, macJson, syncBody };
 })();

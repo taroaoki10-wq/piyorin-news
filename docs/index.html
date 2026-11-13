@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ぴよりん">
-<meta name="piyo-ver" content="2026.11.13-1">
+<meta name="piyo-ver" content="2026.11.13-2">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
@@ -919,7 +919,7 @@ window.PiyoSplash=(function(){
 <script src="news-archive.js"></script>
 <script src="news-identity.js"></script>
 <script src="piyo-persona.js?v=1"></script>
-<script src="piyo-extras.js?v=3"></script>
+<script src="piyo-extras.js?v=4"></script>
 <script src="piyo-buy.js?v=9"></script>
 <script src="piyo-log/schema.js?v=1"></script>
 <script src="piyo-log/recorder.js?v=1"></script>
@@ -1448,7 +1448,7 @@ window.PiyoSplash=(function(){
   });
 
   // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
-  const PN_VERSION='2026.11.13-1（Claude Pet のぴよと記憶と性格をつなぐ）';
+  const PN_VERSION='2026.11.13-2（天気が取れないときにねばる）';
   {
     const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
     const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
@@ -1854,8 +1854,9 @@ window.PiyoSplash=(function(){
         koyomi:!!koyomi&&['holidays','long_weekends','sekki','moon'].every(k=>Array.isArray(koyomi[k])),weather:Array.isArray(weather)&&weather.length>0};
       data={greeting:valid.greeting?greeting:old.greeting||null,memo:valid.memo?memo:old.memo||{},
         events:valid.events?events:old.events||[],news:valid.news?news:old.news||[],basics:valid.basics?basics:old.basics||null,
-        koyomi:valid.koyomi?koyomi:old.koyomi||null,weather:valid.weather?weather:null}; // 古い予報は更新失敗時に使わない
-      weatherAt=valid.weather?now:null;
+        koyomi:valid.koyomi?koyomi:old.koyomi||null,weather:null};
+      putWeather(weather,now,old.weather); // 取れなければ、同じ日で3時間以内の予報だけ残す（それより古い予報は使わない）
+      if(!valid.weather)freshWeather()?.catch(()=>{}); // あいさつは待たせず、裏でねばって取り直す
       // 一部でも失敗したら次に呼んだとき再試行する
       if(Object.values(valid).every(Boolean)){dataLoadedAt=now;dataLoadedDay=new Date(now+9*3600e3).toISOString().slice(0,10)}
       else{dataLoadedAt=null;dataLoadedDay=''}
@@ -1873,11 +1874,31 @@ window.PiyoSplash=(function(){
     const now=Date.now();
     if(weatherAt!==null&&now>=weatherAt&&now-weatherAt<DATA_TTL&&new Date(weatherAt+9*3600e3).toISOString().slice(0,10)===todayStr())return null;
     if(weatherLoading)return weatherLoading;
-    weatherLoading=loadWeather().then(w=>{
+    weatherLoading=loadWeather(3,2500).then(w=>{ // 質問の前はねばる（つながらないことがあるので3回まで）
       if(!data)return;
-      if(Array.isArray(w)&&w.length){data.weather=w;weatherAt=now}else{data.weather=null;weatherAt=null}
+      putWeather(w,Date.now(),data.weather);
     }).finally(()=>{weatherLoading=null});
     return weatherLoading;
+  }
+  // 取れた予報を置く。取れなかったときは、同じ日（日本時間）で3時間以内に取れていた予報だけ残す（端末にも覚えておき、開き直しても使う）
+  const WEATHER_KEEP=3*3600e3,WEATHER_SAVE='piyo-weather-last';
+  const jstDay=t=>new Date(t+9*3600e3).toISOString().slice(0,10);
+  const keepable=(at,now)=>at!==null&&Number.isFinite(at)&&now>=at&&now-at<WEATHER_KEEP&&jstDay(at)===jstDay(now);
+  function putWeather(w,now,old){
+    if(Array.isArray(w)&&w.length){
+      data.weather=w;weatherAt=now;
+      try{localStorage.setItem(WEATHER_SAVE,JSON.stringify({at:now,w}))}catch(_){}
+      return;
+    }
+    if(Array.isArray(old)&&old.length&&keepable(weatherAt,now)){data.weather=old;return}
+    try{const s=JSON.parse(localStorage.getItem(WEATHER_SAVE)||'null');if(s&&Array.isArray(s.w)&&s.w.length&&keepable(s.at,now)){data.weather=s.w;weatherAt=s.at;return}}catch(_){}
+    data.weather=null;weatherAt=null;
+  }
+  // 取り直せずに前の予報で答えるときの一言（30分以上前の予報のときだけ）
+  function weatherNote(){
+    if(weatherAt===null||!data||!data.weather||Date.now()-weatherAt<DATA_TTL)return'';
+    const t=new Date(weatherAt+9*3600e3);
+    return `（${t.getUTCHours()}時${String(t.getUTCMinutes()).padStart(2,'0')}分に取った予報だぴよ。新しい予報はいま取れなかったぴよ。）`;
   }
   // 天気の番号（WMO）を言葉に
   function weatherWord(c){
@@ -1886,12 +1907,21 @@ window.PiyoSplash=(function(){
     if(c>=71&&c<=77)return'雪';if(c===80||c===81)return'にわか雨';if(c===82)return'激しいにわか雨';if(c===85||c===86)return'にわか雪';
     if(c===95)return'雷雨';if(c===96||c===99)return'ひょうまじりの雷雨';return'';
   }
-  async function loadWeather(){
-    const ac=new AbortController(),timer=setTimeout(()=>ac.abort(),1500); // 遅いときは天気なしで進め、あいさつを待たせない（次に呼んだとき取り直す）
+  // Open-Meteo から読む。1回ごとに ms で打ち切り、tries 回までやり直す（つながるまで固まることがあり、やり直すとすぐ通ることが多い）
+  async function fetchWeather(tries,ms){
+    for(let i=0;i<tries;i++){
+      const ac=new AbortController(),timer=setTimeout(()=>ac.abort(),ms),t0=Date.now();
+      try{const r=await fetch(WEATHER,{signal:ac.signal});if(r.ok)return await r.json()}catch(_){}finally{clearTimeout(timer)}
+      if(i<tries-1&&Date.now()-t0<250)await new Promise(r=>setTimeout(r,250)); // すぐ失敗したときは少し間をあける
+    }
+    return null;
+  }
+  // あいさつの前は 1 回・1.5 秒（待たせない）。質問の前は freshWeather が回数を増やして呼ぶ
+  async function loadWeather(tries=1,ms=1500){
     try{
-      const pooled=await globalThis.PiyoInfobase?.weather();
-      const r=pooled?null:await fetch(WEATHER,{signal:ac.signal});if(!pooled&&!r.ok)return null;
-      const {daily:d,hourly:h}=pooled||await r.json(),today=todayStr(),tomorrow=nextDay(today);
+      const pooled=await Promise.resolve(globalThis.PiyoInfobase?.weather()).catch(()=>null); // infobase が失敗しても Open-Meteo へ進む
+      const got=pooled||await fetchWeather(tries,ms);if(!got)return null;
+      const {daily:d,hourly:h}=got,today=todayStr(),tomorrow=nextDay(today);
       const num=(values,i)=>Number.isFinite(values?.[i])?values[i]:null;
       return d.time.map((date,i)=>{
         const rainHours=[];
@@ -1912,7 +1942,7 @@ window.PiyoSplash=(function(){
           sunrise:d.sunrise?.[i]?.slice(11,16)||null,sunset:d.sunset?.[i]?.slice(11,16)||null,uv:num(d.uv_index_max,i),wind:num(d.wind_speed_10m_max,i),precipitation:num(d.precipitation_sum,i),rainHours};
       })
         .filter(x=>x.word&&Number.isFinite(x.max)&&Number.isFinite(x.min));
-    }catch(_){return null}finally{clearTimeout(timer)}
+    }catch(_){return null}
   }
   // あいさつの天気の一言（17時を過ぎたら明日の天気）
   function weatherLine(){
@@ -1922,7 +1952,7 @@ window.PiyoSplash=(function(){
     let t=`${late?'明日':'今日'}の名古屋は**${d.word}**、最高${d.max}℃・最低${d.min}℃${d.rain!=null?`、雨の確率は${d.rain}%`:''}だぴよ。`;
     if(d.rain>=50)t+='傘を忘れずにぴよ。';
     else if(d.max>=25)t+='ぴよりんを持ち帰るなら保冷バッグがあると安心だぴよ。';
-    return t;
+    return t+weatherNote();
   }
   const nextDay=s=>new Date(Date.parse(s+'T00:00:00Z')+86400e3).toISOString().slice(0,10);
   const todayStr=()=>{const d=new Date(Date.now()+9*3600e3);return d.toISOString().slice(0,10)}; // 日本時間の今日
@@ -2376,7 +2406,8 @@ window.PiyoSplash=(function(){
   function answerLocal(q,a){
     if(a.kind==='calendar'){logEnd({status:'ok',answer:'（カレンダーに入れる流れ：'+((a.events||[]).map(e=>e.title).join('・')||'さっき話した予定')+'）',errorKind:'calendar'});return answerCalendar(q,a)}
     const checked=globalThis.PiyoInfobase?.guard(a.text,q);
-    const text=piyoTone(checked?checked.text:a.text),msg=piyoMsg(a.sources==='weather'),lt=asked.lt;
+    const note=a.sources==='weather'&&typeof weatherNote==='function'?weatherNote():'';
+    const text=piyoTone(checked?checked.text:a.text)+(note?'\n'+note:''),msg=piyoMsg(a.sources==='weather'),lt=asked.lt;
     logEnd({status:'ok',answer:text});
     history=[...history,{role:'user',content:q},{role:'assistant',content:text}].slice(-10);
     if(a.kind==='omikuji')markOmikuji();
@@ -2413,8 +2444,14 @@ window.PiyoSplash=(function(){
     }
 
     if(fixPending)endFix(); // 「どこがちがう？」の途中でも、候補を押したら普通の質問にする
-    const refresh=freshWeather(); // 古い予報で答えない（取り直すのは30分以上たったときだけ。待つのは最大1.5秒）
-    if(refresh){busy=true;$('piyo-send').disabled=true;await refresh.catch(()=>{});busy=false;sync()}
+    const refresh=freshWeather(); // 取り直すのは30分以上たったとき・取れていないときだけ
+    if(refresh){
+      // 天気の質問は取れるまで待つ（3回まで）。ほかの質問は最大1.5秒だけ待つ
+      const wq=!!(globalThis.PiyoExtras&&globalThis.PiyoExtras.weatherAsk&&globalThis.PiyoExtras.weatherAsk(q));
+      busy=true;$('piyo-send').disabled=true;
+      await (wq?refresh:Promise.race([refresh,new Promise(r=>setTimeout(r,1500))])).catch(()=>{});
+      busy=false;sync();
+    }
     const local=localReply(q),way=local?null:route();
     if(!local&&!way){pendingQ=q;openKey();return} // 準備したら続きから送る（候補はそれまで残す）
     asked={q,chip:consumeSuggest(q)||'',way:'',web:false};lastExtra='';logStart(q,asked.chip?{chip:asked.chip}:undefined); // 聞いた候補を消し、取得済み情報で答えられる別の質問を右へ補充する
