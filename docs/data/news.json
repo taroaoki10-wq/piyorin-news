@@ -6,14 +6,22 @@
   "title": "ジェイアール名古屋タカシマヤに「パンの聖地」誕生か 人気６店約400種類のパンが集結 朝7時半オープンで通勤・通学も便利に（2026年11月13日掲載）｜中京テレビNEWS NNN",
   "source": "日テレNEWS NNN",
   "url": "https://news.ntv.co.jp/n/ctv/category/life/ct77fbe735d3a7490a8ede455680e1bba0",
-  "related": [],
+  "related": [
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.yahoo.co.jp/articles/9821b64dc8bc2aa4b703efd1e5d7618f8096e025"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
    "ok": false,
    "why": "名古屋駅のパン売り場の話題で、ぴよりんへの言及がない",
    "t": "2026-11-13"
-  }
+  },
+  "merged_ids": [
+   "n20261113-62ef08f7"
+  ]
  },
  {
   "id": "official-p5676",
@@ -121,6 +129,10 @@
    {
     "source": "dメニューニュース",
     "url": "https://topics.smt.docomo.ne.jp/article/tetsudo/trend/tetsudo-Event-62464"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBfU0liTGkwQ0FZZ2RKWWoyUE1CQUluTldtVnp3b0k5V3g3NDNuT0FJUGw1OFdGQUg3dnNpU2QxOGJwbTg5RU05eG5wUUJHVlFLQU5VMnFtVUN2WW0wcmJHa1YtSXE1X01pWHdJV3ZNREstTjkxSTZHWjc3bTM1UdIBgwFBVV95cUxPRkVlSjAzUFhIYUpVSWNqOEJjY0tCNVlKZ29jR2FZYWZ0QS1qLS1aenVHNXZrZjFlX19KaE83eGhRU1JjQTJwWVZnY09jTGxodDlzaHhHa3dMU3ltbmIxWk5xQ0tsNFFydkVQSERuUGtDaGR3UzhqOW16YlZLQXhKSG1odw?oc=5"
    }
   ],
   "dv": 3,
