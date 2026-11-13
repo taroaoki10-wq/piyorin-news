@@ -3545,6 +3545,10 @@
    {
     "source": "Infoseek",
     "url": "https://news.infoseek.co.jp/article/prtimes_000000253_000124425/"
+   },
+   {
+    "source": "AERA dot. (アエラドット)",
+    "url": "https://dot.asahi.com/articles/-/295434?page=1"
    }
   ],
   "merged_ids": [
@@ -9844,6 +9848,21 @@
    "ok": true,
    "why": "ぴよりんルーム第2弾商品発売",
    "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20240808-dfec1da0",
+  "date": "2024-08-08",
+  "cat": "media",
+  "title": "ぴよりんとコラボレーション「ぴよりんルーム」第2弾発売",
+  "source": "www.his.co.jp",
+  "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBTek1hU0lHOVdwWkY1cVdGTWNZSVdsNDBzYlRTem56RGh0YWZRckg3SnN6ek4tMW4wV1FKRmt0YjZiVDB1Q3RrZ1J5NXY5dw?oc=5",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんとのコラボ商品「ぴよりんルーム」の発売記事",
+   "t": "2026-11-14"
   }
  },
  {
