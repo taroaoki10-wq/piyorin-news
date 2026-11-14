@@ -100,16 +100,6 @@
   "time": "",
   "timed": false
  },
- "e-tour": {
-  "alarms": [
-   "eve",
-   "morning",
-   "none"
-  ],
-  "f": "e-tour",
-  "time": "",
-  "timed": false
- },
  "e-wolfy-village": {
   "alarms": [
    "eve",
