@@ -11,7 +11,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "タイトルに「ぴよりんカフェ」が出る名古屋駅地下街の出店記事",
+   "why": "タイトルにぴよりんカフェとあり、名古屋駅の新店舗としてぴよりんを取り上げている",
    "t": "2026-11-16"
   }
  },
@@ -3247,6 +3247,10 @@
    {
     "source": "山陽新聞",
     "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBDX09sNjFzWTFKWFJ3TjZrTElobDl5bGpUN3JxYUhtbERmYzNJNWg4MXQ0QjM1UGVKNUt6akdNa0IzUGc0RFMxZllmWGhBd0N5TkFzZlhIUk5pQXVi?oc=5"
+   },
+   {
+    "source": "佐賀新聞",
+    "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5tRnNjbzMwa2Y5OEtXZkQtSUt3dVBHMnpfTURuZzNRT3hXVU8wNUttSjVaOWdkMXVrRkxwazNTaWVpcFQwbXpEQTZvMjNWc3Byam1IRmRjTVhjcVpTLUNLaFNPakY?oc=5"
    }
   ],
   "dv": 3,
