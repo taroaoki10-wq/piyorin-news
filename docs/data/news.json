@@ -1,5 +1,26 @@
 [
  {
+  "id": "n20261119-325bfcc0",
+  "date": "2026-11-19",
+  "cat": "media",
+  "title": "母が買ってきた名古屋土産の「ぴよりん」を開けたら→「どうした？？」 “あと一歩”の中身に「惜しかった」「ほぼ成功です！」",
+  "source": "ねとらぼ",
+  "url": "https://nlab.itmedia.co.jp/cont/articles/4097060/image/",
+  "related": [
+   {
+    "source": "ねとらぼ",
+    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE11S1VMZTEzNEV1Ukp4SFQyU2dzV1FvQW1Ga2R4ZS1XbUhDWF9iTll3UERnWS1PeFFHdXFrSlR0UDlLRzVFaDk3eGE5aVJ0R09SZXNvM1l3SUw2bHBrdlAyRw?oc=5"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "名古屋土産のぴよりんを開封した話題で、ぴよりん自体が中心",
+   "t": "2026-11-19"
+  }
+ },
+ {
   "id": "n20261118-2debb6cd",
   "date": "2026-11-18",
   "cat": "media",
@@ -27,7 +48,7 @@
   "id": "n20261118-f76b24ce",
   "date": "2026-11-18",
   "cat": "media",
-  "title": "母が買ってきた名古屋土産の「ぴよりん」を開けたら→「どうした ...",
+  "title": "母が買ってきた名古屋土産の「ぴよりん」を開けたら→「どうした？？」　“あと一歩”の中身に「惜しかった」「ほぼ成功です！」（1/3） | ライフスタイル ねとらぼ",
   "source": "ねとらぼ",
   "url": "https://nlab.itmedia.co.jp/cont/articles/4097060/",
   "related": [],
@@ -37,7 +58,10 @@
    "ok": true,
    "why": "名古屋土産のぴよりんが話題になった記事",
    "t": "2026-11-19"
-  }
+  },
+  "merged_ids": [
+   "n20261119-117e96fb"
+  ]
  },
  {
   "id": "n20261117-1eac01ce",
@@ -119,7 +143,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "メイチカ店舗にぴよりんカフェが入ることを紹介",
+   "why": "メイチカ記事にぴよりんカフェが含まれ、ぴよりん店舗の話題",
    "t": "2026-11-19"
   }
  },
@@ -439,10 +463,15 @@
    {
     "source": "Mantan Web",
     "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOT04wTk1NVldGSk1JUVVaWURwcHBYalB6bXhJanRrQV9jcXRQdnlHTC1EZExvbmJyNUhDaGRocWJzZXlHVUNfbEZHNlNDSmttOXNaVUJsaDQ3VWF2VjNFTnZJZXkwMVNLc2RFaElSYnVRZUpmY0lkbGc0UVlldUFNZzNYcE42MXdQ?oc=5"
+   },
+   {
+    "source": "ORICON NEWS",
+    "url": "https://www.oricon.co.jp/pressrelease/3075974/"
    }
   ],
   "merged_ids": [
    "n20261108-07f5349d",
+   "n20261109-783adeb4",
    "n20261109-7bb1bae4",
    "n20261109-e3e706d3",
    "n20261110-7046f5f0",
