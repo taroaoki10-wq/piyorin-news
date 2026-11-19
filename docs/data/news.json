@@ -6,17 +6,153 @@
   "title": "母が買ってきた名古屋土産の「ぴよりん」を開けたら→「どうした？？」 “あと一歩”の中身に「惜しかった」「ほぼ成功です！」",
   "source": "ねとらぼ",
   "url": "https://nlab.itmedia.co.jp/cont/articles/4097060/image/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "名古屋土産のぴよりんを開封した話題で、ぴよりん自体が中心",
+   "t": "2026-11-19"
+  }
+ },
+ {
+  "id": "n20261119-1f7845b5",
+  "date": "2026-11-19",
+  "cat": "media",
+  "title": "JR東海グループの飲食店舗など運営2社が合併へ 「ぴよりん」関連商品の販路拡大も（鉄道コム）",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/3ef01a9706c06ecf34272acfbfae84c076284ab2",
   "related": [
    {
-    "source": "ねとらぼ",
-    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE11S1VMZTEzNEV1Ukp4SFQyU2dzV1FvQW1Ga2R4ZS1XbUhDWF9iTll3UERnWS1PeFFHdXFrSlR0UDlLRzVFaDk3eGE5aVJ0R09SZXNvM1l3SUw2bHBrdlAyRw?oc=5"
+    "source": "千葉テレビ放送株式会社",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE15NXgzZFVtc0hscV9Fc3ZheTEwQ3hhOWw3TmxSX1V2WFpQMHRkLVk2VmJRMHJJRDMtTzlmM0VuRFhYV0xCNW5MU29ZWVpIUDdfYmdnZG52VU9tTTJsVkxF?oc=5"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOQ01CZUhBdk5JZndVMEhFR1B1Sm03cVllNFN5cmU3VW9LNDhZcmZSeGR1UDRQOGlNek9DVVBmVTdySC1OVjFlZ1YtdDZ5eEd2UGpmZGk5ZkxiNFFnWnFDYVpodzd3dS13UlcwSXlmSTVfUG0xRlZhTzJPbWVqUGs5edIBgAFBVV95cUxOQ01CZUhBdk5JZndVMEhFR1B1Sm03cVllNFN5cmU3VW9LNDhZcmZSeGR1UDRQOGlNek9DVVBmVTdySC1OVjFlZ1YtdDZ5eEd2UGpmZGk5ZkxiNFFnWnFDYVpodzd3dS13UlcwSXlmSTVfUG0xRlZhTzJPbWVqUGs5eQ?oc=5"
+   },
+   {
+    "source": "dメニューニュース",
+    "url": "https://topics.smt.docomo.ne.jp/article/tetsudo/trend/tetsudo-News-4298"
+   },
+   {
+    "source": "鉄道コム",
+    "url": "https://www.tetsudo.com/news/4298/"
+   }
+  ],
+  "merged_ids": [
+   "n20261119-6ecf8d3d"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん関連商品の販路拡大に言及する合併記事",
+   "t": "2026-11-19"
+  }
+ },
+ {
+  "id": "n20261119-ea9f87c4",
+  "date": "2026-11-19",
+  "cat": "media",
+  "title": "JR東海、プラスタ・ぴよりん運営が合併 27年4月グループ内再編",
+  "source": "日本経済新聞",
+  "url": "https://www.nikkei.com/article/DGXZQOFD196I00Z11C26A1000000/",
+  "related": [
+   {
+    "source": "日本経済新聞",
+    "url": "https://www.nikkei.com/article/DGXZQOFD196I00Z11C26A1000000/"
    }
   ],
   "dv": 3,
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "名古屋土産のぴよりんを開封した話題で、ぴよりん自体が中心",
+   "why": "ぴよりん運営会社の合併、ぴよりん事業拡大に言及",
+   "t": "2026-11-19"
+  }
+ },
+ {
+  "id": "n20261119-2c9ef013",
+  "date": "2026-11-19",
+  "cat": "media",
+  "title": "「ぴよりん」、名古屋から羽ばたく？JR東海グループ2社が合併！販売エリア拡大・飲食店展開を加速",
+  "source": "千葉テレビ放送株式会社",
+  "url": "https://www.chiba-tv.com/plus/detail/2026112240900",
+  "related": [
+   {
+    "source": "レイルラボ",
+    "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBUNlVkbWJuYlpFcU82YUVzbXFPLUVMOEtfZlR1M1F2eHlONEloeHRCMW5BVTc2dmlqR203QVV0Z3liblNKdmZnR2JfUExfUQ?oc=5"
+   },
+   {
+    "source": "レイルラボ (RailLab)",
+    "url": "https://raillab.jp/news/article/35787"
+   }
+  ],
+  "merged_ids": [
+   "n20261119-55afc3f0"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんを含むJR東海グループ2社の合併記事",
+   "t": "2026-11-19"
+  }
+ },
+ {
+  "id": "n20261119-c46fe832",
+  "date": "2026-11-19",
+  "cat": "media",
+  "title": "【独占密着】ぴよりん新幹線 目玉に「車掌さん ぴよりん」も！ 先着65枚のチケット手にしたファンは大興奮",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/c4e01caf0a3b68c4762ecec0df7ed2decc33d0fd",
+  "related": [
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.yahoo.co.jp/articles/c4e01caf0a3b68c4762ecec0df7ed2decc33d0fd"
+   }
+  ],
+  "merged_ids": [
+   "n20261119-e7e5cdbe"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん新幹線・15周年企画の記事",
+   "t": "2026-11-19"
+  }
+ },
+ {
+  "id": "n20261119-ac6a5ecd",
+  "date": "2026-11-19",
+  "cat": "media",
+  "title": "JR東海、小売りと飲食の子会社を27年4月に統合 「ぴよりん」販路を全国展開へ",
+  "source": "BigGo ファイナンス",
+  "url": "https://finance.biggo.jp/news/12e4e28f-b9cd-4899-bd91-096e1de9f9ce",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "合併によるぴよりん販路全国展開を取り上げる",
+   "t": "2026-11-19"
+  }
+ },
+ {
+  "id": "n20261119-9e1b01ad",
+  "date": "2026-11-19",
+  "cat": "media",
+  "title": "JR東海リテイリング・プラスとフードサービス、2027年4月に合併予定",
+  "source": "news.dellows.jp",
+  "url": "https://news.dellows.jp/1272482/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "合併記事、ぴよりん直接言及はないがグループ再編の話題",
    "t": "2026-11-19"
   }
  },
@@ -143,7 +279,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "メイチカ記事にぴよりんカフェが含まれ、ぴよりん店舗の話題",
+   "why": "名古屋駅メイチカのぴよりんカフェを紹介",
    "t": "2026-11-19"
   }
  },
