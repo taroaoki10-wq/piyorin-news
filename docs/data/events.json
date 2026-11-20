@@ -509,6 +509,28 @@
   "auto": true
  },
  {
+  "id": "auto-n20261120a4d4992f",
+  "title": "ぴよりん2026 クリスマスクッキー缶 販売開始",
+  "start": "2026-11-20",
+  "end": "2026-11-20",
+  "place": "",
+  "kind": "release",
+  "url": "https://prtimes.jp/main/html/rd/p/000000267.000124425.html",
+  "src": "n20261120-a4d4992f",
+  "auto": true
+ },
+ {
+  "id": "auto-n20261120a4d4992f-2",
+  "title": "ぴよりんクリスマス装飾（village・shop・アトリエ店）",
+  "start": "2026-11-20",
+  "end": "2026-12-25",
+  "place": "",
+  "kind": "event",
+  "url": "https://prtimes.jp/main/html/rd/p/000000267.000124425.html",
+  "src": "n20261120-a4d4992f",
+  "auto": true
+ },
+ {
   "id": "auto-officialp5666",
   "title": "ぴよりんとチャレンジしよう！第2弾",
   "start": "2026-11-21",
