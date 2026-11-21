@@ -1,5 +1,21 @@
 [
  {
+  "id": "n20261121-12f356a0",
+  "date": "2026-11-21",
+  "cat": "media",
+  "title": "『ぴよりん』が京都に初の“お出かけ”",
+  "source": "産経ニュース",
+  "url": "https://www.sankei.com/article/20261121-SI7LWK5SNRP2JOKBC2D7ZSKTHY/photo/63SXX7SZPNI23K5A46T5F5ET3A/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの京都初お出かけ記事の写真ページ",
+   "t": "2026-11-21"
+  }
+ },
+ {
   "id": "n20261120-a4d4992f",
   "date": "2026-11-20",
   "cat": "press",
@@ -26,6 +42,10 @@
    {
     "source": "産経ニュース",
     "url": "https://www.sankei.com/pressrelease/prtimes/FB7DJBGNBROKXJ6M6PUGINEVRU/"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1jSE9tWDRLNkR5aDExOFBTMDNWZVJkanYyR1l6SGdhLU9Zdm5sdjVDd2w1N05VUlVoeTFtTENGRzZUQmpJcWlUZW5PZnEycm1iQW51dzEzTjNuNkhVRVVOSy1jSHdHSy1k?oc=5"
    }
   ],
   "merged_ids": [
@@ -102,6 +122,78 @@
    "ok": false,
    "why": "大相撲九州場所の結果記事でぴよりんと無関係",
    "t": "2026-11-20"
+  }
+ },
+ {
+  "id": "n20261120-c4608280",
+  "date": "2026-11-20",
+  "cat": "media",
+  "title": "名古屋名菓『ぴよりん』が京都に初の“お出かけ” きなこ＆抹茶＆黒糖が入ったイベント限定ぴよりんも販売【2027年1月開催】",
+  "source": "ORICON NEWS on MSN",
+  "url": "https://www.msn.com/ja-jp/entertainment/celebrity/%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%90%8D%E8%8F%93-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%8C%E4%BA%AC%E9%83%BD%E3%81%AB%E5%88%9D%E3%81%AE-%E3%81%8A%E5%87%BA%E3%81%8B%E3%81%91-%E3%81%8D%E3%81%AA%E3%81%93-%E6%8A%B9%E8%8C%B6-%E9%BB%92%E7%B3%96%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%9F%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E9%99%90%E5%AE%9A%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%82%82%E8%B2%A9%E5%A3%B2-2027%E5%B9%B41%E6%9C%88%E9%96%8B%E5%82%AC/ar-AA2hSmsl",
+  "related": [
+   {
+    "source": "新潟日報",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9CSy1jdEFtRklmSktBdmtIRE5NbWhvYU8zaGVLbWRPY0lGakFJQy1MU2lYQ3dMWU1lblBRcDRiS2Y2UVBuNnlBWk1PUklCbVlKQVo3N0lGNmlfVWk3Nmc?oc=5"
+   }
+  ],
+  "merged_ids": [
+   "n20261121-a58bd239"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの京都イベント出店・限定品の記事",
+   "t": "2026-11-21"
+  }
+ },
+ {
+  "id": "n20261120-f416f09e",
+  "date": "2026-11-20",
+  "cat": "media",
+  "title": "名古屋銘菓『ぴよりん』が京都に初の“お出かけ” きなこ&抹茶&黒糖が入ったイベント限定ぴよりんも販売【2027年1月開催】",
+  "source": "ORICON NEWS",
+  "url": "https://www.oricon.co.jp/news/2494372/full/",
+  "related": [
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5Wc3ZVc1ZKQU9ZbTRka25qSkY4UmpNVWl6Sl82Y3RQNjVidllqcGFCbzFTNmVldExBdVgwdkkycXBjaFllSVV4N3htRkxKOVk?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9WYVNjVm1FY2E0TC1XbDhQUEIzSGZFaFdEQ2RaQ1F5ZF83YmctbTRhSEthYkZlUDZjdzJKci1lV1lwa3pfQjJYajM2U2VjMllzcFdLZXQwc0J1RUVNWUFR?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5nLWVEd25zRmVEWGc0V2xNS1ZWVmxUSS1heWZ0SkVwT2l2NHg0cHNfd1ZQZHpuU05aT0NIdWp3c2dPQzc0NG9WSnlXQmxYanJOeHdlMzNnVTFKZw?oc=5"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQMnJCN0pWeU9nOEpBQ0tuNG9TVGx4UEZwWmx6TmlOV0RWNDJrSFJPN1hmSnNJSmk1SElySmdvVjhOT0pPSDZFRHVVZ1RMT2lRanFfdWFTS2Y2OTdLRVlNaDZjcXFnMERZekRrSnFvRm5iVjVjOGs1eDJHeHd5VE5JVtIBhgFBVV95cUxQdGtmSnJHQUFGVHBzcThTY0I4N29vV29SZGdTRGRWVU5WUU53cFB6c1ZyMW1ka05GSmVNVUdSVDRLbzlMYzdQUHFJaWFNTmRCNzdlQVZVUGcxZjcyRUZONnlTQkllcEZhSHN4SGZjV2tjcmVpTk5xWVpTbk1OdVpabnF1Tk0xdw?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1kdTlzOE9jTkdEVjE1SHBxckhxTVNkS1BZUmV5Q1NaMzZNOHliaFZpbUhYaFMzVTdhNFhDQWNRczRXck1PbnlGcjJaSHNKVGVwbUppQ3p5bEtOQQ?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1ZcUdTbG16TkxvWEVqaGtMUGNEVlVZYUVYelZlWGplakZubkdPQ1RHWFVOVUFzT0djb2JxdmhLdmNwRXVSTmJEcnNfeEVQWk1xS2x4akhKT1NRdw?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9CMVNsaVdCX1FIYXFnQmQ2WHA5TktDdHE5STdRcXJqVHhTVlQzQ1RLUk5YVEZBU3dsX280R0tFOVlrWTVNeHRaWXdUbld1bEo2VzJHdGE4aEdSZ0NYS3FwWA?oc=5"
+   }
+  ],
+  "merged_ids": [
+   "n20261121-2bc1e77f"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんの京都イベント出店・限定品の記事",
+   "t": "2026-11-21"
   }
  },
  {
@@ -433,7 +525,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "メイチカ記事でぴよりんカフェが取り上げられている",
+   "why": "名古屋駅メイチカのぴよりんカフェに言及するスイーツ記事",
    "t": "2026-11-21"
   }
  },
@@ -529,6 +621,10 @@
    {
     "source": "Infoseek",
     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5KLTNzbkpROGV3enVmaDk1eVFsYUwxSi04X25PYnR1ZlRSei1CdVZPcUY2WURXbmcwbHFTTE9EUk81NFV6MVFXMURqTTYwZ3RwTUtlNnN6SlVkSll0cUJFQll5TUVhcXYwdzMxVVdR?oc=5"
+   },
+   {
+    "source": "北海道新聞デジタル",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9OTE5CU1cwOW5HRndMZGNUWGRwV0xSZ0FMRTIwR2FXTkpuNEpmUDdhTTlPYy1uSDBXZ1RidWN3aVpEZW1majZaNWx6UXpZVHdZUEVwbXpMVGlZZw?oc=5"
    }
   ],
   "dv": 3,
@@ -647,6 +743,10 @@
    {
     "source": "ORICON NEWS",
     "url": "https://www.oricon.co.jp/pressrelease/3078988/"
+   },
+   {
+    "source": "AGARA 紀伊民報",
+    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1CR1lManNvOXNEYUtNc0N3RHA2X0RQRmtGczhIekFJNEpiN19BOF9BUFNrLWcwUjQ2bzRnV1ZtVGhyNVZORzNISU9oVkFoZTA?oc=5"
    }
   ],
   "merged_ids": [
@@ -1214,6 +1314,10 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.livedoor.com/article/image_detail/32721126/?img_id=57355234"
+   },
+   {
+    "source": "おとなの週末Web",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE10TDlrNi16Y0NNVzdUVXh6eWxTZ2cxU1lLWkNiZnJiWnZpWThJTThDZlJTU1hWTjVXd05JQm5FVWtULUZEM0xmdG9qZk11RkVPQXZKaFJGdUt4UQ?oc=5"
    }
   ],
   "merged_ids": [
@@ -1432,6 +1536,10 @@
    {
     "source": "TBS NEWS DIG",
     "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE42aFFsM1hrdFFweW1RaXhzbnRkQ195SmQxNVZXUkFJcmk2NjhfT3U1ckwwNzkyUWtwM1FmWTRhejliRmxxVEx3Vi1UakdIWXNPM3FjOGJXT2htODJsV0lfdQ?oc=5"
+   },
+   {
+    "source": "TBS NEWS DIG",
+    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5rdHhxZEo3VGtiVlI2OTE5UE1qYU5VbnVpOTNjQThxQ2NTelpBbTVocVRiWDRjNzZNMXNBN0ZmNDlIdjdhZVZjb0hEd09NWmpreTQ1M3BkZlJLZEpUVDJsWA?oc=5"
    }
   ],
   "merged_ids": [
@@ -1973,6 +2081,10 @@
    {
     "source": "ニコニコニュース",
     "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1qTjlEWWlnS1JjWENkV0dQUjIxcEx0aTZ1LW9sUUNoLWxfN080RC1ERDhoTzE5b2EzZjNlYVZSUnZGVy1taFVEX3FzLWpaWS1QaHRXSw?oc=5"
+   },
+   {
+    "source": "www.tv-tokyo.co.jp",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1aVjVJd1huczF0bHozU0R2dFY4RTQxaWdZMVFQNERZXzZyVEJINFE3MzVSV05SWndVUkFDMHM1WHhmZXUxaFlvOVhuM1c3VkpIVkw5RWR3My1FaWJaanRzeEhlOGR3aEh6OWFvLVd3?oc=5"
    }
   ],
   "merged_ids": [
@@ -10800,64 +10912,6 @@
    "ok": true,
    "why": "ぴよりんのハロウィンバージョン企画に関する記事",
    "t": "2026-10-19"
-  }
- },
- {
-  "id": "n20261004-d399d142",
-  "date": "2017-08-24",
-  "cat": "media",
-  "title": "いったいどんな味!?名古屋みやげの定番“ぴよりん”に期間限定で仲間が登場！",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/119095/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの新商品（期間限定）に関する記事",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20260922-fa1cff31",
-  "date": "2015-01-08",
-  "cat": "media",
-  "title": "新・名古屋土産「ぴよりん」にあまおう味が登場",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/54134/",
-  "related": [
-   {
-    "source": "walkerplus.com",
-    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE13RVZ0SGJFZEJVal9xYTZ5VUMwNkxxcGMxeXNLZ0hoQ19wendIbDBOVGhJVHdfZFdzdnI4OEM1ekJ5ZllLcTRaUXEwdUxsSE9DSHdpNkVvZ0hNQzJVV1AyM21WRkZsWmd2?oc=5"
-   }
-  ],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの新フレーバー商品（あまおう味）の紹介",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20260929-5118dfb6",
-  "date": "2014-11-09",
-  "cat": "media",
-  "title": "新・名古屋土産「ぴよりん」のクリスマスバージョンがかわいすぎる！",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/52200/",
-  "related": [
-   {
-    "source": "walkerplus.com",
-    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9CYWVkZnB3NF90NlVnbl9OUktLbUdfcVN1S3puZjlmOTNhRHUtOU42aWJJOF9Xc3p3ZFFFVWxTY1Rrc2d1UUM5eEhpeUJ5b1l5bHV2NmJVa2laNEtIV3pqWFN0a1ZXWjhN?oc=5"
-   }
-  ],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんのクリスマスバージョン商品に関する記事",
-   "t": "2026-10-15"
   }
  }
 ]
