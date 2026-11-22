@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ぴよりん">
-<meta name="piyo-ver" content="2026.11.22-5">
+<meta name="piyo-ver" content="2026.11.23-1">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
@@ -924,6 +924,7 @@ window.PiyoSplash=(function(){
       <button type="button" class="set-act" id="set-piyo-setup">話す準備を開く</button>
       <div class="set-toggles" id="set-toggles">
         <label><input type="checkbox" data-flag="wxfig" checked><span>天気の図<small>天気を聞いたとき、7 日分の天気と気温の図を答えの下に出します。</small></span></label>
+        <label><input type="checkbox" id="set-dockwx" checked><span>天気を Mac の infobase から読む<small>町の天気を、Mac の infobase（気象庁・tenki.jp）から読みます。Mac につながらないときは Cloudflare、それもだめなときは Open-Meteo から読みます。切ると Open-Meteo だけです。</small></span></label>
         <label><input type="checkbox" data-flag="buyctx" checked><span>購入記録を答えに使う<small>「最後に買ったのはいつ？」などに答え、Claude へも購入記録の要約（店と品名。メモと写真は送りません）を渡します。</small></span></label>
         <label><input type="checkbox" data-flag="photo" checked><span>写真で聞く<small>写真を付けて聞けます。写真は Mac の Claude では見られないので、API で答えます（送る前に確かめます）。</small></span></label>
         <label><input type="checkbox" data-flag="mic" checked><span>マイクで聞く<small>話した言葉を入力欄に入れます（使える端末だけ）。</small></span></label>
@@ -1002,6 +1003,7 @@ window.PiyoSplash=(function(){
 <script src="news-identity.js"></script>
 <script src="piyo-persona.js?v=1"></script>
 <script src="piyo-extras.js?v=8"></script>
+<script src="piyo-dock.js?v=1"></script>
 <script src="piyo-buy.js?v=9"></script>
 <script src="piyo-log/schema.js?v=1"></script>
 <script src="piyo-log/recorder.js?v=1"></script>
@@ -1555,7 +1557,7 @@ window.PiyoSplash=(function(){
   });
 
   // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
-  const PN_VERSION='2026.11.22-5（ほかの町の天気・3時間ごとの天気・図の切り替え・Mac をすこし待つ・天気の待ち表示・関係するメモだけ渡す・購入記録を踏まえた答え）';
+  const PN_VERSION='2026.11.23-1（天気を Mac の infobase から読む・ほかの町の天気・3時間ごとの天気・図の切り替え・Mac をすこし待つ・天気の待ち表示・関係するメモだけ渡す・購入記録を踏まえた答え）';
   {
     const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
     const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
@@ -2013,6 +2015,16 @@ window.PiyoSplash=(function(){
   }
   // 天気の図（設定「天気の図」で入り切り）。予報が無いときは出さない。days・place はほかの町の答えのとき（無ければ名古屋）
   function weatherFig(msg,days,place){
+    // 名古屋の図（days も place も無い）は、well dock の 1 時間ごとの点が取れたら 3 時間ごとの点だけ重ねる。取れなければ（無い・切・時間切れ）今のまま
+    const D=!days&&!place?dockWx():null;
+    if(!D)return drawFig(msg,days,place);
+    return nagoyaDock().then(dk=>{
+      const base=data&&data.weather,over=dk&&dk.hours&&Object.keys(dk.hours).length?dk.hours:null;
+      const list=!over?undefined:Array.isArray(base)&&base.length?base.map(d=>over[d.date]?{...d,hours:globalThis.PiyoDock.mergeHours(d.hours,over[d.date])}:d):(dk.days||undefined);
+      drawFig(msg,list,undefined);
+    },()=>drawFig(msg));
+  }
+  function drawFig(msg,days,place){
     const X=globalThis.PiyoExtras,list=days||(data&&data.weather);if(!X||!X.weatherFigure||!msg||!msg.el||!list)return;
     try{if(X.flagOn&&!X.flagOn(localStorage,'wxfig'))return}catch(_){}
     const nowHour=new Date(Date.now()+9*3600e3).getUTCHours();
@@ -2116,27 +2128,60 @@ window.PiyoSplash=(function(){
     }
     return{err:reached?'unknown':'net'};
   }
-  // その町の日の配列。{at,label,days} か {err}
-  async function placeDays(pl){
-    const now=Date.now(),hit=placeWx.get(pl.label);
-    if(hit&&now>=hit.at&&now-hit.at<PLACE_WX_KEEP&&jstDay(hit.at)===jstDay(now))return hit;
-    const f=await findPlace(pl);if(!f.spot)return{err:f.err};
-    const got=await fetchJson(placeUrl(f.spot.lat,f.spot.lon),3,2500),days=got&&weatherDays(got);
-    if(!days||!days.length)return{err:'net'};
-    const rec={at:now,label:f.spot.label,days};placeWx.delete(pl.label);placeWx.set(pl.label,rec);
+  // ---- well dock（infobase）の天気：直の道 → Cloudflare → Open-Meteo（piyo-dock.js）。部品が無い・設定が切のときは今までどおり Open-Meteo だけ ----
+  let dockInst=null;
+  function dockWx(){
+    const D=globalThis.PiyoDock;if(!D||typeof D.create!=='function')return null;
+    if(!dockInst){try{dockInst=D.create({fetch:(u,o)=>fetch(u,o),storage:localStorage,getMac:()=>typeof mac!=='undefined'&&mac?mac:null,today:()=>todayStr(),now:()=>Date.now()})}catch(_){return null}}
+    return dockInst.on()?dockInst:null;
+  }
+  // 名古屋の図のための dock の中身。30 分は覚える（古い中身は使わない）
+  let nagoyaDockRec=null;
+  async function nagoyaDock(){
+    const now=Date.now(),hit=nagoyaDockRec;
+    if(hit&&now>=hit.at&&now-hit.at<PLACE_WX_KEEP&&jstDay(hit.at)===jstDay(now))return hit.dk;
+    const D=dockWx();let dk=null;if(D){try{dk=await D.town('名古屋')}catch(_){dk=null}}
+    nagoyaDockRec={at:now,dk};return dk; // 新しい中身の hours だけが入っている（古い中身の hours は空）
+  }
+  function placeRemember(label,rec){
+    placeWx.delete(label);placeWx.set(label,rec);
     while(placeWx.size>PLACE_WX_MAX)placeWx.delete(placeWx.keys().next().value);
     return rec;
+  }
+  // その町の日の配列。{at,label,days,src,...} か {err}。町の名前（label）で well dock を先に引き、だめなら Open-Meteo。noDock：dock を使わない（dock では答えが作れなかったとき）
+  async function placeDays(pl,opt){
+    const now=Date.now(),hit=placeWx.get(pl.label),noDock=!!(opt&&opt.noDock);
+    if(hit&&now>=hit.at&&now-hit.at<PLACE_WX_KEEP&&jstDay(hit.at)===jstDay(now)&&!(noDock&&hit.src==='dock'))return hit;
+    const D=noDock?null:dockWx();let dk=null;
+    if(D){try{dk=await D.town(pl.label)}catch(_){dk=null}}
+    const fromDock=(extra)=>({at:now,label:pl.label,days:dk.days,src:'dock',srcName:dk.srcName,...extra});
+    if(dk&&dk.days&&!dk.stale)return placeRemember(pl.label,fromDock());
+    const f=await findPlace(pl);
+    const got=f.spot?await fetchJson(placeUrl(f.spot.lat,f.spot.lon),3,2500):null,days=got&&weatherDays(got);
+    if(!days||!days.length){
+      if(dk&&dk.days)return fromDock({stale:true,note:globalThis.PiyoDock.noteOf(dk.asOf)}); // Open-Meteo も取れない：古い中身を、取った時刻を添えて使う（覚えない）
+      return{err:f.spot?'net':f.err};
+    }
+    return placeRemember(pl.label,{at:now,label:f.spot.label,days,src:'open-meteo'});
   }
   // 質問と待ち表示を出して、その町の天気の答え（answerLocal へ渡す形）を作る。作れなければ local は null（今までの流れへ。質問の吹き出しは引き継ぐ）
   async function placeAsk(q,pl){
     const X=globalThis.PiyoExtras,qBubble=userMsg(q)||true,wait=piyoMsg();wait.say(`${pl.label}の天気を見てるぴよ…`);
-    let r;try{r=await placeDays(pl)}catch(_){r={err:'net'}}finally{if(wait.remove)wait.remove()}
+    let r,a=null;
+    const make=()=>{a=null;try{a=X.localAnswer(q,{...extrasCtx(),weather:r.days,place:r.label})}catch(_){}};
+    try{
+      r=await placeDays(pl);
+      if(!r.err){
+        make();
+        // dock には日の出・風・紫外線が無い。答えが作れなかったら、Open-Meteo で取り直してもう一度作る
+        if((!a||a.kind!=='weather')&&r.src==='dock'){const r2=await placeDays(pl,{noDock:true});if(!r2.err){r=r2;make()}}
+      }
+    }catch(_){r={err:'net'}}finally{if(wait.remove)wait.remove()}
     if(r.err==='unknown')return{qBubble,local:{text:`${pl.label}がどこか分からなかったぴよ。市の名前で聞いてみてね。`,mood:'sad',kind:'weather',place:pl.label}};
     if(r.err)return{qBubble,local:{text:`${pl.label}の天気をいま取れなかったぴよ…少しあとで聞いてね。`,mood:'sad',kind:'weather',place:pl.label}};
-    let a=null;
-    try{a=X.localAnswer(q,{...extrasCtx(),weather:r.days,place:r.label})}catch(_){}
     if(!a||a.kind!=='weather')return{qBubble,local:null};
-    return{qBubble,local:{...a,place:r.label,figDays:r.days}};
+    const dock=r.src==='dock';
+    return{qBubble,local:{...a,...(dock&&r.note?{text:a.text+'\n'+r.note}:{}),place:r.label,figDays:r.days,...(dock?{srcHtml:`出典：天気 ${esc(r.srcName)}（infobase）`}:{})}};
   }
   // あいさつの天気の一言（17時を過ぎたら明日の天気）
   function weatherLine(){
@@ -2570,6 +2615,13 @@ window.PiyoSplash=(function(){
     if(cb){cb.checked=talkKeepOn();cb.addEventListener('change',()=>setTalkKeep(cb.checked))}
     if(clr)clr.addEventListener('click',clearTalkAll);
   }
+  { // 設定：天気を Mac の infobase から読む（既定は入り。切のときだけ piyo-dockwx が '0'）
+    const dw=$('set-dockwx');
+    if(dw){
+      try{dw.checked=localStorage.getItem('piyo-dockwx')!=='0'}catch(_){}
+      dw.addEventListener('change',()=>{try{dw.checked?localStorage.removeItem('piyo-dockwx'):localStorage.setItem('piyo-dockwx','0')}catch(_){}});
+    }
+  }
 
   // Claude へ渡す材料は 2 つに分ける。変わらない部分（basics・メモ・予定。データが更新されるまで同じ文）と、変わる部分（today・暦・天気）。
   // つなぐと 1 つの <knowledge> になる（Mac の Claude へはつないだ文を送る）。API へは別のブロックにして、前の部分だけキャッシュさせる
@@ -2701,7 +2753,7 @@ window.PiyoSplash=(function(){
     if(a.kind==='calendar'){logEnd({status:'ok',answer:'（カレンダーに入れる流れ：'+((a.events||[]).map(e=>e.title).join('・')||'さっき話した予定')+'）',errorKind:'calendar'});return answerCalendar(q,a)}
     const checked=a.place?null:globalThis.PiyoInfobase?.guard(a.text,q); // ほかの町の答えは、名古屋の札と比べない
     const note=a.sources==='weather'&&!a.place&&typeof weatherNote==='function'?weatherNote():'';
-    const text=piyoTone(checked?checked.text:a.text)+(note?'\n'+note:''),msg=piyoMsg(a.sources==='weather'),lt=asked.lt;
+    const text=piyoTone(checked?checked.text:a.text)+(note?'\n'+note:''),msg=piyoMsg(a.srcHtml||a.sources==='weather'),lt=asked.lt;
     logEnd({status:'ok',answer:text});
     history=[...history,{role:'user',content:q},{role:'assistant',content:text}].slice(-10);
     if(typeof speakAnswer==='function')speakAnswer(text);

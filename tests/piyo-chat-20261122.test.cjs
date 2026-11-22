@@ -125,9 +125,9 @@ test('Mac の Claude へ送る knowledge は、2 つを同じ順につないだ 
   for(const t of ['<basics','<event id="e1"','<today>2026-11-22','<koyomi>','<weather>'])assert.ok(k.includes(t),t);
 });
 
-test('版は 2026.11.22-5 以降の版でも -4 の言葉が残る（画面の meta と PN_VERSION が同じ。-3 の内容は piyo-chat3-20261122.test.cjs が続けて確かめる）',()=>{
-  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.22-5">/);
-  const m=html.match(/const PN_VERSION='2026\.11\.22-5（([^）]*)）'/);assert.ok(m);
+test('版は 2026.11.23-1 以降の版でも -4 の言葉が残る（画面の meta と PN_VERSION が同じ。-3 の内容は piyo-chat3-20261122.test.cjs が続けて確かめる）',()=>{
+  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.23-1">/);
+  const m=html.match(/const PN_VERSION='2026\.11\.23-1（([^）]*)）'/);assert.ok(m);
   for(const w of ['Mac をすこし待つ','天気の待ち表示','関係するメモだけ渡す','購入記録を踏まえた答え'])assert.ok(m[1].includes(w),w);
 });
 
