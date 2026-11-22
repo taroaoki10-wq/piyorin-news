@@ -259,3 +259,12 @@ test('公開の一覧に、足した部品が入っていて、前からある�
   for(const k of ['weatherPlace','geoNames','pickGeo','hoursOf','weatherWord','weatherFigure','weatherKind','weatherAsk','PLACE_TABLE','localAnswer','greeting','tidbits']) assert.ok(k in X,k);
   assert.deepEqual(['晴れ','晴れときどきくもり','くもり','霧','小雨','にわか雨','冷たい雨','雪','にわか雪','雷雨','ひょうまじりの雷雨'].map(X.weatherKind),['sun','partly','cloud','cloud','rain','rain','rain','snow','snow','thunder','thunder']);
 });
+test('weatherPlace：長い言い方は先頭の町の名前で引く（名古屋の札で答えないため）',()=>{
+  const lab=q=>(X.weatherPlace(q)||{}).label||null;
+  assert.equal(lab('東京ディズニーランドの天気'),'東京');
+  assert.equal(lab('大阪万博記念公園の天気は？'),'大阪');
+  assert.equal(lab('札幌ドームの天気'),'札幌');
+  assert.equal(lab('大阪狭山市の天気'),'大阪狭山市'); // 市町村で終わる名前はそのまま
+  assert.equal(lab('ナガシマスパーランドの天気'),'ナガシマスパーランド'); // 表に無ければ地名検索へ（見つからなければ「どこか分からなかった」）
+  assert.equal(X.weatherPlace('名古屋城の天気'),null);
+});

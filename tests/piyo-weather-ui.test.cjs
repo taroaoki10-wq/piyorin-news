@@ -276,7 +276,7 @@ function pager(){
   const pages={clientWidth:300,scrollLeft:0,classList:{contains:c=>c==='piyo-wx-pages'},closest:s=>s==='.piyo-wx2'?box:null,scrollTo(o){scrolls.push(o)}};
   const box={querySelectorAll:s=>s==='.piyo-wx-tab'?tabs:[],querySelector:s=>s==='.piyo-wx-pages'?pages:null};
   const root={addEventListener:(type,fn,cap)=>handlers.push({type,fn,cap})};
-  const c={log:{addEventListener(){}},requestAnimationFrame:f=>{rafs.push(f);return rafs.length},matchMedia:()=>({matches:false}),Number,String};
+  const c={log:{addEventListener(){}},setTimeout:f=>{rafs.push(f);return rafs.length},matchMedia:()=>({matches:false}),Number,String};
   vm.createContext(c);
   vm.runInContext(part('  // ---- 天気の図の切り替え','  // 取り直せずに前の予報で答えるときの一言')+';this.setup=wxPagerSetup;',c);
   c.setup(root);

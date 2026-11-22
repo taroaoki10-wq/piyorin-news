@@ -2031,7 +2031,7 @@ window.PiyoSplash=(function(){
     });
     root.addEventListener('scroll',e=>{ // 指で滑らせたとき：近い方のボタンを押された形に（間引いて読む）
       const p=e.target;if(!p||!p.classList||!p.classList.contains('piyo-wx-pages')||p._wxTick)return;
-      p._wxTick=1;requestAnimationFrame(()=>{p._wxTick=0;const box=p.closest('.piyo-wx2');if(box)wxMark(box,wxPageOf(p))});
+      p._wxTick=1;setTimeout(()=>{p._wxTick=0;const box=p.closest('.piyo-wx2');if(box)wxMark(box,wxPageOf(p))},60); // requestAnimationFrame は隠れた画面で止まり、印が残って切り替えが付いてこなくなるため、短い時間待ちで読む
     },true);
   }
   // 取り直せずに前の予報で答えるときの一言（30分以上前の予報のときだけ）

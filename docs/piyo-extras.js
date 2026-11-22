@@ -245,6 +245,13 @@ window.PiyoExtras = (function () {
         const aft = i === pieces.length - 1 ? after : '';
         const p = placeLookup(w, aft);
         if (p) { found = p; return; }
+        // 「東京ディズニーランドの天気」のような長い言い方は、先頭の町の名前（東京）で引く。無ければ、天気の言葉が続くときはその言い方のまま（地名検索で探す）
+        // （「大阪狭山市」のように市町村で終わる名前は、そのまま地名検索へ）
+        if (w.length >= 4 && !/[市区町村]$/.test(w) && i === pieces.length - 1 && aft !== '' && PLACE_AFTER_RE.test(aft)) {
+          for (let n = 4; n >= 2 && !found; n--) { const hp = placeLookup(w.slice(0, n), ''); if (hp) found = hp; }
+          if (found) return;
+          if (w.length > 8) { if (!other) other = w; return; }
+        }
         if (other || w.length < 2 || w.length > 8 || NOT_PLACE_WORDS.has(w.toLowerCase()) || /^[A-Za-z]+$/.test(w) && w.length < 3) return;
         if (/[市区町村]$/.test(w) || (i === pieces.length - 1 && PLACE_AFTER_RE.test(aft) && aft !== '')) other = w;
       });
