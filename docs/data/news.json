@@ -127,9 +127,14 @@
    {
     "source": "オリコンニュース",
     "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9VN01Janl2LUpTNlg0TW82N2VONTI4cFlXTE53OGZoV0huUXhJWXY4V0pRTUotNmRObi1GZFRzR2F4VUFIckttQVpyclJBdHpzUFdleWpPQng3QQ?oc=5"
+   },
+   {
+    "source": "毎日新聞デジタル",
+    "url": "https://mainichi.jp/articles/20261122/orc/00m/200/053000c"
    }
   ],
   "merged_ids": [
+   "n20261122-1d64d942",
    "n20261122-7ec7aa9a"
   ],
   "dv": 3,
@@ -369,6 +374,10 @@
    {
     "source": "福島民友新聞社 みんゆうNet",
     "url": "https://www.minyu-net.com/release/oricon/detail/2494372"
+   },
+   {
+    "source": "西スポWEB OTTO!",
+    "url": "https://nishispo.nishinippon.co.jp/article/1059202"
    }
   ],
   "merged_ids": [
