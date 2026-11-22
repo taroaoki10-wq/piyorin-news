@@ -36,7 +36,7 @@ MEMO_FILE = DATA / "piyo-memo.json"
 GREETING_FILE = DATA / "piyo-greeting.json"
 
 MEMO_VERSION = 1      # メモの基準を変えたら上げる（作り済みの記事ももう一度メモする）
-GREETING_VERSION = 5  # まとめの基準を変えたら上げる
+GREETING_VERSION = 6  # まとめの基準を変えたら上げる
 KEEP_DAYS = 150       # この日数より古い記事はメモしない・メモから外す
 BATCH = 1             # 1回の呼び出しでメモする記事の数（まとめて渡すと別の記事の話が混ざる。紅茶ぴよりんのメモに「ゴジラとのコラボ」が入った）
 MAX_PER_RUN = 24      # 1回の更新でメモする最大数（残りは次の更新で）
@@ -105,7 +105,7 @@ GREETING_PROMPT = """名古屋のひよこ型スイーツ「ぴよりん」の�
 まとめ（lines）：
 - 1行目は「最近のぴよりんニュースだぴよ！」のような短いあいさつ。
 - 2行目から、今日から先に関係する話題を、大事な順に2〜5個。1行に1話題で、「・」から始めて50文字以内。
-- 終わった販売やイベントは入れない。同じ話題（公式とプレスリリースの重複など）は1つにまとめる。
+- 終わった販売やイベントは入れない。<ended> はもう終わった予定で、end がその終わった日。<ended> にある販売・催しは、メモに期間が書いてあっても入れない（同じ商品の別の予定が <event> にあれば、そちらだけを書く）。販売期間の終わりが <today> より前のものも入れない。同じ話題（公式とプレスリリースの重複など）は1つにまとめる。
 - 日付は「11月3日から」「10月31日まで」のように月日で書く（「きょう」「あした」「あと3日」のような相対的な書き方はしない。まとめは何時間も使われるので、日付が変わるとずれる）。
 - メモと予定に書いてあることだけを書く。商品名・コラボ相手・場所は、その話題のメモのとおりに書き、別の話題（別のメモ）の商品名やコラボ相手を組み合わせない。
 - いちばん大事な部分（商品名と日付など）を1行に1か所まで **太字** で囲む。
@@ -372,6 +372,18 @@ def greeting_input(memos: dict, events: list[dict]) -> str:
         f'<event start="{e.get("start", "")}" end="{e.get("end") or e.get("start", "")}">'
         f'{e.get("title", "")}{"（" + e["place"] + "）" if e.get("place") else ""}</event>'
         for e in upcoming[:20]
+    ]
+    # 最近終わった予定。メモ（記事）には販売期間が残っているので、終わったものをまとめに書かないように渡す
+    # （2026-11-22 のまとめに、11月13日に終わった「ぴよりんゴジラ」の販売が残っていた）
+    ended = sorted(
+        # 「発売・受付開始」（release）は始まりの日だけの予定で、そのあとも売っているので、終わった扱いにしない
+        (e for e in events if e.get("kind") != "release"
+         and since <= (e.get("end") or e.get("start", "")) < today.isoformat()),
+        key=lambda e: e.get("end") or e.get("start", ""), reverse=True,
+    )
+    parts += [
+        f'<ended end="{e.get("end") or e.get("start", "")}">{e.get("title", "")}</ended>'
+        for e in ended[:20]
     ]
     return "\n".join(parts)
 

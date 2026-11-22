@@ -515,10 +515,36 @@ def verify(item: dict) -> tuple[dict, str | None, str | None, str | None]:
         return item, url, None, None
 
 
-def verify_dates(items: list[dict]) -> int:
+def merged_later(item: dict) -> bool:
+    """まとめた相手の記事（merged_ids）が、この記事の日付より 14 日を越えて新しいか。
+    同じ記事なのに日付が大きく違うのは、ニュース検索が古い日付を返したしるし
+    （2026-11-07 の「みかんぴよりん」の記事が 7月16日 の日付で入り、ニュースの一覧で 7 月に埋もれていた）。"""
+    try:
+        own = datetime.fromisoformat(item["date"])
+    except (KeyError, ValueError):
+        return False
+    for mid in item.get("merged_ids", []):
+        m = re.match(r"n(\d{4})(\d{2})(\d{2})-", mid)
+        if m:
+            try:
+                if (datetime(int(m.group(1)), int(m.group(2)), int(m.group(3))) - own).days > 14:
+                    return True
+            except ValueError:
+                pass
+    return False
+
+
+def verify_dates(items: list[dict], new_ids=()) -> int:
+    """直近の記事に加えて、今回はじめて入った記事（new_ids）と、まとめた相手より日付が大きく古い記事も確かめる。
+    ニュース検索が古い日付を付けて返した新しい記事は「直近」に入らず、確かめられないままだった。"""
     limit = (datetime.now(JST).date() - timedelta(days=VERIFY_DAYS)).isoformat()
-    todo = [n for n in items if n.get("cat") != "official" and n.get("date", "") >= limit
-            and n.get("dv", 0) < DATE_CHECK_VERSION and n.get("tries", 0) < 3][:VERIFY_MAX]
+    new_ids = set(new_ids)
+    todo = [n for n in items if n.get("cat") != "official"
+            and (n.get("date", "") >= limit or n.get("id") in new_ids or merged_later(n))
+            and n.get("dv", 0) < DATE_CHECK_VERSION and n.get("tries", 0) < 3]
+    # 新しく入った記事・日付のあやしい記事を先に（1 回で確かめる数に上限があるため）
+    todo.sort(key=lambda n: not (n.get("id") in new_ids or merged_later(n)))
+    todo = todo[:VERIFY_MAX]
     fixed = 0
     with ThreadPoolExecutor(max_workers=6) as ex:
         for item, url, real, title in ex.map(verify, todo):
@@ -554,8 +580,9 @@ def main() -> int:
             print(f"{name}: {len(items)}件取得")
             incoming += items
 
+    before = {i for n in existing for i in [n.get("id"), *n.get("merged_ids", [])]}
     merged, added = merge(existing, incoming)
-    fixed = verify_dates(merged)
+    fixed = verify_dates(merged, {n["id"] for n in merged if n.get("id") not in before})
     if fixed:
         merged.sort(key=lambda n: (n["date"], n["cat"] == "official"), reverse=True)
     print(f"新規 {added}件 / 合計 {len(merged)}件（{time.time() - t0:.1f}秒）")

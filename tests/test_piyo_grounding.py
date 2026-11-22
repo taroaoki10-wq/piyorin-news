@@ -100,7 +100,7 @@ class GreetingGroundingTests(unittest.TestCase):
             ["最近のぴよりんニュースだぴよ！", "・**ぴよりんカレンダー2027**きょう先行販売開始だぴよ",
              "・クリスマスケーキ予約**あした12時**から受け付けるぴよ", "・**紅茶ぴよりんおでかけセット**11月7日・8日に山陽百貨店で売るぴよ"],
             ["ぴよりんゴジラについて", "ゴジラコラボセットについて", "紅茶ぴよりんセットについて", "クリスマスケーキについて"], text)
-        self.assertEqual(result["v"], 5)
+        self.assertEqual(result["v"], piyo.GREETING_VERSION)
         self.assertEqual(result["lines"][1], "・**ぴよりんカレンダー2027**、10月29日先行販売開始だぴよ")  # 数字とつながらないように
         self.assertEqual(result["lines"][2], "・クリスマスケーキ予約**10月30日12時**から受け付けるぴよ")
         self.assertEqual(result["suggest"], ["ぴよりんゴジラについて", "紅茶ぴよりんセットについて", "クリスマスケーキについて"])

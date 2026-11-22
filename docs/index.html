@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ぴよりん">
-<meta name="piyo-ver" content="2026.11.13-3">
+<meta name="piyo-ver" content="2026.11.22-1">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
@@ -181,7 +181,26 @@ details.rel li a:hover{color:var(--caramel)}
 .k-event{background:var(--k-event);color:var(--k-event-ink)}
 .k-campaign{background:var(--k-campaign);color:var(--k-campaign-ink)}
 .k-release{background:var(--k-release);color:var(--k-release-ink);box-shadow:inset 0 0 0 1.5px var(--k-release-line)}
-.more{grid-row:auto;font-size:11px;color:var(--muted);padding-left:10px;font-family:var(--f-mono)}
+.more{grid-row:auto;font-size:11px;color:var(--muted);padding:0 0 0 10px;font-family:var(--f-mono);position:relative;z-index:1;background:none;border:0;text-align:left;cursor:pointer;line-height:var(--bar-h)}
+.more:hover{color:var(--caramel)}
+/* 期間の長い予定は、週の下の細い線（2026-11-22。短い限定販売が段からあふれて隠れないように） */
+.bar.thin{height:4px;align-self:center;font-size:0;line-height:4px;padding:0;border-radius:99px;opacity:.85;box-shadow:none}
+.bar.thin.k-release{background:var(--k-release-line)}
+.legend i.thin{height:4px;width:16px;border-radius:99px;background:var(--k-campaign);vertical-align:3px}
+.cell{cursor:pointer}
+.cell.sel{background:var(--hover)}
+.cell.sel .num{box-shadow:0 0 0 2px var(--yolk)}
+.cal-day{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:6px 8px 4px;box-shadow:var(--shadow)}
+.cal-day-h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 4px}
+.cal-day-h b{font-size:14.5px}
+.cal-day-h b small{font-weight:400;color:var(--muted);font-size:12px;margin-left:8px}
+.cal-day-h button{font:inherit;font-size:12.5px;font-weight:700;background:none;border:1px solid var(--line);color:var(--ink);border-radius:99px;padding:3px 12px;cursor:pointer}
+.cal-day .ag:last-child{border-bottom:0}
+.ag-sub{margin:0;padding:18px 12px 8px;font-size:12px;font-weight:700;color:var(--muted);border-bottom:1px solid var(--line)}
+.set-step{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.set-step button{font:inherit;font-size:16px;font-weight:700;line-height:1;width:32px;height:32px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.set-step button:disabled{opacity:.4;cursor:default}
+.set-step b{font-family:var(--f-mono);font-size:15px;min-width:2ch;text-align:center}
 .agenda{display:flex;flex-direction:column;border-top:1px solid var(--line)}
 .ag{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px 12px;border-bottom:1px solid var(--line);border-radius:12px;transition:background .3s ease}
 .ag:hover{background:var(--hover)}
@@ -194,11 +213,12 @@ details.rel li a:hover{color:var(--caramel)}
 .ktag{font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:99px}
 .ag.done{opacity:.55}
 @media (max-width:620px){
-  .week{--bar-h:6px;row-gap:4px}
+  .week{--bar-h:15px;row-gap:3px}
   .cell{padding:4px}
   .num{font-size:11px;min-width:20px;height:20px}
-  .bar{font-size:0;line-height:6px;padding:0;margin:0 2px}
-  .more{font-size:9px;padding-left:4px;line-height:1}
+  .bar{font-size:9.5px;line-height:15px;padding:0 3px;margin:0 1px;border-radius:4px}
+  .bar.thin{font-size:0;line-height:4px;padding:0;margin:0 1px}
+  .more{font-size:9px;padding-left:4px}
   .ag{grid-template-columns:1fr;gap:6px}
   .cal-title{font-size:24px}
 }
@@ -802,9 +822,10 @@ window.PiyoSplash=(function(){
         </div>
       </div>
       <div class="legend">
-        <span><i class="k-sale"></i>限定販売</span><span><i class="k-event"></i>イベント</span><span><i class="k-campaign"></i>キャンペーン</span><span><i class="k-release"></i>発売・受付開始</span>
+        <span><i class="k-sale"></i>限定販売</span><span><i class="k-event"></i>イベント</span><span><i class="k-campaign"></i>キャンペーン</span><span><i class="k-release"></i>発売・受付開始</span><span id="legend-thin"><i class="thin"></i>期間の長い予定</span>
       </div>
       <div class="cal" id="cal"></div>
+      <div class="cal-day" id="cal-day" hidden></div>
       <p class="sec-label" style="margin:12px 0 0" id="ag-label">この月の予定</p>
       <div class="agenda" id="agenda"></div>
     </div>
@@ -881,6 +902,13 @@ window.PiyoSplash=(function(){
       </div>
       <p class="set-links">Claude のコンソール：<a href="https://platform.claude.com/settings/keys" target="_blank" rel="noopener">API キー ↗</a><a href="https://platform.claude.com/usage" target="_blank" rel="noopener">使った額 ↗</a><a href="https://platform.claude.com/settings/limits" target="_blank" rel="noopener">使用額の上限 ↗</a></p>
     </section>
+    <section class="set-sec" aria-labelledby="set-h-cal">
+      <h3 id="set-h-cal">カレンダー</h3>
+      <div class="set-toggles">
+        <label><input type="checkbox" id="set-cal-group" checked><span>期間の長い予定を細い線にする<small>長く続く企画は週の下の細い線にして、短い限定販売を見やすくします。左の「UPCOMING」も、これから始まる予定を先に出します。切ると前の並べ方に戻ります。</small></span></label>
+      </div>
+      <div class="set-step"><span>細い線にするのは</span><button type="button" id="set-cal-minus" aria-label="1 日減らす">−</button><b id="set-cal-days">14</b><button type="button" id="set-cal-plus" aria-label="1 日増やす">＋</button><span>日を越える予定</span></div>
+    </section>
     <section class="set-sec" aria-labelledby="set-h-fix">
       <h3 id="set-h-fix">ぴよへの指摘</h3>
       <p class="set-note" id="set-fix-none">まだありません。ぴよの答えの下の「ちがうよ」を押すと、ここにたまります。</p>
@@ -930,6 +958,7 @@ window.PiyoSplash=(function(){
   </div>
   <article class="reader-body" id="reader-body"></article>
 </div>
+<script src="piyo-cal.js?v=1"></script>
 <script src="news-archive.js"></script>
 <script src="news-identity.js"></script>
 <script src="piyo-persona.js?v=1"></script>
@@ -1095,15 +1124,16 @@ window.PiyoSplash=(function(){
       </section>`).join(''):`<p class="empty">条件に合うニュースはありません。</p>`;
     if(openRel.size)document.querySelectorAll('#feed details.rel').forEach(d=>{if(openRel.has(d.dataset.id))d.open=true});
   }
+  function calOpt(){try{return PiyoCal.load(localStorage)}catch(_){return PiyoCal.fix(null)}} // カレンダーの並べ方の設定（piyo-cal.js）
   function renderEvents(){
-    const t=todayStr();
-    const up=state.events.filter(e=>(e.end||e.start)>=t).sort((a,b)=>a.start<b.start?-1:1).slice(0,5);
-    $('events').innerHTML=up.length?up.map(e=>{
-      const live=e.start<=t, n=days(t,e.start);
+    const t=todayStr(),o=calOpt();
+    const up=PiyoCal.upcoming(state.events,t,5,o);
+    $('events').innerHTML=up.length?up.map(({e})=>{
+      const st=PiyoCal.status(e,t,o);
       const range=e.end&&e.end!==e.start?`${md(e.start)}–${md(e.end)}`:md(e.start);
       return `<div class="ev"><div class="d"><strong>${md(e.start)}</strong><span>${wd(e.start)}</span></div>
         <div><a class="t" href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener" data-read="${esc(e.id)}">${esc(e.title)}</a>${mark(e.url)}
-        <div class="p"><span>${esc(range)}${e.place?' · '+esc(e.place):''}</span><span class="cd${live?' now':''}">${live?'開催中':n===1?'あした':'あと'+n+'日'}</span></div></div></div>`}).join('')
+        <div class="p"><span>${esc(range)}${e.place?' · '+esc(e.place):''}</span><span class="cd${st.cls==='now'?' now':''}">${st.text}</span></div></div></div>`}).join('')
       :'<p class="meta" style="padding:8px 0">予定されているイベントはありません</p>';
   }
   function renderMeta(){
@@ -1125,46 +1155,61 @@ window.PiyoSplash=(function(){
   const addDays=(s,n)=>{const [y,m,d]=s.split('-').map(Number);return ymd(y,m-1,d+n)};
   const t0=todayStr();
   state.view='news';state.ym=[+t0.slice(0,4),+t0.slice(5,7)-1];
-  function statusOf(e,t){const end=e.end||e.start;if(end<t)return['終了','done'];if(e.start<=t)return['開催中','now'];const n=days(t,e.start);return[n===1?'あした':'あと'+n+'日',''];}
+  function statusOf(e,t){const st=PiyoCal.status(e,t,calOpt());return[st.text,st.cls]}
+  function agRow(e,t,withId){
+    const end=e.end||e.start;const [st,sc]=statusOf(e,t);
+    return `<div class="ag${sc==='done'?' done':''}"${withId?` id="ag-${esc(e.id)}"`:''}>
+        <div class="when">${md(e.start)}${end!==e.start?' – '+md(end):''}<span>${wd(e.start)}${end!==e.start?' – '+wd(end):''}</span></div>
+        <div><h4><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener" data-read="${esc(e.id)}">${esc(e.title)}</a>${mark(e.url)}</h4>
+        <div class="pl"><span class="ktag k-${KINDS[e.kind]?e.kind:'event'}">${KINDS[e.kind]||'イベント'}</span><span>${esc(e.place||'')}</span></div></div>
+        <span class="cd${sc==='now'?' now':''}">${st}</span></div>`;
+  }
   function renderCal(){
-    const [y,m]=state.ym, t=todayStr();
+    const [y,m]=state.ym, t=todayStr(), o=calOpt();
     $('cal-title').innerHTML=`${y}.${pad(m+1)}<small>${m+1}月</small>`;
     const first=ymd(y,m,1), firstDow=new Date(Date.UTC(y,m,1)).getUTCDay();
     const gridStart=addDays(first,-firstDow);
     const lastDay=ymd(y,m+1,0);
     const weeks=Math.ceil((firstDow+ +lastDay.slice(8))/7);
-    const evs=state.events.slice().sort((a,b)=>a.start<b.start?-1:a.start>b.start?1:((b.end||b.start)>(a.end||a.start)?1:-1));
-    let html='<div class="dow">'+WD.map(w=>`<span>${w}</span>`).join('')+'</div>';
     const MAXL=window.matchMedia('(max-width:620px)').matches?4:3;
-    for(let w=0;w<weeks;w++){
-      const ws=addDays(gridStart,w*7), we=addDays(ws,6);
+    // 先に全部の週の置き方を決めて、月の中で段の数をそろえる（短い予定の段・「+数」の段・期間の長い予定の細い線の段）
+    const lay=[];for(let w=0;w<weeks;w++){const ws=addDays(gridStart,w*7);lay.push({ws,we:addDays(ws,6),...PiyoCal.layoutWeek(state.events,ws,addDays(ws,6),{...o,maxLanes:MAXL})})}
+    const L=Math.max(2,...lay.map(x=>x.bars.reduce((n,b)=>Math.max(n,b.lane+1),0)));
+    const hasMore=lay.some(x=>Object.keys(x.hidden).length), T=Math.max(0,...lay.map(x=>x.thinRows));
+    const rows=`30px repeat(${L},var(--bar-h))${hasMore?' var(--bar-h)':''}${T?` repeat(${T},5px)`:''} 4px`;
+    if(state.calDay&&(state.calDay<gridStart||state.calDay>addDays(gridStart,weeks*7-1)))state.calDay='';
+    let html='<div class="dow">'+WD.map(w=>`<span>${w}</span>`).join('')+'</div>';
+    lay.forEach(({ws,bars,hidden,thin})=>{
       let cells='';
-      for(let i=0;i<7;i++){const d=addDays(ws,i);const cls=['cell',d.slice(0,7)!==first.slice(0,7)?'out':'',d===t?'today':'',i===0?'sun':'',i===6?'sat':''].join(' ');cells+=`<div class="${cls}" style="grid-column:${i+1}"><span class="num">${+d.slice(8)}</span></div>`;}
-      const lanes=[];let bars='';const hidden={};
-      evs.forEach(e=>{
-        const end=e.end||e.start; if(end<ws||e.start>we)return;
-        const a=e.start<ws?ws:e.start, b=end>we?we:end;
-        const ci=days(ws,a), ce=days(ws,b);
-        let lane=lanes.findIndex(l=>l.every(([x,y])=>ce<x||ci>y));
-        if(lane<0){lane=lanes.length;lanes.push([])}
-        lanes[lane].push([ci,ce]);
-        if(lane>=MAXL){for(let k=ci;k<=ce;k++)hidden[k]=(hidden[k]||0)+1;return}
-        const cl=['bar','k-'+(KINDS[e.kind]?e.kind:'event'),e.start<ws?'cont-l':'',end>we?'cont-r':'',end<t?'past':''].join(' ');
-        bars+=`<button type="button" class="${cl}" style="grid-column:${ci+1} / span ${ce-ci+1};grid-row:${lane+2}" data-ev="${esc(e.id)}" title="${esc(e.title)}（${esc(md(e.start))}${end!==e.start?'–'+esc(md(end)):''}）">${esc(e.title)}</button>`;
-      });
-      Object.entries(hidden).forEach(([k,n])=>{bars+=`<span class="more" style="grid-column:${+k+1};grid-row:${MAXL+2}">+${n}</span>`});
-      html+=`<div class="week" style="grid-template-rows:30px repeat(${MAXL+1},var(--bar-h)) 4px">${cells}${bars}</div>`;
-    }
+      for(let i=0;i<7;i++){const d=addDays(ws,i);const cls=['cell',d.slice(0,7)!==first.slice(0,7)?'out':'',d===t?'today':'',d===state.calDay?'sel':'',i===0?'sun':'',i===6?'sat':''].join(' ');cells+=`<div class="${cls}" data-day="${d}" style="grid-column:${i+1}"><span class="num">${+d.slice(8)}</span></div>`;}
+      let out='';
+      const bar=(x,row,isThin)=>{
+        const e=x.e,end=e.end||e.start;
+        const cl=['bar',isThin?'thin':'','k-'+(KINDS[e.kind]?e.kind:'event'),x.contL?'cont-l':'',x.contR?'cont-r':'',end<t?'past':''].filter(Boolean).join(' ');
+        out+=`<button type="button" class="${cl}" style="grid-column:${x.ci+1} / span ${x.ce-x.ci+1};grid-row:${row}" data-ev="${esc(e.id)}"${isThin?' data-thin="1"':''} title="${esc(e.title)}（${esc(md(e.start))}${end!==e.start?'–'+esc(md(end)):''}）">${esc(e.title)}</button>`;
+      };
+      bars.forEach(x=>bar(x,x.lane+2,false));
+      Object.entries(hidden).forEach(([k,n])=>{out+=`<button type="button" class="more" data-day="${addDays(ws,+k)}" style="grid-column:${+k+1};grid-row:${L+2}" aria-label="ほか ${n} 件の予定を見る">+${n}</button>`});
+      thin.forEach(x=>bar(x,L+2+(hasMore?1:0)+x.lane,true));
+      html+=`<div class="week" style="grid-template-rows:${rows}">${cells}${out}</div>`;
+    });
     $('cal').innerHTML=html;
-    const inMonth=evs.filter(e=>e.start<=lastDay&&(e.end||e.start)>=first);
-    $('ag-label').textContent=`${m+1}月の予定 · ${inMonth.length}件`;
-    $('agenda').innerHTML=inMonth.length?inMonth.map(e=>{
-      const end=e.end||e.start;const [st,sc]=statusOf(e,t);
-      return `<div class="ag${sc==='done'?' done':''}" id="ag-${esc(e.id)}">
-        <div class="when">${md(e.start)}${end!==e.start?' – '+md(end):''}<span>${wd(e.start)}${end!==e.start?' – '+wd(end):''}</span></div>
-        <div><h4><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener" data-read="${esc(e.id)}">${esc(e.title)}</a>${mark(e.url)}</h4>
-        <div class="pl"><span class="ktag k-${KINDS[e.kind]?e.kind:'event'}">${KINDS[e.kind]||'イベント'}</span><span>${esc(e.place||'')}</span></div></div>
-        <span class="cd${sc==='now'?' now':''}">${st}</span></div>`}).join('')
+    $('legend-thin').hidden=!o.group;
+    // 日付（か「+数」）を押すと、その日にかかる予定を全部出す
+    const dayBox=$('cal-day');
+    if(state.calDay){
+      const list=PiyoCal.dayEvents(state.events,state.calDay,o);
+      dayBox.hidden=false;
+      dayBox.innerHTML=`<div class="cal-day-h"><b>${+state.calDay.slice(5,7)}月${+state.calDay.slice(8)}日（${wd(state.calDay)}）の予定<small>${list.length}件</small></b><button type="button" data-day-close>閉じる</button></div>`
+        +(list.length?list.map(e=>agRow(e,t,false)).join(''):'<p class="empty" style="padding:20px 0">この日の予定はありません。</p>');
+    }else{dayBox.hidden=true;dayBox.innerHTML=''}
+    // 月の予定：これから・開催中 → 期間の長い予定 → 終了した予定 の順（前は始まりの早い順で、終わった予定と長い企画が上に並んだ）
+    const ag=PiyoCal.agenda(state.events,first,lastDay,t,o);
+    $('ag-label').textContent=`${m+1}月の予定 · ${ag.all.length}件`;
+    const sub=(label,list)=>list.length?`<p class="ag-sub">${label} · ${list.length}件</p>`+list.map(e=>agRow(e,t,true)).join(''):'';
+    $('agenda').innerHTML=ag.all.length?
+      ((ag.long.length||ag.done.length)?sub(ag.main.some(e=>e.start<=t)?'開催中・これからの予定':'これからの予定',ag.main):ag.main.map(e=>agRow(e,t,true)).join(''))
+      +sub('期間の長い予定',ag.long)+sub('終了した予定',ag.done)
       :'<p class="empty">この月の予定はまだありません。</p>';
   }
   function setView(v){
@@ -1182,7 +1227,16 @@ window.PiyoSplash=(function(){
   const shift=n=>{let [y,m]=state.ym;m+=n;y+=Math.floor(m/12);m=((m%12)+12)%12;state.ym=[y,m];renderCal()};
   $('cal-prev').addEventListener('click',()=>shift(-1));$('cal-next').addEventListener('click',()=>shift(1));
   $('cal-today').addEventListener('click',()=>{const t=todayStr();state.ym=[+t.slice(0,4),+t.slice(5,7)-1];renderCal()});
-  $('cal').addEventListener('click',e=>{const b=e.target.closest('.bar');if(!b)return;const el=document.getElementById('ag-'+b.dataset.ev);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800)});
+  $('cal').addEventListener('click',e=>{const b=e.target.closest('.bar');if(!b){const c=e.target.closest('[data-day]');if(c){const same=state.calDay===c.dataset.day&&!c.classList.contains('more');state.calDay=same?'':c.dataset.day;renderCal();if(state.calDay&&c.classList.contains('more'))$('cal-day').scrollIntoView({behavior:'smooth',block:'nearest'})}return}const el=document.getElementById('ag-'+b.dataset.ev);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800)});
+  $('cal-day').addEventListener('click',e=>{if(e.target.closest('[data-day-close]')){state.calDay='';renderCal()}});
+  { // 設定：カレンダーの並べ方（期間の長い予定を細い線にする・何日を越えたら長いとみなすか）
+    const paint=()=>{const o=calOpt();$('set-cal-group').checked=o.group;$('set-cal-days').textContent=o.longDays;$('set-cal-minus').disabled=!o.group||o.longDays<=PiyoCal.MIN_DAYS;$('set-cal-plus').disabled=!o.group||o.longDays>=PiyoCal.MAX_DAYS};
+    const put=o=>{PiyoCal.save(localStorage,o);paint();renderEvents();if(state.view==='calendar')renderCal()};
+    $('set-cal-group').addEventListener('change',e=>put({...calOpt(),group:e.target.checked}));
+    $('set-cal-minus').addEventListener('click',()=>{const o=calOpt();put({...o,longDays:o.longDays-1})});
+    $('set-cal-plus').addEventListener('click',()=>{const o=calOpt();put({...o,longDays:o.longDays+1})});
+    paint();
+  }
   function renderCounts(){$('n-news').textContent=state.news.filter(isShown).length;$('n-cal').textContent=state.events.filter(e=>(e.end||e.start)>=todayStr()).length;$('n-bm').textContent=bms.length}
   function bmTag(b){
     if(b.cat==='event'){const k=KINDS[b.kind]?b.kind:'event';return `<span class="ktag k-${k}">${KINDS[k]}</span>`}
@@ -1462,7 +1516,7 @@ window.PiyoSplash=(function(){
   });
 
   // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
-  const PN_VERSION='2026.11.13-3（天気の図・株価は日経平均）';
+  const PN_VERSION='2026.11.22-1（カレンダーで短い予定が隠れない・長い予定は細い線）';
   {
     const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
     const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';

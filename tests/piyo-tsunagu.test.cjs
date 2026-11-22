@@ -139,8 +139,10 @@ test('設定の既定はどれも入り（鍵が無いとき入り・\'1\' で�
 });
 
 test('版・読み込み・Mac への送り',()=>{
-  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.13-3">/);
-  assert.match(html,/PN_VERSION='2026\.11\.13-3（天気の図・株価は日経平均）'/);
+  // 版は上がるたびに変わるので、番号は決め打ちにせず「画面の meta と PN_VERSION が同じ番号」を確かめる
+  const ver=(html.match(/<meta name="piyo-ver" content="(\d{4}\.\d{2}\.\d{2}-\d+)">/)||[])[1];
+  assert.ok(ver,'meta に版がある');
+  assert.ok(html.includes("PN_VERSION='"+ver+'（'),'PN_VERSION も同じ番号');
   assert.match(html,/<script src="piyo-persona\.js\?v=\d+"><\/script>/);
   assert.match(html,/memory:flag\('memory'\),remember:flag\('convo'\)/);
 });
