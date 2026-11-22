@@ -16,6 +16,31 @@
  const STRICT={train:/遅れ|遅延|運休|運転見合わせ|見合わせ|運行|止まって|動いて/,road:/渋滞|通行止め|規制|高速/,outage:/停電/,gold:/金(?:価格|相場|地金)|金の(?:値段|価格|相場|買取)|プラチナ|銀(?:相場|の値段|の価格)/,bond:/国債|金利|利回り/,econ:/経済指標|雇用統計|消費者物価|CPI|GDP/};
  const topicOk=(topic,q)=>!STRICT[topic]||STRICT[topic].test(q);
  const hm=v=>{const t=new Date(+new Date(v)+9*3600000).toISOString();return t.slice(0,10)+' '+t.slice(11,16);};
+ // 札の部品は東海の 5 つの町しか知らず、「東京の天気」にも名古屋の札を返す。天気・いまの話題で、名古屋以外の町を聞いているときは答えず、ほかの答え方（その町の予報）へ回す。
+ // PiyoExtras.weatherPlace があればそれで決める。無いとき（読めていない・古い）は、札の町が質問に入っておらず、ほかの町の言葉があるときだけ断る。
+ const OTHER_PLACE=/東京|大阪|京都|横浜|札幌|福岡|神戸|仙台|広島|沖縄|北海道|海外|岐阜|三重|静岡|浜松|豊橋|岡崎|豊田|一宮|春日井|金沢|長野|[一-龯]{1,3}[都道府県]|[一-龯]{1,3}市|[一-龯]{1,3}区/;
+ // 警報の札は県ごと。東海の主な町は、その県の札で答える。ほかの県の町を聞いたら、愛知県などの札では答えない（2026-11-22「東京の警報」に愛知県の札で答えていた）
+ const PREF_TOWNS={愛知:'名古屋 名駅 豊橋 岡崎 豊田 一宮 春日井 安城 刈谷 瀬戸 半田 小牧 稲沢 西尾 豊川 蒲郡 犬山 常滑 知多 長久手 日進 東海 江南 津島 北名古屋 清須 尾張旭 豊明 大府 知立 碧南 田原 新城 勝川',岐阜:'岐阜 大垣 高山 多治見 各務原 可児 中津川 美濃加茂 土岐 羽島 下呂 郡上 美濃 恵那 瑞浪 関',三重:'三重 津 四日市 鈴鹿 伊勢 桑名 松阪 名張 亀山 鳥羽 志摩 伊賀 尾鷲 熊野',静岡:'静岡 浜松 沼津 富士 熱海 三島 磐田 掛川 藤枝 焼津 富士宮 伊東 島田 御殿場 下田 湖西 袋井 裾野 伊豆'};
+ const WARN_WORDS=/特別警報|警報|注意報|大雨|大雪|暴風|波浪|洪水|高潮|雷|土砂災害|発表|出てる|出て|出た|ある|中/g;
+ function otherPref(one,q){
+  const area=String(one.id||'').split(':')[1]||'',stem=area.replace(/[都道府県]$/,'');
+  if(!stem||q.includes(stem))return false;
+  const X=root.PiyoExtras,rest=q.replace(WARN_WORDS,'');
+  let p=null;if(X&&typeof X.weatherPlace==='function'){try{p=X.weatherPlace(rest+'の天気');}catch{p=null;}}
+  if(!p)return OTHER_PLACE.test(rest.replace(/名古屋|愛知/g,''))&&!Object.values(PREF_TOWNS).join(' ').split(' ').some(t=>rest.includes(t)&&(PREF_TOWNS[stem]||'').split(' ').includes(t));
+  const label=String(p.label||''),names=[label,label.replace(/[市町村区]$/,'')]; // 「四日市」は市を外さずに引く
+  for(const[pref,towns]of Object.entries(PREF_TOWNS))if(names.some(n=>towns.split(' ').includes(n)))return pref!==stem;
+  return true; // 東海の外の町
+ }
+ function otherTown(one,q){
+  if(one.topic==='warning')return otherPref(one,q);
+  if(one.topic!=='weather'&&one.topic!=='now')return false;
+  const X=root.PiyoExtras;
+  if(X&&typeof X.weatherPlace==='function'){try{return !!X.weatherPlace(q);}catch{return false;}}
+  const town=String(one.id||'').split(':')[1]||'';
+  if(town&&q.includes(town.replace(/[市県都府区町村]$/,'')))return false;
+  return OTHER_PLACE.test(q.replace(/名古屋|愛知/g,''));
+ }
  async function briefAnswer(q){
   const b=brief();if(!b||!b.enabled||q.length>40||/ニュース|予想|予測|見通し|なぜ|理由|仕組み|とは|って何|ぴよりん/.test(q))return null;
   const r=await b.answer(q).catch(()=>null);let one=r&&r.briefs&&r.briefs[0];
@@ -25,6 +50,7 @@
   if(!one||!BRIEF_TOPICS.includes(one.topic)||!one.say||one.status==='まだ無い')return null;
   if(one.topic==='fx'&&!fxAsk(q))return null;
   if(!topicOk(one.topic,q))return null;
+  if(otherTown(one,q))return null; // 名古屋以外の町の天気に、名古屋の予報を答えない（2026-11-22）
   const src=(one.sources||[]).find(x=>x.id)||(one.sources||[])[0]||{};
   const card={id:src.id,category:{weather:'002',now:'002',warning:'005',quake:'005',fx:'006',stock:'006',gold:'006',bond:'006',econ:'006',train:'022',road:'022',outage:'026',holiday:'011'}[one.topic],type:'メイン',status:'確定',verdict:'確認済み',title:one.title||one.id,summary:one.say,structured:one.facts||null,url:src.url||'',origin:src.origin||'',attribution:src.attribution||'',published_at:one.as_of,expires_at:one.fresh_until||new Date(Date.now()+3600000).toISOString()};
   // 数字・日付の照らし合わせは本文だけ（出典の行の「CC BY 4.0」や取得の時刻は、答えの数字ではない）

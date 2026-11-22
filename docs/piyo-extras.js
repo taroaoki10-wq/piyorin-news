@@ -90,9 +90,214 @@ window.PiyoExtras = (function () {
     if (!/天気|予報|気温|暑い|寒い|何度|雨|傘|日の出|日の入|日没|降水|風速|強風|風が|風は|紫外線|uv|日焼け/i.test(t)) return false;
     return !/雨の日|雨でも|雨だと|雨なら/.test(t); // 天気予報ではない聞き方
   }
-  function weather(t, ctx) {
+  // ---- 名古屋以外の町の天気（2026-11-22）：質問から町を取り出す（予報そのものは画面側が Open-Meteo から取る） ----
+  // 場所の表：[町の名前, 別の言い方（, 区切り）, 緯度, 経度]。緯度経度は Open-Meteo の地名検索（2026-11-22）の答えを小数 2 けたにした物
+  const PLACE_ROWS = [
+    ['札幌', '北海道', 43.07, 141.35],
+    ['青森', '', 40.82, 140.73],
+    ['盛岡', '岩手', 39.70, 141.15],
+    ['仙台', '宮城', 38.27, 140.87],
+    ['秋田', '', 39.72, 140.12],
+    ['山形', '', 38.23, 140.37],
+    ['福島', '', 37.75, 140.47],
+    ['水戸', '茨城', 36.35, 140.45],
+    ['宇都宮', '栃木', 36.57, 139.88],
+    ['前橋', '群馬', 36.40, 139.08],
+    ['さいたま', '埼玉', 35.91, 139.66],
+    ['千葉', '', 35.60, 140.12],
+    ['東京', '', 35.69, 139.69],
+    ['横浜', '神奈川', 35.43, 139.65],
+    ['新潟', '', 37.92, 139.04],
+    ['富山', '', 36.70, 137.22],
+    ['金沢', '石川', 36.60, 136.62],
+    ['福井', '', 36.06, 136.22],
+    ['甲府', '山梨', 35.67, 138.57],
+    ['長野', '', 36.65, 138.18],
+    ['岐阜', '', 35.42, 136.76],
+    ['静岡', '', 34.98, 138.38],
+    ['津', '三重', 34.73, 136.52],
+    ['大津', '滋賀', 35.00, 135.87],
+    ['京都', '', 35.02, 135.75],
+    ['大阪', '', 34.69, 135.50],
+    ['神戸', '兵庫', 34.69, 135.18],
+    ['奈良', '', 34.69, 135.80],
+    ['和歌山', '', 34.23, 135.17],
+    ['鳥取', '', 35.50, 134.23],
+    ['松江', '島根', 35.48, 133.05],
+    ['岡山', '', 34.65, 133.93],
+    ['広島', '', 34.40, 132.45],
+    ['山口', '', 34.18, 131.47],
+    ['徳島', '', 34.07, 134.57],
+    ['高松', '香川', 34.33, 134.05],
+    ['松山', '愛媛', 33.84, 132.76],
+    ['高知', '', 33.55, 133.53],
+    ['福岡', '', 33.60, 130.42],
+    ['佐賀', '', 33.23, 130.30],
+    ['長崎', '', 32.75, 129.88],
+    ['熊本', '', 32.81, 130.69],
+    ['大分', '', 33.23, 131.60],
+    ['宮崎', '', 31.92, 131.42],
+    ['鹿児島', '', 31.57, 130.55],
+    ['那覇', '沖縄', 26.21, 127.68],
+    ['豊橋', '', 34.77, 137.38],
+    ['岡崎', '', 34.95, 137.17],
+    ['豊田', '', 35.08, 137.15],
+    ['一宮', '', 35.30, 136.80],
+    ['春日井', '', 35.25, 136.97],
+    ['刈谷', '', 34.98, 136.98],
+    ['安城', '', 34.96, 137.08],
+    ['瀬戸', '', 35.23, 137.10],
+    ['半田', '', 34.88, 136.93],
+    ['犬山', '', 35.38, 136.94],
+    ['小牧', '', 35.28, 136.92],
+    ['大垣', '', 35.35, 136.62],
+    ['高山', '', 36.13, 137.25],
+    ['多治見', '', 35.32, 137.13],
+    ['中津川', '', 35.48, 137.50],
+    ['下呂', '', 35.80, 137.23],
+    ['四日市', '', 34.97, 136.62],
+    ['鈴鹿', '', 34.88, 136.58],
+    ['伊勢', '', 34.48, 136.70],
+    ['桑名', '', 35.05, 136.67],
+    ['松阪', '', 34.58, 136.54],
+    ['鳥羽', '', 34.48, 136.84],
+    ['浜松', '', 34.70, 137.73],
+    ['沼津', '', 35.10, 138.87],
+    ['熱海', '', 35.09, 139.05],
+    ['富士', '', 35.17, 138.68],
+    ['掛川', '', 34.77, 138.02],
+    ['磐田', '', 34.70, 137.85],
+    ['御殿場', '', 35.32, 138.94],
+    ['三島', '', 35.12, 138.92],
+    ['伊東', '', 34.97, 139.08],
+    ['下田', '', 34.68, 138.94],
+    ['飯田', '', 35.52, 137.82],
+    ['松本', '', 36.23, 137.97],
+    ['諏訪', '', 36.04, 138.11],
+    ['川崎', '', 35.52, 139.72],
+    ['北九州', '', 33.85, 130.85],
+    ['軽井沢', '', 36.35, 138.63],
+    ['箱根', '', 35.19, 139.03],
+    ['函館', '', 41.78, 140.74],
+    ['旭川', '', 43.77, 142.36],
+    ['つくば', '', 36.08, 140.12],
+    ['いわき', '', 37.05, 140.88],
+    ['ひたちなか', '', 36.40, 140.53],
+    ['横須賀', '', 35.28, 139.67],
+    ['鎌倉', '', 35.31, 139.55],
+    ['相模原', '', 35.57, 139.24],
+    ['八王子', '', 35.66, 139.32],
+    ['船橋', '', 35.70, 139.99],
+    ['川越', '', 35.91, 139.49],
+    ['長岡', '', 37.45, 138.85],
+    ['姫路', '', 34.82, 134.70],
+    ['倉敷', '', 34.58, 133.77],
+    ['西宮', '', 34.72, 135.33],
+    ['久留米', '', 33.32, 130.52],
+    ['別府', '', 33.28, 131.50],
+    ['日光', '', 36.75, 139.62],
+    ['小樽', '', 43.19, 141.00],
+    ['釧路', '', 42.98, 144.37],
+    ['帯広', '', 42.92, 143.20],
+    ['弘前', '', 40.59, 140.47],
+    ['石垣', '', 24.34, 124.16],
+    ['富良野', '', 43.35, 142.38]
+  ];
+  const PLACE_TABLE = PLACE_ROWS.map(([label, alias, lat, lon]) => ({ label, names: [label, ...(alias ? alias.split(',') : [])], lat, lon }));
+  const PLACE_BY_NAME = new Map();
+  PLACE_TABLE.forEach(p => p.names.forEach(n => PLACE_BY_NAME.set(n, p)));
+  // 名古屋のこと（これは町として拾わない）。「名古屋市中区」のように区まで続く言い方も一緒に外す
+  const NAGOYA_RE = /(?:名古屋|愛知)[市県駅]?(?:[一-龯ァ-ヶー]{1,3}区)?|名駅/g;
+  // 町の名前ではない言葉（日時・天気・よくある名詞）。長い物から外す
+  const NOT_PLACE_RE = new RegExp([
+    '\\d+日後?', '[月火水木金土日]曜日?', 'uv',
+    '明後日', '一週間', '再来週', '来週', '今週', '週間', '週末', '土日', '今夜', '今晩', '今日', '明日', '午前', '午後', '曜日', '天気', '予報', '気温', '最高', '最低', '何度',
+    '降水', '確率', '紫外線', '日の出', '日の入', '日没', '今', '朝', '昼', '夜', '雨', '傘', '晴', '雪', '風', '暑', '寒', '教', '週', '天', '何', '降'
+  ].join('|'), 'gi');
+  const NOT_PLACE_WORDS = new Set(['津波', '対策', '必要', '準備', '予定', '大丈夫', '洗濯物', '洗濯', '服装', '荷物', '今度', '今月', '来月', '先週', '昨日', '本日', '今年', '来年', '最近', '気象', '台風', '梅雨', '花粉', '湿度', '気圧', '天候', '屋外', '屋内',
+    '大雨', '豪雨', '暴風', '警報', '注意報', '時間', '今後', '以降', '現在', '海外', '全国', '日本', '地域', '地区', '市町村', '都道府県', '場所', '近所', '近く', '周辺', 'ココ', 'ソコ', 'ドコ', 'ゲリラ', 'ニュース', 'ピヨ',
+    'weather', 'forecast', 'today', 'tomorrow']);
+  const HIRA_PLACES = PLACE_TABLE.filter(p => /^[ぁ-ん]+$/.test(p.label)).map(p => p.label);
+  const PLACE_TOKEN_RE = new RegExp('(?:' + HIRA_PLACES.join('|') + ')市?|[一-龯々〆ァ-ヶー]+|[A-Za-z]+', 'g');
+  const PLACE_AFTER_RE = /^(?:$|\s|の|は|が|も|で|に|と|へ|を|や|って|から|まで)/;
+  // 町の名前を引く：そのまま → 末尾（市・区・町・村・都・府・県・駅）を外して。1 文字の「津」は、前に漢字・カタカナが付かず、後ろが の・は・市 などのときだけ
+  function placeLookup(w, after) {
+    let p = PLACE_BY_NAME.get(w);
+    if (p && w.length === 1 && !PLACE_AFTER_RE.test(after)) p = null;
+    if (p) return p;
+    const base = w.replace(/[市区町村都府県駅]$/, '');
+    return base !== w && base ? PLACE_BY_NAME.get(base) || null : null;
+  }
+  // 質問の中の町。町が無い・名古屋（愛知）なら null。表にある町は {label, lat, lon}、表に無い町らしき言葉は {label, lat:null, lon:null}
+  function weatherPlace(q) {
+    const raw = String(q == null ? '' : q).normalize('NFKC');
+    if (/大分(?=[寒暑涼冷暖温雨降晴曇])/.test(raw)) q = raw.replace(/大分(?=[寒暑涼冷暖温雨降晴曇])/g, ' '); // 「大分寒い」は「だいぶ」
+    else q = raw;
+    const s = q.replace(NAGOYA_RE, ' ').replace(NOT_PLACE_RE, ' ');
+    const re = new RegExp(PLACE_TOKEN_RE.source, 'g');
+    let found = null, other = null, m;
+    while ((m = re.exec(s))) {
+      const token = m[0], after = s.slice(m.index + token.length, m.index + token.length + 2);
+      // 「静岡県浜松市」のように 1 つながりの言い方は、県・府・都・道の後ろで切る
+      const cut = token.match(/^(.{2,3}?[都道府県])(.{2,})$/);
+      const pieces = cut ? [cut[1], cut[2]] : [token];
+      pieces.forEach((w, i) => {
+        const aft = i === pieces.length - 1 ? after : '';
+        const p = placeLookup(w, aft);
+        if (p) { found = p; return; }
+        if (other || w.length < 2 || w.length > 8 || NOT_PLACE_WORDS.has(w.toLowerCase()) || /^[A-Za-z]+$/.test(w) && w.length < 3) return;
+        if (/[市区町村]$/.test(w) || (i === pieces.length - 1 && PLACE_AFTER_RE.test(aft) && aft !== '')) other = w;
+      });
+    }
+    if (found) return { label: found.label, lat: found.lat, lon: found.lon };
+    return other ? { label: other, lat: null, lon: null } : null;
+  }
+  // 地名検索（Open-Meteo）で試す名前の並び。「仙台市」は見つからず「仙台」なら見つかる、というずれがあるので、いくつか試す
+  function geoNames(label) {
+    const w = String(label == null ? '' : label).trim();
+    if (!w) return [];
+    if (/[市町村区都府県]$/.test(w)) { const base = w.slice(0, -1); return base.length >= 2 ? [w, base] : [w]; }
+    return [w + '市', w + '町', w];
+  }
+  // 地名検索の results から 1 つ選ぶ：日本の町（PPL…）か行政の区分（ADM…）だけ、人口の多い順。公園・山・空港・島は外す
+  function pickGeo(results) {
+    const list = (Array.isArray(results) ? results : []).filter(r => r && r.country_code === 'JP' && /^(PPL|ADM)/.test(String(r.feature_code || '')) && Number.isFinite(r.latitude) && Number.isFinite(r.longitude));
+    if (!list.length) return null;
+    const best = list.reduce((a, b) => ((Number(b.population) || 0) > (Number(a.population) || 0) ? b : a));
+    return { label: best.name, lat: best.latitude, lon: best.longitude, pref: best.admin1 };
+  }
+  // 天気の番号（WMO）を言葉に（index.html の weatherWord と同じ対応。値が無い・知らない番号は ''）
+  function weatherWord(c) {
+    if (typeof c !== 'number' || !Number.isFinite(c)) return '';
+    if (c <= 1) return '晴れ'; if (c === 2) return '晴れときどきくもり'; if (c === 3) return 'くもり'; if (c === 45 || c === 48) return '霧';
+    if (c >= 51 && c <= 57) return '霧雨'; if (c === 61) return '小雨'; if (c === 63) return '雨'; if (c === 65) return '強い雨'; if (c === 66 || c === 67) return '冷たい雨';
+    if (c >= 71 && c <= 77) return '雪'; if (c === 80 || c === 81) return 'にわか雨'; if (c === 82) return '激しいにわか雨'; if (c === 85 || c === 86) return 'にわか雪';
+    if (c === 95) return '雷雨'; if (c === 96 || c === 99) return 'ひょうまじりの雷雨'; return '';
+  }
+  // Open-Meteo の hourly（日本時間の 'YYYY-MM-DDTHH:00'）から、その日の 3 時間ごとの点 [{h, temp, word, rain}]。
+  // temp は四捨五入、rain はその時刻から 3 時間（h・h+1・h+2 時）の最大（無ければ null）。気温か天気が無い点は外す
+  function hoursOf(hourly, date) {
+    if (!hourly || !Array.isArray(hourly.time)) return [];
+    const at = new Map(hourly.time.map((t, i) => [t, i])), out = [];
+    const num = (arr, i) => (Array.isArray(arr) && Number.isFinite(arr[i]) ? arr[i] : null);
+    for (let h = 0; h < 24; h += 3) {
+      const key = h => `${date}T${String(h).padStart(2, '0')}:00`;
+      if (!at.has(key(h))) continue;
+      const i = at.get(key(h)), t = num(hourly.temperature_2m, i), word = weatherWord(num(hourly.weather_code, i));
+      if (t === null || !word) continue;
+      // 雨は h〜h+3 時の区間。Open-Meteo の時刻の値は直前 1 時間の予報なので、h+1・h+2・h+3 時の値の最大（答えの文の rainHours と同じ数え方）
+      const next = new Date(Date.parse(date + 'T00:00:00Z') + 86400000).toISOString().slice(0, 10);
+      const keyOf = x => (x < 24 ? key(x) : `${next}T${String(x - 24).padStart(2, '0')}:00`);
+      const rains = [h + 1, h + 2, h + 3].map(x => (at.has(keyOf(x)) ? num(hourly.precipitation_probability, at.get(keyOf(x))) : null)).filter(v => v !== null);
+      out.push({ h, temp: Math.round(t) || 0, word, rain: rains.length ? Math.max(...rains) : null });
+    }
+    return out;
+  }
+
+  // nm：答えの文に書く町の名前。ctx.place があれば、その町の予報（画面側が取った物）で答え、ほかの町で断らない
+  function weatherCore(t, ctx, nm, other) {
     if (!weatherAsk(t)) return null;
-    if (OTHER_PLACE.test(t.replace(/名古屋|愛知/g, ''))) return null;
+    if (!other && OTHER_PLACE.test(t.replace(/名古屋|愛知/g, ''))) return null;
     const w = (ctx.weather || []).filter(x => x.date >= ctx.today);
     if (!w.length) return { text: 'いま天気を取れてないぴよ…少しあとで、また呼んで聞いてね。', mood: 'sad', kind: 'weather' };
     const today = ctx.today;
@@ -108,36 +313,41 @@ window.PiyoExtras = (function () {
     const last = w[w.length - 1].date;
     if (!days.length) return { text: `その日の天気はまだ分からないぴよ。分かるのは${jp(last)}までだぴよ。`, kind: 'weather', sources: 'weather' };
     if (days.length > 1) {
-      return { text: ['名古屋の天気だぴよ！', ...days.map(d => `・${jp(d.date)} ${d.word} ${d.max}℃／${d.min}℃${d.rain != null ? ` 雨${d.rain}%` : ''}`)].join('\n'), kind: 'weather', sources: 'weather' };
+      return { text: [`${nm}の天気だぴよ！`, ...days.map(d => `・${jp(d.date)} ${d.word} ${d.max}℃／${d.min}℃${d.rain != null ? ` 雨${d.rain}%` : ''}`)].join('\n'), kind: 'weather', sources: 'weather' };
     }
     const d = days[0], label = dayLabel(d.date, today);
     let text;
     if (/日の出|日の入|日没/.test(t)) {
       if (!d.sunrise || !d.sunset) return null;
-      text = `${label}の名古屋の日の出は**${d.sunrise}**、日の入りは**${d.sunset}**だぴよ。`;
+      text = `${label}の${nm}の日の出は**${d.sunrise}**、日の入りは**${d.sunset}**だぴよ。`;
     } else if (/雨|傘|降水/.test(t)) {
       if (d.rain == null) return null;
-      text = `${label}の名古屋の雨の確率は**${d.rain}%**だぴよ。`;
+      text = `${label}の${nm}の雨の確率は**${d.rain}%**だぴよ。`;
       const nowHour = d.date === today ? ctx.hour : -1;
       const wet = (d.rainHours || []).filter(h => h.to > nowHour && h.rain >= 30).sort((a, b) => b.rain - a.rain).slice(0, 2).sort((a, b) => a.from - b.from);
       if (wet.length) text += `降りやすいのは${wet.map(h => `${h.from}〜${h.to}時（${h.rain}%）`).join('と')}ごろだぴよ。`;
       text += d.rain >= 50 ? '傘を持っていってぴよ。' : d.rain < 20 ? '傘はいらなそうだぴよ。' : '折りたたみ傘があると安心だぴよ。';
     } else if (/気温|暑い|寒い|何度/.test(t)) {
-      text = `${label}の名古屋は、最高**${d.max}℃**・最低${d.min}℃だぴよ。`;
+      text = `${label}の${nm}は、最高**${d.max}℃**・最低${d.min}℃だぴよ。`;
       if (d.max >= 25) text += 'ぴよりんを持ち帰るなら保冷バッグがあると安心だぴよ。';
       else if (d.min <= 8) text += '朝と夜は冷えるから、あったかくしてぴよ。';
     } else if (/風/.test(t)) {
       if (d.wind == null) return null;
-      text = `${label}の名古屋の最大風速は**${d.wind}m/s**だぴよ。` + (d.wind >= 10 ? '風が強いから気をつけてぴよ。' : '');
+      text = `${label}の${nm}の最大風速は**${d.wind}m/s**だぴよ。` + (d.wind >= 10 ? '風が強いから気をつけてぴよ。' : '');
     } else if (/紫外線|uv|日焼け/i.test(t)) {
       if (d.uv == null) return null;
-      text = `${label}の名古屋の紫外線の強さ（UV指数）は最大**${d.uv}**だぴよ。` + (d.uv >= 6 ? '日焼け止めがあると安心だぴよ。' : '');
+      text = `${label}の${nm}の紫外線の強さ（UV指数）は最大**${d.uv}**だぴよ。` + (d.uv >= 6 ? '日焼け止めがあると安心だぴよ。' : '');
     } else {
-      text = `${label}の名古屋は**${d.word}**、最高${d.max}℃・最低${d.min}℃${d.rain != null ? `、雨の確率は${d.rain}%` : ''}だぴよ。`;
+      text = `${label}の${nm}は**${d.word}**、最高${d.max}℃・最低${d.min}℃${d.rain != null ? `、雨の確率は${d.rain}%` : ''}だぴよ。`;
       if (d.rain >= 50) text += '傘を忘れずにぴよ。';
       else if (d.max >= 25) text += 'ぴよりんを持ち帰るなら保冷バッグがあると安心だぴよ。';
     }
     return { text, kind: 'weather', sources: 'weather' };
+  }
+  function weather(t, ctx) {
+    const place = ctx && ctx.place ? String(ctx.place) : '';
+    const r = weatherCore(t, ctx, place || '名古屋', !!place);
+    return r && place ? { ...r, place } : r;
   }
   function moonTime(m) { const [d, hm] = m.time.split('T'); return `${jp(d)} ${Number(hm.slice(0, 2))}時ごろ`; }
   function koyomi(t, ctx) {
@@ -947,6 +1157,7 @@ window.PiyoExtras = (function () {
     cloud: '<path class="c" d="M7 18.6h10.2a4.2 4.2 0 0 0 .6-8.4 5.7 5.7 0 0 0-10.9 1.4A3.5 3.5 0 0 0 7 18.6z"/>',
     rain: '<path class="c" d="M7 15h10.2a4.2 4.2 0 0 0 .6-8.4A5.7 5.7 0 0 0 6.9 8 3.5 3.5 0 0 0 7 15z"/><path class="rl" d="M8.4 17.6l-1 2.9M12.4 17.6l-1 2.9M16.4 17.6l-1 2.9"/>',
     snow: '<path class="c" d="M7 15h10.2a4.2 4.2 0 0 0 .6-8.4A5.7 5.7 0 0 0 6.9 8 3.5 3.5 0 0 0 7 15z"/><circle class="r" cx="8" cy="19" r="1.2"/><circle class="r" cx="12" cy="19.6" r="1.2"/><circle class="r" cx="16" cy="19" r="1.2"/>',
+    moon: '<path class="s" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
     thunder: '<path class="c" d="M7 15h10.2a4.2 4.2 0 0 0 .6-8.4A5.7 5.7 0 0 0 6.9 8 3.5 3.5 0 0 0 7 15z"/><path class="s" d="M12.6 14.2l-3 4.2h2.3l-1 3.4 3.3-4.6h-2.3z"/>',
   };
   function weatherKind(word) {
@@ -957,12 +1168,14 @@ window.PiyoExtras = (function () {
     if (/晴れ/.test(w)) return /くもり/.test(w) ? 'partly' : 'sun';
     return 'cloud';
   }
-  function weatherFigure(days, today) {
+  const escHtml = v => String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  // 7 日の帯（今までの図。place は町の名前）
+  function weekFigure(days, today, place) {
     const list = (days || []).filter(d => d && d.date >= today && Number.isFinite(d.max) && Number.isFinite(d.min)).slice(0, 7);
     if (list.length < 2) return '';
     const hi = Math.max(...list.map(d => d.max)), lo = Math.min(...list.map(d => d.min)), span = Math.max(1, hi - lo);
     const pct = v => Math.round((v / span) * 1000) / 10;
-    const label = '名古屋の天気：' + list.map(d => `${dayLabel(d.date, today)} ${d.word} 最高${d.max}℃ 最低${d.min}℃${d.rain != null ? ` 雨${d.rain}%` : ''}`).join('、');
+    const label = place + 'の天気：' + list.map(d => `${dayLabel(d.date, today)} ${d.word} 最高${d.max}℃ 最低${d.min}℃${d.rain != null ? ` 雨${d.rain}%` : ''}`).join('、');
     const cols = list.map(d => {
       const w = wd(d.date), cls = (d.date === today ? ' now' : '') + (w === '土' ? ' sat' : w === '日' ? ' sun' : '');
       return `<div class="piyo-wx-day${cls}"><span class="piyo-wx-d">${d.date === today ? '今日' : w}</span>`
@@ -972,10 +1185,47 @@ window.PiyoExtras = (function () {
         + `<span class="piyo-wx-lo">${d.min}°</span>`
         + `<span class="piyo-wx-r${d.rain >= 50 ? ' wet' : ''}">${d.rain != null ? d.rain + '%' : '–'}</span></div>`;
     }).join('');
-    return `<div class="piyo-wx" role="img" aria-label="${label.replace(/"/g, '&quot;')}">${cols}</div>`;
+    return `<div class="piyo-wx" role="img" aria-label="${escHtml(label)}">${cols}</div>`;
+  }
+  // 今の時を 3 で切り捨てた時刻から、今日・明日の day.hours（hoursOf の点）をつないで 8 点まで
+  function hourPoints(days, today, nowHour) {
+    const start = Math.floor((Number.isFinite(nowHour) ? Math.min(23, Math.max(0, nowHour)) : 0) / 3) * 3, out = [];
+    for (const date of [today, addDays(today, 1)]) {
+      const day = (days || []).find(d => d && d.date === date), hs = day && Array.isArray(day.hours) ? day.hours : [];
+      hs.filter(p => p && Number.isFinite(p.h) && Number.isFinite(p.temp) && typeof p.word === 'string' && p.word).sort((a, b) => a.h - b.h)
+        .forEach(p => { if (date !== today || p.h >= start) out.push({ ...p, date }); });
+    }
+    return out.slice(0, 8);
+  }
+  // 天気の図。opt = {nowHour（今の時 0〜23。無ければ 0）, place（町の名前。無ければ名古屋）}。
+  // 3 時間ごとの点（days の今日・明日の hours）が 2 つ以上あれば「3時間ごと／週間」の切り替えの図、無ければ週間の帯だけ。週間も作れなければ ''
+  function weatherFigure(days, today, opt) {
+    const place = opt && opt.place ? String(opt.place) : '名古屋';
+    const wk = weekFigure(days, today, place);
+    if (!wk) return '';
+    const pts = hourPoints(days, today, opt && opt.nowHour);
+    if (pts.length < 2) return wk;
+    const first = pts[0].date;
+    const cells = pts.map(p => {
+      const kind = weatherKind(p.word), night = p.h >= 18 || p.h < 6;
+      // 日付は時刻の上の細い行に分ける（「明日 0時」を 1 列に入れると折れて列がずれるため）。最初の点と日が変わった点だけ日付を書く
+      const head = pts.find(x => x.date === p.date) === p, newDay = head && p.date !== first;
+      const time = newDay ? `${dayLabel(p.date, today)} ${p.h}時` : `${p.h}時`;
+      const day = head ? dayLabel(p.date, today) : '';
+      const rain = Number.isFinite(p.rain) ? p.rain : null;
+      const aria = `${time} ${p.word} ${p.temp}度${rain !== null ? ` 雨${rain}%` : ''}`;
+      return `<div class="piyo-wx-hr${newDay ? ' newday' : ''}" role="img" aria-label="${escHtml(aria)}"><span class="piyo-wx-dd">${escHtml(day)}</span><span class="piyo-wx-hh">${p.h}時</span>`
+        + `<svg class="piyo-wx-i" viewBox="0 0 24 24" aria-hidden="true">${WX_ICON[kind === 'sun' && night ? 'moon' : kind]}</svg>`
+        + `<span class="piyo-wx-t">${p.temp}°</span>`
+        + `<span class="piyo-wx-r${rain !== null && rain >= 50 ? ' wet' : ''}">${rain !== null ? rain + '%' : '–'}</span></div>`;
+    }).join('');
+    return `<div class="piyo-wx2" role="group" aria-label="${escHtml(place)}の天気">`
+      + '<div class="piyo-wx-tabs" role="tablist"><button type="button" class="piyo-wx-tab on" role="tab" aria-selected="true" data-page="0">3時間ごと</button>'
+      + '<button type="button" class="piyo-wx-tab" role="tab" aria-selected="false" data-page="1">週間</button></div>'
+      + `<div class="piyo-wx-pages"><div class="piyo-wx-page" data-page="0">${cells}</div><div class="piyo-wx-page" data-page="1">${wk}</div></div></div>`;
   }
 
-  return { outingEvents, eventChips, weatherAsk, weatherFigure, weatherKind, bareStock, localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf, plannedLine,
+  return { outingEvents, eventChips, weatherAsk, weatherFigure, weatherKind, weatherPlace, geoNames, pickGeo, hoursOf, weatherWord, PLACE_TABLE, bareStock, localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf, plannedLine,
     pickMemos, buyAsk, buySummary, beforeGo, speakText, OPT_KEYS, optOn,
     flagOn, FLAG_KEYS, personaBlock, memoryBlock, saveMemoryCard, readMemoryCard, composeSystem, readMacLink, macJson, syncBody };
 })();

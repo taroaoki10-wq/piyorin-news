@@ -337,11 +337,11 @@ test('設定：memofocus・buyctx の 2 行（入り切りの仕組み data-flag
   assert.equal((box.match(/data-flag=/g)||[]).length,9); // 写真・マイク（piyo-chat4）を足して 7 → 9
 });
 
-test('版は 2026.11.22-4（meta・PN_VERSION・piyo-extras.js?v=7）',()=>{
-  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.22-4">/);
-  assert.match(html,/const PN_VERSION='2026\.11\.22-4（[^）]+）'/);
-  assert.match(html,/<script src="piyo-extras\.js\?v=7"><\/script>/);
-  assert.ok(!html.includes('piyo-extras.js?v=6')&&!html.includes('2026.11.22-3'));
+test('版は 2026.11.22-5（meta・PN_VERSION・piyo-extras.js?v=8）',()=>{
+  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.22-5">/);
+  assert.match(html,/const PN_VERSION='2026\.11\.22-5（[^）]+）'/);
+  assert.match(html,/<script src="piyo-extras\.js\?v=8"><\/script>/);
+  assert.ok(!html.includes('piyo-extras.js?v=7')&&!html.includes('2026.11.22-4'));
 });
 
 test('画面の <script>（中身があるもの）に構文の誤りが無い',()=>{
