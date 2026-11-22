@@ -45,9 +45,10 @@ class ModeTests(unittest.TestCase):
                 with patch.dict(os.environ, {'PIYO_AI': 'cli', 'ANTHROPIC_API_KEY': 'k'}, clear=True):
                     self.assertEqual((claude_call.mode(), claude_call.api_key()), ('cli', 'cli'))  # 環境変数が先
 
-    def test_repo_default_keeps_the_api(self):
+    def test_repo_setting_is_a_known_mode(self):
+        # scripts/ai_mode.txt の今の値（2026-11-22 ユーザー決定で none＝Claude なしの控え）。api・none のどちらかで、cli は書かない
         with patch.dict(os.environ, {}, clear=True):
-            self.assertEqual(claude_call.mode(), 'api')  # scripts/ai_mode.txt の今の値。切りかえはユーザーが決める
+            self.assertIn(claude_call.mode(), ('api', 'none'))
 
 
 class CliTests(unittest.TestCase):

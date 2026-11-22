@@ -48,7 +48,7 @@ class EventExtractionTests(unittest.TestCase):
 
         with patch.object(ex, "fetch", side_effect=lambda u: PAGES[u]), \
                 patch.object(ex, "claude_events_batch", side_effect=fake_claude), \
-                patch.dict(os.environ, {"ANTHROPIC_API_KEY": key}), \
+                patch.dict(os.environ, {"ANTHROPIC_API_KEY": key, "PIYO_AI": "api"}), \
                 patch.object(ex, "datetime", wraps=ex.datetime) as dt:
             dt.now.return_value = ex.datetime(2026, 10, 28, 12, tzinfo=ex.JST)
             ex.main()
