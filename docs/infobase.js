@@ -10,7 +10,11 @@
  // 天気（東海の 5 つの町・週間・いまの気温）・警報・地震・ドル円・祝日を、AI を使わずに答える。合わなければ前の答え方へ。
  let briefClient=null,briefKey='';
  function brief(){const c=config(),k=JSON.stringify([c.url,c.key,c.enabled]);if(!root.InfobaseBrief)return null;if(!briefClient||k!==briefKey){briefKey=k;briefClient=root.InfobaseBrief.create({...c,maxAgeMs:300000});}return briefClient;}
- const BRIEF_TOPICS=['weather','now','warning','quake','fx','holiday','stock'];
+ const BRIEF_TOPICS=['weather','now','warning','quake','fx','holiday','stock','train','road','outage','gold','bond','econ'];
+ // 2026-11-22 に足した話題（電車・道路・停電・金・金利・経済指標）は、言葉がはっきり合うときだけ札で答える。
+ // 「JR 高島屋で買える？」「料金は？」のような、ぴよりんの質問を取り違えないため。中身が届かない鍵では、前と同じくほかの答え方へ回る。
+ const STRICT={train:/遅れ|遅延|運休|運転見合わせ|見合わせ|運行|止まって|動いて/,road:/渋滞|通行止め|規制|高速/,outage:/停電/,gold:/金(?:価格|相場|地金)|金の(?:値段|価格|相場|買取)|プラチナ|銀(?:相場|の値段|の価格)/,bond:/国債|金利|利回り/,econ:/経済指標|雇用統計|消費者物価|CPI|GDP/};
+ const topicOk=(topic,q)=>!STRICT[topic]||STRICT[topic].test(q);
  const hm=v=>{const t=new Date(+new Date(v)+9*3600000).toISOString();return t.slice(0,10)+' '+t.slice(11,16);};
  async function briefAnswer(q){
   const b=brief();if(!b||!b.enabled||q.length>40||/ニュース|予想|予測|見通し|なぜ|理由|仕組み|とは|って何|ぴよりん/.test(q))return null;
@@ -20,8 +24,9 @@
   if(one&&one.topic==='stock'&&one.id==='index:all')return null; // どの株か分からないまとめでは答えない
   if(!one||!BRIEF_TOPICS.includes(one.topic)||!one.say||one.status==='まだ無い')return null;
   if(one.topic==='fx'&&!fxAsk(q))return null;
+  if(!topicOk(one.topic,q))return null;
   const src=(one.sources||[]).find(x=>x.id)||(one.sources||[])[0]||{};
-  const card={id:src.id,category:{weather:'002',now:'002',warning:'005',quake:'005',fx:'006',stock:'006',holiday:'011'}[one.topic],type:'メイン',status:'確定',verdict:'確認済み',title:one.title||one.id,summary:one.say,structured:one.facts||null,url:src.url||'',origin:src.origin||'',attribution:src.attribution||'',published_at:one.as_of,expires_at:one.fresh_until||new Date(Date.now()+3600000).toISOString()};
+  const card={id:src.id,category:{weather:'002',now:'002',warning:'005',quake:'005',fx:'006',stock:'006',gold:'006',bond:'006',econ:'006',train:'022',road:'022',outage:'026',holiday:'011'}[one.topic],type:'メイン',status:'確定',verdict:'確認済み',title:one.title||one.id,summary:one.say,structured:one.facts||null,url:src.url||'',origin:src.origin||'',attribution:src.attribution||'',published_at:one.as_of,expires_at:one.fresh_until||new Date(Date.now()+3600000).toISOString()};
   // 数字・日付の照らし合わせは本文だけ（出典の行の「CC BY 4.0」や取得の時刻は、答えの数字ではない）
   const body=root.InfobaseBrief.voice(one.say,'piyo'),checked=root.InfobaseGuard.guard(body,[card]);if(!checked.ok)return null;
   const text=checked.text+`\n出典：${src.attribution||src.origin||'infobase'}（${one.as_of?hm(one.as_of)+'、日本時間':'infobase'}）`;
@@ -51,6 +56,6 @@
  function hasWeatherProof(q){return client().enabled&&/天気|気温|降水|雨|傘/.test(q||'')&&weatherCards.length>0;}
  function guard(text,q){return hasWeatherProof(q)?root.InfobaseGuard.guard(text,weatherCards):{ok:true,text};}
  function settings(){const form=document.getElementById('piyo-key-modal'),place=document.getElementById('set-infobase');if(!form&&!place)return;const section=document.createElement('section');section.style.marginTop='14px';const title=document.createElement('strong');title.textContent='infobase の一般情報';const hint=document.createElement('p');hint.textContent='接続の設定を貼ると、天気・為替・ニュースにも使えます。取れないときは今までの方法で答えます。';hint.style.fontSize='12px';const input=document.createElement('textarea');input.rows=2;input.setAttribute('aria-label','infobase のつなぎ方');input.placeholder=config().key?'保存済み（入れ直すときだけ貼り付け）':'接続の設定（JSON）を貼り付け';input.autocomplete='off';input.spellcheck=false;Object.assign(input.style,{width:'100%',fontSize:'16px',boxSizing:'border-box'});const label=document.createElement('label'),toggle=document.createElement('input');toggle.type='checkbox';Object.assign(toggle.style,{width:'auto',margin:'0',padding:'0'});toggle.checked=config().enabled!==false;label.append(toggle,document.createTextNode(' infobase を使う'));const button=document.createElement('button');button.type='button';button.textContent='接続を保存';const message=document.createElement('p');message.setAttribute('role','status');button.onclick=()=>{try{const c=input.value.trim()?JSON.parse(input.value):config();if(!c.url||!c.key||!/^https:\/\//.test(c.url))throw new Error();localStorage.setItem(KEY,JSON.stringify({...c,enabled:toggle.checked}));input.value='';input.placeholder='保存済み';message.textContent='保存しました。';}catch{message.textContent='つなぎ方の設定をそのまま貼り付けてください。';}};toggle.onchange=()=>{const c=config();localStorage.setItem(KEY,JSON.stringify({...c,enabled:toggle.checked}));};if(place){section.append(hint,label,input,button,message);place.append(section);return;}section.append(title,hint,label,input,button,message);(form.querySelector('.piyo-prep')||form).append(section);}
- root.PiyoInfobase={answer,weather,report,corrections,guard,hasWeatherProof,get cards(){return usedCards;}};
+ root.PiyoInfobase={topicOk,BRIEF_TOPICS,answer,weather,report,corrections,guard,hasWeatherProof,get cards(){return usedCards;}};
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',settings,{once:true});else settings();
 })(globalThis);

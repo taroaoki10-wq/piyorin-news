@@ -23,6 +23,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import claude_call  # noqa: E402
 from claude_events import API_URL, MODEL, note_stop  # noqa: E402  モデルや接続先は予定の抽出と同じ設定を使う
 from news_store import linked_sources, nfkc, primary_sources  # noqa: E402
 
@@ -247,13 +248,7 @@ def call_tool(system: str, tool: dict, content: str, max_tokens: int, api_key: s
         "tool_choice": {"type": "tool", "name": tool["name"]},
         "messages": [{"role": "user", "content": content}],
     }
-    req = urllib.request.Request(
-        API_URL,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"x-api-key": api_key, "anthropic-version": "2023-06-01", "content-type": "application/json"},
-    )
-    with urllib.request.urlopen(req, timeout=90) as r:
-        res = json.load(r)
+    res = claude_call.send(payload, api_key, 90)
     note_stop(res, "ぴよのメモとまとめ")
     for block in res.get("content", []):
         if block.get("type") == "tool_use" and block.get("name") == tool["name"]:
@@ -388,6 +383,51 @@ def greeting_input(memos: dict, events: list[dict]) -> str:
     return "\n".join(parts)
 
 
+LONG_DAYS = 14  # これを越える予定は「期間の長い予定」（画面の docs/piyo-cal.js と同じ考え方）
+
+
+def _md(day: str) -> str:
+    return f"{int(day[5:7])}月{int(day[8:10])}日"
+
+
+def rule_greeting(events: list[dict]) -> dict | None:
+    """Claude を使わずに、予定（events.json）から「最近のぴよりんニュース」を作る。
+    書くのは開催中・これから 60 日以内の予定だけなので、終わった販売は入らない。短い予定を先に、最大 5 件。"""
+    today = today_jst()
+    t, limit = today.isoformat(), (today + timedelta(days=60)).isoformat()
+
+    def span(e):
+        return (date.fromisoformat(e.get("end") or e["start"]) - date.fromisoformat(e["start"])).days + 1
+
+    live = [e for e in events if e.get("start") and e.get("title") and (e.get("end") or e["start"]) >= t and e["start"] <= limit
+            and not (e.get("kind") == "release" and e["start"] < t)]
+    live.sort(key=lambda e: (span(e) > LONG_DAYS and e["start"] <= t, e["start"]))
+    picked = live[:5]
+    basis = hashlib.sha1(("rule\n" + str(GREETING_VERSION) + "\n" + json.dumps(
+        [[e["title"], e["start"], e.get("end"), e.get("place")] for e in picked], ensure_ascii=False)).encode("utf-8")).hexdigest()[:16]
+    old = load_json(GREETING_FILE, {})
+    if isinstance(old, dict) and old.get("basis") == basis:
+        return None
+    if not picked:
+        return {"v": GREETING_VERSION, "by": "rule", "at": datetime.now(JST).strftime("%Y-%m-%dT%H:%M+09:00"), "basis": basis,
+                "lines": ["最近のぴよりんニュースだぴよ！", "・いま決まっている予定はないぴよ"], "suggest": []}
+    lines = ["最近のぴよりんニュースだぴよ！"]
+    for e in picked:
+        end = e.get("end") or e["start"]
+        if e.get("kind") == "release":
+            when = f"{_md(e['start'])}から"
+        elif end == e["start"]:
+            when = _md(e["start"])
+        else:
+            when = f"{_md(e['start'])}から{_md(end) if end[5:7] != e['start'][5:7] else str(int(end[8:10])) + '日'}まで"
+        place = e.get("place") or ""
+        where = f"、{place}" if place and place not in e["title"] else ""
+        lines.append(f"・{e['title']}は**{when}**{where}だぴよ")
+    suggest = [(re.sub(r"[（(].*$", "", e["title"]).strip()[:14] + "について") for e in picked]
+    return {"v": GREETING_VERSION, "by": "rule", "at": datetime.now(JST).strftime("%Y-%m-%dT%H:%M+09:00"),
+            "basis": basis, "lines": lines, "suggest": list(dict.fromkeys(suggest))[:6]}
+
+
 def build_greeting(memos: dict, events: list[dict], api_key: str) -> tuple[dict | None, dict]:
     text = greeting_input(memos, events)
     basis = hashlib.sha1(f"{GREETING_VERSION}\n{MODEL}\n{text}".encode("utf-8")).hexdigest()[:16]
@@ -433,9 +473,19 @@ def write_if_changed(path: Path, obj) -> None:
 
 
 def main() -> int:
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
-    if not api_key:
+    api_key = claude_call.api_key()
+    if not api_key and claude_call.mode() != "none":
         print("ぴよのメモとまとめ: ANTHROPIC_API_KEY が無いため作りません")
+        return 0
+    if not api_key:  # Claude を使わない設定：まとめだけ、予定から決まった文で作る（メモは Claude で読める回に作る）
+        greeting = rule_greeting(load_json(EVENTS_FILE, []))
+        if greeting:
+            write_if_changed(GREETING_FILE, greeting)
+            print("ぴよのまとめ: Claude を使わずに予定から作りました")
+            for ln in greeting["lines"]:
+                print("  " + ln)
+        else:
+            print("ぴよのまとめ: 変わりなし（Claude を使わない設定）")
         return 0
     news = load_json(NEWS_FILE, [])
     events = load_json(EVENTS_FILE, [])

@@ -241,3 +241,25 @@ PC の表示は変えていません（どれも 620px 以下の幅だけ）。
 - 「ちがうよ」は使った管理番号と種類だけを infobase に送り、質問・返事・自由文は送らない。公開は最後の承認待ち。
 
 - 2026-11-02（未公開）：infobaseと同じ共通の `infobase-guard.js` を表示前に適用。翌日のことを今日・去年のことを今年と言う返答、根拠のない数値・名前を止める。カードがあるAIの返答は確認が済んでから全文を出す。AIを新たに呼び出す処理は追加していない。
+
+## データ作りの Claude の呼び方（2026-11-22）
+
+データ作り（予定の読み取り・関係ない記事の判定・ぴよのメモとまとめ）で Claude をどう呼ぶかを、3 つから選べる。部品は `scripts/claude_call.py`。
+
+| 呼び方 | 中身 | 料金 |
+|---|---|---|
+| `api`（既定） | Claude API（`ANTHROPIC_API_KEY`）。GitHub Actions の今までの動き | 使った分 |
+| `cli` | 定額の Claude Code を `claude -p` で呼ぶ。Mac で `python3 scripts/update_local.py` | 定額の中 |
+| `none` | Claude を使わない。予定は決まったパターンで読み、まとめは予定から決まった文で作る | かからない |
+
+- 決まり方：環境変数 `PIYO_AI` → `scripts/ai_mode.txt` → `api`。Actions を Claude なしにするなら `scripts/ai_mode.txt` を `none` にする。
+- `none` のとき：関係ない記事の判定はしない（記事はそのまま出る）。ぴよのメモは作り直さない（前のまま）。パターンで読んだ記事には印（` rule`）を付け、Claude で読める回に読み直す。
+- パターンの読み取りは 1 記事から 1 予定まで。10 月からの公式・プレス 18 記事で測ると、日付が Claude と同じ 13・ちがう 1・余分 4（Claude は同じ記事から 22 件）。
+- Mac で動かす：`python3 scripts/update_local.py`（定額）／`--none`（Claude なし）／`--no-push`（push しない）。定額はターミナルで `claude auth login` が済んでいること。
+- 試験：`tests/test_ai_modes.py`。
+
+## infobase の札で答える話題（2026-11-22）
+
+ぴよの会話で、infobase の札から Claude を使わずに答える話題に、電車（train）・道路（road）・停電（outage）・金（gold）・金利（bond）・経済指標（econ）を足した（`docs/infobase.js` の `BRIEF_TOPICS`）。
+「JR 高島屋で買える？」「料金は？」のようなぴよりんの質問を取り違えないよう、足した話題は言葉がはっきり合うときだけ答える（`STRICT`）。
+中身は infobase が鍵ごとに決める（`brief-contract.js` の `KEY_TOPICS`）。許されていない話題は中身が届かず、前と同じ答え方へ回る。

@@ -50,3 +50,25 @@ test('「株価は」は日経平均の札で答える。名前のある株・�
   assert.equal(await globalThis.PiyoInfobase.answer('株価は'),null);
  }finally{globalThis.fetch=f;delete globalThis.PiyoExtras;}
 });
+
+// 2026-11-22：電車・道路・停電・金・金利・経済指標も札で答える（言葉がはっきり合うときだけ）
+test('電車の遅れ・金の値段は札で答え、ぴよりんの質問（JR 高島屋・料金）は取り違えない。中身の届かない札は前の答え方へ',async()=>{
+ setup();
+ const b={built_day:today,etag:'e9',aliases:{},
+  index:{topics:[{words:['JR','ＪＲ'],default:'train:JR東海'},{words:['金は','金の値段','金相場'],default:'gold:金'},{words:['停電'],default:'outage:愛知県'}]},
+  briefs:[
+   {id:'train:JR東海',topic:'train',title:'JR東海の運行',status:'あり',say:'JR東海の在来線は、平常どおり運転しています。',as_of:asOf,fresh_until:later,sources:[{id:'s1',origin:'JR東海',attribution:'JR東海'}]},
+   {id:'gold:金',topic:'gold',title:'金の店頭価格',status:'あり',say:'金の店頭の小売価格は、1グラム23,456円です。',facts:{price:23456},as_of:asOf,fresh_until:later,sources:[{id:'s2',origin:'田中貴金属',attribution:'田中貴金属'}]},
+   {id:'outage:愛知県',topic:'outage',title:'愛知県の停電',status:'あり',say:null,sources:[]}, // 公開先用の鍵には中身が届かない
+  ]};
+ const f=globalThis.fetch;globalThis.fetch=async url=>new Response(JSON.stringify(String(url).includes('/v1/brief')?b:{cards:[]}));
+ try{
+  const P=globalThis.PiyoInfobase;
+  const t=await P.answer('JRは遅れてる？');assert.match(t.body,/平常どおり運転しているぴよ|平常どおり運転しています/);assert.equal(t.brief,'train:JR東海');
+  const g=await P.answer('金相場は？');assert.match(g.body,/23,456円/);
+  assert.equal(await P.answer('JR高島屋で買える？'),null);
+  assert.equal(await P.answer('料金は？'),null);
+  assert.equal(await P.answer('愛知で停電してる？'),null);
+  assert.equal(P.topicOk('train','名鉄は動いてる？'),true);assert.equal(P.topicOk('bond','長期金利は'),true);assert.equal(P.topicOk('weather','なんでも'),true);
+ }finally{globalThis.fetch=f;}
+});

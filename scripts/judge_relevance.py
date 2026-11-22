@@ -22,6 +22,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import claude_call  # noqa: E402
 from claude_events import API_URL, MODEL, note_stop  # noqa: E402  モデルや接続先は予定の抽出と同じ設定を使う
 
 JST = timezone(timedelta(hours=9))
@@ -111,13 +112,7 @@ def judge_batch(items: list[dict], api_key: str) -> tuple[dict[int, tuple[bool, 
         "tool_choice": {"type": "tool", "name": "save_judgments"},
         "messages": [{"role": "user", "content": "\n\n".join(parts)}],
     }
-    req = urllib.request.Request(
-        API_URL,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"x-api-key": api_key, "anthropic-version": "2023-06-01", "content-type": "application/json"},
-    )
-    with urllib.request.urlopen(req, timeout=60) as r:
-        res = json.load(r)
+    res = claude_call.send(payload, api_key, 60)
     note_stop(res, "関連判定")
     out: dict[int, tuple[bool, str]] = {}
     for block in res.get("content", []):
@@ -131,9 +126,9 @@ def judge_batch(items: list[dict], api_key: str) -> tuple[dict[int, tuple[bool, 
 
 
 def main() -> int:
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+    api_key = claude_call.api_key()
     if not api_key:
-        print("関連判定: ANTHROPIC_API_KEY が無いため行いません")
+        print("関連判定: Claude を使わない設定か、ANTHROPIC_API_KEY が無いため行いません（記事はそのまま表示）")
         return 0
     if not NEWS_FILE.exists():
         return 0

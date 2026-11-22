@@ -19,7 +19,9 @@ import sys
 import urllib.request
 from datetime import date, timedelta
 
-API_URL = "https://api.anthropic.com/v1/messages"
+import claude_call
+
+API_URL = claude_call.API_URL
 MODEL = os.environ.get("CLAUDE_MODEL") or "claude-haiku-5-5"
 KINDS = ["sale", "event", "campaign", "release"]
 MAX_SNIPPET = 2500  # 1記事あたりに渡す最大文字数
@@ -142,13 +144,7 @@ def claude_events_batch(items: list[tuple[dict, str]], api_key: str,
         "tool_choice": {"type": "tool", "name": "save_events"},
         "messages": [{"role": "user", "content": known_block(list(known)) + "\n\n".join(parts)}],
     }
-    req = urllib.request.Request(
-        API_URL,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"x-api-key": api_key, "anthropic-version": "2023-06-01", "content-type": "application/json"},
-    )
-    with urllib.request.urlopen(req, timeout=120) as r:
-        res = json.load(r)
+    res = claude_call.send(payload, api_key, 120)  # API か、定額の Claude Code（claude_call.py）
     note_stop(res, "予定の読み取り")
     raw = []
     for block in res.get("content", []):

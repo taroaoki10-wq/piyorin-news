@@ -25,6 +25,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
+import claude_call
 from claude_events import claude_events_batch, snippet
 from news_store import linked_sources, nfkc, page_html, primary_sources, request_url
 
@@ -279,6 +280,17 @@ def read_pages(urls) -> dict[str, list[str] | None]:
         return dict(ex.map(load, sorted(urls)))
 
 
+RULE_MARK = " rule"  # Claude を使わずにパターンで読んだ印（state.json の値の終わりに付く）
+
+
+def finished(done: str | None, want: str, with_claude: bool) -> bool:
+    """この記事はもう読み終えたか。Claude で読める回は、パターンで読んだだけの記事（印つき）を読み直す。
+    Claude を使わない回は、パターンで読んだ記事も、前に Claude で読んだ記事も読み直さない。"""
+    if done == want:
+        return True
+    return not with_claude and done == want + RULE_MARK
+
+
 def basis(item: dict) -> str:
     """読んだ元の組み合わせ。これが変わったら読み直す。"""
     return f"v{EXTRACT_VERSION} " + " ".join(primary_sources(item))
@@ -295,16 +307,16 @@ def main() -> int:
 
     # 手で登録した予定（Claude に渡し、同じ予定を出さないようにする）
     known = [e for e in events if not e.get("auto") and (e.get("end") or e.get("start", "")) >= cutoff]
+    api_key = claude_call.api_key()  # 空なら Claude を使わず、見出しのパターンで読む（claude_call.py）
     todo = [n for n in news if n.get("cat") in ("official", "press") and n.get("date", "") >= cutoff
             and not SKIP_TITLE.search(n.get("title", ""))
             and not (isinstance(n.get("jg"), dict) and n["jg"].get("ok") is False)
             and primary_sources(n) and not manual.intersection(primary_sources(n))
-            and done.get(n["id"]) != basis(n)][:MAX_ARTICLES_PER_RUN]
+            and not finished(done.get(n["id"]), basis(n), bool(api_key))][:MAX_ARTICLES_PER_RUN]
     if not todo:
         print(f"新しく読む記事なし（{time.time() - t0:.1f}秒）")
         return 0
 
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
     pages = read_pages({u for n in todo for u in primary_sources(n)})
     linked = {u for lines in pages.values() if lines for u in linked_sources("\n".join(lines))} - set(pages)
     pages.update(read_pages(linked))
@@ -312,6 +324,7 @@ def main() -> int:
     results: dict[str, list[dict]] = {}
     sources: dict[str, list[str]] = {}
     ask: list[tuple[dict, str]] = []
+    nodate: set[str] = set()
     for art in todo:
         own = primary_sources(art)
         srcs = list(dict.fromkeys(own + [u for s in own for u in linked_sources("\n".join(pages.get(s) or []))]))
@@ -324,6 +337,7 @@ def main() -> int:
         n = count_ranges(text, base)
         if n == 0:
             results[art["id"]] = []  # 日付がない記事はAPIに送らない
+            nodate.add(art["id"])
             continue
         if api_key:  # 予定の名前を短く分かりやすくするため、日付がある記事は Claude に読ませる
             ask.append((art, text))
@@ -331,6 +345,7 @@ def main() -> int:
             one = extract(art, lines)
             results[art["id"]] = [one] if one else []
 
+    asked = {art["id"] for art, _ in ask}
     tokens = {"input_tokens": 0, "output_tokens": 0}
     for i in range(0, len(ask), 8):  # 8記事ずつまとめて1回で読ませる
         chunk = ask[i:i + 8]
@@ -367,7 +382,8 @@ def main() -> int:
         for e in old:
             if not any(f["start"] == e["start"] and f["end"] == e.get("end") and f["title"] == e["title"] for f in found):
                 print(f"前の予定を外す: {e['start']}〜{e.get('end')} {e['title']}")
-        done[art["id"]] = basis(art)
+        # パターンで読んだ記事には印を付け、あとで Claude（API か定額）で読める回に読み直す
+        done[art["id"]] = basis(art) + ("" if art["id"] in asked or art["id"] in nodate else RULE_MARK)
 
     events.sort(key=lambda e: (e.get("start", ""), e.get("end", "")))
     events = drop_duplicates(events)
