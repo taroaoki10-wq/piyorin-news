@@ -6,7 +6,12 @@
   "title": "『ぴよりん』が京都に初の“お出かけ”",
   "source": "産経ニュース",
   "url": "https://www.sankei.com/article/20261121-SI7LWK5SNRP2JOKBC2D7ZSKTHY/photo/63SXX7SZPNI23K5A46T5F5ET3A/",
-  "related": [],
+  "related": [
+   {
+    "source": "産経ニュース",
+    "url": "https://www.sankei.com/article/20261121-SI7LWK5SNRP2JOKBC2D7ZSKTHY/?outputType=theme_oriconnews"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -564,7 +569,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "地下街リニューアルでぴよりんカフェが取り上げられている",
+   "why": "記事見出しにぴよりんカフェとあり、ぴよりん出店の話題",
    "t": "2026-11-22"
   }
  },
