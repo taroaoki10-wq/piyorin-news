@@ -256,7 +256,9 @@ PC の表示は変えていません（どれも 620px 以下の幅だけ）。
 - `none` のとき：関係ない記事の判定はしない（記事はそのまま出る）。ぴよのメモは作り直さない（前のまま）。パターンで読んだ記事には印（` rule`）を付け、Claude で読める回に読み直す。
 - パターンの読み取りは 1 記事から 1 予定まで。10 月からの公式・プレス 18 記事で測ると、日付が Claude と同じ 13・ちがう 1・余分 4（Claude は同じ記事から 22 件）。
 - Mac で動かす：`python3 scripts/update_local.py`（定額）／`--none`（Claude なし）／`--no-push`（push しない）。定額はターミナルで `claude auth login` が済んでいること。
-- 試験：`tests/test_ai_modes.py`。
+- Mac の定額の更新を主に、Actions を Claude なしの控えにするとき：Claude が作ったまとめが 36 時間以内なら、控えは決まった文で上書きしない（`claude_greeting_is_fresh`）。Mac が 36 時間止まると、控えが決まった文で作る。
+- `update_local.py` は、始めに「まだ push していない自分のデータのコミット」を捨ててから取り込む（手元だけで試したあとや、ほかの更新とぶつかったあとに止まらないように。ほかのコミットが混じっていれば何もしない）。
+- 試験：`tests/test_ai_modes.py`・`tests/test_update_local.py`。
 
 ## infobase の札で答える話題（2026-11-22）
 

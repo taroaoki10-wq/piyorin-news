@@ -97,6 +97,17 @@ class RuleTests(unittest.TestCase):
         self.assertEqual((got['start'], got['end'], got['title'], got['place'], got['kind']),
                          ('2026-11-26', '2026-11-27', '静岡みかんぴよりんおでかけセット', 'アスティ静岡 西館', 'sale'))
 
+    def test_claude_greeting_is_kept_for_36_hours_in_none_mode(self):
+        from datetime import datetime, timedelta, timezone
+        jst = timezone(timedelta(hours=9))
+        now = datetime(2026, 11, 22, 18, 0, tzinfo=jst)
+        g = {"v": 6, "at": "2026-11-22T16:33+09:00", "lines": ["最近のぴよりんニュースだぴよ！"]}
+        self.assertTrue(piyo.claude_greeting_is_fresh(g, now))
+        self.assertFalse(piyo.claude_greeting_is_fresh(g, now + timedelta(hours=40)))   # Mac が止まったら控えが作る
+        self.assertFalse(piyo.claude_greeting_is_fresh({**g, "by": "rule"}, now))        # 決まった文のまとめは作り直してよい
+        self.assertFalse(piyo.claude_greeting_is_fresh({}, now))
+        self.assertFalse(piyo.claude_greeting_is_fresh({**g, "at": "こわれた"}, now))
+
     def test_rule_greeting_lists_only_live_and_coming_events(self):
         events = [
             {'title': 'ぴよりんゴジラ販売', 'start': '2026-11-03', 'end': '2026-11-13', 'kind': 'sale'},

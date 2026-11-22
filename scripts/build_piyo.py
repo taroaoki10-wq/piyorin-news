@@ -390,6 +390,22 @@ def _md(day: str) -> str:
     return f"{int(day[5:7])}月{int(day[8:10])}日"
 
 
+KEEP_CLAUDE_HOURS = 36
+
+
+def claude_greeting_is_fresh(greeting: dict, now: datetime | None = None) -> bool:
+    """Claude が作ったまとめが 36 時間以内なら True。Mac の定額の更新が主で、Actions が Claude なしの控えのとき、
+    控えが決まった文で上書きして行ったり来たりしないようにする。Mac が 36 時間止まったら、控えが決まった文で作る。"""
+    if not isinstance(greeting, dict) or greeting.get("by") == "rule" or not greeting.get("lines"):
+        return False
+    try:
+        at = datetime.fromisoformat(str(greeting.get("at")))
+    except ValueError:
+        return False
+    now = now or datetime.now(at.tzinfo)
+    return timedelta(0) <= now - at <= timedelta(hours=KEEP_CLAUDE_HOURS)
+
+
 def rule_greeting(events: list[dict]) -> dict | None:
     """Claude を使わずに、予定（events.json）から「最近のぴよりんニュース」を作る。
     書くのは開催中・これから 60 日以内の予定だけなので、終わった販売は入らない。短い予定を先に、最大 5 件。"""
@@ -478,6 +494,9 @@ def main() -> int:
         print("ぴよのメモとまとめ: ANTHROPIC_API_KEY が無いため作りません")
         return 0
     if not api_key:  # Claude を使わない設定：まとめだけ、予定から決まった文で作る（メモは Claude で読める回に作る）
+        if claude_greeting_is_fresh(load_json(GREETING_FILE, {})):
+            print("ぴよのまとめ: Claude が作った新しいまとめがあるので、そのまま使います（Claude を使わない設定）")
+            return 0
         greeting = rule_greeting(load_json(EVENTS_FILE, []))
         if greeting:
             write_if_changed(GREETING_FILE, greeting)
