@@ -55,13 +55,7 @@
   "source": "産経ニュース",
   "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/photo/VMOKJD6TEFNYPEMPN5DMOMQHJE/",
   "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりん3店舗のクリスマス限定商品の記事で、ぴよりん自体の話題",
-   "t": "2026-11-22"
-  }
+  "dv": 3
  },
  {
   "id": "n20261121-1e5aec85",
@@ -431,11 +425,16 @@
    {
     "source": "西スポWEB OTTO!",
     "url": "https://nishispo.nishinippon.co.jp/article/1059202"
+   },
+   {
+    "source": "毎日新聞デジタル",
+    "url": "https://mainichi.jp/articles/20261121/orc/00m/200/012000c"
    }
   ],
   "merged_ids": [
    "n20261120-60aa54f4",
    "n20261120-c4608280",
+   "n20261121-010ec2cb",
    "n20261121-2bc1e77f",
    "n20261121-a58bd239"
   ],
@@ -772,13 +771,7 @@
   "source": "日本経済新聞",
   "url": "https://www.nikkei.com/article/DGXZQOFD063HD0W6A101C2000000/",
   "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "名古屋駅地下街のリニューアルで、ぴよりんカフェが取り上げられている",
-   "t": "2026-11-22"
-  }
+  "dv": 3
  },
  {
   "id": "n20261115-0f52a1dd",
