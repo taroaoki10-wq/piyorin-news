@@ -175,8 +175,80 @@ window.PiyoExtras = (function () {
     if (!parts.length) return null;
     return { text: parts.join('') + '時刻は計算したおおよその値だぴよ。', kind: 'koyomi' };
   }
+  // ---- 予定の答えの並べ方（カレンダーと同じ：短い予定を先、期間の長い企画をあとに。2026-11-22） ----
+  // 期間の長さの判定は PiyoCal（piyo-cal.js）。無い画面（試験など）では今までの並べ方。
+  function calPart() {
+    const C = typeof window !== 'undefined' && window.PiyoCal;
+    if (!C || typeof C.isLong !== 'function') return null;
+    let o; try { o = C.load(localStorage); } catch (_) { o = C.fix(null); }
+    return { C, o };
+  }
+  // 開催中の予定：短い予定（終わりの近い順）→ 長い予定（終わりの近い順）
+  function liveOrder(list) {
+    const cp = calPart(), long = e => (cp ? cp.C.isLong(e, cp.o) : false);
+    return list.slice().sort((a, b) => (long(a) - long(b)) || endOf(a).localeCompare(endOf(b)) || a.start.localeCompare(b.start));
+  }
+  // これから・今月：始まりの近い順。開催中の長い企画は後ろ（PiyoCal.upcoming と同じ）
+  function startOrder(list, today) {
+    const cp = calPart();
+    if (cp && typeof cp.C.upcoming === 'function') return cp.C.upcoming(list, today, list.length + 1, cp.o).map(x => x.e);
+    return list.slice().sort((a, b) => a.start.localeCompare(b.start));
+  }
+  const more = n => (n > 0 ? [`ほか${n}件あるぴよ。`] : []);
+  // 「定番は毎日ある」は、基本情報に根拠（無休の店の行に「ぴよりんの販売」か「定番」があり、定番ぴよりんの行もある）があるときだけ言う
+  const dailyBasic = ctx => { const ls = (ctx.basics && ctx.basics.lines) || []; return ls.some(l => /^店\d/.test(l) && /無休/.test(l) && /ぴよりんの販売|定番/.test(l)) && ls.some(l => /定番ぴよりん/.test(l)); };
+  const mdOf = s => { const [, m, d] = s.split('-').map(Number); return [m, d]; };
+  function shortSpan(e) {
+    const [m1, d1] = mdOf(e.start), end = endOf(e);
+    if (end === e.start) return `${m1}月${d1}日`;
+    const [m2, d2] = mdOf(end);
+    return m1 === m2 ? `${m1}月${d1}日〜${d2}日` : `${m1}月${d1}日〜${m2}月${d2}日`;
+  }
+  const leftWord = (e, today) => { const n = diff(today, endOf(e)); return n <= 0 ? 'きょうまで' : n === 1 ? 'あしたまで' : `あと${n}日`; };
+  // 「（アスティ静岡）」「（1月23日）」のような、場所や日付のかっこは、あとで別に書くので題から外す
+  const plainTitle = e => { const m = e.title.match(/^(.*?)（([^）]*)）$/); return m && m[1] && ((e.place || '').includes(m[2]) || /^\d+月\d+日$/.test(m[2])) ? m[1] : e.title; };
+  // 質問から、決まり文句を外して、予定の名前が残らないとき（＝特定の予定ではなく、ひろく聞いている）
+  const generic = (t, words) => t.replace(words, '') === '';
+  function buyToday(t, ctx) {
+    if (!/買え/.test(t) || !/今日|きょう|いま|今(?![月年週後度])|何が|なにが/.test(t)) return null;
+    // 今月・今週・明日などの質問は、ここでは答えない（今までどおり）
+    if (/どこ|場所|いくら|値段|価格|買い方|方法|どうやって|予約|何時|時間|店|なぜ|理由|今月|来月|今週|来週|明日|あした|あす|昨日|今年|来年|今後|今度/.test(t)) return null;
+    if (!generic(t, /今日|きょう|いま|今|何が|なにが|買える|買えます|買えるの|限定|ぴよりん|販売|もの|やつ|ある|あるの|です|か|は|が|の|を|も|って|[?？]/g)) return null;
+    const list = (ctx.events || []).filter(e => e && e.start && e.title && e.kind === 'sale'), today = ctx.today;
+    const cp = calPart();
+    // 「限定」は期間の短い販売。長く続く販売（ぬいぐるみの店頭販売など）は入れない
+    const live = liveOrder(list.filter(e => e.start <= today && endOf(e) >= today && !(cp && cp.C.isLong(e, cp.o))));
+    if (!live.length) {
+      const next = list.filter(e => e.start > today).sort((a, b) => a.start.localeCompare(b.start))[0];
+      return { text: `今日は限定は入ってないぴよ。${next ? `次は**${next.title}**（${shortSpan(next)}・${diff(today, next.start) === 1 ? 'あした' : `あと${diff(today, next.start)}日`}）だぴよ。` : ''}`, refs: next ? [evRef(next)] : [], kind: 'event' };
+    }
+    const shown = live.slice(0, 3);
+    return { text: `今日買える限定は、${shown.map(e => `**${e.title}**（${shortSpan(e)}・${leftWord(e, today)}）`).join('、')}だぴよ。${live.length > 3 ? `ほか${live.length - 3}件あるぴよ。` : ''}${dailyBasic(ctx) ? '定番のぴよりんは毎日あるぴよ。' : ''}`, refs: shown.map(evRef), kind: 'event' };
+  }
+  // 「おでかけ」＝題に「おでかけ」が入る販売、または、場所がぴよりんの店・名古屋駅・各店舗・MARKET 以外の販売（百貨店・催事など）
+  const OWN_PLACE = /ぴよりん\s*(shop|village|market)|名古屋駅|各店舗|market/i;
+  const isOuting = e => e.kind === 'sale' && (/おでかけ|お出かけ|お出掛け/.test(e.title) || (!!(e.place || '').trim() && !OWN_PLACE.test(e.place) && !/乗車券|展示|ぬいぐるみ|グッズ|アフタヌーンティー/.test(e.title)));
+  const outingEvents = ctx => (ctx.events || []).filter(e => e && e.start && e.title && endOf(e) >= ctx.today && isOuting(e)).sort((a, b) => a.start.localeCompare(b.start) || endOf(a).localeCompare(endOf(b)));
+  // 質問のチップ：答えになる予定があるときだけ出す（index.html）
+  function eventChips(ctx) {
+    const evs = (ctx && ctx.events) || [], today = ctx && ctx.today, out = [];
+    if (evs.some(e => e && e.kind === 'sale' && e.start && endOf(e) >= today)) out.push('今日買えるぴよりんは？');
+    if (outingEvents({ events: evs, today }).length) out.push('次のおでかけは？');
+    return out;
+  }
+  function outing(t, ctx) {
+    if (!/おでかけ|お出かけ|お出掛け|次はどこ(に|へ|で)?(来|くる|行|いく)|どこ(に|へ)(来る|くる|行く|いく)/.test(t)) return null;
+    if (/いくら|値段|価格|買い方|方法|どうやって|予約|理由|なぜ|どこで買|何時/.test(t)) return null;
+    if (!generic(t, /次の?|おでかけ|お出かけ|お出掛け|セット|いつ|いつから|どこ|に|へ|で|来る|くる|行く|いく|予定|ある|あるの|は|の|が|って|です|か|ぴよりん|販売|イベント|[?？]/g)) return null;
+    const today = ctx.today, up = outingEvents(ctx);
+    if (!up.length) return { text: 'おでかけの予定は、いまは予定に入ってないぴよ。', refs: [], kind: 'event' };
+    const shown = up.slice(0, 3);
+    return { text: ['次のおでかけは、これだぴよ！', ...shown.map(e => `・**${plainTitle(e)}**：${shortSpan(e)}${e.place ? `、${e.place}` : ''}（${e.start <= today ? 'いま開催中' : diff(today, e.start) === 1 ? 'あした' : `あと${diff(today, e.start)}日`}）`), ...more(up.length - 3)].join('\n'), refs: shown.map(evRef), kind: 'event' };
+  }
   function events(t, ctx) {
     const list = (ctx.events || []).filter(e => e && e.start && e.title), today = ctx.today;
+    const asked = buyToday(t, ctx) || outing(t, ctx);
+    if (asked) return asked;
     const hits = matchEvents(t, list);
     const when = /いつ|何日|何時から|まで|から|期間|日程|開催日|発売日|販売日|始ま|終わ|締め?切|最終日|開始|スタート/.test(t);
     if (hits.length) {
@@ -193,24 +265,24 @@ window.PiyoExtras = (function () {
     const lines = es => es.map(e => `・${span(e)} ${e.title}`);
     if (/今日の(イベント|予定)|(いま|今)(?!日|月|年|週|後|度)|現在|開催中|販売中|やって(る|い)/.test(t) && /買え|販売|限定|イベント|開催|やって|予定|キャンペーン/.test(t)) {
       const sale = /買え|限定|販売中/.test(t) && !/イベント|キャンペーン/.test(t);
-      const live = list.filter(e => e.start <= today && endOf(e) >= today && (!sale || e.kind === 'sale')).sort((a, b) => endOf(a).localeCompare(endOf(b)));
+      const live = liveOrder(list.filter(e => e.start <= today && endOf(e) >= today && (!sale || e.kind === 'sale')));
       if (!live.length) {
         const next = list.filter(e => e.start > today && (!sale || e.kind === 'sale')).sort((a, b) => a.start.localeCompare(b.start))[0];
         return { text: `いま${sale ? '販売中の限定' : '開催中の予定'}は、ぴよのカレンダーには入ってないぴよ。${next ? `次は**${next.title}**（${jp(next.start)}から）だぴよ！` : ''}`, refs: next ? [evRef(next)] : [], kind: 'event' };
       }
-      return { text: [`いま${sale ? '販売中の限定' : '開催中'}はこれだぴよ！`, ...live.slice(0, 5).map(e => `・${e.title}（${jp(endOf(e))}まで）`), ...(sale ? ['定番のぴよりんは毎日売ってるぴよ。'] : [])].join('\n'), refs: live.slice(0, 3).map(evRef), kind: 'event' };
+      return { text: [`いま${sale ? '販売中の限定' : '開催中'}はこれだぴよ！`, ...live.slice(0, 5).map(e => `・${e.title}（${jp(endOf(e))}まで）`), ...more(live.length - 5), ...(sale && dailyBasic(ctx) ? ['定番のぴよりんは毎日売ってるぴよ。'] : [])].join('\n'), refs: live.slice(0, 3).map(evRef), kind: 'event' };
     }
     const month = /今月/.test(t) ? today.slice(0, 7) : /来月/.test(t) ? addDays(today.slice(0, 8) + '01', 32).slice(0, 7) : '';
     if (month && /予定|イベント|限定|販売|何がある|なにがある/.test(t)) {
-      const inMonth = list.filter(e => e.start.slice(0, 7) <= month && endOf(e).slice(0, 7) >= month && endOf(e) >= today).sort((a, b) => a.start.localeCompare(b.start));
+      const inMonth = startOrder(list.filter(e => e.start.slice(0, 7) <= month && endOf(e).slice(0, 7) >= month && endOf(e) >= today), today);
       const m = Number(month.slice(5));
       if (!inMonth.length) return { text: `${m}月の予定は、まだぴよのカレンダーに入ってないぴよ。`, kind: 'event' };
-      return { text: [`${m}月の予定はこれだぴよ！`, ...lines(inMonth.slice(0, 6))].join('\n'), refs: inMonth.slice(0, 3).map(evRef), kind: 'event' };
+      return { text: [`${m}月の予定はこれだぴよ！`, ...lines(inMonth.slice(0, 6)), ...more(inMonth.length - 6)].join('\n'), refs: inMonth.slice(0, 3).map(evRef), kind: 'event' };
     }
     if (/これから|今後|次の(イベント|予定|限定|販売)|予定は|予定って|イベントは|イベントある|スケジュール/.test(t)) {
-      const up = list.filter(e => e.start > today).sort((a, b) => a.start.localeCompare(b.start)).slice(0, 5);
-      if (!up.length) return { text: 'これからの予定は、まだぴよのカレンダーに入ってないぴよ。', kind: 'event' };
-      return { text: ['これからの予定はこれだぴよ！', ...up.map(e => `・${span(e)} ${e.title}（あと${diff(today, e.start)}日）`)].join('\n'), refs: up.slice(0, 3).map(evRef), kind: 'event' };
+      const sale = /限定|販売/.test(t), all = startOrder(list.filter(e => e.start > today && (!sale || e.kind === 'sale')), today), up = all.slice(0, 5);
+      if (!up.length) return { text: sale ? 'これからの限定は、まだぴよのカレンダーに入ってないぴよ。' : 'これからの予定は、まだぴよのカレンダーに入ってないぴよ。', kind: 'event' };
+      return { text: [sale ? 'これからの限定はこれだぴよ！' : 'これからの予定はこれだぴよ！', ...up.map(e => `・${span(e)} ${e.title}（あと${diff(today, e.start)}日）`), ...more(all.length - 5)].join('\n'), refs: up.slice(0, 3).map(evRef), kind: 'event' };
     }
     return null;
   }
@@ -698,6 +770,6 @@ window.PiyoExtras = (function () {
     return `<div class="piyo-wx" role="img" aria-label="${label.replace(/"/g, '&quot;')}">${cols}</div>`;
   }
 
-  return { weatherAsk, weatherFigure, weatherKind, bareStock, localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf, plannedLine,
+  return { outingEvents, eventChips, weatherAsk, weatherFigure, weatherKind, bareStock, localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf, plannedLine,
     flagOn, FLAG_KEYS, personaBlock, memoryBlock, saveMemoryCard, readMemoryCard, composeSystem, readMacLink, macJson, syncBody };
 })();

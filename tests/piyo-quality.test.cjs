@@ -57,7 +57,7 @@ test('API の道は Haiku 5.5・考える量は少なめ・答えの上限は 20
   const sent=[];
   const c={fetch:async(url,o)=>{sent.push(JSON.parse(o.body));return{ok:true,headers:{get:()=>'application/json'},
     json:async()=>({content:[{type:'thinking',thinking:'',signature:'s'},{type:'text',text:'答えだぴよ。'}],stop_reason:'end_turn'})}},
-    apiKey:'fake-test-key',SYSTEM:'指示',knowledge:()=>'<knowledge/>'};
+    apiKey:'fake-test-key',SYSTEM:'指示',knowledge:()=>'<knowledge/>',knowledgeParts:()=>({stable:'<knowledge/>',volatile:'<today/>'})}; // 2026-11-22：材料を 2 つに分けた（knowledgeParts）。道具の差し替えだけで、期待値は同じ
   vm.createContext(c);
   vm.runInContext(html.match(/const API='[^']+', MODEL='[^']+';/)[0]+part('  async function callClaude(','  function errText(')+';this.callClaude=callClaude;this.textOf=textOf;',c);
   const res=await c.callClaude({messages:[{role:'user',content:'q'}]});

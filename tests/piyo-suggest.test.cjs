@@ -148,3 +148,34 @@ test('初回のあいさつ中に、仮の候補が見えてから別の候補�
   assert.equal(h.ctx.suggest.style.visibility,'');assert.deepEqual(labels(h),greeting.suggest);
   assert.deepEqual(seen,[['','ゴジラぴよりんについて|カレンダーはいくら？']]); // あいさつの時点で、もう決まった候補が見えている
 });
+test('予定から答えられる質問（今日買える・次のおでかけ）は、答えになる予定があるときだけ候補に補充する',()=>{
+  const h=setup();
+  h.ctx.window=h.ctx;vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'../docs/piyo-extras.js'),'utf8'),h.ctx);
+  h.ctx.data={basics:{lines:[]},memo:{},events:[{id:'a',title:'ぴよりんゴジラ販売',start:'2026-10-01',end:'2026-10-20',kind:'sale'}]};
+  assert.equal(h.api.suggestPool().length,0); // 終わった販売だけ
+  h.ctx.data.events.push({id:'b',title:'三島甘藷ぴよりん販売',start:'2026-10-25',end:'2026-10-30',kind:'sale'});
+  assert.deepEqual(Array.from(h.api.suggestPool()),['今日買えるぴよりんは？']);
+  assert.deepEqual(Array.from(h.api.suggestPool()),['今日買えるぴよりんは？']); // おでかけの販売はまだ無い
+  h.ctx.data.events.push({id:'c',title:'静岡みかんぴよりんおでかけセット販売（アスティ静岡）',start:'2026-11-26',end:'2026-11-27',kind:'sale',place:'アスティ静岡'});
+  assert.deepEqual(Array.from(h.api.suggestPool()),['今日買えるぴよりんは？','次のおでかけは？']);
+});
+test('開いた直後の候補：予定で答えられる質問は、まとめの候補の右側と入れ替えて、数は変えない（本物のあいさつ＋予定）',async()=>{
+  // 2026-11-22 の piyo-greeting.json の suggest と、予定の写し
+  const greeting={lines:['こんにちはだぴよ。'],suggest:['クリスマス装飾について','クリスマスクッキー缶について','みかんぴよりんについて','dancyu祭2027について','三島甘藷ぴよりんについて']};
+  const events=[{id:'imo',title:'三島甘藷ぴよりん販売',start:'2026-11-15',end:'2026-11-23',kind:'sale'},
+    {id:'mikan',title:'静岡みかんぴよりんおでかけセット販売（アスティ静岡）',start:'2026-11-26',end:'2026-11-27',kind:'sale',place:'アスティ静岡'}];
+  for(const drawn of [true,false]){
+    const h=setup();
+    Object.assign(h.ctx,{log:{children:[],scrollTop:0,lastElementChild:null,set innerHTML(v){}},idleEl:{hidden:true},idleHide(){},guardOn(){},
+      layer:{hidden:true},lockPage(){},fit(){},frame(){},toBottom(){},slideFrom(){},matchMedia:()=>({matches:true}),todayStr:()=>'2026-11-22',
+      loadData:async()=>{h.ctx.data={greeting,events};return true},omikujiDrawn:()=>drawn,extrasCtx:()=>({today:'2026-11-22',hour:12,events:[],basics:null,koyomi:null,weather:[],now:Date.now()}),
+      play(name,done){done?.()},idle(){},piyoMsg:()=>({say(){}}),fmt:s=>s,piyoTone:s=>s,weatherLine:()=>'',DEFAULT_SUGGEST:['ぴよりんについて']});
+    h.ctx.window=h.ctx;vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'../docs/piyo-extras.js'),'utf8'),h.ctx);
+    vm.runInContext('let greeted=false,openId=0,history=[];'+html.slice(html.indexOf('  async function open(){'),html.indexOf('  function close('))+';this.api.open=open;',h.ctx);
+    await h.api.open();
+    const want=[...greeting.suggest.slice(0,3),'今日買えるぴよりんは？','次のおでかけは？',...(drawn?[]:['今日のおみくじ'])];
+    assert.deepEqual(labels(h).map(x=>x),want.map(x=>labels(h).includes(x)?x:h.api.suggestLabel(x)),String(drawn));
+    assert.equal(labels(h).length,drawn?5:6); // おみくじを入れて 6 つの上限のまま
+    assert.ok(labels(h).includes('今日買えるぴよりんは？')&&labels(h).includes('次のおでかけは？'));
+  }
+});

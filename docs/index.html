@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ぴよりん">
-<meta name="piyo-ver" content="2026.11.22-2">
+<meta name="piyo-ver" content="2026.11.22-3">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
@@ -606,6 +606,7 @@ html.buy-open .piyo-idle{visibility:hidden}
 .piyo-text{white-space:pre-wrap;overflow-wrap:anywhere}
 .piyo-text b{font-weight:700;color:var(--caramel)}
 .piyo-text a{color:var(--caramel);text-decoration:underline;text-underline-offset:2px}
+.piyo-resume{flex:none;align-self:center;color:var(--muted);font-size:11.5px;line-height:1.7}
 .piyo-sources{margin-top:8px;color:var(--muted);font-size:11.5px;line-height:1.7;overflow-wrap:anywhere;opacity:1;transform:translateY(0);transition:opacity .6s ease-out,transform .6s ease-out}
 .piyo-sources[aria-hidden="true"]{visibility:hidden;opacity:0;transform:translateY(4px)}
 .piyo-sources a{text-decoration:underline;text-underline-offset:2px}
@@ -900,6 +901,10 @@ window.PiyoSplash=(function(){
         <label><input type="checkbox" data-flag="buysync" checked><span>購入記録を Mac の selfbase に送る<small>購入記録を保存・削除したときに、Mac にも送ります（写真は送りません）。</small></span></label>
         <small class="set-note">Mac のつなぎ方を入れているときだけ働きます。</small>
       </div>
+      <div class="set-toggles">
+        <label><input type="checkbox" id="set-talk-keep" checked><span>会話の続きを残す<small>この端末に、直近のやり取りの文だけを 12 時間まで残し、開き直したときに続きから話せます。切ると、残した会話も消します。</small></span></label>
+        <button type="button" class="set-act" id="set-talk-clear">会話を消す</button>
+      </div>
       <p class="set-links">Claude のコンソール：<a href="https://platform.claude.com/settings/keys" target="_blank" rel="noopener">API キー ↗</a><a href="https://platform.claude.com/usage" target="_blank" rel="noopener">使った額 ↗</a><a href="https://platform.claude.com/settings/limits" target="_blank" rel="noopener">使用額の上限 ↗</a></p>
     </section>
     <section class="set-sec" aria-labelledby="set-h-cal">
@@ -962,7 +967,7 @@ window.PiyoSplash=(function(){
 <script src="news-archive.js"></script>
 <script src="news-identity.js"></script>
 <script src="piyo-persona.js?v=1"></script>
-<script src="piyo-extras.js?v=5"></script>
+<script src="piyo-extras.js?v=6"></script>
 <script src="piyo-buy.js?v=9"></script>
 <script src="piyo-log/schema.js?v=1"></script>
 <script src="piyo-log/recorder.js?v=1"></script>
@@ -1516,7 +1521,7 @@ window.PiyoSplash=(function(){
   });
 
   // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
-  const PN_VERSION='2026.11.22-2（電車・金・金利なども infobase の札で答える準備・データ作りの Claude を選べる）';
+  const PN_VERSION='2026.11.22-3（ぴよが短い予定を先に答える・今日買えるぴよりん・会話の続きを残す）';
   {
     const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
     const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
@@ -1751,7 +1756,7 @@ window.PiyoSplash=(function(){
   const ICON_NEWS='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11l3 3v13H5z"/><path d="M8.5 10h7M8.5 13.5h7M8.5 17h4.5"/></svg>';
   const ICON_EVENT='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>';
   const WEATHER='https://api.open-meteo.com/v1/forecast?latitude=35.1709&longitude=136.8815&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max,wind_speed_10m_max,precipitation_sum&hourly=precipitation_probability&wind_speed_unit=ms&timezone=Asia%2FTokyo&forecast_days=7'; // 名古屋駅。風速はm/s
-  const DEFAULT_SUGGEST=['いま買える限定ぴよりんは？','これからのイベントは？','ぴよりんってどこで買える？'];
+  const DEFAULT_SUGGEST=['今日買えるぴよりんは？','次のおでかけは？','これからのイベントは？','ぴよりんってどこで買える？'];
 
   document.body.insertAdjacentHTML('beforeend',`
 <button type="button" class="piyo-idle" id="piyo-idle" aria-label="ぴよと話す" title="ぴよと話す"></button>
@@ -2164,6 +2169,7 @@ window.PiyoSplash=(function(){
       [/消費期限/,'ぴよりんの消費期限は？'],
       [/買い方.*予約/,'ぴよりんは予約できる？'],
     ])if(pattern.test(basics))piyo.push(q);
+    const evX=globalThis.PiyoExtras;if(evX&&evX.eventChips)piyo.push(...evX.eventChips({today:todayStr(),events:data.events})); // 予定で答えられる質問（答えになる予定があるときだけ）
     // knowledge()に渡す最新80件と同じ範囲に、本文のあるメモがある場合だけ。
     if(Object.values(data.memo||{}).sort((a,b)=>(b.date||'').localeCompare(a.date||'')).slice(0,80).some(m=>m.memo?.trim()))piyo.push('最近のぴよりんニュースは？');
     const today=todayStr();
@@ -2199,6 +2205,7 @@ window.PiyoSplash=(function(){
     const refreshed=await loadData().catch(()=>false);
     if(id!==openId)return;
     if(refreshed)greeted=false;
+    if(typeof carried!=='undefined'&&carried){carried=false;greeted=true} // 戻した会話があるときは、最初の 1 回だけあいさつで消さずに続きを見せる（typeof は試験で関数だけ切り出すため）
     if(layer.hidden)return; // 取得中にしまった場合は、次の呼び出しで表示する
     if(!greeted&&!wasBusy&&!busy){
       // 到着してから古い会話を薄く消す。途中で会話が始まったら次回へ持ち越す。
@@ -2211,11 +2218,12 @@ window.PiyoSplash=(function(){
       const chipFade=reduced?null:fadeSuggest();
       await Promise.all([fade,chipFade].map(a=>a&&a.finished.catch(()=>{})));
       if(!current()){if(fade)fade.cancel();if(chipFade)chipFade.cancel();return showSuggest()}
-      log.innerHTML='';history=[];pendingChip=null;log.scrollTop=0;toBottom(true);globalThis.PiyoLog?.newConv(); // 会話の記録も新しい会話にする
+      log.innerHTML='';history=[];if(typeof forgetTalk==='function')forgetTalk();pendingChip=null;log.scrollTop=0;toBottom(true);globalThis.PiyoLog?.newConv(); // 会話の記録も新しい会話にする
       if(fade)fade.cancel();
       holdSuggest();if(chipFade)chipFade.cancel();
       const g=data&&data.greeting,X=globalThis.PiyoExtras;
-      const base=g&&Array.isArray(g.suggest)&&g.suggest.length?g.suggest:DEFAULT_SUGGEST;
+      const base0=g&&Array.isArray(g.suggest)&&g.suggest.length?g.suggest:DEFAULT_SUGGEST,ev=X&&X.eventChips?X.eventChips({today:todayStr(),events:data&&data.events}):[];
+      const base=ev.length?[...base0.filter(q=>!ev.includes(q)).slice(0,5-ev.length),...ev]:base0; // 予定で答えられる質問は、まとめの候補の右側と入れ替えて、数は変えない（5＋おみくじ）
       fillSuggest(X&&!omikujiDrawn()?[...base.slice(0,5),'今日のおみくじ']:base); // おみくじは1日1回、候補のいちばん右に出す
       showSuggest(); // 決まった候補だけを出す。あいさつの途中では入れ替えない
       const ex=X?X.greeting(extrasCtx()):null; // 時間帯のあいさつと、近い予定の「あと◯日」
@@ -2277,6 +2285,7 @@ window.PiyoSplash=(function(){
     chatting=true;
     const text=piyoTone(it.text),msg=piyoMsg();
     history=[...history,{role:'user',content:'（ぴよをなでた）'},{role:'assistant',content:text}].slice(-10);
+    if(typeof keepTalk==='function')keepTalk([{r:'p',t:text}]);
     msg.say(fmt(text),()=>{chatting=false;msg.links(refLinks(it.refs));msg.fix({src:'tidbit',q:'',a:text})});
   });
   // おみくじ（1日1回。結果は日付と端末ごとの種で決まる）
@@ -2400,25 +2409,91 @@ window.PiyoSplash=(function(){
   let history=[]; // 答えまで終わったやり取りだけを残す（直近5往復）
   let refMap={}; // 返事の [[参照:m1,e2]] を、記事と予定に戻す
 
-  function knowledge(){
+  // ---- 会話の続きを端末に残す（localStorage の piyo-talk。「会話の記録」（piyo-log）とは別。文だけで、鍵・合言葉・接続の設定は入れない） ----
+  // 答えまで終わったやり取りだけを残す（途中・エラーは残さない）。12 時間より古い物は戻さない（「今日」「あした」の話が古くなるため）
+  const TALK_KEY='piyo-talk',TALK_KEEP='piyo-talk-keep',TALK_MAX=20,TALK_HOURS=12;
+  let talk=[],carried=false; // talk: 画面に出した、答えまで終わったやり取り（直近 20 通）[{r:'u'|'p',t}]。carried: 前の会話を戻した（最初の open() では、あいさつで消さない）
+  const talkKeepOn=()=>{try{return localStorage.getItem(TALK_KEEP)!=='0'}catch(_){return true}}; // 既定は入り（切のときだけ '0'）
+  const talkDrop=()=>{try{localStorage.removeItem(TALK_KEY)}catch(_){}};
+  function saveTalk(){
+    if(!talkKeepOn())return;
+    if(!talk.length)return talkDrop();
+    try{localStorage.setItem(TALK_KEY,JSON.stringify({v:1,at:Date.now(),talk,history}))}catch(_){} // history は直近 5 往復
+  }
+  function keepTalk(items){talk=[...talk,...items].slice(-TALK_MAX);saveTalk()}
+  function forgetTalk(){talk=[];carried=false;talkDrop()} // 新しい会話を始めるとき
+  function setTalkKeep(on){
+    try{on?localStorage.removeItem(TALK_KEEP):localStorage.setItem(TALK_KEEP,'0')}catch(_){}
+    on?saveTalk():talkDrop(); // 切にしたら、残した物も消す
+  }
+  // 「会話を消す」：残した物・画面・Claude に渡す history を消す（返事待ちのときは、画面と history は触らない）
+  function clearTalkAll(){
+    talk=[];carried=false;talkDrop();
+    if(!busy){history=[];log.innerHTML='';greeted=false} // 次に開くと、あいさつから始まる
+  }
+  const talkHistoryOk=h=>Array.isArray(h)&&h.length%2===0&&h.length<=10&&h.every((m,i)=>m&&m.role===(i%2?'assistant':'user')&&typeof m.content==='string'&&m.content);
+  function restoreTalk(){
+    if(!talkKeepOn())return;
+    let raw=null;try{raw=localStorage.getItem(TALK_KEY)}catch(_){}
+    if(raw===null)return;
+    let v=null;try{v=JSON.parse(raw)}catch(_){}
+    const age=v&&Number.isFinite(v.at)?Date.now()-v.at:NaN;
+    const items=v&&v.v===1&&age<=TALK_HOURS*3600e3&&age>=-300e3&&Array.isArray(v.talk)
+      ?v.talk.filter(x=>x&&(x.r==='u'||x.r==='p')&&typeof x.t==='string'&&x.t).slice(-TALK_MAX).map(x=>({r:x.r,t:x.t.slice(0,4000)})):[];
+    if(!items.length){talkDrop();return} // 古い・壊れている
+    const d=new Date(v.at+9*3600e3),note=document.createElement('div');
+    note.className='piyo-resume';note.textContent='前の会話の続き　'+(d.getUTCMonth()+1)+'/'+d.getUTCDate()+' '+d.getUTCHours()+':'+String(d.getUTCMinutes()).padStart(2,'0');
+    log.appendChild(note);
+    // 文だけ戻す（記事・予定の札・出典・天気の図・ちがうよ・選択肢は戻さない）。1 文字ずつは出さず、すぐ全部出す
+    items.forEach(x=>{if(x.r==='u')userMsg(x.t);else piyoMsg().el.querySelector('.piyo-text').innerHTML=fmt(x.t)});
+    talk=items;history=talkHistoryOk(v.history)?v.history.map(m=>({role:m.role,content:m.content})):[];carried=true;
+  }
+  restoreTalk(); // 開いたときのあいさつは、戻した会話があるとき最初の 1 回だけ出さない（open()）
+  { // 設定：会話の続きを残す（入り切り）・会話を消す
+    const cb=$('set-talk-keep'),clr=$('set-talk-clear');
+    if(cb){cb.checked=talkKeepOn();cb.addEventListener('change',()=>setTalkKeep(cb.checked))}
+    if(clr)clr.addEventListener('click',clearTalkAll);
+  }
+
+  // Claude へ渡す材料は 2 つに分ける。変わらない部分（basics・メモ・予定。データが更新されるまで同じ文）と、変わる部分（today・暦・天気）。
+  // つなぐと 1 つの <knowledge> になる（Mac の Claude へはつないだ文を送る）。API へは別のブロックにして、前の部分だけキャッシュさせる
+  function knowledge(){const p=knowledgeParts();return p.stable+p.volatile}
+  function knowledgeParts(){
     const today=todayStr(),since=new Date(Date.now()-21*86400e3).toISOString().slice(0,10);
     const memos=Object.entries(data.memo).sort(([,a],[,b])=>(b.date||'').localeCompare(a.date||'')).slice(0,80);
-    const evs=data.events.filter(e=>(e.end||e.start||'')>=since).sort((a,b)=>(a.start||'').localeCompare(b.start||'')).slice(0,40);
+    const evs=pickEvents(data.events,today,since);
     refMap={};memos.forEach(([id],i)=>{refMap['m'+(i+1)]={type:'news',id}});evs.forEach((e,i)=>{refMap['e'+(i+1)]={type:'event',id:e.id}});
     const b=data.basics;
-    return lastKnowledge=`<knowledge>\n<today>${today}（${weekday(today)}）</today>\n`
+    const stable='<knowledge>\n'
       +(b?`<basics checked="${b.checked||''}">\n${b.lines.join('\n')}\n</basics>\n`:'')
       +memos.map(([,m],i)=>`<memo id="m${i+1}" date="${m.date}" url="${m.url}">${m.memo}</memo>`).join('\n')+'\n'
-      +koyomiKnowledge()+weatherKnowledge()
-      +evs.map((e,i)=>`<event id="e${i+1}" start="${e.start}" end="${e.end||e.start}"${e.place?` place="${e.place}"`:''}>${e.title}</event>`).join('\n')
-      +'\n</knowledge>';
+      +evs.map((e,i)=>`<event id="e${i+1}" start="${e.start}" end="${e.end||e.start}"${e.place?` place="${e.place}"`:''}>${e.title}</event>`).join('\n')+'\n';
+    const volatile=`<today>${today}（${weekday(today)}）</today>\n`+koyomiKnowledge()+weatherKnowledge()+'</knowledge>';
+    lastKnowledge=stable+volatile;
+    return {stable,volatile};
+  }
+  // 渡す予定（40 件まで）：開催中 → これから（始まりの近い順）→ 最近終わった物（終わりの新しい順。21 日前まで）の順に選ぶ。
+  // 選んだあとの並びは前と同じ始まりの古い順（40 件以下なら前と 1 文字も変わらない）
+  function pickEvents(events,today,since,max=40){
+    const start=e=>e.start||'',end=e=>e.end||e.start||'';
+    const cand=events.filter(e=>end(e)>=since);
+    let keep=cand;
+    if(cand.length>max){
+      const live=cand.filter(e=>end(e)>=today&&start(e)<=today).sort((a,b)=>end(a).localeCompare(end(b)));
+      const next=cand.filter(e=>end(e)>=today&&start(e)>today).sort((a,b)=>start(a).localeCompare(start(b)));
+      const past=cand.filter(e=>end(e)<today).sort((a,b)=>end(b).localeCompare(end(a)));
+      const picked=new Set([...live,...next,...past].slice(0,max));
+      keep=cand.filter(e=>picked.has(e));
+    }
+    return keep.slice().sort((a,b)=>start(a).localeCompare(start(b)));
   }
   // onText を渡すと、返事を作りながら受け取り（ストリーム）、文字が届くたびに onText(ここまでの文) を呼ぶ
   // Haiku 5.5 は答える前に考える（考えた中身は届かない）。チャットの短い答えなので、考える量は少なめ（Mac の道と同じ）
   async function callClaude(body,onText){
     const stream=!!onText&&!!globalThis.PiyoExtras;
+    const k=knowledgeParts(); // 決まり → 変わらない材料（ここまでキャッシュ）→ 変わる材料（today・暦・天気）の順
     const r=await fetch(API,{method:'POST',headers:{'x-api-key':apiKey,'anthropic-version':'2023-06-01','content-type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:MODEL,max_tokens:2048,output_config:{effort:'low'},system:[{type:'text',text:(globalThis.PiyoExtras&&globalThis.PiyoExtras.composeSystem?globalThis.PiyoExtras.composeSystem(SYSTEM,{storage:localStorage,persona:globalThis.PiyoPersona,memory:true}):SYSTEM)},{type:'text',text:knowledge(),cache_control:{type:'ephemeral'}}],...body,...(stream?{stream:true}:{})})});
+      body:JSON.stringify({model:MODEL,max_tokens:2048,output_config:{effort:'low'},system:[{type:'text',text:(globalThis.PiyoExtras&&globalThis.PiyoExtras.composeSystem?globalThis.PiyoExtras.composeSystem(SYSTEM,{storage:localStorage,persona:globalThis.PiyoPersona,memory:true}):SYSTEM)},{type:'text',text:k.stable,cache_control:{type:'ephemeral'}},{type:'text',text:k.volatile}],...body,...(stream?{stream:true}:{})})});
     if(stream&&r.ok&&r.body&&/event-stream/.test(r.headers.get('content-type')||''))return globalThis.PiyoExtras.readMessage(r,onText);
     let res=null;try{res=await r.json()}catch(_){}
     if(!r.ok){const err=new Error('http');err.status=r.status;err.detail=res&&res.error&&res.error.message||'';throw err}
@@ -2486,6 +2561,7 @@ window.PiyoSplash=(function(){
     const text=piyoTone(checked?checked.text:a.text)+(note?'\n'+note:''),msg=piyoMsg(a.sources==='weather'),lt=asked.lt;
     logEnd({status:'ok',answer:text});
     history=[...history,{role:'user',content:q},{role:'assistant',content:text}].slice(-10);
+    if(typeof keepTalk==='function')keepTalk([{r:'u',t:q},{r:'p',t:text}]);
     if(a.kind==='omikuji')markOmikuji();
     play(a.mood||'wave');msg.say(fmt(text),()=>{if(a.sources==='weather'&&typeof weatherFig==='function')weatherFig(msg);msg.links(refLinks(a.refs));offerCalendar(msg,a.refs);addFollowUps(a.refs);if(msg.fix)msg.fix({src:'local',q:asked.q||q,a:text,chip:asked.chip,...(lt?{lt}:{})})});
     busy=false;sync();
@@ -2516,7 +2592,7 @@ window.PiyoSplash=(function(){
     if(globalThis.PiyoInfobase){
       busy=true;sync();let pooled=null;
       try{pooled=await globalThis.PiyoInfobase.answer(q);}finally{busy=false;sync();}
-      if(pooled){asked={q,chip:consumeSuggest(q)||'',way:'infobase',web:false};const lt=logStart(q,asked.chip?{chip:asked.chip}:undefined);logEnd({status:'ok',answer:pooled.text});userMsg(q);const msg=piyoMsg(pooled.source?fmt(pooled.source):false);play('wave');msg.say(fmt(pooled.body??pooled.text),()=>{if(/^(weather|now):名古屋/.test(pooled.brief||'')&&typeof weatherFig==='function')weatherFig(msg);if(msg.fix)msg.fix({src:'infobase',q,a:pooled.text,...(lt?{lt}:{})});});history=[...history,{role:'user',content:q},{role:'assistant',content:pooled.text}].slice(-10);return;}
+      if(pooled){asked={q,chip:consumeSuggest(q)||'',way:'infobase',web:false};const lt=logStart(q,asked.chip?{chip:asked.chip}:undefined);logEnd({status:'ok',answer:pooled.text});if(typeof keepTalk==='function')keepTalk([{r:'u',t:q},{r:'p',t:String(pooled.body??pooled.text)}]);userMsg(q);const msg=piyoMsg(pooled.source?fmt(pooled.source):false);play('wave');msg.say(fmt(pooled.body??pooled.text),()=>{if(/^(weather|now):名古屋/.test(pooled.brief||'')&&typeof weatherFig==='function')weatherFig(msg);if(msg.fix)msg.fix({src:'infobase',q,a:pooled.text,...(lt?{lt}:{})});});history=[...history,{role:'user',content:q},{role:'assistant',content:pooled.text}].slice(-10);return;}
     }
 
     if(fixPending)endFix(); // 「どこがちがう？」の途中でも、候補を押したら普通の質問にする
@@ -2683,6 +2759,7 @@ window.PiyoSplash=(function(){
     const note=failed?'':factNote(text,q); // 一言は吹き出しにだけ出し、記憶（history）には入れない（ぴよがまねしないように）
     const lt=typeof asked==='object'?asked.lt:null;if(typeof logEnd==='function')logEnd({status:failed?'error':partial?'cut':'ok',answer:text+note,errorKind:failed?'empty':partial?'partial':undefined});
     history=[...history,{role:'user',content:q},{role:'assistant',content:text}].slice(-10);
+    if(!failed&&typeof keepTalk==='function')keepTalk([{r:'u',t:q},{r:'p',t:text+note}]); // 答えが出来たときだけ残す
     if(!streamed)play('jump'); // 流して出したときは、最初の文が出たときにもう跳ねている
     const refs=[...r.ids.map(id=>refMap[id]).filter(Boolean),...(extra||[])],links=refLinks(refs);
     msg.say(fmt(text+note),()=>{if(msg.links)msg.links(links);offerCalendar(msg,refs);addFollowUps(refs);if(msg.fix)msg.fix({src:asked.way||'api',q:asked.q||q,a:text,chip:asked.chip,...(lt?{lt}:{})})},streamed);busy=false;sync();
@@ -2815,7 +2892,7 @@ window.PiyoSplash=(function(){
     if(kind==='question'&&info.chip)hideSuggest(info.chip);
     // 会話の記憶の中の答えにも印を付ける（同じまちがいを繰り返さない）
     const i=history.findLastIndex(h=>h.role==='assistant'&&h.content===info.a);
-    if(i>=0)history=history.map((h,j)=>j===i?{...h,content:'（この答えは「'+FIX_LABEL[kind]+'」と言われた）\n'+h.content}:h);
+    if(i>=0){history=history.map((h,j)=>j===i?{...h,content:'（この答えは「'+FIX_LABEL[kind]+'」と言われた）\n'+h.content}:h);if(typeof saveTalk==='function')saveTalk()}
     recheck(info,kind,comment);
   }
   function hideSuggest(label){

@@ -66,7 +66,9 @@ test('予定は名前と「いつ」がそろったときだけ答え、札に�
   assert.equal(ask('ぴよりんゴジラについて'),null); // 概要は Claude
   assert.equal(ask('クリスマスケーキの予約はいつまで？'),null); // 1日だけの「受付開始」からは締め切りが分からない
   assert.equal(ask('ゴジラはどこで買える？'),null);
-  assert.match(ask('いま買える限定ぴよりんは？').text,/ハロウィンぴよりん販売（10月31日（土）まで）[\s\S]*定番のぴよりんは毎日/);
+  // 2026-11-22：「いま買える限定」は「今日買える」の答え（期間と、終わりまでの日数）。「定番は毎日」は、店の行に「無休」と「ぴよりんの販売」があるこの基本情報が根拠
+  assert.match(ask('いま買える限定ぴよりんは？').text,/^今日買える限定は、\*\*ハロウィンぴよりん販売\*\*（10月23日〜31日・あと3日）だぴよ。定番のぴよりんは毎日あるぴよ。$/);
+  assert.match(ask('今やってる限定は？').text,/ハロウィンぴよりん販売（10月31日（土）まで）/);
   assert.match(ask('これからのイベントは？').text,/10月30日（金） ぴよりんクリスマスケーキ 予約受付開始（あと2日）/);
   assert.match(ask('来月の予定は？').text,/11月の予定/);
 });
@@ -173,4 +175,168 @@ test('天気の図：7日分の天気・最高と最低・雨の確率を帯に�
   assert.equal(X.weatherFigure(w,'2026-11-20'),''); // 残りが 1 日だけなら出さない
   assert.equal(X.weatherFigure(null,'2026-11-13'),'');assert.equal(X.weatherFigure(w.slice(3),'2026-11-13').includes('今日'),false);
   assert.equal(X.weatherAsk('今日の天気'),true);assert.equal(X.weatherAsk('雨の日でも買える？'),false);assert.equal(X.weatherAsk('ぴよりんの値段'),false);
+});
+
+// ---- 予定の答えをカレンダーと同じ並べ方にする／「今日買える」「次のおでかけ」（2026-11-22） ----
+// tests/piyo-cal.test.cjs と同じ、2026-11-22 の本物の予定の写し。ゴジラ販売（〜11/13）は終わった予定。
+const CAL_EVENTS=[
+  {id:'oshi',title:'推し旅×ぴよりん',start:'2026-10-02',end:'2026-11-30',kind:'campaign',place:'東海道新幹線・ぴよりんvillage'},
+  {id:'wolfy',title:'ウルフィ×ぴよりん ぬいぐるみ 店頭販売',start:'2026-10-19',end:'2026-12-31',kind:'sale',place:'ぴよりんvillage'},
+  {id:'stamp',title:'ぴよりんゴジラ スタンプラリーキャンペーン',start:'2026-10-22',end:'2026-11-30',kind:'campaign'},
+  {id:'sq',title:'Squeezibo クラウドファンディング',start:'2026-10-29',end:'2026-12-31',kind:'campaign',place:'JR東海MARKET'},
+  {id:'onoda',title:'ぴよりんおでかけセット おのだサンパーク',start:'2026-11-01',end:'2026-11-03',kind:'sale',place:'おのだサンパーク'},
+  {id:'cal',title:'ぴよりんカレンダー2027 販売開始',start:'2026-11-02',end:'2026-11-02',kind:'release',place:'各店舗'},
+  {id:'godzilla',title:'ぴよりんゴジラ販売',start:'2026-11-03',end:'2026-11-13',kind:'sale'},
+  {id:'imo',title:'三島甘藷ぴよりん販売',start:'2026-11-15',end:'2026-11-23',kind:'sale'},
+  {id:'xmas',title:'ぴよりんクリスマス装飾',start:'2026-11-20',end:'2026-12-25',kind:'event'},
+  {id:'mikan',title:'静岡みかんぴよりんおでかけセット販売（アスティ静岡）',start:'2026-11-26',end:'2026-11-27',kind:'sale',place:'アスティ静岡'},
+  {id:'cake',title:'ぴよりんクリスマスケーキ 受取期間',start:'2026-12-19',end:'2026-12-25',kind:'sale'},
+  {id:'dancyu',title:'dancyu祭2027 in 京都 ぴよりん出展',start:'2027-01-23',end:'2027-01-24',kind:'event',place:'京都市勧業館「みやこめっせ」'},
+  {id:'dsale1',title:'dancyu祭2027 in 京都 ぴよりん おでかけセット販売（1月23日）',start:'2027-01-23',end:'2027-01-23',kind:'sale',place:'京都市勧業館「みやこめっせ」'},
+  {id:'dsale2',title:'dancyu祭2027 in 京都 ぴよりん おでかけセット販売（1月24日）',start:'2027-01-24',end:'2027-01-24',kind:'sale',place:'京都市勧業館「みやこめっせ」'},
+];
+const REAL_EVENTS=JSON.parse(read('docs/data/events.json'));
+const realBasics=JSON.parse(read('docs/data/piyo-basics.json'));
+const ctxCal={window:{},TextEncoder,TextDecoder};
+vm.runInNewContext(read('docs/piyo-cal.js'),ctxCal);
+vm.runInNewContext(read('docs/piyo-extras.js'),ctxCal);
+const XC=ctxCal.window.PiyoExtras; // カレンダーの部品（PiyoCal）がある画面と同じ
+const askC=(q,today='2026-11-22',c={})=>XC.localAnswer(q,{...base,today,now:Date.parse(today+'T12:00:00+09:00'),events:CAL_EVENTS,basics:realBasics,...c});
+const askN=(q,today='2026-11-22',c={})=>X.localAnswer(q,{...base,today,now:Date.parse(today+'T12:00:00+09:00'),events:CAL_EVENTS,basics:realBasics,...c}); // PiyoCal が無い
+const at=(text,s)=>text.indexOf(s);
+const ids2=a=>plain(a.refs.map(r=>r.id));
+
+test('「今やってる」は、短い予定を先・長い企画をあとにして、入りきらない分は「ほか n 件」と添える',()=>{
+  const a=askC('今やってる限定は？');
+  assert.equal(a.kind,'event');
+  assert.match(a.text,/いま販売中の限定はこれだぴよ！/);
+  assert.ok(at(a.text,'三島甘藷ぴよりん販売')>0&&at(a.text,'三島甘藷ぴよりん販売')<at(a.text,'ウルフィ'),a.text);
+  assert.doesNotMatch(a.text,/ゴジラ販売/);
+  assert.equal(ids2(a)[0],'imo');
+  const b=askC('いま開催中のイベントは？');
+  assert.match(b.text,/・三島甘藷ぴよりん販売（11月23日（月）まで）/);
+  const lines=b.text.split('\n').filter(l=>l.startsWith('・'));
+  assert.equal(lines.length,5);
+  assert.match(lines[0],/三島甘藷/);
+  assert.match(b.text,/ほか1件あるぴよ。/);
+  assert.doesNotMatch(b.text,/ゴジラ販売|おのだ/);
+});
+test('「これから」「今月」「次の限定」は、始まりの近い順で、開催中の長い企画が先頭を占めない',()=>{
+  const a=askC('これからの予定は？');
+  assert.match(a.text.split('\n')[1],/静岡みかんぴよりんおでかけセット販売/);
+  assert.doesNotMatch(a.text,/推し旅|ゴジラ販売|三島/);
+  const b=askC('次の限定は？');
+  const l=b.text.split('\n').filter(x=>x.startsWith('・'));
+  assert.match(l[0],/静岡みかん/);assert.ok(l.every(x=>!/出展/.test(x)),b.text); // 限定＝販売の予定だけ
+  assert.equal(ids2(b)[0],'mikan');
+  const m=askC('今月の予定は？');
+  const ml=m.text.split('\n').filter(x=>x.startsWith('・'));
+  assert.match(ml[0],/三島甘藷/);assert.match(ml[1],/静岡みかん/); // 推し旅（10/2〜）より先
+  assert.doesNotMatch(m.text,/ゴジラ販売/);
+  assert.match(askC('今月の予定は？','2026-11-22').text,/11月の予定はこれだぴよ！/);
+});
+test('「今日買える」は、今日が期間に入っている短い販売を、終わりまでの日数つきで答える',()=>{
+  for(const q of ['今日買えるぴよりんは？','今日は何が買える？','いま買える限定']){
+    const a=askC(q);
+    assert.equal(a.kind,'event',q);
+    assert.match(a.text,/今日買える限定は、\*\*三島甘藷ぴよりん販売\*\*（11月15日〜23日・あしたまで）だぴよ。定番のぴよりんは毎日あるぴよ。/,q);
+    assert.doesNotMatch(a.text,/ゴジラ|ウルフィ/,q);
+    assert.deepEqual(ids2(a),['imo'],q);
+    assert.equal(tone.piyoTone(a.text),a.text,q);
+  }
+  assert.match(askC('今日買えるぴよりんは？','2026-11-26').text,/\*\*静岡みかんぴよりんおでかけセット販売（アスティ静岡）\*\*（11月26日〜27日・あしたまで）/);
+  assert.match(askC('今日買えるぴよりんは？','2026-11-27').text,/・きょうまで/);
+  assert.match(askC('今日買えるぴよりんは？','2026-11-20').text,/・あと3日/);
+  const none=askC('今日買えるぴよりんは？','2026-11-24');
+  assert.match(none.text,/^今日は限定は入ってないぴよ。次は\*\*静岡みかんぴよりんおでかけセット販売（アスティ静岡）\*\*（11月26日〜27日・あと2日）だぴよ。/);
+  assert.deepEqual(ids2(none),['mikan']);
+  assert.doesNotMatch(none.text,/毎日/); // 限定が無い日に「定番は毎日」とは言わない
+  assert.equal(tone.piyoTone(none.text),none.text);
+});
+test('「定番は毎日ある」は、基本情報にその根拠の行があるときだけ書く',()=>{
+  const weak={lines:['値段（税込）: 定番ぴよりん 450円。','店1 ぴよりんshop: JR名古屋駅。9:00〜20:00。']};
+  const a=askC('今日買えるぴよりんは？','2026-11-22',{basics:weak});
+  assert.match(a.text,/三島甘藷ぴよりん販売/);assert.doesNotMatch(a.text,/毎日/);
+  assert.doesNotMatch(askC('今やってる限定は？','2026-11-22',{basics:weak}).text,/毎日/);
+  assert.match(askC('今やってる限定は？').text,/定番のぴよりんは毎日売ってるぴよ。/);
+});
+test('「次のおでかけ」は、おでかけセットなど外へ出る販売を、これから近い順に 3 つまで期間と場所つきで答える',()=>{
+  for(const q of ['次のおでかけは？','おでかけセットはいつ？','次はどこに来る？']){
+    const a=askC(q);
+    assert.equal(a.kind,'event',q);
+    const l=a.text.split('\n').filter(x=>x.startsWith('・'));
+    assert.equal(l.length,3,q);
+    assert.match(l[0],/静岡みかんぴよりんおでかけセット販売.*11月26日〜27日、アスティ静岡/,q);
+    assert.match(l[1],/1月23日.*京都市勧業館/,q);
+    assert.deepEqual(ids2(a),['mikan','dsale1','dsale2'],q);
+    assert.doesNotMatch(a.text,/おのだ|山陽|ゴジラ|ウルフィ/,q); // 終わった物・お店の中の販売は出ない
+    assert.equal(tone.piyoTone(a.text),a.text,q);
+  }
+  assert.match(askC('次のおでかけは？','2027-02-01').text,/いまは予定に入ってないぴよ/);
+  assert.deepEqual(plain(askC('次のおでかけは？','2027-02-01').refs||[]),[]);
+  // 名前の入った質問は、前と同じ（その予定の答え）
+  assert.match(askC('静岡みかんぴよりんおでかけセットはいつ？').text,/^\*\*静岡みかんぴよりんおでかけセット販売（アスティ静岡）\*\*は\*\*11月26日（木）〜11月27日（金）\*\*/);
+});
+test('値段・買い方・場所を聞く質問や、名前の入った質問は、前と同じく Claude に回す',()=>{
+  assert.equal(askC('三島甘藷ぴよりんはいくら？'),null);
+  assert.equal(askC('静岡みかんぴよりんはどこで買える？'),null);
+  assert.equal(askC('ゴジラは今日買える？'),null);
+  assert.equal(askC('おでかけセットの買い方は？'),null);
+  assert.equal(askC('おでかけセットはいくら？',undefined,{events:REAL_EVENTS}),null); // 本物の予定では、おでかけは 6 件の題にだけあり、予定の名前に当たる
+  const shop=askC('今日どこで買える？');
+  assert.ok(!shop||!/今日買える限定/.test(shop.text));
+});
+test('PiyoCal が無い画面でも落ちず、今までの並べ方で答える',()=>{
+  assert.equal(ctx.window.PiyoCal,undefined);
+  for(const q of ['今やってる限定は？','いま開催中のイベントは？','これからの予定は？','次の限定は？','今月の予定は？','今日買えるぴよりんは？','次のおでかけは？']){
+    const a=askN(q);assert.ok(a&&a.text&&a.kind==='event',q);assert.doesNotMatch(a.text,/ゴジラ販売/,q);
+  }
+  assert.match(askN('次のおでかけは？').text,/静岡みかん/);
+  assert.match(askN('今日買えるぴよりんは？').text,/三島甘藷/);
+});
+test('本物の events.json（2026-11-22 の写し）で、おでかけの判定と答えが同じになる',()=>{
+  const a=askC('次のおでかけは？','2026-11-22',{events:REAL_EVENTS});
+  const l=a.text.split('\n').filter(x=>x.startsWith('・'));
+  assert.equal(l.length,3);assert.match(l[0],/静岡みかん.*11月26日〜27日、アスティ静岡/);
+  assert.ok(REAL_EVENTS.some(e=>e.id==='auto-officialp5657'));
+  assert.match(askC('今日買えるぴよりんは？','2026-11-22',{events:REAL_EVENTS}).text,/三島甘藷ぴよりん販売\*\*（11月15日〜23日・あしたまで）/);
+  assert.match(askC('今日買えるぴよりんは？','2026-11-24',{events:REAL_EVENTS}).text,/^今日は限定は入ってないぴよ。次は\*\*静岡みかん/);
+  assert.match(askC('今やってる限定は？','2026-11-22',{events:REAL_EVENTS}).text.split('\n')[1],/三島甘藷/);
+});
+test('今月・今週・明日・おでかけセットとは、のような広い言い方は、今日の答えにしない',()=>{
+  const q1=askC('今月買える限定は？'); // 今までの「今月の予定」の答え
+  assert.ok(!q1||!/今日買える限定/.test(q1.text));
+  assert.equal(askC('今週は何が買える？'),null);
+  assert.equal(askC('明日買える限定は？'),null);
+  assert.equal(askC('おでかけセットって何？'),null);
+  assert.equal(askC('おでかけセットとは'),null);
+  assert.equal(askC('おでかけセットを買えるのはいつまで？'),null);
+});
+test('PiyoCal の設定（localStorage の piyo-cal）で、長い・短いの境目が変わる',()=>{
+  const set=v=>{ctxCal.localStorage={getItem:k=>k==='piyo-cal'?JSON.stringify(v):null}};
+  try{
+    set({longDays:5}); // 9 日の三島甘藷が「長い」側へ回る→今日の限定には入らない
+    assert.match(askC('今日買えるぴよりんは？').text,/^今日は限定は入ってないぴよ。次は\*\*静岡みかん/);
+    set({group:false}); // まとめない：ぬいぐるみの販売も短い扱い
+    assert.match(askC('今日買えるぴよりんは？').text,/三島甘藷ぴよりん販売\*\*（11月15日〜23日・あしたまで）、\*\*ウルフィ×ぴよりん ぬいぐるみ 店頭販売\*\*/);
+    set({longDays:20}); // 36 日の装飾・推し旅(60日)は長い
+    assert.match(askC('いま開催中のイベントは？').text.split('\n')[1],/三島甘藷/);
+  }finally{delete ctxCal.localStorage}
+  assert.match(askC('今日買えるぴよりんは？').text,/^今日買える限定は、\*\*三島甘藷ぴよりん販売\*\*（11月15日〜23日・あしたまで）だぴよ。/); // 設定が無ければ既定
+});
+test('会話：「今日買える」「次のおでかけ」も、API キーが無くても Claude を呼ばずその場で答え、予定の札を返す',async()=>{
+  const said=[],sent=[],linked=[];
+  const c={PiyoExtras:XC,data:{events:CAL_EVENTS,basics:realBasics,koyomi,weather,news:[],greeting:null},apiKey:'',mac:null,routeMode:'mac-first',pendingQ:'',keyPrompts:0,openKey(){c.keyPrompts++},$:()=>({}),
+    todayStr:()=>'2026-11-22',localStorage:{getItem:()=>null,setItem(){}},Math,OMIKUJI:'piyo-omikuji',refLinks:refs=>(refs||[]).map(r=>({id:r.id})),
+    userMsg(){},piyoMsg:()=>({say(text,done){said.push(text);done?.()},choices(){},links(l){linked.push(l)}}),loop(){},idle(){},play(){},sync(){},fmt:s=>s,piyoTone:tone.piyoTone,
+    consumeSuggest(){},NEED_MORE:{},textOf:r=>r.content[0].text,callClaude:async b=>{sent.push(b);return{content:[{type:'text',text:'答えだぴよ。'}]}}};
+  vm.createContext(Object.assign(c,{freshWeather:c.freshWeather||(()=>null)}));
+  vm.runInContext('let history=[];'+html.slice(html.indexOf('  let busy=false,pendingChip=null;'),html.indexOf('  const sync=()=>'))
+    +html.slice(html.indexOf('  function omikujiSeed('),html.indexOf('  // ---- API キー'))+';this.ask=ask;',c);
+  await c.ask('今日買えるぴよりんは？');
+  await c.ask('次のおでかけは？');
+  assert.equal(sent.length,0);assert.equal(c.keyPrompts,0);
+  assert.match(said[0],/今日買える限定は、\*\*三島甘藷ぴよりん販売\*\*（11月15日〜23日・あしたまで）/);
+  assert.match(said[1],/次のおでかけは、これだぴよ！[\s\S]*静岡みかん/);
+  assert.deepEqual(plain(linked[0].map(l=>l.id)),['imo']);assert.deepEqual(plain(linked[1].map(l=>l.id)),['mikan','dsale1','dsale2']);
 });
