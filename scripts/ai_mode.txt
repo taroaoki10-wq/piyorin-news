@@ -1,3 +1,3 @@
 # Claude の呼び方（GitHub Actions の定期の更新が読む）。api＝Claude API（使った分だけ料金）／none＝Claude を使わない（料金 0）
 # Mac の定額の Claude で更新するときは scripts/update_local.py（こちらは常に定額。この設定に関係なく動く）
-api
+none
