@@ -32,22 +32,6 @@
   }
  },
  {
-  "id": "n20261122-5af2ddee",
-  "date": "2026-11-22",
-  "cat": "media",
-  "title": "『ぴよりん』3店舗がクリスマスムードに",
-  "source": "産経ニュース",
-  "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/photo/VMOKJD6TEFNYPEMPN5DMOMQHJE/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりん3店舗のクリスマス限定商品の記事",
-   "t": "2026-11-22"
-  }
- },
- {
   "id": "n20261122-48d7f772",
   "date": "2026-11-22",
   "cat": "media",
@@ -62,6 +46,46 @@
    "why": "普天間飛行場の会議の記事で、ぴよりんと無関係",
    "t": "2026-11-22"
   }
+ },
+ {
+  "id": "n20261122-5af2ddee",
+  "date": "2026-11-22",
+  "cat": "media",
+  "title": "『ぴよりん』3店舗がクリスマスムードに",
+  "source": "産経ニュース",
+  "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/photo/VMOKJD6TEFNYPEMPN5DMOMQHJE/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん3店舗のクリスマス限定商品の記事で、ぴよりん自体の話題",
+   "t": "2026-11-22"
+  }
+ },
+ {
+  "id": "n20261121-1e5aec85",
+  "date": "2026-11-21",
+  "cat": "media",
+  "title": "JR名古屋駅などの『ぴよりん』3店舗がクリスマスムードに ...",
+  "source": "産経ニュース",
+  "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/?outputType=theme_oriconnews",
+  "related": [
+   {
+    "source": "産経ニュース",
+    "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/photo/VMOKJD6TEFNYPEMPN5DMOMQHJE/"
+   }
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん3店舗のクリスマス装飾を伝える記事",
+   "t": "2026-11-22"
+  },
+  "merged_ids": [
+   "n20261122-5af2ddee"
+  ]
  },
  {
   "id": "n20261121-12f356a0",
@@ -167,10 +191,19 @@
    {
     "source": "オリコンニュース",
     "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1aV0tIdUVnSTJDTW0wam1FaHkwei1ZTFRPdVdxdUEzZ3h1T2dZWkg0clZJNzBuOWpWa1dHRms5aVpnZjk4TUZVdVE1Y21GQlpTM21WYzgyOVJJdw?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE4xUDF0U2RHN0pyZ0RjYjNGRlNWS05vUk1XM1E3TEhkZ2wyRG92TFJYaFpQeXBJV28xc1FNQ1RGamhKV0ZobEM3eS14Z1QybFhBV3lNZEhLVzdEdw?oc=5"
+   },
+   {
+    "source": "ORICON NEWS on MSN",
+    "url": "https://www.msn.com/ja-jp/entertainment/celebrity/%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-jr%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85%E3%81%AA%E3%81%A9%E3%81%AE-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-3%E5%BA%97%E8%88%97%E3%81%8C%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%E3%83%A0%E3%83%BC%E3%83%89%E3%81%AB-%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%E9%99%90%E5%AE%9A%E3%81%AE-%E3%82%AF%E3%83%83%E3%82%AD%E3%83%BC%E7%BC%B6-%E3%82%82%E7%99%BB%E5%A0%B4/ar-AA2hWsk0"
    }
   ],
   "merged_ids": [
    "n20261122-1d64d942",
+   "n20261122-4bf9e5ed",
    "n20261122-7ec7aa9a"
   ],
   "dv": 3,
@@ -178,22 +211,6 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりん3店舗のクリスマス装飾とクッキー缶の記事",
-   "t": "2026-11-22"
-  }
- },
- {
-  "id": "n20261121-1e5aec85",
-  "date": "2026-11-21",
-  "cat": "media",
-  "title": "JR名古屋駅などの『ぴよりん』3店舗がクリスマスムードに ...",
-  "source": "産経ニュース",
-  "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/?outputType=theme_oriconnews",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりん3店舗のクリスマス装飾を伝える記事",
    "t": "2026-11-22"
   }
  },
@@ -759,7 +776,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "メイチカ再開業でぴよりんカフェが取り上げられている",
+   "why": "名古屋駅地下街のリニューアルで、ぴよりんカフェが取り上げられている",
    "t": "2026-11-22"
   }
  },
