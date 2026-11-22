@@ -22,10 +22,12 @@ function systems(){
 }
 
 // 2026-11-13：ユーザーの頼みで「株価は → 日経平均・古い値は書かない」の 1 行を足したので、指紋を取り直した
+// 2026-11-22：購入記録を踏まえた答えのため「<purchases> は利用者の購入記録の要約…」の 1 行を足したので、指紋を取り直した
+// 2026-11-22（版 -4）：写真で聞くため「写真が付いていたら、写っているぴよりんや商品について…」の 1 行を足したので、指紋を取り直した
 test('SYSTEM と SYSTEM_MAC の文は 1 文字も変わっていない',()=>{
   const {SYSTEM,SYSTEM_MAC}=systems();
-  assert.equal(sha(SYSTEM),'037750be4b29e64137af2f00a5bde916b5bb4c576fa61c9439525bbf1729a1fe');
-  assert.equal(sha(SYSTEM_MAC),'7b478a3204e42fa985a86d9a5ec7193ea77781af1b3c4ac5c4421c1976a03c56');
+  assert.equal(sha(SYSTEM),'d6b355218b628be3ea6f1696a2bbacb633ca83a1d5d861f7240b204c15e7b031');
+  assert.equal(sha(SYSTEM_MAC),'3ee9b717eb13f455287907b137a07b58c9d0b9d77b98b70faa42f777f1e754f5');
 });
 
 test('性格は入りのときだけ、指示の末尾に約束どおりの 1 ブロックで足される',()=>{
@@ -134,7 +136,7 @@ test('設定の既定はどれも入り（鍵が無いとき入り・\'1\' で�
     assert.equal(X.flagOn(mem({[X.FLAG_KEYS[n]]:'0'}),n),true);
     assert.match(html,new RegExp(`<input type="checkbox" data-flag="${n}" checked>`));
   }
-  assert.deepEqual(plain(X.FLAG_KEYS),{persona:'piyo-persona-off',memory:'piyo-memory-off',convo:'piyo-convo-off',buysync:'piyo-buysync-off',wxfig:'piyo-wxfig-off'});
+  assert.deepEqual(plain(X.FLAG_KEYS),{persona:'piyo-persona-off',memory:'piyo-memory-off',convo:'piyo-convo-off',buysync:'piyo-buysync-off',wxfig:'piyo-wxfig-off',memofocus:'piyo-memofocus-off',buyctx:'piyo-buyctx-off',photo:'piyo-photo-off',mic:'piyo-mic-off'}); // 2026-11-22 に 4 つ足した（chat2 の試験）
   assert.match(html,/要約だけを送ります（全文は送りません）/);
 });
 

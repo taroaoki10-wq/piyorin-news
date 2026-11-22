@@ -119,16 +119,16 @@ test('決まりの文（SYSTEM）は変えず、today は今までどおり <kno
 
 test('Mac の Claude へ送る knowledge は、2 つを同じ順につないだ 1 つの文（情報は今と同じ）',()=>{
   const src=part('  async function askMac(','  // Mac の道でつまずいたとき');
-  assert.ok(src.includes('knowledge:knowledge()'));
+  assert.ok(src.includes('knowledge:knowledge('));
   const h=kctx({events:[ev('a','2026-11-23','2026-11-24')]});
   const k=h.api.knowledge();
   for(const t of ['<basics','<event id="e1"','<today>2026-11-22','<koyomi>','<weather>'])assert.ok(k.includes(t),t);
 });
 
-test('版は 2026.11.22-3（画面の meta と PN_VERSION が同じ。説明に短い予定・今日買えるぴよりん・会話の続き）',()=>{
-  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.22-3">/);
-  const m=html.match(/const PN_VERSION='2026\.11\.22-3（([^）]*)）'/);assert.ok(m);
-  for(const w of ['ぴよが短い予定を先に答える','今日買えるぴよりん','会話の続きを残す'])assert.ok(m[1].includes(w),w);
+test('版は 2026.11.22-4（画面の meta と PN_VERSION が同じ。-3 の内容は piyo-chat3-20261122.test.cjs が続けて確かめる）',()=>{
+  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.22-4">/);
+  const m=html.match(/const PN_VERSION='2026\.11\.22-4（([^）]*)）'/);assert.ok(m);
+  for(const w of ['Mac をすこし待つ','天気の待ち表示','関係するメモだけ渡す','購入記録を踏まえた答え'])assert.ok(m[1].includes(w),w);
 });
 
 // ---- 3：会話の続きを残す ----

@@ -25,7 +25,7 @@ function setup(){
         url.includes('piyo-basics')?{lines:['basics'+version]}:[{id:'item'+version}];
       return {ok:!url.includes('http-error'),json:async()=>value};
     }};
-  vm.createContext(ctx);vm.runInContext(source+'\n'+html.slice(html.indexOf('  function knowledge(){'),html.indexOf('  async function callClaude('))+'\nthis.api={loadData,freshWeather,weatherLine,knowledge,koyomiKnowledge,weatherKnowledge,get data(){return data}};',ctx);
+  vm.createContext(ctx);vm.runInContext(source+'\n'+html.slice(html.indexOf('  function knowledge('),html.indexOf('  async function callClaude('))+'\nthis.api={loadData,freshWeather,weatherLine,knowledge,koyomiKnowledge,weatherKnowledge,get data(){return data}};',ctx);
   return {ctx,calendar,forecast,respond:(url,value)=>overrides.set(url,value),api:ctx.api,advance:n=>now+=n,setTime:n=>now=Date.parse(n),version:n=>version=n,fail:s=>fail=s,get calls(){return calls},hold:()=>{let done;release=new Promise(r=>done=r);return ()=>{release=null;done()}}};
 }
 test('初回取得、30分未満は再取得せず、30分ちょうどで全データ更新',async()=>{

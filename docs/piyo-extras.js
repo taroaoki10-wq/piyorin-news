@@ -29,7 +29,9 @@ window.PiyoExtras = (function () {
     const scored = list.map((e, i) => [[...eg[i]].filter(x => !common(x) && qg.has(x)).length, e]).filter(([s]) => s >= 2);
     if (!scored.length) return [];
     const best = Math.max(...scored.map(([s]) => s));
-    return scored.filter(([s]) => s >= best * 0.6).map(([, e]) => e).sort((a, b) => a.start.localeCompare(b.start));
+    const out = scored.filter(([s]) => s >= best * 0.6).map(([, e]) => e).sort((a, b) => a.start.localeCompare(b.start));
+    out.top = scored.filter(([s]) => s === best).map(([, e]) => e); // いちばんよく合った予定（events が「終わった予定」を答えるときに使う）
+    return out;
   }
   function status(e, today) {
     const end = endOf(e);
@@ -209,15 +211,19 @@ window.PiyoExtras = (function () {
   const plainTitle = e => { const m = e.title.match(/^(.*?)（([^）]*)）$/); return m && m[1] && ((e.place || '').includes(m[2]) || /^\d+月\d+日$/.test(m[2])) ? m[1] : e.title; };
   // 質問から、決まり文句を外して、予定の名前が残らないとき（＝特定の予定ではなく、ひろく聞いている）
   const generic = (t, words) => t.replace(words, '') === '';
+  // 今日買える限定（今日が期間に入っている販売。期間の長い販売は入れない）を、短い予定の先に並べる
+  function liveLimited(ctx) {
+    const list = (ctx.events || []).filter(e => e && e.start && e.title && e.kind === 'sale'), today = ctx.today;
+    const cp = calPart();
+    // 「限定」は期間の短い販売。長く続く販売（ぬいぐるみの店頭販売など）は入れない
+    return { list, live: liveOrder(list.filter(e => e.start <= today && endOf(e) >= today && !(cp && cp.C.isLong(e, cp.o)))) };
+  }
   function buyToday(t, ctx) {
     if (!/買え/.test(t) || !/今日|きょう|いま|今(?![月年週後度])|何が|なにが/.test(t)) return null;
     // 今月・今週・明日などの質問は、ここでは答えない（今までどおり）
     if (/どこ|場所|いくら|値段|価格|買い方|方法|どうやって|予約|何時|時間|店|なぜ|理由|今月|来月|今週|来週|明日|あした|あす|昨日|今年|来年|今後|今度/.test(t)) return null;
     if (!generic(t, /今日|きょう|いま|今|何が|なにが|買える|買えます|買えるの|限定|ぴよりん|販売|もの|やつ|ある|あるの|です|か|は|が|の|を|も|って|[?？]/g)) return null;
-    const list = (ctx.events || []).filter(e => e && e.start && e.title && e.kind === 'sale'), today = ctx.today;
-    const cp = calPart();
-    // 「限定」は期間の短い販売。長く続く販売（ぬいぐるみの店頭販売など）は入れない
-    const live = liveOrder(list.filter(e => e.start <= today && endOf(e) >= today && !(cp && cp.C.isLong(e, cp.o))));
+    const { list, live } = liveLimited(ctx), today = ctx.today;
     if (!live.length) {
       const next = list.filter(e => e.start > today).sort((a, b) => a.start.localeCompare(b.start))[0];
       return { text: `今日は限定は入ってないぴよ。${next ? `次は**${next.title}**（${shortSpan(next)}・${diff(today, next.start) === 1 ? 'あした' : `あと${diff(today, next.start)}日`}）だぴよ。` : ''}`, refs: next ? [evRef(next)] : [], kind: 'event' };
@@ -255,7 +261,9 @@ window.PiyoExtras = (function () {
       if (!when || /値段|いくら|価格|どこ|場所|買い方|方法|どうやって/.test(t)) return null;
       // 「受付開始」のような1日だけの予定からは、いつまでかは分からない
       if (/まで|締め?切|最終日|終わ/.test(t) && hits.some(e => endOf(e) === e.start && e.kind === 'release')) return null;
-      const live = hits.filter(e => endOf(e) >= today), shown = (live.length ? live : hits.slice(-3)).slice(0, 3);
+      // いちばんよく合った予定が全部終わっているなら、ほかの開催中の予定ではなく、その終わった予定で答える（「ゴジラ販売はいつまで？」にスタンプラリーで答えていた）
+      const top = hits.top || [], topDone = top.length && top.length < hits.length && top.every(e => endOf(e) < today);
+      const live = hits.filter(e => endOf(e) >= today), shown = (topDone ? top.slice(-3) : live.length ? live : hits.slice(-3)).slice(0, 3);
       if (shown.length === 1) {
         const e = shown[0];
         return { text: `**${e.title}**は**${span(e)}**${e.place ? `、${e.place}` : ''}だぴよ。${status(e, today)}`, refs: [evRef(e)], kind: 'event', mood: endOf(e) >= today ? 'jump' : 'wave' };
@@ -286,19 +294,23 @@ window.PiyoExtras = (function () {
     }
     return null;
   }
-  function basics(t, ctx) {
-    const lines = ctx.basics && ctx.basics.lines;
-    if (!Array.isArray(lines) || !lines.length) return null;
-    const all = lines.join('\n'), line = re => lines.find(l => re.test(l)) || '';
-    // 限定品や催しの名前が入った質問は、メモを読める Claude に任せる
-    if (matchEvents(t, ctx.events).length) return null;
-    const shops = lines.filter(l => /^店\d/.test(l)).map(l => {
+  // 基本情報の「店1 …」「店2 …」の行から、お店ごとの名前・場所・営業時間・ぴよりんの販売時間を読む
+  function shopsOf(lines) {
+    return lines.filter(l => /^店\d/.test(l)).map(l => {
       const m = l.match(/^店\d\s*(.+?)[:：]\s*(.+)$/); if (!m) return null;
       const place = m[2].split(/[（。]/)[0].trim();
       const hours = [...m[2].matchAll(/(カフェ|物販)?\s*(\d{1,2}:\d{2}〜\d{1,2}:\d{2})/g)].map(x => (x[1] || '') + x[2]);
       const sale = (m[2].match(/ぴよりんの販売は\s*([\d:・]+)/) || [])[1] || '';
       return { name: m[1].trim(), place, hours, sale, closed: /無休/.test(m[2]) };
     }).filter(Boolean);
+  }
+  function basics(t, ctx) {
+    const lines = ctx.basics && ctx.basics.lines;
+    if (!Array.isArray(lines) || !lines.length) return null;
+    const all = lines.join('\n'), line = re => lines.find(l => re.test(l)) || '';
+    // 限定品や催しの名前が入った質問は、メモを読める Claude に任せる
+    if (matchEvents(t, ctx.events).length) return null;
+    const shops = shopsOf(lines);
     const shopIn = shops.filter(s => {
       const k = hira(s.name + ' ' + s.place);
       return (/アトリエ|勝川/.test(t) && /あとりえ|勝川/.test(k)) || (/village|ヴィレッジ|ビレッジ|カフェ/i.test(t) && /village/.test(k)) || (/うまいもん|広小路/.test(t) && /うまいもん/.test(k));
@@ -394,7 +406,196 @@ window.PiyoExtras = (function () {
       const o = omikuji(ctx);
       return { text: (ctx.omikuji.drawn ? '今日はもう引いたぴよ！結果をもう一度言うね。\n' : '') + o.text, kind: 'omikuji', mood: /大吉|中吉/.test(o.fortune) ? 'jump' : 'wave' };
     }
-    return weather(t, ctx) || koyomi(t, ctx) || events(t, ctx) || basics(t, ctx) || null;
+    return weather(t, ctx) || koyomi(t, ctx) || beforeGo(t, ctx) || buyAsk(t, ctx) || events(t, ctx) || basics(t, ctx) || null;
+  }
+
+  // ---- 購入記録を踏まえた答え・行く前のまとめ・メモの絞り込み・読み上げ（2026-11-22） ----
+  // 利用者が打った文（品名・店名など）の「<」「>」は全角にし、改行は空白に（Claude へ渡す文の枠や画面を壊されないように）
+  const angle = s => String(s == null ? '' : s).replace(/</g, '＜').replace(/>/g, '＞').replace(/\s+/g, ' ').trim();
+  const isDate = s => /^\d{4}-\d{2}-\d{2}$/.test(String(s || ''));
+  const numOf = v => (v == null || v === '' || !Number.isFinite(Number(v)) ? null : Number(v));
+  const itemQty = it => { const n = Math.floor(Number(it && it.qty)); return n >= 1 ? n : 1; };
+  const isPiyorin = it => it.cat === 'piyorin' || it.name === 'villageぴよりん' || (!it.cat && /ぴよりん$/.test(it.name));
+  const yenText = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '円';
+  // ctx.buy.records（PiyoBuy の記録）を、新しい順の「日付と品のある記録」にする。ctx.buy が無ければ null
+  function buyRecords(ctx) {
+    const list = ctx && ctx.buy && ctx.buy.records;
+    if (!Array.isArray(list)) return null;
+    return list.filter(r => r && isDate(r.date) && Array.isArray(r.items))
+      .map(r => ({ ...r, items: r.items.filter(it => it && typeof it.name === 'string' && it.name) }))
+      .filter(r => r.items.length)
+      .sort((a, b) => (a.date !== b.date ? (a.date < b.date ? 1 : -1) : String(b.time || '').localeCompare(String(a.time || ''))));
+  }
+  function buyStats(recs) {
+    const s = { visits: recs.length, pieces: 0, piyorin: 0, kinds: new Set(), byName: new Map(), yen: 0, priced: 0, unpriced: 0 };
+    for (const r of recs) for (const it of r.items) {
+      const q = itemQty(it), p = numOf(it.price);
+      s.pieces += q;
+      if (isPiyorin(it)) { s.piyorin += q; s.kinds.add(it.name); }
+      s.byName.set(it.name, (s.byName.get(it.name) || 0) + q);
+      if (p != null && p >= 0) { s.yen += p * q; s.priced++; } else s.unpriced++;
+    }
+    s.top = [...s.byName].sort((a, b) => b[1] - a[1]);
+    return s;
+  }
+  const buyWhen = (date, today) => { const n = diff(date, today); return n < 0 ? '' : n === 0 ? '今日' : n === 1 ? '昨日' : `${n}日前`; };
+  const buyItems = items => {
+    const names = items.map(it => angle(it.name).slice(0, 30) + (itemQty(it) > 1 ? `×${itemQty(it)}` : ''));
+    return names.slice(0, 4).join('・') + (names.length > 4 ? `ほか${names.length - 4}品` : '');
+  };
+  // 質問にある期間（今年・今月・去年・先月）。無ければ null
+  function buyPeriod(t, today) {
+    const y = Number(today.slice(0, 4));
+    if (/今月/.test(t)) return { label: '今月', prefix: today.slice(0, 7) };
+    if (/先月/.test(t)) return { label: '先月', prefix: addDays(today.slice(0, 8) + '01', -1).slice(0, 7) };
+    if (/今年/.test(t)) return { label: '今年', prefix: String(y) };
+    if (/去年|昨年/.test(t)) return { label: '去年', prefix: String(y - 1) };
+    return null;
+  }
+  // 質問から、聞き方の決まり文句を外して、何か残れば品名（ゴジラ・サブレなど）として探す
+  const BUY_GENERIC = /よく|多く|多い|頼|食べ|今まで|これまで|いままで|今年|今月|去年|昨年|先月|最後|最近|直近|前に|前は|この前|こないだ|先日|いちばん|一番|新しい|最新|買った|買って|買い|買う|購入|いつ|何個|何回|何度|何こ|何件|何種類|何杯|いくつ|どのくらい|どれくらい|どれだけ|いくら|使った|使って|使い|使う|払った|払って|支払|金額|総額|合計|全部|ぜんぶ|かかった|ぴよりん|ですか|です|だけ|ぐらい|くらい|のは|ある|ない|もの|物|何|[はをにがのもでか?]/g;
+  const NO_BUY = 'まだ購入記録が無いぴよ。「購入記録」のタブから付けられるぴよ。';
+  function buyAsk(t, ctx) {
+    t = norm(t);
+    const recs = buyRecords(ctx), today = ctx && ctx.today;
+    if (!t || !recs || !isDate(today)) return null;
+    // 買い方・買える物・値段など、販売の質問は取らない（今までどおり）
+    if (/買え|どこで買|どこで売|どこに売|買い方|方法|どうやって|予約|値段|価格|何円|何時|売り切れ|売ってる|売っている|売り場|買いたい|買いに|買うなら|おすすめ|オススメ/.test(t)) return null;
+    const BUYW = /買|購入/.test(t), per = buyPeriod(t, today);
+    const reply = text => ({ text, kind: 'buy', refs: [] });
+    let kind = '', name = '';
+    const ever = t.match(/^(.+?)(?:は|を|って|も)?(?:前に|今まで|これまで|いままで)?(?:買った|購入した|食べた)(?:こと|事)(?:が|は)?(?:ある|あっ|ない|ありま|なか)/);
+    if (/いくら|金額|総額|合計/.test(t) && /使った|使って|使い|使う|払った|払って|支払|今まで|これまで|いままで|かかった|買った(?!ら)|購入した(?!ら)/.test(t)) kind = 'money';
+    else if (/いちばん買|一番買|よく買|多く買|いちばん多|一番多|よく食べ|よく頼/.test(t)) kind = 'top';
+    else if (ever && (name = ever[1].replace(/^(?:今まで|これまで|いままで|前に|いつか)/, '').trim())) kind = 'ever';
+    else if ((/最後|最近|前に|前は|この前|こないだ|先日|直近|いちばん新し|一番新し|最新/.test(t) && BUYW) || /いつ.*(買った|買い|購入)|(買った|購入した).*いつ/.test(t)) kind = 'last';
+    else {
+      const strong = /何個|何回|何こ|何件|何種類|いくつ|どれだけ|どのくらい|どれくらい|何杯/.test(t) || (/何度/.test(t) && BUYW);
+      // 「買」が無いときは、期間（今年・今まで…）の言葉があって、予定・天気などの質問ではないときだけ
+      const asked = BUYW || ((per || /今まで|これまで|いままで/.test(t)) && !/予定|イベント|限定|販売|開催|おでかけ|祝日|連休|休み|ニュース|記事|満月|新月|曜日|種類が|出た/.test(t) && !weatherAsk(t));
+      if (strong && asked && !/入り|入って|入る/.test(t)) kind = 'count';
+    }
+    if (!kind) return null;
+    if (!recs.length) return reply(NO_BUY);
+    if (kind === 'ever') {
+      const key = hira(name.normalize('NFKC'));
+      const hit = recs.filter(r => r.items.some(it => hira(it.name.normalize('NFKC')).includes(key)));
+      if (!hit.length) return reply(`「${angle(name)}」は、購入記録には見当たらないぴよ。`);
+      const pieces = hit.reduce((n, r) => n + r.items.filter(it => hira(it.name.normalize('NFKC')).includes(key)).reduce((m, it) => m + itemQty(it), 0), 0);
+      const r = hit[0], when = buyWhen(r.date, today);
+      return reply(`「${angle(name)}」は買ったことあるぴよ！記録では**${hit.length}回**（${pieces}個）で、最後は**${jp(r.date)}**${when ? `（${when}）` : ''}だぴよ。`);
+    }
+    // 品名が入った質問（「ゴジラはいつ買った？」「いちごぴよりんは何個買った？」）は、その品だけの記録で答える。品名に当たらない言葉が残るときは Claude へ
+    let use = recs, who = '';
+    const rest = t.replace(BUY_GENERIC, '');
+    if (rest) {
+      const key = hira(rest.normalize('NFKC')), has = it => hira(it.name.normalize('NFKC')).includes(key);
+      use = kind !== 'top' && key.length >= 2 ? recs.map(r => ({ ...r, items: r.items.filter(has) })).filter(r => r.items.length) : [];
+      if (!use.length) return null;
+      who = `「${angle(rest)}」`;
+    }
+    const sub = per ? use.filter(r => r.date.startsWith(per.prefix)) : use, label = per ? per.label + 'の' : '今までの';
+    if (kind === 'last') {
+      const r = use.find(x => x.date <= today) || use[0], when = buyWhen(r.date, today);
+      return reply(`${who}${who ? 'を' : ''}最後に買ったのは**${jp(r.date)}**${when ? `（${when}）` : ''}だぴよ。${r.shop ? `${angle(r.shop)}で、` : ''}${buyItems(r.items)}を買ったぴよ。`);
+    }
+    if (!sub.length) return reply(`${per.label}の購入記録は、まだ無いぴよ。`);
+    const s = buyStats(sub);
+    if (kind === 'top') {
+      return reply(`${per ? per.label + 'いちばん' : 'いちばん'}買ってるのは、${s.top.slice(0, 3).map(([n, q], i) => `${i + 1}位 ${angle(n).slice(0, 30)}（${q}個）`).join('、')}だぴよ。`);
+    }
+    if (kind === 'money') {
+      if (!s.priced) return reply('値段が入った記録がまだ無いから、金額は分からないぴよ。');
+      return reply(`${per ? per.label + 'は' : 'いままでに'}${who ? who + 'に' : ''}**${yenText(s.yen)}**使ったぴよ。${s.unpriced ? `値段が入ってない${s.unpriced}品は入れてないぴよ。` : ''}`);
+    }
+    if (who) return reply(`${label}${who}の記録は**${s.visits}回**、全部で**${s.pieces}個**だぴよ。`);
+    return reply(`${label}購入記録は**${s.visits}回**、全部で**${s.pieces}個**だぴよ。ぴよりんは**${s.piyorin}個**（${s.kinds.size}種類）だぴよ。`);
+  }
+  // Claude へ渡す短い要約（600 字まで。メモは入れない）。記録が無ければ ''
+  function buySummary(records, today) {
+    const recs = buyRecords({ buy: { records } });
+    if (!recs || !recs.length) return '';
+    const s = buyStats(recs), cut = (x, n) => angle(x).slice(0, n);
+    const head = `購入記録（利用者の端末の記録。今日は${cut(today, 10)}）：合計${s.visits}回・${s.pieces}個（ぴよりん${s.piyorin}個）。`
+      + `よく買う物：${s.top.slice(0, 3).map(([n, q]) => `${cut(n, 20)}×${q}`).join('・')}。`;
+    const recent = recs.slice(0, 5).map(r => `${+r.date.slice(5, 7)}/${+r.date.slice(8)}${r.shop ? ' ' + cut(r.shop, 20) : ''} ${r.items.slice(0, 4).map(it => cut(it.name, 20) + (itemQty(it) > 1 ? `×${itemQty(it)}` : '')).join('・')}${r.items.length > 4 ? `ほか${r.items.length - 4}品` : ''}`);
+    let text;
+    for (;;) {
+      text = head + '直近：' + recent.join('／');
+      if (text.length <= 600 || recent.length <= 1) break;
+      recent.pop();
+    }
+    if (text.length > 600) { text = text.slice(0, 600); if (/[\uD800-\uDBFF]$/.test(text)) text = text.slice(0, -1); }
+    return text;
+  }
+  // 行く前のまとめ（今日買える限定・営業時間と売り切れ・今日の天気・前に買ったときの待ち時間）。ある物だけ並べる
+  function beforeGo(t, ctx) {
+    t = norm(t);
+    if (!t || !ctx || !isDate(ctx.today)) return null;
+    if (/どこ|いつ|何時|どうやって|行き方|アクセス|なぜ|理由/.test(t)) return null;
+    if (/予定|イベント|キャンペーン|スケジュール|開催中|何がある|なにがある/.test(t)) return null; // 予定を聞いている質問は、予定の答えに任せる（まとめは短い販売しか並べない）
+    if (!/(行く|いく|出かける|出掛ける|向かう)前|これから.*(買い|行(?:く|こ|き)|いく(?![らつ])|出かけ|向かう)|(今日|きょう|今から|いまから|いま).*(行く|いく(?![らつ])|行こう|行きたい|買いに)|買いに(行|いく(?![らつ]))/.test(t)) return null;
+    // 特定の予定の名前が入った質問（「〇〇を買いに行くけど、いつまで？」）は、予定の答えに任せる
+    if (matchEvents(t.replace(/名古屋駅|名古屋|勝川駅|勝川|アトリエ店?|ぴよりん[sS]hop|village|ヴィレッジ|ぴよりん|[駅店]/g, ''), ctx.events).length) return null;
+    const today = ctx.today, { live } = liveLimited(ctx), shown = live.slice(0, 3), lines = ['行く前のまとめだぴよ！'];
+    lines.push(shown.length
+      ? `・今日買える限定：${shown.map(e => `**${e.title}**（${shortSpan(e)}・${leftWord(e, today)}）`).join('、')}${live.length > 3 ? `、ほか${live.length - 3}件` : ''}`
+      : '・今日の限定は予定に入ってないぴよ。');
+    const bl = ctx.basics && Array.isArray(ctx.basics.lines) ? ctx.basics.lines : [];
+    const shop = shopsOf(bl).find(s => s.hours.length);
+    let official = false;
+    if (shop) { lines.push(`・営業時間：${shop.name} ${shop.hours.join('・')}${shop.sale ? `（ぴよりんの販売は${shop.sale}）` : ''}`); official = true; }
+    if (bl.some(l => /すぐ売り切れる/.test(l))) { lines.push('・売り切れ：すぐ売り切れることが多いから、早めに行くといいぴよ。'); official = true; }
+    const w = (ctx.weather || []).find(x => x && x.date === today);
+    if (w) lines.push(`・今日の天気：${w.word}、最高${w.max}℃・最低${w.min}℃${w.rain != null ? `、雨の確率${w.rain}%` : ''}${w.rain >= 50 ? '。傘があると安心だぴよ' : ''}`);
+    const recs = buyRecords(ctx) || [], avg = list => (list.length ? list.reduce((a, b) => a + b, 0) / list.length : null);
+    const wait = avg(recs.map(r => numOf(r.wait)).filter(x => x != null)), crowd = avg(recs.map(r => numOf(r.crowd)).filter(x => x != null && x >= 1));
+    const past = [wait != null ? `待ち${Math.round(wait)}分くらい` : '', crowd != null ? `混み具合は5段階で平均${Math.round(crowd * 10) / 10}` : ''].filter(Boolean);
+    if (past.length) lines.push(`・前に買ったときは、${past.join('・')}だったぴよ。`);
+    if (official) lines.push(OFFICIAL);
+    return { text: lines.join('\n'), kind: 'go', refs: shown.map(evRef) };
+  }
+
+  // ---- Claude へ渡すメモを、質問に関係する物だけに絞る ----
+  // 言葉：カタカナの連なり（2 字以上）・漢字の連なり（2 字以上。3 字以上は 2 字ずつの切れ端も）・英数字の語（2 字以上）
+  function memoWords(text) {
+    const s = String(text || '').normalize('NFKC'), out = new Set();
+    for (const m of s.matchAll(/[ァ-ヶ][ァ-ヶー]+/g)) out.add(m[0]);
+    for (const m of s.matchAll(/[一-龯々〆]{2,}/g)) { out.add(m[0]); if (m[0].length >= 3) for (let i = 0; i < m[0].length - 1; i++) out.add(m[0].slice(i, i + 2)); }
+    for (const m of s.matchAll(/[A-Za-z0-9]{2,}/g)) out.add(m[0].toLowerCase());
+    return out;
+  }
+  const MEMO_ALIASES = [['高島屋', '髙島屋', 'タカシマヤ', 'たかしまや'], ['名古屋駅', '名駅'], ['jr', 'ジェイアール'], ['クリスマス', 'xmas'], ['ハロウィン', 'ハロウィーン'], ['バレンタイン', 'ヴァレンタイン'], ['village', 'ヴィレッジ', 'ビレッジ'], ['shop', 'ショップ'], ['market', 'マーケット'], ['カフェ', 'cafe', 'café']];
+  // 返すのは、残すメモの番号（0 始まり・昇順）。opt: top（既定 16）・fresh（既定 6）・min（既定 20。これ以下の件数は全部返す）
+  function pickMemos(memos, q, history, opt) {
+    const list = Array.isArray(memos) ? memos : [], o = opt || {};
+    const top = Number.isFinite(o.top) ? o.top : 16, fresh = Number.isFinite(o.fresh) ? o.fresh : 6, min = Number.isFinite(o.min) ? o.min : 20;
+    const all = list.map((_, i) => i);
+    if (list.length <= min) return all;
+    const users = (Array.isArray(history) ? history : []).filter(h => h && h.role === 'user' && typeof h.content === 'string').slice(-2).map(h => h.content);
+    const words = [...new Set([q, ...users].flatMap(x => [...memoWords(x)]))];
+    // 書き方がいくつもある名前は、どの書き方のメモも拾う（「高島屋」で聞いて「タカシマヤ」と書いたメモが落ちていた）
+    const asked = [q, ...users].join(' ').normalize('NFKC').toLowerCase();
+    for (const g of MEMO_ALIASES) if (g.some(w => asked.includes(w))) for (const w of g) if (!words.includes(w)) words.push(w);
+    if (!words.length) return all;
+    const texts = list.map(m => (typeof m === 'string' ? m : `${(m && m.title) || ''} ${(m && m.memo) || ''}`).normalize('NFKC').toLowerCase());
+    // メモの半分以上に出る言葉（「ぴよりん」「販売」など）は点にしない
+    const keep = words.filter(w => texts.filter(x => x.includes(w)).length * 2 < list.length);
+    if (!keep.length) return all;
+    const score = texts.map(x => keep.reduce((n, w) => n + (x.includes(w) ? 1 : 0), 0));
+    if (!score.some(s => s > 0)) return all;
+    const out = new Set(all.filter(i => score[i] > 0).sort((a, b) => score[b] - score[a] || a - b).slice(0, Math.max(0, top)));
+    for (let i = 0; i < Math.min(Math.max(0, fresh), list.length); i++) out.add(i);
+    return [...out].sort((a, b) => a - b);
+  }
+
+  // ---- 読み上げ用に、答えの文から飾りを外す（** ・出典の印・URL・絵文字・行頭の「・」。改行は「。」でつなぐ） ----
+  function speakText(text) {
+    if (typeof text !== 'string' || !text) return '';
+    const lines = text.replace(/\[\[[^\]]*\]\]/g, '').replace(/\[[A-Za-z]\d+(?:[\s,、]*[A-Za-z]\d+)*\]/g, '')
+      .replace(/https?:\/\/[\x21-\x7e]+/g, '').replace(/\*\*/g, '').replace(/[\p{Extended_Pictographic}️‍⃣]/gu, '')
+      .split(/\r?\n/).map(l => l.replace(/^[\s　]*[・•]\s*/, '').replace(/[ \t　]+/g, ' ').trim()).filter(Boolean);
+    return lines.reduce((acc, l) => (acc ? acc + (/[。！？!?]$/.test(acc) ? '' : '。') + l : l), '');
   }
 
   // ---- あいさつの先頭に足す一言（時間帯のあいさつと、近い予定の「あと◯日」） ----
@@ -667,8 +868,12 @@ window.PiyoExtras = (function () {
 
   // ---- 記憶と性格をつなぐ（Claude Pet との受け渡しの約束 2026-11-13） ----
   // 設定は localStorage の鍵が '1' のときだけ切（鍵が無いときは入り）
-  const FLAG_KEYS = { persona: 'piyo-persona-off', memory: 'piyo-memory-off', convo: 'piyo-convo-off', buysync: 'piyo-buysync-off', wxfig: 'piyo-wxfig-off' };
+  const FLAG_KEYS = { persona: 'piyo-persona-off', memory: 'piyo-memory-off', convo: 'piyo-convo-off', buysync: 'piyo-buysync-off', wxfig: 'piyo-wxfig-off',
+    memofocus: 'piyo-memofocus-off', buyctx: 'piyo-buyctx-off', photo: 'piyo-photo-off', mic: 'piyo-mic-off' };
   function flagOn(storage, name) { try { return !storage || storage.getItem(FLAG_KEYS[name]) !== '1'; } catch (_) { return true; } }
+  // 既定が切の設定（鍵が '1' のときだけ入り。storage が無ければ切）
+  const OPT_KEYS = { speak: 'piyo-speak' };
+  function optOn(storage, name) { try { return !!storage && !!OPT_KEYS[name] && storage.getItem(OPT_KEYS[name]) === '1'; } catch (_) { return false; } }
   const MEMORY_KEY = 'piyo-memory-card', MEMORY_DAYS = 7;
   function personaBlock(p) {
     const t = p && typeof p.text === 'string' ? p.text.trim() : '';
@@ -771,5 +976,6 @@ window.PiyoExtras = (function () {
   }
 
   return { outingEvents, eventChips, weatherAsk, weatherFigure, weatherKind, bareStock, localAnswer, greeting, tidbit, tidbits, omikuji, matchEvents, refs, streamView, readMessage, parseMacLink, readRelay, ics, norm, checkFacts, followUps, topicOf, plannedLine,
+    pickMemos, buyAsk, buySummary, beforeGo, speakText, OPT_KEYS, optOn,
     flagOn, FLAG_KEYS, personaBlock, memoryBlock, saveMemoryCard, readMemoryCard, composeSystem, readMacLink, macJson, syncBody };
 })();

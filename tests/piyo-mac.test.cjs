@@ -162,12 +162,12 @@ test('調べる回数の上限で止まったら、ここまでの答えに一�
 test('「Mac を優先」：Mac につながらなければ一言そえて API で答える',async()=>{
   const h=chat({mac:LINK,apiKey:'sk-ant-test',relay:()=>{throw new TypeError('Load failed')}});
   await h.c.ask(Q);
-  assert.deepEqual(h.fetched.map(f=>f.url),[URL0+'/piyo-news/health']);
-  assert.deepEqual(h.said.map(s=>s.text),['考え中だぴよ…','Mac につながらないから API で答えるぴよ。','考え中だぴよ…','API の答えだぴよ。']);
+  assert.deepEqual(h.fetched.map(f=>f.url),[URL0+'/piyo-news/health',URL0+'/piyo-news/health']); // 2026-11-22：つながらなければ 1 回だけやり直す
+  assert.deepEqual(h.said.map(s=>s.text),['考え中だぴよ…','Mac を呼んでるぴよ…','Mac につながらないから API で答えるぴよ。','考え中だぴよ…','API の答えだぴよ。']);
   assert.equal(h.sent.length,1);assert.equal(h.c.isBusy(),false);
   // 送る段階でつながらなくても（確かめたあとに Mac が寝た）API で答える
   const h2=chat({mac:LINK,apiKey:'sk-ant-test',relay:url=>{if(url.endsWith('/health'))return healthOk();throw new TypeError('Load failed')}});
-  await h2.c.ask(Q);assert.equal(h2.sent.length,1);assert.equal(h2.said[1].text,'Mac につながらないから API で答えるぴよ。');
+  await h2.c.ask(Q);assert.equal(h2.sent.length,1);assert.equal(h2.said[2].text,'Mac につながらないから API で答えるぴよ。'); // 送るところもやり直す（「Mac を呼んでるぴよ…」が 1 つ入る）
 });
 
 test('「Mac だけ」：つながらなくても API に切り替えず、API キーがあれば「API で聞く」ボタンを出す',async()=>{
