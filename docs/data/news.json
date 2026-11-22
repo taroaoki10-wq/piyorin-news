@@ -1,5 +1,37 @@
 [
  {
+  "id": "n20261122-5634ebe9",
+  "date": "2026-11-22",
+  "cat": "media",
+  "title": "スパーンが優勝 男子ゴルフ",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/gpnews/1779257/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": false,
+   "why": "ゴルフの大会結果の記事で、ぴよりんと無関係",
+   "t": "2026-11-22"
+  }
+ },
+ {
+  "id": "n20261122-1b40fe88",
+  "date": "2026-11-22",
+  "cat": "media",
+  "title": "古謝知事、普天間会議の開催要求",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/gpnews/1779256/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": false,
+   "why": "沖縄県知事と官房長官の会談記事で、ぴよりんと無関係",
+   "t": "2026-11-22"
+  }
+ },
+ {
   "id": "n20261121-12f356a0",
   "date": "2026-11-21",
   "cat": "media",
@@ -45,6 +77,94 @@
   }
  },
  {
+  "id": "n20261121-e7d1e20a",
+  "date": "2026-11-21",
+  "cat": "media",
+  "title": "【ぴよりん】JR名古屋駅などの『ぴよりん』3店舗がクリスマスムードに クリスマス限定の「クッキー缶」も登場（オリコン）",
+  "source": "ORICON NEWS",
+  "url": "https://www.oricon.co.jp/news/2494384/full/",
+  "related": [
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE8wQjV1VEtab2gtaG80UnMyVDNkTDBmMVZHZzYtakY2VHg2U3VjNEoxTWJhRzlWMFIxejN2bGU4RTc1Q0E2Zk1KVHlrcl9GSGNDZjNxa2lLeUNLaTRFVVhXYU1rN0tMUDh1b2dUN0NuR0pDb2lnTzhCYjUzZHMzbms?oc=5"
+   },
+   {
+    "source": "佐賀新聞",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1Oa0ZsSm8xZG5xbko4R1hROUd1Vkt5ZkFwYm16SnFUb21udFdjckNWbDN3TGY3WTdkdjhNREhHY0V6X0NBSlc1S3dQTlVkX0hDbzExX05R?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9ZX3FWYjBEMmEzbTlHclRRWHR2Y3dmalVIWUVXYkpWZ0JEYzFHV2JwbkpSbUVlOXZ1QTEtUy1CUGVpRnktNWRVejk4VjREaGxWVW5YdHNqY0s3N1pYTVE?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFA3cFFPaGxrM3VUMmVOZkVvTlVCbXBGR1Fac0wyRDc2TGY0UktSWDY1RWlZR3VaM1ZYZXRiTFdHbDJCMGl1NmNWYVVfY1dzZ3JrOGJMNHJNQm5DVXc?oc=5"
+   },
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPZkVhcVRTcHpCdjNfcDFKVExPRXVJSzFtd3N4WXM5YlBUMGNCTnUyWFNPTDZ6dUU3bWFYMnRmaWpSc3BBQmRXSW5wNzBtTXBWZTBDVlJkUFkwYkZxeUdXWHgweEJNQnBGTDZldFlyaFVjNExUTzVzV2FyaC05WHFCekFIbHZDMmxXTTQ5V2FR?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1teTljR0dKLVVVNFlTcUJFWGRBWDI3Zjl4R01WdXJXTVU4ZlhXeVFid1Y0Z3lxd3JRTkNWcVBQTG5WMkx1XzZBeUptNUFZYlhfbWptYU5NWEJGa2htbUxNbA?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE83VktjaDFTSGZaMEFtNm1UMnNxajFWQXpWd0JPNnVFeTh1OE5aUm9KVkx5RGtiSGotS2tkclkwemFZR0xNc2otZFhtTWtlOWwycmdRSm5ISU9ydw?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE4wVDZEUW9OMFFfNG93MEkya2FtdmQxLU5XRmxQcFQwT0dUU0RibmNqSkJNMUFITHlVZy1QTnExTE9sWU5vZk9ELWtGLXA0Y3hoNWdrdTZqcnNZZzV0WGhV?oc=5"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5wWDJjT29GbDhNWWtDVm9Vb3J0VkxRdEljNjNXdkhBRkdOaWhFTjhldEQ4Z2dndVJ1UksxQ0htTHMydjlSTmdrZEhmclFCT09HLV9XRFF3?oc=5"
+   }
+  ],
+  "merged_ids": [
+   "n20261122-7ec7aa9a"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん3店舗のクリスマス装飾とクッキー缶の記事",
+   "t": "2026-11-22"
+  }
+ },
+ {
+  "id": "n20261121-1e5aec85",
+  "date": "2026-11-21",
+  "cat": "media",
+  "title": "JR名古屋駅などの『ぴよりん』3店舗がクリスマスムードに ...",
+  "source": "産経ニュース",
+  "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/?outputType=theme_oriconnews",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん3店舗のクリスマス装飾を伝える記事",
+   "t": "2026-11-22"
+  }
+ },
+ {
+  "id": "n20261121-b910a11d",
+  "date": "2026-11-21",
+  "cat": "media",
+  "title": "ぴよりん3店舗がクリスマス仕様",
+  "source": "mixiニュース",
+  "url": "https://news.mixi.jp/view_news.pl?id=9038276&media_id=54&from=widget&widget_type=1&widget_setting=0",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん3店舗のクリスマス仕様を伝える記事",
+   "t": "2026-11-22"
+  }
+ },
+ {
   "id": "n20261120-a4d4992f",
   "date": "2026-11-20",
   "cat": "press",
@@ -75,9 +195,14 @@
    {
     "source": "ニコニコニュース",
     "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1jSE9tWDRLNkR5aDExOFBTMDNWZVJkanYyR1l6SGdhLU9Zdm5sdjVDd2w1N05VUlVoeTFtTENGRzZUQmpJcWlUZW5PZnEycm1iQW51dzEzTjNuNkhVRVVOSy1jSHdHSy1k?oc=5"
+   },
+   {
+    "source": "MANTANWEB（まんたんウェブ）",
+    "url": "https://mantan-web.jp/prtimes/article/20261120prt00m200000258a.html"
    }
   ],
   "merged_ids": [
+   "n20261120-0821b830",
    "n20261120-3d386534",
    "n20261120-b5f14b9d"
   ],
@@ -569,7 +694,7 @@
   "jg": {
    "v": 1,
    "ok": true,
-   "why": "記事見出しにぴよりんカフェとあり、ぴよりん出店の話題",
+   "why": "名古屋駅地下街のリニューアルでぴよりんカフェが取り上げられている",
    "t": "2026-11-22"
   }
  },
@@ -1017,6 +1142,42 @@
    "why": "タイトルは山陽百貨店の行列で、ぴよりんとの関連が見当たらない",
    "t": "2026-11-08"
   }
+ },
+ {
+  "id": "n20260716-76391320",
+  "date": "2026-11-07",
+  "cat": "media",
+  "title": "【静岡駅】限定「みかんぴよりん」が登場！アスティ静岡で11月26、27日に整理券配布し特別販売",
+  "source": "dメニューニュース",
+  "url": "https://topics.smt.docomo.ne.jp/article/ats_sbs/region/ats_sbs-2090982",
+  "related": [
+   {
+    "source": "＠S[アットエス]",
+    "url": "https://www.at-s.com/life/article/ats/2090982.html"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPNE1KcG1PazBqejFIcmRIR3FWZFVOV0tWOHFoX2lodHNaSEc0RmRNZjFnQVp3V20zSDJ5LWtpUUFOYjFzY3E3LWg5UkFqekJSc19qQWRWVGU4UlJhYXo5RkxGNE9vWjFNb2dmcElwLUVDNUxVQmdLUG53WGxxb2pfbXJ4R1lJZDExdGhpcG5aTmhGdk0tMmk4RXJLM2liaFRfdUxvWXBXeGN2OGNKQ2p5OHdpRU44TWIxaS1lQlFsRHd3N1MwWEQteExBYlY5T1HSAX9BVV95cUxNUE1nRy1hYTJaTFJNTG1FcnpXRG84MmkyX3hwaGRsN0tfenVZbTl2S0pFU2NndVdpNm1BSmZ3SWZfOHREdUpvcXRoQVppV2NSSnlsM1NfVGF1UWtaeG5pQ05lSDhwbE5YLWxaTVc4QnhkSHdtLXNiRTdNdTg1dGxB?oc=5"
+   },
+   {
+    "source": "ｄメニューニュース",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1QTWdHLWFhMlpMUk1MbUVyeldEbzgyaTJfeHBoZGw3S196dVltOXZLSkVTY2d1V2k2bUFKZndJZl84dER1Sm9xdGhBWmlXY1JKeWwzU19UYXVRa1p4bmlDTmVIOHBsTlgtbFpNVzhCeGRId20tc2JFN011ODV0bEHSAX9BVV95cUxNUE1nRy1hYTJaTFJNTG1FcnpXRG84MmkyX3hwaGRsN0tfenVZbTl2S0pFU2NndVdpNm1BSmZ3SWZfOHREdUpvcXRoQVppV2NSSnlsM1NfVGF1UWtaeG5pQ05lSDhwbE5YLWxaTVc4QnhkSHdtLXNiRTdNdTg1dGxB?oc=5"
+   },
+   {
+    "source": "アットエス",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1pbms3cU1BdWtna0dQSGJlRzFDVE9LQ2Q5YjBMdVR3MXdwWHNCb0R3UERkOU1rTjhPdVJ1Z2tVbnBZanlBV1plTzlMUWc5Z2xwTGpSWWMyNC1QTUdoR3A4?oc=5"
+   }
+  ],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん限定「みかんぴよりん」の販売記事（重複）",
+   "t": "2026-11-07"
+  },
+  "merged_ids": [
+   "n20261107-a74a5751"
+  ],
+  "dv": 3
  },
  {
   "id": "n20261106-a3eb9df5",
@@ -7395,7 +7556,7 @@
   "cat": "media",
   "title": "ぴよりん×バーミキュラ 初の「鍋ぴよりん」体験教室 名古屋市（2026年8月21日掲載）｜中京テレビNEWS NNN",
   "source": "日テレNEWS NNN",
-  "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPbzlHTnFLNEw4ejc0R1FmTjFYOXdzUm9DNVFxXzEtTUN0TVlmeG5XTWZiczk2OE5xa0g5X18xQVdhVVpEWWx6X2NwMjdRNEhTdmN6X2czOG5UeXFpZVhQUnU3TTdTUWV2TWs5ZC0zSEdzMWxZUnBXTTVkVmtaQS1tWUVKYw?oc=5",
+  "url": "https://news.ntv.co.jp/n/ctv/category/life/ct44ee5b3afc504b979a090bb8afb879b9",
   "related": [
    {
     "source": "Yahoo!ニュース",
@@ -7414,7 +7575,8 @@
   },
   "merged_ids": [
    "n20260917-f987b157"
-  ]
+  ],
+  "dv": 3
  },
  {
   "id": "n20260818-406ed6b0",
@@ -7821,41 +7983,6 @@
    "why": "ぴよりんの公式コラボ商品（乗車券）",
    "t": "2026-10-15"
   }
- },
- {
-  "id": "n20260716-76391320",
-  "date": "2026-07-16",
-  "cat": "media",
-  "title": "【静岡駅】限定「みかんぴよりん」が登場！アスティ静岡で11月26、27日に整理券配布し特別販売",
-  "source": "dメニューニュース",
-  "url": "https://topics.smt.docomo.ne.jp/article/ats_sbs/region/ats_sbs-2090982",
-  "related": [
-   {
-    "source": "＠S[アットエス]",
-    "url": "https://www.at-s.com/life/article/ats/2090982.html"
-   },
-   {
-    "source": "ｄメニューニュース",
-    "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPNE1KcG1PazBqejFIcmRIR3FWZFVOV0tWOHFoX2lodHNaSEc0RmRNZjFnQVp3V20zSDJ5LWtpUUFOYjFzY3E3LWg5UkFqekJSc19qQWRWVGU4UlJhYXo5RkxGNE9vWjFNb2dmcElwLUVDNUxVQmdLUG53WGxxb2pfbXJ4R1lJZDExdGhpcG5aTmhGdk0tMmk4RXJLM2liaFRfdUxvWXBXeGN2OGNKQ2p5OHdpRU44TWIxaS1lQlFsRHd3N1MwWEQteExBYlY5T1HSAX9BVV95cUxNUE1nRy1hYTJaTFJNTG1FcnpXRG84MmkyX3hwaGRsN0tfenVZbTl2S0pFU2NndVdpNm1BSmZ3SWZfOHREdUpvcXRoQVppV2NSSnlsM1NfVGF1UWtaeG5pQ05lSDhwbE5YLWxaTVc4QnhkSHdtLXNiRTdNdTg1dGxB?oc=5"
-   },
-   {
-    "source": "ｄメニューニュース",
-    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1QTWdHLWFhMlpMUk1MbUVyeldEbzgyaTJfeHBoZGw3S196dVltOXZLSkVTY2d1V2k2bUFKZndJZl84dER1Sm9xdGhBWmlXY1JKeWwzU19UYXVRa1p4bmlDTmVIOHBsTlgtbFpNVzhCeGRId20tc2JFN011ODV0bEHSAX9BVV95cUxNUE1nRy1hYTJaTFJNTG1FcnpXRG84MmkyX3hwaGRsN0tfenVZbTl2S0pFU2NndVdpNm1BSmZ3SWZfOHREdUpvcXRoQVppV2NSSnlsM1NfVGF1UWtaeG5pQ05lSDhwbE5YLWxaTVc4QnhkSHdtLXNiRTdNdTg1dGxB?oc=5"
-   },
-   {
-    "source": "アットエス",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1pbms3cU1BdWtna0dQSGJlRzFDVE9LQ2Q5YjBMdVR3MXdwWHNCb0R3UERkOU1rTjhPdVJ1Z2tVbnBZanlBV1plTzlMUWc5Z2xwTGpSWWMyNC1QTUdoR3A4?oc=5"
-   }
-  ],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりん限定「みかんぴよりん」の販売記事（重複）",
-   "t": "2026-11-07"
-  },
-  "merged_ids": [
-   "n20261107-a74a5751"
-  ]
  },
  {
   "id": "n20260716-b2a14aeb",
@@ -10872,90 +10999,6 @@
    "ok": true,
    "why": "ぴよりん福袋販売。ぴよりん商品企画",
    "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20260923-afcc9479",
-  "date": "2020-06-30",
-  "cat": "media",
-  "title": "名古屋名物のスイーツ「ぴよりん」に新作が続々！神出鬼没な“○よりん”など限定商品も",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/1003319/",
-  "related": [
-   {
-    "source": "walkerplus.com",
-    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE56TE4tSTQzZG9oQVA2VDFucGZ2NG54cW5WNjZ4QWRESmdrdExJdTdvZlQ4dm1mTnREal9UbVF2RW9qX0w4MG1pTnZMOHprOXhweV9wZk1fM0tkcXB2d2l1MDEzNndQM1EzM1ptaWFR?oc=5"
-   }
-  ],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの新作商品紹介。ぴよりん本体の話題",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20200130-df9e8c13",
-  "date": "2020-01-30",
-  "cat": "media",
-  "title": "名古屋のスイーツ「ぴよりん」、崩さず無事に持ち帰る「#ぴよりんチャレンジ」がSNS上で人気に",
-  "source": "名駅経済新聞",
-  "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE82dDBOLThTQUlTQ1VScVNTbURwdG9MLTN5Q3Zabl9IM25lLW94ejNqNjM2eUNtVmJjVTBvS0JHOTNKZGZveXV0VFRTdnFIY2JpRHc?oc=5",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんのSNSトレンド企画について",
-   "t": "2026-10-22"
-  }
- },
- {
-  "id": "n20260925-1d7ab54a",
-  "date": "2018-06-21",
-  "cat": "media",
-  "title": "期間限定の「ぴよりん」登場！かわいい”2羽”の新味が仲間入り!!",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/151510/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "期間限定ぴよりん新味の紹介。新商品情報",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20261014-0bdc9ca9",
-  "date": "2018-03-23",
-  "cat": "media",
-  "title": "目が合ったら最後♡超キュートな｢ぴよりん｣の専門店が名古屋駅にオープン！",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/140731/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの専門店オープンについての直接的な記事",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20261018-821713d3",
-  "date": "2017-09-04",
-  "cat": "media",
-  "title": "名古屋スイーツ「ぴよりん」のかわいすぎるハロウィンバージョンが登場！",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/120373/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんのハロウィンバージョン企画に関する記事",
-   "t": "2026-10-19"
   }
  }
 ]
