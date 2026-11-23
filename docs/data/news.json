@@ -1,5 +1,15 @@
 [
  {
+  "id": "n20261123-f1fde46a",
+  "date": "2026-11-23",
+  "cat": "media",
+  "title": "神谷そら17位 米女子ゴルフ予選会",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/gpnews/1779275/",
+  "related": [],
+  "dv": 3
+ },
+ {
   "id": "n20261122-5634ebe9",
   "date": "2026-11-22",
   "cat": "media",
@@ -55,19 +65,13 @@
   "source": "産経ニュース",
   "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/photo/VMOKJD6TEFNYPEMPN5DMOMQHJE/",
   "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりん3店舗のクリスマス限定商品の記事で、ぴよりん自体の話題",
-   "t": "2026-11-23"
-  }
+  "dv": 3
  },
  {
   "id": "n20261121-1e5aec85",
   "date": "2026-11-21",
   "cat": "media",
-  "title": "JR名古屋駅などの『ぴよりん』3店舗がクリスマスムードに ...",
+  "title": "JR名古屋駅などの『ぴよりん』3店舗がクリスマスムードに クリスマス限定の「クッキー缶」も登場",
   "source": "産経ニュース",
   "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/?outputType=theme_oriconnews",
   "related": [
@@ -84,6 +88,7 @@
    "t": "2026-11-22"
   },
   "merged_ids": [
+   "n20261122-150e41a8",
    "n20261122-5af2ddee"
   ]
  },
@@ -141,10 +146,6 @@
   "url": "https://www.oricon.co.jp/news/2494384/full/",
   "related": [
    {
-    "source": "Yahoo!ニュース",
-    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE8wQjV1VEtab2gtaG80UnMyVDNkTDBmMVZHZzYtakY2VHg2U3VjNEoxTWJhRzlWMFIxejN2bGU4RTc1Q0E2Zk1KVHlrcl9GSGNDZjNxa2lLeUNLaTRFVVhXYU1rN0tMUDh1b2dUN0NuR0pDb2lnTzhCYjUzZHMzbms?oc=5"
-   },
-   {
     "source": "佐賀新聞",
     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1Oa0ZsSm8xZG5xbko4R1hROUd1Vkt5ZkFwYm16SnFUb21udFdjckNWbDN3TGY3WTdkdjhNREhHY0V6X0NBSlc1S3dQTlVkX0hDbzExX05R?oc=5"
    },
@@ -155,10 +156,6 @@
    {
     "source": "オリコンニュース",
     "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFA3cFFPaGxrM3VUMmVOZkVvTlVCbXBGR1Fac0wyRDc2TGY0UktSWDY1RWlZR3VaM1ZYZXRiTFdHbDJCMGl1NmNWYVVfY1dzZ3JrOGJMNHJNQm5DVXc?oc=5"
-   },
-   {
-    "source": "Yahoo!ニュース",
-    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPZkVhcVRTcHpCdjNfcDFKVExPRXVJSzFtd3N4WXM5YlBUMGNCTnUyWFNPTDZ6dUU3bWFYMnRmaWpSc3BBQmRXSW5wNzBtTXBWZTBDVlJkUFkwYkZxeUdXWHgweEJNQnBGTDZldFlyaFVjNExUTzVzV2FyaC05WHFCekFIbHZDMmxXTTQ5V2FR?oc=5"
    },
    {
     "source": "オリコンニュース",
@@ -203,11 +200,16 @@
    {
     "source": "オリコンニュース",
     "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE03T0xVZnZPaGhnT1FzdWM4ajEyYktacHZDNGJvdjNGWnRDcDJKMnNaU05nN3pZdl90aEwwOHJZRVZtVW9HaEVvQnBKQXFSOElMQVludE5uNGt5QQ?oc=5"
+   },
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.yahoo.co.jp/articles/9163ced0c80dc041e3dcc741da9d07a24ba7a1a2"
    }
   ],
   "merged_ids": [
    "n20261122-1d64d942",
    "n20261122-4bf9e5ed",
+   "n20261122-5a77d7a0",
    "n20261122-7ec7aa9a"
   ],
   "dv": 3,
@@ -11036,27 +11038,6 @@
    "ok": true,
    "why": "名古屋スイーツぴよりんの購入レビュー記事",
    "t": "2026-11-12"
-  }
- },
- {
-  "id": "n20260919-1f266706",
-  "date": "2021-09-16",
-  "cat": "media",
-  "title": "名古屋スイーツ・ぴよりん、オウムに変身 映画「総理の夫」とコラボ [愛知県]",
-  "source": "朝日新聞",
-  "url": "https://www.asahi.com/sp/articles/photo/AS20210915002190.html?iref=sp_photo_gallery_3",
-  "related": [
-   {
-    "source": "asahi.com",
-    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOZlZ5WlVBOHplTDR0WFhWcnVyQldWOXIyWnZxWkNZbEQxQzZtQ3EzUWJFcFR1dUNkeXRRRF85YzNSUmRnMlZfNFFuZ3VPM3QzY1BlTUpvRVJCSHFvNjgtT3VHNHQ4aHpMOUN2OTVFMUlLOWxkRzJybWFibnREOFZRMWRqOFpoQVlYdzBaUDBR?oc=5"
-   }
-  ],
-  "checked": true,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "映画とのコラボぴよりん。公式コラボ企画",
-   "t": "2026-10-15"
   }
  }
 ]
