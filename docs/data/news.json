@@ -249,6 +249,10 @@
    {
     "source": "Yahoo!ニュース",
     "url": "https://news.yahoo.co.jp/articles/9163ced0c80dc041e3dcc741da9d07a24ba7a1a2"
+   },
+   {
+    "source": "オリコンニュース",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFAtRFk2dTRBbDZmQW8xMlQ2MmREaW90TlZ4VHE1cGt1RXRYUy1wOGZrZkZKb0VnTDRDN0NDSXJ5VTZYdmRGYnpibEkwWnhKcDhoQ2wyNjhGZHdyUlE?oc=5"
    }
   ],
   "merged_ids": [
@@ -320,6 +324,10 @@
    {
     "source": "STRAIGHT PRESS",
     "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1jRkgyQW91UXNsd0Z2dVNPWXhSTGFVQUFxVkxicUZ3cEFXWEk5bW1oSWRFdkR2VXJUWUVUSThjd3F1SFRyRkF5akZ0VWpmeHVrWGprbkZ3cTc5dWQyOVJjRjNNeWNsVy04YXh0X3JCNEVmV1NMdFE?oc=5"
+   },
+   {
+    "source": "Mantan Web",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5iVFRUZTQ4cUNZdFcydVFtZlRsSjFEZ3N2cmdOOW8wLTNxRjctTGdvbGdEaDJRa01halNXSGZkeHdtYy1OUk5NZ0N3enNmckk1NUZvcFF5QlVHU25vUmtEYlRxRlFhWUZKZDUwVEZTdWtrUjVOSmc?oc=5"
    }
   ],
   "merged_ids": [
@@ -822,23 +830,6 @@
    "ok": true,
    "why": "ぴよりんのコラボイベント・グッズをまとめた記事",
    "t": "2026-11-17"
-  }
- },
- {
-  "id": "n20261116-6d5e9157",
-  "date": "2026-11-16",
-  "cat": "media",
-  "title": "名古屋駅のフード出店に新風 地下街「メイチカ」リニューアル、ぴよりんカフェやあんバター",
-  "source": "日本経済新聞",
-  "url": "https://www.nikkei.com/article/DGXZQOFD063HD0W6A101C2000000/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "題にぴよりん",
-   "t": "2026-11-24",
-   "by": "rule"
   }
  },
  {
@@ -11058,6 +11049,21 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんの予約サービス新展開について",
+   "t": "2026-10-22"
+  }
+ },
+ {
+  "id": "n20240205-6b2d1645",
+  "date": "2024-02-05",
+  "cat": "media",
+  "title": "軟らかすぎる名古屋スイーツ「ぴよりん」 愛される理由は“固い意思”",
+  "source": "日経クロストレンド",
+  "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5fUGhWTWVYdHEyUGYybGFueHV6dGtueEtTUjI0Tk9sTDRmTktiTUJXcVZsUDRDQkdISC1TTEpsd2hjNzFOZ0NrcGEzNkJsQWF3djJtRk9IZHFTaEZTWEh0cUpGR3BJMnc3dU5Pb2RXZw?oc=5",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "名古屋スイーツぴよりんの特集記事",
    "t": "2026-10-22"
   }
  }
