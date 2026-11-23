@@ -9,7 +9,10 @@
   "related": [],
   "dv": 3,
   "jg": {
-   "wait": "2026-11-23T17:19:35+09:00"
+   "v": 1,
+   "ok": false,
+   "why": "ゴルフ選手の大会結果で、ぴよりんとの関係なし",
+   "t": "2026-11-24"
   }
  },
  {
@@ -22,7 +25,10 @@
   "related": [],
   "dv": 3,
   "jg": {
-   "wait": "2026-11-23T17:19:35+09:00"
+   "v": 1,
+   "ok": false,
+   "why": "ステーキ店のキャンペーンで、ぴよりんとの関係なし",
+   "t": "2026-11-24"
   }
  },
  {
@@ -35,7 +41,10 @@
   "related": [],
   "dv": 3,
   "jg": {
-   "wait": "2026-11-23T17:19:35+09:00"
+   "v": 1,
+   "ok": false,
+   "why": "産院のグッドデザイン賞の記事で、ぴよりんとの関係なし",
+   "t": "2026-11-24"
   }
  },
  {
@@ -290,6 +299,10 @@
    {
     "source": "MANTANWEB（まんたんウェブ）",
     "url": "https://mantan-web.jp/prtimes/article/20261120prt00m200000258a.html"
+   },
+   {
+    "source": "STRAIGHT PRESS",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1jRkgyQW91UXNsd0Z2dVNPWXhSTGFVQUFxVkxicUZ3cEFXWEk5bW1oSWRFdkR2VXJUWUVUSThjd3F1SFRyRkF5akZ0VWpmeHVrWGprbkZ3cTc5dWQyOVJjRjNNeWNsVy04YXh0X3JCNEVmV1NMdFE?oc=5"
    }
   ],
   "merged_ids": [
