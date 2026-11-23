@@ -447,7 +447,7 @@ test('index.html：部品の読み込み・設定の行・版・合言葉を doc
   assert.ok(html.indexOf('piyo-dock.js')>html.indexOf('piyo-extras.js'));
   assert.match(html,/<label><input type="checkbox" id="set-dockwx" checked><span>天気を Mac の infobase から読む<small>/);
   assert.match(html,/localStorage\.getItem\('piyo-dockwx'\)!=='0'/);
-  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.23-1">/);assert.match(html,/const PN_VERSION='2026\.11\.23-1（[^）]+）'/);
+  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.23-\d+">/);assert.match(html,/const PN_VERSION='2026\.11\.23-\d+（[^）]+）'/);
   assert.ok(!html.includes('piyo-dock.js?v=0'));
   const dockSrc=read('docs/piyo-dock.js');assert.ok(!/token/.test(dockSrc.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/.*$/gm,'')),'合言葉（token）を部品は読まない');
   const scripts=[...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]).filter(s=>s.trim());

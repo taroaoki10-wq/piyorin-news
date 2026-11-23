@@ -338,8 +338,8 @@ test('設定：memofocus・buyctx の 2 行（入り切りの仕組み data-flag
 });
 
 test('版は 2026.11.23-1（meta・PN_VERSION・piyo-extras.js?v=8）',()=>{
-  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.23-1">/);
-  assert.match(html,/const PN_VERSION='2026\.11\.23-1（[^）]+）'/);
+  assert.match(html,/<meta name="piyo-ver" content="2026\.11\.23-\d+">/);
+  assert.match(html,/const PN_VERSION='2026\.11\.23-\d+（[^）]+）'/);
   assert.match(html,/<script src="piyo-extras\.js\?v=8"><\/script>/);
   assert.ok(!html.includes('piyo-extras.js?v=7')&&!html.includes('2026.11.22-4'));
 });

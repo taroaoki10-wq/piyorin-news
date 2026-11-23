@@ -19,9 +19,9 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-STEPS = ["fetch_news.py", "extract_events.py", "build_reader.py", "judge_relevance.py", "build_piyo.py",
+STEPS = ["fetch_news.py", "extract_events.py", "build_reader.py", "learn_deletions.py", "judge_relevance.py", "build_piyo.py",
          "build_ics.py", "build_koyomi.py", "build_images.py"]
-OPTIONAL = {"build_images.py"}  # Actions でも失敗してよい段
+OPTIONAL = {"build_images.py", "learn_deletions.py"}  # Actions でも失敗してよい段
 
 
 def git(*args: str, check: bool = True) -> subprocess.CompletedProcess:

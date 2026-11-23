@@ -1,0 +1,7 @@
+{
+ "rule_title": true,
+ "learn_sim": 0.6,
+ "min_batch": 4,
+ "max_wait_hours": 9,
+ "cli_timeout": 300
+}
