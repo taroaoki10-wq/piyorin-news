@@ -138,3 +138,57 @@ class WrongReleaseImage(unittest.TestCase):
         self.assertTrue(b.again(e))
         self.assertFalse(b.again({**e, "titleChecked": True}))
         self.assertFalse(b.again({**e, "title": "ハロウィンぴよりん販売"}))
+
+
+class OfficialWithoutLink(unittest.TestCase):
+    """2026-11-25：ブラックサンダーぴよりん（公式のお知らせ p5546）は、リリースへのリンクが無く写真のファイルだけが PR TIMES だった"""
+    PAGE = ('<p><img src="https://prtimes.jp/api/file.php?t=origin&amp;f=d124425-235-2f37093ce6667c357d7c-6.jpg&amp;s3=124425-235-4163e1b0afd8c7861b01740d6388db2c-1487x531.jpg"></p>'
+            '<p><img src="https://prtimes.jp/api/file.php?t=origin&amp;f=d124425-235-26a999b1f3cda8db72d7-6.png&amp;s3=124425-235-cb5f773afc04d46b94296e04d29d25d8-1500x868.png"></p>')
+
+    def test_pr_from_official(self):
+        self.assertEqual(b.pr_from_official(self.PAGE), "https://prtimes.jp/main/html/rd/p/000000235.000124425.html")
+        self.assertEqual(b.pr_from_official('<a href="https://prtimes.jp/main/html/rd/p/000000101.000124425.html">'), "https://prtimes.jp/main/html/rd/p/000000101.000124425.html")
+        self.assertIsNone(b.pr_from_official('<img src="https://piyorin.com/wp/wp-content/uploads/2026/09/a.jpg">'))
+        self.assertIsNone(b.pr_from_official('<img src="https://prtimes.jp/api/file.php?s3=99999-1-ab-10x10.jpg">'))  # ほかの会社のリリースは使わない
+
+    def test_release_image_via_photo_name(self):
+        pr = '<meta property="og:title" content="豊橋限定「ブラックサンダーぴよりん」"/><meta property="og:image" content="https://prcdn.freetls.fastly.net/release_image/124425/235/x-842x595.jpg?width=2400"/>'
+        seen = []
+        old = b.get
+        b.get = lambda u: (seen.append(u), self.PAGE if "piyorin.com" in u else pr)[1]
+        try:
+            img = b.release_image("https://piyorin.com/news/p5546/")
+        finally:
+            b.get = old
+        self.assertEqual(img, "https://prcdn.freetls.fastly.net/release_image/124425/235/x-842x595.jpg")
+        self.assertEqual(seen[1], "https://prtimes.jp/main/html/rd/p/000000235.000124425.html")
+
+    def test_again_official_once(self):
+        u = "https://piyorin.com/news/p5546/"
+        self.assertTrue(b.again({"url": u, "img": None}))
+        self.assertFalse(b.again({"url": u, "img": None, "prTried": True}))
+        self.assertFalse(b.again({"url": u, "img": "https://prcdn.freetls.fastly.net/release_image/124425/235/x.jpg"}))
+
+
+class SameItem(unittest.TestCase):
+    """お知らせから見つけたリリースが、その商品のものか（2026-11-25 栗きんとんぴよりん）"""
+    def page(self, t):
+        return f'<meta property="og:title" content="{t}"/>'
+
+    def test_same_item(self):
+        self.assertFalse(b.same_item("栗きんとんぴよりん", self.page("「ぴよりん」が横浜・京急百貨店に期間限定で登場!")))
+        self.assertTrue(b.same_item("ブラックサンダーぴよりん", self.page("豊橋限定「ブラックサンダーぴよりん」を販売")))
+        self.assertTrue(b.same_item("新幹線ツアー募集開始（完売）", self.page("新幹線を1車両まるごと「ぴよりん」仕様に!")))
+        self.assertTrue(b.same_item("ぴよりん出張販売（まるひろ川越）", self.page("まるひろ川越店「秋の全国うまいもの市」に期間限定出店")))
+        self.assertTrue(b.same_item("ぴよりん販売", self.page("なんでも")))  # 言葉が取れない題は確かめない
+
+    def test_official_release_of_other_item_is_not_used(self):
+        off = '<p><img src="https://prtimes.jp/api/file.php?s3=124425-223-ab-842x595.jpg"></p>'
+        pr = '<meta property="og:title" content="「ぴよりん」が横浜・京急百貨店に期間限定で登場!"/><meta property="og:image" content="https://prcdn.freetls.fastly.net/release_image/124425/223/k-842x595.jpg"/>'
+        old = b.get
+        b.get = lambda u: off if "piyorin.com" in u else pr
+        try:
+            self.assertIsNone(b.release_image("https://piyorin.com/news/p5551/", None, "栗きんとんぴよりん"))
+            self.assertTrue(b.release_image("https://piyorin.com/news/p5551/", None, "京急百貨店 出店"))
+        finally:
+            b.get = old

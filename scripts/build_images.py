@@ -145,14 +145,14 @@ def og_image_for(page, want):
     return og_image(page)
 
 
-def release_image_any(urls, want=None):
+def release_image_any(urls, want=None, title=None):
     """いくつかの住所を順に試す（PR TIMES を先に）"""
     seen = []
     for u in sorted([u for u in urls if u], key=lambda u: "prtimes.jp" not in u):
         if u in seen:
             continue
         seen.append(u)
-        img = release_image(u, want)
+        img = release_image(u, want, title)
         if img:
             return img
     return None
@@ -177,7 +177,25 @@ def x_name(title):
     return m.group(1).strip() if m else None
 
 
-def release_image(url, want=None):
+STOP_WORDS = {"ぴよりん", "販売", "発売", "開始", "限定", "店頭", "オンライン", "募集", "完売", "先行", "予約", "受付", "期間", "新商品", "登場"}
+
+
+def core_words(title):
+    """商品だと分かる言葉：漢字・カタカナ・ひらがな・英数字のつながりごとに切り、ありふれた言葉と 1 文字を除く"""
+    t = unicodedata.normalize("NFKC", title or "")
+    for w in sorted(STOP_WORDS, key=len, reverse=True):
+        t = t.replace(w, " ")
+    runs = re.findall(r"[一-龥々]+|[ァ-ヶー]+|[ぁ-ゖ]+|[A-Za-z0-9]+", t)
+    return [w for w in runs if len(w) >= 2 and w not in STOP_WORDS]
+
+
+def same_item(title, page):
+    """予定の題の言葉が、リリースの題に 1 つでもあるか（言葉が取れない題は確かめない）"""
+    words = core_words(title)
+    return not words or any(w in page_title(page) for w in words)
+
+
+def release_image(url, want=None, title=None):
     """リリースの代表画像（PR TIMES の og:image）。公式のお知らせなら、中にある PR TIMES の住所から。公式 X なら投稿の写真"""
     if not url:
         return None
@@ -187,11 +205,27 @@ def release_image(url, want=None):
         return og_image_for(get(url), want)
     if re.match(r"^https://piyorin\.com/news/p\d+/?$", url):
         page = get(url)
-        pr = re.search(r'href="(https://prtimes\.jp/main/html/rd/p/[0-9.]+\.html)"', page)
+        pr = pr_from_official(page)
         if pr:
-            return og_image_for(get(pr.group(1)), want)
+            prp = get(pr)
+            if title and not same_item(title, prp):
+                return None  # お知らせに載っていた別のリリース（2026-11-25 栗きんとんぴよりん → 京急百貨店の出店）
+            return og_image_for(prp, want)
         return None  # PR TIMES の無いお知らせは、本文の画像を取り違えやすいので使わない
     return None
+
+
+def pr_from_official(page):
+    """公式のお知らせの中の PR TIMES のリリースの住所。リンクが無くても、本文の写真のファイル名（124425-235-…）から番号を読む。
+    2026-11-25：ブラックサンダーぴよりん（p5546）は写真だけが PR TIMES のファイルで、リリースへのリンクが無く、絵が付かなかった"""
+    m = re.search(r'href="(https://prtimes\.jp/main/html/rd/p/[0-9.]+\.html)"', page)
+    if m:
+        return m.group(1)
+    nums = re.findall(r"prtimes\.jp/api/file\.php\?[^\"'\s<>]*?\b(124425)-(\d{1,6})-[0-9a-f]+-\d+x\d+\.", page)
+    if not nums:
+        return None
+    co, no = max(set(nums), key=nums.count)  # いちばん多く出てくるリリース
+    return f"https://prtimes.jp/main/html/rd/p/{int(no):09d}.{int(co):09d}.html"
 
 
 def cookie_name(title):
@@ -276,6 +310,8 @@ def again(entry):
     e = entry or {}
     if not e.get("img") and bool(X_STATUS.match(e.get("url") or "")) and not e.get("xTried"):
         return True
+    if not e.get("img") and re.match(r"^https://piyorin\.com/news/p\d+/?$", e.get("url") or "") and not e.get("prTried"):
+        return True  # 写真のファイル名からリリースを探す前に、絵が取れなかったお知らせ（2026-11-25）
     return bool(e.get("img")) and "prcdn.freetls.fastly.net" in e.get("img", "") and bool(want_word(e.get("title"))) and not e.get("titleChecked")
 
 
@@ -311,7 +347,7 @@ def main():
     limit = 10**6 if "--all" in sys.argv else MAX_RELEASES
     for c in todo[:limit]:
         try:
-            img = release_image_any([c["url"], *c.get("alts", [])], c.get("want"))
+            img = release_image_any([c["url"], *c.get("alts", [])], c.get("want"), c["title"] if c.get("from") == "event" else None)
         except Exception as e:
             print(f"リリースを読めませんでした {c['url']}: {e}", file=sys.stderr)
             continue  # 次の更新でもう一度
@@ -322,6 +358,8 @@ def main():
             entry["titleChecked"] = True
         if not img and X_STATUS.match(c["url"]):
             entry["xTried"] = True  # 写真の無い投稿は何度も読まない
+        if not img and re.match(r"^https://piyorin\.com/news/p\d+/?$", c["url"]):
+            entry["prTried"] = True  # リリースの見つからないお知らせは何度も読まない
         rel[c["key"]] = entry
     print(f"リリース: {sum(1 for v in rel.values() if v.get('img'))} 件に画像（新しく {min(len(todo), limit)} 件を読んだ）")
     write_json(OUT, out)

@@ -3336,7 +3336,7 @@
    "title": "ウルフィ×ぴよりん ぬいぐるみ 店頭販売",
    "date": "2026-10-19",
    "url": "https://piyorin.com/news/p5558/",
-   "img": null,
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/244/124425-244-1d5e6488b57c388587456ce46c6f060b-1988x1048.jpg",
    "from": "event"
   },
   "e-wolfy-online": {
@@ -3344,7 +3344,7 @@
    "title": "ウルフィ×ぴよりん ぬいぐるみ オンライン発売",
    "date": "2026-10-17",
    "url": "https://piyorin.com/news/p5558/",
-   "img": null,
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/244/124425-244-1d5e6488b57c388587456ce46c6f060b-1988x1048.jpg",
    "from": "event"
   },
   "auto-officialp5609": {
@@ -3376,7 +3376,7 @@
    "title": "ブラックサンダーぴよりん",
    "date": "2026-10-02",
    "url": "https://piyorin.com/news/p5546/",
-   "img": null,
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/235/124425-235-21d47185a867603fd32c13f2cd5324db-842x595.jpg",
    "from": "event"
   },
   "auto-n20260915ea7e6c93": {
@@ -3400,7 +3400,7 @@
    "title": "ぴよりんコラボ弁当 第3弾",
    "date": "2026-09-19",
    "url": "https://piyorin.com/news/p5491/",
-   "img": null,
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/233/124425-233-241a4bbcb6a402715ea8f4af17b233f4-842x595.jpg",
    "from": "event"
   },
   "e-cookie": {
@@ -3409,7 +3409,9 @@
    "date": "2026-09-18",
    "url": "https://piyorin.com/news/p5538/",
    "img": null,
-   "from": "event"
+   "from": "event",
+   "titleChecked": true,
+   "prTried": true
   },
   "e-kuri": {
    "cat": "piyorin",
@@ -3417,14 +3419,15 @@
    "date": "2026-09-18",
    "url": "https://piyorin.com/news/p5507/",
    "img": null,
-   "from": "event"
+   "from": "event",
+   "prTried": true
   },
   "e-kawagoe": {
    "cat": "piyorin",
    "title": "ぴよりん出張販売（まるひろ川越）",
    "date": "2026-09-18",
    "url": "https://piyorin.com/news/p5520/",
-   "img": null,
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/238/124425-238-ccc60fa162d8c813806f0ff41eae5ca0-842x595.jpg",
    "from": "event"
   },
   "e-honohon": {
@@ -3432,7 +3435,7 @@
    "title": "ホノホンぴよりん",
    "date": "2026-09-18",
    "url": "https://piyorin.com/news/p5512/",
-   "img": null,
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/224/124425-224-21ebad704e6b0466449bcc0338c29d6c-842x595.jpg",
    "from": "event"
   },
   "e-tour-entry": {
@@ -3440,7 +3443,7 @@
    "title": "新幹線ツアー募集開始（完売）",
    "date": "2026-09-17",
    "url": "https://piyorin.com/news/p5529/",
-   "img": null,
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/234/124425-234-94d7886355cfc3ab85ffb2aa79af0f60-1920x1005.jpg",
    "from": "event"
   },
   "n20260915-atelier": {
@@ -3490,7 +3493,7 @@
    "title": "ハロウィン限定グッズ発売",
    "date": "2026-09-01",
    "url": "https://piyorin.com/news/p5363/",
-   "img": null,
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/231/124425-231-c756eabd6bf55b5bd3b72a37c2394eb3-900x1125.jpg",
    "from": "event"
   },
   "auto-n20260818406ed6b0": {
