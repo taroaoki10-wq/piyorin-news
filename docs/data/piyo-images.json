@@ -1,5 +1,5 @@
 {
- "note": "購入記録の画像の住所。ぴよりんはぴよりん図鑑、クッキー缶などは公式のプレスリリースの代表画像。画像は公式のサーバーのものをそのまま表示する。",
+ "note": "購入記録の画像の住所。ぴよりんはぴよりん図鑑、クッキー缶などは公式のプレスリリースの代表画像、公式 X だけの新作は投稿の写真。画像は公式のサーバーのものをそのまま表示する。",
  "zukanSource": "https://piyorin.com/detail/",
  "zukanChecked": "2026-11-23T23:20:44+09:00",
  "zukan": [
@@ -3678,7 +3678,7 @@
    "title": "11/20(金)～「ぴよりん 2026 クリスマスクッキー缶」が登場🐥",
    "date": "2026-11-20",
    "url": "https://x.com/piyorin_nagoya/status/2123611035256942640",
-   "img": null,
+   "img": "https://pbs.twimg.com/media/HXiSksUawAAz4HJ.jpg",
    "from": "news",
    "name": "ひよりの手作りクッキー缶"
   },
@@ -3687,7 +3687,7 @@
    "title": "ミルクティーぴよりん 販売（アトリエ店限定）",
    "date": "2026-11-20",
    "url": "https://x.com/piyorin_nagoya/status/2122887519435960587",
-   "img": null,
+   "img": "https://pbs.twimg.com/media/HXX4e66bkAAkPYj.jpg",
    "from": "event"
   },
   "auto-n2026110430d57579": {
@@ -3695,7 +3695,7 @@
    "title": "Winter Break新商品 発売（village限定）",
    "date": "2026-11-10",
    "url": "https://x.com/piyorin_nagoya/status/2117783897669038462",
-   "img": null,
+   "img": "https://pbs.twimg.com/media/HWGxurbagAANnER.jpg",
    "from": "event"
   },
   "auto-n20261110defbf59f": {
@@ -3703,8 +3703,17 @@
    "title": "シャチボンプレート販売（ボンボヤージュ）",
    "date": "2026-11-10",
    "url": "https://x.com/piyorin_nagoya/status/2119973586291319204",
-   "img": null,
+   "img": "https://pbs.twimg.com/media/HWuovS4aMAAkiZA.jpg",
    "from": "event"
+  },
+  "n20261118-cfe9975b": {
+   "cat": "piyorin",
+   "title": "【店舗限定 ぴよりん が登場！】 11/20(金)～ ぴよりんshopアトリエ店 限定「ミルクティーぴよりん」を販売♪",
+   "date": "2026-11-18",
+   "url": "https://x.com/piyorin_nagoya/status/2122887519435960587",
+   "img": "https://pbs.twimg.com/media/HXX4e66bkAAkPYj.jpg",
+   "from": "x",
+   "name": "ミルクティーぴよりん"
   }
  }
 }
