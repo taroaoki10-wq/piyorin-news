@@ -63,8 +63,17 @@
     if(/クッキー缶/.test(t))return 'cookie';
     if(GOODS_WORD.test(t))return 'goods';
     if(/ぴよりん|ぴよ/.test(t)&&e.kind==='sale')return 'piyorin';
+    // 終わりの日が無い新作（「11/20〜 アトリエ店限定 ミルクティーぴよりん」）は release で入る。名前が「〜ぴよりん」ならぴよりん
+    // Claude が「ミルクティーぴよりん（アトリエ店限定）」「ミルクティーぴよりん アトリエ店限定」と付けても同じに見る
+    if(e.kind==='release'&&/ぴよりん$/.test(itemName(t).replace(/[（(][^）)]*[）)]/g,'').replace(/\s+\S{0,14}限定$/,'').trim()))return 'piyorin';
     return e.kind==='release'?'goods':null;
   }
+  // 終わりの日が無い物（release で開始日＝終了日）は、始まってから OPEN_DAYS 日は売っているものとして選択肢に出す
+  const OPEN_DAYS=60;
+  const isOpen=e=>!!e&&e.kind==='release'&&isDate(e.start)&&(!isDate(e.end)||e.end===e.start);
+  const lastDay=e=>isOpen(e)?addDays(e.start,OPEN_DAYS):(isDate(e.end)?e.end:e.start);
+  // 期間の書き方：「11/20〜」（終わりの日が無い）・「11/1〜11/13」・「11/20」
+  const spanText=(x,md)=>md(x.start)+(x.open?'〜':x.end!==x.start?'〜'+md(x.end):'');
   // ぴよメモ（記事の要約）から値段を拾う：「テイクアウト580円」「1,300円(税込)」
   function memoPrices(memo){
     const out=[],seen=new Set();
@@ -81,13 +90,13 @@
     const lo=range==null?'0000-01-01':addDays(date,-range),hi=range==null?'9999-12-31':addDays(date,range),out=[],seen=new Set();
     for(const e of events){
       const c=eventCat(e);if(!c||(cat&&c!==cat)||!isDate(e.start))continue;
-      const end=isDate(e.end)?e.end:e.start;
-      if(end<lo||e.start>hi)continue;
+      const end=isDate(e.end)?e.end:e.start,open=isOpen(e),last=lastDay(e);
+      if(last<lo||e.start>hi)continue;
       const name=itemName(e.title);if(seen.has(c+name))continue;seen.add(c+name);
       const m=memo&&(memo[e.src]||memo[e.id]);
       const prices=memoPrices(m&&m.memo);
-      out.push({id:e.id,cat:c,name,start:e.start,end,place:str(e.place,60),url:e.url||'',
-        onSale:e.start<=date&&date<=end,prices,price:prices.length?prices[0].price:null});
+      out.push({id:e.id,cat:c,name,start:e.start,end,open,place:str(e.place,60),url:e.url||'',
+        onSale:e.start<=date&&date<=last,prices,price:prices.length?prices[0].price:null});
     }
     return out.sort((a,b)=>(b.onSale-a.onSale)||(a.start<b.start?1:-1));
   }
@@ -248,7 +257,7 @@
     return !list.some(r=>r.id!==rec.id&&(r.date<rec.date||(r.date===rec.date&&r.createdAt<rec.createdAt))&&r.items.some(x=>x.name===it.name));
   }
 
-  const PiyoBuy={KEY,CATS,REGULAR,VILLAGE,fixedFor,SHOPS,shopOf,slotTime,CROWD,RATE,itemName,eventCat,memoPrices,limitedFor,allLimited,imageFor,archiveItems,nkey,normalize,total,count,sortRecs,
+  const PiyoBuy={KEY,CATS,REGULAR,VILLAGE,fixedFor,SHOPS,shopOf,slotTime,CROWD,RATE,itemName,eventCat,OPEN_DAYS,isOpen,lastDay,spanText,memoPrices,limitedFor,allLimited,imageFor,archiveItems,nkey,normalize,total,count,sortRecs,
     parseStore,dumpStore,merge,filter,stats,firstTime,todayJst,addDays,yen,newId,syncDiff,syncApply};
   root.PiyoBuy=PiyoBuy;
   if(typeof module!=='undefined'&&module.exports)module.exports=PiyoBuy;
@@ -428,9 +437,9 @@
       <section class="set-sec"><h3>買った物 <small>${f.items.length>1?`${f.items.length}つ`:''}</small></h3>
         ${f.items.length>1?`<div class="by-lines">${f.items.map((x,i)=>`<button type="button" class="by-line${i===f.tab?' on':''}" data-tab="${i}">${esc(x.name||'（未入力）')}${+x.qty>1?' ×'+x.qty:''}</button>`).join('')}</div>`:''}
         <div class="by-seg" role="group" aria-label="分類">${Object.entries(B.CATS).map(([k,l])=>`<button type="button" data-cat="${k}" aria-pressed="${it.cat===k}">${l}</button>`).join('')}</div>
-        ${onSale.length?`<p class="by-lab">${md(f.date)} に${f.date<B.todayJst()?'売っていた':'売っている'}限定</p><div class="by-chips">${onSale.map(x=>chip(`data-lim="${esc(x.id)}"`,x.name,it.name===x.name,`${md(x.start)}${x.end!==x.start?'〜'+md(x.end):''}${x.price!=null?' · '+B.yen(x.price):''}`,thumb({cat:x.cat,name:x.name,lid:x.id},f.date))).join('')}</div>`:''}
+        ${onSale.length?`<p class="by-lab">${md(f.date)} に${f.date<B.todayJst()?'売っていた':'売っている'}限定</p><div class="by-chips">${onSale.map(x=>chip(`data-lim="${esc(x.id)}"`,x.name,it.name===x.name,`${B.spanText(x,md)}${x.price!=null?' · '+B.yen(x.price):''}`,thumb({cat:x.cat,name:x.name,lid:x.id},f.date))).join('')}</div>`:''}
         ${regular.length?`<p class="by-lab">${it.cat==='goods'?'定番のおかし':it.cat==='village'?'ぴよりんvillage 限定のメニュー':'定番'}</p><div class="by-chips">${regular.map(x=>chip(`data-reg="${esc(x.name)}"`,x.name,it.name===x.name,x.price!=null?B.yen(x.price):'',thumb({cat:it.cat,name:x.name},f.date))).join('')}</div>`:''}
-        ${near.length?`<details class="by-near"${near.some(x=>x.name===it.name)?' open':''}><summary>前後 1 週間の限定（${near.length}）</summary><div class="by-chips">${near.map(x=>chip(`data-lim="${esc(x.id)}"`,x.name,it.name===x.name,`${md(x.start)}${x.end!==x.start?'〜'+md(x.end):''}`,thumb({cat:x.cat,name:x.name,lid:x.id},x.start))).join('')}</div></details>`:''}
+        ${near.length?`<details class="by-near"${near.some(x=>x.name===it.name)?' open':''}><summary>前後 1 週間の限定（${near.length}）</summary><div class="by-chips">${near.map(x=>chip(`data-lim="${esc(x.id)}"`,x.name,it.name===x.name,B.spanText(x,md),thumb({cat:x.cat,name:x.name,lid:x.id},x.start))).join('')}</div></details>`:''}
         ${it.cat==='village'?'':it.cat!=='goods'||allLim.some(x=>x.cat==='goods')?`<details class="by-near" id="by-all"${f.allOpen?' open':''}><summary>これまでの限定から探す</summary>
           <input type="search" id="by-allq" value="${esc(f.allQ||'')}" placeholder="例：ハロウィン、2025、ゴジラ" aria-label="これまでの限定を探す">
           <div class="by-chips" id="by-allres">${allChips(f,it)}</div></details>`:''}
@@ -477,7 +486,7 @@
     const arc=B.archiveItems(images,it.cat,f.allQ).filter(x=>!seen.has(B.nkey(x.name))&&(seen.add(B.nkey(x.name)),true));
     if(!all.length&&!arc.length)return '<p class="by-hint">見つかりません。下の欄に自由に入力できます。</p>';
     const MAX=f.allQ?60:30;
-    return [...all.map(x=>chip(`data-lim="${esc(x.id)}" data-setdate="1"`,x.name,it.name===x.name,`${x.start.slice(0,4)}.${md(x.start)}${x.end!==x.start?'〜'+md(x.end):''}`,thumb({cat:x.cat,name:x.name,lid:x.id},x.start))),
+    return [...all.map(x=>chip(`data-lim="${esc(x.id)}" data-setdate="1"`,x.name,it.name===x.name,`${x.start.slice(0,4)}.${B.spanText(x,md)}`,thumb({cat:x.cat,name:x.name,lid:x.id},x.start))),
       ...arc.map(x=>chip(`data-arc="${esc(x.id)}"`,x.name,it.name===x.name,x.sub,thumb({cat:it.cat,name:x.name,lid:x.src==='release'?x.id:''},x.date||f.date)))]
       .slice(0,MAX).join('')+(all.length+arc.length>MAX?`<p class="by-hint">ほかに ${all.length+arc.length-MAX} 件。ことばで絞ってください（例：2024、ハロウィン）。</p>`:'');
   }
@@ -496,9 +505,9 @@
   }
   function pickLimited(id,setDate){
     const ev=(opts.events()||[]).find(e=>e.id===id);if(!ev)return;
-    if(setDate&&(form.date<ev.start||form.date>(ev.end||ev.start)))form.date=ev.start>B.todayJst()?B.todayJst():ev.start; // 買った日が期間の外なら、期間の初日にする（あとで直せる）
+    if(setDate&&(form.date<ev.start||form.date>B.lastDay(ev)))form.date=ev.start>B.todayJst()?B.todayJst():ev.start; // 買った日が期間の外なら、期間の初日にする（あとで直せる）
     const it=form.items[form.tab];const x=B.limitedFor([ev],form.date,memo,null)[0]||{name:B.itemName(ev.title),price:null};
-    it.cat=B.eventCat(ev)||it.cat;it.name=x.name;it.limited=x.name;it.period=`${ev.start}〜${ev.end||ev.start}`;it.lid=ev.id;
+    it.cat=B.eventCat(ev)||it.cat;it.name=x.name;it.limited=x.name;it.period=B.isOpen(ev)?`${ev.start}〜`:`${ev.start}〜${ev.end||ev.start}`;it.lid=ev.id;
     if(x.price!=null)it.price=x.price;
     if(!form.shop&&x.place&&!/、/.test(x.place))form.shop=x.place;
   }

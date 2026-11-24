@@ -117,7 +117,7 @@ test('ページに購入記録のタブ・画面・読み込みがある',()=>{
   assert.match(html,/id="view-buy"/);
   assert.match(html,/id="buy-modal"/);
   assert.match(html,/id="set-buy"/);
-  assert.match(html,/<script src="piyo-buy\.js\?v=9"><\/script>/);
+  assert.match(html,/<script src="piyo-buy\.js\?v=10"><\/script>/);
   assert.match(html,/PiyoBuyUI\.mount\(/);
 });
 
@@ -230,4 +230,28 @@ test('前にぴよりんの分類で残した village のメニューは、villa
   const r=B.normalize({date:'2026-11-04',items:[{cat:'piyorin',name:'ぴよりんパフェ',qty:1,price:1680},{cat:'piyorin',name:'定番ぴよりん',qty:2,price:450}]});
   assert.equal(r.items[0].cat,'village');
   assert.equal(r.items[1].cat,'piyorin');
+});
+
+// 2026-11-24：公式 X だけで知らされた「ミルクティーぴよりん」（11/20〜・終わりの日なし）が購入記録の選択肢に出なかった
+test('終わりの日が無い新作は「ぴよりん」に分け、60 日は売っている物として出す',()=>{
+  const milk={id:'auto-x1',title:'ミルクティーぴよりん',start:'2026-11-20',end:'2026-11-20',kind:'release',place:'ぴよりんshopアトリエ店'};
+  assert.equal(B.eventCat(milk),'piyorin');
+  assert.equal(B.eventCat({title:'ぴよりんカレンダー2027 販売開始',kind:'release'}),'goods'); // 品物はその他のまま
+  assert.equal(B.eventCat({title:'ミルクティーぴよりん販売',kind:'release'}),'piyorin');
+  assert.equal(B.eventCat({title:'ミルクティーぴよりん（アトリエ店限定）',kind:'release'}),'piyorin');
+  assert.equal(B.eventCat({title:'ミルクティーぴよりん アトリエ店限定',kind:'release'}),'piyorin');
+  assert.equal(B.eventCat({title:'ぴよりんクリスマスケーキ 予約受付開始',kind:'release'}),null);
+  assert.ok(B.isOpen(milk));
+  assert.equal(B.lastDay(milk),'2027-01-19');
+  const md=d=>+d.slice(5,7)+'/'+ +d.slice(8);
+  const at=d=>B.limitedFor([milk],d,{},'piyorin');
+  assert.ok(at('2026-11-24')[0].onSale);
+  assert.ok(at('2027-01-19')[0].onSale);
+  assert.equal(at('2027-01-27').length,0);       // 60 日と前後 1 週間を過ぎたら出さない
+  assert.equal(B.spanText(at('2026-11-24')[0],md),'11/20〜');
+  assert.equal(B.spanText({start:'2026-11-01',end:'2026-11-13'},md),'11/1〜11/13');
+  assert.equal(B.spanText({start:'2026-11-20',end:'2026-11-20'},md),'11/20');
+  const sale={title:'ぴよりんゴジラ販売',start:'2026-11-01',end:'2026-11-13',kind:'sale'};
+  assert.ok(!B.isOpen(sale));
+  assert.equal(B.lastDay(sale),'2026-11-13');
 });

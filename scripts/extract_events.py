@@ -160,12 +160,20 @@ def find_labeled(lines: list[str], labels: list[str], extra: int = 2) -> list[tu
     return [(h[2], h[3]) for h in hits]
 
 
+# 店の名前（見出しの無い短いお知らせ＝公式 X の投稿で、会場の代わりに使う）
+SHOP_NAME = re.compile(r"ぴよりん\s*(?:shop\s*アトリエ店|shop|village|MARKET)", re.I)
+
+
 def short_title(title: str) -> str:
     quotes = re.findall(r"[「『]([^」』]{2,40})[」』]", title)
     good = [q for q in quotes if "ぴよりん" in q and len(q) >= 6
             and not re.fullmatch(r"ぴよりん\s*(village|アトリエ|shop|ショップ|カフェ|MARKET).*", q, re.I)]
     if good:
         return max(good, key=len)
+    # 公式 X の投稿の見出しは文のまま長い。かぎかっこの中の名前（「シェシバタ のクリスマスクッキー缶」）があれば使う
+    named = [q.strip() for q in quotes if len(q.strip()) >= 5 and not SHOP_NAME.fullmatch(q.strip())]
+    if named and len(title) > 40:
+        return named[0]
     return re.sub(r"^【[^】]*】", "", title).strip()
 
 
@@ -202,6 +210,10 @@ def extract(article: dict, lines: list[str]) -> dict | None:
         place = re.split(r"\s*[※(]|\s{2,}|URL|TEL", value)[0].strip(" :：")
         if place:
             break
+    if not place:
+        # 本文に店の名前（「ぴよりんshopアトリエ店限定」など）があれば、それを会場にする
+        shop = next((m.group(0) for ln in lines[:12] for m in [SHOP_NAME.search(ln)] if m), "")
+        place = re.sub(r"\s+", "", shop)
     if not place:
         # 見出しがなければ、タイトル中の「ぴよりん」以外のかぎかっこ（会場名のことが多い）を使う
         others = [q for q in re.findall(r"「([^」]{2,20})」", article["title"]) if "ぴよりん" not in q]

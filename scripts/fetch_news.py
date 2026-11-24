@@ -6,6 +6,9 @@
   - PR TIMES（ジェイアール東海フードサービスの会社別RSS）
   - Googleニュース（関連度順・直近7日・直近1日の3種類の検索RSS）
   - Bingニュース（関連度順・直近7日の2種類の検索RSS）
+  - ぴよりん公式 X（@piyorin_nagoya）の投稿（店舗限定の新作は X だけで知らせることがあるため。2026-11-24 から）
+    投稿の番号を Yahoo!検索・DuckDuckGo・X の埋め込み用の一覧から拾い、埋め込み用の投稿データで本文を読む。
+    公式サイト・PR TIMES の記事と同じ商品の投稿は、その記事の「ほか◯件」にまとめる。
 
 検索の種類を増やしているのは、1つの検索では新しい記事が上位100件から漏れることがあるため。
 標準ライブラリだけで動くので、pip install は不要です。
@@ -27,7 +30,7 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import parse_qs, quote, urlencode, urljoin, urlparse
-from news_store import page_html, read_news, request_url, write_news
+from news_store import X_STATUS, page_html, read_news, request_url, write_news, x_posted, x_title, x_text
 
 JST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent.parent
@@ -301,12 +304,138 @@ SOURCES = [
     ("Googleニュース（1日）", gnews("ぴよりん when:1d"), "google"),
     ("Bingニュース", bing("ぴよりん"), "bing"),
     ("Bingニュース（7日）", bing("ぴよりん", newest=True), "bing"),
+    ("公式X", "https://x.com/piyorin_nagoya", "x"),
 ]
+
+
+# ---------- 公式 X ----------
+X_SOURCE = "ぴよりん公式X"
+X_DAYS = 40      # これより古い投稿は読まない
+X_MAX = 25       # 1回で読む投稿の数の上限
+# 投稿の番号を拾う所（どれかが断っても、ほかで拾えるように 4 つ）
+X_FINDERS = [
+    "https://search.yahoo.co.jp/search?p=" + quote("piyorin_nagoya status") + "&vd=w",
+    "https://search.yahoo.co.jp/search?p=" + quote("piyorin_nagoya status") + "&vd=m",
+    "https://html.duckduckgo.com/html/?q=" + quote("site:x.com/piyorin_nagoya") + "&df=m",
+    "https://syndication.twitter.com/srv/timeline-profile/screen-name/piyorin_nagoya",
+]
+# 新作・販売・催しのお知らせらしい投稿（あいさつ・お礼だけの投稿はニュースにしない）
+X_NEWS_WORD = re.compile(r"販売|発売|登場|限定|新商品|新作|開催|出店|予約|受付|おでかけ|コラボ|お知らせ")
+X_BROWSER_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"
+
+
+def x_ids(page: str) -> set[str]:
+    """検索結果・一覧のページから、公式 X の投稿の番号を拾う（住所が %XX で書かれていても拾う）。"""
+    from urllib.parse import unquote
+    text = unquote(unquote(page))
+    return set(re.findall(r"piyorin_nagoya/status/(\d{15,20})", text))
+
+
+# 投稿の本文に出てくる名前（見出しに入らなかったかぎかっこの中も、同じ商品の記事を探すのに使う）。この回だけ使う
+X_BODY_NAMES: dict[str, list[str]] = {}
+
+
+def x_item(tweet_id: str, data: str) -> dict | None:
+    """埋め込み用の投稿データ（JSON）をニュースの1件にする。公式の投稿でない・返信・お知らせでない投稿は None。"""
+    d = json.loads(data)
+    if (d.get("user") or {}).get("screen_name", "").lower() != "piyorin_nagoya" or d.get("in_reply_to_screen_name"):
+        return None
+    body = x_text(d.get("text") or "")
+    title = x_title(body)
+    if len(title) < 6 or not X_NEWS_WORD.search(body):
+        return None
+    date = to_jst_date(d.get("created_at")) or x_posted(tweet_id).strftime("%Y-%m-%d")
+    url = f"https://x.com/piyorin_nagoya/status/{tweet_id}"
+    X_BODY_NAMES[url] = x_names(body)
+    return {"date": date, "cat": "official", "title": title, "source": X_SOURCE, "url": url}
+
+
+def x_fetch(url: str) -> str:
+    req = urllib.request.Request(request_url(url), headers={"User-Agent": X_BROWSER_UA, "Accept-Language": "ja"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        return r.read().decode(r.headers.get_content_charset() or "utf-8", errors="replace")
+
+
+def collect_x() -> list[dict]:
+    """公式 X の最近の投稿（新しい順に X_MAX 件まで）。番号を拾える所が 1 つも無ければ失敗にする。"""
+    ids, fails = set(), []
+    for url in X_FINDERS:
+        try:
+            ids |= x_ids(x_fetch(url))
+        except Exception as e:
+            fails.append(f"{urlparse(url).hostname}: {e}")
+    if len(fails) == len(X_FINDERS):
+        raise RuntimeError("投稿の番号を拾えませんでした（" + " / ".join(fails) + "）")
+    since = datetime.now(JST) - timedelta(days=X_DAYS)
+    recent = sorted((i for i in ids if x_posted(i) >= since), key=int, reverse=True)[:X_MAX]
+    if not recent:  # 拾う所が古い中身を返しているだけでも気づけるように、失敗として meta.json に残す
+        raise RuntimeError(f"直近{X_DAYS}日の投稿の番号が 0 件（" + (" / ".join(fails) or "拾えた番号 " + str(len(ids)) + " 件") + "）")
+    items = []
+    for i in recent:
+        try:
+            it = x_item(i, x_fetch(f"https://x.com/piyorin_nagoya/status/{i}"))
+        except Exception as e:  # 消された投稿などは飛ばす
+            print(f"{X_SOURCE}: 読めない投稿 {i}: {e}", file=sys.stderr)
+            continue
+        if it:
+            items.append(it)
+    return items
+
+
+def x_names(title: str) -> list[str]:
+    """投稿の見出しのかぎかっこの中の名前（商品名・催しの名前のことが多い）。比べるために記号を外す。"""
+    names = [norm(q) for q in re.findall(r"[「『]([^」』]{3,40})[」』]", title)]
+    return [n for n in names if len(n) >= 5 and not re.fullmatch(r"ぴよりん(?:village|shop|market|アトリエ店?)?", n)]
+
+
+# 名前の中のカタカナの語のうち、どの商品にも付く言葉（これだけが同じでは同じ商品と見なさない）
+X_COMMON_WORD = re.compile(r"クリスマス|ハロウィン|クッキー|プリン|ケーキ|セット|グッズ|コラボ|バレンタイン|スイーツ|オリジナル")
+
+
+def x_words(names: list[str]) -> set[str]:
+    """名前から、商品を見分ける手がかりになるカタカナの語（5 字以上。「シェシバタ」など）。"""
+    out = set()
+    for n in names:
+        for w in re.findall(r"[ァ-ヴー]{5,}", n):
+            w = X_COMMON_WORD.sub("", w)
+            if len(w) >= 5:
+                out.add(w)
+    return out
+
+
+def attach_x(items: list[dict]) -> int:
+    """公式 X の投稿を、同じ商品の公式サイト・PR TIMES の記事（前後 10 日）の「ほか◯件」にまとめる。
+    まとめると予定の読み取り（extract_events.py）がその記事を X の本文といっしょに読み直す。まとめた数を返す。"""
+    def is_x(n):
+        return bool(X_STATUS.match(n.get("url", "")))
+
+    hosts = [n for n in items if n.get("cat") in ("official", "press") and not is_x(n)]
+    drop = set()
+    for x in [n for n in items if is_x(n)]:
+        names = list(dict.fromkeys(x_names(x["title"]) + X_BODY_NAMES.get(x["url"], [])))
+        if not names:
+            continue
+        words, xd = x_words(names), datetime.fromisoformat(x["date"])
+
+        def same(h):
+            gap, ht = abs((datetime.fromisoformat(h["date"]) - xd).days), norm(h["title"])
+            # 名前がそのまま入っている（前後 10 日）か、見分ける語（「シェシバタ」）が入っている（前後 3 日）
+            return (gap <= 10 and any(nm in ht for nm in names)) or (gap <= 3 and any(w in ht for w in words))
+        for h in hosts:
+            if same(h):
+                absorb(h, x)
+                drop.add(id(x))
+                break
+    if drop:
+        items[:] = [n for n in items if id(n) not in drop]
+    return len(drop)
 
 
 def collect(src) -> tuple[str, list[dict] | None, str | None]:
     name, url, kind = src
     try:
+        if kind == "x":
+            return name, collect_x(), None
         body = fetch(url)
         items = parse_official(body) if kind == "official" else parse_rss(body, kind)
         return name, items, None
@@ -582,6 +711,9 @@ def main() -> int:
 
     before = {i for n in existing for i in [n.get("id"), *n.get("merged_ids", [])]}
     merged, added = merge(existing, incoming)
+    joined = attach_x(merged)
+    if joined:
+        print(f"公式Xの投稿を同じ商品の記事にまとめる: {joined}件")
     fixed = verify_dates(merged, {n["id"] for n in merged if n.get("id") not in before})
     if fixed:
         merged.sort(key=lambda n: (n["date"], n["cat"] == "official"), reverse=True)
