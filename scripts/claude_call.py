@@ -22,6 +22,22 @@ API_URL = "https://api.anthropic.com/v1/messages"
 MODES = ("api", "cli", "none")
 MODE_FILE = Path(__file__).resolve().parent / "ai_mode.txt"
 CLI_MODEL = os.environ.get("PIYO_CLI_MODEL") or "haiku"  # 定額でも使用量を小さくするため、軽いモデルで読む
+# 定額の Claude の打ち切り（秒）。2026-11-24：launchd の中では起動が遅く 180 秒で打ち切られていたので 300 に。
+CLI_TIMEOUT_DEFAULT = 300
+
+
+def cli_timeout() -> int:
+    try:
+        return max(30, int(os.environ.get("PIYO_CLI_TIMEOUT", "")))
+    except ValueError:
+        return CLI_TIMEOUT_DEFAULT
+
+
+def cli_safe() -> bool:
+    """--safe-mode で呼ぶか（既定は入。PIYO_CLI_SAFE=0 で切る）。
+    フック・プラグイン・CLAUDE.md・MCP を読まない。ログインと --json-schema はそのまま使える。
+    launchd の定期の更新では、これが無いと 5 件のメモに 160 秒、あると 39 秒だった（2026-11-24 に測った）。"""
+    return os.environ.get("PIYO_CLI_SAFE", "1").strip().lower() not in ("0", "off", "false", "no")
 
 
 def mode() -> str:
@@ -54,7 +70,7 @@ def _json_from(text: str):
         return json.loads(m.group(0)) if m else None
 
 
-def send_cli(payload: dict, timeout: int = 180) -> dict:
+def send_cli(payload: dict, timeout: int | None = None) -> dict:
     """定額の Claude Code に同じ頼みを渡し、API と同じ形（tool_use の入力）で返す。道具・MCP・コマンドは使わせない。"""
     tool = payload["tools"][0]
     user = "\n\n".join(m["content"] for m in payload["messages"] if isinstance(m.get("content"), str))
@@ -63,6 +79,9 @@ def send_cli(payload: dict, timeout: int = 180) -> dict:
     cmd = [os.environ.get("PIYO_CLAUDE_BIN") or "claude", "-p", "--model", CLI_MODEL, "--output-format", "json",
            "--json-schema", json.dumps(tool["input_schema"], ensure_ascii=False), "--system-prompt", system,
            "--tools", "", "--strict-mcp-config", "--disable-slash-commands", "--no-session-persistence"]
+    if cli_safe():
+        cmd.insert(1, "--safe-mode")
+    timeout = timeout or cli_timeout()
     env = {k: v for k, v in os.environ.items() if k != "ANTHROPIC_API_KEY"}  # API キーがあっても定額のログインで動かす
     with tempfile.TemporaryDirectory() as cwd:  # 何も無いフォルダで動かす（このリポジトリのファイルを読ませない）
         run = subprocess.run(cmd, input=user, capture_output=True, text=True, timeout=timeout, cwd=cwd, env=env)
@@ -85,7 +104,7 @@ def send_cli(payload: dict, timeout: int = 180) -> dict:
 def send(payload: dict, key: str, timeout: int = 90) -> dict:
     """Claude に頼みを送り、API の答えの形で返す。key が "cli" なら定額の Claude Code、ほかは API。"""
     if key == "cli":
-        return send_cli(payload, max(timeout, 180))
+        return send_cli(payload, max(timeout, cli_timeout()))
     req = urllib.request.Request(
         API_URL, data=json.dumps(payload).encode("utf-8"),
         headers={"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json"})

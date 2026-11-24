@@ -68,6 +68,26 @@ class CliTests(unittest.TestCase):
         self.assertIn('--strict-mcp-config', a)
         self.assertEqual(json.loads(a[a.index('--json-schema') + 1]), TOOL['input_schema'])
         self.assertIn('予定を抜き出す', a[a.index('--system-prompt') + 1])
+        self.assertIn('--safe-mode', a)  # フック・プラグイン・CLAUDE.md を読まない（launchd の中で 1 回 160 秒かかっていた）
+
+    def test_cli_safe_mode_and_timeout_can_be_changed(self):
+        exe = fake_claude('print(json.dumps({"is_error":False,"structured_output":{"events":[]}}))\n')
+        seen_to = []
+        real_run = claude_call.subprocess.run
+
+        def run(*a, **k):
+            seen_to.append(k.get('timeout'))
+            return real_run(*a, **k)
+        with patch.dict(os.environ, {'PIYO_CLAUDE_BIN': exe, 'PIYO_CLI_SAFE': '0', 'PIYO_CLI_TIMEOUT': '420'}), \
+                patch.object(claude_call.subprocess, 'run', run):
+            claude_call.send(PAYLOAD, 'cli')
+        a = json.load(open(os.path.join(os.path.dirname(exe), 'seen.json')))['argv']
+        self.assertNotIn('--safe-mode', a)
+        self.assertEqual(seen_to, [420])
+        with patch.dict(os.environ, {'PIYO_CLAUDE_BIN': exe}), patch.object(claude_call.subprocess, 'run', run):
+            os.environ.pop('PIYO_CLI_TIMEOUT', None)
+            claude_call.send(PAYLOAD, 'cli', 120)
+        self.assertEqual(seen_to[-1], 300)  # 既定は 300 秒（前は 180 秒）
 
     def test_cli_text_answer_and_errors(self):
         exe = fake_claude('print(json.dumps({"is_error":False,"result":"```json\\n{\\"events\\":[]}\\n```"}))\n')
