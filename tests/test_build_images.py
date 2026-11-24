@@ -90,3 +90,51 @@ class Again(unittest.TestCase):
         self.assertFalse(b.again({"url": x, "img": None, "xTried": True}))
         self.assertFalse(b.again({"url": x, "img": "https://pbs.twimg.com/media/a.jpg"}))
         self.assertFalse(b.again({"url": "https://prtimes.jp/main/html/rd/p/1.html", "img": None}))
+
+
+class WrongReleaseImage(unittest.TestCase):
+    """2026-11-24：「ぴよりん2026 クリスマスクッキー缶」に店のクリスマス飾りのリリースの代表画像（店の入口）が付いた"""
+    PR = ('<meta property="og:title" content="ぴよりんvillage・ぴよりんshop・ぴよりんshopアトリエ店がクリスマス仕様でお出迎え！"/>'
+          '<meta property="og:image" content="https://prcdn.freetls.fastly.net/release_image/124425/267/shop-1920x1005.jpg"/>')
+    X = '{"mediaDetails":[{"type":"photo","media_url_https":"https://pbs.twimg.com/media/HXiSksUawAAz4HJ.jpg"}]}'
+    EV = {"id": "auto-n20261120a4d4992f", "title": "ぴよりん2026 クリスマスクッキー缶 販売開始", "start": "2026-11-20", "kind": "release",
+          "url": "https://prtimes.jp/main/html/rd/p/000000267.000124425.html", "src": "n20261120-a4d4992f"}
+    NEWS = [{"id": "n20261120-a4d4992f", "title": "ぴよりんvillage・ぴよりんshop・ぴよりんshopアトリエ店がクリスマス仕様でお出迎え！", "date": "2026-11-20",
+             "source": "PR TIMES", "cat": "press", "url": "https://prtimes.jp/main/html/rd/p/000000267.000124425.html"},
+            {"id": "n20261120-3d57b48f", "title": "11/20(金)～「ぴよりん 2026 クリスマスクッキー缶」が登場🐥", "date": "2026-11-20",
+             "source": "ぴよりん公式X", "cat": "official", "url": "https://x.com/piyorin_nagoya/status/2123611035256942640"},
+            {"id": "n-old", "title": "「クッキー缶」の話", "date": "2026-09-01",
+             "source": "ぴよりん公式X", "cat": "official", "url": "https://x.com/piyorin_nagoya/status/1"}]
+
+    def test_want_word(self):
+        self.assertEqual(b.want_word("ぴよりん2026 クリスマスクッキー缶 販売開始"), "クッキー缶")
+        self.assertEqual(b.want_word("ぴよりんドール缶 クリスマス限定"), "ドール缶")
+        self.assertIsNone(b.want_word("ハロウィンぴよりん販売"))
+
+    def test_title_without_product_is_not_used(self):
+        self.assertIsNone(b.og_image_for(self.PR, "クッキー缶"))
+        self.assertEqual(b.og_image_for(self.PR, None), "https://prcdn.freetls.fastly.net/release_image/124425/267/shop-1920x1005.jpg")
+        ok = self.PR.replace("クリスマス仕様でお出迎え", "クッキー缶が登場")
+        self.assertTrue(b.og_image_for(ok, "クッキー缶"))
+
+    def test_event_falls_back_to_official_x_photo(self):
+        c = [x for x in b.candidates([self.EV], self.NEWS) if x["key"] == self.EV["id"]][0]
+        self.assertIn("https://x.com/piyorin_nagoya/status/2123611035256942640", c["alts"])
+        self.assertNotIn("https://x.com/piyorin_nagoya/status/1", c["alts"])  # 日付の離れた投稿は使わない
+        old = b.get
+        b.get = lambda u: self.PR if "prtimes" in u else self.X
+        try:
+            img = b.release_image_any([c["url"], *c["alts"]], c["want"])
+        finally:
+            b.get = old
+        self.assertEqual(img, "https://pbs.twimg.com/media/HXiSksUawAAz4HJ.jpg")
+
+    def test_x_cookie_name(self):
+        self.assertEqual(b.cookie_name(self.NEWS[1]["title"]), "ぴよりん 2026 クリスマスクッキー缶")
+        self.assertEqual(b.cookie_name("ぴよりんモチーフの「クッキー缶」愛知県外で初販売！「そごう横浜店」に登場"), "ひよりの手作りクッキー缶")
+
+    def test_old_wrong_entry_is_read_again(self):
+        e = {"title": self.EV["title"], "url": self.EV["url"], "img": "https://prcdn.freetls.fastly.net/release_image/124425/267/a.jpg"}
+        self.assertTrue(b.again(e))
+        self.assertFalse(b.again({**e, "titleChecked": True}))
+        self.assertFalse(b.again({**e, "title": "ハロウィンぴよりん販売"}))

@@ -121,14 +121,38 @@ def og_image(page):
     return u if IMG_OK.match(u) else None
 
 
-def release_image_any(urls):
+def page_title(page):
+    """ページの題（og:title、無ければ <title>）"""
+    m = re.search(r'<meta property="og:title" content="([^"]+)"', page) or re.search(r"<title>([^<]+)", page)
+    return unicodedata.normalize("NFKC", html.unescape(m.group(1))) if m else ""
+
+
+def want_word(title):
+    """その商品だと分かる言葉（クッキー缶・ドール缶 など）。無ければ None。
+    2026-11-24：「クリスマスクッキー缶」の予定に、店のクリスマス飾りのリリース（クッキー缶は本文に 1 行だけ）の
+    代表画像（店の入口の写真）が付いた。リリースの題にこの言葉が無ければ、そのリリースの代表画像は使わない。"""
+    t = unicodedata.normalize("NFKC", title or "")
+    if "クッキー缶" in t:
+        return "クッキー缶"
+    m = re.search(r"([ァ-ヶー]{2,8}缶)", t)
+    return m.group(1) if m else None
+
+
+def og_image_for(page, want):
+    """題に want が無いリリースの代表画像は、別の物の写真なので使わない"""
+    if want and want not in page_title(page):
+        return None
+    return og_image(page)
+
+
+def release_image_any(urls, want=None):
     """いくつかの住所を順に試す（PR TIMES を先に）"""
     seen = []
     for u in sorted([u for u in urls if u], key=lambda u: "prtimes.jp" not in u):
         if u in seen:
             continue
         seen.append(u)
-        img = release_image(u)
+        img = release_image(u, want)
         if img:
             return img
     return None
@@ -153,19 +177,19 @@ def x_name(title):
     return m.group(1).strip() if m else None
 
 
-def release_image(url):
+def release_image(url, want=None):
     """リリースの代表画像（PR TIMES の og:image）。公式のお知らせなら、中にある PR TIMES の住所から。公式 X なら投稿の写真"""
     if not url:
         return None
     if X_STATUS.match(url):
         return x_photo(get(request_url(url)))
     if "prtimes.jp/main/html/rd/p/" in url:
-        return og_image(get(url))
+        return og_image_for(get(url), want)
     if re.match(r"^https://piyorin\.com/news/p\d+/?$", url):
         page = get(url)
         pr = re.search(r'href="(https://prtimes\.jp/main/html/rd/p/[0-9.]+\.html)"', page)
         if pr:
-            return og_image(get(pr.group(1)))
+            return og_image_for(get(pr.group(1)), want)
         return None  # PR TIMES の無いお知らせは、本文の画像を取り違えやすいので使わない
     return None
 
@@ -173,6 +197,9 @@ def release_image(url):
 def cookie_name(title):
     """クッキー缶のリリースの題名から商品名を作る（自由入力で直せる）"""
     t = unicodedata.normalize("NFKC", title or "")
+    named = re.search(r"「([^」]*クッキー缶[^」]*)」", t)  # 「ぴよりん 2026 クリスマスクッキー缶」のように題に名前がある
+    if named and re.sub(r"\s", "", named.group(1)) not in ("クッキー缶", "ひよりの手作りクッキー缶", "手作りクッキー缶"):
+        return re.sub(r"\s+", " ", named.group(1)).strip()
     m = (re.search(r"「([^」]*(?:ver\.|版)[^」]*)」", t) or re.search(r"[（(]([^）)]*ver\.[^）)]*)[）)]", t)
          or re.search(r"に([^「」、。！!]{1,12}?ver\.)が", t) or re.search(r"に「?([^「」、。！!にの]{1,8}?(?:限定|特別)版)", t))
     if "シェ・シバタ" in t:
@@ -200,6 +227,20 @@ def candidates(events, news):
     out = []
     by_id = {n.get("id"): n for n in news if isinstance(n, dict)} if isinstance(news, list) else {}
 
+    def near(a, b, days=7):
+        try:
+            return abs((datetime.fromisoformat(a[:10]) - datetime.fromisoformat(b[:10])).days) <= days
+        except ValueError:
+            return False
+
+    def x_links(want, date):
+        """同じ商品の公式 X の投稿（リリースの代表画像が使えないときの控え）"""
+        if not want:
+            return []
+        return [n["url"] for n in news if isinstance(news, list) and isinstance(n, dict) and n.get("source") == X_SOURCE
+                and X_STATUS.match(n.get("url") or "") and want in unicodedata.normalize("NFKC", n.get("title") or "")
+                and near(n.get("date") or "", date)]
+
     def pr_links(n):
         return [r.get("url") for r in (n or {}).get("related") or [] if "prtimes.jp/main/html/rd/p/" in (r.get("url") or "")]
 
@@ -210,14 +251,15 @@ def candidates(events, news):
         cat = "cookie" if "クッキー缶" in t else ("piyorin" if "ぴよりん" in t and e.get("kind") == "sale" else "goods")
         src = by_id.get(e.get("src"))
         out.append({"key": e.get("id"), "cat": cat, "title": t, "date": e.get("start") or "", "url": e["url"], "from": "event",
-                    "alts": pr_links(src) + ([src.get("url")] if src else [])})
+                    "alts": pr_links(src) + ([src.get("url")] if src else []) + x_links(want_word(t), e.get("start") or ""),
+                    "want": want_word(t)})
     for n in news if isinstance(news, list) else []:
         t = n.get("title") or ""
         if "クッキー缶" not in t or n.get("cat") not in ("official", "press"):
             continue
         url = n.get("url") or ""
         out.append({"key": n.get("id"), "cat": "cookie", "title": t, "date": n.get("date") or "", "url": url, "alts": pr_links(n),
-                    "from": "news", "name": cookie_name(t)})
+                    "from": "news", "name": cookie_name(t), "want": want_word(t)})
     # 公式 X だけで知らされた新作ぴよりん（予定がまだ無くても絵を出す）
     for n in news if isinstance(news, list) else []:
         name = x_name(n.get("title")) if n.get("source") == X_SOURCE and X_STATUS.match(n.get("url") or "") else None
@@ -228,8 +270,13 @@ def candidates(events, news):
 
 
 def again(entry):
-    """前に絵が取れなかった公式 X の分は読み直す（2026-11-24 より前は X の写真を読んでいなかった）"""
-    return not (entry or {}).get("img") and bool(X_STATUS.match((entry or {}).get("url") or "")) and not (entry or {}).get("xTried")
+    """読み直す物：
+    - 前に絵が取れなかった公式 X の分（2026-11-24 より前は X の写真を読んでいなかった）
+    - 題の確かめ（want_word）をする前に、商品名のある予定へリリースの代表画像を付けた分（2026-11-24 クリスマスクッキー缶）"""
+    e = entry or {}
+    if not e.get("img") and bool(X_STATUS.match(e.get("url") or "")) and not e.get("xTried"):
+        return True
+    return bool(e.get("img")) and "prcdn.freetls.fastly.net" in e.get("img", "") and bool(want_word(e.get("title"))) and not e.get("titleChecked")
 
 
 def main():
@@ -255,18 +302,24 @@ def main():
             print(f"図鑑を読めませんでした: {e}", file=sys.stderr)
     # リリースの代表画像（新しいものだけ）
     rel = out["releases"]
-    todo = [c for c in candidates(load(DATA / "events.json", []), load(DATA / "news.json", [])) if c["key"] and (c["key"] not in rel or again(rel[c["key"]]))]
+    cands = candidates(load(DATA / "events.json", []), load(DATA / "news.json", []))
+    for c in cands:  # 名前の付け方を直したら、読み直さずに名前だけ直す
+        if c.get("name") and c["key"] in rel and rel[c["key"]].get("name") and rel[c["key"]]["name"] != c["name"]:
+            rel[c["key"]]["name"] = c["name"]
+    todo = [c for c in cands if c["key"] and (c["key"] not in rel or again(rel[c["key"]]))]
     todo.sort(key=lambda c: c["date"], reverse=True)
     limit = 10**6 if "--all" in sys.argv else MAX_RELEASES
     for c in todo[:limit]:
         try:
-            img = release_image_any([c["url"], *c.get("alts", [])])
+            img = release_image_any([c["url"], *c.get("alts", [])], c.get("want"))
         except Exception as e:
             print(f"リリースを読めませんでした {c['url']}: {e}", file=sys.stderr)
             continue  # 次の更新でもう一度
         entry = {"cat": c["cat"], "title": c["title"][:120], "date": c["date"], "url": c["url"], "img": img, "from": c["from"]}
         if c.get("name"):
             entry["name"] = c["name"]
+        if c.get("want"):
+            entry["titleChecked"] = True
         if not img and X_STATUS.match(c["url"]):
             entry["xTried"] = True  # 写真の無い投稿は何度も読まない
         rel[c["key"]] = entry

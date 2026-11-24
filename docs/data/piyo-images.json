@@ -3302,7 +3302,8 @@
    "date": "2026-10-23",
    "url": "https://piyorin.com/news/p5599/",
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/241/124425-241-daab9ea83ed9e9b17719e85abe993299-842x595.jpg",
-   "from": "event"
+   "from": "event",
+   "titleChecked": true
   },
   "auto-officialp5620": {
    "cat": "piyorin",
@@ -3327,7 +3328,8 @@
    "url": "https://piyorin.com/news/p5599/",
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/241/124425-241-daab9ea83ed9e9b17719e85abe993299-842x595.jpg",
    "from": "news",
-   "name": "ひよりの手作りクッキー缶（ハロウィンver.）"
+   "name": "ひよりの手作りクッキー缶（ハロウィンver.）",
+   "titleChecked": true
   },
   "e-wolfy-village": {
    "cat": "piyorin",
@@ -3448,7 +3450,8 @@
    "url": "https://piyorin.com/news/p5538/",
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/240/124425-240-c6b9e41967f68542cfba172ef2fa02b6-842x595.jpg",
    "from": "news",
-   "name": "ひよりの手作りクッキー缶（秋限定）"
+   "name": "ひよりの手作りクッキー缶（秋限定）",
+   "titleChecked": true
   },
   "auto-n20260822501de54a-2": {
    "cat": "piyorin",
@@ -3504,7 +3507,8 @@
    "date": "2026-08-20",
    "url": "https://prtimes.jp/main/html/rd/p/000000226.000124425.html",
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/226/124425-226-1659891807572aafea06d08315cbf88a-842x595.jpg",
-   "from": "event"
+   "from": "event",
+   "titleChecked": true
   },
   "auto-n202608039c811fb3": {
    "cat": "piyorin",
@@ -3586,7 +3590,8 @@
    "url": "https://prtimes.jp/main/html/rd/p/000000192.000124425.html",
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/192/124425-192-ef48c29e1cd04b469f09080da02ccf41-1200x848.jpg",
    "from": "news",
-   "name": "ひよりの手作りクッキー缶"
+   "name": "ひよりの手作りクッキー缶",
+   "titleChecked": true
   },
   "n20260422-69bc1678": {
    "cat": "cookie",
@@ -3595,7 +3600,8 @@
    "url": "https://prtimes.jp/main/html/rd/p/000000186.000124425.html",
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/186/124425-186-75744457967d4ffbc372234d605fd1c1-842x595.jpg",
    "from": "news",
-   "name": "ひよりの手作りクッキー缶（新緑ver.）"
+   "name": "ひよりの手作りクッキー缶（新緑ver.）",
+   "titleChecked": true
   },
   "n20251217-a1e112f5": {
    "cat": "cookie",
@@ -3604,7 +3610,8 @@
    "url": "https://prtimes.jp/main/html/rd/p/000000142.000124425.html",
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/142/124425-142-12dca094f7cc18e5fa21ebbca11504b4-1200x848.jpg",
    "from": "news",
-   "name": "ひよりの手作りクッキー缶（お正月限定）"
+   "name": "ひよりの手作りクッキー缶（お正月限定）",
+   "titleChecked": true
   },
   "n20251204-91979b86": {
    "cat": "cookie",
@@ -3613,7 +3620,8 @@
    "url": "https://prtimes.jp/main/html/rd/p/000000137.000124425.html",
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/137/124425-137-c8c4de2437a28fae3bdcdf33be965867-1200x848.jpg",
    "from": "news",
-   "name": "ひよりの手作りクッキー缶（クリスマス限定）"
+   "name": "ひよりの手作りクッキー缶（クリスマス限定）",
+   "titleChecked": true
   },
   "n20251017-2ceaca21": {
    "cat": "cookie",
@@ -3622,7 +3630,8 @@
    "url": "https://prtimes.jp/main/html/rd/p/000000126.000124425.html",
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/126/124425-126-aeb40a034cb3fd077975e775d49c22f0-1200x848.jpg",
    "from": "news",
-   "name": "ひよりの手作りクッキー缶（ハロウィン特別版）"
+   "name": "ひよりの手作りクッキー缶（ハロウィン特別版）",
+   "titleChecked": true
   },
   "n20250904-c3dfbfb4": {
    "cat": "cookie",
@@ -3631,7 +3640,8 @@
    "url": "https://prtimes.jp/main/html/rd/p/000000109.000124425.html",
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/109/124425-109-13693b73c20b3c7277f29e6a285912f7-1200x848.jpg",
    "from": "news",
-   "name": "ひよりの手作りクッキー缶"
+   "name": "ひよりの手作りクッキー缶",
+   "titleChecked": true
   },
   "auto-officialp5666-2": {
    "cat": "goods",
@@ -3662,16 +3672,18 @@
    "title": "ぴよりん2026 クリスマスクッキー缶 販売開始",
    "date": "2026-11-20",
    "url": "https://prtimes.jp/main/html/rd/p/000000267.000124425.html",
-   "img": "https://prcdn.freetls.fastly.net/release_image/124425/267/124425-267-f434077d923f8a522b49b9c9d6d482b6-1920x1005.jpg",
-   "from": "event"
+   "img": "https://pbs.twimg.com/media/HXiSksUawAAz4HJ.jpg",
+   "from": "event",
+   "titleChecked": true
   },
   "auto-n202611240733aa9c": {
    "cat": "goods",
-   "title": "ぴよりんドール缶 クリスマス限定",
+   "title": "ぴよりんドール缶 クリスマス限定 発売",
    "date": "2026-12-01",
    "url": "https://prtimes.jp/main/html/rd/p/000000269.000124425.html",
    "img": "https://prcdn.freetls.fastly.net/release_image/124425/269/124425-269-d55526393d1646f9fa808396b1b6a271-842x595.jpg",
-   "from": "event"
+   "from": "event",
+   "titleChecked": true
   },
   "n20261120-3d57b48f": {
    "cat": "cookie",
@@ -3680,7 +3692,7 @@
    "url": "https://x.com/piyorin_nagoya/status/2123611035256942640",
    "img": "https://pbs.twimg.com/media/HXiSksUawAAz4HJ.jpg",
    "from": "news",
-   "name": "ひよりの手作りクッキー缶"
+   "name": "ぴよりん 2026 クリスマスクッキー缶"
   },
   "auto-n20261118cfe9975b": {
    "cat": "goods",
