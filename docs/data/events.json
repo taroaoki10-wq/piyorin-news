@@ -554,14 +554,14 @@
  },
  {
   "id": "auto-n202611240733aa9c",
-  "title": "ぴよりんドール缶 クリスマス限定",
+  "title": "ぴよりんドール缶 クリスマス限定 発売",
   "start": "2026-12-01",
   "end": "2026-12-01",
   "place": "ぴよりんvillage",
   "kind": "release",
   "url": "https://prtimes.jp/main/html/rd/p/000000269.000124425.html",
-  "auto": true,
-  "src": "n20261124-0733aa9c"
+  "src": "n20261124-0733aa9c",
+  "auto": true
  },
  {
   "id": "auto-n2026102183b7c75c-2",

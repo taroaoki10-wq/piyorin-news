@@ -8,14 +8,14 @@ UID:auto-n202611240733aa9c@piyorin-news
 DTSTAMP:20261201T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
-SUMMARY:ぴよりんドール缶 クリスマス限定
+SUMMARY:ぴよりんドール缶 クリスマス限定 発売
 LOCATION:ぴよりんvillage
 URL:https://prtimes.jp/main/html/rd/p/000000269.000124425.html
 DESCRIPTION:ぴよりんニュースより\nhttps://prtimes.jp/main/html/rd
  /p/000000269.000124425.html
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:ぴよりんドール缶 クリスマス限定
+DESCRIPTION:ぴよりんドール缶 クリスマス限定 発売
 TRIGGER:-PT240M
 END:VALARM
 END:VEVENT
