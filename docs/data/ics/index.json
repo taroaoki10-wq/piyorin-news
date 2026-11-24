@@ -19,6 +19,16 @@
   "time": "",
   "timed": false
  },
+ "auto-n202611240733aa9c": {
+  "alarms": [
+   "eve",
+   "morning",
+   "none"
+  ],
+  "f": "auto-n202611240733aa9c",
+  "time": "",
+  "timed": false
+ },
  "auto-officialp5633-3": {
   "alarms": [
    "eve",
