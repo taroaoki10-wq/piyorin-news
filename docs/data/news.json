@@ -88,6 +88,14 @@
    {
     "source": "ファッションプレス",
     "url": "https://www.fashion-press.net/news/153790"
+   },
+   {
+    "source": "au Webポータル",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1rZURjQVlXX0tYZGR4UEc5dmROQXdtNFlWcmpTTExDanAzNE1VcUxtcXg2ZlNKZ2MyM3pld3dKellzazdNRkJFSDFqb3hKUTkyUEpmSUIzODREcmdDYzdRWU8yQ1pHWXl5YUctQm5n?oc=5"
+   },
+   {
+    "source": "千葉テレビ放送株式会社",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1qbnFZRGxBZUEwV1ZISzdSRkFySXBpV0h3a19ab2psNjJaUW9oVnRfclE3WC1rMldndDhZZTNnRGczVElNTGlxSTNHdUpFdXhnLV83V0tIX2pWZnM1ODJv?oc=5"
    }
   ],
   "merged_ids": [
@@ -141,7 +149,12 @@
   "title": "クリスマスの贈り物にも♪ぴよりんとシェ・シバタがコラボしたゴールドカラーの限定クッキー缶",
   "source": "cocotte on MSN",
   "url": "https://www.msn.com/ja-jp/news/other/%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%E3%81%AE%E8%B4%88%E3%82%8A%E7%89%A9%E3%81%AB%E3%82%82-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%81%A8%E3%82%B7%E3%82%A7-%E3%82%B7%E3%83%90%E3%82%BF%E3%81%8C%E3%82%B3%E3%83%A9%E3%83%9C%E3%81%97%E3%81%9F%E3%82%B4%E3%83%BC%E3%83%AB%E3%83%89%E3%82%AB%E3%83%A9%E3%83%BC%E3%81%AE%E9%99%90%E5%AE%9A%E3%82%AF%E3%83%83%E3%82%AD%E3%83%BC%E7%BC%B6/ar-AA2i7uHR",
-  "related": [],
+  "related": [
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFAyUUVSOXZVVUF5NlZ0eHhiWGRHeU1NQ3VvbTJhNC1XV245cExVUkljNTJncEUyeWdXR0g4M193bi0wdGZObHQyaHpmRlIyNTF5WW0yV1NSb1QyV0RTRFE?oc=5"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
