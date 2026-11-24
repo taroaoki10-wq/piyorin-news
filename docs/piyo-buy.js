@@ -194,6 +194,30 @@
     return known?sum:null;
   }
   const count=r=>(r.items||[]).reduce((s,it)=>s+(it.qty||1),0);
+  // 入力中の買った物のまとめ（名前のある物だけ数える）：種類・個数・わかっている値段の合計・値段のない物の数
+  function cartSum(items){
+    let kinds=0,pieces=0,yen=0,known=false,unknown=0;
+    for(const it of items||[]){
+      if(!String(it.name||'').trim())continue;
+      const q=Math.max(1,Math.min(999,Math.floor(+it.qty)||1));kinds++;pieces+=q;
+      const p=it.price===''||it.price==null?NaN:+it.price;
+      if(Number.isFinite(p)&&p>=0){yen+=p*q;known=true}else unknown++;
+    }
+    return {kinds,pieces,yen:known?yen:null,unknown};
+  }
+  // 同じ日・同じ場所の記録（同じ買い物を 2 つに分けて記録してしまったもの）を探す
+  const sameVisit=(list,rec)=>(list||[]).filter(r=>r.id!==rec.id&&r.date===rec.date&&(r.shop||'').trim()===(rec.shop||'').trim());
+  // add の買った物を base に足した記録を返す（空の欄は add で埋める・メモはつなぐ）
+  function mergeInto(base,add,now){
+    const o=JSON.parse(JSON.stringify(base));
+    o.items=[...base.items,...add.items].slice(0,30);
+    for(const k of ['time','shop'])if(!o[k]&&add[k])o[k]=add[k];
+    for(const k of ['crowd','wait'])if(o[k]==null&&add[k]!=null)o[k]=add[k];
+    o.soldout=!!(base.soldout||add.soldout);o.fav=!!(base.fav||add.fav);
+    o.memo=[base.memo,add.memo].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i).join('\n').slice(0,1000);
+    if(!o.photo&&add.photo){o.photo=true;if(add.pv)o.pv=add.pv}
+    o.updatedAt=now;return o;
+  }
   function sortRecs(list){return list.slice().sort((a,b)=>a.date!==b.date?(a.date<b.date?1:-1):((b.time||'')>(a.time||'')?1:(b.time||'')<(a.time||'')?-1:b.createdAt-a.createdAt))}
   function parseStore(raw){
     try{const d=JSON.parse(raw||'null');const list=Array.isArray(d)?d:(d&&Array.isArray(d.records)?d.records:[]);
@@ -295,7 +319,7 @@
     return !list.some(r=>r.id!==rec.id&&(r.date<rec.date||(r.date===rec.date&&r.createdAt<rec.createdAt))&&r.items.some(x=>x.name===it.name));
   }
 
-  const PiyoBuy={KEY,CATS,REGULAR,VILLAGE,fixedFor,SHOPS,shopOf,slotTime,CROWD,RATE,itemName,eventCat,OPEN_DAYS,isOpen,lastDay,spanText,memoPrices,limitedFor,allLimited,imageFor,archiveItems,nkey,normalize,total,count,sortRecs,
+  const PiyoBuy={KEY,CATS,REGULAR,VILLAGE,fixedFor,SHOPS,shopOf,slotTime,CROWD,RATE,itemName,eventCat,OPEN_DAYS,isOpen,lastDay,spanText,memoPrices,limitedFor,allLimited,imageFor,archiveItems,nkey,normalize,total,count,cartSum,sameVisit,mergeInto,sortRecs,
     parseStore,dumpStore,merge,filter,stats,firstTime,todayJst,addDays,yen,newId,syncDiff,syncApply,syncMerge,canonBuy,photoPlan,GONE_DAYS};
   root.PiyoBuy=PiyoBuy;
   if(typeof module!=='undefined'&&module.exports)module.exports=PiyoBuy;
@@ -451,6 +475,19 @@
     const p=$('by-prev');if(p&&p.dataset.u){URL.revokeObjectURL(p.dataset.u)}
   }
   const chip=(attr,label,on,sub,img)=>`<button type="button" class="by-chip${on?' on':''}${img?' has-img':''}" ${attr} aria-pressed="${!!on}">${img||''}<span>${esc(label)}${sub?`<small>${esc(sub)}</small>`:''}</span></button>`;
+  // 入力中の買った物の一覧（かご）。どれを入れている途中か・いくつ・いくらかを、いつも見えるようにする（2026-11-24）
+  function cartHtml(f){
+    const one=f.items.length>1;
+    return `<ol class="by-cl">${f.items.map((x,i)=>{const q=Math.max(1,Math.floor(+x.qty)||1),p=x.price===''||x.price==null?NaN:+x.price;
+      return `<li class="${i===f.tab?'on':''}"><button type="button" class="by-cr" data-tab="${i}" aria-current="${i===f.tab}"><b>${i+1}</b><span class="by-cn">${x.name.trim()?esc(x.name):'<i>名前をまだ入れていません</i>'}</span><span class="by-cq">×${q}</span><span class="by-cy">${Number.isFinite(p)?B.yen(p*q):'値段なし'}</span>${i===f.tab&&one?'<em>入力中</em>':''}</button>${one?`<button type="button" class="by-cx" data-rmi="${i}" aria-label="${i+1}つ目を外す">×</button>`:''}</li>`}).join('')}</ol>
+      <div class="by-csum"><span>${sumText(f)}</span><button type="button" class="set-act" data-add>＋ ほかの物も足す</button></div>`;
+  }
+  function sumText(f){const c=B.cartSum(f.items);if(!c.kinds)return 'まだ何も入っていません';
+    return `${c.kinds}種類・${c.pieces}個${c.yen!=null?' · 合計 '+B.yen(c.yen):''}${c.unknown&&c.yen!=null?`（値段なし ${c.unknown}）`:''}`}
+  function totText(f){const c=B.cartSum(f.items);if(!c.kinds)return '';return c.yen!=null?`合計 ${B.yen(c.yen)}・${c.pieces}個`:`${c.kinds}種類${c.pieces}個`}
+  function nowText(f){return f.items.length>1?`▼ ${f.tab+1}つ目（全 ${f.items.length} つ）を入力中`:'▼ 買った物を入力中（ほかにも買ったら上の「＋ ほかの物も足す」）'}
+  // 名前・数・値段を打つたびに、かごと合計を描き直す（入力欄は描き直さない）
+  function refreshCart(){if(!form||!$('by-cart'))return;$('by-cart').innerHTML=cartHtml(form);$('buy-total').textContent=totText(form)}
   function renderForm(){
     if(!form)return;
     const f=form, it=f.items[f.tab]||f.items[0];
@@ -464,7 +501,7 @@
     const limPlaces=[...new Set(allLim.filter(x=>x.onSale&&x.place&&x.cat!=='goods').flatMap(x=>x.place.split(/[、,，・]/)).map(p=>p.trim()).filter(p=>p&&!B.SHOPS.some(sh=>sh.name.includes(p)||p.includes(sh.short)||/^ぴよりん(shop|village)?$/.test(p))))];
     const shops=[...B.SHOPS.map(s=>s.name),...limPlaces,...used].filter((v,i,a)=>a.indexOf(v)===i).slice(0,10);
     const shopDef=B.shopOf(f.shop);
-    const tot=B.total({items:f.items.map(x=>({qty:+x.qty||1,price:x.price===''?null:+x.price}))});
+    const sibs=f.id?B.sameVisit(recs.filter(r=>!(f.mergeIds||[]).includes(r.id)),{id:f.id,date:f.date,shop:f.shop}):[];
     const hit=lim.find(x=>x.name===it.name);
     $('buy-h').textContent=f.id?'記録を直す':'ぴよりんを記録する';
     $('buy-form').innerHTML=`
@@ -473,8 +510,10 @@
           <input type="time" id="by-time" value="${esc(f.time)}" aria-label="買った時刻（わからなければ空で）"></div>
         <div class="by-chips">${chip('data-day="0"','今日',f.date===B.todayJst())}${chip('data-day="-1"','昨日',f.date===B.addDays(B.todayJst(),-1))}${chip('data-day="-2"','おととい',f.date===B.addDays(B.todayJst(),-2))}${f.date<B.addDays(B.todayJst(),-2)?`<span class="by-past">過去の記録（${esc(f.date.replaceAll('-','.'))}）</span>`:''}</div>
       </section>
-      <section class="set-sec"><h3>買った物 <small>${f.items.length>1?`${f.items.length}つ`:''}</small></h3>
-        ${f.items.length>1?`<div class="by-lines">${f.items.map((x,i)=>`<button type="button" class="by-line${i===f.tab?' on':''}" data-tab="${i}">${esc(x.name||'（未入力）')}${+x.qty>1?' ×'+x.qty:''}</button>`).join('')}</div>`:''}
+      <section class="set-sec"><h3>買った物</h3>
+        ${sibs.length?`<div class="by-dup"><p>同じ日・同じ場所の記録がほかに ${sibs.length} 件あります（${esc(sibs.flatMap(r=>r.items.map(x=>x.name)).slice(0,4).join('、'))}${sibs.flatMap(r=>r.items).length>4?' など':''}）。</p><button type="button" class="set-act" data-mergeall>この記録に 1 つにまとめる</button></div>`:''}
+        <div class="by-cart" id="by-cart">${cartHtml(f)}</div>
+        <p class="by-now" id="by-now">${nowText(f)}</p>
         <div class="by-seg" role="group" aria-label="分類">${Object.entries(B.CATS).map(([k,l])=>`<button type="button" data-cat="${k}" aria-pressed="${it.cat===k}">${l}</button>`).join('')}</div>
         ${onSale.length?`<p class="by-lab">${md(f.date)} に${f.date<B.todayJst()?'売っていた':'売っている'}限定</p><div class="by-chips">${onSale.map(x=>chip(`data-lim="${esc(x.id)}"`,x.name,it.name===x.name,`${B.spanText(x,md)}${x.price!=null?' · '+B.yen(x.price):''}`,thumb({cat:x.cat,name:x.name,lid:x.id},f.date))).join('')}</div>`:''}
         ${regular.length?`<p class="by-lab">${it.cat==='goods'?'定番のおかし':it.cat==='village'?'ぴよりんvillage 限定のメニュー':'定番'}</p><div class="by-chips">${regular.map(x=>chip(`data-reg="${esc(x.name)}"`,x.name,it.name===x.name,x.price!=null?B.yen(x.price):'',thumb({cat:it.cat,name:x.name},f.date))).join('')}</div>`:''}
@@ -494,7 +533,7 @@
         <div class="by-fld"><span>この物の評価</span>
           <div class="by-rate" role="radiogroup" aria-label="評価（5 段階）">${[1,2,3,4,5].map(n=>`<button type="button" role="radio" data-rate="${n}" aria-checked="${it.rating===n}" aria-label="${n}／5" title="${B.RATE[n]}">${(it.rating||0)>=n?'★':'☆'}</button>`).join('')}<small>${it.rating?esc(B.RATE[it.rating]):'押して選ぶ（もう一度押すと消す）'}</small></div></div>
         <label class="by-fld"><span>この物のメモ</span><textarea id="by-note" rows="2" maxlength="500" placeholder="味・食感・表情・また買いたいか など">${esc(it.note||'')}</textarea></label>
-        <div class="by-row by-lact"><button type="button" class="set-act" data-add>＋ 買った物を足す</button>${f.items.length>1?'<button type="button" class="set-act by-danger" data-rm>この物を外す</button>':''}</div>
+        <div class="by-row by-lact"><button type="button" class="set-act" data-add>＋ ほかの物も足す</button>${f.items.length>1?'<button type="button" class="set-act by-danger" data-rm>この物を外す</button>':''}</div>
       </section>
       <section class="set-sec"><h3>どこで</h3>
         <div class="by-chips">${shops.map(s=>chip(`data-shop="${esc(s)}"`,s,f.shop===s)).join('')}</div>
@@ -513,7 +552,7 @@
         <img id="by-prev" class="by-prev" alt="" hidden>
       </section>
       ${f.id?'<section class="set-sec"><button type="button" class="set-act by-danger" data-buydel>この記録を消す</button></section>':''}`;
-    $('buy-total').textContent=tot!=null?'合計 '+B.yen(tot):'';
+    $('buy-total').textContent=totText(f);
     // 写真の見本
     const pv=$('by-prev');
     if(f.newPhoto){const u=URL.createObjectURL(f.newPhoto);pv.src=u;pv.dataset.u=u;pv.hidden=false}
@@ -558,15 +597,24 @@
     const rec=B.normalize({id:f.id||B.newId(now),date:f.date,time:f.time,shop:f.shop,crowd:f.crowd,wait:f.wait,soldout:f.soldout,memo:f.memo,fav:f.fav,
       photo:f.newPhoto?true:(f.photo&&!f.dropPhoto),pv:f.newPhoto?now:(old&&old.pv),items,createdAt:old?old.createdAt:now,updatedAt:now},now);
     if(!rec){opts.toast('日付を確かめてください');return}
-    if(f.newPhoto){try{await putPhoto(rec.id,f.newPhoto);dropUrl(rec.id);setHave(rec.id,rec.pv)}catch(e){rec.photo=false;delete rec.pv;opts.toast('写真は保存できませんでした')}}
+    // 新しい記録で、同じ日・同じ場所の記録がもうあれば、そこに足すかを聞く（同じ買い物を何件にも分けてしまわないように）
+    let into=null;
+    if(!old){const sib=B.sameVisit(recs,rec)[0];
+      if(sib&&!(f.newPhoto&&sib.photo)&&confirm(`${sib.date.replaceAll('-','.')}${sib.shop?'・'+sib.shop:''} の記録がもうあります（${sib.items.map(x=>x.name+(x.qty>1?' ×'+x.qty:'')).join('、')}）。\nいま入れた物を、その記録に足しますか？\n（キャンセルを押すと、別の記録として保存します）`))into=sib}
+    const tgt=into?B.mergeInto(into,rec,now):rec;
+    if(f.newPhoto){try{await putPhoto(tgt.id,f.newPhoto);dropUrl(tgt.id);setHave(tgt.id,tgt.pv)}catch(e){tgt.photo=false;delete tgt.pv;opts.toast('写真は保存できませんでした')}}
     else if(f.dropPhoto&&old&&old.photo){await delPhoto(rec.id);dropUrl(rec.id);setHave(rec.id,null)}
-    recs=B.sortRecs(old?recs.map(r=>r.id===rec.id?rec:r):[...recs,rec]);
+    // 編集の画面で「1 つにまとめる」を押した記録は消す（ほかの端末でも消えるように印を残す）
+    const gone=(f.mergeIds||[]).filter(id=>id!==tgt.id&&recs.some(r=>r.id===id));
+    if(gone.length){const g=readObj(GONE_KEY);for(const id of gone){g[id]=now;const r=recs.find(x=>x.id===id);if(r&&r.photo){await delPhoto(id);dropUrl(id);setHave(id,null)}}writeObj(GONE_KEY,g)}
+    recs=B.sortRecs((old||into?recs.map(r=>r.id===tgt.id?tgt:r):[...recs,tgt]).filter(r=>!gone.includes(r.id)));
     if(!save())return;
-    const keep=more?{date:rec.date,shop:rec.shop}:null;
+    const keep=more?{date:tgt.date,shop:tgt.shop}:null;
     closeForm();renderList();
     if(keep){openForm(null);Object.assign(form,keep);renderForm()}
-    const lim=rec.items.find(it=>it.limited&&B.firstTime(recs,rec,it));
-    opts.toast(lim?`はじめての ${lim.name} を記録したぴよ！`:old?'記録を直したぴよ':'記録したぴよ！');
+    const lim=rec.items.find(it=>it.limited&&B.firstTime(recs,tgt,it));
+    const c=B.cartSum(tgt.items);
+    opts.toast(lim?`はじめての ${lim.name} を記録したぴよ！`:into?`前の記録に足したぴよ（${c.kinds}種類${c.pieces}個）`:gone.length?`${gone.length+1} 件を 1 つにまとめたぴよ`:old?'記録を直したぴよ':'記録したぴよ！');
   }
   async function remove(id){
     const r=recs.find(x=>x.id===id);if(!r)return;
@@ -719,8 +767,25 @@
       else if(t.dataset.arc){pickArchive(t.dataset.arc);form.allOpen=true}
       else if(t.dataset.pp)it.price=+t.dataset.pp;
       else if(t.dataset.qty)it.qty=Math.max(1,Math.min(999,(+it.qty||1)+(+t.dataset.qty)));
-      else if('add' in t.dataset){form.items.push({cat:it.cat,name:'',qty:1,price:'',limited:'',period:'',rating:null,note:''});form.tab=form.items.length-1}
+      else if('add' in t.dataset){
+        const blankAt=form.items.findIndex(x=>!x.name.trim());
+        if(blankAt>=0){form.tab=blankAt;renderForm();opts.toast(`${blankAt+1}つ目の名前をまだ入れていません。先に入れてください`);const n=$('by-name');if(n){n.scrollIntoView({block:'center'});n.focus()}return}
+        form.items.push({cat:it.cat,name:'',qty:1,price:'',limited:'',period:'',rating:null,note:''});form.tab=form.items.length-1;
+        renderForm();const c=$('by-cart');if(c)c.scrollIntoView({block:'start'});opts.toast(`${form.items.length}つ目を入れてください`);return}
       else if('rm' in t.dataset){form.items.splice(form.tab,1);form.tab=Math.max(0,form.tab-1)}
+      else if(t.dataset.rmi){const i=+t.dataset.rmi;if(form.items.length<2)return;const x=form.items[i];
+        if(x.name.trim()&&!confirm(`「${x.name}」を外しますか？`))return;
+        form.items.splice(i,1);if(form.tab>=i&&form.tab>0)form.tab--}
+      else if('mergeall' in t.dataset){
+        const sibs=B.sameVisit(recs.filter(r=>!(form.mergeIds||[]).includes(r.id)),{id:form.id,date:form.date,shop:form.shop});if(!sibs.length)return;
+        if(!confirm(`同じ日・同じ場所の記録 ${sibs.length} 件を、この記録にまとめます。\n保存を押すと 1 つの記録になり、ほかの ${sibs.length} 件は消えます。`))return;
+        form.items=form.items.filter(x=>x.name.trim());
+        for(const r of sibs){form.items.push(...r.items.map(x=>Object.assign({},x,{price:x.price??''})));
+          if(!form.time&&r.time)form.time=r.time;if(form.crowd==null&&r.crowd!=null)form.crowd=r.crowd;if(form.wait===''&&r.wait!=null)form.wait=r.wait;
+          form.soldout=form.soldout||r.soldout;form.fav=form.fav||r.fav;if(r.memo&&!form.memo.includes(r.memo))form.memo=[form.memo,r.memo].filter(Boolean).join('\n');
+          if(r.photo&&!(form.photo&&!form.dropPhoto)&&!form.newPhoto)getPhoto(r.id).then(b=>{if(b&&form&&!form.newPhoto){form.newPhoto=b;form.dropPhoto=false;renderForm()}});}
+        form.items=form.items.slice(0,30);form.mergeIds=[...(form.mergeIds||[]),...sibs.map(r=>r.id)];
+        opts.toast('まとめました。保存を押すと 1 つの記録になります')}
       else if(t.dataset.tab)form.tab=+t.dataset.tab;
       else if(t.dataset.shop){ // 店を替えたら、前の店の販売の回で入れた時刻は消す
         const old=B.shopOf(form.shop),nw=B.shopOf(t.dataset.shop);form.shop=t.dataset.shop;
@@ -741,7 +806,7 @@
       if(e.target.id==='by-date'){pull();renderForm();return}
       if(e.target.id==='by-photo'&&e.target.files[0]){pull();try{form.newPhoto=await shrink(e.target.files[0]);form.dropPhoto=false}catch(_){opts.toast('この写真は読めませんでした')}renderForm()}
     });
-    m.addEventListener('input',e=>{if(form&&e.target.id==='by-allq'){form.allQ=e.target.value;const it=form.items[form.tab];$('by-allres').innerHTML=allChips(form,it);return}if(form&&(e.target.id==='by-price'||e.target.id==='by-qty')){pull();const tot=B.total({items:form.items.map(x=>({qty:+x.qty||1,price:x.price===''?null:+x.price}))});$('buy-total').textContent=tot!=null?'合計 '+B.yen(tot):''}});
+    m.addEventListener('input',e=>{if(form&&e.target.id==='by-allq'){form.allQ=e.target.value;const it=form.items[form.tab];$('by-allres').innerHTML=allChips(form,it);return}if(form&&(e.target.id==='by-price'||e.target.id==='by-qty'||e.target.id==='by-name')){pull();refreshCart()}});
     $('buy-scrim').addEventListener('click',closeForm);
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&form)closeForm()});
     const sb=$('set-buy');

@@ -117,7 +117,7 @@ test('ページに購入記録のタブ・画面・読み込みがある',()=>{
   assert.match(html,/id="view-buy"/);
   assert.match(html,/id="buy-modal"/);
   assert.match(html,/id="set-buy"/);
-  assert.match(html,/<script src="piyo-buy\.js\?v=11"><\/script>/); // 2026-11-24 端末どうしの同期で 11
+  assert.match(html,/<script src="piyo-buy\.js\?v=12"><\/script>/); // 2026-11-24 端末どうしの同期で 11、買った物の一覧で 12
   assert.match(html,/PiyoBuyUI\.mount\(/);
 });
 
@@ -306,4 +306,30 @@ test('同期：写真を送り受けする間に保存・削除した分は、�
   const fin=B.syncMerge(now,nowGone,m.list,m.gone,1000);
   assert.deepEqual(fin.list.map(r=>r.id).sort(),['aaaa1','cccc3','dddd4']);
   assert.deepEqual(fin.gone,{bbbb2:60});
+});
+
+test('買った物の一覧の合計（名前のある物だけ・値段なしも数える）',()=>{
+  assert.deepEqual(B.cartSum([]),{kinds:0,pieces:0,yen:null,unknown:0});
+  assert.deepEqual(B.cartSum([{name:'ハロウィンぴよりん',qty:'2',price:'520'},{name:'',qty:1,price:'300'},{name:'クッキー缶',qty:1,price:''}]),{kinds:2,pieces:3,yen:1040,unknown:1});
+  assert.deepEqual(B.cartSum([{name:'a',qty:'x',price:'0'}]),{kinds:1,pieces:1,yen:0,unknown:0});
+});
+
+test('同じ日・同じ場所の記録を探して 1 つにまとめる',()=>{
+  const a=B.normalize({id:'aaaa1',date:'2026-11-24',shop:'アスティ静岡',memo:'晴れ',photo:false,items:[{cat:'piyorin',name:'ミルクティーぴよりん',qty:1,price:520}],createdAt:1,updatedAt:1},1);
+  const b=B.normalize({id:'bbbb2',date:'2026-11-24',shop:'アスティ静岡',time:'10:30',crowd:3,memo:'晴れ',photo:true,pv:5,items:[{cat:'cookie',name:'クッキー缶',qty:2,price:800}],createdAt:2,updatedAt:2},2);
+  const c=B.normalize({id:'cccc3',date:'2026-11-24',shop:'ぴよりんshop',items:[{cat:'piyorin',name:'ぴよりん',qty:1}],createdAt:3,updatedAt:3},3);
+  assert.deepEqual(B.sameVisit([a,b,c],a).map(r=>r.id),['bbbb2']);
+  assert.deepEqual(B.sameVisit([a,b,c],c),[]);
+  const m=B.mergeInto(a,b,9);
+  assert.equal(m.id,'aaaa1');assert.equal(m.items.length,2);assert.equal(m.time,'10:30');assert.equal(m.crowd,3);
+  assert.equal(m.memo,'晴れ');assert.equal(m.photo,true);assert.equal(m.pv,5);assert.equal(m.updatedAt,9);
+  assert.equal(B.total(m),2120);assert.equal(a.items.length,1); // 元は変えない
+});
+
+test('購入記録の画面：かごの一覧・入力中の印・保存して別の記録へ',()=>{
+  const js=fs.readFileSync(path.join(__dirname,'..','docs/piyo-buy.js'),'utf8');
+  const html=fs.readFileSync(path.join(__dirname,'..','docs/index.html'),'utf8');
+  assert.match(js,/id="by-cart"/);assert.match(js,/data-rmi=/);assert.match(js,/data-mergeall/);assert.match(js,/を入力中/);
+  assert.match(js,/e\.target\.id==='by-name'\)\)\{pull\(\);refreshCart\(\)/);
+  assert.match(html,/id="buy-more"[^>]*>保存して別の記録へ</);assert.doesNotMatch(html,/続けて記録/);
 });
