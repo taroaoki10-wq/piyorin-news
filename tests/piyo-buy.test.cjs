@@ -117,7 +117,7 @@ test('ページに購入記録のタブ・画面・読み込みがある',()=>{
   assert.match(html,/id="view-buy"/);
   assert.match(html,/id="buy-modal"/);
   assert.match(html,/id="set-buy"/);
-  assert.match(html,/<script src="piyo-buy\.js\?v=12"><\/script>/); // 2026-11-24 端末どうしの同期で 11、買った物の一覧で 12
+  assert.match(html,/<script src="piyo-buy\.js\?v=13"><\/script>/); // 2026-11-24 端末どうしの同期で 11、買った物の一覧で 12、11-25 金額の欄で 13
   assert.match(html,/PiyoBuyUI\.mount\(/);
 });
 
@@ -330,6 +330,7 @@ test('購入記録の画面：かごの一覧・入力中の印・保存して�
   const js=fs.readFileSync(path.join(__dirname,'..','docs/piyo-buy.js'),'utf8');
   const html=fs.readFileSync(path.join(__dirname,'..','docs/index.html'),'utf8');
   assert.match(js,/id="by-cart"/);assert.match(js,/data-rmi=/);assert.match(js,/data-mergeall/);assert.match(js,/を入力中/);
-  assert.match(js,/e\.target\.id==='by-name'\)\)\{pull\(\);refreshCart\(\)/);
+  assert.match(js,/e\.target\.id==='by-name'\)\)\{const it=form\.items\[form\.tab\];pull\(\);[\s\S]{0,300}refreshCart\(\)\}\}\);/);
+  assert.match(js,/e\.target\.id==='by-amt'\)\{[^\n]*B\.fromAmount\(e\.target\.value,it\.qty\)[^\n]*refreshCart\(\)/); // 2026-11-25 金額の欄
   assert.match(html,/id="buy-more"[^>]*>保存して別の記録へ</);assert.doesNotMatch(html,/続けて記録/);
 });
