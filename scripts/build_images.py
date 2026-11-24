@@ -2,6 +2,7 @@
 
 - ぴよりんの画像: 公式サイトの「ぴよりん図鑑」（https://piyorin.com/detail/）の名前と画像。1 日に 1 回だけ読み直す。
 - クッキー缶などの画像: 公式のプレスリリース（PR TIMES）の代表画像（og:image）。
+- 公式 X だけで知らされた新作（ミルクティーぴよりん など）: 投稿の写真（埋め込み用の投稿データの mediaDetails。pbs.twimg.com）。
   予定（events.json）の元のリリースと、ニュース（news.json）の公式・プレスリリースのクッキー缶の記事から。
   一度取った住所は覚えておき、新しいリリースだけ読む（1 回に 25 件まで）。
 画像そのものはリポジトリに写さない。ページは公式のサーバーの画像をそのまま表示する。
@@ -15,7 +16,7 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from news_store import write_json
+from news_store import X_STATUS, request_url, write_json
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "docs" / "data"
@@ -25,7 +26,8 @@ UA = "Mozilla/5.0 (piyorin-news-watch; +https://github.com/)"
 JST = timezone(timedelta(hours=9))
 MAX_PAGES = 30
 MAX_RELEASES = 25
-IMG_OK = re.compile(r"^https://(piyorin\.com/wp/wp-content/uploads/|prcdn\.freetls\.fastly\.net/release_image/)[^\s\"'<>]+$")
+IMG_OK = re.compile(r"^https://(piyorin\.com/wp/wp-content/uploads/|prcdn\.freetls\.fastly\.net/release_image/|pbs\.twimg\.com/media/)[^\s\"'<>]+$")
+X_SOURCE = "ぴよりん公式X"
 
 
 def get(url):
@@ -132,10 +134,31 @@ def release_image_any(urls):
     return None
 
 
+def x_photo(text):
+    """公式 X の投稿データ（JSON）から 1 枚目の写真の住所。無ければ None"""
+    try:
+        d = json.loads(text)
+    except ValueError:
+        return None
+    for m in (d.get("mediaDetails") or []) if isinstance(d, dict) else []:
+        u = (m or {}).get("media_url_https") or ""
+        if m.get("type") == "photo" and IMG_OK.match(u):
+            return u
+    return None
+
+
+def x_name(title):
+    """公式 X の投稿の題から、「」の中の「〜ぴよりん」を商品名にする。無ければ None"""
+    m = re.search(r"[「『]([^「」『』]{1,30}ぴよりん)[」』]", unicodedata.normalize("NFKC", title or ""))
+    return m.group(1).strip() if m else None
+
+
 def release_image(url):
-    """リリースの代表画像（PR TIMES の og:image）。公式のお知らせなら、中にある PR TIMES の住所から"""
+    """リリースの代表画像（PR TIMES の og:image）。公式のお知らせなら、中にある PR TIMES の住所から。公式 X なら投稿の写真"""
     if not url:
         return None
+    if X_STATUS.match(url):
+        return x_photo(get(request_url(url)))
     if "prtimes.jp/main/html/rd/p/" in url:
         return og_image(get(url))
     if re.match(r"^https://piyorin\.com/news/p\d+/?$", url):
@@ -195,13 +218,24 @@ def candidates(events, news):
         url = n.get("url") or ""
         out.append({"key": n.get("id"), "cat": "cookie", "title": t, "date": n.get("date") or "", "url": url, "alts": pr_links(n),
                     "from": "news", "name": cookie_name(t)})
+    # 公式 X だけで知らされた新作ぴよりん（予定がまだ無くても絵を出す）
+    for n in news if isinstance(news, list) else []:
+        name = x_name(n.get("title")) if n.get("source") == X_SOURCE and X_STATUS.match(n.get("url") or "") else None
+        if name:
+            out.append({"key": n.get("id"), "cat": "piyorin", "title": n.get("title") or "", "date": n.get("date") or "",
+                        "url": n["url"], "alts": [], "from": "x", "name": name})
     return out
+
+
+def again(entry):
+    """前に絵が取れなかった公式 X の分は読み直す（2026-11-24 より前は X の写真を読んでいなかった）"""
+    return not (entry or {}).get("img") and bool(X_STATUS.match((entry or {}).get("url") or "")) and not (entry or {}).get("xTried")
 
 
 def main():
     now = datetime.now(JST)
     old = load(OUT, {})
-    out = {"note": "購入記録の画像の住所。ぴよりんはぴよりん図鑑、クッキー缶などは公式のプレスリリースの代表画像。画像は公式のサーバーのものをそのまま表示する。",
+    out = {"note": "購入記録の画像の住所。ぴよりんはぴよりん図鑑、クッキー缶などは公式のプレスリリースの代表画像、公式 X だけの新作は投稿の写真。画像は公式のサーバーのものをそのまま表示する。",
            "zukanSource": ZUKAN, "zukanChecked": old.get("zukanChecked"), "zukan": old.get("zukan") or [],
            "releases": old.get("releases") or {}}
     # 図鑑は 1 日 1 回
@@ -221,7 +255,7 @@ def main():
             print(f"図鑑を読めませんでした: {e}", file=sys.stderr)
     # リリースの代表画像（新しいものだけ）
     rel = out["releases"]
-    todo = [c for c in candidates(load(DATA / "events.json", []), load(DATA / "news.json", [])) if c["key"] and c["key"] not in rel]
+    todo = [c for c in candidates(load(DATA / "events.json", []), load(DATA / "news.json", [])) if c["key"] and (c["key"] not in rel or again(rel[c["key"]]))]
     todo.sort(key=lambda c: c["date"], reverse=True)
     limit = 10**6 if "--all" in sys.argv else MAX_RELEASES
     for c in todo[:limit]:
@@ -233,6 +267,8 @@ def main():
         entry = {"cat": c["cat"], "title": c["title"][:120], "date": c["date"], "url": c["url"], "img": img, "from": c["from"]}
         if c.get("name"):
             entry["name"] = c["name"]
+        if not img and X_STATUS.match(c["url"]):
+            entry["xTried"] = True  # 写真の無い投稿は何度も読まない
         rel[c["key"]] = entry
     print(f"リリース: {sum(1 for v in rel.values() if v.get('img'))} 件に画像（新しく {min(len(todo), limit)} 件を読んだ）")
     write_json(OUT, out)

@@ -50,8 +50,12 @@
   const str=(v,max)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,max);
 
   // 予定（data/events.json）の題名から商品名にする：「ハロウィンぴよりん販売」→「ハロウィンぴよりん」
+  const SALE_END=/\s*(の)?(先行販売|販売開始|期間限定販売|限定販売|販売|発売)$/;
   function itemName(title){
-    let t=str(title,80).replace(/\s*(の)?(先行販売|販売開始|期間限定販売|限定販売|販売|発売)$/,'').trim();
+    let t=str(title,80).replace(SALE_END,'').trim();
+    // 「ミルクティーぴよりん 販売（アトリエ店限定）」のように、かっこが後ろに付いても「販売」を外す（2026-11-24）
+    const m=t.match(/\s*([（(][^（()）]*[）)])$/);
+    if(m){const base=t.slice(0,m.index),cut=base.replace(SALE_END,'').trim();if(cut&&cut!==base.trim())t=cut+m[1]}
     return t||str(title,80);
   }
   // 予定が どの分類の買える物か（買える物でなければ null）
@@ -114,7 +118,7 @@
   const nkey=s=>String(s||'').normalize('NFKC').replace(/[\s・･「」『』]/g,'').toLowerCase();
   const noParen=k=>k.replace(/[（(][^）)]*[）)]/g,'');
   const noYear=k=>k.replace(/20\d\d$/,'');
-  const IMG_OK=/^https:\/\/(piyorin\.com\/wp\/wp-content\/uploads\/|prcdn\.freetls\.fastly\.net\/release_image\/)[^\s"'<>]+$/;
+  const IMG_OK=/^https:\/\/(piyorin\.com\/wp\/wp-content\/uploads\/|prcdn\.freetls\.fastly\.net\/release_image\/|pbs\.twimg\.com\/media\/)[^\s"'<>]+$/; // 公式 X の写真も（2026-11-24）
   const ixCache=new WeakMap();
   function imageIndex(images){
     if(!images||typeof images!=='object')return null;
@@ -132,7 +136,7 @@
   }
   // 「2026-10-31」「2025年10月」→ 月の通し番号。読めなければ null
   function monthNo(d){const m=String(d||'').normalize('NFKC').match(/(20\d\d)\D{1,2}(\d{1,2})/);return m?(+m[1])*12+(+m[2]-1):null}
-  const relThumb=u=>/prcdn\.freetls\.fastly\.net/.test(u)?u+'?width=360&height=360&fit=bounds&format=jpeg':u;
+  const relThumb=u=>/prcdn\.freetls\.fastly\.net/.test(u)?u+'?width=360&height=360&fit=bounds&format=jpeg':/^https:\/\/pbs\.twimg\.com\/media\/[^?]+$/.test(u)?u+'?name=small':u;
   // {src（小さい画像）, full, from: 'zukan' | 'release', page}
   function imageFor(it,date,images){
     const ix=imageIndex(images);if(!ix||!it||!it.name)return null;
