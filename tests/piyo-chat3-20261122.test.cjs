@@ -334,13 +334,13 @@ test('設定：memofocus・buyctx の 2 行（入り切りの仕組み data-flag
   assert.ok(note>0);
   assert.ok(box.indexOf('data-flag="buyctx"')<note&&box.indexOf('data-flag="wxfig"')<note);
   for(const f of ['persona','memory','convo','buysync','memofocus'])assert.ok(box.indexOf('data-flag="'+f+'"')>note,f+' は注意書きの下');
-  assert.equal((box.match(/data-flag=/g)||[]).length,9); // 写真・マイク（piyo-chat4）を足して 7 → 9
+  assert.equal((box.match(/data-flag=/g)||[]).length,10); // 写真・マイク（piyo-chat4）を足して 7 → 9、購入記録の端末どうしの同期（buygist）で 10
 });
 
 test('版は 2026.11.23-1（meta・PN_VERSION・piyo-extras.js?v=8）',()=>{
   assert.match(html,/<meta name="piyo-ver" content="\d{4}\.\d{2}\.\d{2}-\d+">/);
   assert.match(html,/const PN_VERSION='\d{4}\.\d{2}\.\d{2}-\d+（[^）]+）'/);
-  assert.match(html,/<script src="piyo-extras\.js\?v=8"><\/script>/);
+  assert.ok(+(html.match(/<script src="piyo-extras\.js\?v=(\d+)"><\/script>/)||[])[1]>=8); // 2026-11-24 に 9（購入記録の同期の鍵 buygist）
   assert.ok(!html.includes('piyo-extras.js?v=7')&&!html.includes('2026.11.22-4'));
 });
 

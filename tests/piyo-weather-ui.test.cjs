@@ -326,7 +326,7 @@ test('CSS：横スクロール・スナップ・漏れ止め・縦は邪魔し�
 test('版は 2026.11.23-1（meta・PN_VERSION・piyo-extras.js?v=8・infobase.js?v=7）',()=>{
   assert.match(html,/<meta name="piyo-ver" content="\d{4}\.\d{2}\.\d{2}-\d+">/);
   assert.match(html,/const PN_VERSION='\d{4}\.\d{2}\.\d{2}-\d+（[^）]+）'/);
-  assert.match(html,/<script src="piyo-extras\.js\?v=8"><\/script>/);assert.match(html,/<script src="infobase\.js\?v=7"><\/script>/);
+  assert.ok(+(html.match(/<script src="piyo-extras\.js\?v=(\d+)"><\/script>/)||[])[1]>=8); // 2026-11-24 に 9（購入記録の同期の鍵 buygist）assert.match(html,/<script src="infobase\.js\?v=7"><\/script>/);
   assert.ok(!html.includes('piyo-extras.js?v=7')&&!html.includes('infobase.js?v=6'));
 });
 test('画面の <script>（中身があるもの）に構文の誤りが無い',()=>{

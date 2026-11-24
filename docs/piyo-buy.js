@@ -182,9 +182,11 @@
     const items=(Array.isArray(r.items)?r.items:[]).map(normItem).filter(Boolean).slice(0,30);
     if(!items.length||!isDate(r.date))return null;
     const time=/^\d{1,2}:\d{2}$/.test(r.time||'')?r.time:'';
-    return {id:/^[a-z0-9]{4,40}$/i.test(r.id||'')?r.id:newId(now),date:r.date,time,shop:str(r.shop,60),
+    const o={id:/^[a-z0-9]{4,40}$/i.test(r.id||'')?r.id:newId(now),date:r.date,time,shop:str(r.shop,60),
       crowd:int(r.crowd,1,5),wait:int(r.wait,0,1440),soldout:!!r.soldout,memo:String(r.memo??'').trim().slice(0,1000),
       photo:!!r.photo,fav:!!r.fav,items,createdAt:int(r.createdAt,0,9e15)??now,updatedAt:int(r.updatedAt,0,9e15)??now};
+    const pv=int(r.pv,1,9e15);if(o.photo&&pv)o.pv=pv; // 写真の版（端末どうしの同期で、どの写真かを見分ける）
+    return o;
   }
   function total(r){
     let sum=0,known=false;
@@ -228,6 +230,38 @@
     return { sent, removed: (Array.isArray(st.removed) ? st.removed : []).filter(id => !gone.has(id)), asked: st.asked === true };
   }
 
+  // ---------- 端末どうしの同期（合言葉の gist。iPhone と Mac のブラウザで同じ記録を見る。2026-11-24） ----------
+  // gone は消した記録の印 {id: 消した時刻}。消したあとに直した記録は残す。印は 180 日で捨てる
+  const GONE_DAYS=180;
+  const objOf=v=>v&&typeof v==='object'&&!Array.isArray(v)?v:{};
+  function syncMerge(local,localGone,remote,remoteGone,now=Date.now()){
+    const gone={};
+    for(const g of [localGone,remoteGone])for(const [id,t] of Object.entries(objOf(g)))if(typeof t==='number'&&t>(gone[id]||0))gone[id]=t;
+    const map=new Map();
+    for(const raw of [...(Array.isArray(local)?local:[]),...(Array.isArray(remote)?remote:[])]){
+      if(!raw||!/^[a-z0-9]{4,40}$/i.test(raw.id||''))continue;const r=normalize(raw,now);if(!r)continue;
+      const o=map.get(r.id);if(!o||r.updatedAt>o.updatedAt)map.set(r.id,r);
+    }
+    const list=[];
+    for(const r of map.values()){if(gone[r.id]>=r.updatedAt)continue;delete gone[r.id];list.push(r)}
+    const cut=now-GONE_DAYS*864e5;for(const id in gone)if(gone[id]<cut)delete gone[id];
+    return {list:sortRecs(list),gone};
+  }
+  // 中身が変わったかを比べる文字（id・直した時刻・写真の版と、消した印）
+  const canonBuy=(list,gone)=>JSON.stringify([(list||[]).map(r=>`${r.id}@${r.updatedAt}@${r.pv||0}`).sort(),Object.keys(objOf(gone)).sort().map(k=>k+'@'+gone[k])]);
+  // 写真をどうするか。have = この端末にある写真の版 {id:pv}、remote = gist にある写真の版 {id:pv}
+  //   up：この端末の写真を gist へ送る／down：gist から受け取る／drop：要らなくなった gist の写真
+  function photoPlan(list,have,remote){
+    const want={},up=[],down=[],drop=[];have=objOf(have);remote=objOf(remote);
+    for(const r of list||[])if(r&&r.photo&&r.pv)want[r.id]=r.pv;
+    for(const [id,pv] of Object.entries(want)){
+      if(have[id]===pv&&remote[id]!==pv)up.push(id);
+      else if(have[id]!==pv&&remote[id]===pv)down.push(id);
+    }
+    for(const id of Object.keys(remote))if(!(id in want))drop.push(id);
+    return {up,down,drop};
+  }
+
   // 絞り込み：期間（'all' | 'YYYY' | 'YYYY-MM'）・分類・ことば
   function filter(list,{period='all',cat='all',q=''}={}){
     const words=String(q||'').toLowerCase().split(/[\s　]+/).filter(Boolean);
@@ -262,7 +296,7 @@
   }
 
   const PiyoBuy={KEY,CATS,REGULAR,VILLAGE,fixedFor,SHOPS,shopOf,slotTime,CROWD,RATE,itemName,eventCat,OPEN_DAYS,isOpen,lastDay,spanText,memoPrices,limitedFor,allLimited,imageFor,archiveItems,nkey,normalize,total,count,sortRecs,
-    parseStore,dumpStore,merge,filter,stats,firstTime,todayJst,addDays,yen,newId,syncDiff,syncApply};
+    parseStore,dumpStore,merge,filter,stats,firstTime,todayJst,addDays,yen,newId,syncDiff,syncApply,syncMerge,canonBuy,photoPlan,GONE_DAYS};
   root.PiyoBuy=PiyoBuy;
   if(typeof module!=='undefined'&&module.exports)module.exports=PiyoBuy;
 })(typeof window!=='undefined'?window:globalThis);
@@ -283,7 +317,8 @@
   const urls=new Map(); // 写真の表示用 URL
 
   function load(){try{recs=B.sortRecs(B.parseStore(localStorage.getItem(B.KEY)))}catch(e){recs=[]}}
-  function save(){try{localStorage.setItem(B.KEY,B.dumpStore(recs));setTimeout(buySync,0);return true}catch(e){opts.toast('保存できませんでした（ブラウザの空きが足りないかもしれません）');return false}}
+  // push=false は同期で受け取ったとき（送り返さない）
+  function save(push=true){try{localStorage.setItem(B.KEY,B.dumpStore(recs));setTimeout(buySync,0);if(push&&typeof window.piyoQueueSync==='function')window.piyoQueueSync();return true}catch(e){opts.toast('保存できませんでした（ブラウザの空きが足りないかもしれません）');return false}}
 
   // ---------- 写真（IndexedDB） ----------
   let dbp=null;
@@ -477,7 +512,7 @@
           ${(f.photo&&!f.dropPhoto)||f.newPhoto?'<button type="button" class="set-act by-danger" data-nophoto>写真を外す</button>':''}</div>
         <img id="by-prev" class="by-prev" alt="" hidden>
       </section>
-      ${f.id?'<section class="set-sec"><button type="button" class="set-act by-danger" data-del>この記録を消す</button></section>':''}`;
+      ${f.id?'<section class="set-sec"><button type="button" class="set-act by-danger" data-buydel>この記録を消す</button></section>':''}`;
     $('buy-total').textContent=tot!=null?'合計 '+B.yen(tot):'';
     // 写真の見本
     const pv=$('by-prev');
@@ -521,10 +556,10 @@
     if(!items.length){opts.toast('買った物の名前を入れてください');form.tab=0;renderForm();setTimeout(()=>$('by-name')&&$('by-name').focus(),50);return}
     const now=Date.now(),old=f.id?recs.find(r=>r.id===f.id):null;
     const rec=B.normalize({id:f.id||B.newId(now),date:f.date,time:f.time,shop:f.shop,crowd:f.crowd,wait:f.wait,soldout:f.soldout,memo:f.memo,fav:f.fav,
-      photo:f.newPhoto?true:(f.photo&&!f.dropPhoto),items,createdAt:old?old.createdAt:now,updatedAt:now},now);
+      photo:f.newPhoto?true:(f.photo&&!f.dropPhoto),pv:f.newPhoto?now:(old&&old.pv),items,createdAt:old?old.createdAt:now,updatedAt:now},now);
     if(!rec){opts.toast('日付を確かめてください');return}
-    if(f.newPhoto){try{await putPhoto(rec.id,f.newPhoto);dropUrl(rec.id)}catch(e){rec.photo=false;opts.toast('写真は保存できませんでした')}}
-    else if(f.dropPhoto&&old&&old.photo){await delPhoto(rec.id);dropUrl(rec.id)}
+    if(f.newPhoto){try{await putPhoto(rec.id,f.newPhoto);dropUrl(rec.id);setHave(rec.id,rec.pv)}catch(e){rec.photo=false;delete rec.pv;opts.toast('写真は保存できませんでした')}}
+    else if(f.dropPhoto&&old&&old.photo){await delPhoto(rec.id);dropUrl(rec.id);setHave(rec.id,null)}
     recs=B.sortRecs(old?recs.map(r=>r.id===rec.id?rec:r):[...recs,rec]);
     if(!save())return;
     const keep=more?{date:rec.date,shop:rec.shop}:null;
@@ -536,7 +571,8 @@
   async function remove(id){
     const r=recs.find(x=>x.id===id);if(!r)return;
     if(!confirm(`${r.date.replaceAll('-','.')} の記録（${r.items.map(x=>x.name).join('、')}）を消しますか？`))return;
-    recs=recs.filter(x=>x.id!==id);save();if(r.photo){await delPhoto(id);dropUrl(id)}
+    const g=readObj(GONE_KEY);g[id]=Date.now();writeObj(GONE_KEY,g); // ほかの端末でも消えるように印を残す
+    recs=recs.filter(x=>x.id!==id);save();if(r.photo){await delPhoto(id);dropUrl(id);setHave(id,null)}
     closeForm();renderList();opts.toast('記録を消しました');
   }
 
@@ -570,6 +606,66 @@
     finally{syncing=false;if(syncAgain){syncAgain=false;buySync()}}
   }
 
+  // ---------- 端末どうしの同期（合言葉の gist。index.html の doSync から呼ぶ。設定「購入記録をほかの端末と同期する」が入りのとき） ----------
+  //   記録は同期の gist の piyorin-purchases.json、写真は別の gist（piyorin-photos.json の目印つき）に 1 枚 1 ファイル
+  const GONE_KEY='piyo-buy-gone',HAVE_KEY='piyo-buy-pv',BUY_FILE='piyorin-purchases.json',PH_MARK='piyorin-photos.json';
+  const phName=id=>`p-${id}.txt`;
+  function readObj(k){try{const v=JSON.parse(localStorage.getItem(k)||'null');return v&&typeof v==='object'&&!Array.isArray(v)?v:{}}catch(_){return {}}}
+  function writeObj(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(_){}}
+  function setHave(id,pv){const h=readObj(HAVE_KEY);if(pv)h[id]=pv;else delete h[id];writeObj(HAVE_KEY,h)}
+  const gistOn=()=>{const X=window.PiyoExtras;return !X||!X.flagOn||X.flagOn(localStorage,'buygist')};
+  const syncOn=()=>{try{const v=JSON.parse(localStorage.getItem('piyo-sync')||'null');return !!(v&&v.token)}catch(_){return false}};
+  async function fileText(f){return f.truncated&&f.raw_url?await fetch(f.raw_url,{cache:'no-store'}).then(r=>r.text()):f.content}
+  async function photoGistId(gh){
+    for(let pg=1;pg<=10;pg++){const l=await gh('/gists?per_page=100&page='+pg);const g=l.find(x=>x.files&&x.files[PH_MARK]);if(g)return g.id;if(l.length<100)break}
+    const g=await gh('/gists',{method:'POST',body:JSON.stringify({description:'ぴよりんニュースの購入記録の写真（自動同期）',public:false,files:{[PH_MARK]:{content:JSON.stringify({v:1})}}})});
+    return g.id;
+  }
+  // gh(path,opt) は index.html の GitHub の口、gist は同期の gist の id、files はその gist の files（読んだばかりの物）
+  async function gistSync({gh,gist,files}){
+    if(!gistOn())return;
+    const f=files&&files[BUY_FILE];
+    let remote={records:[],gone:{},photos:{},photoGist:''};
+    if(f){try{const j=JSON.parse(await fileText(f)||'{}');remote={records:Array.isArray(j.records)?j.records:[],gone:readJ(j.gone),photos:readJ(j.photos),photoGist:typeof j.photoGist==='string'?j.photoGist:''}}catch(_){}}
+    const have=readObj(HAVE_KEY),got={};let pvAdded=false;
+    for(const r of recs)if(r.photo&&!r.pv&&await getPhoto(r.id)){r.pv=r.updatedAt;have[r.id]=got[r.id]=r.pv;pvAdded=true} // 同期の前に撮った写真にも版を付ける
+    const localGone=readObj(GONE_KEY);
+    const m=B.syncMerge(recs,localGone,remote.records,remote.gone);
+    const plan=B.photoPlan(m.list,have,remote.photos);
+    const photos=Object.assign({},remote.photos);let photoGist=remote.photoGist;
+    if(plan.up.length||plan.drop.length){
+      if(!photoGist)photoGist=await photoGistId(gh);
+      for(const id of plan.up){ // 1 枚ずつ送る（1 枚 100〜300KB）
+        const b=await getPhoto(id);const d=b&&await blobToData(b);if(!d)continue;
+        await gh('/gists/'+photoGist,{method:'PATCH',body:JSON.stringify({files:{[phName(id)]:{content:d}}})});photos[id]=have[id];
+      }
+      if(plan.drop.length){
+        try{await gh('/gists/'+photoGist,{method:'PATCH',body:JSON.stringify({files:Object.fromEntries(plan.drop.map(id=>[phName(id),null]))})})}catch(_){/* もう無い写真は消せなくてよい */}
+        for(const id of plan.drop)delete photos[id];
+      }
+    }
+    if(plan.down.length&&photoGist){
+      const pg=await gh('/gists/'+photoGist);
+      for(const id of plan.down){const pf=pg.files&&pg.files[phName(id)];if(!pf)continue;
+        const b=await dataToBlob(await fileText(pf));if(b&&/^image\//.test(b.type)){try{await putPhoto(id,b);dropUrl(id);got[id]=photos[id]}catch(_){}}}
+    }
+    // 写真を送り受けする間（数秒）にこの端末で保存・削除した分も入れて、合わせ直してから書く（上書きで消さない）
+    const nowGone=readObj(GONE_KEY);
+    const fin=B.syncMerge(recs,nowGone,m.list,m.gone);
+    const want=new Set(fin.list.filter(r=>r.photo).map(r=>r.id));
+    for(const r of recs)if(r.photo&&!want.has(r.id)){await delPhoto(r.id);dropUrl(r.id)} // ほかの端末で消した・写真を外した記録
+    const h=Object.assign(readObj(HAVE_KEY),got);
+    for(const id of Object.keys(h))if(!want.has(id))delete h[id];
+    writeObj(HAVE_KEY,h);
+    if(pvAdded||B.canonBuy(fin.list,fin.gone)!==B.canonBuy(recs,nowGone)){recs=fin.list;writeObj(GONE_KEY,fin.gone);save(false);renderList()}
+    else writeObj(GONE_KEY,fin.gone);
+    renderSet();
+    const r0=B.syncMerge([],{},remote.records,remote.gone);
+    if(!f||B.canonBuy(fin.list,fin.gone)!==B.canonBuy(r0.list,r0.gone)||JSON.stringify(photos)!==JSON.stringify(remote.photos)||photoGist!==remote.photoGist)
+      await gh('/gists/'+gist,{method:'PATCH',body:JSON.stringify({files:{[BUY_FILE]:{content:JSON.stringify({v:1,updated:new Date().toISOString(),records:fin.list,gone:fin.gone,photos,photoGist})}}})});
+  }
+  const readJ=v=>v&&typeof v==='object'&&!Array.isArray(v)?v:{};
+
   // ---------- 書き出し・読み込み（設定の画面） ----------
   async function exportAll(){
     const out=[];for(const r of recs){const o=Object.assign({},r);if(r.photo){const b=await getPhoto(r.id);if(b)o.photoData=await blobToData(b)}out.push(o)}
@@ -589,7 +685,8 @@
   }
   function renderSet(){
     const el=$('set-buy');if(!el)return;
-    el.innerHTML=`<p class="set-note">記録は ${recs.length}件。この端末のブラウザにだけ保存されます。機種を変える前やブラウザのデータを消す前に、書き出しておくと安心です（写真も入ります）。</p>
+    const shared=syncOn()&&gistOn();
+    el.innerHTML=`<p class="set-note">記録は ${recs.length}件。${shared?'「同期」の合言葉で、ほかの端末（iPhone・Mac）と同じ記録を見られます（写真も同期します）。':'この端末のブラウザにだけ保存されます。ほかの端末と同じ記録を見るには、ブックマークの「同期を設定」で合言葉を入れてください。'}機種を変える前やブラウザのデータを消す前に、書き出しておくと安心です（写真も入ります）。</p>
       <div class="by-row"><button type="button" class="set-act" id="buy-export"${recs.length?'':' disabled'}>書き出す</button>
       <label class="set-act by-file">ファイルから読み込む<input type="file" id="buy-import" accept="application/json,.json" hidden></label></div>`;
   }
@@ -634,7 +731,7 @@
       else if(t.dataset.rate){const n=+t.dataset.rate;it.rating=it.rating===n?null:n}
       else if(t.dataset.crowd){const n=+t.dataset.crowd;form.crowd=form.crowd===n?null:n}
       else if('nophoto' in t.dataset){form.newPhoto=null;form.dropPhoto=true}
-      else if('del' in t.dataset)return remove(form.id);
+      else if('buydel' in t.dataset)return remove(form.id);
       else return;
       const sc=m.querySelector('.set-body').scrollTop;renderForm();m.querySelector('.set-body').scrollTop=sc;
     });
@@ -654,5 +751,5 @@
     renderList();renderSet();
     setTimeout(buySync,2500);
   }
-  window.PiyoBuyUI={mount,render:()=>{needImages();renderList();renderSet()},open:()=>openForm(null),get count(){return recs.length}};
+  window.PiyoBuyUI={mount,gistSync,render:()=>{needImages();renderList();renderSet()},open:()=>openForm(null),get count(){return recs.length}};
 })();

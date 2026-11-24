@@ -117,7 +117,7 @@ test('ページに購入記録のタブ・画面・読み込みがある',()=>{
   assert.match(html,/id="view-buy"/);
   assert.match(html,/id="buy-modal"/);
   assert.match(html,/id="set-buy"/);
-  assert.match(html,/<script src="piyo-buy\.js\?v=10"><\/script>/);
+  assert.match(html,/<script src="piyo-buy\.js\?v=11"><\/script>/); // 2026-11-24 端末どうしの同期で 11
   assert.match(html,/PiyoBuyUI\.mount\(/);
 });
 
@@ -254,4 +254,56 @@ test('終わりの日が無い新作は「ぴよりん」に分け、60 日は�
   const sale={title:'ぴよりんゴジラ販売',start:'2026-11-01',end:'2026-11-13',kind:'sale'};
   assert.ok(!B.isOpen(sale));
   assert.equal(B.lastDay(sale),'2026-11-13');
+});
+
+// ---- 端末どうしの同期（2026-11-24） ----
+const rec=(id,updatedAt,extra={})=>({id,date:'2026-11-20',items:[{cat:'piyorin',name:'ミルクティーぴよりん',qty:1}],createdAt:1,updatedAt,...extra});
+test('同期：両方の記録を合わせ、同じ id は新しく直した方を残す',()=>{
+  const m=B.syncMerge([rec('aaaa1',10),rec('bbbb2',20,{memo:'手元'})],{},[rec('bbbb2',30,{memo:'iPhone'}),rec('cccc3',5)],{},1000);
+  assert.deepEqual(m.list.map(r=>r.id).sort(),['aaaa1','bbbb2','cccc3']);
+  assert.equal(m.list.find(r=>r.id==='bbbb2').memo,'iPhone');
+  const m2=B.syncMerge([rec('bbbb2',40,{memo:'手元'})],{},[rec('bbbb2',30,{memo:'iPhone'})],{},1000);
+  assert.equal(m2.list[0].memo,'手元');
+});
+test('同期：消した印のある記録は消える。消したあとに直した記録は残り、印が外れる',()=>{
+  const m=B.syncMerge([rec('aaaa1',10),rec('bbbb2',50)],{},[],{aaaa1:20,bbbb2:40},1000);
+  assert.deepEqual(m.list.map(r=>r.id),['bbbb2']);
+  assert.deepEqual(m.gone,{aaaa1:20});
+  // 片方で消して、もう片方にまだある
+  const m2=B.syncMerge([],{cccc3:100},[rec('cccc3',60)],{},1000);
+  assert.equal(m2.list.length,0);assert.deepEqual(m2.gone,{cccc3:100});
+});
+test('同期：古い消した印（180 日より前）は捨てる・変な id は入れない',()=>{
+  const now=200*864e5;
+  const m=B.syncMerge([],{old1:1,new1:now-864e5},[{id:'../x',date:'2026-11-20',items:[{name:'a'}]}],{},now);
+  assert.deepEqual(m.gone,{new1:now-864e5});assert.equal(m.list.length,0);
+});
+test('同期：写真の版 pv は写真があるときだけ残り、比べる文字に入る',()=>{
+  assert.equal(B.normalize(rec('aaaa1',10,{photo:true,pv:7})).pv,7);
+  assert.equal('pv' in B.normalize(rec('aaaa1',10,{photo:false,pv:7})),false);
+  const a=[B.normalize(rec('aaaa1',10,{photo:true,pv:7}))],b=[B.normalize(rec('aaaa1',10,{photo:true,pv:8}))];
+  assert.notEqual(B.canonBuy(a,{}),B.canonBuy(b,{}));
+  assert.equal(B.canonBuy(a,{x:1}),B.canonBuy(plain(a),{x:1}));
+});
+test('同期：写真を送る・受け取る・消すを決める',()=>{
+  const list=[rec('up001',1,{photo:true,pv:5}),rec('dn001',1,{photo:true,pv:6}),rec('same1',1,{photo:true,pv:7}),rec('none1',1)];
+  const p=B.photoPlan(list.map(r=>B.normalize(r)),{up001:5,dn001:3,same1:7},{dn001:6,same1:7,gone1:9,none1:2});
+  assert.deepEqual(p,{up:['up001'],down:['dn001'],drop:['gone1','none1']});
+  // まだ誰も送っていない写真は、受け取りも送りもしない（持っている端末が送るのを待つ）
+  assert.deepEqual(B.photoPlan([B.normalize(rec('wait1',1,{photo:true,pv:4}))],{},{}),{up:[],down:[],drop:[]});
+});
+test('「この記録を消す」は data-buydel（index.html のニュースの削除が data-del を先に拾うため。2026-11-24 に見つけた不具合）',()=>{
+  const src=fs.readFileSync(path.join(__dirname,'..','docs/piyo-buy.js'),'utf8');
+  assert.ok(!/data-del\b/.test(src));
+  assert.match(src,/data-buydel>この記録を消す/);
+  assert.match(src,/'buydel' in t\.dataset\)return remove\(form\.id\)/);
+});
+test('同期：写真を送り受けする間に保存・削除した分は、合わせ直しで残る（上書きで消さない）',()=>{
+  // 同期の始めに合わせた結果 m（gist に cccc3 があった）
+  const m=B.syncMerge([rec('aaaa1',10),rec('bbbb2',10)],{},[rec('cccc3',10)],{},1000);
+  // 待つ間に、この端末で dddd4 を足し、bbbb2 を消した
+  const now=[rec('aaaa1',10),rec('dddd4',50)],nowGone={bbbb2:60};
+  const fin=B.syncMerge(now,nowGone,m.list,m.gone,1000);
+  assert.deepEqual(fin.list.map(r=>r.id).sort(),['aaaa1','cccc3','dddd4']);
+  assert.deepEqual(fin.gone,{bbbb2:60});
 });

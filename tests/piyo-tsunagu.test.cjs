@@ -136,7 +136,7 @@ test('設定の既定はどれも入り（鍵が無いとき入り・\'1\' で�
     assert.equal(X.flagOn(mem({[X.FLAG_KEYS[n]]:'0'}),n),true);
     assert.match(html,new RegExp(`<input type="checkbox" data-flag="${n}" checked>`));
   }
-  assert.deepEqual(plain(X.FLAG_KEYS),{persona:'piyo-persona-off',memory:'piyo-memory-off',convo:'piyo-convo-off',buysync:'piyo-buysync-off',wxfig:'piyo-wxfig-off',memofocus:'piyo-memofocus-off',buyctx:'piyo-buyctx-off',photo:'piyo-photo-off',mic:'piyo-mic-off'}); // 2026-11-22 に 4 つ足した（chat2 の試験）
+  assert.deepEqual(plain(X.FLAG_KEYS),{persona:'piyo-persona-off',memory:'piyo-memory-off',convo:'piyo-convo-off',buysync:'piyo-buysync-off',buygist:'piyo-buygist-off',wxfig:'piyo-wxfig-off',memofocus:'piyo-memofocus-off',buyctx:'piyo-buyctx-off',photo:'piyo-photo-off',mic:'piyo-mic-off'}); // 2026-11-22 に 4 つ足した（chat2 の試験）
   assert.match(html,/要約だけを送ります（全文は送りません）/);
 });
 

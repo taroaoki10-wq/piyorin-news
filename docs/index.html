@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ぴよりん">
-<meta name="piyo-ver" content="2026.11.24-2">
+<meta name="piyo-ver" content="2026.11.24-3">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
@@ -929,6 +929,7 @@ window.PiyoSplash=(function(){
         <label><input type="checkbox" data-flag="photo" checked><span>写真で聞く<small>写真を付けて聞けます。写真は Mac の Claude では見られないので、API で答えます（送る前に確かめます）。</small></span></label>
         <label><input type="checkbox" data-flag="mic" checked><span>マイクで聞く<small>話した言葉を入力欄に入れます（使える端末だけ）。</small></span></label>
         <label id="set-speak-row"><input type="checkbox" id="set-speak"><span>答えを読み上げる<small>ぴよの答えを声で読み上げます。</small></span></label>
+        <label><input type="checkbox" data-flag="buygist" checked><span>購入記録をほかの端末と同期する<small>ブックマークの「同期」の合言葉を入れた端末（iPhone・Mac）どうしで、購入記録と写真をそろえます。</small></span></label>
         <small class="set-note">ここから下は、Mac のつなぎ方を入れているときだけ働きます。</small>
         <label><input type="checkbox" data-flag="persona" checked><span>ぴよの性格<small>Claude Pet のぴよの人柄で、あいさつや雑談に答えます。</small></span></label>
         <label><input type="checkbox" data-flag="memory" checked><span>Mac の記憶を受け取る<small>Mac が覚えているあなたの好みを、答えの参考にします。</small></span></label>
@@ -1010,9 +1011,9 @@ window.PiyoSplash=(function(){
 <script src="news-identity.js"></script>
 <script src="piyo-learn.js"></script>
 <script src="piyo-persona.js?v=1"></script>
-<script src="piyo-extras.js?v=8"></script>
+<script src="piyo-extras.js?v=9"></script>
 <script src="piyo-dock.js?v=1"></script>
-<script src="piyo-buy.js?v=10"></script>
+<script src="piyo-buy.js?v=11"></script>
 <script src="piyo-log/schema.js?v=1"></script>
 <script src="piyo-log/recorder.js?v=1"></script>
 <script src="piyo-log/rules.js?v=1"></script>
@@ -1514,6 +1515,7 @@ window.PiyoSplash=(function(){
       if(!f||canon(m)!==canon(remote))
         await gh('/gists/'+sync.gist,{method:'PATCH',body:JSON.stringify({files:{[FILE]:{content:JSON.stringify({v:1,updated:new Date().toISOString(),items:m.items,removed:m.removed})}}})});
       await syncDel(g);
+      if(window.PiyoBuyUI&&PiyoBuyUI.gistSync)await PiyoBuyUI.gistSync({gh,gist:sync.gist,files:g.files}); // 購入記録（2026-11-24）
       syncLast=new Date();syncErr='';
     }catch(e){
       syncErr=e.message==='auth'?'合言葉が使えません（期限切れか削除された可能性があります）。「解除」してから設定し直してください。':e.message==='http403'||e.message==='http404'?'合言葉に「gist」の権限がありません。「gist」にチェックを入れて作り直してください。':'同期できませんでした。通信状態を確かめて「今すぐ同期」を押してください。';
@@ -1523,6 +1525,7 @@ window.PiyoSplash=(function(){
     }
   }
   function queueSync(){if(!sync)return;clearTimeout(syncTmr);syncTmr=setTimeout(doSync,800)}
+  window.piyoQueueSync=queueSync; // 購入記録を保存したときにも同期する（piyo-buy.js）
   const hm=d=>`${d.getMonth()+1}/${d.getDate()} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
   const pad2=n=>String(n).padStart(2,'0');
   const TOKEN_URL='https://github.com/settings/tokens/new?scopes=gist&description='+encodeURIComponent('ぴよりんニュース ブックマーク同期');
@@ -1533,10 +1536,10 @@ window.PiyoSplash=(function(){
       el.innerHTML=`<div class="sync-row"><span class="sync-dot on${syncBusy?' busy':''}"></span><div><b>同期オン</b>${st.startsWith('<small')?st:`<small>${st}</small>`}</div>
         <div class="sync-btns"><button type="button" data-sync="now" ${syncBusy?'disabled':''}>今すぐ同期</button><button type="button" data-sync="copy">合言葉をコピー</button><button type="button" data-sync="off">解除</button></div></div>`;
     }else{
-      el.innerHTML=`<div class="sync-row"><span class="sync-dot"></span><div><b>この端末だけに保存中</b><small>${syncErr?`<span style="color:#C2412D">${esc(syncErr)}</span>`:'同期を設定すると、ほかのブラウザ・端末とブックマークや削除した記事を共有できます'}</small></div>
+      el.innerHTML=`<div class="sync-row"><span class="sync-dot"></span><div><b>この端末だけに保存中</b><small>${syncErr?`<span style="color:#C2412D">${esc(syncErr)}</span>`:'同期を設定すると、ほかのブラウザ・端末とブックマーク・削除した記事・購入記録を共有できます'}</small></div>
         <div class="sync-btns"><button type="button" class="${syncOpen?'':'primary'}" data-sync="open">${syncOpen?'閉じる':'同期を設定'}</button></div></div>
         ${syncOpen?`<form id="sync-form" autocomplete="off"><ol>
-          <li><b>はじめての端末</b>：<a href="${TOKEN_URL}" target="_blank" rel="noopener">GitHubで合言葉を作る ↗</a><small>「gist」だけにチェックが入った画面が開きます。Expiration（有効期限）を選んで一番下の「Generate token」を押し、表示された ghp_ で始まる文字をコピーします。この合言葉はブックマークと削除した記事の記録の保存にしか使えません。</small></li>
+          <li><b>はじめての端末</b>：<a href="${TOKEN_URL}" target="_blank" rel="noopener">GitHubで合言葉を作る ↗</a><small>「gist」だけにチェックが入った画面が開きます。Expiration（有効期限）を選んで一番下の「Generate token」を押し、表示された ghp_ で始まる文字をコピーします。この合言葉は、ブックマーク・削除した記事・購入記録（写真も）を GitHub の非公開のメモ（gist）に保存するのにしか使えません。</small></li>
           <li><b>2台目以降</b>：同期オンの端末で「合言葉をコピー」を押し、その文字をこの端末に送ります（AirDrop・メモなど）。</li>
           <li>合言葉を貼り付けて「同期を開始」を押します。
             <div class="sync-in" style="margin-top:6px"><input type="password" id="sync-token" placeholder="ghp_…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="合言葉"><button type="submit" class="primary">同期を開始</button></div></li>
@@ -1593,7 +1596,7 @@ window.PiyoSplash=(function(){
   });
 
   // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
-  const PN_VERSION='2026.11.24-2（公式 X の新作の絵・公式 X の新作を拾う・削除から学ぶ・天気を Mac の infobase から読む・ほかの町の天気・3時間ごとの天気・図の切り替え・Mac をすこし待つ・天気の待ち表示・関係するメモだけ渡す・購入記録を踏まえた答え）';
+  const PN_VERSION='2026.11.24-3（購入記録を端末どうしで同期・公式 X の新作の絵・公式 X の新作を拾う・削除から学ぶ・天気を Mac の infobase から読む・ほかの町の天気・3時間ごとの天気・図の切り替え・Mac をすこし待つ・天気の待ち表示・関係するメモだけ渡す・購入記録を踏まえた答え）';
   {
     const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
     const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';

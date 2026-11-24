@@ -264,7 +264,7 @@ test('speakText：読み上げ用に、飾り・出典の印・URL・絵文字�
 
 // ---------------------------------------------------------------- 設定の鍵
 test('設定の鍵：FLAG_KEYS に memofocus・buyctx・photo・mic（既定は入り）。OPT_KEYS の speak は既定が切',()=>{
-  assert.deepEqual(plain(X.FLAG_KEYS),{persona:'piyo-persona-off',memory:'piyo-memory-off',convo:'piyo-convo-off',buysync:'piyo-buysync-off',wxfig:'piyo-wxfig-off',
+  assert.deepEqual(plain(X.FLAG_KEYS),{persona:'piyo-persona-off',memory:'piyo-memory-off',convo:'piyo-convo-off',buysync:'piyo-buysync-off',buygist:'piyo-buygist-off',wxfig:'piyo-wxfig-off',
     memofocus:'piyo-memofocus-off',buyctx:'piyo-buyctx-off',photo:'piyo-photo-off',mic:'piyo-mic-off'});
   for(const n of ['memofocus','buyctx','photo','mic']){
     assert.equal(X.flagOn(mem(),n),true);

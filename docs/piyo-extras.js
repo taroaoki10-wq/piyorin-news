@@ -1085,7 +1085,7 @@ window.PiyoExtras = (function () {
 
   // ---- 記憶と性格をつなぐ（Claude Pet との受け渡しの約束 2026-11-13） ----
   // 設定は localStorage の鍵が '1' のときだけ切（鍵が無いときは入り）
-  const FLAG_KEYS = { persona: 'piyo-persona-off', memory: 'piyo-memory-off', convo: 'piyo-convo-off', buysync: 'piyo-buysync-off', wxfig: 'piyo-wxfig-off',
+  const FLAG_KEYS = { persona: 'piyo-persona-off', memory: 'piyo-memory-off', convo: 'piyo-convo-off', buysync: 'piyo-buysync-off', buygist: 'piyo-buygist-off', wxfig: 'piyo-wxfig-off',
     memofocus: 'piyo-memofocus-off', buyctx: 'piyo-buyctx-off', photo: 'piyo-photo-off', mic: 'piyo-mic-off' };
   function flagOn(storage, name) { try { return !storage || storage.getItem(FLAG_KEYS[name]) !== '1'; } catch (_) { return true; } }
   // 既定が切の設定（鍵が '1' のときだけ入り。storage が無ければ切）
