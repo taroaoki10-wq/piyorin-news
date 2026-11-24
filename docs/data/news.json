@@ -153,6 +153,10 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFAyUUVSOXZVVUF5NlZ0eHhiWGRHeU1NQ3VvbTJhNC1XV245cExVUkljNTJncEUyeWdXR0g4M193bi0wdGZObHQyaHpmRlIyNTF5WW0yV1NSb1QyV0RTRFE?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBsVzBQR3BJVHNma1UxdElFVEFzM3c3MnhQWVVOTFppUXNUZ1l1Y2RGOG9ZaGtjMnRDbzN3N3VoQ18zbFJHdXA3MzljOVBjdjR0T2RDMHRCaGROU2Exdlpj?oc=5"
    }
   ],
   "dv": 3,
@@ -273,7 +277,7 @@
    "v": 1,
    "ok": true,
    "why": "題にぴよりん",
-   "t": "2026-11-24",
+   "t": "2026-11-25",
    "by": "rule"
   }
  },
@@ -1025,23 +1029,6 @@
    "ok": true,
    "why": "ぴよりんのコラボイベント・グッズをまとめた記事",
    "t": "2026-11-17"
-  }
- },
- {
-  "id": "n20261116-6d5e9157",
-  "date": "2026-11-16",
-  "cat": "media",
-  "title": "名古屋駅のフード出店に新風 地下街「メイチカ」リニューアル、ぴよりんカフェやあんバター",
-  "source": "日本経済新聞",
-  "url": "https://www.nikkei.com/article/DGXZQOFD063HD0W6A101C2000000/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "題にぴよりん",
-   "t": "2026-11-24",
-   "by": "rule"
   }
  },
  {
@@ -11108,6 +11095,21 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりん×イコちゃん初コラボぬいぐるみ発売",
+   "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20240822-9297c463",
+  "date": "2024-08-22",
+  "cat": "press",
+  "title": "秋の訪れを彩る、「紅茶と洋ナシぴよりん」が登場！",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000042.000124425.html",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "紅茶と洋ナシぴよりん新商品登場",
    "t": "2026-10-15"
   }
  }
