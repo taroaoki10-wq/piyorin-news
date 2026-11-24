@@ -6,7 +6,24 @@
   "title": "クリスマスツリーを割ると、ぴよりんがひょっこり。シェ・シバタが手掛ける「ぴよりんドール缶 クリスマス限定」を発売",
   "source": "PR TIMES",
   "url": "https://prtimes.jp/main/html/rd/p/000000269.000124425.html",
-  "related": [],
+  "related": [
+   {
+    "source": "Excite エキサイト",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBZZm91TXlUeXdNd2h3MnhHMF91c01HUWJpb0F3emFmSUd6TkRZTDc1M2x5SW9ZREhqREpqOWptUXhGVUx3a3JjeFNYWjRUU1NiUTV4LTljcExqNmtMNGlhMGgzcmIwdDBQQ19kS2xqaWpWMFFHMFE?oc=5"
+   },
+   {
+    "source": "産経ニュース",
+    "url": "https://www.sankei.com/pressrelease/prtimes/TRLV2YISOJIDLMUJ6LJ3NHQDJM/"
+   },
+   {
+    "source": "MANTANWEB（まんたんウェブ）",
+    "url": "https://mantan-web.jp/prtimes/article/20261124prt00m200000219a/photopage/001.html"
+   },
+   {
+    "source": "ぴよりん公式X",
+    "url": "https://x.com/piyorin_nagoya/status/2125031654314103145"
+   }
+  ],
   "dv": 3,
   "jg": {
    "v": 1,
@@ -14,7 +31,11 @@
    "why": "題にぴよりん",
    "t": "2026-11-24",
    "by": "rule"
-  }
+  },
+  "merged_ids": [
+   "n20261123-24a5f8b6",
+   "n20261124-105aa23b"
+  ]
  },
  {
   "id": "n20261124-3af95e70",
@@ -283,6 +304,10 @@
    {
     "source": "オリコンニュース",
     "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFAtRFk2dTRBbDZmQW8xMlQ2MmREaW90TlZ4VHE1cGt1RXRYUy1wOGZrZkZKb0VnTDRDN0NDSXJ5VTZYdmRGYnpibEkwWnhKcDhoQ2wyNjhGZHdyUlE?oc=5"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBDUV80QTd0aGpqbnFXN0VQWEV0Y0pQUVhPekxTY0h5MzlSeWROWng1U2ZFdUxueUdzLWNRVjN3MExUbTI3ckJNV3RpejRzc3Y0bWc?oc=5"
    }
   ],
   "merged_ids": [
@@ -750,6 +775,15 @@
    "why": "ぴよりんとゴジラのコラボステッカーの記事",
    "t": "2026-11-21"
   }
+ },
+ {
+  "id": "n20261118-cfe9975b",
+  "date": "2026-11-18",
+  "cat": "official",
+  "title": "【店舗限定 ぴよりん が登場！】 11/20(金)～ ぴよりんshopアトリエ店 限定「ミルクティーぴよりん」を販売♪",
+  "source": "ぴよりん公式X",
+  "url": "https://x.com/piyorin_nagoya/status/2122887519435960587",
+  "related": []
  },
  {
   "id": "n20261118-2debb6cd",
@@ -3294,9 +3328,14 @@
    {
     "source": "MANTANWEB（まんたんウェブ）",
     "url": "https://mantan-web.jp/prtimes/article/20261023prt00m200001060a.html"
+   },
+   {
+    "source": "ぴよりん公式X",
+    "url": "https://x.com/piyorin_nagoya/status/2113510739587539261"
    }
   ],
   "merged_ids": [
+   "n20261023-4b30a629",
    "n20261023-64989879",
    "n20261023-a1f6b18e",
    "n20261024-499b8037"
@@ -11055,21 +11094,6 @@
    "v": 1,
    "ok": true,
    "why": "スガキヤとのコラボ商品。公式コラボ",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20240522-1690ceb2",
-  "date": "2024-05-22",
-  "cat": "press",
-  "title": "リニアをモチーフにしたコラボぴよりん「リニアぴよりん」が登場！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000017.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "リニアをモチーフとしたコラボぴよりん",
    "t": "2026-10-15"
   }
  }
