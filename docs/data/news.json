@@ -55,7 +55,10 @@
   "related": [],
   "dv": 3,
   "jg": {
-   "wait": "2026-11-24T11:29:40+09:00"
+   "v": 1,
+   "ok": false,
+   "why": "ドイツでの北海道誘客セミナーの記事で、ぴよりんの言及なし",
+   "t": "2026-11-24"
   }
  },
  {
@@ -68,7 +71,67 @@
   "related": [],
   "dv": 3,
   "jg": {
-   "wait": "2026-11-24T17:55:43+09:00"
+   "v": 1,
+   "ok": false,
+   "why": "プロボクシングのダブル世界戦の記事で、ぴよりんとは無関係",
+   "t": "2026-11-24"
+  }
+ },
+ {
+  "id": "n20261124-85966666",
+  "date": "2026-11-24",
+  "cat": "media",
+  "title": "ツリーを割るとミニぴよりんが出現！「ぴよりんクッキー缶」クリスマス限定で、シェ・シバタとコラボ",
+  "source": "ファッションプレス",
+  "url": "https://www.fashion-press.net/news/153790",
+  "related": [
+   {
+    "source": "ファッションプレス",
+    "url": "https://www.fashion-press.net/news/153790"
+   }
+  ],
+  "merged_ids": [
+   "n20261124-3f0491b5"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "題にぴよりん",
+   "t": "2026-11-24",
+   "by": "rule"
+  }
+ },
+ {
+  "id": "n20261124-164d6f23",
+  "date": "2026-11-24",
+  "cat": "media",
+  "title": "戸郷、4000万円ダウン プロ野球",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/gpnews/1779321/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": false,
+   "why": "巨人・戸郷の契約更改の記事で、ぴよりんとは無関係",
+   "t": "2026-11-24"
+  }
+ },
+ {
+  "id": "n20261124-a0ea4a59",
+  "date": "2026-11-24",
+  "cat": "media",
+  "title": "柴田は倍増 プロ野球",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/gpnews/1779323/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": false,
+   "why": "日本ハム・柴田の契約更改の記事で、ぴよりんとは無関係",
+   "t": "2026-11-24"
   }
  },
  {
@@ -932,23 +995,6 @@
    "ok": true,
    "why": "ぴよりんのコラボイベント・グッズをまとめた記事",
    "t": "2026-11-17"
-  }
- },
- {
-  "id": "n20261116-6d5e9157",
-  "date": "2026-11-16",
-  "cat": "media",
-  "title": "名古屋駅のフード出店に新風 地下街「メイチカ」リニューアル、ぴよりんカフェやあんバター",
-  "source": "日本経済新聞",
-  "url": "https://www.nikkei.com/article/DGXZQOFD063HD0W6A101C2000000/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "題にぴよりん",
-   "t": "2026-11-24",
-   "by": "rule"
   }
  },
  {
@@ -11040,36 +11086,6 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんルーム第2弾商品発売",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20240808-dfec1da0",
-  "date": "2024-08-08",
-  "cat": "media",
-  "title": "ぴよりんとコラボレーション「ぴよりんルーム」第2弾発売",
-  "source": "www.his.co.jp",
-  "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBTek1hU0lHOVdwWkY1cVdGTWNZSVdsNDBzYlRTem56RGh0YWZRckg3SnN6ek4tMW4wV1FKRmt0YjZiVDB1Q3RrZ1J5NXY5dw?oc=5",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんとのコラボ商品「ぴよりんルーム」の発売記事",
-   "t": "2026-11-14"
-  }
- },
- {
-  "id": "n20240730-87ff711c",
-  "date": "2024-07-30",
-  "cat": "press",
-  "title": "今度の付録は「ビッグサイズのふわふわぬいぐるみ」！！『ぴよりんブランドムック』第2弾発売！！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000037.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんのムック本付録について。グッズ関連",
    "t": "2026-10-15"
   }
  }
