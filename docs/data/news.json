@@ -30,6 +30,10 @@
    {
     "source": "AERA DIGITAL",
     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE4tcW5WU3hOMExTd0d3NGhLbm1VWFcxWWJLdXJUbUJKU3NjWjMxeC1kS0FnZkJhRUJBcGh4WGc5QjBPRE1MV0VCbkxqV1pVU3E1?oc=5"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5uR2hvNXMtVFJ1Zloxcy10TGtjZ1B6OFZxYnFoY1Q0Nklxa1RXS0cxM3hTOUdxWDBOTU00Z0ozakNDWl9NWVhsQmFhOXFTeXgyWUc0akpzSTdYMFJJMmVULUNyeE8yMUpvMTdGY1pBNi1UZUJvdEE?oc=5"
    }
   ],
   "dv": 3,
@@ -277,23 +281,6 @@
    "ok": false,
    "why": "普天間飛行場の会議の記事で、ぴよりんと無関係",
    "t": "2026-11-22"
-  }
- },
- {
-  "id": "n20261122-5af2ddee",
-  "date": "2026-11-22",
-  "cat": "media",
-  "title": "『ぴよりん』3店舗がクリスマスムードに",
-  "source": "産経ニュース",
-  "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/photo/VMOKJD6TEFNYPEMPN5DMOMQHJE/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "題にぴよりん",
-   "t": "2026-11-25",
-   "by": "rule"
   }
  },
  {
@@ -11129,6 +11116,21 @@
    "v": 1,
    "ok": true,
    "why": "紅茶と洋ナシぴよりん新商品登場",
+   "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20240809-80755dc5",
+  "date": "2024-08-09",
+  "cat": "press",
+  "title": "さらなる進化を遂げた「ぴよりんルーム 第2弾」発売！",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000038.000124425.html",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりんルーム第2弾商品発売",
    "t": "2026-10-15"
   }
  }
