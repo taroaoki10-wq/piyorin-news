@@ -63,6 +63,23 @@
   }
  },
  {
+  "id": "n20261125-f011f23d",
+  "date": "2026-11-25",
+  "cat": "media",
+  "title": "「イチゴぴよりん」を模したぬいぐるみを飾り付けたミニツリー",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/photoflash/6601/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "題にぴよりん",
+   "t": "2026-11-25",
+   "by": "rule"
+  }
+ },
+ {
   "id": "n20261124-0733aa9c",
   "date": "2026-11-24",
   "cat": "press",
@@ -344,6 +361,23 @@
    "ok": false,
    "why": "普天間飛行場の会議の記事で、ぴよりんと無関係",
    "t": "2026-11-22"
+  }
+ },
+ {
+  "id": "n20261122-5af2ddee",
+  "date": "2026-11-22",
+  "cat": "media",
+  "title": "『ぴよりん』3店舗がクリスマスムードに",
+  "source": "産経ニュース",
+  "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/photo/VMOKJD6TEFNYPEMPN5DMOMQHJE/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "題にぴよりん",
+   "t": "2026-11-25",
+   "by": "rule"
   }
  },
  {
@@ -11119,36 +11153,6 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりん×生しるこサンドコラボ商品の発売",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20240828-3d4ac33f",
-  "date": "2024-08-28",
-  "cat": "media",
-  "title": "愛知県の和洋スイーツがコラボ「ぴよりん生しるこサンド ...",
-  "source": "トラベル Watch",
-  "url": "https://travel.watch.impress.co.jp/docs/news/1619218.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりん生しるこサンドのコラボ商品の記事",
-   "t": "2026-11-19"
-  }
- },
- {
-  "id": "n20240827-794efa33",
-  "date": "2024-08-27",
-  "cat": "press",
-  "title": "「ぴよりん」とレトロな世界を楽しもう！『ぴよりんと旅する レトロな世界フェア』開催！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000044.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんとレトロ世界フェア開催",
    "t": "2026-10-15"
   }
  }
