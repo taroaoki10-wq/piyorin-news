@@ -253,6 +253,10 @@
    {
     "source": "ライブドアニュース",
     "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1KRk9aQVRqMG0zTkZrWGE4WTdfSzZMX3BKTHZZOGdxYWlNeGg2MVIxMENJSmpQak9QelRVS3M4MUpNeVhLd2xuNlVuMU1WVEtiYUpkR25oRVBEa1RMNjJGc1dSczJ3dDdkcW9CdTVhMGNsT2ZCU0dKb3lIV04?oc=5"
+   },
+   {
+    "source": "ライブドアニュース",
+    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE8xcXU3UXhJSDBWS01GeFo1M3Y1aXZCUjItSEFQQnpGRFRfbXE4TGdWcVUwejROMzFqM0Rxc0FhdVJaU3R1akw3OTAxZUpLQXppOU9SaXhCcmJpb2RucFdtNFdWLTk2YTRMaEwxTzIxNkFIRnlCV1YzSE9kYXU?oc=5"
    }
   ],
   "dv": 3,
@@ -361,23 +365,6 @@
    "ok": false,
    "why": "普天間飛行場の会議の記事で、ぴよりんと無関係",
    "t": "2026-11-22"
-  }
- },
- {
-  "id": "n20261122-5af2ddee",
-  "date": "2026-11-22",
-  "cat": "media",
-  "title": "『ぴよりん』3店舗がクリスマスムードに",
-  "source": "産経ニュース",
-  "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/photo/VMOKJD6TEFNYPEMPN5DMOMQHJE/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "題にぴよりん",
-   "t": "2026-11-25",
-   "by": "rule"
   }
  },
  {
@@ -11138,6 +11125,21 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんの振動実験動画公開、企画内容",
+   "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20240828-60a7aad0",
+  "date": "2024-08-28",
+  "cat": "press",
+  "title": "【生しるこサンド×ぴよりん】愛知県の人気商品が夢のコラボ！和洋折衷の新感覚スイーツ「ぴよりん生しるこサンド」発売！！",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000041.000124425.html",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "ぴよりん×生しるこサンドコラボ商品の発売",
    "t": "2026-10-15"
   }
  },
