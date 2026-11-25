@@ -1,5 +1,68 @@
 [
  {
+  "id": "n20261125-25eb0f09",
+  "date": "2026-11-25",
+  "cat": "media",
+  "title": "名駅の「ぴよりんvillage」が初のクリスマス仕様に サンタ姿のぴよりんも（みんなの経済新聞ネットワーク）",
+  "source": "Yahoo!ニュース",
+  "url": "https://news.yahoo.co.jp/articles/3103f311d42e80a82a6339ff8f3053881a7f7206",
+  "related": [
+   {
+    "source": "Howl.Link",
+    "url": "https://news.google.com/rss/articles/CBMiO0FVX3lxTE4yVFRDMURobE52NVl3QjdaZHdnaGxxVkJaalQ4UVFVWmlBbTFhQ3pKbUZkR1RnSmozemVZ?oc=5"
+   },
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.yahoo.co.jp/articles/3103f311d42e80a82a6339ff8f3053881a7f7206"
+   }
+  ],
+  "merged_ids": [
+   "n20261125-3f37f88d"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "題にぴよりん",
+   "t": "2026-11-25",
+   "by": "rule"
+  }
+ },
+ {
+  "id": "n20261125-06da8d5b",
+  "date": "2026-11-25",
+  "cat": "media",
+  "title": "トナカイに扮した「ぴよりん」のぬいぐるみを飾り付けたミニツリー",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/photoflash/6600/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "題にぴよりん",
+   "t": "2026-11-25",
+   "by": "rule"
+  }
+ },
+ {
+  "id": "n20261125-4b5c217e",
+  "date": "2026-11-25",
+  "cat": "media",
+  "title": "「雪化粧ぴよりん」をテーマに装飾する「cafe&gifts ぴよりんvillage」外観",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/photoflash/6603/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "題にぴよりん",
+   "t": "2026-11-25",
+   "by": "rule"
+  }
+ },
+ {
   "id": "n20261124-0733aa9c",
   "date": "2026-11-24",
   "cat": "press",
@@ -11086,51 +11149,6 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんとレトロ世界フェア開催",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20240827-5f4e8981",
-  "date": "2024-08-27",
-  "cat": "press",
-  "title": "【イコちゃん×ぴよりん】関西と東海の人気キャラが初のコラボ！「カモノハシのイコちゃん×ぴよりん だっこぬいぐるみ」発売！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000043.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりん×イコちゃん初コラボぬいぐるみ発売",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20240822-9297c463",
-  "date": "2024-08-22",
-  "cat": "press",
-  "title": "秋の訪れを彩る、「紅茶と洋ナシぴよりん」が登場！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000042.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "紅茶と洋ナシぴよりん新商品登場",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20240809-80755dc5",
-  "date": "2024-08-09",
-  "cat": "press",
-  "title": "さらなる進化を遂げた「ぴよりんルーム 第2弾」発売！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000038.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんルーム第2弾商品発売",
    "t": "2026-10-15"
   }
  }
