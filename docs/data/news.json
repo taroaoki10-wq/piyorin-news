@@ -18,9 +18,14 @@
    {
     "source": "時事ドットコム",
     "url": "https://www.jiji.com/jc/article?k=000000270.000124425&g=prt"
+   },
+   {
+    "source": "ORICON NEWS",
+    "url": "https://www.oricon.co.jp/pressrelease/3103697/"
    }
   ],
   "merged_ids": [
+   "n20261125-db4ff8f5",
    "n20261126-c4ab5638"
   ]
  },
@@ -86,6 +91,39 @@
   "dv": 3,
   "jg": {
    "wait": "2026-11-26T11:59:50+09:00"
+  }
+ },
+ {
+  "id": "n20261126-8ebafe03",
+  "date": "2026-11-26",
+  "cat": "media",
+  "title": "名古屋人気スイーツ『ぴよりん』がサンタさんに変身！トナカイや雪だるまなど愛らしいクリスマス限定商品が12月1日から順次新発売",
+  "source": "au Webポータル",
+  "url": "https://article.auone.jp/611e4bf6-606f-4697-b0af-aa85fd158a7e",
+  "related": [
+   {
+    "source": "Yahoo!ニュース",
+    "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9iZ1JRZXJRVDN5ODJqQjJzNDdwaGhHNWdFcUNnMjdvU2ZqUG5uMVp0OEtRNWhjYmR5WmNJZkJYYVlUVzl2MmdVaksyNmYyRkNOQlBCdTJnWHA0eTB4dlFabnVUNE9UYTgycHROb2l0MzMxLTJUemNHRUp5d1lmT1U?oc=5"
+   },
+   {
+    "source": "めざましmedia on MSN",
+    "url": "https://www.msn.com/ja-jp/food-and-drink/%E5%85%A8%E8%88%AC/%E5%90%8D%E5%8F%A4%E5%B1%8B%E4%BA%BA%E6%B0%97%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%8C%E3%82%B5%E3%83%B3%E3%82%BF%E3%81%95%E3%82%93%E3%81%AB%E5%A4%89%E8%BA%AB-%E3%83%88%E3%83%8A%E3%82%AB%E3%82%A4%E3%82%84%E9%9B%AA%E3%81%A0%E3%82%8B%E3%81%BE%E3%81%AA%E3%81%A9%E6%84%9B%E3%82%89%E3%81%97%E3%81%84%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%E9%99%90%E5%AE%9A%E5%95%86%E5%93%81%E3%81%8C12%E6%9C%881%E6%97%A5%E3%81%8B%E3%82%89%E9%A0%86%E6%AC%A1%E6%96%B0%E7%99%BA%E5%A3%B2/ar-AA2ifqHH"
+   },
+   {
+    "source": "めざましmedia on MSN",
+    "url": "https://www.msn.com/ja-jp/news/other/%E5%90%8D%E5%8F%A4%E5%B1%8B%E4%BA%BA%E6%B0%97%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%8C%E3%82%B5%E3%83%B3%E3%82%BF%E3%81%95%E3%82%93%E3%81%AB%E5%A4%89%E8%BA%AB%E3%83%88%E3%83%8A%E3%82%AB%E3%82%A4%E3%82%84%E9%9B%AA%E3%81%A0%E3%82%8B%E3%81%BE%E3%81%AA%E3%81%A9%E6%84%9B%E3%82%89%E3%81%97%E3%81%84%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%E9%99%90%E5%AE%9A%E5%95%86%E5%93%81%E3%81%8C12%E6%9C%881%E6%97%A5%E3%81%8B%E3%82%89%E9%A0%86%E6%AC%A1%E6%96%B0%E7%99%BA%E5%A3%B2/ar-AA2ifqHH"
+   }
+  ],
+  "merged_ids": [
+   "n20261126-689b7583"
+  ],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "題にぴよりん",
+   "t": "2026-11-26",
+   "by": "rule"
   }
  },
  {
@@ -901,6 +939,10 @@
    {
     "source": "山陽新聞",
     "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1aX1ZFdF9RS1dUQ2I5Qy01Z2dwWlNoZUZfc2dWUC1LeWpGQW9GbFdBQ01aZmZkaTdFWlBlWjJlNFBDUmJlZDRNcG1HNEZlY0VNM1E?oc=5"
+   },
+   {
+    "source": "山陽新聞",
+    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBPMV9IT3RXT3N0YVNNZkw4ZkhFQkVWZzBSZ2IwZk41dXJXRDRkQkZZbGZpbTBKVnpsNDdZMTllLXJuUjREVERQNlZPalZWU2lfRHNxeTJSYzJESExLRDUtSg?oc=5"
    }
   ],
   "merged_ids": [
@@ -1242,6 +1284,23 @@
    "ok": true,
    "why": "ぴよりんのコラボイベント・グッズをまとめた記事",
    "t": "2026-11-17"
+  }
+ },
+ {
+  "id": "n20261116-6d5e9157",
+  "date": "2026-11-16",
+  "cat": "media",
+  "title": "名古屋駅のフード出店に新風 地下街「メイチカ」リニューアル、ぴよりんカフェやあんバター",
+  "source": "日本経済新聞",
+  "url": "https://www.nikkei.com/article/DGXZQOFD063HD0W6A101C2000000/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "題にぴよりん",
+   "t": "2026-11-26",
+   "by": "rule"
   }
  },
  {
@@ -11138,37 +11197,6 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりん鉄道の日オリジナルグッズ販売。ぴよりん企画",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20261010-3c571a08",
-  "date": "2024-10-07",
-  "cat": "media",
-  "title": "これであなたも“ぴよりんチャレンジ”の勝者に!?日立製作所研究チームとの振動実験がガチすぎる",
-  "source": "ウォーカープラス",
-  "url": "https://www.walkerplus.com/article/1219952/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりンチャレンジ企画で日立製作所とのコラボ検証",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20241004-27fbaa0f",
-  "date": "2024-10-04",
-  "cat": "press",
-  "title": "【イッチー×ぴよりん】東海テレビ公式キャラクター「イッチー」と初コラボ！「東海テレビ　ふるさとイッチー祭2024」にてコラボぴよりん＆オリジナルグッズを限定販売！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000052.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりん×イッチー東海テレビコラボ商品の販売",
    "t": "2026-10-15"
   }
  }
