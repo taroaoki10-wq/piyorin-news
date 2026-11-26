@@ -22,6 +22,10 @@
    {
     "source": "ORICON NEWS",
     "url": "https://www.oricon.co.jp/pressrelease/3103697/"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBXN3U2aGFaS2N4dnFGT2ozV1diaWl3Z2t6YjRDMExWTVBRMy1fVVhpTmVCcF9vSXBGU3JUa1IxRExNX3V6VlhjMW5peWJCVVJUQ1o1eWk1aG9uZUVfU1pIdUNrOG5JeWxzLWpJQS1iV3JpbHE5Q0J3Sw?oc=5"
    }
   ],
   "merged_ids": [
@@ -66,6 +70,10 @@
    {
     "source": "ファッションプレス",
     "url": "https://www.fashion-press.net/news/153864"
+   },
+   {
+    "source": "千葉テレビ放送株式会社",
+    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE0xRlNHTW5MSnkxaVY3MzJrMWxDUXA0SHY0ekZUMk9HWjBWZ0M2eTlJOU5IYzd1OGZmM2tnZUdKMGFRNkRXZDluZjNPN0hWUlhENTlYS0o2ZGd4WnZfV01z?oc=5"
    }
   ],
   "merged_ids": [
@@ -112,10 +120,19 @@
    {
     "source": "めざましmedia on MSN",
     "url": "https://www.msn.com/ja-jp/news/other/%E5%90%8D%E5%8F%A4%E5%B1%8B%E4%BA%BA%E6%B0%97%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%8C%E3%82%B5%E3%83%B3%E3%82%BF%E3%81%95%E3%82%93%E3%81%AB%E5%A4%89%E8%BA%AB%E3%83%88%E3%83%8A%E3%82%AB%E3%82%A4%E3%82%84%E9%9B%AA%E3%81%A0%E3%82%8B%E3%81%BE%E3%81%AA%E3%81%A9%E6%84%9B%E3%82%89%E3%81%97%E3%81%84%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%E9%99%90%E5%AE%9A%E5%95%86%E5%93%81%E3%81%8C12%E6%9C%881%E6%97%A5%E3%81%8B%E3%82%89%E9%A0%86%E6%AC%A1%E6%96%B0%E7%99%BA%E5%A3%B2/ar-AA2ifqHH"
+   },
+   {
+    "source": "めざましmedia",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE0wTElpV1JUQXhIdVJwNVJlNi1ZcDJlZXUwSEdOd3FkRFgyN2pXa0Jhd0g1YjYzMlpZMkkyaTc3WWJFMkR1WG9VOEVGMlpSMUtldHpsM0JIcEtnRlU?oc=5"
+   },
+   {
+    "source": "めざましmedia on MSN",
+    "url": "https://www.msn.com/ja-jp/food-and-drink/recipes/%E5%90%8D%E5%8F%A4%E5%B1%8B%E4%BA%BA%E6%B0%97%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%8C%E3%82%B5%E3%83%B3%E3%82%BF%E3%81%95%E3%82%93%E3%81%AB%E5%A4%89%E8%BA%AB-%E3%83%88%E3%83%8A%E3%82%AB%E3%82%A4%E3%82%84%E9%9B%AA%E3%81%A0%E3%82%8B%E3%81%BE%E3%81%AA%E3%81%A9%E6%84%9B%E3%82%89%E3%81%97%E3%81%84%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%E9%99%90%E5%AE%9A%E5%95%86%E5%93%81%E3%81%8C12%E6%9C%881%E6%97%A5%E3%81%8B%E3%82%89%E9%A0%86%E6%AC%A1%E6%96%B0%E7%99%BA%E5%A3%B2/ar-AA2ifqHH"
    }
   ],
   "merged_ids": [
-   "n20261126-689b7583"
+   "n20261126-689b7583",
+   "n20261126-82f8486c"
   ],
   "dv": 3,
   "jg": {
@@ -124,6 +141,19 @@
    "why": "題にぴよりん",
    "t": "2026-11-26",
    "by": "rule"
+  }
+ },
+ {
+  "id": "n20261126-d51dfc0c",
+  "date": "2026-11-26",
+  "cat": "media",
+  "title": "野党、関文科相問責提出",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/gpnews/1779361/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "wait": "2026-11-26T18:00:47+09:00"
   }
  },
  {
@@ -11182,21 +11212,6 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりん×イコちゃんのコラボ商品。公式コラボ企画",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20241008-4742a573",
-  "date": "2024-10-08",
-  "cat": "press",
-  "title": "「ぴよりん」鉄道の日オリジナルグッズ販売！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000051.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりん鉄道の日オリジナルグッズ販売。ぴよりん企画",
    "t": "2026-10-15"
   }
  }
