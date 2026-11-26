@@ -598,14 +598,25 @@
  },
  {
   "id": "auto-officialp5728",
-  "title": "サンタぴよりんとトナカイぴよりんがやってくる！12月14日からは雪だるまぴよりんも登場！",
+  "title": "サンタぴよりん・トナカイぴよりん販売",
   "start": "2026-12-01",
   "end": "2026-12-25",
-  "place": "ぴよりんvillage",
+  "place": "ぴよりんshop・ぴよりんshopアトリエ店",
   "kind": "sale",
   "url": "https://piyorin.com/news/p5728/",
-  "auto": true,
-  "src": "official-p5728"
+  "src": "official-p5728",
+  "auto": true
+ },
+ {
+  "id": "auto-officialp5728-2",
+  "title": "雪だるまぴよりん販売",
+  "start": "2026-12-14",
+  "end": "2026-12-25",
+  "place": "ぴよりんshop・ぴよりんshopアトリエ店",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5728/",
+  "src": "official-p5728",
+  "auto": true
  },
  {
   "id": "auto-n2026102183b7c75c-2",
