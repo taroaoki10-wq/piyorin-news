@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//piyorin-news//JA
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:auto-officialp5728@piyorin-news
+DTSTAMP:20261201T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261226
+SUMMARY:サンタぴよりんとトナカイぴよりんがやってくる
+ ！12月14日からは雪だるまぴよりんも登場！
+LOCATION:ぴよりんvillage
+URL:https://piyorin.com/news/p5728/
+DESCRIPTION:ぴよりんニュースより\nhttps://piyorin.com/news/p5728/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:サンタぴよりんとトナカイぴよりんがやってく
+ る！12月14日からは雪だるまぴよりんも登場！
+TRIGGER:-PT240M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

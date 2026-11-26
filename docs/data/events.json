@@ -597,6 +597,17 @@
   "auto": true
  },
  {
+  "id": "auto-officialp5728",
+  "title": "サンタぴよりんとトナカイぴよりんがやってくる！12月14日からは雪だるまぴよりんも登場！",
+  "start": "2026-12-01",
+  "end": "2026-12-25",
+  "place": "ぴよりんvillage",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5728/",
+  "auto": true,
+  "src": "official-p5728"
+ },
+ {
   "id": "auto-n2026102183b7c75c-2",
   "title": "ぴよりんクリスマスケーキ 受取期間",
   "start": "2026-12-19",
