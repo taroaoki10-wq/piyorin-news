@@ -1,1 +1,1 @@
-{"updatedAt": "2026-11-27T12:02+09:00", "added": 2, "sources": {"公式サイト": 12, "PR TIMES": 174, "Googleニュース": 91, "Googleニュース（7日）": 37, "Googleニュース（1日）": 16, "Bingニュース": 11, "Bingニュース（7日）": 7, "公式X": 4}, "errors": []}
+{"updatedAt": "2026-11-27T17:01+09:00", "added": 4, "sources": {"公式サイト": 12, "PR TIMES": 174, "Googleニュース": 91, "Googleニュース（7日）": 38, "Bingニュース": 11, "Bingニュース（7日）": 7, "公式X": 4}, "errors": ["Googleニュース（1日）: HTTP Error 429: Too Many Requests"]}
