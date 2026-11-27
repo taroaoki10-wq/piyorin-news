@@ -808,23 +808,6 @@
   }
  },
  {
-  "id": "n20261122-5af2ddee",
-  "date": "2026-11-22",
-  "cat": "media",
-  "title": "『ぴよりん』3店舗がクリスマスムードに",
-  "source": "産経ニュース",
-  "url": "https://www.sankei.com/article/20261122-ONL62TWZAZPTZP5C2QFF74XDXU/photo/VMOKJD6TEFNYPEMPN5DMOMQHJE/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "題にぴよりん",
-   "t": "2026-11-28",
-   "by": "rule"
-  }
- },
- {
   "id": "n20261121-1e5aec85",
   "date": "2026-11-21",
   "cat": "media",
@@ -11302,6 +11285,21 @@
    "v": 1,
    "ok": true,
    "why": "チョコレート祭でぴよりん限定販売",
+   "t": "2026-10-15"
+  }
+ },
+ {
+  "id": "n20241226-a8480370",
+  "date": "2024-12-26",
+  "cat": "press",
+  "title": "新年は華やかな特別仕様の【ぴよりん】とともに。三が日限定「賀正ぴよりん」販売！！",
+  "source": "PR TIMES",
+  "url": "https://prtimes.jp/main/html/rd/p/000000065.000124425.html",
+  "related": [],
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "正月限定ぴよりん商品販売",
    "t": "2026-10-15"
   }
  }
