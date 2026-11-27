@@ -1,7 +1,7 @@
 {
  "note": "購入記録の画像の住所。ぴよりんはぴよりん図鑑、クッキー缶などは公式のプレスリリースの代表画像、公式 X だけの新作は投稿の写真。画像は公式のサーバーのものをそのまま表示する。",
  "zukanSource": "https://piyorin.com/detail/",
- "zukanChecked": "2026-11-26T15:00:31+09:00",
+ "zukanChecked": "2026-11-27T11:57:25+09:00",
  "zukan": [
   {
    "id": "z1384",
@@ -3752,6 +3752,14 @@
    "date": "2026-12-14",
    "url": "https://x.com/piyorin_nagoya/status/2125780957022335159",
    "img": "https://pbs.twimg.com/media/HYBKPpwaUAAmdgw.png",
+   "from": "event"
+  },
+  "auto-officialp5731": {
+   "cat": "piyorin",
+   "title": "「ぴよりん village」にクリスマスメニューが登場！限定プレートや華やかなパフェを販売",
+   "date": "2026-12-01",
+   "url": "https://piyorin.com/news/p5731/",
+   "img": "https://prcdn.freetls.fastly.net/release_image/124425/271/124425-271-aca0e342231f5d13867878e3bf9ae67e-842x595.jpg",
    "from": "event"
   }
  }

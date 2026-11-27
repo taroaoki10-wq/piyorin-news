@@ -608,6 +608,17 @@
   "auto": true
  },
  {
+  "id": "auto-officialp5731",
+  "title": "「ぴよりん village」にクリスマスメニューが登場！限定プレートや華やかなパフェを販売",
+  "start": "2026-12-01",
+  "end": "2026-12-25",
+  "place": "ぴよりんvillage",
+  "kind": "sale",
+  "url": "https://piyorin.com/news/p5731/",
+  "auto": true,
+  "src": "official-p5731"
+ },
+ {
   "id": "auto-n20261126e4a3eafa",
   "title": "クリスマス限定 雪だるまぴよりん販売開始",
   "start": "2026-12-14",

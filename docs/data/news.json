@@ -1,5 +1,27 @@
 [
  {
+  "id": "official-p5731",
+  "date": "2026-11-27",
+  "cat": "official",
+  "title": "「ぴよりん village」にクリスマスメニューが登場！限定プレートや華やかなパフェを販売",
+  "source": "ぴよりん公式サイト",
+  "url": "https://piyorin.com/news/p5731/",
+  "related": [
+   {
+    "source": "PR TIMES",
+    "url": "https://prtimes.jp/main/html/rd/p/000000271.000124425.html"
+   },
+   {
+    "source": "Excite エキサイト",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9Mb1JUZ0RHRktub1RnVEVPckdQQm9qR1FSUXNOa19qUkJETDZoS1I5cFBPaG8tTnhrWXZEZUpHODhXNktBMkY1cG9IMElENkJfMWpudDQ5Ty16U01MalR3V1NWMHpkMXhnTWJaUVQwdlhCSkdiVEE?oc=5"
+   },
+   {
+    "source": "毎日新聞デジタル",
+    "url": "https://mainichi.jp/articles/20261127/pr2/00m/020/245000c"
+   }
+  ]
+ },
+ {
   "id": "official-p5728",
   "date": "2026-11-26",
   "cat": "official",
@@ -26,11 +48,20 @@
    {
     "source": "ニコニコニュース",
     "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBXN3U2aGFaS2N4dnFGT2ozV1diaWl3Z2t6YjRDMExWTVBRMy1fVVhpTmVCcF9vSXBGU3JUa1IxRExNX3V6VlhjMW5peWJCVVJUQ1o1eWk1aG9uZUVfU1pIdUNrOG5JeWxzLWpJQS1iV3JpbHE5Q0J3Sw?oc=5"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBHZnhrYWVDNlNPTjBHV2MxNFFabkJyNWZUcG1QTzBjLWMwRldnS1hOeF9vb1h4SVZZd3NLRUM3S1ZSYmVCU3hNbUFDUU9XQnNMQlVCcU5fdEZLY2tlTkVweUlLb0F2ZVdK?oc=5"
+   },
+   {
+    "source": "ぴよりん公式X",
+    "url": "https://x.com/piyorin_nagoya/status/2126118819894796696"
    }
   ],
   "merged_ids": [
    "n20261125-db4ff8f5",
-   "n20261126-c4ab5638"
+   "n20261126-c4ab5638",
+   "n20261127-62f8ec2a"
   ]
  },
  {
@@ -190,6 +221,10 @@
    {
     "source": "Yahoo!ニュース",
     "url": "https://news.yahoo.co.jp/articles/60e15c8726d11a64149307d0cba27c401cefd2c3"
+   },
+   {
+    "source": "おとなの週末Web",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5hZThRRXlxajZrbjJOY1p6eFVBN2hfbWNfQ004V1piNEhXZWxHZElONEN3RHYtRHdXd0JRUFVQSENPTDdmQjRiWGh3MUFibk9BVUVldFU2SQ?oc=5"
    }
   ],
   "merged_ids": [
@@ -1448,23 +1483,6 @@
    "ok": true,
    "why": "ぴよりんのコラボイベント・グッズをまとめた記事",
    "t": "2026-11-17"
-  }
- },
- {
-  "id": "n20261116-6d5e9157",
-  "date": "2026-11-16",
-  "cat": "media",
-  "title": "名古屋駅のフード出店に新風 地下街「メイチカ」リニューアル、ぴよりんカフェやあんバター",
-  "source": "日本経済新聞",
-  "url": "https://www.nikkei.com/article/DGXZQOFD063HD0W6A101C2000000/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "題にぴよりん",
-   "t": "2026-11-27",
-   "by": "rule"
   }
  },
  {

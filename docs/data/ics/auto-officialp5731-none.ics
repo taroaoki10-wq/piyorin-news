@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//piyorin-news//JA
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:auto-officialp5731@piyorin-news
+DTSTAMP:20261201T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261226
+SUMMARY:「ぴよりん village」にクリスマスメニューが登場
+ ！限定プレートや華やかなパフェを販売
+LOCATION:ぴよりんvillage
+URL:https://piyorin.com/news/p5731/
+DESCRIPTION:ぴよりんニュースより\nhttps://piyorin.com/news/p5731/
+END:VEVENT
+END:VCALENDAR
