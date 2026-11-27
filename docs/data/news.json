@@ -22,6 +22,10 @@
    {
     "source": "ORICON NEWS",
     "url": "https://www.oricon.co.jp/pressrelease/3106147/"
+   },
+   {
+    "source": "Infoseek",
+    "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5BMHNBV0k2c0xORTNwcVphOFRzb1V4ZUc0cUNQNTBpNFhoemxjVFg1RFRGM1hHMkZiZUdHVDZwRmpHZjlrVWJJcFNCa3ZpT1dHMms0YUhuYlBsQUNBdFlqbkVzSTI1aXBuUkI5enliaUV6dw?oc=5"
    }
   ],
   "merged_ids": [
@@ -43,6 +47,19 @@
    "why": "題にぴよりん",
    "t": "2026-11-27",
    "by": "rule"
+  }
+ },
+ {
+  "id": "n20261127-fbf56620",
+  "date": "2026-11-27",
+  "cat": "media",
+  "title": "ドクターS、静岡駅で公開",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/gpnews/1779398/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "wait": "2026-11-27T20:01:46+09:00"
   }
  },
  {
@@ -1510,23 +1527,6 @@
   }
  },
  {
-  "id": "n20261116-6d5e9157",
-  "date": "2026-11-16",
-  "cat": "media",
-  "title": "名古屋駅のフード出店に新風 地下街「メイチカ」リニューアル、ぴよりんカフェやあんバター",
-  "source": "日本経済新聞",
-  "url": "https://www.nikkei.com/article/DGXZQOFD063HD0W6A101C2000000/",
-  "related": [],
-  "dv": 3,
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "題にぴよりん",
-   "t": "2026-11-27",
-   "by": "rule"
-  }
- },
- {
   "id": "n20261115-0f52a1dd",
   "date": "2026-11-15",
   "cat": "media",
@@ -1577,6 +1577,23 @@
   "source": "ぴよりん公式サイト",
   "url": "https://piyorin.com/news/p5676/",
   "related": []
+ },
+ {
+  "id": "n20261127-7a7f9fae",
+  "date": "2026-11-11",
+  "cat": "media",
+  "title": "写真：昨年早期完売した「ドクターイエロー」エコカイロが進化！今年は「ぴよりん」も仲間入りし、ふわふわのぬいぐるみ仕様で新登場",
+  "source": "沖縄タイムス社",
+  "url": "https://www.okinawatimes.co.jp/articles/gallery/1963966",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "題にぴよりん",
+   "t": "2026-11-27",
+   "by": "rule"
+  }
  },
  {
   "id": "n20261111-98056884",
@@ -11270,21 +11287,6 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりん販売数達成とキャンペーン",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20241118-22c2305a",
-  "date": "2024-11-18",
-  "cat": "press",
-  "title": "出版業界からエコ活動を発信する「ONE ECO PROJECT」が提案するエコバッグ「本袋（大）」に「ぴよりん柄」が登場！！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000060.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりん柄エコバッグコラボ商品",
    "t": "2026-10-15"
   }
  }
