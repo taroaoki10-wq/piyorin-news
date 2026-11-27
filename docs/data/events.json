@@ -609,14 +609,14 @@
  },
  {
   "id": "auto-officialp5731",
-  "title": "「ぴよりん village」にクリスマスメニューが登場！限定プレートや華やかなパフェを販売",
+  "title": "クリスマスメニュー（ぴよりん village）",
   "start": "2026-12-01",
   "end": "2026-12-25",
-  "place": "ぴよりんvillage",
+  "place": "ぴよりん village（名古屋駅）",
   "kind": "sale",
   "url": "https://piyorin.com/news/p5731/",
-  "auto": true,
-  "src": "official-p5731"
+  "src": "official-p5731",
+  "auto": true
  },
  {
   "id": "auto-n20261126e4a3eafa",

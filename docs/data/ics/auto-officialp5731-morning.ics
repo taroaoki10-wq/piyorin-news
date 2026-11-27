@@ -8,15 +8,13 @@ UID:auto-officialp5731@piyorin-news
 DTSTAMP:20261201T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261226
-SUMMARY:「ぴよりん village」にクリスマスメニューが登場
- ！限定プレートや華やかなパフェを販売
-LOCATION:ぴよりんvillage
+SUMMARY:クリスマスメニュー（ぴよりん village）
+LOCATION:ぴよりん village（名古屋駅）
 URL:https://piyorin.com/news/p5731/
 DESCRIPTION:ぴよりんニュースより\nhttps://piyorin.com/news/p5731/
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:「ぴよりん village」にクリスマスメニューが登
- 場！限定プレートや華やかなパフェを販売
+DESCRIPTION:クリスマスメニュー（ぴよりん village）
 TRIGGER:PT540M
 END:VALARM
 END:VEVENT
