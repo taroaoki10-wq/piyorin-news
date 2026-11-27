@@ -26,10 +26,15 @@
    {
     "source": "Infoseek",
     "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5BMHNBV0k2c0xORTNwcVphOFRzb1V4ZUc0cUNQNTBpNFhoemxjVFg1RFRGM1hHMkZiZUdHVDZwRmpHZjlrVWJJcFNCa3ZpT1dHMms0YUhuYlBsQUNBdFlqbkVzSTI1aXBuUkI5enliaUV6dw?oc=5"
+   },
+   {
+    "source": "産経ニュース",
+    "url": "https://www.sankei.com/pressrelease/prtimes/IMZNX23AS5JZXOAJRFM6FHFVXQ/"
    }
   ],
   "merged_ids": [
-   "n20261126-0e7a05ea"
+   "n20261126-0e7a05ea",
+   "n20261127-0de8b307"
   ]
  },
  {
@@ -60,6 +65,32 @@
   "dv": 3,
   "jg": {
    "wait": "2026-11-27T20:01:46+09:00"
+  }
+ },
+ {
+  "id": "n20261127-c2a9f070",
+  "date": "2026-11-27",
+  "cat": "media",
+  "title": "千葉百音が女子SP首位",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/gpnews/1779411/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "wait": "2026-11-27T23:02:00+09:00"
+  }
+ },
+ {
+  "id": "n20261127-bcec52ec",
+  "date": "2026-11-27",
+  "cat": "media",
+  "title": "佐藤駿の演技 NHK杯フィギュア",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/gpnews/1779412/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "wait": "2026-11-27T23:02:00+09:00"
   }
  },
  {
@@ -11263,36 +11294,6 @@
    "v": 1,
    "ok": true,
    "why": "チョコレート祭でぴよりん限定販売",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20241226-a8480370",
-  "date": "2024-12-26",
-  "cat": "press",
-  "title": "新年は華やかな特別仕様の【ぴよりん】とともに。三が日限定「賀正ぴよりん」販売！！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000065.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "正月限定ぴよりん商品販売",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20241203-3600ef93",
-  "date": "2024-12-03",
-  "cat": "press",
-  "title": "クリスマス限定「クリスマスぴよりんパフェ」で幸せ気分",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000063.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "クリスマス限定ぴよりんパフェ",
    "t": "2026-10-15"
   }
  }
