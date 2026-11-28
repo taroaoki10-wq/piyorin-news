@@ -1,5 +1,31 @@
 [
  {
+  "id": "n20261128-46594c9c",
+  "date": "2026-11-28",
+  "cat": "media",
+  "title": "カブス、佐藤輝明外野手と6年契約発表",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/gpnews/1779418/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "wait": "2026-11-28T11:03:12+09:00"
+  }
+ },
+ {
+  "id": "n20261128-54997777",
+  "date": "2026-11-28",
+  "cat": "media",
+  "title": "高橋光成投手、Dバックスと合意",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/gpnews/1779417/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "wait": "2026-11-28T11:03:12+09:00"
+  }
+ },
+ {
   "id": "official-p5731",
   "date": "2026-11-27",
   "cat": "official",
@@ -30,6 +56,10 @@
    {
     "source": "産経ニュース",
     "url": "https://www.sankei.com/pressrelease/prtimes/IMZNX23AS5JZXOAJRFM6FHFVXQ/"
+   },
+   {
+    "source": "ニコニコニュース",
+    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1Gd0pjUmFrLWF2dlBYVExuRGRERTNJM0QxLWk3cndrbmJhTmdYTHBwSmJnN0l4Ny1OTV9Cc19yS1VpTVgwYU9ZYU16cnc0cW9TVFRjMkQ4UmtsR3dHWFVjdHJPNExBcjd4?oc=5"
    }
   ],
   "merged_ids": [
@@ -272,6 +302,10 @@
    {
     "source": "めざましmedia on MSN",
     "url": "https://www.msn.com/ja-jp/news/other/%E5%90%8D%E5%8F%A4%E5%B1%8B%E4%BA%BA%E6%B0%97%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84-%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93-%E3%81%8C%E3%82%B5%E3%83%B3%E3%82%BF%E3%81%95%E3%82%93%E3%81%AB%E5%A4%89%E8%BA%AB-%E3%83%88%E3%83%8A%E3%82%AB%E3%82%A4%E3%82%84%E9%9B%AA%E3%81%A0%E3%82%8B%E3%81%BE%E3%81%AA%E3%81%A9%E6%84%9B%E3%82%89%E3%81%97%E3%81%84%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%E9%99%90%E5%AE%9A%E5%95%86%E5%93%81%E3%81%8C12%E6%9C%881%E6%97%A5%E3%81%8B%E3%82%89%E9%A0%86%E6%AC%A1%E6%96%B0%E7%99%BA%E5%A3%B2/ar-AA2ifqHH"
+   },
+   {
+    "source": "めざましmedia",
+    "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBGQlZWNGM2TXUydjF2NXJPeXdVRk1ZbWo3a0llUXRoRmU1dmE1Wks3SzFFOTBQdjVWYVJTa29NTG9fS1daVlllbjBRQVRGTzBhQ1ZyMFFGekRvb3NrN0h3VWdOSktZdw?oc=5"
    }
   ],
   "merged_ids": [
@@ -1256,6 +1290,10 @@
    {
     "source": "愛媛新聞",
     "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5YNWhuZkh1YXhSOUxUTnIxRjk2VlUxZkl3R3pTbDBnNzBtUkhiTW9CRFJYRjN3b1d4MklrYVNab2l6eXZDVGdGUFlrUW0yUXNCUGU0X2lxN0h0RW8?oc=5"
+   },
+   {
+    "source": "佐賀新聞",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE0wMU1nMFQ2bDNPYUxYWXlnRGV3TmxLQ2VpSklhTFhFUXVSOUFVSnlkYldXLXZ1bUx1UndKSjJCU1VvdDFabUxGdl9HbHlZV0ZuTUU1VkdB?oc=5"
    }
   ],
   "merged_ids": [
@@ -11289,36 +11327,6 @@
    "v": 1,
    "ok": true,
    "why": "ぴよりんの新キャラクター登場の話題",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20250130-3ccdce72",
-  "date": "2025-01-30",
-  "cat": "press",
-  "title": "【Hisaya-odori Park×ぴよりん】SPECIAL COLLABORATION！ぴよりんの巨大インスタレーションが登場！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000074.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんとパークのコラボイベント",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20250129-8c77399b",
-  "date": "2025-01-29",
-  "cat": "press",
-  "title": "初登場から13年！バレンタイン限定の特別な「バレンタインぴよりん」が今年も登場！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000067.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "バレンタイン限定ぴよりん商品",
    "t": "2026-10-15"
   }
  }
