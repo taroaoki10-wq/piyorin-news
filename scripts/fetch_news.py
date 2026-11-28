@@ -217,6 +217,20 @@ def prune_relays(item: dict) -> None:
         item["related"] = kept
 
 
+# 通信社の配信記事の転載ページ（みんなの経済新聞ネットワークの /gpnews/ など）。ぴよりんの記事にはならない
+WIRE_URL = re.compile(r"\.keizai\.biz/gpnews/|/gpnews/\d+")
+# 説明文の中の通信社の名乗り。これより後ろは、ページの横の「ほかの記事」の見出しなので、言葉を探さない
+WIRE_CREDIT = re.compile(r"【[^】]{0,12}(?:通信社|通信|共同|時事)】")
+
+
+def own_text(desc: str) -> str:
+    """検索の説明文から、記事そのものの文だけを残す（通信社の名乗りより後ろを切る）。
+    2026-11-28：名駅経済新聞の通信社の記事（「カブス、佐藤輝明外野手と6年契約発表」など）は、
+    Bing の説明文の後ろにページの横の見出し（「トナカイに扮した『ぴよりん』…」）が付き、言葉ありと取り違えていた。"""
+    m = WIRE_CREDIT.search(desc or "")
+    return (desc or "")[:m.start()] if m else (desc or "")
+
+
 def has_keyword(text: str) -> bool:
     low = (text or "").lower()
     return any(k.lower() in low for k in KEYWORDS)
@@ -286,7 +300,9 @@ def parse_rss(xml_text: str, kind: str) -> list[dict]:
         if source and title.endswith(" - " + source):
             title = title[: -len(" - " + source)].strip()
         title = clean_title(html.unescape(title))
-        hay = title + (" " + desc if kind in ("bing", "prtimes") else "")
+        if WIRE_URL.search(link):
+            continue
+        hay = title + (" " + own_text(desc) if kind in ("bing", "prtimes") else "")
         if not has_keyword(hay):
             continue
         date = to_jst_date(_text(f, "pubDate") or _text(f, "date")) or today()

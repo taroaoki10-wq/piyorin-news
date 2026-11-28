@@ -145,15 +145,14 @@ class RuleAndBatchTest(unittest.TestCase):
         calls, jg = self.run_main([self.item("b", "神谷そら 米女子ゴルフ予選会で20位"), self.item("c", "ステーキ店の感謝デー")],
                                   learn, key="")
         self.assertEqual(jg["b"]["ok"], False)
-        self.assertIsNone(jg["c"])  # 迷う記事は表示したまま
+        self.assertIsNone(jg["c"])  # 迷う記事は判定待ち（画面には出さない）
 
     def test_few_ambiguous_items_wait_then_batch(self):
         news = [self.item("c", "ステーキ店の感謝デー"), self.item("d", "産院がグッドデザイン賞")]
         calls, jg = self.run_main(news, {})
         self.assertEqual(calls, [])  # 2 件ではまだ呼ばない
-        self.assertIn("wait", jg["c"])
-        self.assertNotIn("ok", jg["c"])
-        old = dict(news[0], jg={"wait": "2026-01-01T00:00:00+09:00"})
+        self.assertIsNone(jg["c"])  # 待ちの印は jg でなく jw に書く（2026-11-28。jg は判定が済んだ印）
+        old = dict(news[0], jw="2026-01-01T00:00:00+09:00")
         calls, jg = self.run_main([old, news[1]], {})
         self.assertEqual(calls, [["c", "d"]])  # 待ちすぎたので 1 回でまとめて聞く
         self.assertEqual(jg["c"]["ok"], False)

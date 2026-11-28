@@ -222,6 +222,18 @@ def rule(item: dict, del_ex: list, keep_ex: list, cfg: dict) -> tuple[bool, str]
     return None
 
 
+def mark_wait(item: dict, now: datetime) -> None:
+    """判定を待たせ始めた時刻を、jg ではなく jw に書く。
+    jg は「判定が済んだ印」として画面（index.html）と Claude Pet（piyorin.js の isWaiting）が見ているので、
+    待ちの印を jg に入れると「判定済み」と取り違えて、無関係な記事が最大 9 時間出ていた（2026-11-28）。"""
+    jg = item.get("jg")
+    if isinstance(jg, dict) and "ok" not in jg:  # 前の形（jg.wait）を移す
+        item.setdefault("jw", jg.get("wait") or now.isoformat(timespec="seconds"))
+        del item["jg"]
+    if not item.get("jw"):
+        item["jw"] = now.isoformat(timespec="seconds")
+
+
 def ids_of(item: dict) -> set:
     return {item.get("id"), *(item.get("merged_ids") or [])}
 
@@ -233,6 +245,9 @@ def main() -> int:
     api_key = claude_call.api_key()
     before = NEWS_FILE.read_text(encoding="utf-8")
     news = json.loads(before)
+    for n in news:  # 前の形の待ちの印（jg.wait だけの jg）を jw に移す
+        if isinstance(n.get("jg"), dict) and "ok" not in n["jg"]:
+            mark_wait(n, datetime.now(JST))
     rejudge = os.environ.get("REJUDGE", "").strip() not in ("", "0", "false")
     now = datetime.now(JST)
     today = now.strftime("%Y-%m-%d")
@@ -267,6 +282,7 @@ def main() -> int:
             ask.append(it)
             continue
         it["jg"] = {"v": JUDGE_VERSION, "ok": r[0], "why": r[1], "t": today, "by": "rule"}
+        it.pop("jw", None)
         ruled += 1
         if not r[0]:
             flagged += 1
@@ -277,11 +293,9 @@ def main() -> int:
     if ask and api_key:
         waits = []
         for it in ask:
-            jg = it.get("jg") if isinstance(it.get("jg"), dict) else {}
-            if not jg.get("wait"):
-                it["jg"] = dict(jg, wait=now.isoformat(timespec="seconds"))  # ok が無いので画面には出たまま
+            mark_wait(it, now)
             try:
-                waits.append(datetime.fromisoformat(it["jg"]["wait"]))
+                waits.append(datetime.fromisoformat(it["jw"]))
             except (TypeError, ValueError):
                 waits.append(now)
         oldest_h = (now - min(waits)).total_seconds() / 3600
@@ -290,7 +304,7 @@ def main() -> int:
                        f"（いちばん古いもので {oldest_h:.1f} 時間）")
             ask = []
     elif ask:
-        msg.append(f"迷う記事 {len(ask)} 件は、Claude を使わない設定のため表示したまま")
+        msg.append(f"迷う記事 {len(ask)} 件は、Claude を使わない設定のため、判定が済むまで画面には出さない")
         ask = []
 
     t0 = time.time()
@@ -313,6 +327,7 @@ def main() -> int:
                 continue  # 答えが抜けた記事は次回もう一度
             ok, why = res[k]
             it["jg"] = {"v": JUDGE_VERSION, "ok": ok, "why": why, "t": today}
+            it.pop("jw", None)
             if sig:
                 it["jg"]["lv"] = sig  # どの例で判定したか
             done += 1

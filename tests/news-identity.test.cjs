@@ -24,3 +24,16 @@ test('旧IDを保持し同期後も設定を参照できる', () => {
   assert.equal(api.deletion(item, records).on, false);
   assert.equal(api.ids({id:'unchanged'}).length, 1);
 });
+
+// 2026-11-28：判定待ちの記事（題に「ぴよりん」が無く、AI がまだ決めていない）は出さない
+test('判定待ちの記事は pending（出さない）', () => {
+  const p = n => api.pending(n);
+  assert.equal(p({cat:'media', title:'カブス、佐藤輝明外野手と6年契約発表'}), true);
+  assert.equal(p({cat:'media', title:'カブス、佐藤輝明外野手と6年契約発表', jw:'2026-11-28T11:03:12+09:00'}), true);
+  assert.equal(p({cat:'media', title:'カブス、佐藤輝明外野手と6年契約発表', jg:{wait:'2026-11-28T11:03:12+09:00'}}), true); // 前の形
+  assert.equal(p({cat:'media', title:'4周年のショッパー', jg:{v:1, ok:true}}), false); // AI が関係ありと判定
+  assert.equal(p({cat:'media', title:'野党の記事', jg:{v:1, ok:false}}), false); // 関係なしは別の理由（by:'ai'）で隠す
+  assert.equal(p({cat:'media', title:'サンタぴよりんが登場'}), false); // 題にぴよりん
+  assert.equal(p({cat:'media', title:'ＰＩＹＯＲＩＮ cafe'}), false); // 全角でも
+  assert.equal(p({cat:'official', title:'お知らせ'}), false); // 公式は判定の対象外
+});

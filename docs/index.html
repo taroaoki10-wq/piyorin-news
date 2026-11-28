@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ぴよりん">
-<meta name="piyo-ver" content="2026.11.25-1">
+<meta name="piyo-ver" content="2026.11.28-1">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
@@ -1025,7 +1025,7 @@ window.PiyoSplash=(function(){
 </div>
 <script src="piyo-cal.js?v=1"></script>
 <script src="news-archive.js"></script>
-<script src="news-identity.js"></script>
+<script src="news-identity.js?v=2"></script>
 <script src="piyo-learn.js"></script>
 <script src="piyo-persona.js?v=1"></script>
 <script src="piyo-extras.js?v=9"></script>
@@ -1086,6 +1086,7 @@ window.PiyoSplash=(function(){
       if(d)return d.on?{by:'user'}:null;
       const j=n.jg;
       if(j&&j.ok===false&&n.cat!=='official')return {by:'ai',why:String(j.why||'')}; // 公式の記事は判定の対象外
+      if(PiyoNewsIdentity.pending(n))return {by:'wait',why:'AIの判定待ち'}; // 判定が済むまで出さない（元に戻すで出せる）
       const w=learnWhy(n);
       if(w)return {by:'learn',why:w};
       return null;
@@ -1105,7 +1106,7 @@ window.PiyoSplash=(function(){
     function hiddenNote(src){
       const n=src&&src.id&&state.news.find(x=>x.id===src.id), h=n&&hideInfo(n);
       if(!h)return '<p class="reader-hid" id="reader-hid" hidden></p>';
-      return `<p class="reader-hid" id="reader-hid">${h.by==='ai'?'AIが「ぴよりんと関係なさそう」と判定した記事です'+(h.why?'（'+esc(h.why)+'）':''):h.by==='learn'?'前の削除から学んで隠した記事です（'+esc(h.why)+'）':'削除済みの記事です'}。右上のボタンで元に戻せます。</p>`;
+      return `<p class="reader-hid" id="reader-hid">${h.by==='ai'?'AIが「ぴよりんと関係なさそう」と判定した記事です'+(h.why?'（'+esc(h.why)+'）':''):h.by==='wait'?'題に「ぴよりん」が無く、AIの判定を待っている記事です':h.by==='learn'?'前の削除から学んで隠した記事です（'+esc(h.why)+'）':'削除済みの記事です'}。右上のボタンで元に戻せます。</p>`;
     }
     function paintDel(){
       const b=$('reader-del');if(!b)return;
@@ -1116,11 +1117,11 @@ window.PiyoSplash=(function(){
     }
     function renderTrash(list){
       $('hero').hidden=true;$('hero').innerHTML='';
-      const note='<p class="trash-note">「ぴよりんと関係なさそう」とAIが判定した記事と、手動で削除した記事と、前の削除から学んで隠した記事です。タイトルを押すと読めます。元に戻すと「関係ある記事」として覚えます。</p>';
+      const note='<p class="trash-note">「ぴよりんと関係なさそう」とAIが判定した記事と、手動で削除した記事と、前の削除から学んで隠した記事と、題に「ぴよりん」が無くAIの判定を待っている記事です。タイトルを押すと読めます。元に戻すと「関係ある記事」として覚えます。</p>';
       $('feed').innerHTML=note+(list.length?`<div class="items">${list.map(it=>{
         const h=hideInfo(it)||{};
         return `<article class="item trash-item">
-<div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><span class="dt" style="font-family:var(--f-mono)">${esc(it.date.replaceAll('-','.'))} ${wd(it.date)}</span><span class="why ${h.by==='ai'||h.by==='learn'?'ai':''}">${h.by==='ai'?'AIが関係なしと判定':h.by==='learn'?'削除から学んで隠した':'手動で削除'}</span></div>
+<div class="row"><span class="tag ${esc(it.cat)}">${esc(CATS[it.cat]||it.cat)}</span><span class="dt" style="font-family:var(--f-mono)">${esc(it.date.replaceAll('-','.'))} ${wd(it.date)}</span><span class="why ${h.by==='ai'||h.by==='learn'||h.by==='wait'?'ai':''}">${h.by==='ai'?'AIが関係なしと判定':h.by==='wait'?'AIの判定待ち':h.by==='learn'?'削除から学んで隠した':'手動で削除'}</span></div>
 <h3><a href="${esc(safeUrl(it.url))}" target="_blank" rel="noopener" data-news="${esc(it.id)}">${esc(it.title)}</a></h3>
 <div class="row"><span class="src">${esc(it.source)}</span>${(h.by==='ai'||h.by==='learn')&&h.why?`<span>${esc(h.why)}</span>`:''}<button type="button" class="restore-btn" data-restore="${esc(it.id)}">元に戻す</button></div>
 </article>`}).join('')}</div>`:'<p class="empty">削除した記事はありません。</p>');
@@ -1613,7 +1614,7 @@ window.PiyoSplash=(function(){
   });
 
   // ---------- 設定の画面（右上の歯車。ぴよと話す準備・指摘・infobase・同期・更新ボタン・版） ----------
-  const PN_VERSION='2026.11.25-1（購入記録の金額の欄・前に入れた値段を覚える・購入記録の買った物の一覧と合計・同じ買い物をまとめる・購入記録を端末どうしで同期・公式 X の新作の絵・公式 X の新作を拾う・削除から学ぶ・天気を Mac の infobase から読む・ほかの町の天気・3時間ごとの天気・図の切り替え・Mac をすこし待つ・天気の待ち表示・関係するメモだけ渡す・購入記録を踏まえた答え）';
+  const PN_VERSION='2026.11.28-1（判定待ちの記事を出さない・購入記録の金額の欄・前に入れた値段を覚える・購入記録の買った物の一覧と合計・同じ買い物をまとめる・購入記録を端末どうしで同期・公式 X の新作の絵・公式 X の新作を拾う・削除から学ぶ・天気を Mac の infobase から読む・ほかの町の天気・3時間ごとの天気・図の切り替え・Mac をすこし待つ・天気の待ち表示・関係するメモだけ渡す・購入記録を踏まえた答え）';
   {
     const panel=$('set-panel'),scrim=$('set-scrim');let back=null;
     const openSet=()=>{back=document.activeElement;$('set-ver').textContent=PN_VERSION;$('set-data').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
@@ -2765,7 +2766,7 @@ window.PiyoSplash=(function(){
   let pickedNews=[]; // 「調べる」で読んだ記事（答えの下の札にする）
   async function pickArticles(q){
     const grams=s=>{const t=String(s).replace(/[\s、。！？!?「」『』・]/g,'');const g=new Set();for(let i=0;i<t.length-1;i++)g.add(t.slice(i,i+2));return g};
-    const qg=grams(q),news=data.news.filter(n=>!(n.jg&&n.jg.ok===false&&n.cat!=='official'));
+    const qg=grams(q),news=data.news.filter(n=>!(n.jg&&n.jg.ok===false&&n.cat!=='official')&&!(typeof PiyoNewsIdentity!=='undefined'&&PiyoNewsIdentity.pending(n)));
     const docs=news.map(n=>{const m=data.memo[n.id];return grams(n.title+(m?m.memo:''))});
     // 「ぴよ」「りん」のように、ほとんどの記事に出てくる並びは手がかりにしない
     const common=new Set([...qg].filter(x=>docs.filter(g=>g.has(x)).length>news.length*.2));
