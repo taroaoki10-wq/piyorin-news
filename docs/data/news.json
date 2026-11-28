@@ -26,6 +26,19 @@
   }
  },
  {
+  "id": "n20261128-af8390ca",
+  "date": "2026-11-28",
+  "cat": "media",
+  "title": "期限内の政権樹立呼び掛け イスラエル",
+  "source": "名駅経済新聞",
+  "url": "https://meieki.keizai.biz/gpnews/1779421/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "wait": "2026-11-28T14:03:24+09:00"
+  }
+ },
+ {
   "id": "official-p5731",
   "date": "2026-11-27",
   "cat": "official",
@@ -414,10 +427,15 @@
    {
     "source": "cocotte on MSN",
     "url": "https://www.msn.com/ja-jp/news/other/%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%9E%E3%82%B9%E4%BB%95%E6%A7%98%E3%81%AE%E3%81%B4%E3%82%88%E3%82%8A%E3%82%93%E3%81%8C%E5%8B%A2%E3%81%9E%E3%82%8D%E3%81%84-%E3%83%99%E3%83%AA%E3%83%BC%E3%82%84%E3%82%AD%E3%83%A3%E3%83%A9%E3%83%A1%E3%83%AB-%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%88%E3%83%81%E3%83%A7%E3%82%B3%E3%81%AE%E9%99%90%E5%AE%9A%E3%83%95%E3%83%AC%E3%83%BC%E3%83%90%E3%83%BC/ar-AA2ihXZ6"
+   },
+   {
+    "source": "dメニューニュース",
+    "url": "https://topics.smt.docomo.ne.jp/article/cocotte/trend/cocotte-653235"
    }
   ],
   "merged_ids": [
-   "n20261126-72bc0434"
+   "n20261126-72bc0434",
+   "n20261126-ef452898"
   ],
   "dv": 3,
   "jg": {
@@ -1635,6 +1653,23 @@
    "ok": true,
    "why": "ぴよりんのコラボイベント・グッズをまとめた記事",
    "t": "2026-11-17"
+  }
+ },
+ {
+  "id": "n20261116-6d5e9157",
+  "date": "2026-11-16",
+  "cat": "media",
+  "title": "名古屋駅のフード出店に新風 地下街「メイチカ」リニューアル、ぴよりんカフェやあんバター",
+  "source": "日本経済新聞",
+  "url": "https://www.nikkei.com/article/DGXZQOFD063HD0W6A101C2000000/",
+  "related": [],
+  "dv": 3,
+  "jg": {
+   "v": 1,
+   "ok": true,
+   "why": "題にぴよりん",
+   "t": "2026-11-28",
+   "by": "rule"
   }
  },
  {
@@ -11295,36 +11330,6 @@
    "v": 1,
    "ok": true,
    "why": "onちゃんとのコラボぴよりん販売企画",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20250201-61c66c9b",
-  "date": "2025-02-01",
-  "cat": "press",
-  "title": "「ぴよりん」の新キャラクター「ひより」デビュー!!",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000073.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんの新キャラクター登場の話題",
-   "t": "2026-10-15"
-  }
- },
- {
-  "id": "n20250130-3ccdce72",
-  "date": "2025-01-30",
-  "cat": "press",
-  "title": "【Hisaya-odori Park×ぴよりん】SPECIAL COLLABORATION！ぴよりんの巨大インスタレーションが登場！",
-  "source": "PR TIMES",
-  "url": "https://prtimes.jp/main/html/rd/p/000000074.000124425.html",
-  "related": [],
-  "jg": {
-   "v": 1,
-   "ok": true,
-   "why": "ぴよりんとパークのコラボイベント",
    "t": "2026-10-15"
   }
  }
