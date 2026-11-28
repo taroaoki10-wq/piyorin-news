@@ -217,7 +217,8 @@ def prune_relays(item: dict) -> None:
         item["related"] = kept
 
 
-# 通信社の配信記事の転載ページ（みんなの経済新聞ネットワークの /gpnews/ など）。ぴよりんの記事にはならない
+# 通信社の配信記事の転載ページ（みんなの経済新聞ネットワークの /gpnews/ など）。
+# ページの横に地元の見出しが並ぶので、題に言葉がある物だけ拾う（「人気スイーツ『ぴよりん』に特別住民票」は拾う）
 WIRE_URL = re.compile(r"\.keizai\.biz/gpnews/|/gpnews/\d+")
 # 説明文の中の通信社の名乗り。これより後ろは、ページの横の「ほかの記事」の見出しなので、言葉を探さない
 WIRE_CREDIT = re.compile(r"【[^】]{0,12}(?:通信社|通信|共同|時事)】")
@@ -300,9 +301,8 @@ def parse_rss(xml_text: str, kind: str) -> list[dict]:
         if source and title.endswith(" - " + source):
             title = title[: -len(" - " + source)].strip()
         title = clean_title(html.unescape(title))
-        if WIRE_URL.search(link):
-            continue
-        hay = title + (" " + own_text(desc) if kind in ("bing", "prtimes") else "")
+        wire = bool(WIRE_URL.search(link))
+        hay = title + (" " + own_text(desc) if kind in ("bing", "prtimes") and not wire else "")
         if not has_keyword(hay):
             continue
         date = to_jst_date(_text(f, "pubDate") or _text(f, "date")) or today()

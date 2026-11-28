@@ -38,10 +38,14 @@ class FetchTest(unittest.TestCase):
             ("木原官房長官、拉致現場視察", "https%3a%2f%2fexample.jp%2fa%2f1",
              "視察した。【共同通信】 名駅の「ぴよりんvillage」"),
             ("ぴよりん村がクリスマス仕様に", "https%3a%2f%2fmeieki.keizai.biz%2fheadline%2f1%2f", "サンタ姿"),
+            ("人気スイーツ「ぴよりん」に特別住民票", "https%3a%2f%2fmeieki.keizai.biz%2fgpnews%2f1700000%2f",
+             "住民票を交付した。【時事通信社】"),  # 転載でも題にぴよりんがあれば拾う
+            ("ドクターS、静岡駅で公開", "https%3a%2f%2fmeieki.keizai.biz%2fgpnews%2f1779398%2f",
+             "名駅で「ぴよりん」も"),  # 転載は説明文に言葉があっても、題に無ければ拾わない（名乗りが無い説明文でも）
             ("名古屋駅の新しいお土産", "https%3a%2f%2fexample.jp%2fb%2f2", "ぴよりんの新作が登場した。"),
         )
         got = [x["title"] for x in fetch_news.parse_rss(xml, "bing")]
-        self.assertEqual(got, ["ぴよりん村がクリスマス仕様に", "名古屋駅の新しいお土産"])
+        self.assertEqual(got, ["ぴよりん村がクリスマス仕様に", "人気スイーツ「ぴよりん」に特別住民票", "名古屋駅の新しいお土産"])
 
 
 class WaitMarkTest(unittest.TestCase):
